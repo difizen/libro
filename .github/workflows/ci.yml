@@ -1,0 +1,60 @@
+name: 'Code: CI'
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+  push:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ['16.20.x']
+        python-version: ['3.8.16', '3.9.x', '3.10.x']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: nrwl/nx-set-shas@v3
+        with:
+          main-branch-name: 'main'
+
+      - name: Use PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: ^8.6.0
+          run_install: false
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Cache Nx output
+        uses: actions/cache@v3
+        with:
+          path: node_modules/.cache/nx
+          key: |
+            cache-nx
+            -${{ runner.os }}
+            -${{ matrix.node-version }}
+            -${{ github.ref }}
+
+      - name: Setup projects
+        run: pnpm bootstrap
+
+      - name: Run linters and tests
+        run: pnpm run ci:affected

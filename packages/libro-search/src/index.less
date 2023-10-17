@@ -1,0 +1,107 @@
+.libro-search-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-shadow: 0 2px 2px 0 #7c68681a;
+  background-color: var(--mana-color-bg-elevated);
+  z-index: 2000;
+}
+
+.libro-search-content {
+  display: flex;
+  align-items: center;
+  padding: 2px 6px;
+  min-width: 320px;
+}
+
+.libro-search-row {
+  height: 32px;
+
+  input {
+    margin-right: 4px;
+  }
+
+  .ant-btn {
+    border: none;
+    box-shadow: none;
+    margin-left: 4px;
+  }
+}
+
+.libro-search-replace-toggle {
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--mana-activityBar-background);
+  }
+}
+
+.libro-search-input {
+  align-items: center;
+  flex: 1;
+
+  .ant-input-affix-wrapper-sm {
+    margin-right: 4px;
+  }
+}
+
+.libro-search-input-suffix {
+  span {
+    margin-left: 4px;
+    padding: 2px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--mana-activityBar-background);
+    }
+  }
+
+  .libro-search-input-suffix-active {
+    background-color: var(--mana-activityBar-background);
+  }
+}
+
+.libro-search-index {
+  // width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  margin-right: 16px;
+}
+
+.libro-search-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.libro-search-replace-toggle-icon {
+  font-size: 12px;
+  transition: transform 0.2s linear;
+}
+
+.libro-search-replace-toggle-replace-icon {
+  transform: rotate(90deg);
+}
+
+.libro-search-input-area {
+  flex: 1;
+}
+
+.libro-selectedtext {
+  background-color: rgb(255, 225, 0);
+
+  span {
+    background-color: rgb(255, 225, 0);
+  }
+}
+
+mark.libro-searching {
+  padding: 0;
+}

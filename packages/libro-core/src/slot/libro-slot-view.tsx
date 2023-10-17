@@ -1,0 +1,51 @@
+import { DefaultSlotView, view, ViewRender, ViewInstance } from '@difizen/mana-app';
+import { transient } from '@difizen/mana-app';
+import { equals, prop, useInject } from '@difizen/mana-app';
+import React, { forwardRef } from 'react';
+
+import { isDisplayView } from './libro-slot-protocol.js';
+
+export const LibroExtensionViewComponent = forwardRef(
+  function LibroExtensionViewComponent(
+    _props,
+    ref: React.ForwardedRef<HTMLDivElement>,
+  ) {
+    const instance = useInject<LibroSlotView>(ViewInstance);
+    //过滤出实现了DisplayView接口的View,用于控制抢占逻辑
+    const filteredChildren = instance.children.filter((item) => {
+      return isDisplayView(item) && item.isDisplay;
+    });
+    if (filteredChildren.length < 1) {
+      return (
+        <div className={'libro-slot-container'} ref={ref}>
+          {instance.children.map(
+            (item) => !isDisplayView(item) && <ViewRender view={item} key={item.id} />,
+          )}
+        </div>
+      );
+    } else {
+      const activeView =
+        filteredChildren.find(
+          (item) => instance.active && equals(item, instance.active),
+        ) || filteredChildren[filteredChildren.length - 1];
+      return (
+        <div className={'libro-slot-container'} ref={ref}>
+          <ViewRender view={activeView} />
+          {instance.children.map(
+            (item) => !isDisplayView(item) && <ViewRender view={item} key={item.id} />,
+          )}
+        </div>
+      );
+    }
+  },
+);
+
+@transient()
+@view('libro-slot-view')
+export class LibroSlotView extends DefaultSlotView {
+  override label: React.ReactNode = null;
+  override view = LibroExtensionViewComponent;
+  @prop()
+  override sort?: boolean = false;
+  // sort?: boolean = true;
+}

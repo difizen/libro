@@ -1,0 +1,835 @@
+/* stylelint-disable number-max-precision */
+.libro-display-data-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.libro-display-data-container {
+  overflow: auto;
+}
+
+.libro-error-container {
+  .libro-text-render-container[data-mime-type='application/vnd.jupyter.stderr'] {
+    background: unset;
+    padding: unset;
+  }
+}
+
+.libro-show-error-detail-button {
+  height: 24px !important;
+  width: 118px;
+  margin-top: 16px;
+  padding: unset !important;
+  background: var(--mana-color-bg-container) !important;
+  border-color: var(--mana-libro-error-color) !important;
+
+  span {
+    font-family: ArialMT;
+    font-size: 12px;
+    color: var(--mana-libro-error-color) !important;
+    line-height: 22px;
+  }
+}
+
+.libro-svg-render-container,
+.libro-html-render-container,
+.libro-markdown-render-container,
+.libro-latex-render-container,
+.libro-image-render-container,
+.libro-error-text-render-container,
+.libro-text-render-container,
+.libro-plotly-render-container {
+  padding: 10px 24px;
+}
+
+.libro-svg-render-container,
+.libro-html-render-container,
+.libro-markdown-render-container,
+.libro-latex-render-container,
+.libro-image-render-container,
+.libro-error-text-render-container,
+.libro-text-render-container:last-child {
+  border-radius: 4px;
+}
+
+.libro-display-data-container,
+.libro-error-container,
+.libro-stream-container:last-child {
+  border-radius: 4px;
+}
+
+:root {
+  /* Elevation
+   *
+   * We style box-shadows using Material Design's idea of elevation. These particular numbers are taken from here:
+   *
+   * https://github.com/material-components/material-components-web
+   * https://material-components-web.appspot.com/elevation.html
+   */
+
+  --md-red-100: #ffcdd2;
+  --md-red-300: #e57373;
+  --md-red-900: #b71c1c;
+  --md-blue-50: #e3f2fd;
+  --md-blue-700: #1976d2;
+  --md-blue-800: #1565c0;
+  --md-light-blue-50: #e1f5fe;
+  --md-cyan-100: #b2ebf2;
+  --md-cyan-300: #4dd0e1;
+  --md-cyan-900: #006064;
+  --md-green-100: #c8e6c9;
+  --md-green-300: #81c784;
+  --md-green-900: #1b5e20;
+  --md-orange-100: #ffe0b2;
+  --md-orange-300: #ffb74d;
+  --md-orange-900: #e65100;
+  --md-grey-100: #f5f5f5;
+  --md-grey-200: #eee;
+  --md-grey-300: #e0e0e0;
+  --md-grey-400: #bdbdbd;
+  --md-grey-900: #212121;
+
+  /* Borders
+   *
+   * The following variables, specify the visual styling of borders in JupyterLab.
+   */
+
+  --jp-border-width: 1px;
+  --jp-border-color0: var(--md-grey-400);
+  --jp-border-color1: var(--md-grey-400);
+  --jp-border-color2: var(--md-grey-300);
+  --jp-border-radius: 2px;
+
+  /* UI Fonts
+   *
+   * The UI font CSS variables are used for the typography all of the JupyterLab
+   * user interface elements that are not directly user generated content.
+   *
+   * The font sizing here is done assuming that the body font size of --jp-ui-font-size1
+   * is applied to a parent element. When children elements, such as headings, are sized
+   * in em all things will be computed relative to that body size.
+   */
+
+  --jp-ui-font-size0: 0.83333em;
+  --jp-ui-font-size1: 13px; /* Base font size */
+
+  /* Defaults use Material Design specification */
+  --jp-ui-font-color1: rgba(0, 0, 0, 87%);
+  // --mana-libro-link-color: var(--md-blue-700);
+
+  /*
+   * Use these against the brand/accent/warn/error colors.
+   * These will typically go from light to darker, in both a dark and light theme.
+   */
+
+  --jp-ui-inverse-font-color0: rgba(255, 255, 255, 100%);
+
+  /* Content Fonts
+   *
+   * Content font variables are used for typography of user generated content.
+   *
+   * The font sizing here is done assuming that the body font size of --jp-content-font-size1
+   * is applied to a parent element. When children elements, such as headings, are sized
+   * in em all things will be computed relative to that body size.
+   */
+
+  --jp-content-line-height: 1.6;
+  --jp-content-font-size0: 0.83333em;
+  --jp-content-font-size1: 14px; /* Base font size */
+  --jp-content-font-size2: 1.2em;
+  --jp-content-font-size3: 1.44em;
+  --jp-content-font-size4: 1.728em;
+  --jp-content-font-size5: 2.0736em;
+
+  /* This gives a magnification of about 125% in presentation mode over normal. */
+  --jp-content-heading-line-height: 1;
+  --jp-content-heading-margin-top: 1.2em;
+  --jp-content-heading-margin-bottom: 0.8em;
+  --jp-content-heading-font-weight: 500;
+
+  /* Defaults use Material Design specification */
+  --jp-content-font-color1: rgba(0, 0, 0, 87%);
+  --jp-content-font-family: system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
+    helvetica, arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
+
+  /*
+   * Code Fonts
+   *
+   * Code font variables are used for typography of code and other monospaces content.
+   */
+
+  --jp-code-font-size: 14px;
+  --jp-code-line-height: 1.3077; /* 17px for 13px base */
+  --jp-code-padding: 5px; /* 5px for 13px base, codemirror highlighting needs integer px value */
+  --jp-code-font-family-default: menlo-regular, consolas, 'DejaVu Sans Mono', monospace;
+  --jp-code-font-family: var(--jp-code-font-family-default);
+
+  /* Layout
+   *
+   * The following are the main layout colors use in JupyterLab. In a light
+   * theme these would go from light to dark.
+   */
+
+  --jp-layout-color0: white;
+  --jp-layout-color2: var(--md-grey-200);
+
+  /* Inverse Layout
+   *
+   * The following are the inverse layout colors use in JupyterLab. In a light
+   * theme these would go from dark to light.
+   */
+
+  --jp-inverse-layout-color0: #111;
+  --jp-inverse-layout-color1: var(--md-grey-900);
+
+  /* State colors (warn, error, success, info) */
+
+  --jp-warn-color0: var(--md-orange-900);
+  --jp-warn-color2: var(--md-orange-300);
+  --jp-warn-color3: var(--md-orange-100);
+  --jp-error-color0: var(--md-red-900);
+  --jp-error-color2: var(--md-red-300);
+  --jp-error-color3: var(--md-red-100);
+  --jp-success-color0: var(--md-green-900);
+  --jp-success-color2: var(--md-green-300);
+  --jp-success-color3: var(--md-green-100);
+  --jp-info-color0: var(--md-cyan-900);
+  --jp-info-color2: var(--md-cyan-300);
+  --jp-info-color3: var(--md-cyan-100);
+
+  /* Notebook specific styles */
+
+  --jp-notebook-padding: 10px;
+
+  /* Rendermime styles */
+
+  --jp-rendermime-error-background: #fdd;
+  --jp-rendermime-table-row-background: var(--md-grey-100);
+  --jp-rendermime-table-row-hover-background: var(--md-light-blue-50);
+
+  /* Search-related styles */
+
+  --jp-search-selected-match-background-color: rgb(245, 200, 0);
+  --jp-search-selected-match-color: black;
+  --jp-search-unselected-match-background-color: var(--jp-inverse-layout-color0);
+  --jp-search-unselected-match-color: var(--jp-ui-inverse-font-color0);
+
+  /* This is the padding value to fill the gaps between lines containing spans with background color. */
+  --jp-private-code-span-padding: calc(
+    (var(--jp-code-line-height) - 1) * var(--jp-code-font-size) / 2
+  );
+}
+
+/* -----------------------------------------------------------------------------
+| RenderedText
+|---------------------------------------------------------------------------- */
+
+.libro-text-render {
+  text-align: left;
+  line-height: var(--jp-code-line-height);
+  font-family: var(--jp-code-font-family);
+}
+
+.libro-text-render pre,
+.libro-RenderedJavaScript pre,
+.libro-html-common-render pre {
+  color: var(--mana-libro-text-default-color);
+  font-size: var(--jp-code-font-size);
+  border: none;
+  margin: 0;
+  padding: 0;
+  white-space: pre-wrap;
+}
+
+.libro-text-render pre a:link {
+  text-decoration: none;
+  color: var(--mana-libro-link-color);
+}
+
+.libro-text-render pre a:hover {
+  text-decoration: underline;
+  color: var(--mana-libro-link-color);
+}
+
+.libro-text-render pre a:visited {
+  text-decoration: none;
+  color: var(--mana-libro-link-color);
+}
+
+/* console foregrounds and backgrounds */
+.libro-text-render pre .ansi-black-fg {
+  color: var(--mana-libro-text-default-color);
+}
+
+.libro-text-render pre .ansi-red-fg {
+  color: #e75c58;
+}
+
+.libro-text-render pre .ansi-green-fg {
+  color: #00a250;
+}
+
+.libro-text-render pre .ansi-yellow-fg {
+  color: #ddb62b;
+}
+
+.libro-text-render pre .ansi-blue-fg {
+  color: #208ffb;
+}
+
+.libro-text-render pre .ansi-magenta-fg {
+  color: #d160c4;
+}
+
+.libro-text-render pre .ansi-cyan-fg {
+  color: #60c6c8;
+}
+
+.libro-text-render pre .ansi-white-fg {
+  color: #c5c1b4;
+}
+
+.libro-text-render pre .ansi-black-bg {
+  background-color: #3e424d;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-red-bg {
+  background-color: #e75c58;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-green-bg {
+  background-color: #00a250;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-yellow-bg {
+  background-color: #ddb62b;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-blue-bg {
+  background-color: #208ffb;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-magenta-bg {
+  background-color: #d160c4;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-cyan-bg {
+  background-color: #60c6c8;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-white-bg {
+  background-color: #c5c1b4;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-black-intense-fg {
+  color: #282c36;
+}
+
+.libro-text-render pre .ansi-red-intense-fg {
+  color: #b22b31;
+}
+
+.libro-text-render pre .ansi-green-intense-fg {
+  color: #007427;
+}
+
+.libro-text-render pre .ansi-yellow-intense-fg {
+  color: #b27d12;
+}
+
+.libro-text-render pre .ansi-blue-intense-fg {
+  color: #0065ca;
+}
+
+.libro-text-render pre .ansi-magenta-intense-fg {
+  color: #a03196;
+}
+
+.libro-text-render pre .ansi-cyan-intense-fg {
+  color: #258f8f;
+}
+
+.libro-text-render pre .ansi-white-intense-fg {
+  color: #a1a6b2;
+}
+
+.libro-text-render pre .ansi-black-intense-bg {
+  background-color: #282c36;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-red-intense-bg {
+  background-color: #b22b31;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-green-intense-bg {
+  background-color: #007427;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-yellow-intense-bg {
+  background-color: #b27d12;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-blue-intense-bg {
+  background-color: #0065ca;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-magenta-intense-bg {
+  background-color: #a03196;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-cyan-intense-bg {
+  background-color: #258f8f;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-white-intense-bg {
+  background-color: #a1a6b2;
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-default-inverse-fg {
+  color: var(--jp-ui-inverse-font-color0);
+}
+
+.libro-text-render pre .ansi-default-inverse-bg {
+  background-color: var(--jp-inverse-layout-color0);
+  padding: var(--jp-private-code-span-padding) 0;
+}
+
+.libro-text-render pre .ansi-bold {
+  font-weight: bold;
+}
+
+.libro-text-render pre .ansi-underline {
+  text-decoration: underline;
+}
+
+.libro-text-render-container[data-mime-type='application/vnd.jupyter.stderr'] {
+  background: var(--mana-libro-warning-background);
+}
+
+/* -----------------------------------------------------------------------------
+| RenderedLatex
+|---------------------------------------------------------------------------- */
+
+.libro-latex-render {
+  color: var(--jp-content-font-color1);
+  font-size: var(--jp-content-font-size1);
+  line-height: var(--jp-content-line-height);
+}
+
+/* Left-justify outputs. */
+.libro-OutputArea-output.libro-latex-render {
+  padding: var(--jp-code-padding);
+  text-align: left;
+}
+
+/* -----------------------------------------------------------------------------
+| RenderedHTML
+|---------------------------------------------------------------------------- */
+
+.libro-html-common-render {
+  color: var(--jp-content-font-color1);
+  font-family: var(--jp-content-font-family);
+  font-size: var(--jp-content-font-size1);
+  line-height: var(--jp-content-line-height);
+
+  /* Give a bit more R padding on Markdown text to keep line lengths reasonable */
+  padding-right: 20px;
+}
+
+.libro-html-common-render em {
+  font-style: italic;
+}
+
+.libro-html-common-render strong {
+  font-weight: bold;
+}
+
+.libro-html-common-render u {
+  text-decoration: underline;
+}
+
+.libro-html-common-render a:link {
+  text-decoration: none;
+  color: var(--mana-libro-link-color);
+}
+
+.libro-html-common-render a:hover {
+  text-decoration: underline;
+  color: var(--mana-libro-link-color);
+}
+
+.libro-html-common-render a:visited {
+  text-decoration: none;
+  color: var(--mana-libro-link-color);
+}
+
+/* Headings */
+
+.libro-html-common-render h1,
+.libro-html-common-render h2,
+.libro-html-common-render h3,
+.libro-html-common-render h4,
+.libro-html-common-render h5,
+.libro-html-common-render h6 {
+  line-height: var(--jp-content-heading-line-height);
+  font-weight: var(--jp-content-heading-font-weight);
+  font-style: normal;
+  margin: var(--jp-content-heading-margin-top) 0 var(--jp-content-heading-margin-bottom)
+    0;
+}
+
+.libro-html-common-render h1:first-child,
+.libro-html-common-render h2:first-child,
+.libro-html-common-render h3:first-child,
+.libro-html-common-render h4:first-child,
+.libro-html-common-render h5:first-child,
+.libro-html-common-render h6:first-child {
+  margin-top: calc(0.5 * var(--jp-content-heading-margin-top));
+}
+
+.libro-html-common-render h1:last-child,
+.libro-html-common-render h2:last-child,
+.libro-html-common-render h3:last-child,
+.libro-html-common-render h4:last-child,
+.libro-html-common-render h5:last-child,
+.libro-html-common-render h6:last-child {
+  margin-bottom: calc(0.5 * var(--jp-content-heading-margin-bottom));
+}
+
+.libro-html-common-render h1 {
+  font-size: var(--jp-content-font-size5);
+}
+
+.libro-html-common-render h2 {
+  font-size: var(--jp-content-font-size4);
+}
+
+.libro-html-common-render h3 {
+  font-size: var(--jp-content-font-size3);
+}
+
+.libro-html-common-render h4 {
+  font-size: var(--jp-content-font-size2);
+}
+
+.libro-html-common-render h5 {
+  font-size: var(--jp-content-font-size1);
+}
+
+.libro-html-common-render h6 {
+  font-size: var(--jp-content-font-size0);
+}
+
+/* Lists */
+
+.libro-html-common-render ul:not(.list-inline),
+.libro-html-common-render ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+.libro-html-common-render ul {
+  list-style: disc;
+}
+
+.libro-html-common-render ul ul {
+  list-style: square;
+}
+
+.libro-html-common-render ul ul ul {
+  list-style: circle;
+}
+
+.libro-html-common-render ol {
+  list-style: decimal;
+}
+
+.libro-html-common-render ol ol {
+  list-style: upper-alpha;
+}
+
+.libro-html-common-render ol ol ol {
+  list-style: lower-alpha;
+}
+
+.libro-html-common-render ol ol ol ol {
+  list-style: lower-roman;
+}
+
+.libro-html-common-render ol ol ol ol ol {
+  list-style: decimal;
+}
+
+.libro-html-common-render ol,
+.libro-html-common-render ul {
+  margin-bottom: 1em;
+}
+
+.libro-html-common-render ul ul,
+.libro-html-common-render ul ol,
+.libro-html-common-render ol ul,
+.libro-html-common-render ol ol {
+  margin-bottom: 0;
+}
+
+.libro-html-common-render hr {
+  color: var(--jp-border-color2);
+  background-color: var(--jp-border-color1);
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.libro-html-common-render > pre {
+  margin: 1.5em 2em;
+}
+
+.libro-html-common-render pre,
+.libro-html-common-render code {
+  border: 0;
+  background-color: var(--jp-layout-color0);
+  color: var(--jp-content-font-color1);
+  font-family: var(--jp-code-font-family);
+  font-size: inherit;
+  line-height: var(--jp-code-line-height);
+  padding: 0;
+  white-space: pre-wrap;
+}
+
+.libro-html-common-render :not(pre) > code {
+  background-color: var(--jp-layout-color2);
+  padding: 1px 5px;
+}
+
+/* Tables */
+
+.libro-html-common-render table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: none;
+  color: var(--jp-ui-font-color1);
+  font-size: var(--jp-ui-font-size1);
+  table-layout: fixed;
+  // margin-left: auto;
+  margin-bottom: 1em;
+  // margin-right: auto;
+}
+
+.libro-html-common-render thead {
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color1);
+  vertical-align: bottom;
+}
+
+.libro-html-common-render td,
+.libro-html-common-render th,
+.libro-html-common-render tr {
+  vertical-align: middle;
+  padding: 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+
+.libro-markdown-render.libro-html-common-render td,
+.libro-markdown-render.libro-html-common-render th {
+  max-width: none;
+}
+
+:not(.libro-markdown-render).libro-html-common-render td,
+:not(.libro-markdown-render).libro-html-common-render th,
+:not(.libro-markdown-render).libro-html-common-render tr {
+  text-align: right;
+}
+
+.libro-html-common-render th {
+  font-weight: bold;
+}
+
+.libro-html-common-render tbody tr:nth-child(odd) {
+  background: var(--jp-layout-color0);
+}
+
+.libro-html-common-render tbody tr:nth-child(even) {
+  background: var(--jp-rendermime-table-row-background);
+}
+
+.libro-html-common-render tbody tr:hover {
+  background: var(--jp-rendermime-table-row-hover-background);
+}
+
+.libro-html-common-render p {
+  text-align: left;
+  margin: 0;
+  margin-bottom: 1em;
+}
+
+.libro-html-common-render img {
+  -moz-force-broken-image-icon: 1;
+}
+
+/* Restrict to direct children as other images could be nested in other content. */
+.libro-html-common-render > img {
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1em;
+}
+
+/* Change color behind transparent images if they need it... */
+[data-libro-theme-light='false'] .libro-image-render img.libro-needs-light-background {
+  background-color: var(--jp-inverse-layout-color1);
+}
+
+[data-libro-theme-light='true'] .libro-image-render img.libro-needs-dark-background {
+  background-color: var(--jp-inverse-layout-color1);
+}
+
+.libro-html-common-render img,
+.libro-image-render img,
+.libro-html-common-render svg,
+.libro-svg-render svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.libro-html-common-render img.libro-mod-unconfined,
+.libro-image-render img.libro-mod-unconfined,
+.libro-html-common-render svg.libro-mod-unconfined,
+.libro-svg-render svg.libro-mod-unconfined {
+  max-width: none;
+}
+
+.libro-html-common-render .alert {
+  padding: var(--jp-notebook-padding);
+  border: var(--jp-border-width) solid transparent;
+  border-radius: var(--jp-border-radius);
+  margin-bottom: 1em;
+}
+
+.libro-html-common-render .alert-info {
+  color: var(--jp-info-color0);
+  background-color: var(--jp-info-color3);
+  border-color: var(--jp-info-color2);
+}
+
+.libro-html-common-render .alert-info hr {
+  border-color: var(--jp-info-color3);
+}
+
+.libro-html-common-render .alert-info > p:last-child,
+.libro-html-common-render .alert-info > ul:last-child {
+  margin-bottom: 0;
+}
+
+.libro-html-common-render .alert-warning {
+  color: var(--jp-warn-color0);
+  background-color: var(--jp-warn-color3);
+  border-color: var(--jp-warn-color2);
+}
+
+.libro-html-common-render .alert-warning hr {
+  border-color: var(--jp-warn-color3);
+}
+
+.libro-html-common-render .alert-warning > p:last-child,
+.libro-html-common-render .alert-warning > ul:last-child {
+  margin-bottom: 0;
+}
+
+.libro-html-common-render .alert-success {
+  color: var(--jp-success-color0);
+  background-color: var(--jp-success-color3);
+  border-color: var(--jp-success-color2);
+}
+
+.libro-html-common-render .alert-success hr {
+  border-color: var(--jp-success-color3);
+}
+
+.libro-html-common-render .alert-success > p:last-child,
+.libro-html-common-render .alert-success > ul:last-child {
+  margin-bottom: 0;
+}
+
+.libro-html-common-render .alert-danger {
+  color: var(--jp-error-color0);
+  background-color: var(--jp-error-color3);
+  border-color: var(--jp-error-color2);
+}
+
+.libro-html-common-render .alert-danger hr {
+  border-color: var(--jp-error-color3);
+}
+
+.libro-html-common-render .alert-danger > p:last-child,
+.libro-html-common-render .alert-danger > ul:last-child {
+  margin-bottom: 0;
+}
+
+.libro-html-common-render blockquote {
+  margin: 1em 2em;
+  padding: 0 1em;
+  border-left: 5px solid var(--jp-border-color2);
+}
+
+a.libro-InternalAnchorLink {
+  visibility: hidden;
+  margin-left: 8px;
+  color: var(--md-blue-800);
+}
+
+h1:hover .libro-InternalAnchorLink,
+h2:hover .libro-InternalAnchorLink,
+h3:hover .libro-InternalAnchorLink,
+h4:hover .libro-InternalAnchorLink,
+h5:hover .libro-InternalAnchorLink,
+h6:hover .libro-InternalAnchorLink {
+  visibility: visible;
+}
+
+.libro-html-common-render kbd {
+  background-color: var(--jp-rendermime-table-row-background);
+  border: 1px solid var(--jp-border-color0);
+  border-bottom-color: var(--jp-border-color2);
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 25%);
+  display: inline-block;
+  font-size: var(--jp-ui-font-size0);
+  line-height: 1em;
+  padding: 0.2em 0.5em;
+}
+
+/* Most direct children of .libro-html-common-render have a margin-bottom of 1.0.
+ * At the bottom of cells this is a bit too much as there is also spacing
+ * between cells. Going all the way to 0 gets too tight between markdown and
+ * code cells.
+ */
+.libro-html-common-render > *:last-child {
+  margin-bottom: 0.5em;
+}
+
+.libro-mimeType-highlight {
+  background-color: var(--jp-search-unselected-match-background-color) !important;
+  color: var(--jp-search-unselected-match-color) !important;
+}
+
+.libro-mod-selected.libro-mimeType-highlight {
+  background-color: var(--jp-search-selected-match-background-color) !important;
+  color: var(--jp-search-selected-match-color) !important;
+}

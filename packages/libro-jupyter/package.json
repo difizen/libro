@@ -1,0 +1,75 @@
+{
+  "name": "@difizen/libro-jupyter",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "libro"
+  ],
+  "repository": "git@github.com:difizen/libro.git",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "typings": "./es/index.d.ts",
+      "default": "./es/index.js"
+    },
+    "./mock": {
+      "typings": "./es/mock/index.d.ts",
+      "default": "./es/mock/index.js"
+    },
+    "./es/mock": {
+      "typings": "./es/mock/index.d.ts",
+      "default": "./es/mock/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "es/index.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "files": [
+    "es",
+    "src"
+  ],
+  "scripts": {
+    "setup": "father build",
+    "build": "father build",
+    "test": ": Note: lint task is delegated to test:* scripts",
+    "test:vitest": "vitest run",
+    "test:jest": "jest",
+    "coverage": ": Note: lint task is delegated to coverage:* scripts",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:jest": "jest --coverage",
+    "lint": ": Note: lint task is delegated to lint:* scripts",
+    "lint:eslint": "eslint src",
+    "lint:tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@difizen/libro-code-editor": "^0.0.1",
+    "@difizen/libro-codemirror": "^0.0.1",
+    "@difizen/libro-codemirror-code-cell": "^0.0.1",
+    "@difizen/libro-codemirror-markdown-cell": "^0.0.1",
+    "@difizen/libro-codemirror-raw-cell": "^0.0.1",
+    "@difizen/libro-rendermime": "^0.0.1",
+    "@difizen/libro-common": "^0.0.1",
+    "@difizen/libro-core": "^0.0.1",
+    "@difizen/libro-kernel": "^0.0.1",
+    "@difizen/libro-l10n": "^0.0.1",
+    "@difizen/libro-output": "^0.0.1",
+    "@difizen/libro-search": "^0.0.1",
+    "@difizen/libro-search-codemirror-cell": "^0.0.1",
+    "@difizen/mana-app": "alpha",
+    "@difizen/mana-l10n": "alpha",
+    "@ant-design/colors": "^7.0.0",
+    "@ant-design/icons": "^5.1.0",
+    "classnames": "^2.3.2",
+    "moment": "^2.29.4",
+    "plotly.js": "^2.16.1"
+  },
+  "peerDependencies": {
+    "antd": "^5.8.6",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.25"
+  }
+}

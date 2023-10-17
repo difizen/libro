@@ -1,0 +1,160 @@
+/* stylelint-disable color-function-notation */
+.difizen-dumi-banner {
+  position: relative;
+  width: 100%;
+  height: 548px;
+  background-color: #fff;
+  background-image: url('https://mdn.alipayobjects.com/huamei_usjdcg/afts/img/A*D4cjRIorZ9oAAAAAAAAAAAAADo6HAQ/original');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 548px;
+
+  @media only screen and (min-width: 1450px) {
+    background-size: 100% 100%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    height: 636px;
+    background-size: auto 636px;
+  }
+
+  &-main {
+    position: relative;
+    display: flex;
+    max-width: 1200px;
+    height: 548px;
+    align-items: center;
+    margin: 0 auto;
+    padding-inline: 40px;
+
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
+      height: 636px;
+      padding-inline: 12px;
+    }
+  }
+
+  &-content {
+    @media only screen and (max-width: 768px) {
+      padding-top: 90px;
+      text-align: center;
+    }
+
+    transition: 'all .7s ease-out';
+
+    &-title {
+      margin: 0 0 10px;
+      color: #181818;
+      font-size: 54px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-align: justify;
+
+      @media only screen and (max-width: 768px) {
+        margin: 10px 0;
+        text-align: center;
+      }
+    }
+
+    &-detail {
+      padding: 0;
+      color: rgb(66 78 102 / 100%);
+      font-size: 14px;
+      letter-spacing: 0;
+      line-height: 28px;
+      white-space: pre-wrap;
+
+      p {
+        margin: 0;
+      }
+
+      @media only screen and (max-width: 768px) {
+        font-size: 13px;
+        padding: 0 20px;
+      }
+    }
+
+    &-actions {
+      display: flex;
+      margin: 20px 0;
+      justify-content: center;
+    }
+  }
+
+  &-img {
+    display: inline-block;
+    width: 670px;
+    opacity: 0;
+
+    @media only screen and (max-width: 920px) {
+      width: 100%;
+    }
+
+    @media only screen and (max-width: 768px) {
+      /* height: 90%; */
+    }
+  }
+}
+
+.difizen-dumi-hero {
+  position: relative;
+  margin: -96px auto -160px;
+  max-width: 1392px;
+  height: 932px;
+  padding-top: 220px;
+  text-align: center;
+  box-sizing: border-box;
+
+  &-title {
+    margin: 0 0 32px;
+    display: inline-block;
+    font-family: Alibaba-PuHuiTi, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+      sans-serif;
+    color: #83cdf8;
+    font-size: 180px;
+    line-height: 1;
+
+    span {
+      color: transparent;
+      text-shadow: 0 10px 20px rgba(22, 119, 255, 15%);
+      background: linear-gradient(30deg, #90d5ff 30%, #65a5ff);
+      background-clip: text;
+    }
+  }
+
+  &-desc {
+    margin: 32px;
+    color: #4f5866;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  &-actions {
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+
+    :first-child {
+      color: '#fff';
+      background-color: '#1677ff';
+    }
+
+    :not(:first-child) {
+      margin-inline-start: 48px;
+      color: #1677ff;
+      border: 1px solid #1677ff;
+    }
+
+    a {
+      display: inline-block;
+      height: 52px;
+      font-size: 18px;
+      line-height: 52px;
+      text-decoration: none;
+      min-width: 168px;
+      border-radius: 26px;
+      box-sizing: border-box;
+      transition: opacity 0.2s;
+    }
+  }
+}

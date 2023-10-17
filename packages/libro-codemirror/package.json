@@ -1,0 +1,74 @@
+{
+  "name": "@difizen/libro-codemirror",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "libro",
+    "notebook"
+  ],
+  "repository": "git@github.com:difizen/libro.git",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "typings": "./es/index.d.ts",
+      "default": "./es/index.js"
+    },
+    "./mock": {
+      "typings": "./es/mock/index.d.ts",
+      "default": "./es/mock/index.js"
+    },
+    "./es/mock": {
+      "typings": "./es/mock/index.d.ts",
+      "default": "./es/mock/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "es/index.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "files": [
+    "es",
+    "src"
+  ],
+  "scripts": {
+    "setup": "father build",
+    "build": "father build",
+    "test": ": Note: lint task is delegated to test:* scripts",
+    "test:vitest": "vitest run",
+    "test:jest": "jest",
+    "coverage": ": Note: lint task is delegated to coverage:* scripts",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:jest": "jest --coverage",
+    "lint": ": Note: lint task is delegated to lint:* scripts",
+    "lint:eslint": "eslint src",
+    "lint:tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@difizen/mana-app": "alpha",
+    "@codemirror/autocomplete": "^6.0.0",
+    "@codemirror/commands": "^6.1.0",
+    "@codemirror/lang-javascript": "^6.0.2",
+    "@codemirror/lang-json": "^6.0.0",
+    "@codemirror/lang-markdown": "^6.0.5",
+    "@codemirror/lang-python": "^6.0.1",
+    "@codemirror/lang-sql": "^6.3.0",
+    "@codemirror/language": "^6.2.1",
+    "@codemirror/lint": "^6.0.0",
+    "@codemirror/search": "^6.0.0",
+    "@codemirror/state": "^6.0.0",
+    "@codemirror/view": "^6.2.2",
+    "@difizen/libro-code-editor": "^0.0.1",
+    "@difizen/libro-common": "^0.0.1",
+    "@difizen/libro-rendermime": "^0.0.1",
+    "@lezer/common": "^1.1.0",
+    "@lezer/highlight": "^1.1.4",
+    "markdown-it": "^13.0.1",
+    "uuid": "^9.0.0",
+    "vscode-languageserver-protocol": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^12.2.3",
+    "@types/uuid": "^8.3.4"
+  }
+}

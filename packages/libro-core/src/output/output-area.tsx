@@ -1,0 +1,255 @@
+import type { IOutput } from '@difizen/libro-common';
+import { isError, isStream } from '@difizen/libro-common';
+import type { ViewComponent } from '@difizen/mana-app';
+import type { Contribution } from '@difizen/mana-app';
+import {
+  ViewOption,
+  getOrigin,
+  ViewRender,
+  BaseView,
+  Priority,
+  useInject,
+  view,
+  ViewInstance,
+} from '@difizen/mana-app';
+import { Emitter } from '@difizen/mana-app';
+import { contrib, inject, transient } from '@difizen/mana-app';
+import { prop } from '@difizen/mana-app';
+import React, { useEffect } from 'react';
+import { v4 } from 'uuid';
+
+import { ExecutableCellView } from '../cell/index.js';
+import type { CellView } from '../libro-protocol.js';
+
+import type {
+  BaseOutputArea,
+  BaseOutputView,
+  IOutputAreaOption,
+} from './output-protocol.js';
+import { OutputContribution } from './output-protocol.js';
+
+const LibroOutputAreaRender = React.forwardRef<HTMLDivElement>(
+  function LibroOutputAreaRender(_props, ref) {
+    const outputArea = useInject<LibroOutputArea>(ViewInstance);
+
+    useEffect(() => {
+      outputArea.onUpdateEmitter.fire();
+    }, [outputArea.onUpdateEmitter, outputArea.outputs]);
+
+    return (
+      <div className="libro-output-area" ref={ref}>
+        {outputArea.outputs.map((output) => {
+          return <ViewRender view={output} key={output.id} />;
+        })}
+      </div>
+    );
+  },
+);
+
+@transient()
+@view('libro-output-area')
+export class LibroOutputArea extends BaseView implements BaseOutputArea {
+  override view: ViewComponent = LibroOutputAreaRender;
+  cell: CellView;
+  @prop()
+  outputs: BaseOutputView[] = [];
+
+  @contrib(OutputContribution)
+  outputProvider: Contribution.Provider<OutputContribution>;
+
+  constructor(@inject(ViewOption) option: IOutputAreaOption) {
+    super();
+    this.cell = option.cell;
+  }
+  disposed?: boolean | undefined;
+
+  get length() {
+    return this.outputs.length;
+  }
+
+  protected clearNext = false;
+  protected lastStream = '';
+
+  protected lastName?: 'stdout' | 'stderr';
+
+  /**
+   * @internal
+   */
+  onUpdateEmitter = new Emitter<void>();
+
+  get onUpdate() {
+    return this.onUpdateEmitter.event;
+  }
+
+  get(index: number): BaseOutputView {
+    if (index >= 0 && index < this.outputs.length) {
+      return this.outputs[index];
+    }
+    throw new Error('index out of range');
+  }
+  protected doCreateOutput(options: IOutput): Promise<BaseOutputView> {
+    const provider = this.findProvider(options);
+
+    return provider.factory({
+      output: { _librOutputId: v4(), ...options },
+      trusted: this.cell.model.trusted,
+      cell: this.cell,
+    });
+  }
+  add = async (output: IOutput): Promise<number> => {
+    // if (this.clearNext) {
+    //   this.clear();
+    //   this.clearNext = false;
+    // }
+    // Consolidate outputs if they are stream outputs of the same kind.
+    if (
+      isStream(output) &&
+      this.lastStream &&
+      output.name === this.lastName &&
+      this.shouldCombine({
+        output,
+        lastModel: this.outputs[this.length - 1],
+      })
+    ) {
+      // In order to get a list change event, we add the previous
+      // text to the current item and replace the previous item.
+      // This also replaces the metadata of the last item.
+      this.lastStream += normalize(output.text);
+      this.lastStream = removeOverwrittenChars(this.lastStream);
+      output.text = this.lastStream;
+      const index = this.length - 1;
+      this.set(index, output);
+      return this.length;
+    }
+
+    if (isStream(output)) {
+      output.text = removeOverwrittenChars(normalize(output.text));
+    }
+
+    const outputModel = this.doCreateOutput(output);
+
+    // Update the stream information.
+    if (isStream(output)) {
+      this.lastStream = normalize(output.text);
+      this.lastName = output.name;
+    } else {
+      this.lastStream = '';
+    }
+    return this.outputs.push(await outputModel);
+  };
+  set = async (index: number, output: IOutput) => {
+    const outputModel = this.doCreateOutput(output);
+    const current = this.outputs[index];
+    current.dispose();
+    this.outputs[index] = await outputModel;
+  };
+  clear(wait?: boolean | undefined) {
+    this.lastStream = '';
+    if (wait) {
+      this.clearNext = true;
+      return;
+    }
+    this.outputs.forEach((output) => {
+      output.dispose();
+    });
+    this.outputs = [];
+  }
+  fromJSON = async (values: IOutput[]) => {
+    if (!values) {
+      return;
+    }
+    // this.clear();
+    for (const value of values) {
+      await this.add(value);
+    }
+  };
+  toJSON = (): IOutput[] => {
+    return this.outputs.map((output) => output.toJSON());
+  };
+
+  setupCellView(cell: CellView) {
+    this.cell = cell;
+  }
+
+  protected findProvider(options: IOutput): OutputContribution {
+    const prioritized = Priority.sortSync(
+      this.outputProvider.getContributions(),
+      (contribution) => contribution.canHandle(options),
+    );
+    const sorted = prioritized.map((c) => c.value);
+    return sorted[0]!;
+  }
+
+  /**
+   * Whether a new value should be consolidated with the previous output.
+   *
+   * This will only be called if the minimal criteria of both being stream
+   * messages of the same type.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected shouldCombine(_options: {
+    output: IOutput;
+    lastModel: BaseOutputView;
+  }): boolean {
+    return true;
+  }
+}
+
+/**
+ * Remove characters that are overridden by backspace characters.
+ */
+function fixBackspace(txt: string): string {
+  let tmp = txt;
+  do {
+    // eslint-disable-next-line no-param-reassign
+    txt = tmp;
+    // Cancel out anything-but-newline followed by backspace
+    tmp = txt.replace(/[^\n]\x08/gm, ''); // eslint-disable-line no-control-regex
+  } while (tmp.length < txt.length);
+  return txt;
+}
+
+/**
+ * Remove chunks that should be overridden by the effect of
+ * carriage return characters.
+ */
+function fixCarriageReturn(txt: string): string {
+  // eslint-disable-next-line no-param-reassign
+  txt = txt.replace(/\r+\n/gm, '\n'); // \r followed by \n --> newline
+  while (txt.search(/\r[^$]/g) > -1) {
+    const base = txt.match(/^(.*)\r+/m)![1];
+    let insert = txt.match(/\r+(.*)$/m)![1];
+    insert = insert + base.slice(insert.length, base.length);
+    // eslint-disable-next-line no-param-reassign
+    txt = txt.replace(/\r+.*$/m, '\r').replace(/^.*\r/m, insert);
+  }
+  return txt;
+}
+
+/*
+ * Remove characters overridden by backspaces and carriage returns
+ */
+export function removeOverwrittenChars(text: string): string {
+  return fixCarriageReturn(fixBackspace(text));
+}
+
+/**
+ * Normalize an output.
+ */
+//TODO: output处理
+export function normalize(value: string[] | string): string {
+  if (Array.isArray(value)) {
+    return value.join('');
+  }
+  return value;
+}
+
+export function hasErrorOutput(cell: CellView): boolean {
+  if (!ExecutableCellView.is(cell)) {
+    return false;
+  }
+  if (cell.outputArea && cell.outputArea.length) {
+    return !!cell.outputArea.outputs.find((output) => isError(getOrigin(output.raw)));
+  }
+  return false;
+}

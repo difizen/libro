@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# 1) Validate committer email
+
+EMAIL=$(git config user.email)
+
+
+# 2) Lint staged files
+
+pnpm exec lint-staged

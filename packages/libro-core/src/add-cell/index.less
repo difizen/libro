@@ -1,0 +1,38 @@
+.default-add-cell-container {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 90px;
+  padding-bottom: 30px;
+  margin: 0 72px;
+
+  .libro-add-cell-container-item {
+    margin-right: 16px;
+    padding-left: 12px;
+    border-radius: 6px;
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    font-family: PingFangSC;
+    font-weight: 400;
+    font-size: 14px;
+    background: var(--mana-libro-bottom-btn-background-color) !important;
+    border-color: var(--mana-libro-bottom-btn-border-color) !important;
+    line-height: 22px;
+
+    .libro-add-cell-icon {
+      padding-right: 8px;
+      color: var(--mana-libro-bottom-btn-icon-color) !important;
+    }
+
+    span:not(.libro-add-cell-icon) {
+      color: var(--mana-libro-bottom-btn-text-color);
+    }
+
+    path {
+      // position: absolute;
+      // top: 11px;
+      // left: 12px;
+      height: 9.8px;
+      width: 9.4px;
+    }
+  }
+}

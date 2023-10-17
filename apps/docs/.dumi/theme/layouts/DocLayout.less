@@ -1,0 +1,23 @@
+.difizen-dumi-layout {
+  height: 100%;
+
+  main {
+    .dumi-default-content {
+      min-height: calc(100vh - 61px);
+    }
+  }
+}
+
+.dumi-default-content {
+  &:not([data-no-sidebar]) {
+    padding: 48px 0 0;
+
+    > article {
+      padding: 0 48px;
+    }
+
+    .dumi-default-content-footer {
+      padding: 0 48px;
+    }
+  }
+}

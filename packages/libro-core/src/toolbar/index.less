@@ -1,0 +1,59 @@
+// The prefix to use on all css classes from ant.
+@ant-prefix: ant;
+
+.libro-hide-selector-menu {
+  .@{ant-prefix}-dropdown-menu {
+    background-color: var(--mana-libro-popover-background-color);
+  }
+  .@{ant-prefix}-dropdown-menu-item {
+    color: var(--mana-libro-toolbar-menu-label-color);
+  }
+  .@{ant-prefix}-dropdown-menu-item-disabled {
+    color: var(--mana-libro-toolbar-menu-disabled-label-color) !important;
+  }
+  .@{ant-prefix}-dropdown-menu-item.@{ant-prefix}-dropdown-menu-item-disabled:hover,
+  .@{ant-prefix}-dropdown-menu-item:hover {
+    background-color: var(--mana-libro-menu-hover-color);
+  }
+}
+
+.libro-cell-selector {
+  background-color: var(--mana-libro-popover-background-color) !important;
+  .@{ant-prefix}-select-item-option-selected:not(
+      .@{ant-prefix}-select-item-option-disabled
+    ),
+  .@{ant-prefix}-select-item-option-active:not(
+      .@{ant-prefix}-select-item-option-disabled
+    ) {
+    background-color: var(--mana-libro-menu-hover-color) !important;
+  }
+  .@{ant-prefix}-select-item-option-content {
+    color: var(--mana-libro-toolbar-menu-label-color);
+  }
+}
+
+.libro-restart-kernel-modal,
+.libro-shut-down-kernel-modal {
+  .@{ant-prefix}-modal-content {
+    background-color: var(--mana-libro-popover-background-color) !important;
+  }
+  .@{ant-prefix}-modal-header {
+    background: var(--mana-libro-popover-background-color);
+    border-color: var(--mana-libro-table-bottom-border-color);
+  }
+  .@{ant-prefix}-modal-title {
+    color: var(--mana-libro-modal-title-color);
+  }
+  .@{ant-prefix}-modal-body {
+    color: var(--mana-libro-modal-content-color);
+  }
+  .@{ant-prefix}-modal-footer {
+    border-color: var(--mana-libro-table-bottom-border-color);
+  }
+  .@{ant-prefix}-btn-primary {
+    background: var(--mana-libro-btn-primary-background-color);
+  }
+  .@{ant-prefix}-modal-close {
+    color: var(--mana-libro-close-color);
+  }
+}

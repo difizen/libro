@@ -1,0 +1,62 @@
+{
+  "name": "@difizen/libro-common",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "libro",
+    "notebook"
+  ],
+  "repository": "git@github.com:difizen/libro.git",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "typings": "./es/index.d.ts",
+      "default": "./es/index.js"
+    },
+    "./mock": {
+      "typings": "./es/mock/index.d.ts",
+      "default": "./es/mock/index.js"
+    },
+    "./es/mock": {
+      "typings": "./es/mock/index.d.ts",
+      "default": "./es/mock/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "es/index.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "files": [
+    "es",
+    "src"
+  ],
+  "scripts": {
+    "setup": "father build",
+    "build": "father build",
+    "test": ": Note: lint task is delegated to test:* scripts",
+    "test:vitest": "vitest run",
+    "test:jest": "jest",
+    "coverage": ": Note: lint task is delegated to coverage:* scripts",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:jest": "jest --coverage",
+    "lint": ": Note: lint task is delegated to lint:* scripts",
+    "lint:eslint": "eslint src",
+    "lint:tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@difizen/mana-common": "alpha",
+    "path-browserify": "^1.0.0",
+    "sanitize-html": "^2.7.2",
+    "url-parse": "^1.5.10"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.25",
+    "@types/path-browserify": "^1.0.0",
+    "@types/sanitize-html": "^2.6.2",
+    "@types/url-parse": "^1.4.8"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
+}

@@ -1,0 +1,66 @@
+.libro-markdown-container {
+  width: 100%;
+  height: 100%;
+  height: 16px;
+  min-height: 16px;
+}
+
+.markdown-toc-container {
+  width: 120px;
+  min-height: 240px;
+  // position: absolute;
+  // top: 12px;
+  // right: 0;
+  // bottom: 0;
+  padding-top: 12px;
+  overflow-y: auto;
+
+  .markdown-toc-container-title {
+    box-sizing: border-box;
+    height: 24px;
+    margin-bottom: 16px;
+    color: var(--mana-libro-toc-title-color);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+    text-align: left;
+
+    .anticon-eye-invisible,
+    .anticon-eye {
+      padding-left: 4px;
+      cursor: pointer;
+    }
+  }
+
+  .markdown-toc-container-anchor {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 4px 0;
+    overflow: hidden;
+    color: var(--mana-libro-toc-text-color);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    white-space: nowrap;
+    text-align: left;
+    text-overflow: ellipsis;
+    border-left: 2px solid transparent;
+    cursor: pointer;
+
+    &.active {
+      font-weight: 600;
+      border-left: 2px solid rgba(5, 140, 224, 99.9%);
+    }
+
+    &:hover {
+      background-color: var(--mana-libro-toc-hover-color);
+    }
+
+    .libro-toc-collapsed {
+      margin-right: 4px;
+    }
+  }
+}

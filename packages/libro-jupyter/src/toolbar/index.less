@@ -1,0 +1,194 @@
+/* stylelint-disable declaration-property-value-disallowed-list */
+/* stylelint-disable color-function-notation */
+// The prefix to use on all css classes from ant.
+@ant-prefix: ant;
+
+.kernel-status {
+  width: 140px;
+
+  .ant-badge-status-dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.container-and-service-status-step {
+  > div:first-child {
+    height: 70px;
+  }
+
+  .libro-kernel-badge :first-child {
+    width: 9px;
+    height: 9px;
+    border: 1px solid var(--mana-libro-kernel-badge-border-color);
+  }
+}
+
+.libro-tooltip-placement-bottom,
+.libro-tooltip-placement-right {
+  opacity: 0.9;
+
+  > div {
+    > div:nth-child(2) {
+      padding: 8px 10px;
+      color: #fff;
+      text-align: left;
+      text-decoration: none;
+      background-color: #373737;
+      border-radius: 6px;
+      box-shadow: 0 0 4px rgb(0 0 0 / 17%);
+      min-height: 34px;
+    }
+  }
+}
+
+.libro-kernel-and-container-status {
+  font-family: PingFangSC, 'Helvetica Neue', helvetica, arial, sans-serif;
+
+  .libro-kernel-status-and-selector {
+    .kernel {
+      color: var(--mana-libro-kernel-text);
+    }
+
+    .@{ant-prefix}-space-item {
+      color: var(--mana-libro-kernel-select-text);
+
+      > span {
+        transform: translate(-5px, 2px);
+        color: var(--mana-libro-dropdown-icon-color);
+      }
+    }
+
+    .libro-kernel-badge {
+      :first-child {
+        width: 9px;
+        height: 9px;
+        border: 1px solid var(--mana-libro-kernel-badge-border-color);
+      }
+
+      padding-left: 8px;
+
+      :nth-child(2) {
+        color: var(--mana-libro-kernel-status-text);
+        opacity: var(--mana-libro-kernel-text-opacity);
+      }
+    }
+  }
+
+  .libro-container-and-service-status {
+    .loading-icon {
+      color: rgba(24, 144, 255, 100%);
+    }
+
+    .failed-icon {
+      color: rgba(255, 77, 79, 100%);
+    }
+
+    .kernel-prepare-failed {
+      padding: 0 16px 0 10px;
+    }
+
+    .container-log-view-slot {
+      display: inline;
+
+      > div:first-child {
+        display: inline;
+      }
+    }
+
+    .no-kernel {
+      padding: 0 16px 0 10px;
+      color: var(--mana-libro-kernel-text);
+    }
+
+    .status-category {
+      padding-right: 8px;
+    }
+  }
+}
+
+.libro-popover-kernel-status {
+  .@{ant-prefix}-popover-inner {
+    background-color: var(--mana-libro-jupyter-kernel-status-background-color);
+  }
+  .@{ant-prefix}-popover-arrow-content::before {
+    background: var(--mana-libro-jupyter-kernel-status-background-color);
+  }
+  .@{ant-prefix}-steps-item-title {
+    color: var(--mana-libro-jupyter-kernel-status-title-color) !important;
+  }
+  .@{ant-prefix}-steps-item-icon {
+    background-color: transparent !important;
+  }
+  .@{ant-prefix}-steps-item-description {
+    .@{ant-prefix}-badge-status-text {
+      color: var(--mana-libro-jupyter-kernel-status-step-description-color) !important;
+    }
+  }
+
+  .@{ant-prefix}-steps-item-active {
+    .@{ant-prefix}-steps-item-title {
+      color: var(--mana-libro-jupyter-kernel-status-active-step-title-color) !important;
+    }
+    .@{ant-prefix}-steps-item-icon {
+      background-color: var(
+        --mana-libro-jupyter-kernel-status-step-active-background-color
+      ) !important;
+
+      span {
+        color: white !important;
+      }
+    }
+  }
+}
+
+.libro-run-menu-container {
+  width: 220px;
+  background-color: var(--mana-libro-popover-background-color) !important;
+  .@{ant-prefix}-dropdown-menu-item:hover {
+    background-color: var(--mana-libro-menu-hover-color) !important;
+  }
+
+  > li {
+    > span {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .libro-run-menu-label {
+        font-family: PingFangSC;
+        font-weight: 400;
+        font-size: 14px;
+        color: var(--mana-libro-toolbar-menu-label-color);
+      }
+
+      .libro-run-menu-keybind {
+        margin-left: auto;
+        font-family: PingFangSC;
+        font-weight: 400;
+        font-size: 12px;
+        color: var(--mana-libro-toolbar-menu-keybind-color);
+        text-align: right;
+        line-height: 18px;
+      }
+    }
+  }
+}
+
+.libro-kernel-dropdown {
+  .@{ant-prefix}-dropdown-menu {
+    background-color: var(--mana-libro-popover-background-color);
+  }
+
+  .@{ant-prefix}-dropdown-menu-item-group-title {
+    color: var(--mana-libro-jupyter-kernel-status-title-color) !important;
+  }
+
+  .@{ant-prefix}-dropdown-menu-title-content {
+    color: var(--mana-libro-jupyter-kernel-status-menu-color);
+  }
+
+  .@{ant-prefix}-dropdown-menu-item:hover {
+    background-color: var(--mana-libro-menu-hover-color);
+  }
+}

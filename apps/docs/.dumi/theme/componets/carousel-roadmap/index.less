@@ -1,0 +1,148 @@
+/* stylelint-disable color-function-notation */
+.difizen-dumi-carousel {
+  position: relative;
+  height: 460px;
+  padding-top: 70px;
+
+  &-roadmap {
+    overflow: hidden;
+    margin: 0 auto;
+    transition: all 0.6s ease-out;
+    z-index: 1;
+    margin-top: -10px;
+
+    @media only screen and (min-width: 1420px) {
+      width: 1192px;
+    }
+
+    @media only screen and (max-width: 1420px) {
+      width: 888px;
+    }
+
+    @media only screen and (max-width: 1140px) {
+      width: 584px;
+    }
+
+    @media only screen and (max-width: 840px) {
+      width: 280px;
+    }
+
+    &-container {
+      z-index: 1;
+      overflow: hidden;
+      margin-left: 0;
+      transition: all 0.3s;
+      white-space: nowrap;
+      height: 316px;
+    }
+
+    &-card-container {
+      display: inline-block;
+    }
+
+    &-card {
+      position: relative;
+      display: inline-block;
+      display: flex;
+      flex-direction: column;
+      width: 280px;
+
+      /* height: 216px; */
+      box-sizing: border-box;
+      padding: 20px;
+      border-radius: 10px;
+      margin-right: 24px;
+      background-image: linear-gradient(180deg, #fff 0%, rgb(255 255 255 / 50%) 100%);
+      box-shadow: 0 2px 5px 0 rgb(0 0 0 / 3%);
+      text-align: center;
+
+      a {
+        color: rgba(0, 96, 230, 100%);
+      }
+    }
+  }
+
+  &-line {
+    position: absolute;
+    top: 143px;
+    left: 50%;
+    margin: 10px 0;
+    transform: translateX(-50%);
+
+    .difizen-dumi-carousel-next-btn {
+      right: -100px;
+      transition: all 0.5s;
+    }
+
+    .difizen-dumi-carousel-prev-btn {
+      left: -100px;
+      transition: all 0.5s;
+    }
+
+    @media only screen and (min-width: 1420px) {
+      width: 1192px;
+    }
+
+    @media only screen and (max-width: 1420px) {
+      width: 888px;
+    }
+
+    @media only screen and (max-width: 1140px) {
+      width: 584px;
+    }
+
+    @media only screen and (max-width: 840px) {
+      width: 280px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      top: 103px;
+    }
+
+    @media only screen and (max-width: 520px) {
+      .next-btn {
+        right: -60px;
+      }
+
+      .prev-btn {
+        left: -60px;
+      }
+    }
+    @media only screen and (max-width: 375px) {
+      .difizen-dumi-carousel-next-btn {
+        right: -45px;
+      }
+
+      .difizen-dumi-carousel-prev-btn {
+        left: -45px;
+      }
+    }
+  }
+
+  .difizen-dumi-carousel-rolling-btn-disabled {
+    color: #eee;
+    cursor: not-allowed;
+  }
+
+  .difizen-dumi-carousel-rolling-btn {
+    position: absolute;
+    z-index: 1;
+    width: 50px;
+    height: 50px;
+    border: 0;
+    border-radius: 50%;
+    margin-top: 50px;
+    background-color: #fff;
+    box-shadow: 0 0 10px 5px #1b1b1b09;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding-top: 32px;
+
+    .difizen-dumi-carousel-rolling-btn {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}

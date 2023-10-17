@@ -1,0 +1,103 @@
+@ant-prefix: ant;
+
+.libro-add-between-cell {
+  position: relative;
+  .@{ant-prefix}-popover-arrow {
+    display: none;
+  }
+  .@{ant-prefix}-popover {
+    padding: 0;
+    max-width: unset;
+  }
+
+  .@{ant-prefix}-popover-inner {
+    border-radius: 8px;
+    background-color: var(--mana-libro-add-between-popover-background-color);
+    padding: 0;
+  }
+
+  .@{ant-prefix}-popover-inner-content {
+    padding: 0;
+    width: unset;
+    max-width: unset;
+  }
+
+  .libro-add-cell-menu {
+    z-index: 1000;
+  }
+
+  .@{ant-prefix}-menu {
+    border-radius: 8px !important;
+    background-color: var(--mana-libro-add-between-popover-background-color) !important;
+  }
+
+  .@{ant-prefix}-menu-vertical {
+    border-right: unset !important;
+  }
+
+  .@{ant-prefix}-menu-item {
+    height: 32px !important;
+    line-height: 32px !important;
+  }
+  .@{ant-prefix}-menu-item:hover {
+    background-color: var(--mana-libro-add-between-hover-color) !important;
+  }
+
+  .@{ant-prefix}-menu-title-content {
+    color: var(--mana-libro-add-between-menu-label-color);
+  }
+
+  .@{ant-prefix}-menu-item-selected {
+    background-color: var(--mana-libro-add-between-hover-color) !important;
+  }
+}
+
+.libro-cell-divider {
+  width: 100%;
+  height: 4px;
+  background-color: var(--mana-libro-add-between-divider-color);
+  border-radius: 2px;
+}
+
+.libro-add-between-cell-icon {
+  z-index: 20;
+  margin-right: 10px;
+  margin-left: 30px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+
+  svg {
+    color: var(--mana-libro-add-between-icon-color);
+
+    &:hover {
+      color: var(--mana-libro-add-between-icon-hover-color);
+    }
+  }
+}
+
+.libro-add-between-cell-area {
+  position: absolute;
+  top: -16px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 16px;
+  cursor: pointer;
+}
+
+.libro-add-between-cell-tooltip {
+  .@{ant-prefix}-tooltip-inner {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 6px;
+  }
+}
+
+.libro-add-between-cell-anchor:focus {
+  outline: none;
+  cursor: pointer;
+}

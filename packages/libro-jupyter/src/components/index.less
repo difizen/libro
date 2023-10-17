@@ -1,0 +1,82 @@
+.libro-cell-execution-tip {
+  position: absolute;
+  bottom: -15px;
+  left: 40px;
+  z-index: 10;
+  width: calc(100% - 50px);
+  max-width: 400px;
+  height: 30px;
+  background-color: transparent;
+
+  > svg,
+  > span {
+    margin-top: 7px;
+    margin-left: 8px;
+  }
+
+  > svg {
+    position: absolute;
+    color: var(--mana-libro-execution-tip-success-color);
+  }
+
+  p {
+    width: calc(100% - 56px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    top: 4px;
+    left: 26px;
+    color: var(--mana-libro-tip-font-color) !important;
+    font-weight: 400;
+    font-size: 12px;
+    font-family: 'AlibabaPuHuiTi_2_55_Regular';
+    line-height: 20px;
+  }
+}
+
+.libro-cell-execution-tip-without-output {
+  bottom: 5px;
+}
+
+.libro-cell-bottom-blank {
+  height: 20px;
+  border-top: 1px solid var(--mana-color-border);
+
+  > div {
+    margin: 0;
+  }
+
+  background: var(--mana-libro-output-background);
+}
+
+.libro-cell-execution-tip-hide-output {
+  position: absolute;
+  bottom: -15px;
+  left: 40px;
+  z-index: 1000;
+  width: 30px;
+  height: 30px;
+  // background-color: var(--mana-color-bg-container);
+  > svg,
+  > span {
+    margin-top: 7px;
+    margin-left: 8px;
+  }
+
+  > svg {
+    position: absolute;
+    color: var(--mana-libro-execution-tip-success-color);
+  }
+}
+
+.libro-cell-execution-tip-border {
+  position: absolute;
+  background: var(--mana-libro-output-background);
+  width: 100%;
+  height: 16px;
+  border: 1px solid var(--mana-libro-code-border-color);
+  border-bottom: unset;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}

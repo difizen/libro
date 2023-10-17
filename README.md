@@ -1,0 +1,1 @@
+# JavaScript monorepo template

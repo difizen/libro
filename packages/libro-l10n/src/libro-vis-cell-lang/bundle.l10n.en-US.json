@@ -1,0 +1,17 @@
+{
+  "请选择数据来源": "Visualize data from",
+  "刷新": "Refresh",
+  "柱状图": "Column",
+  "分组柱状图": "Group Column",
+  "堆叠柱状图": "Stack Column",
+  "折线图": "Line",
+  "多面积图": "Stack Area",
+  "百分比堆叠面积图": "Percentage Area",
+  "折线图 & 面积图": "Line & Area",
+  "图表类型": "Type",
+  "数据": "Data",
+  "样式": "Style",
+  "选择图表类型": "Choose Type",
+  "复合图表": "Combo Chart",
+  "数据过长,只读取前5000条数据": "The data exceeds the length limit, only the first 5000 data entries are read."
+}

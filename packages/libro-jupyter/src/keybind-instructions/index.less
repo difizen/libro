@@ -1,0 +1,177 @@
+/* stylelint-disable declaration-property-value-disallowed-list */
+// The prefix to use on all css classes from ant.
+@ant-prefix: ant;
+
+.libro-keybind-instructions-command-search {
+  // padding: 16px 16px 0px 24px;
+  .@{ant-prefix}-input-group-wrapper {
+    background-color: var(--mana-libro-filtered-background-color) !important;
+    border-radius: 6px;
+  }
+
+  .@{ant-prefix}-input-group-addon {
+    background: transparent;
+  }
+  .@{ant-prefix}-input-search-button {
+    background: transparent;
+    border: none;
+  }
+}
+
+.libro-keybind-instructions-drawer {
+  .@{ant-prefix}-drawer-content-wrapper {
+    box-shadow:
+      0 0 16px -8px rgba(0, 0, 0, 8%),
+      0 0 28px 0 rgba(0, 0, 0, 5%),
+      0 0 48px 16px rgba(0, 0, 0, 3%) !important;
+  }
+  .@{ant-prefix}-segmented {
+    background-color: var(--mana-libro-filtered-background-color);
+  }
+  .@{ant-prefix}-segmented:hover {
+    background: var(--mana-libro-filtered-background-color) !important;
+  }
+  .@{ant-prefix}-segmented-item-label {
+    color: var(--mana-libro-drawer-title-color);
+  }
+  .@{ant-prefix}-segmented-item-selected {
+    .@{ant-prefix}-segmented-item-label {
+      color: rgba(0, 10, 26, 89%);
+    }
+  }
+  .@{ant-prefix}-drawer-mask {
+    opacity: 0;
+  }
+  .@{ant-prefix}-drawer-content {
+    background: var(--mana-libro-popover-background-color);
+  }
+  .@{ant-prefix}-drawer-close {
+    color: var(--mana-libro-drawer-close-color);
+  }
+  .@{ant-prefix}-drawer-close:hover {
+    color: var(--mana-libro-drawer-close-color);
+  }
+  .@{ant-prefix}-drawer-title {
+    color: var(--mana-libro-drawer-title-color);
+  }
+  .@{ant-prefix}-input-search-button {
+    color: var(--mana-libro-filtered-text-color) !important;
+  }
+  .@{ant-prefix}-drawer-header {
+    border-bottom: 1px solid var(--mana-libro-filtered-border-color);
+  }
+
+  .@{ant-prefix}-btn:hover,
+  .@{ant-prefix}-btn:focus,
+  .@{ant-prefix}-btn:active {
+    background: var(--mana-libro-btn-hover-color) !important;
+  }
+
+  .@{ant-prefix}-input {
+    color: var(--mana-libro-drawer-title-color);
+  }
+}
+
+.libro-keybind-instructions-table {
+  height: calc(100% - 48px) !important;
+  margin-top: 16px;
+  overflow-y: auto !important;
+}
+
+.libro-keybind-instructions-table,
+.libro-magic-table {
+  .@{ant-prefix}-table {
+    background: var(--mana-libro-popover-background-color);
+  }
+}
+
+.libro-keybind-instructions-icon {
+  display: flex;
+  width: 18px;
+  height: 18px;
+}
+
+.libro-edit-mode-keybind-instructions-table {
+  margin-top: 24px;
+}
+
+.libro-command-mode-keybind-instructions-table,
+.libro-edit-mode-keybind-instructions-table {
+  tbody {
+    .anticon svg {
+      font-size: 12px;
+    }
+  }
+
+  thead > tr > th:nth-child(2) {
+    padding-right: 8px;
+  }
+
+  thead > tr > th:nth-child(2),
+  tbody > tr > td:nth-child(2) {
+    text-align: end;
+  }
+  .@{ant-prefix}-tag {
+    display: inline;
+    color: var(--mana-libro-keybind-tag-text-color);
+    font-weight: 400;
+    font-size: 10px;
+    font-family: SFProText;
+    line-height: 12px;
+    letter-spacing: 0;
+    background-color: var(--mana-libro-keybind-tag-background-color);
+    border: none;
+    border-radius: 2px;
+  }
+}
+
+.libro-keybind-search-match {
+  background-color: var(--mana-libro-search-match-background-color);
+  color: rgba(0, 10, 26, 89%);
+}
+
+.libro-command-mode-keybind-instructions-table,
+.libro-edit-mode-keybind-instructions-table,
+.libro-magic-table {
+  .@{ant-prefix}-table-thead > tr > th {
+    background: var(--mana-libro-popover-background-color);
+  }
+
+  .@{ant-prefix}-table-tbody > tr.@{ant-prefix}-table-row:hover > td {
+    background: var(--mana-libro-btn-hover-color) !important;
+  }
+
+  .@{ant-prefix}-table-tbody > tr > td,
+  .@{ant-prefix}-table-thead > tr > th {
+    border-bottom: 1px solid var(--mana-libro-table-border-color) !important;
+  }
+
+  thead tr th {
+    height: 30px;
+    color: var(--mana-libro-table-title-color);
+    font-weight: 600;
+    font-size: 14px;
+    font-family: PingFangSC;
+    font-style: semibold;
+  }
+
+  tbody > tr > td {
+    height: 33px;
+    color: var(--mana-libro-table-title-color);
+    font-weight: 400;
+    font-size: 10px;
+    font-family: PingFangSC;
+    font-style: regular;
+    line-height: 14px;
+  }
+
+  .@{ant-prefix}-table-thead > tr > th,
+  .@{ant-prefix}-table-tbody > tr > td,
+  .@{ant-prefix}-table tfoot > tr > th,
+  .@{ant-prefix}-table tfoot > tr > td {
+    padding: 0;
+  }
+  .@{ant-prefix}-table-cell .@{ant-prefix}-table-cell-scrollbar {
+    border-bottom: unset !important;
+  }
+}

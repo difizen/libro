@@ -1,0 +1,28 @@
+{
+  "name": "@difizen/mana-docs",
+  "private": true,
+  "license": "MIT",
+  "description": "Document site for mana",
+  "scripts": {
+    "start": "dumi dev",
+    "build": "dumi build"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/react": "^18.2.25",
+    "dumi": "^2.2.13",
+    "execa": "^5.1.1"
+  },
+  "engines": {
+    "node": ">=16.20.0"
+  },
+  "packageManager": "pnpm@8.4.0",
+  "dependencies": {
+    "@difizen/mana-app": "alpha",
+    "@difizen/mana-react": "alpha",
+    "@difizen/libro-jupyter": "^0.0.1",
+    "@ant-design/icons": "^4.7.0",
+    "react": "^18.2.0",
+    "antd": "^5.8.6"
+  }
+}

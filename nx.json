@@ -1,0 +1,117 @@
+{
+  // We are using Nx for monorepo task orchestration
+  // See https://nx.dev/concepts/mental-model to understand more
+  "$schema": "https://cdn.jsdelivr.net/npm/nx@latest/schemas/nx-schema.json",
+  // Inputs affect when Nx will re-run a task
+  // If inputs are not changed then Nx will skip re-run and replay cached results
+  // For example, we want to re-run ESLint whenever eslintrc is updated
+  // This guarantees that tasks are always correct and up-to-date
+  //
+  // Named inputs defined here are to be referenced in targetDefaults
+  // See https://nx.dev/concepts/mental-model#computation-hashing-and-caching
+  // and https://nx.dev/reference/nx-json#inputs-&-namedinputs
+  //
+  // workspaceRoot means the root of the monorepo
+  // projectRoot means the root of the package in which the task is defined
+  "namedInputs": {
+    ":default": ["{projectRoot}/**/*"],
+    ":eslint": [
+      "{workspaceRoot}/.eslintrc.{js,cjs}",
+      "{workspaceRoot}/.eslintrc.*.{js,cjs}",
+      "{workspaceRoot}/.eslintignore",
+      "{projectRoot}/.eslintrc.{js,cjs}"
+    ],
+    ":stylelint": [
+      "{workspaceRoot}/.stylelintrc.{js,cjs}",
+      "{workspaceRoot}/.stylelintignore",
+      "{projectRoot}/.stylelint.{js,cjs}"
+    ],
+    ":prettier": [
+      "{workspaceRoot}/.prettierrc.json",
+      "{workspaceRoot}/.prettierignore"
+    ],
+    ":tsc": [
+      "{workspaceRoot}/tsconfig.json",
+      "{workspaceRoot}/tsconfig.*.json",
+      "{projectRoot}/**/tsconfig.json",
+      "{projectRoot}/**/tsconfig.*.json"
+    ],
+    ":vitest": ["{workspaceRoot}/vitest.config.mts", "{projectRoot}/vitest.config.mts"],
+    ":jest": [
+      "{workspaceRoot}/jest.config.js",
+      "{workspaceRoot}/babel.config.js",
+      "{projectRoot}/jest.config.js",
+      "{projectRoot}/babel.config.js"
+    ]
+  },
+  // targetDefaults configure default options for each task
+  // such as inputs, outputs and dependencies
+  // See https://nx.dev/reference/nx-json#target-defaults
+  // The actual commands are defined in the `scripts` section in each package's package.json
+  "targetDefaults": {
+    "setup": {
+      "outputs": ["{projectRoot}/dist", "{projectRoot}/es", "{projectRoot}/lib"],
+      "dependsOn": ["^setup"]
+    },
+    "build": {
+      "outputs": ["{projectRoot}/dist", "{projectRoot}/es", "{projectRoot}/lib"],
+      "dependsOn": ["^build"]
+    },
+    "lint:eslint": {
+      "inputs": [":default", ":eslint"]
+    },
+    "lint:stylelint": {
+      "inputs": [":default", ":stylelint"]
+    },
+    "lint:prettier": {
+      "inputs": [":default", ":prettier"]
+    },
+    "lint:tsc": {
+      "inputs": [":default", ":tsc"]
+    },
+    "lint": {
+      "dependsOn": ["lint:eslint", "lint:stylelint", "lint:prettier", "lint:tsc"]
+    },
+    "test:vitest": {
+      "inputs": [":default", ":vitest"]
+    },
+    "test:jest": {
+      "inputs": [":default", ":jest"]
+    },
+    "test": {
+      "dependsOn": ["test:jest"]
+    },
+    "coverage:vitest": {
+      "outputs": ["{projectRoot}/coverage"],
+      "inputs": [":default", ":vitest"]
+    },
+    "coverage:jest": {
+      "outputs": ["{projectRoot}/coverage"],
+      "inputs": [":default", ":jest"]
+    },
+    "coverage": {
+      "dependsOn": ["coverage:jest"]
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "parallel": 6,
+        "cacheableOperations": [
+          "setup",
+          "build",
+          "lint:eslint",
+          "lint:stylelint",
+          "lint:prettier",
+          "lint:tsc",
+          "lint",
+          "test:vitest",
+          "test",
+          "coverage:vitest",
+          "coverage"
+        ]
+      }
+    }
+  }
+}
