@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-kernel",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "description": "",
   "keywords": [
     "ai-infra",
@@ -45,8 +45,8 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-common": "^0.0.1",
-    "@difizen/libro-core": "^0.0.1",
+    "@difizen/libro-common": "^0.0.2-alpha.0",
+    "@difizen/libro-core": "^0.0.2-alpha.0",
     "@difizen/mana-app": "alpha",
     "minimist": "^1.2.8",
     "query-string": "^8.1.0",

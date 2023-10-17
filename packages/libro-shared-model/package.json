@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-shared-model",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "description": "",
   "keywords": [
     "libro",
@@ -45,7 +45,7 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-common": "^0.0.1",
+    "@difizen/libro-common": "^0.0.2-alpha.0",
     "@difizen/mana-common": "alpha",
     "uuid": "^8.3.2",
     "y-protocols": "^1.0.5",

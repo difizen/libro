@@ -3,8 +3,8 @@
   "changelog": ["@changesets/cli/changelog", { "repo": "difizen/libro" }],
   "commit": false,
   "fixed": [],
-  "linked": [],
-  "access": "restricted",
+  "linked": [["@difizen/*"]],
+  "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": []
