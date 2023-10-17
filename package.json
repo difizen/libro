@@ -18,6 +18,7 @@
     "ci": "nx run-many --target=lint:prettier,lint,test,coverage:jest,coverage",
     "ci:affected": "nx affected --target=lint:prettier,lint,test,coverage:jest,coverage",
     "docs": "nx run @difizen/mana-docs:start",
+    "changeset": "changeset",
     "clean": "git clean -fX ."
   },
   "devDependencies": {

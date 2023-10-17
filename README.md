@@ -1,1 +1,1 @@
-# JavaScript monorepo template
+# libro
