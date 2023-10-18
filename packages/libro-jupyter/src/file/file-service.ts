@@ -132,15 +132,15 @@ export class JupyterFileService extends FileService {
 
   override async copy(
     source: URI,
-    target: URI,
-    options?: CopyFileOptions,
+    _target: URI,
+    _options?: CopyFileOptions,
   ): Promise<FileStatWithMetadata> {
     return this.resolve(source);
   }
   override async move(
     source: URI,
-    target: URI,
-    options?: MoveFileOptions,
+    _target: URI,
+    _options?: MoveFileOptions,
   ): Promise<FileStatWithMetadata> {
     return this.resolve(source);
   }
@@ -158,7 +158,7 @@ export class JupyterFileService extends FileService {
 
   override async resolve(
     resource: URI,
-    options?: ResolveFileOptions | undefined,
+    _options?: ResolveFileOptions | undefined,
   ): Promise<FileStatWithMetadata> {
     const resolved = await this.doResolve(resource.path.toString());
     if (resolved) {

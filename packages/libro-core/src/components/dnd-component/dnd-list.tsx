@@ -45,10 +45,13 @@ export const DndCellContent = forwardRef<HTMLDivElement, { libroView: LibroView 
   },
 );
 
-export const DndList = forwardRef<
-  HTMLDivElement,
-  { libroView: LibroView; children: any }
->(function DndList({ libroView, children }) {
+export function DndList({
+  libroView,
+  children,
+}: {
+  libroView: LibroView;
+  children: any;
+}) {
   const cellService = useInject<CellService>(LibroCellService);
 
   const [, drop] = useDrop<Dragparams>(() => ({
@@ -113,4 +116,4 @@ export const DndList = forwardRef<
       {children}
     </div>
   );
-});
+}

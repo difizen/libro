@@ -16,7 +16,12 @@ const configs = {
     '^.+\\.(ts|tsx)?$': 'babel-jest',
     '^.+\\.(js|jsx)$': 'babel-jest',
   },
+  transformIgnorePatterns: [
+    '^/node_modules/(?!react-dnd|dnd-core|query-string|@react-dnd)',
+  ],
+
   coveragePathIgnorePatterns: [
+    '/dist/',
     '/lib/',
     '/es/',
     '/node_modules/',

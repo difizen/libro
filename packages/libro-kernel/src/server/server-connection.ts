@@ -1,6 +1,5 @@
 import { URL } from '@difizen/libro-common';
-import { isNative, isWeb, prop } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
+import { isNative, isWeb, prop, singleton } from '@difizen/mana-app';
 
 import { PageConfig } from '../page-config.js';
 
@@ -12,13 +11,13 @@ let HEADERS: typeof Headers;
 let REQUEST: typeof Request;
 let WEBSOCKET: typeof WebSocket;
 
-if (typeof window === 'undefined') {
+if (isNative) {
   // node environment
 } else {
-  FETCH = fetch;
-  REQUEST = Request;
-  HEADERS = Headers;
-  WEBSOCKET = WebSocket;
+  FETCH = window.fetch;
+  REQUEST = window.Request;
+  HEADERS = window.Headers;
+  WEBSOCKET = window.WebSocket;
 }
 
 @singleton()

@@ -12,7 +12,7 @@ import {
   ViewOption,
 } from '@difizen/mana-app';
 import { inject, transient, useInject, equals } from '@difizen/mana-app';
-import { Spin, Button, BackTop, FloatButton } from 'antd';
+import { Spin, Button, FloatButton } from 'antd';
 import type { FC, ForwardRefExoticComponent, RefAttributes } from 'react';
 import { useEffect, useRef, useCallback, memo, forwardRef } from 'react';
 import { v4 } from 'uuid';
@@ -57,7 +57,6 @@ import './index.less';
 
 export const LibroContentComponent = memo(function LibroContentComponent() {
   const libroSlotManager = useInject(LibroSlotManager);
-  const ref = useRef<HTMLDivElement>(null);
   const libroViewTopRef = useRef<HTMLDivElement>(null);
   const libroViewRightContentRef = useRef<HTMLDivElement>(null);
   const libroViewLeftContentRef = useRef<HTMLDivElement>(null);
@@ -134,7 +133,7 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
         <div className="libro-view-content-left" ref={libroViewLeftContentRef}>
           <DndContext>
             <CustomDragLayer />
-            <DndList libroView={instance} ref={ref}>
+            <DndList libroView={instance}>
               <Slot
                 name={libroSlotManager.getSlotName(instance, 'list')}
                 slotView={LibroSlotView}
