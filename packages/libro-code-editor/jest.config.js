@@ -1,3 +1,3 @@
-const configs = require('../../jest.config');
+import configs from '../../jest.config.mjs';
 
-module.exports = configs;
+export default configs;

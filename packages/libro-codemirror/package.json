@@ -69,6 +69,6 @@
   },
   "devDependencies": {
     "@types/markdown-it": "^12.2.3",
-    "@types/uuid": "^8.3.4"
+    "@types/uuid": "^9.0.2"
   }
 }

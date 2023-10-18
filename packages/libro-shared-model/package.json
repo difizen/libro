@@ -47,11 +47,11 @@
   "dependencies": {
     "@difizen/libro-common": "^0.0.2-alpha.0",
     "@difizen/mana-common": "alpha",
-    "uuid": "^8.3.2",
+    "uuid": "^9.0.0",
     "y-protocols": "^1.0.5",
     "yjs": "^13.5.40"
   },
   "devDependencies": {
-    "@types/uuid": "^8.3.4"
+    "@types/uuid": "^9.0.2"
   }
 }

@@ -11,6 +11,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: 'read'
+  actions: 'read'
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -19,7 +23,6 @@ jobs:
       fail-fast: false
       matrix:
         node-version: ['16.20.x']
-        python-version: ['3.8.16', '3.9.x', '3.10.x']
 
     steps:
       - name: Checkout
@@ -28,6 +31,8 @@ jobs:
           fetch-depth: 0
 
       - uses: nrwl/nx-set-shas@v3
+        # https://nx.dev/recipes/ci/monorepo-ci-github-actions
+        # https://github.com/marketplace/actions/nx-set-shas
         with:
           main-branch-name: 'main'
 
@@ -41,7 +46,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
 
       - name: Cache Nx output
         uses: actions/cache@v3

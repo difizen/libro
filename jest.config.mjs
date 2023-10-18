@@ -1,9 +1,17 @@
-const { defaults } = require('jest-config');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
+import { defaults } from 'jest-config';
+
+const configs = {
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'js', 'ts', 'tsx'],
   verbose: true,
   testRegex: '(/__test__/.*|(\\.|/)(test|spec))\\.tsx?$',
+  resolver: `${__dirname}/scripts/jest-resolver.cjs`,
   transform: {
     '^.+\\.(ts|tsx)?$': 'babel-jest',
     '^.+\\.(js|jsx)$': 'babel-jest',
@@ -17,12 +25,14 @@ module.exports = {
     '/scripts/mock/',
   ],
   collectCoverageFrom: ['**/*/src/**/*.{js,jsx,ts,tsx}'],
-  moduleDirectories: ['node_modules', 'lib', 'es', 'dist'],
+  moduleDirectories: ['node_modules', 'src', 'es'],
   moduleNameMapper: {
     '\\.(less|css)$': 'jest-less-loader',
   },
-  extensionsToTreatAsEsm: ['.ts'],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   testEnvironment: 'jsdom',
   coverageProvider: 'v8',
   coverageReporters: ['text-summary', 'json-summary', 'json', 'lcov'],
 };
+
+export default configs;

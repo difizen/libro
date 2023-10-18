@@ -1,12 +1,7 @@
 import { markdown } from '@codemirror/lang-markdown';
-import type { LanguageSupport } from '@codemirror/language';
 import { LanguageDescription } from '@codemirror/language';
+import type { LanguageSupport } from '@codemirror/language';
 import { defaultMimeType } from '@difizen/libro-code-editor';
-
-// This ensures the language spec for python will be loaded when
-// we instantiate a new editor instance, which is required since
-// python is the default language and we don't want to split
-// the editor constructor because of asynchronous loading.
 import { PathExt } from '@difizen/libro-common';
 import { highlightTree } from '@lezer/highlight';
 
