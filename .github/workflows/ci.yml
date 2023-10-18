@@ -62,3 +62,10 @@ jobs:
 
       - name: Run linters and tests
         run: pnpm run ci:affected
+        env:
+          JEST_MAX_WORKER: ${{ env.JEST_MAX_WORKER }}
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

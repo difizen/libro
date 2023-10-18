@@ -19,7 +19,7 @@ const configs = {
   transformIgnorePatterns: [
     '^/node_modules/(?!react-dnd|dnd-core|query-string|@react-dnd)',
   ],
-
+  maxWorkers: process.env.JEST_MAX_WORKER || '100%',
   coveragePathIgnorePatterns: [
     '/dist/',
     '/lib/',

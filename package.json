@@ -6,7 +6,7 @@
   "description": "JavaScript + Python hybrid monorepo",
   "scripts": {
     "bootstrap": "./scripts/bootstrap.sh",
-    "test:jest": "jest",
+    "test:jest": "jest --logHeapUsage --show-config",
     "coverage": "nx run-many --target=coverage",
     "coverage:jest": "jest --coverage",
     "postinstall": "is-ci || husky install",
@@ -16,8 +16,8 @@
     "lint:prettier": "prettier --check --ignore-unknown .",
     "lint-staged": "lint-staged",
     "test": "nx run-many --target=test",
-    "ci": "nx run-many --target=lint:prettier,lint,test,coverage:jest,coverage",
-    "ci:affected": "nx affected --target=lint:prettier,lint,test,coverage:jest,coverage",
+    "ci": "nx run-many --target=lint:prettier,lint,test,test:jest",
+    "ci:affected": "nx affected --target=lint:prettier,lint,test:jest,coverage:jest",
     "docs": "nx run @difizen/mana-docs:start",
     "changeset": "changeset",
     "clean": "git clean -fX ."
