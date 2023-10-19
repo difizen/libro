@@ -1551,7 +1551,7 @@ export class YNotebook extends YDocument<NotebookChange> implements ISharedNoteb
     // this reflects the event.changes.delta, but replaces the content of delta.insert with ycells
     const cellsChange: Delta<ISharedCell[]> = [];
     event.changes.delta.forEach((d: any) => {
-      if (d.insert !== null) {
+      if (d.insert) {
         const insertedCells = d.insert.map((ycell: Y.Map<any>) =>
           this._ycellMapping.get(ycell),
         );
@@ -1567,7 +1567,7 @@ export class YNotebook extends YDocument<NotebookChange> implements ISharedNoteb
         });
 
         index += d.insert.length;
-      } else if (d.delete !== null) {
+      } else if (d.delete) {
         cellsChange.push(d);
         const oldValues = this.cells.splice(index, d.delete);
 
@@ -1578,7 +1578,7 @@ export class YNotebook extends YDocument<NotebookChange> implements ISharedNoteb
           oldIndex: index,
           oldValues,
         });
-      } else if (d.retain !== null) {
+      } else if (d.retain) {
         cellsChange.push(d);
         index += d.retain;
       }
