@@ -6,9 +6,9 @@ import {
   createSlotPreference,
   RootSlotId,
   CardTabView,
-  SideTabView,
+  FileTreeView,
+  createViewPreference,
 } from '@difizen/mana-app';
-import { FileTreeView } from '@difizen/mana-app';
 
 import { LibroApp } from './app.js';
 import { LibroWorkbenchLayoutView, LibroWorkbenchSlots } from './layout/index.js';
@@ -29,6 +29,11 @@ const BaseModule = ManaModule.create().register(
     view: FileTreeView,
     slot: LibroWorkbenchSlots.Left,
   }),
+  // createViewPreference({
+  //   autoCreate: true,
+  //   view: FileTreeView,
+  //   slot: LibroWorkbenchSlots.Left,
+  // }),
 );
 
 const App = (): JSX.Element => {

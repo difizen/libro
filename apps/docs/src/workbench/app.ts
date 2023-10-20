@@ -1,17 +1,13 @@
 import {
-  LibroService,
   ServerConnection,
   LibroJupyterConfiguration,
+  ServerManager,
 } from '@difizen/libro-jupyter';
 import type { FileTreeView } from '@difizen/mana-app';
 import { ConfigurationService } from '@difizen/mana-app';
-import { FileTreeViewFactory } from '@difizen/mana-app';
+import { FileTreeViewFactory, SlotViewManager } from '@difizen/mana-app';
 import { URI } from '@difizen/mana-app';
-import {
-  ApplicationContribution,
-  SlotViewManager,
-  ViewManager,
-} from '@difizen/mana-app';
+import { ApplicationContribution, ViewManager } from '@difizen/mana-app';
 import { inject, singleton } from '@difizen/mana-app';
 
 import { LibroWorkbenchSlots } from './layout/workbench-layout.view.js';
@@ -19,9 +15,9 @@ import { LibroWorkbenchSlots } from './layout/workbench-layout.view.js';
 @singleton({ contrib: ApplicationContribution })
 export class LibroApp implements ApplicationContribution {
   @inject(ServerConnection) serverConnection: ServerConnection;
-  @inject(LibroService) libroService: LibroService;
-  @inject(SlotViewManager) slotViewManager: SlotViewManager;
+  @inject(ServerManager) serverManager: ServerManager;
   @inject(ViewManager) viewManager: ViewManager;
+  @inject(SlotViewManager) slotViewManager: SlotViewManager;
   @inject(ConfigurationService) configurationService: ConfigurationService;
 
   async onStart() {
@@ -33,6 +29,7 @@ export class LibroApp implements ApplicationContribution {
       LibroJupyterConfiguration['OpenSlot'],
       LibroWorkbenchSlots.Main,
     );
+    this.serverManager.launch();
     await this.initialWorkspace();
   }
 

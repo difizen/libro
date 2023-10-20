@@ -1,8 +1,6 @@
 ---
 title: 工作台
 order: 1
-nav:
-  path: /examples
 ---
 
 # Libro 工作台

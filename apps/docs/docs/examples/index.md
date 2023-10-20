@@ -1,8 +1,6 @@
 ---
 title: 输出示例
 order: 0
-nav:
-  path: /examples
 ---
 
 # Libro 输出示例
