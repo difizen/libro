@@ -23,7 +23,7 @@
     "@difizen/mana-react": "alpha",
     "@difizen/libro-jupyter": "^0.0.2-alpha.0",
     "@difizen/libro-core": "^0.0.2-alpha.0",
-    "@ant-design/icons": "^4.7.0",
+    "@ant-design/icons": "^5.1.0",
     "react": "^18.2.0",
     "antd": "^5.8.6"
   }
