@@ -2,6 +2,7 @@ import type { JSONPrimitive } from '@difizen/libro-common';
 import { URL } from '@difizen/libro-common';
 import type { ISettings } from '@difizen/libro-kernel';
 import type { Disposable, Disposed, Event } from '@difizen/mana-app';
+import { transient } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
 import { Emitter } from '@difizen/mana-app';
 import { inject } from '@difizen/mana-app';
@@ -15,13 +16,12 @@ import type {
 } from './protocol.js';
 import { TerminalRestAPI } from './restapi.js';
 
-/**
- * An implementation of a terminal interface.
- */
+@transient()
 export class TerminalConnection implements Disposable, Disposed {
-  protected _messageReceivedEmitter = new Emitter<TerminalMessage>();
+  protected _onDisposed = new Emitter<void>();
+  protected _messageReceived = new Emitter<TerminalMessage>();
   protected _connectionStatus: TerminalConnectionStatus = 'connecting';
-  protected _connectionStatusChangedEmitter = new Emitter<TerminalConnectionStatus>();
+  protected _connectionStatusChanged = new Emitter<TerminalConnectionStatus>();
   protected _name: string;
   protected _reconnectTimeout?: NodeJS.Timeout = undefined;
   protected _ws?: WebSocket = undefined;
@@ -47,7 +47,11 @@ export class TerminalConnection implements Disposable, Disposed {
    * A signal emitted when a message is received from the server.
    */
   get messageReceived(): Event<TerminalMessage> {
-    return this._messageReceivedEmitter.event;
+    return this._messageReceived.event;
+  }
+
+  get onDisposed(): Event<void> {
+    return this._onDisposed.event;
   }
 
   /**
@@ -283,7 +287,7 @@ export class TerminalConnection implements Disposable, Disposed {
       return;
     }
 
-    this._messageReceivedEmitter.fire({
+    this._messageReceived.fire({
       type: data[0] as TerminalMessageType,
       content: data.slice(1),
     });
@@ -318,7 +322,7 @@ export class TerminalConnection implements Disposable, Disposed {
     }
 
     // Notify others that the connection status changed.
-    this._connectionStatusChangedEmitter.fire(connectionStatus);
+    this._connectionStatusChanged.fire(connectionStatus);
   }
 
   protected _errorIfDisposed() {
@@ -328,7 +332,7 @@ export class TerminalConnection implements Disposable, Disposed {
   }
 
   get connectionStatusChanged(): Event<TerminalConnectionStatus> {
-    return this._connectionStatusChangedEmitter.event;
+    return this._connectionStatusChanged.event;
   }
 
   get connectionStatus(): TerminalConnectionStatus {
