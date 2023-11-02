@@ -15,7 +15,7 @@ import {
   singleton,
 } from '@difizen/mana-app';
 
-import { LibroLabSlots } from './layout/index.js';
+import { LibroLabContentSlots } from './layout/index.js';
 
 @singleton({ contrib: ApplicationContribution })
 export class LibroLabApp implements ApplicationContribution {
@@ -32,7 +32,7 @@ export class LibroLabApp implements ApplicationContribution {
     });
     this.configurationService.set(
       LibroJupyterConfiguration['OpenSlot'],
-      LibroLabSlots.main,
+      LibroLabContentSlots.main,
     );
     await this.initialWorkspace();
   }

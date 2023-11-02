@@ -5,11 +5,16 @@ import {
   CardTabView,
   SideTabView,
   createViewPreference,
+  HeaderView,
 } from '@difizen/mana-app';
 import { FileTreeView } from '@difizen/mana-app';
 
 import { LibroLabApp } from './lab-app.js';
-import { LibroLabLayoutView, LibroLabSlots } from './layout/index.js';
+import {
+  LibroLabLayoutView,
+  LibroLabSlots,
+  LibroLabContentSlots,
+} from './layout/index.js';
 
 export const LibroLabModule = ManaModule.create().register(
   LibroLabApp,
@@ -19,16 +24,20 @@ export const LibroLabModule = ManaModule.create().register(
     slot: RootSlotId,
   }),
   createSlotPreference({
+    slot: LibroLabSlots.top,
+    view: HeaderView,
+  }),
+  createSlotPreference({
     view: CardTabView,
-    slot: LibroLabSlots.main,
+    slot: LibroLabContentSlots.main,
   }),
   createSlotPreference({
     view: SideTabView,
-    slot: LibroLabSlots.left,
+    slot: LibroLabContentSlots.left,
   }),
   createViewPreference({
     view: FileTreeView,
-    slot: LibroLabSlots.left,
+    slot: LibroLabContentSlots.left,
     autoCreate: true,
   }),
 );
