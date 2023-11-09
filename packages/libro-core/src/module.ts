@@ -1,5 +1,5 @@
 import { CodeEditorModule } from '@difizen/libro-code-editor';
-import { ConfigurationModule } from '@difizen/mana-app';
+import { ConfigurationModule, ManaAppPreset } from '@difizen/mana-app';
 import { ManaModule } from '@difizen/mana-app';
 
 import { LibroCellModule } from './cell/libro-cell-module.js';
@@ -80,6 +80,7 @@ export const LibroModule = ManaModule.create()
     },
   )
   .dependOn(
+    ManaAppPreset,
     LibroCellModule,
     LibroSlotModule,
     CodeEditorModule,

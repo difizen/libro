@@ -107,7 +107,7 @@ export const NotebookCommands: Record<
   },
   CloseAndShutdown: {
     id: 'notebook:close-and-shutdown',
-    label: `Close and Shut Down Notebook`,
+    label: `Close editor and shut down kernel`,
     icon: PoweroffOutlined,
   },
   // TODO: 确定命令含义
@@ -122,16 +122,6 @@ export const NotebookCommands: Record<
     keybind: 'C',
     icon: CopyOutlined,
     when: 'commandMode',
-  },
-  // TODO: 确定命令含义
-  CopyToClipboard: {
-    id: 'notebook:copy-to-clipboard',
-    label: `Copy Output to Clipboard`,
-  },
-  // TODO: 确定命令含义
-  CreateOutputView: {
-    id: 'notebook:create-output-view',
-    label: `Create New View for Cell Output`,
   },
   CutCell: {
     id: 'notebook:cut-cell',
@@ -340,6 +330,7 @@ export const NotebookCommands: Record<
     icon: SnippetsOutlined,
     when: 'commandMode',
   },
+  // TODO: register keybind
   Redo: {
     id: 'notebook:redo',
     label: `Redo`,

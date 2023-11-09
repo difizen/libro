@@ -9,7 +9,19 @@ notebook 产品前端解决方案。
 - 方便扩展和二次开发
 - React 快速集成
 
+## 预置方案
+
+### notebook 编辑器
+
 ![image](https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*jfLFTqY-l6EAAAAAAAAAAAAADjOxAQ/original)
+
+### notebook 集成研发环境
+
+TODO
+
+### 大模型工作流研发工具
+
+TODO
 
 ## 模块
 
@@ -52,7 +64,7 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 ## 架构
 
-![image](https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*Xz3vS5pmNzwAAAAAAAAAAAAADjOxAQ/original)
+![image](https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*ca1tTapQbBYAAAAAAAAAAAAADjOxAQ/original)
 
 ## 贡献代码
 

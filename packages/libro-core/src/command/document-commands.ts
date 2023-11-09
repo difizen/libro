@@ -12,7 +12,7 @@ export const DocumentCommands: Record<
     keybind: 'ctrlcmd+s',
   },
   OpenSettings: {
-    id: 'document.notebook.open_setting',
+    id: 'document:setting',
     icon: SettingOutlined,
   },
 };

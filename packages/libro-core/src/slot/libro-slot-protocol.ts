@@ -17,7 +17,7 @@ export interface LibroExtensionSlotContribution {
   };
 }
 
-export type LibroSlot = 'content' | 'container' | 'list' | 'right' | 'containerLog';
+export type LibroSlot = 'content' | 'container' | 'list' | 'right';
 
 export interface DisplayView {
   isDisplay: boolean;
