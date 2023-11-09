@@ -7,7 +7,7 @@ import {
   HeaderToolbarVisible,
   AutoInsertWhenNoCell,
   EnterEditModeWhenAddCell,
-  CollapserClickActive,
+  CollapserActive,
   MultiSelectionWhenShiftClick,
   RightContentFixed,
 } from './libro-configuration.js';
@@ -21,7 +21,7 @@ export class LibroConfigurationContribution implements ConfigurationContribution
       CellSideToolbarVisible,
       AutoInsertWhenNoCell,
       EnterEditModeWhenAddCell,
-      CollapserClickActive,
+      CollapserActive,
       MultiSelectionWhenShiftClick,
       RightContentFixed,
     ];
