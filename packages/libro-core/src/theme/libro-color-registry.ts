@@ -1,5 +1,5 @@
 import type { ColorRegistry } from '@difizen/mana-app';
-import { Color, ColorContribution } from '@difizen/mana-app';
+import { ColorContribution } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
 
 @singleton({ contrib: ColorContribution })
@@ -19,12 +19,12 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.background',
-        defaults: { dark: '#1f2022', light: '#ffffff' },
+        defaults: { dark: '#1F2022', light: '#FFFFFF' },
         description: '',
       },
       {
         id: 'libro.popover.background.color',
-        defaults: { dark: '#2f3032', light: '#ffffff' },
+        defaults: { dark: '#2F3032', light: '#FFFFFF' },
         description: '',
       },
       {
@@ -35,8 +35,8 @@ export class LibroColorRegistry implements ColorContribution {
       {
         id: 'libro.dropdown.icon.color',
         defaults: {
-          dark: Color.rgba(255, 255, 255, 0.3),
-          light: Color.rgba(0, 0, 0, 0.2),
+          dark: '#FFFFFF4D',
+          light: '#00000033',
         },
         description: '',
       },
@@ -47,24 +47,24 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.text.default.color',
-        defaults: { dark: '#e3e4e6', light: '#000000' },
+        defaults: { dark: '#E3E4E6', light: '#000000' },
         description: '',
       },
       {
         id: 'libro.text.tertiary.color',
-        defaults: { dark: '#bdc0c4', light: '#B8BABA' },
+        defaults: { dark: '#BDC0C4', light: '#B8BABA' },
         description: '',
       },
       {
         id: 'libro.output.background',
-        defaults: { dark: '#292A2D', light: '#fff' },
+        defaults: { dark: '#292A2D', light: '#FFFFFF' },
         description: '',
       },
       {
         id: 'libro.toptoolbar.border.color',
         defaults: {
-          dark: Color.rgba(255, 255, 255, 0.1),
-          light: Color.rgba(0, 0, 0, 0.1),
+          dark: '#FFFFFF1A',
+          light: '#0000001A',
         },
         description: '',
       },
@@ -76,47 +76,47 @@ export class LibroColorRegistry implements ColorContribution {
       {
         id: 'libro.toptoolbar.disabled.icon.color',
         defaults: {
-          dark: Color.rgba(255, 255, 255, 0.3),
-          light: Color.rgba(0, 0, 0, 0.25),
+          dark: '#FFFFFF4D',
+          light: '#00000040',
         },
         description: '',
       },
       {
         id: 'libro.toptoolbar.text.color',
-        defaults: { dark: '#f5f5f5', light: '#000000' },
+        defaults: { dark: '#F5F5F5', light: '#000000' },
         description: '',
       },
       {
         id: 'libro.bottom.btn.background.color',
         defaults: {
-          dark: Color.rgba(255, 255, 255, 0.04),
-          light: Color.rgba(255, 255, 255, 1),
+          dark: '#FFFFFF0A',
+          light: '#FFFFFF',
         },
         description: '',
       },
       {
         id: 'libro.bottom.btn.border.color',
-        defaults: { dark: '#505559', light: Color.rgba(0, 10, 26, 0.16) },
+        defaults: { dark: '#505559', light: '#000A1A29' },
         description: '',
       },
       {
         id: 'libro.bottom.btn.icon.color',
-        defaults: { dark: '#505559', light: Color.rgba(82, 89, 100, 0.85) },
+        defaults: { dark: '#505559', light: '#525964D9' },
         description: '',
       },
       {
         id: 'libro.bottom.btn.text.color',
-        defaults: { dark: '#E3E4E6', light: Color.rgba(0, 10, 26, 0.68) },
+        defaults: { dark: '#E3E4E6', light: '#000A1AAD' },
         description: '',
       },
       {
         id: 'libro.default.btn.background.color',
-        defaults: { dark: Color.rgba(255, 255, 255, 0.1), light: '#FFFFFF' },
+        defaults: { dark: '#FFFFFF1A', light: '#FFFFFF' },
         description: '',
       },
       {
         id: 'libro.default.btn.text.color',
-        defaults: { dark: '#E3E4E6', light: Color.rgba(0, 10, 26, 0.68) },
+        defaults: { dark: '#E3E4E6', light: '#000A1AAD' },
         description: '',
       },
       {
@@ -131,17 +131,17 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.toolbar.menu.label.color',
-        defaults: { dark: '#BDC0C4', light: Color.rgba(0, 0, 0, 0.65) },
+        defaults: { dark: '#BDC0C4', light: '#000000A6' },
         description: '',
       },
       {
         id: 'libro.toolbar.menu.disabled.label.color',
-        defaults: { dark: '#878c93', light: Color.rgba(0, 0, 0, 0.25) },
+        defaults: { dark: '#878C93', light: '#00000040' },
         description: '',
       },
       {
         id: 'libro.toolbar.menu.keybind.color',
-        defaults: { dark: '#878c93', light: Color.rgba(0, 0, 0, 0.45) },
+        defaults: { dark: '#878C93', light: '#00000073' },
         description: '',
       },
       {
@@ -152,27 +152,27 @@ export class LibroColorRegistry implements ColorContribution {
       {
         id: 'libro.sidetoolbar.border.color',
         defaults: {
-          dark: Color.rgba(255, 255, 255, 0.08),
-          light: Color.rgba(0, 0, 0, 0.1),
+          dark: '#FFFFFF14',
+          light: '#0000001A',
         },
         description: '',
       },
       {
         id: 'libro.close.color',
         defaults: {
-          dark: Color.rgba(255, 255, 255, 0.45),
-          light: Color.rgba(0, 0, 0, 0.45),
+          dark: '#FFFFFF73',
+          light: '#00000073',
         },
         description: '',
       },
       {
         id: 'libro.modal.title.color',
-        defaults: { dark: '#EDEEEF', light: Color.rgba(0, 0, 0, 0.85) },
+        defaults: { dark: '#EDEEEF', light: '#000000D9' },
         description: '',
       },
       {
         id: 'libro.modal.content.color',
-        defaults: { dark: '#e3e4e6', light: '#000a1a' },
+        defaults: { dark: '#E3E4E6', light: '#000A1A' },
         description: '',
       },
       {
@@ -187,7 +187,7 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.tip.font.color',
-        defaults: { dark: '#D6D8DA', light: Color.rgba(0, 0, 0, 0.5) },
+        defaults: { dark: '#D6D8DA', light: '#00000080' },
         description: '',
       },
       {
@@ -202,24 +202,24 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.error.color',
-        defaults: { dark: '#cf4c52', light: '#ed1345' },
+        defaults: { dark: '#CF4C52', light: '#ED1345' },
         description: '',
       },
       {
         id: 'libro.cell.border.color',
-        defaults: { dark: '#3b3c42', light: '#D6DEE6' },
+        defaults: { dark: '#3B3C42', light: '#D6DEE6' },
         description: '',
       },
       {
         id: 'libro.cell.active.border.color',
-        defaults: { dark: '#378edf', light: '#3490ed' },
+        defaults: { dark: '#378EDF', light: '#3490ED' },
         description: '',
       },
       {
         id: 'libro.cell.active.border.shadow.color',
         defaults: {
-          dark: Color.rgba(73, 162, 250, 0.25),
-          light: Color.rgba(53, 146, 238, 0.25),
+          dark: '#49A2FA40',
+          light: '#3592EE40',
         },
         description: '',
       },
@@ -230,7 +230,7 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.cell.header.title',
-        defaults: { dark: '#d6d8da', light: '#000a1a' },
+        defaults: { dark: '#D6D8DA', light: '#000A1A' },
         description: '',
       },
       {
@@ -240,22 +240,22 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.input.border.color',
-        defaults: { dark: '#505559', light: Color.rgba(0, 0, 0, 0.15) },
+        defaults: { dark: '#505559', light: '#00000026' },
         description: '',
       },
       {
         id: 'libro.input.background.color',
-        defaults: { dark: Color.rgba(255, 255, 255, 0.04), light: '#FFFFFF' },
+        defaults: { dark: '#FFFFFF0A', light: '#FFFFFF' },
         description: '',
       },
       {
         id: 'libro.input.group.btn.background.color',
-        defaults: { dark: Color.rgba(0, 0, 0, 0.02), light: Color.rgba(0, 0, 0, 0.02) },
+        defaults: { dark: '#00000005', light: '#00000005' },
         description: '',
       },
       {
         id: 'libro.table.innner.border.color',
-        defaults: { dark: '#1affffff', light: '#E5EBF1' },
+        defaults: { dark: '#1AFFFF', light: '#E5EBF1' },
         description: '',
       },
       {
@@ -265,52 +265,52 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.editor.keyword.color',
-        defaults: { dark: '#109b67', light: '#098658' },
+        defaults: { dark: '#109B67', light: '#098658' },
         description: '',
       },
       {
         id: 'libro.editor.number.color',
-        defaults: { dark: '#109b67', light: '#098658' },
+        defaults: { dark: '#109B67', light: '#098658' },
         description: '',
       },
       {
         id: 'libro.editor.variable.2.color',
-        defaults: { dark: '#5da4ea', light: '#2060A0' },
+        defaults: { dark: '#5DA4EA', light: '#2060A0' },
         description: '',
       },
       {
         id: 'libro.editor.punctuation.color',
-        defaults: { dark: '#5da4ea', light: '#2060A0' },
+        defaults: { dark: '#5DA4EA', light: '#2060A0' },
         description: '',
       },
       {
         id: 'libro.editor.property.color',
-        defaults: { dark: '#5da4ea', light: '#2060A0' },
+        defaults: { dark: '#5DA4EA', light: '#2060A0' },
         description: '',
       },
       {
         id: 'libro.editor.operator.color',
-        defaults: { dark: 'e12ee1', light: '#C700C7' },
+        defaults: { dark: 'E12EE1', light: '#C700C7' },
         description: '',
       },
       {
         id: 'libro.editor.meta.color',
-        defaults: { dark: '#e12ee1', light: '#C700C7' },
+        defaults: { dark: '#E12EE1', light: '#C700C7' },
         description: '',
       },
       {
         id: 'libro.editor.builtin.color',
-        defaults: { dark: '#109b67', light: '#098658' },
+        defaults: { dark: '#109B67', light: '#098658' },
         description: '',
       },
       {
         id: 'libro.editor.variable.color',
-        defaults: { dark: '#e3e4e6', light: '#212121' },
+        defaults: { dark: '#E3E4E6', light: '#212121' },
         description: '',
       },
       {
         id: 'libro.editor.def.color',
-        defaults: { dark: '#187dff', light: '#003cff' },
+        defaults: { dark: '#187DFF', light: '#003CFF' },
         description: '',
       },
       {
@@ -320,20 +320,20 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.editor.string.color',
-        defaults: { dark: '#ff5b48', light: '#c03030' },
+        defaults: { dark: '#FF5B48', light: '#C03030' },
         description: '',
       },
       {
         id: 'libro.editor.activeline.color',
         defaults: {
-          dark: Color.rgba(229, 232, 240, 0.1),
-          light: Color.rgba(229, 232, 240, 0.5),
+          dark: '#E5E8F01A',
+          light: '#E5E8F080',
         },
         description: '',
       },
       {
         id: 'libro.editor.selectionMatch.color',
-        defaults: { dark: '#99ff7780', light: '#DDE6FF' },
+        defaults: { dark: '#99FF7780', light: '#DDE6FF' },
         description: '',
       },
       {
@@ -343,7 +343,7 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.editor.gutter.number.color',
-        defaults: { dark: '#a8aebf', light: '#A4AECB' },
+        defaults: { dark: '#A8EABF', light: '#A4AECB' },
         description: '',
       },
       {
@@ -353,12 +353,12 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.editor.cursor.color',
-        defaults: { dark: '#ffffff', light: '#000000' },
+        defaults: { dark: '#FFFFFF', light: '#000000' },
         description: '',
       },
       {
         id: 'libro.editor.indent.marker.bg.color',
-        defaults: { dark: '#42444d', light: '#d6dbeb' },
+        defaults: { dark: '#42444D', light: '#D6DBEB' },
         description: '',
       },
       {

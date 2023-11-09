@@ -20,7 +20,7 @@ import { CellCollapsible } from '../collapse-service.js';
 import {
   CellSideToolbarVisible,
   CellTopToolbarSetting,
-  CollapserClickActive,
+  CollapserActive,
 } from '../configuration/libro-configuration.js';
 import type { CellView, DndItemProps } from '../libro-protocol.js';
 import { LibroToolbarArea, isCellView } from '../libro-protocol.js';
@@ -71,7 +71,7 @@ const CellInput: React.FC<{ cell: CellView }> = forwardRef(function CellInput(
 ) {
   const { cell } = props;
   const inputCollapserRef = useRef<HTMLDivElement>(null);
-  const [collapserClickActive] = useConfigurationValue(CollapserClickActive);
+  const [collapserClickActive] = useConfigurationValue(CollapserActive);
   const handleCellInputCollapser = () => {
     if (collapserClickActive) {
       cell.hasInputHidden = !cell.hasInputHidden;
@@ -156,7 +156,7 @@ const CellOutput: React.FC<{ cell: CellView }> = forwardRef(function CellOutput(
 ) {
   const { cell } = props;
   const outputCollapserRef = useRef<HTMLDivElement>(null);
-  const [collapserClickActive] = useConfigurationValue(CollapserClickActive);
+  const [collapserActive] = useConfigurationValue(CollapserActive);
   if (!ExecutableCellView.is(cell)) {
     return null;
   }
@@ -168,7 +168,7 @@ const CellOutput: React.FC<{ cell: CellView }> = forwardRef(function CellOutput(
     return null;
   }
   const handleCellOutputCollapser = () => {
-    if (ExecutableCellModel.is(cell.model) && collapserClickActive) {
+    if (ExecutableCellModel.is(cell.model) && collapserActive) {
       cell.model.hasOutputHidden = !cell.model.hasOutputHidden;
     }
   };
@@ -188,7 +188,7 @@ const CellOutput: React.FC<{ cell: CellView }> = forwardRef(function CellOutput(
 const HideCellContent: React.FC<{ cell: CellView }> = (props: { cell: CellView }) => {
   const { cell } = props;
   const cellCollapserRef = useRef<HTMLDivElement>(null);
-  const [collapserClickActive] = useConfigurationValue(CollapserClickActive);
+  const [collapserClickActive] = useConfigurationValue(CollapserActive);
 
   const handleCellCollapser = () => {
     if (collapserClickActive) {
