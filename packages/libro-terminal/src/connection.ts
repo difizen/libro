@@ -38,7 +38,7 @@ export class TerminalConnection implements Disposable, Disposed {
   /**
    * Construct a new terminal session.
    */
-  constructor(@inject(TerminalOption) options: TerminalOption) {
+  constructor(@inject(TerminalOption) options: TerminalOption & { name: string }) {
     this._name = options.name;
     this._createSocket();
   }
