@@ -1,4 +1,4 @@
-# @difizen/mana-docs
+# @difizen/libro-docs
 
 ## 0.0.2-alpha.0
 
