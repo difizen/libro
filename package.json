@@ -18,7 +18,7 @@
     "test": "nx run-many --target=test",
     "ci": "nx run-many --target=lint:prettier,lint,test,test:jest",
     "ci:affected": "nx affected --target=lint:prettier,lint,test:jest,coverage:jest",
-    "docs": "nx run @difizen/mana-docs:start",
+    "docs": "nx run @difizen/libro-docs:start",
     "changeset": "changeset",
     "clean": "git clean -fX ."
   },

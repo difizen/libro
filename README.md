@@ -1,9 +1,15 @@
 # libro
 
+<div align="center">
+<img src="https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*cngiQYmKficAAAAAAAAAAAAADjOxAQ/original" alt="Editor" width="280">
+</div>
+
+<div id="top" align="center">
+notebook 产品前端解决方案。
+</div>
+
 [![Code: CI](https://github.com/difizen/libro/actions/workflows/ci.yml/badge.svg)](https://github.com/difizen/libro/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/difizen/libro/graph/badge.svg?token=8LWLNZK78Z)](https://codecov.io/gh/difizen/libro)
-
-notebook 产品前端解决方案。
 
 - 优雅的交互和丰富的功能
 - 方便扩展和二次开发

@@ -21,7 +21,7 @@
     "@difizen/libro-shared-model": "0.0.1",
     "@difizen/libro-toc": "0.0.1",
     "@difizen/libro-widget": "0.0.1",
-    "@difizen/mana-docs": "0.0.1"
+    "@difizen/libro-docs": "0.0.1"
   },
   "changesets": ["shaggy-lemons-prove"]
 }
