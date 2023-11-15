@@ -1,3 +1,4 @@
+import { FolderFilled } from '@ant-design/icons';
 import type { TreeNode, ViewOpenHandler } from '@difizen/mana-app';
 import { FileTreeViewFactory } from '@difizen/mana-app';
 import {
@@ -19,7 +20,7 @@ import {
   inject,
   singleton,
 } from '@difizen/mana-app';
-import type React from 'react';
+import React from 'react';
 
 import type { LibroNavigatableView } from '../navigatable-view.js';
 
@@ -53,6 +54,8 @@ export class FileView extends FileTreeView {
       labelProvider,
       decoratorService,
     );
+    this.title.label = '文件导航';
+    this.title.icon = <FolderFilled />;
     this.toDispose.push(this.model.onOpenNode(this.openNode));
   }
 

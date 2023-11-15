@@ -4,18 +4,15 @@ export interface IProps {
   height?: string;
 }
 export function Logo(props: IProps) {
-  const { className = '', width = '154px', height = '116px' } = props;
+  const { className = '' } = props;
   return (
     <svg
-      width={width}
-      height={height}
       viewBox="0 0 154 116"
       className={className}
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <title>Libro logo</title>
       <g id="页面-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="画板备份-6" transform="translate(-119.000000, -152.000000)">
           <g id="Libro-logo" transform="translate(119.000000, 152.000000)">
