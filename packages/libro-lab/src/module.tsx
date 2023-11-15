@@ -6,15 +6,31 @@ import {
   CardTabView,
   SideTabView,
   createViewPreference,
+  FileTreeView,
 } from '@difizen/mana-app';
-import { FileTreeView } from '@difizen/mana-app';
 
+import { KernelManagerView } from './kernel-manager/index.js';
 import { LibroLabApp } from './lab-app.js';
 import {
   LibroLabLayoutModule,
   LibroLabLayoutSlots,
   LibroLabLayoutView,
 } from './layout/index.js';
+
+import './index.less';
+
+export const KernelManagerModule = ManaModule.create().register(
+  KernelManagerView,
+  createViewPreference({
+    view: KernelManagerView,
+    slot: LibroLabLayoutSlots.navigator,
+    openOptions: {
+      reveal: false,
+      order: 'kernel-manager',
+    },
+    autoCreate: true,
+  }),
+);
 
 export const LibroLabModule = ManaModule.create()
   .register(
@@ -26,16 +42,23 @@ export const LibroLabModule = ManaModule.create()
     }),
     createSlotPreference({
       view: CardTabView,
-      slot: LibroLabLayoutSlots.main,
+      slot: LibroLabLayoutSlots.content,
     }),
     createSlotPreference({
       view: SideTabView,
       slot: LibroLabLayoutSlots.navigator,
+      options: {
+        sort: true,
+      },
     }),
     createViewPreference({
       view: FileTreeView,
       slot: LibroLabLayoutSlots.navigator,
       autoCreate: true,
+      openOptions: {
+        reveal: true,
+        order: 'file-tree',
+      },
     }),
   )
-  .dependOn(LibroLabLayoutModule, LibroJupyterModule);
+  .dependOn(LibroJupyterModule, KernelManagerModule, LibroLabLayoutModule);

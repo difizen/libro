@@ -29,11 +29,6 @@ const BaseModule = ManaModule.create().register(
     view: FileTreeView,
     slot: LibroWorkbenchSlots.Left,
   }),
-  // createViewPreference({
-  //   autoCreate: true,
-  //   view: FileTreeView,
-  //   slot: LibroWorkbenchSlots.Left,
-  // }),
 );
 
 const App = (): JSX.Element => {

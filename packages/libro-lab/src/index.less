@@ -1,0 +1,57 @@
+#libro-lab-content-layout-left {
+  .mana-side-tab-view {
+    .mana-tabs-left {
+      .mana-tabs-nav {
+        background-color: #f0f2f51f;
+        min-width: 40px;
+        box-shadow:
+          1px 0 0 0 rgba(0, 10, 26, 0.84%),
+          2px 0 0 0 rgba(255, 255, 255, 4.8%);
+
+        .mana-tabs-ink-bar {
+          display: none;
+        }
+
+        .mana-tabs-tab {
+          width: 40px;
+          height: 40px;
+
+          &-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .mana-tab-icon {
+              .anticon {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+
+        .mana-tabs-tab-active {
+          .mana-tabs-tab-btn {
+            background-color: #000a1a1f;
+
+            .mana-tab-icon {
+              color: #1890ff;
+            }
+          }
+        }
+      }
+
+      .mana-tabs-content-holder {
+        background-image: linear-gradient(269deg, #c8c8cd1f 0%, #ffffff1f 100%);
+        border-left: none;
+        background-color: unset;
+
+        .mana-tab-side-pane-content {
+          height: calc(100% - 32px);
+        }
+      }
+    }
+  }
+}

@@ -10,7 +10,7 @@ export const LibroLabLayoutContainerComponent = forwardRef(
   function LibroLabLayoutContainerComponent() {
     return (
       <BoxPanel direction="top-to-bottom">
-        <BoxPanel.Pane className="libro-lab-layout-main">
+        <BoxPanel.Pane className="libro-lab-layout-main" flex={1}>
           <Slot name={LibroLabLayoutSlots.main} />
         </BoxPanel.Pane>
         <BoxPanel.Pane className="libro-lab-layout-bottom">

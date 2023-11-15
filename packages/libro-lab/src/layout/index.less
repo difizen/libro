@@ -1,9 +1,30 @@
-/* stylelint-disable color-function-notation */
 .libro-lab-layout {
   width: 100%;
   height: 100%;
 
   &-header {
     height: 56px;
+    min-height: 56px;
+  }
+
+  &-container {
+    height: calc(100% - 56px);
+  }
+
+  &-main {
+    height: calc(100% - 28px);
+  }
+
+  &-bottom {
+    height: 28px;
+    min-height: 28px;
+    background-image: linear-gradient(270deg, #c8c8cd 0%, #fff 100%);
+    opacity: 0.12;
+    box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 50%);
+  }
+
+  .mana-header {
+    background: var(--mana-color-bg-container);
+    border-bottom: none;
   }
 }
