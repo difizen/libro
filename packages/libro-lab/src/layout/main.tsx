@@ -34,13 +34,13 @@ export const LibroLabLayoutMainComponent = forwardRef(
             >
               <Slot name={LibroLabLayoutSlots.content} />
             </SplitPanel.Pane>
-            <SplitPanel.Pane
+            {/* <SplitPanel.Pane
               id="libro-lab-content-layout-bottom"
               flex={1}
               defaultSize={200}
             >
               <Slot name={LibroLabLayoutSlots.contentBottom} />
-            </SplitPanel.Pane>
+            </SplitPanel.Pane> */}
           </SplitPanel>
         </SplitPanel.Pane>
       </SplitPanel>

@@ -7,8 +7,10 @@ import {
   SideTabView,
   createViewPreference,
   FileTreeView,
+  HeaderArea,
 } from '@difizen/mana-app';
 
+import { GithubLinkView } from './github-link/index.js';
 import { KernelManagerView } from './kernel-manager/index.js';
 import { LibroLabApp } from './lab-app.js';
 import {
@@ -19,23 +21,29 @@ import {
 
 import './index.less';
 
-export const KernelManagerModule = ManaModule.create().register(
-  KernelManagerView,
-  createViewPreference({
-    view: KernelManagerView,
-    slot: LibroLabLayoutSlots.navigator,
-    openOptions: {
-      reveal: false,
-      order: 'kernel-manager',
-    },
-    autoCreate: true,
-  }),
-);
-
 export const LibroLabModule = ManaModule.create()
   .register(
     LibroLabApp,
     LibroLabLayoutView,
+    GithubLinkView,
+    createViewPreference({
+      view: GithubLinkView,
+      slot: HeaderArea.right,
+      openOptions: {
+        order: 'github',
+      },
+      autoCreate: true,
+    }),
+    KernelManagerView,
+    createViewPreference({
+      view: KernelManagerView,
+      slot: LibroLabLayoutSlots.navigator,
+      openOptions: {
+        reveal: false,
+        order: 'kernel-manager',
+      },
+      autoCreate: true,
+    }),
     createSlotPreference({
       view: LibroLabLayoutView,
       slot: RootSlotId,
@@ -61,4 +69,4 @@ export const LibroLabModule = ManaModule.create()
       },
     }),
   )
-  .dependOn(LibroJupyterModule, KernelManagerModule, LibroLabLayoutModule);
+  .dependOn(LibroJupyterModule, LibroLabLayoutModule);
