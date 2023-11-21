@@ -1,8 +1,4 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable @typescript-eslint/no-parameter-properties */
-/* eslint-disable @typescript-eslint/parameter-properties */
-/* eslint-disable prefer-const */
 import type { Transaction, EditorState, ChangeDesc } from '@codemirror/state';
 import { StateField, StateEffect } from '@codemirror/state';
 import type { Tooltip } from '@codemirror/view';
@@ -33,8 +29,8 @@ function score(option: Completion) {
 }
 
 function sortOptions(active: readonly ActiveSource[], state: EditorState) {
-  let options = [],
-    i = 0;
+  const options = [];
+  let i = 0;
   for (const a of active) {
     if (a.hasResult()) {
       if (a.result.filter === false) {
@@ -49,8 +45,8 @@ function sortOptions(active: readonly ActiveSource[], state: EditorState) {
           options.push(new Option(option, a, match));
         }
       } else {
-        let matcher = new FuzzyMatcher(state.sliceDoc(a.from, a.to)),
-          match;
+        const matcher = new FuzzyMatcher(state.sliceDoc(a.from, a.to));
+        let match;
         for (const option of a.result.options) {
           if ((match = matcher.match(option.label))) {
             if (option.boost !== undefined) {
@@ -62,8 +58,8 @@ function sortOptions(active: readonly ActiveSource[], state: EditorState) {
       }
     }
   }
-  let result = [],
-    prev = null;
+  const result = [];
+  let prev = null;
   const compare = state.facet(completionConfig).compareCompletions;
   for (const opt of options.sort(
     (a, b) => b.match[0] - a.match[0] || compare(a.completion, b.completion),
@@ -168,8 +164,8 @@ export class CompletionState {
   }
 
   update(tr: Transaction) {
-    let { state } = tr,
-      conf = state.facet(completionConfig);
+    const { state } = tr;
+    const conf = state.facet(completionConfig);
     const sources =
       conf.override ||
       state
@@ -195,15 +191,16 @@ export class CompletionState {
     ) {
       active = this.active;
     }
-
-    let open =
+    let open;
+    if (
       tr.selection ||
       active.some((a) => a.hasResult() && tr.changes.touchesRange(a.from, a.to)) ||
       !sameResults(active, this.active)
-        ? CompletionDialog.build(active, state, this.id, this.open, conf)
-        : this.open && tr.docChanged
-        ? this.open.map(tr.changes)
-        : this.open;
+    ) {
+      open = CompletionDialog.build(active, state, this.id, this.open, conf);
+    } else {
+      open = this.open && tr.docChanged ? this.open.map(tr.changes) : this.open;
+    }
     if (
       !open &&
       active.every((a) => a.state !== State.Pending) &&
@@ -280,11 +277,13 @@ export const enum State {
 }
 
 export function getUserEvent(tr: Transaction): 'input' | 'delete' | null {
-  return tr.isUserEvent('input.type')
-    ? 'input'
-    : tr.isUserEvent('delete.backward')
-    ? 'delete'
-    : null;
+  if (tr.isUserEvent('input.type')) {
+    return 'input';
+  }
+  if (tr.isUserEvent('delete.backward')) {
+    return 'delete';
+  }
+  return null;
 }
 
 export class ActiveSource {
@@ -299,8 +298,8 @@ export class ActiveSource {
   }
 
   update(tr: Transaction, conf: Required<CompletionConfig>): ActiveSource {
-    let event = getUserEvent(tr),
-      value: ActiveSource = this;
+    const event = getUserEvent(tr);
+    let value: ActiveSource = this;
     if (event) {
       value = value.handleUserEvent(tr, event, conf);
     } else if (tr.docChanged) {
@@ -385,8 +384,8 @@ export class ActiveResult extends ActiveSource {
         type === 'input' && conf.activateOnTyping ? State.Pending : State.Inactive,
       );
     }
-    let explicitPos = this.explicitPos < 0 ? -1 : tr.changes.mapPos(this.explicitPos),
-      updated;
+    const explicitPos = this.explicitPos < 0 ? -1 : tr.changes.mapPos(this.explicitPos);
+    let updated;
     if (checkValid(this.result.validFor, tr.state, from, to)) {
       return new ActiveResult(this.source, explicitPos, this.result, from, to);
     }
