@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
   IAttachments,
   IBaseCellMetadata,
@@ -744,11 +746,15 @@ export class YBaseCell<Metadata extends IBaseCellMetadata>
    */
   transact(f: () => void, undoable = true): void {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    this.notebook && undoable
-      ? this.notebook.transact(f)
-      : this.ymodel.doc === null
-      ? f()
-      : this.ymodel.doc.transact(f, this);
+    if (this.notebook && undoable) {
+      this.notebook.transact(f);
+    } else {
+      if (this.ymodel.doc === null) {
+        f();
+      } else {
+        this.ymodel.doc.transact(f, this);
+      }
+    }
   }
 
   /**

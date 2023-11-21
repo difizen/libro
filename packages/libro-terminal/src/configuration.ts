@@ -39,8 +39,8 @@ export const terminalIntegratedFontFamily: ConfigurationNode<any> = {
   defaultValue: isOSX
     ? "Menlo, Monaco, 'Courier New', monospace"
     : isWindows
-    ? "Consolas, 'Courier New', monospace"
-    : "'Droid Sans Mono', 'monospace', monospace",
+      ? "Consolas, 'Courier New', monospace"
+      : "'Droid Sans Mono', 'monospace', monospace",
 };
 export const terminalIntegratedFontSize: ConfigurationNode<any> = {
   id: 'terminal.integrated.fontSize',

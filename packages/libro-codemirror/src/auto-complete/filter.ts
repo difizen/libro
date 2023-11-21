@@ -1,6 +1,5 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable prefer-const */
-/* eslint-disable @typescript-eslint/no-parameter-properties */
-/* eslint-disable @typescript-eslint/parameter-properties */
 import { codePointAt, codePointSize, fromCodePoint } from '@codemirror/state';
 
 // Scores are counted from 0 (great match) down to negative numbers,
@@ -64,11 +63,13 @@ export class FuzzyMatcher {
     // at the start
     if (chars.length === 1) {
       const first = codePointAt(word, 0);
-      return first === chars[0]
-        ? [0, 0, codePointSize(first)]
-        : first === folded[0]
-        ? [Penalty.CaseFold, 0, codePointSize(first)]
-        : null;
+      if (first === chars[0]) {
+        return [0, 0, codePointSize(first)];
+      }
+      if (first === folded[0]) {
+        return [Penalty.CaseFold, 0, codePointSize(first)];
+      }
+      return null;
     }
     const direct = word.indexOf(this.pattern);
     if (direct === 0) {
@@ -134,13 +135,13 @@ export class FuzzyMatcher {
             ? (next >= 48 && next <= 57) || (next >= 97 && next <= 122)
               ? Tp.Lower
               : next >= 65 && next <= 90
-              ? Tp.Upper
-              : Tp.NonWord
+                ? Tp.Upper
+                : Tp.NonWord
             : (ch = fromCodePoint(next)) !== ch.toLowerCase()
-            ? Tp.Upper
-            : ch !== ch.toUpperCase()
-            ? Tp.Lower
-            : Tp.NonWord;
+              ? Tp.Upper
+              : ch !== ch.toUpperCase()
+                ? Tp.Lower
+                : Tp.NonWord;
       if (
         !i ||
         (type === Tp.Upper && hasLower) ||

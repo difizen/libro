@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable no-param-reassign */
-/* eslint-disable @typescript-eslint/no-namespace */
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Event } from '@difizen/mana-common';
 import { Emitter, Deferred } from '@difizen/mana-common';
 
@@ -294,12 +291,16 @@ export class Poll<T = any, U = any, V extends string = 'standby'>
    */
   protected _execute(): void {
     let standby = typeof this.standby === 'function' ? this.standby() : this.standby;
-    standby =
-      standby === 'never'
-        ? false
-        : standby === 'when-hidden'
-        ? !!(typeof document !== 'undefined' && document && document.hidden)
-        : standby;
+    switch (standby) {
+      case 'never':
+        standby = false;
+        break;
+      case 'when-hidden':
+        standby = !!(typeof document !== 'undefined' && document && document.hidden);
+        break;
+      default:
+        break;
+    }
 
     // If in standby mode schedule next tick without calling the factory.
     if (standby) {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import type { Extension, EditorState, StateEffect } from '@codemirror/state';
 import { Prec } from '@codemirror/state';
 import type { KeyBinding } from '@codemirror/view';
@@ -66,11 +65,13 @@ const completionKeymapExt = Prec.highest(
 /// returns `null`.
 export function completionStatus(state: EditorState): null | 'active' | 'pending' {
   const cState = state.field(completionState, false);
-  return cState && cState.active.some((a) => a.state === State.Pending)
-    ? 'pending'
-    : cState && cState.active.some((a) => a.state !== State.Inactive)
-    ? 'active'
-    : null;
+  if (cState && cState.active.some((a) => a.state === State.Pending)) {
+    return 'pending';
+  }
+  if (cState && cState.active.some((a) => a.state !== State.Inactive)) {
+    return 'active';
+  }
+  return null;
 }
 
 const completionArrayCache: WeakMap<readonly Option[], readonly Completion[]> =

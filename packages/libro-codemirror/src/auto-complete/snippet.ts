@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable prefer-const */
-/* eslint-disable no-param-reassign */
-/* eslint-disable @typescript-eslint/no-parameter-properties */
-/* eslint-disable @typescript-eslint/parameter-properties */
 import { indentUnit } from '@codemirror/language';
 import type {
   ChangeDesc,
@@ -96,13 +93,8 @@ class Snippet {
           name = m[2] || m[3] || '',
           found = -1;
         for (let i = 0; i < fields.length; i++) {
-          if (
-            seq !== null
-              ? fields[i].seq === seq
-              : name
-              ? fields[i].name === name
-              : false
-          ) {
+          const sameName = name ? fields[i].name === name : false;
+          if (seq !== null ? fields[i].seq === seq : sameName) {
             found = i;
           }
         }
