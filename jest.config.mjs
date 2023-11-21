@@ -7,14 +7,31 @@ const __dirname = path.dirname(__filename);
 
 import { defaults } from 'jest-config';
 
+const swcJestConfig = {
+  sourceMaps: false,
+  jsc: {
+    parser: {
+      syntax: 'typescript',
+      tsx: true,
+      decorators: true,
+    },
+
+    transform: {
+      react: {
+        runtime: 'automatic',
+      },
+    },
+  },
+};
+
 const configs = {
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'js', 'ts', 'tsx'],
   verbose: true,
   testRegex: '(/__test__/.*|(\\.|/)(test|spec))\\.tsx?$',
   resolver: `${__dirname}/scripts/jest-resolver.cjs`,
   transform: {
-    '^.+\\.(ts|tsx)?$': 'babel-jest',
-    '^.+\\.(js|jsx)$': 'babel-jest',
+    '^.+\\.(ts|tsx)?$': ['@swc/jest', swcJestConfig],
+    '^.+\\.(js|jsx)$': ['@swc/jest', swcJestConfig],
   },
   transformIgnorePatterns: [
     '^/node_modules/(?!react-dnd|dnd-core|query-string|@react-dnd)',
