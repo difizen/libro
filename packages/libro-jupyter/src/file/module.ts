@@ -1,6 +1,10 @@
 import { FileTreeModule, ManaModule } from '@difizen/mana-app';
 
+import { FileCommandContribution } from './file-command.js';
+import { FileCreateModalContribution } from './file-create-modal-contribution.js';
+import { FileCreateDirModalContribution } from './file-createdir-modal-contribution.js';
 import { FileNameAlias } from './file-name-alias.js';
+import { FileRenameModalContribution } from './file-rename-modal-contribution.js';
 import { JupyterFileService } from './file-service.js';
 import { FileTreeLabelProvider } from './file-tree-label-provider.js';
 import { FileView } from './file-view/index.js';
@@ -15,5 +19,9 @@ export const LibroJupyterFileModule = ManaModule.create()
     FileTreeLabelProvider,
     LibroNavigatableView,
     LibroJupyterOpenHandler,
+    FileCommandContribution,
+    FileCreateModalContribution,
+    FileCreateDirModalContribution,
+    FileRenameModalContribution,
   )
   .dependOn(FileTreeModule);
