@@ -1,4 +1,4 @@
-import { LibroJupyterModule } from '@difizen/libro-jupyter';
+import { FileView, LibroJupyterModule } from '@difizen/libro-jupyter';
 import {
   ManaModule,
   createSlotPreference,
@@ -60,7 +60,7 @@ export const LibroLabModule = ManaModule.create()
       },
     }),
     createViewPreference({
-      view: FileTreeView,
+      view: FileView,
       slot: LibroLabLayoutSlots.navigator,
       autoCreate: true,
       openOptions: {
