@@ -26,6 +26,7 @@ export * from './theme/index.js';
 export * from './toolbar/index.js';
 export * from './libro-jupyter-protocol.js';
 export * from './libro-jupyter-model.js';
+export * from './libro-jupyter-view.js';
 export * from './libro-jupyter-file-service.js';
 export * from './libro-jupyter-server-launch-manager.js';
 export * from './file/index.js';
