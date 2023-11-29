@@ -19,6 +19,7 @@ import {
 } from './layout/index.js';
 import './index.less';
 import { LibroLabHeaderMenuModule } from './menu/module.js';
+import { LibroLabTocModule } from './toc/module.js';
 
 export const LibroLabModule = ManaModule.create()
   .register(
@@ -68,4 +69,9 @@ export const LibroLabModule = ManaModule.create()
       },
     }),
   )
-  .dependOn(LibroJupyterModule, LibroLabLayoutModule, LibroLabHeaderMenuModule);
+  .dependOn(
+    LibroJupyterModule,
+    LibroLabLayoutModule,
+    LibroLabHeaderMenuModule,
+    LibroLabTocModule,
+  );
