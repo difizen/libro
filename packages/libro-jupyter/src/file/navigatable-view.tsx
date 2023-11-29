@@ -1,6 +1,7 @@
 import type { LibroView } from '@difizen/libro-core';
 import { LibroService } from '@difizen/libro-core';
 import type { NavigatableView } from '@difizen/mana-app';
+import { CommandRegistry } from '@difizen/mana-app';
 import {
   BaseView,
   inject,
@@ -19,6 +20,8 @@ import {
 } from '@difizen/mana-app';
 import { createRef, forwardRef } from 'react';
 
+import type { EditorView } from './file-protocol.js';
+
 export const LibroEditorComponent = forwardRef(function LibroEditorComponent() {
   const instance = useInject<LibroNavigatableView>(ViewInstance);
 
@@ -32,14 +35,22 @@ export const LibroEditorComponent = forwardRef(function LibroEditorComponent() {
 export const LibroNavigatableViewFactoryId = 'libro-navigatable-view-factory';
 @transient()
 @view(LibroNavigatableViewFactoryId)
-export class LibroNavigatableView extends BaseView implements NavigatableView {
+export class LibroNavigatableView
+  extends BaseView
+  implements NavigatableView, EditorView
+{
   @inject(LibroService) protected libroService: LibroService;
+
+  @inject(CommandRegistry) commandRegistry: CommandRegistry;
 
   override view = LibroEditorComponent;
 
   codeRef = createRef<HTMLDivElement>();
 
   @prop() filePath?: string;
+
+  @prop()
+  dirty: boolean;
 
   @prop()
   libroView?: LibroView;
@@ -56,6 +67,7 @@ export class LibroNavigatableView extends BaseView implements NavigatableView {
   ) {
     super();
     this.filePath = options.path;
+    this.dirty = false;
     this.title.caption = options.path;
     const uri = new URI(options.path);
     const uriRef = URIIconReference.create('file', new VScodeURI(options.path));
@@ -77,7 +89,14 @@ export class LibroNavigatableView extends BaseView implements NavigatableView {
       return;
     }
     this.libroView = libroView;
+    this.libroView.model.onContentChanged(() => {
+      this.dirty = true;
+    });
+    this.libroView.onSave(() => {
+      this.dirty = false;
+    });
     await this.libroView.initialized;
+    this.libroView.focus();
     this.defer.resolve();
   }
 

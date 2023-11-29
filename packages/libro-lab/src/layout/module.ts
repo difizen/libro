@@ -7,6 +7,7 @@ import {
 
 import { BrandView } from './brand/index.js';
 import { LibroLabLayoutContainerView } from './container.js';
+import { EditorTabView } from './editor-tab-view.js';
 import { LibroLabLayoutView } from './layout.js';
 import { LibroLabLayoutMainView } from './main.js';
 import { LibroLabLayoutSlots } from './protocol.js';
@@ -16,6 +17,7 @@ export const LibroLabLayoutModule = ManaModule.create('LibroLabLayoutModule').re
   LibroLabLayoutContainerView,
   LibroLabLayoutMainView,
   BrandView,
+  EditorTabView,
   createSlotPreference({
     slot: LibroLabLayoutSlots.header,
     view: HeaderView,
