@@ -1,6 +1,7 @@
 import {
   DefaultSlotView,
   inject,
+  Notifier,
   prop,
   singleton,
   SlotViewManager,
@@ -14,6 +15,7 @@ export type VisibilityMap = Record<LibroLabLayoutSlotsType, boolean>;
 @singleton()
 export class LayoutService {
   @inject(SlotViewManager) protected readonly slotViewManager: SlotViewManager;
+
   @prop()
   protected visibilityMap: VisibilityMap = {
     [LibroLabLayoutSlots.header]: true,
@@ -43,7 +45,13 @@ export class LayoutService {
     return undefined;
   }
 
-  onSlotActiveChange(slot: LibroLabLayoutSlotsType) {
-    //
+  onSlotActiveChange(slot: LibroLabLayoutSlotsType, handler: () => void) {
+    if (this.isAreaVisible(slot)) {
+      const slotView = this.slotViewManager.getSlotView(slot);
+      if (slotView instanceof DefaultSlotView) {
+        return Notifier.find(slotView, 'active')?.onChange(() => handler());
+      }
+    }
+    return undefined;
   }
 }

@@ -49,6 +49,7 @@
     "@difizen/mana-app": "latest",
     "@difizen/mana-react": "latest",
     "@difizen/libro-jupyter": "0.0.2-alpha.0",
+    "@difizen/libro-toc": "0.0.2-alpha.0",
     "@ant-design/icons": "^5.1.0",
     "classnames": "^2.2.6"
   },
