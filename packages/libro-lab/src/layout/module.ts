@@ -1,5 +1,6 @@
 import {
   createSlotPreference,
+  FlexSlotView,
   HeaderArea,
   HeaderView,
   ManaModule,
@@ -8,6 +9,8 @@ import {
 import { BrandView } from './brand/index.js';
 import { LibroLabLayoutContainerView } from './container.js';
 import { EditorTabView } from './editor-tab-view.js';
+import { FooterArea, LibroLabLayoutFooterView } from './footer/footer-view.js';
+import { LayoutService } from './layout-service.js';
 import { LibroLabLayoutView } from './layout.js';
 import { LibroLabLayoutMainView } from './main.js';
 import { LibroLabLayoutSlots } from './protocol.js';
@@ -18,6 +21,8 @@ export const LibroLabLayoutModule = ManaModule.create('LibroLabLayoutModule').re
   LibroLabLayoutMainView,
   BrandView,
   EditorTabView,
+  LibroLabLayoutFooterView,
+  LayoutService,
   createSlotPreference({
     slot: LibroLabLayoutSlots.header,
     view: HeaderView,
@@ -33,5 +38,19 @@ export const LibroLabLayoutModule = ManaModule.create('LibroLabLayoutModule').re
   createSlotPreference({
     slot: LibroLabLayoutSlots.main,
     view: LibroLabLayoutMainView,
+  }),
+  createSlotPreference({
+    slot: LibroLabLayoutSlots.footer,
+    view: LibroLabLayoutFooterView,
+  }),
+  createSlotPreference({
+    slot: FooterArea.right,
+    view: FlexSlotView,
+    options: { sort: true },
+  }),
+  createSlotPreference({
+    slot: FooterArea.left,
+    view: FlexSlotView,
+    options: { sort: true },
   }),
 );

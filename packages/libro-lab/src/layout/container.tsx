@@ -14,7 +14,7 @@ export const LibroLabLayoutContainerComponent = forwardRef(
           <Slot name={LibroLabLayoutSlots.main} />
         </BoxPanel.Pane>
         <BoxPanel.Pane className="libro-lab-layout-bottom">
-          <Slot name={LibroLabLayoutSlots.bottom} />
+          <Slot name={LibroLabLayoutSlots.footer} />
         </BoxPanel.Pane>
       </BoxPanel>
     );
