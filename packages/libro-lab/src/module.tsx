@@ -20,6 +20,7 @@ import {
 import './index.less';
 import { LibroLabHeaderMenuModule } from './menu/module.js';
 import { LibroLabTocModule } from './toc/module.js';
+import { WelcomeView } from './welcome/index.js';
 
 export const LibroLabModule = ManaModule.create()
   .register(
@@ -66,6 +67,16 @@ export const LibroLabModule = ManaModule.create()
       openOptions: {
         reveal: true,
         order: 'file-tree',
+      },
+    }),
+    WelcomeView,
+    createViewPreference({
+      view: WelcomeView,
+      slot: LibroLabLayoutSlots.content,
+      autoCreate: true,
+      openOptions: {
+        reveal: true,
+        order: 'welcome',
       },
     }),
   )
