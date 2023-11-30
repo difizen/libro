@@ -1,3 +1,4 @@
+import type { SlotView, View, ViewOpenHandlerOptions } from '@difizen/mana-app';
 import {
   DefaultSlotView,
   inject,
@@ -33,6 +34,12 @@ export class LayoutService {
 
   setAreaVisible(slot: LibroLabLayoutSlotsType, visible: boolean) {
     this.visibilityMap[slot] = visible;
+  }
+
+  async addView(view: View, option?: ViewOpenHandlerOptions): Promise<void> {
+    const { slot = LibroLabLayoutSlots.main, ...viewOpenOption } = option || {};
+    const slotView = this.slotViewManager.getSlotView(slot) as SlotView;
+    await slotView.addView(view, viewOpenOption);
   }
 
   getActiveView(slot: LibroLabLayoutSlotsType) {
