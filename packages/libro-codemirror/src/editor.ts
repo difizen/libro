@@ -140,7 +140,7 @@ export class CodeMirrorEditor implements IEditor {
    */
   constructor(options: IOptions) {
     this._editorConfig = new EditorConfiguration(options);
-    const host = (this.host = options.host);
+    const host = (this.host = options['host']);
 
     host.classList.add(EDITOR_CLASS);
     host.classList.add('jp-Editor');
@@ -148,7 +148,7 @@ export class CodeMirrorEditor implements IEditor {
     host.addEventListener('blur', this, true);
     host.addEventListener('scroll', this, true);
 
-    this._uuid = options.uuid || v4();
+    this._uuid = options['uuid'] || v4();
 
     // State and effects for handling the selection marks
     this._addMark = StateEffect.define<ICollabSelectionText>();
@@ -187,19 +187,19 @@ export class CodeMirrorEditor implements IEditor {
     });
 
     // Handle selection style.
-    const style = options.selectionStyle || {};
+    const style = options['selectionStyle'] || {};
     this._selectionStyle = {
       ...defaultSelectionStyle,
       ...(style as IEditorSelectionStyle),
     };
 
-    const model = (this._model = options.model);
+    const model = (this._model = options['model']);
 
     const config = options.config || {};
     const fullConfig = (this._config = {
       ...codeMirrorDefaultConfig,
       ...config,
-      mimetype: options.model.mimeType,
+      mimetype: options['model'].mimeType,
     });
 
     // this._initializeEditorBinding();
@@ -207,13 +207,16 @@ export class CodeMirrorEditor implements IEditor {
     // Extension for handling DOM events
     const domEventHandlers = EditorView.domEventHandlers({
       keydown: (event: KeyboardEvent) => {
-        const index = findFirstArrayIndex(this._keydownHandlers, (handler) => {
-          if (handler(this, event) === true) {
-            event.preventDefault();
-            return true;
-          }
-          return false;
-        });
+        const index = findFirstArrayIndex(
+          this._keydownHandlers,
+          (handler: KeydownHandler) => {
+            if (handler(this, event) === true) {
+              event.preventDefault();
+              return true;
+            }
+            return false;
+          },
+        );
         if (index === -1) {
           return this.onKeydown(event);
         }
@@ -391,7 +394,7 @@ export class CodeMirrorEditor implements IEditor {
     // Don't bother setting the option if it is already the same.
     if (this._config[option] !== value) {
       this._config[option] = value;
-      this._editorConfig.reconfigureExtension(this._editor, option, value);
+      this._editorConfig.reconfigureExtension(this._editor, option as string, value);
     }
 
     if (option === 'readOnly') {
@@ -544,7 +547,10 @@ export class CodeMirrorEditor implements IEditor {
   addKeydownHandler(handler: KeydownHandler): Disposable {
     this._keydownHandlers.push(handler);
     return Disposable.create(() => {
-      removeAllWhereFromArray(this._keydownHandlers, (val) => val === handler);
+      removeAllWhereFromArray(
+        this._keydownHandlers,
+        (val: KeydownHandler) => val === handler,
+      );
     });
   }
 

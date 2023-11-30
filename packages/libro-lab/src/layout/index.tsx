@@ -27,6 +27,7 @@ export const LibroLabLayoutComponent = forwardRef(
             <SplitPanel id="libro-lab-content-layout">
               <SplitPanel.Pane
                 id="libro-lab-content-layout-left"
+                className="libro-lab-content-layout-left"
                 defaultSize={300}
                 minResize={160}
               >
@@ -34,6 +35,7 @@ export const LibroLabLayoutComponent = forwardRef(
               </SplitPanel.Pane>
               <SplitPanel.Pane
                 id="libro-lab-content-layout-main-container"
+                className="libro-lab-content-layout-main-container"
                 flex={1}
                 minResize={200}
               >
@@ -43,6 +45,7 @@ export const LibroLabLayoutComponent = forwardRef(
                 >
                   <SplitPanel.Pane
                     id="libro-lab-content-layout-main"
+                    className="libro-lab-content-layout-main"
                     flex={2}
                     flexGrow={1}
                     minResize={200}
@@ -51,6 +54,7 @@ export const LibroLabLayoutComponent = forwardRef(
                   </SplitPanel.Pane>
                   <SplitPanel.Pane
                     id="libro-lab-content-layout-bottom"
+                    className="libro-lab-content-layout-bottom"
                     flex={1}
                     defaultSize={200}
                   >

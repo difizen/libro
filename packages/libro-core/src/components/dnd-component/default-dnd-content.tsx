@@ -7,9 +7,9 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 
 import { CellService } from '../../cell/index.js';
 import { CellCollapsible } from '../../collapse-service.js';
+import { MultiSelectionWhenShiftClick } from '../../configuration/libro-configuration.js';
 import { isCellView, DragAreaKey } from '../../libro-protocol.js';
 import type { CellView, DndContentProps } from '../../libro-protocol.js';
-import { MultiSelectionWhenShiftClick } from '../../configuration/libro-configuration.js';
 import type { LibroView } from '../../libro-view.js';
 import { HolderOutlined, PlusOutlined } from '../../material-from-designer.js';
 import { hasErrorOutput } from '../../output/index.js';
