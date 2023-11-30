@@ -46,6 +46,6 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/mana-l10n": "alpha"
+    "@difizen/mana-l10n": "latest"
   }
 }

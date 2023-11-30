@@ -51,7 +51,7 @@
     "@difizen/libro-common": "^0.0.2-alpha.0",
     "@difizen/libro-core": "^0.0.2-alpha.0",
     "@difizen/libro-markdown": "^0.0.2-alpha.0",
-    "@difizen/mana-app": "alpha"
+    "@difizen/mana-app": "latest"
   },
   "peerDependencies": {
     "react": "^18.2.0"

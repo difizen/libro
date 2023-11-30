@@ -46,8 +46,8 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/mana-app": "alpha",
-    "@difizen/mana-react": "alpha",
+    "@difizen/mana-app": "latest",
+    "@difizen/mana-react": "latest",
     "@difizen/libro-jupyter": "0.0.2-alpha.0"
   },
   "peerDependencies": {

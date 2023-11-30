@@ -46,8 +46,8 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/mana-app": "alpha",
-    "@difizen/mana-l10n": "alpha",
+    "@difizen/mana-app": "latest",
+    "@difizen/mana-l10n": "latest",
     "@ant-design/icons": "^5.1.0",
     "@difizen/libro-common": "^0.0.2-alpha.0",
     "@difizen/libro-core": "^0.0.2-alpha.0",

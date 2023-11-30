@@ -46,7 +46,7 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/mana-app": "alpha",
+    "@difizen/mana-app": "latest",
     "@types/markdown-it": "^12.2.3",
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.5"

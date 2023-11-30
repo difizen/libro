@@ -45,7 +45,7 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/mana-app": "alpha",
+    "@difizen/mana-app": "latest",
     "@difizen/libro-common": "^0.0.2-alpha.0",
     "@difizen/libro-shared-model": "^0.0.2-alpha.0",
     "uuid": "^9.0.0",

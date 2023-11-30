@@ -45,7 +45,7 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/mana-app": "alpha",
+    "@difizen/mana-app": "latest",
     "@codemirror/autocomplete": "^6.0.0",
     "@codemirror/commands": "^6.1.0",
     "@codemirror/lang-javascript": "^6.0.2",

@@ -19,8 +19,8 @@
   },
   "packageManager": "pnpm@8.4.0",
   "dependencies": {
-    "@difizen/mana-app": "alpha",
-    "@difizen/mana-react": "alpha",
+    "@difizen/mana-app": "latest",
+    "@difizen/mana-react": "latest",
     "@difizen/libro-jupyter": "^0.0.2-alpha.0",
     "@difizen/libro-core": "^0.0.2-alpha.0",
     "@ant-design/icons": "^5.1.0",
