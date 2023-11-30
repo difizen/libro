@@ -13,7 +13,7 @@ export const LibroLabLayoutContainerComponent = forwardRef(
         <BoxPanel.Pane className="libro-lab-layout-main" flex={1}>
           <Slot name={LibroLabLayoutSlots.main} />
         </BoxPanel.Pane>
-        <BoxPanel.Pane className="libro-lab-layout-bottom">
+        <BoxPanel.Pane className="libro-lab-layout-footer">
           <Slot name={LibroLabLayoutSlots.footer} />
         </BoxPanel.Pane>
       </BoxPanel>
