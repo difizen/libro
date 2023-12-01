@@ -16,7 +16,7 @@
     "noFallthroughCasesInSwitch": false,
     // "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitOverride": true,
     "skipLibCheck": true,

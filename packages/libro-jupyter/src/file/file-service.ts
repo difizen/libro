@@ -170,7 +170,7 @@ export class JupyterFileService extends FileService {
 
   async delete(
     resource: URI,
-    options?: ResolveFileOptions | undefined,
+    _options?: ResolveFileOptions | undefined,
   ): Promise<FileStatWithMetadata> {
     await this.contentsManager.delete(resource.path.toString());
     return this.resolve(resource);

@@ -16,6 +16,7 @@ export const LibroLabLayoutMainComponent = forwardRef(
         {layoutService.isAreaVisible(LibroLabLayoutSlots.navigator) && (
           <SplitPanel.Pane
             id="libro-lab-content-layout-left"
+            className="libro-lab-content-layout-left"
             defaultSize={300}
             minResize={160}
           >
@@ -24,6 +25,7 @@ export const LibroLabLayoutMainComponent = forwardRef(
         )}
         <SplitPanel.Pane
           id="libro-lab-content-layout-main-container"
+          className="libro-lab-content-layout-main-container"
           flex={1}
           minResize={200}
         >
@@ -34,6 +36,7 @@ export const LibroLabLayoutMainComponent = forwardRef(
             {layoutService.isAreaVisible(LibroLabLayoutSlots.content) && (
               <SplitPanel.Pane
                 id="libro-lab-content-layout-main"
+                className="libro-lab-content-layout-main"
                 flex={2}
                 flexGrow={1}
                 minResize={200}
@@ -44,6 +47,7 @@ export const LibroLabLayoutMainComponent = forwardRef(
             {layoutService.isAreaVisible(LibroLabLayoutSlots.contentBottom) && (
               <SplitPanel.Pane
                 id="libro-lab-content-layout-bottom"
+                className="libro-lab-content-layout-bottom"
                 flex={1}
                 defaultSize={200}
               >
