@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-code-editor",
-  "version": "0.0.2-alpha.0",
+  "version": "0.1.0",
   "description": "",
   "keywords": [
     "libro",
@@ -46,8 +46,8 @@
   },
   "dependencies": {
     "@difizen/mana-app": "latest",
-    "@difizen/libro-common": "^0.0.2-alpha.0",
-    "@difizen/libro-shared-model": "^0.0.2-alpha.0",
+    "@difizen/libro-common": "^0.1.0",
+    "@difizen/libro-shared-model": "^0.1.0",
     "uuid": "^9.0.0",
     "vscode-languageserver-protocol": "^3.17.0"
   },
