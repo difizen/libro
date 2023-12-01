@@ -4,7 +4,6 @@ export interface IProps {
   height?: string;
 }
 export function TocIcon(props: IProps) {
-  const { className = '' } = props;
   return (
     <svg
       width="12px"
