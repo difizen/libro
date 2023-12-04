@@ -1,7 +1,9 @@
 import { singleton, Slot, useInject, view } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
 import { BoxPanel } from '@difizen/mana-react';
+import { Alert } from 'antd';
 import { forwardRef } from 'react';
+import { Loadding } from '../common/icon.js';
 
 import './index.less';
 import { LayoutService } from './layout-service.js';
@@ -18,6 +20,15 @@ export const LibroLabLayoutContainerComponent = forwardRef(
             <BoxPanel.Pane className="libro-lab-layout-header">
               <Slot name={LibroLabLayoutSlots.header} />
             </BoxPanel.Pane>
+          )}
+          {layoutService.isAreaVisible(LibroLabLayoutSlots.alert) && (
+            <Alert
+              message="服务启动中，请稍后，待容器启动完成后即可编辑文件。"
+              type="info"
+              banner
+              closable
+              icon={<Loadding className="libro-lab-loadding" />}
+            />
           )}
           {layoutService.isAreaVisible(LibroLabLayoutSlots.container) && (
             <BoxPanel.Pane className="libro-lab-layout-container" flex={1}>

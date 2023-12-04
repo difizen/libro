@@ -1,7 +1,7 @@
 import { BaseView, view, singleton } from '@difizen/mana-app';
 import * as React from 'react';
+import { Logo } from '../../common/index.js';
 
-import { Logo } from './logo.js';
 import './index.less';
 
 export const Brand: React.ForwardRefExoticComponent<any> = React.forwardRef(
