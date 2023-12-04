@@ -1,8 +1,7 @@
 import { singleton, view } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
 import { forwardRef } from 'react';
-
-import { WelcomeIcon } from './welcome-icon.js';
+import { WelcomeIcon } from '../common/index.js';
 
 import './index.less';
 

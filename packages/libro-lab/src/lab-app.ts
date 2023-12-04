@@ -2,6 +2,7 @@ import {
   LibroService,
   ServerConnection,
   LibroJupyterConfiguration,
+  ServerManager,
 } from '@difizen/libro-jupyter';
 import type { FileTreeView } from '@difizen/mana-app';
 import {
@@ -16,6 +17,7 @@ import {
 } from '@difizen/mana-app';
 
 import { LibroLabLayoutSlots } from './layout/index.js';
+import { LayoutService } from './layout/layout-service.js';
 
 @singleton({ contrib: ApplicationContribution })
 export class LibroLabApp implements ApplicationContribution {
@@ -24,13 +26,23 @@ export class LibroLabApp implements ApplicationContribution {
   @inject(SlotViewManager) slotViewManager: SlotViewManager;
   @inject(ViewManager) viewManager: ViewManager;
   @inject(ConfigurationService) configurationService: ConfigurationService;
+  @inject(ServerManager) serverManager: ServerManager;
+  @inject(LayoutService) layoutService: LayoutService;
 
   async onStart() {
     this.configurationService.set(
       LibroJupyterConfiguration['OpenSlot'],
       LibroLabLayoutSlots.content,
     );
-    await this.initialWorkspace();
+    this.serverManager.ready
+      .then(() => {
+        this.layoutService.setAreaVisible(LibroLabLayoutSlots.navigator, true);
+        this.layoutService.setAreaVisible(LibroLabLayoutSlots.alert, false);
+        this.layoutService.serverSatus = 'success';
+        this.initialWorkspace();
+        return;
+      })
+      .catch();
   }
 
   protected async initialWorkspace() {

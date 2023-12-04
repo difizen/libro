@@ -18,7 +18,6 @@ export const LibroLabLayoutMainComponent = forwardRef(
             id="libro-lab-content-layout-left"
             className="libro-lab-content-layout-left"
             defaultSize={300}
-            minResize={160}
           >
             <Slot name={LibroLabLayoutSlots.navigator} />
           </SplitPanel.Pane>

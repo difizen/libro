@@ -1,17 +1,20 @@
 .libro-lab-footer {
-  .libro-lab-footer-left {
+  .libro-lab-footer-left,
+  .libro-lab-footer-right {
     padding: 0 24px;
   }
 }
 
-.libro-lab-current-file-footer {
+.libro-lab-current-file-footer,
+.libro-lab-status-footer {
   height: 100%;
   display: flex;
   align-items: center;
+  font-weight: 400;
+  font-size: 12px;
+  color: rgba(0, 10, 26, 68%);
+}
 
-  span {
-    font-weight: 400;
-    font-size: 12px;
-    color: rgba(0, 10, 26, 68%);
-  }
+.libro-lab-status-footer {
+  justify-content: end;
 }

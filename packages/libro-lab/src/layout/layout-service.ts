@@ -8,7 +8,7 @@ import {
   SlotViewManager,
 } from '@difizen/mana-app';
 
-import type { LibroLabLayoutSlotsType } from './protocol.js';
+import type { LibroLabLayoutSlotsType, StatusType } from './protocol.js';
 import { LibroLabLayoutSlots } from './protocol.js';
 
 export type VisibilityMap = Record<LibroLabLayoutSlotsType, boolean>;
@@ -18,14 +18,17 @@ export class LayoutService {
   @inject(SlotViewManager) protected readonly slotViewManager: SlotViewManager;
 
   @prop()
+  serverSatus: StatusType = 'loading';
+  @prop()
   protected visibilityMap: VisibilityMap = {
     [LibroLabLayoutSlots.header]: true,
     [LibroLabLayoutSlots.container]: true,
     [LibroLabLayoutSlots.main]: true,
     [LibroLabLayoutSlots.footer]: true,
-    [LibroLabLayoutSlots.navigator]: true,
+    [LibroLabLayoutSlots.navigator]: false,
     [LibroLabLayoutSlots.content]: true,
     [LibroLabLayoutSlots.contentBottom]: false,
+    [LibroLabLayoutSlots.alert]: true,
   };
 
   isAreaVisible(slot: LibroLabLayoutSlotsType): boolean {

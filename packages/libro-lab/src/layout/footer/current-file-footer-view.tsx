@@ -1,4 +1,3 @@
-import { LibroNavigatableView } from '@difizen/libro-jupyter';
 import {
   BaseView,
   inject,
@@ -22,7 +21,7 @@ const CurrentFileFooterComponent = React.forwardRef(function CurrentFileFooterCo
   return (
     <div className="libro-lab-current-file-footer" ref={ref}>
       <span>{`当前文件：${
-        currentFileFooterView.libroNavigatableView?.title.label || ''
+        currentFileFooterView.navigatableView?.title.label || ''
       }`}</span>
     </div>
   );
@@ -34,11 +33,8 @@ export class LibroLabCurrentFileFooterView extends BaseView {
   override view = CurrentFileFooterComponent;
   @inject(LayoutService) protected layoutService: LayoutService;
 
-  get libroNavigatableView() {
+  get navigatableView() {
     const contentView = this.layoutService.getActiveView(LibroLabLayoutSlots.content);
-    if (contentView instanceof LibroNavigatableView) {
-      return contentView;
-    }
-    return undefined;
+    return contentView;
   }
 }

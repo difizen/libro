@@ -12,11 +12,11 @@ import {
   ViewRender,
 } from '@difizen/mana-app';
 import { Empty } from 'antd';
+import { TocIcon } from '../common/index.js';
 
 import { LayoutService } from '../layout/layout-service.js';
 import { LibroLabLayoutSlots } from '../layout/protocol.js';
 
-import { TocIcon } from './libro-toc-icons.js';
 import './index.less';
 
 const TocViewRender: React.FC = () => {

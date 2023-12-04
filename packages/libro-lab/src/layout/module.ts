@@ -11,6 +11,7 @@ import { LibroLabLayoutContainerView } from './container.js';
 import { EditorTabView } from './editor-tab-view.js';
 import { LibroLabCurrentFileFooterView } from './footer/current-file-footer-view.js';
 import { FooterArea, LibroLabLayoutFooterView } from './footer/footer-view.js';
+import { LibroLabStatusFooterView } from './footer/status-footer-view.js';
 import { LayoutService } from './layout-service.js';
 import { LibroLabLayoutView } from './layout.js';
 import { LibroLabLayoutMainView } from './main.js';
@@ -58,5 +59,10 @@ export const LibroLabLayoutModule = ManaModule.create('LibroLabLayoutModule').re
   createSlotPreference({
     slot: FooterArea.left,
     view: LibroLabCurrentFileFooterView,
+  }),
+  LibroLabStatusFooterView,
+  createSlotPreference({
+    slot: FooterArea.right,
+    view: LibroLabStatusFooterView,
   }),
 );
