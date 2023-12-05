@@ -1,6 +1,6 @@
 import { BaseView, inject, singleton, useInject, view } from '@difizen/mana-app';
 import * as React from 'react';
-import { Loadding } from '../../common/icon.js';
+import { Loadding, SuccIcon } from '../../common/icon.js';
 
 import { LayoutService } from '../layout-service.js';
 import { LibroLabLayoutSlots } from '../protocol.js';
@@ -14,7 +14,7 @@ const Status: Record<StatusType, StatusItem> = {
   },
   success: {
     label: '启动成功',
-    icon: <Loadding />,
+    icon: <SuccIcon />,
   },
 };
 

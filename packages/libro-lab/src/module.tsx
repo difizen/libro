@@ -21,6 +21,7 @@ import './index.less';
 import { LibroLabHeaderMenuModule } from './menu/module.js';
 import { LibroLabTocModule } from './toc/module.js';
 import { WelcomeView } from './welcome/index.js';
+import { EntryPointView } from './welcome/entry-point-view.js';
 
 export const LibroLabModule = ManaModule.create()
   .register(
@@ -79,6 +80,7 @@ export const LibroLabModule = ManaModule.create()
         order: 'welcome',
       },
     }),
+    EntryPointView,
   )
   .dependOn(
     LibroJupyterModule,
