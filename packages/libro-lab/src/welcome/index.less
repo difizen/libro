@@ -1,7 +1,8 @@
 .libro-lab-welcome-page {
   padding: 32px 54px;
-  height: 100%;
+  height: calc(100% - 64px);
   background: white;
+  overflow: auto;
 
   .libro-lab-welcome-page-title {
     /* stylelint-disable-next-line declaration-property-value-disallowed-list */
@@ -18,4 +19,104 @@
     font-size: 16px;
     color: rgba(0, 10, 26, 78%);
   }
+}
+
+.libro-lab-entry-point-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 24px;
+  height: 100px;
+  width: 100px;
+  background-color: rgba(0, 10, 26, 2%);
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 10, 26, 4%);
+  }
+}
+
+.libro-lab-entry-point-item-text {
+  margin-top: 6px;
+  line-height: 20px;
+  font-size: 14px;
+  color: rgba(0, 10, 26, 68%);
+}
+
+.libro-lab-entry-point-title {
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: rgba(0, 10, 26, 89%);
+}
+
+.libro-lab-entry-point-item-title {
+  font-weight: 500;
+  font-size: 16px;
+  color: rgba(0, 10, 26, 89%);
+  margin-bottom: 16px;
+}
+
+.libro-lab-entry-point-item-recent {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 52px;
+  width: 180px;
+  border: 1px solid rgba(0, 10, 26, 7%);
+  border-radius: 8px;
+  margin-bottom: 24px;
+  cursor: pointer;
+
+  &:hover {
+    border-color: transparent;
+    background-color: rgba(0, 10, 26, 4%);
+  }
+}
+
+.libro-lab-entry-point-item-recent-icon {
+  font-size: 24px;
+}
+
+.libro-lab-entry-point-item-recent-text {
+  margin-left: 8px;
+  color: rgba(0, 10, 26, 89%);
+}
+
+.libro-lab-entry-point-item-config {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  cursor: pointer;
+  height: 32px;
+  width: 100px;
+  border: 1px solid rgba(0, 0, 0, 15%);
+  border-radius: 6px;
+}
+
+.libro-lab-entry-point-item-config-text {
+  margin-left: 4px;
+  color: rgba(0, 0, 0, 88%);
+  line-height: 22px;
+}
+
+.libro-lab-welcome-page-server-info {
+  height: 80px;
+  width: 400px;
+  background-color: rgba(0, 10, 26, 2%);
+  border-radius: 8px;
+  margin-bottom: 24px;
+  padding: 16px 24px;
+}
+
+.libro-lab-welcome-page-server-info-title {
+  font-weight: 500;
+  font-size: 16px;
+  color: rgba(0, 10, 26, 89%);
+}
+
+.libro-lab-welcome-page-server-info-item {
+  color: rgba(0, 10, 26, 78%);
 }
