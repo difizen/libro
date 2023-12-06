@@ -1,7 +1,7 @@
-import type { IEditor, IRange } from '@difizen/libro-code-editor';
+import type { IEditor } from '@difizen/libro-code-editor';
 import { prop } from '@difizen/mana-app';
 
-import type { CellView } from '../libro-protocol.js';
+import type { CellView, EditorStatus } from '../libro-protocol.js';
 import { isCellView } from '../libro-protocol.js';
 
 import { LibroCellView } from './libro-cell-view.js';
@@ -12,11 +12,6 @@ export interface EditorCellView extends CellView {
   redo: () => void;
 
   undo: () => void;
-  getSelections: () => IRange[];
-  getSelectionsOffsetAt: (selection: IRange) => {
-    start: number;
-    end: number;
-  };
 }
 
 export const EditorCellView = {
@@ -44,8 +39,9 @@ export abstract class LibroEditorCellView
   @prop()
   editor: IEditor | undefined;
 
-  abstract getSelections: () => IRange[];
-  abstract getSelectionsOffsetAt: (selection: IRange) => { start: number; end: number };
+  @prop()
+  editorStatus: EditorStatus;
+
   get wrapperCls() {
     return '';
   }

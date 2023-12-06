@@ -13,7 +13,7 @@ export const HeaderToolbarVisible: ConfigurationNode<boolean> = {
 };
 
 export const CellTopToolbarSetting: ConfigurationNode<boolean> = {
-  id: 'libro.cell.top-toolbar',
+  id: 'libro.cell.toptoolbar',
   description: l10n.t('是否显示cell顶部工具栏'),
   title: l10n.t('cell顶部工具栏'),
   type: 'checkbox',
@@ -24,7 +24,7 @@ export const CellTopToolbarSetting: ConfigurationNode<boolean> = {
 };
 
 export const CellSideToolbarVisible: ConfigurationNode<boolean> = {
-  id: 'libro.cell.side-toolbar',
+  id: 'libro.cell.sidetoolbar',
   description: l10n.t('是否显示cell侧边工具栏'),
   title: l10n.t('cell侧边工具栏'),
   type: 'checkbox',
@@ -35,7 +35,7 @@ export const CellSideToolbarVisible: ConfigurationNode<boolean> = {
 };
 
 export const AutoInsertWhenNoCell: ConfigurationNode<boolean> = {
-  id: 'libro.command.insert-cell-below',
+  id: 'libro.command.insertcellbelow',
   description: l10n.t('没有cell时是否默认创建cell'),
   title: l10n.t('默认创建cell'),
   type: 'checkbox',
@@ -46,7 +46,7 @@ export const AutoInsertWhenNoCell: ConfigurationNode<boolean> = {
 };
 
 export const EnterEditModeWhenAddCell: ConfigurationNode<boolean> = {
-  id: 'libro.command.enter-edit-mode-when-add-cell',
+  id: 'libro.command.entereditmodewhenaddcell',
   description: l10n.t('增加cell操作默认进入编辑态'),
   title: l10n.t('默认进入编辑态'),
   type: 'checkbox',
@@ -55,8 +55,8 @@ export const EnterEditModeWhenAddCell: ConfigurationNode<boolean> = {
     type: 'boolean',
   },
 };
-export const CollapserActive: ConfigurationNode<boolean> = {
-  id: 'libro.command.collapser-active',
+export const CollapserClickActive: ConfigurationNode<boolean> = {
+  id: 'libro.command.collapserclickactive',
   description: l10n.t('点击左侧长条是否可以隐藏与显示cell'),
   title: l10n.t('默认点击长条可以隐藏与显示cell'),
   type: 'checkbox',
@@ -66,7 +66,7 @@ export const CollapserActive: ConfigurationNode<boolean> = {
   },
 };
 export const MultiSelectionWhenShiftClick: ConfigurationNode<boolean> = {
-  id: 'libro.command.multiselection-when-shift-click',
+  id: 'libro.command.multiselectionwhenshiftclick',
   description: l10n.t('按住shift键并点击拖拽区域可以进行多选'),
   title: l10n.t('默认按住shift键并点击拖拽区域可以进行多选'),
   type: 'checkbox',
@@ -82,6 +82,17 @@ export const RightContentFixed: ConfigurationNode<boolean> = {
   title: l10n.t('右侧内容是否相对固定'),
   type: 'checkbox',
   defaultValue: false,
+  schema: {
+    type: 'boolean',
+  },
+};
+
+export const OutputScrollBtnVisiable: ConfigurationNode<boolean> = {
+  id: 'libro.cell.output.scroll.button.visiable',
+  description: l10n.t('cell输出区域高度固定按钮是否显示'),
+  title: l10n.t('cell输出区域高度固定按钮是否显示'),
+  type: 'checkbox',
+  defaultValue: true,
   schema: {
     type: 'boolean',
   },

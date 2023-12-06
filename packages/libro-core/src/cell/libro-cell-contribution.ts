@@ -14,11 +14,7 @@ import { LibroCellView } from './libro-cell-view.js';
 export class LibroCellContribution
   implements CellModelContribution, CellViewContribution
 {
-  libroCellModelFactory: CellModelFactory;
-
-  constructor(@inject(CellModelFactory) libroCellModelFactory: CellModelFactory) {
-    this.libroCellModelFactory = libroCellModelFactory;
-  }
+  @inject(CellModelFactory) libroCellModelFactory: CellModelFactory;
 
   cellMeta: CellMeta = {
     type: 'raw',
@@ -27,7 +23,7 @@ export class LibroCellContribution
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  canHandle(_options: CellOptions): number {
+  canHandle(options: CellOptions): number {
     return 1;
   }
   createModel(options: CellOptions): CellModel {

@@ -9,15 +9,13 @@ import { LibroExtensionSlotContribution } from './libro-slot-protocol.js';
 
 @singleton()
 export class LibroSlotManager {
-  protected slotViewManager: SlotViewManager;
+  @inject(SlotViewManager) slotViewManager: SlotViewManager;
   protected readonly libroExtraProvider: Contribution.Provider<LibroExtensionSlotContribution>;
   constructor(
-    @inject(SlotViewManager) slotViewManager: SlotViewManager,
     @contrib(LibroExtensionSlotContribution)
     libroExtraProvider: Contribution.Provider<LibroExtensionSlotContribution>,
   ) {
     this.libroExtraProvider = libroExtraProvider;
-    this.slotViewManager = slotViewManager;
   }
 
   getSlotName(libro: LibroView, slot: LibroSlot): string {

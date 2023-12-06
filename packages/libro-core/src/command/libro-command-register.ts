@@ -40,10 +40,7 @@ export interface GeneralLibroCommandHandler extends CommandHandler {
 
 @singleton()
 export class LibroCommandRegister {
-  protected readonly libroService: LibroService;
-  constructor(@inject(LibroService) libroService: LibroService) {
-    this.libroService = libroService;
-  }
+  @inject(LibroService) protected readonly libroService: LibroService;
   registerKeybinds(
     keybindings: KeybindingRegistry,
     commands: Record<

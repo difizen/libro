@@ -10,22 +10,24 @@ import {
   DefaultCollapseService,
 } from './collapse-service.js';
 import { LibroCommandModule } from './command/index.js';
+import { VirtualizedManager } from './components/dnd-component/virtualized-manager.js';
 import {
-  CellExecutionTimeProvider,
-  LibroCellExecutionTime,
-  CellInputBottonBlankProvider,
-  LibroCellInputBottonBlank,
-  CellOutputVisulizationProvider,
-  LibroCellVisualization,
-  LibroBetweenCellContent,
   BetweenCellProvider,
+  CellExecutionTimeProvider,
+  CellInputBottonBlankProvider,
+  CellOutputVisulizationProvider,
+  LibroBetweenCellContent,
+  LibroCellExecutionTime,
+  LibroCellInputBottonBlank,
+  LibroCellVisualization,
 } from './components/index.js';
-import { LibroConfigurationContribution } from './configuration/libro-configuration-contribution.js';
 import { LibroContentModule } from './content/index.js';
+import { LibroFormatterModule } from './formatter/index.js';
 import { LirboContextKey } from './libro-context-key.js';
 import { LibroModel } from './libro-model.js';
-import { NotebookOption, ModelFactory } from './libro-protocol.js';
+import { ModelFactory, NotebookOption } from './libro-protocol.js';
 import { LibroService } from './libro-service.js';
+import { LibroSettingContribution } from './libro-setting-contribution.js';
 import { LibroViewTracker } from './libro-view-tracker.js';
 import { LibroView } from './libro-view.js';
 import { OutputModule } from './output/index.js';
@@ -34,11 +36,12 @@ import { LibroColorRegistry } from './theme/libro-color-registry.js';
 
 export const LibroModule = ManaModule.create()
   .register(
+    VirtualizedManager,
     LibroService,
     LirboContextKey,
     LibroModel,
     LibroView,
-    LibroConfigurationContribution,
+    LibroSettingContribution,
     LibroColorRegistry,
     LibroViewTracker,
     {
@@ -88,4 +91,5 @@ export const LibroModule = ManaModule.create()
     ConfigurationModule,
     OutputModule,
     LibroContentModule,
+    LibroFormatterModule,
   );

@@ -8,7 +8,6 @@ import type { View } from '@difizen/mana-app';
 import { Syringe } from '@difizen/mana-app';
 
 import type { CellView } from '../libro-protocol.js';
-// import type { CellModel } from '../libro-protocol';
 
 export const CellOption = Symbol('CellOption');
 

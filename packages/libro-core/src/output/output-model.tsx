@@ -23,15 +23,15 @@ export class LibroOutputView extends BaseView implements BaseOutputView {
 
   // 增加cell属性，使得通过output可以找到Cell
   cell: CellView;
-  type: string;
 
   @prop()
   raw: IOutput;
-
   @prop()
   data: JSONObject;
   @prop()
   metadata: PartialJSONObject;
+  type: string;
+  trusted: boolean;
   constructor(@inject(ViewOption) options: IOutputOptions) {
     super();
     this.raw = options.output;
@@ -43,7 +43,7 @@ export class LibroOutputView extends BaseView implements BaseOutputView {
   }
 
   render: FC<{ output: BaseOutputView }> = LibroOutputModelRender;
-  trusted: boolean;
+
   override dispose() {
     //
   }

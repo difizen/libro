@@ -14,6 +14,8 @@ interface ExecutableCellView extends EditorCellView {
   clearExecution: () => void;
 
   outputArea: BaseOutputArea;
+
+  noEditorAreaHeight: number;
 }
 
 export const ExecutableCellView = {
@@ -40,7 +42,9 @@ export abstract class LibroExecutableCellView
 {
   declare model: CellModel & ExecutableCellModel;
 
-  declare outputArea: BaseOutputArea;
+  outputArea: BaseOutputArea;
+
+  declare noEditorAreaHeight: number;
 
   constructor(
     @inject(ViewOption) options: CellViewOptions,
@@ -54,6 +58,7 @@ export abstract class LibroExecutableCellView
     //
   };
 
+  // TODO: 性能！
   override hasCellHidden() {
     if (
       !ExecutableCellModel.is(this.model) ||

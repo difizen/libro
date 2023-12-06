@@ -1,56 +1,141 @@
 import { getOrigin, useInject, useObserve, ViewInstance } from '@difizen/mana-app';
-import type { FC } from 'react';
-import { forwardRef, memo } from 'react';
+import classNames from 'classnames';
+import type { FC, ReactNode } from 'react';
+import { forwardRef, memo, useEffect, useState } from 'react';
 import type { XYCoord } from 'react-dnd';
 import { useDrop } from 'react-dnd';
 
-import { LibroCellService } from '../../cell/index.js';
 import type { CellService } from '../../cell/index.js';
-import { DragAreaKey, isCellView } from '../../libro-protocol.js';
+import { LibroCellService } from '../../cell/index.js';
 import type { CellView, DndContentProps } from '../../libro-protocol.js';
+import { DragAreaKey, isCellView } from '../../libro-protocol.js';
 import type { LibroView } from '../../libro-view.js';
+import { LibroCellsOutputRender } from '../libro-virtualized-render.js';
 
 import type { Dragparams } from './default-dnd-content.js';
+import { VirtualizedManager } from './virtualized-manager.js';
+import './index.less';
 
-const DndContent: FC<DndContentProps> = ({ cell, index, ...props }) => {
+export const DndCellRender: FC<DndContentProps> = memo(function DndCellRender({
+  cell,
+  index,
+  ...props
+}: DndContentProps) {
   const observableCell = useObserve(cell);
   const instance = useInject<LibroView>(ViewInstance);
-  const DndContentRender = instance.dndContentRender;
-  return (
-    <DndContentRender cell={observableCell} key={cell.id} index={index} {...props} />
-  );
-};
-const DndContentMemo = memo(DndContent);
+  const DndCellContainer = instance.dndContentRender;
 
-export const DndCellContent = forwardRef<HTMLDivElement, { libroView: LibroView }>(
-  function DndCellContent({ libroView }, ref) {
-    const LoadingRender = getOrigin(libroView.loadingRender);
-    const cells = libroView.model.getCells().reduce<CellView[]>(function (a, b) {
-      if (a.indexOf(b) < 0) {
-        a.push(b);
-      }
-      return a;
-    }, []);
-    return (
-      <div className="libro-dnd-cells-container" ref={ref}>
-        {!libroView.model.isInitialized && <LoadingRender />}
-        {libroView.model.isInitialized &&
-          cells
-            .filter((cell) => cell.collapsedHidden === false)
-            .map((cell, index) => {
-              return <DndContentMemo cell={cell} key={cell.id} index={index} />;
-            })}
-      </div>
-    );
-  },
+  return (
+    <DndCellContainer cell={observableCell} key={cell.id} index={index} {...props} />
+  );
+});
+
+// 定义一个函数用于渲染非虚拟列表时的单元格
+const renderNonVirtualListCells = (cells: CellView[]) => (
+  <div style={{ height: '100%', overflow: 'visible' }}>
+    {cells
+      .filter((cell) => !cell.collapsedHidden)
+      .map((cell, index) => (
+        <DndCellRender cell={cell} key={cell.id} index={index} />
+      ))}
+  </div>
 );
 
-export function DndList({
+export const DndCellsRender = forwardRef<
+  HTMLDivElement,
+  { libroView: LibroView; addCellButtons: ReactNode }
+>(function DndCellsRender(
+  { libroView, addCellButtons }: { libroView: LibroView; addCellButtons: ReactNode },
+  ref,
+) {
+  const LoadingRender = getOrigin(libroView.loadingRender);
+  const virtualizedManager = useInject(VirtualizedManager);
+
+  const cells = libroView.model.getCells().reduce<CellView[]>(function (a, b) {
+    if (a.indexOf(b) < 0) {
+      a.push(b);
+    }
+    return a;
+  }, []);
+
+  const [isVirtualList, setIsVirtualList] = useState<boolean>(false);
+  const [isJudging, setIsJudging] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!libroView.model.isInitialized) {
+      return;
+    }
+
+    let size = undefined;
+    // TODO: 类型处理
+    const model = libroView.model as any;
+    if (model.currentFileContents && model.currentFileContents.size) {
+      size = parseFloat((model.currentFileContents.size / 1048576).toFixed(3)); // 单位MB
+    }
+
+    setIsJudging(true);
+    virtualizedManager
+      .openVirtualized(cells.length, size)
+      .then((willOpen) => {
+        setIsVirtualList(willOpen);
+        return;
+      })
+      .catch(() => {
+        setIsVirtualList(false);
+      })
+      .finally(() => {
+        setIsJudging(false);
+      })
+      .catch((e) => {
+        //
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [virtualizedManager, libroView.model.isInitialized]);
+
+  const isInitialized = libroView.model.isInitialized;
+  const isLoading = !isInitialized || isJudging;
+  const shouldRenderCells = isInitialized && !isJudging;
+
+  return (
+    <>
+      <div
+        className={classNames(
+          'libro-dnd-cells-container',
+          isVirtualList && 'virtual_list_container',
+        )}
+        ref={ref}
+      >
+        {isLoading && <LoadingRender />}
+        <>
+          {shouldRenderCells && (
+            <>
+              {isVirtualList ? (
+                <LibroCellsOutputRender
+                  cells={cells}
+                  libroView={libroView}
+                  addCellButtons={addCellButtons}
+                />
+              ) : (
+                renderNonVirtualListCells(cells)
+              )}
+            </>
+          )}
+        </>
+      </div>
+      {shouldRenderCells && !isVirtualList && addCellButtons}
+    </>
+  );
+});
+
+export const DndList = forwardRef<
+  HTMLDivElement,
+  { libroView: LibroView; children: ReactNode }
+>(function DndList({
   libroView,
   children,
 }: {
   libroView: LibroView;
-  children: any;
+  children: ReactNode;
 }) {
   const cellService = useInject<CellService>(LibroCellService);
 
@@ -67,9 +152,10 @@ export function DndList({
           item.cell.parent.id,
         )
         .then((view) => {
-          return view.dispose();
+          view.dispose();
+          return;
         })
-        .catch(() => {
+        .catch((e) => {
           //
         });
       if (isCellView(item.cell)) {
@@ -112,8 +198,7 @@ export function DndList({
 
   return (
     <div className="libro-dnd-list-container" ref={drop}>
-      <DndCellContent libroView={libroView} />
-      {children}
+      <DndCellsRender libroView={libroView} addCellButtons={children} />
     </div>
   );
-}
+});

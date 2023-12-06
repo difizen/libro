@@ -13,27 +13,18 @@ import { LibroViewTracker } from './libro-view-tracker.js';
 
 @singleton({ contrib: NotebookService })
 export class LibroService implements NotebookService {
-  protected libroModelFactory: ModelFactory;
-  protected viewManager: ViewManager;
-  protected libroViewTracker: LibroViewTracker;
-
+  @inject(ModelFactory) protected libroModelFactory: ModelFactory;
+  @inject(ViewManager) protected viewManager: ViewManager;
+  @inject(LibroViewTracker) protected libroViewTracker: LibroViewTracker;
   protected themeService: ThemeService;
   @prop()
   themeMode: string;
-  constructor(
-    @inject(ThemeService) themeService: ThemeService,
-    @inject(ModelFactory) libroModelFactory: ModelFactory,
-    @inject(ViewManager) viewManager: ViewManager,
-    @inject(LibroViewTracker) libroViewTracker: LibroViewTracker,
-  ) {
+  constructor(@inject(ThemeService) themeService: ThemeService) {
     this.themeService = themeService;
     this.themeMode = this.themeService.getCurrentTheme().type;
     this.themeService.onDidColorThemeChange((e) => {
       this.themeMode = e.newTheme.type;
     });
-    this.libroModelFactory = libroModelFactory;
-    this.viewManager = viewManager;
-    this.libroViewTracker = libroViewTracker;
   }
 
   @prop() protected _active?: NotebookView;

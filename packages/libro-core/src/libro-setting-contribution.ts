@@ -1,19 +1,18 @@
-import { ConfigurationContribution } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
+import { singleton, ConfigurationContribution } from '@difizen/mana-app';
 
 import {
+  AutoInsertWhenNoCell,
   CellSideToolbarVisible,
   CellTopToolbarSetting,
-  HeaderToolbarVisible,
-  AutoInsertWhenNoCell,
+  CollapserClickActive,
   EnterEditModeWhenAddCell,
-  CollapserActive,
+  HeaderToolbarVisible,
   MultiSelectionWhenShiftClick,
   RightContentFixed,
-} from './libro-configuration.js';
+} from './libro-setting.js';
 
 @singleton({ contrib: ConfigurationContribution })
-export class LibroConfigurationContribution implements ConfigurationContribution {
+export class LibroSettingContribution implements ConfigurationContribution {
   registerConfigurations() {
     return [
       HeaderToolbarVisible,
@@ -21,7 +20,7 @@ export class LibroConfigurationContribution implements ConfigurationContribution
       CellSideToolbarVisible,
       AutoInsertWhenNoCell,
       EnterEditModeWhenAddCell,
-      CollapserActive,
+      CollapserClickActive,
       MultiSelectionWhenShiftClick,
       RightContentFixed,
     ];

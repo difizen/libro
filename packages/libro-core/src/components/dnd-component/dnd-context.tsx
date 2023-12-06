@@ -1,5 +1,5 @@
-import { ViewInstance } from '@difizen/mana-app';
 import { getOrigin, useInject } from '@difizen/mana-app';
+import { ViewInstance } from '@difizen/mana-app';
 import type { FC } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';

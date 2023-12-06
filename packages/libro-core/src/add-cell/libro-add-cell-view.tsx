@@ -1,16 +1,23 @@
 import { DisplayWrapComponent } from '@difizen/libro-common';
-import { prop, useInject } from '@difizen/mana-app';
-import { BaseView, CommandRegistry, view, ViewInstance } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+import {
+  inject,
+  transient,
+  prop,
+  useInject,
+  BaseView,
+  CommandRegistry,
+  view,
+  ViewInstance,
+} from '@difizen/mana-app';
 import { Button } from 'antd';
-import React from 'react';
-import './index.less';
+import { forwardRef } from 'react';
 
 import { CellService } from '../cell/index.js';
 import type { CellMeta } from '../cell/index.js';
 import { NotebookCommands } from '../command/index.js';
 import type { LibroView } from '../libro-view.js';
 import { PlusOutlined } from '../material-from-designer.js';
+import './index.less';
 
 type AddType = {
   name: string;
@@ -56,7 +63,7 @@ export const LibroAddCell: React.FC = () => {
   );
 };
 
-export const LibroWrappedAddCell = React.forwardRef(function LibroWrappedAddCell() {
+export const LibroWrappedAddCell = forwardRef(function LibroWrappedAddCell() {
   const instance = useInject<LibroAddCellView>(ViewInstance);
   return (
     <DisplayWrapComponent mode={instance.parent?.model.readOnly}>

@@ -5,11 +5,11 @@ import { useCallback } from 'react';
 import { NotebookCommands } from '../command/index.js';
 import type { LibroView } from '../libro-view.js';
 
-export const ShutdownModalComponent: React.FC<ModalItemProps<LibroView>> = ({
+export function ShutdownModalComponent({
   visible,
   close,
   data,
-}: ModalItemProps<LibroView>) => {
+}: ModalItemProps<LibroView>) {
   const handleShutdown = useCallback(() => {
     data?.closeAndShutdown();
     close();
@@ -29,7 +29,7 @@ export const ShutdownModalComponent: React.FC<ModalItemProps<LibroView>> = ({
       Do you want to shutdown the current kernel?.
     </Modal>
   );
-};
+}
 
 export const ShutdownModal: ModalItem<LibroView> = {
   id: NotebookCommands['CloseAndShutdown'].id,

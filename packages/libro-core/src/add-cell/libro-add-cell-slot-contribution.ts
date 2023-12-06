@@ -9,10 +9,7 @@ import { LibroAddCellView } from './libro-add-cell-view.js';
 
 @singleton({ contrib: LibroExtensionSlotContribution })
 export class LibroAddCellSlotContribution implements LibroExtensionSlotContribution {
-  protected viewManager: ViewManager;
-  constructor(@inject(ViewManager) viewManager: ViewManager) {
-    this.viewManager = viewManager;
-  }
+  @inject(ViewManager) viewManager: ViewManager;
   protected viewMap: Map<string, LibroAddCellView> = new Map();
 
   public readonly slot: LibroSlot = 'list';

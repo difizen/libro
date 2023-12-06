@@ -4,7 +4,6 @@ import {
   CopyOutlined,
   ScissorOutlined,
   SnippetsOutlined,
-  PauseCircleOutlined,
   EyeOutlined,
   EyeInvisibleOutlined,
   // ReloadOutlined,
@@ -22,6 +21,7 @@ import {
   MoveDownOutlined,
   DeleteOutlined,
   MoreOutlined,
+  PauseCircleOutlined,
 } from '../material-from-designer.js';
 
 export const NotebookCommands: Record<
@@ -107,7 +107,7 @@ export const NotebookCommands: Record<
   },
   CloseAndShutdown: {
     id: 'notebook:close-and-shutdown',
-    label: `Close editor and shut down kernel`,
+    label: `Close Editor and Shut Down Kernel`,
     icon: PoweroffOutlined,
   },
   // TODO: 确定命令含义
@@ -122,6 +122,16 @@ export const NotebookCommands: Record<
     keybind: 'C',
     icon: CopyOutlined,
     when: 'commandMode',
+  },
+  // TODO: 确定命令含义
+  CopyToClipboard: {
+    id: 'notebook:copy-to-clipboard',
+    label: `Copy Output to Clipboard`,
+  },
+  // TODO: 确定命令含义
+  CreateOutputView: {
+    id: 'notebook:create-output-view',
+    label: `Create New View for Cell Output`,
   },
   CutCell: {
     id: 'notebook:cut-cell',
@@ -152,6 +162,10 @@ export const NotebookCommands: Record<
   EnableOutputScrolling: {
     id: 'notebook:enable-output-scrolling',
     label: `Enable Scrolling for Outputs`,
+  },
+  EnableOrDisableAllOutputScrolling: {
+    id: 'notebook:enable-or-disable-all-output-scrolling',
+    label: `Enable Or Disable Scrolling for all Outputs`,
   },
   EnterCommandMode: {
     id: 'notebook:enter-command-mode',
@@ -330,7 +344,6 @@ export const NotebookCommands: Record<
     icon: SnippetsOutlined,
     when: 'commandMode',
   },
-  // TODO: register keybind
   Redo: {
     id: 'notebook:redo',
     label: `Redo`,

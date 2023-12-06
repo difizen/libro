@@ -43,10 +43,21 @@ export type ModelFactory<T = NotebookOption> = (options: T) => NotebookModel;
 
 export const NotebookModel = Symbol('NotebookModel');
 
+export enum EditorStatus {
+  NOTLOADED = 'not loaded',
+  LOADING = 'loading',
+  LOADED = 'loaded',
+}
+
 export type Options = {
   id?: string;
   [key: string]: any;
 };
+
+export interface ScrollParams {
+  cellIndex: number;
+  lineIndex?: number;
+}
 
 export type NotebookModel = BaseNotebookModel & DndListModel;
 export interface BaseNotebookModel {
@@ -59,8 +70,8 @@ export interface BaseNotebookModel {
    */
   dirty: boolean;
   executeCount: number;
-  lastClipboardInteraction?: string;
-  clipboard?: CellView | CellView[];
+  lastClipboardInteraction?: string | undefined;
+  clipboard?: undefined | CellView | CellView[];
   active?: CellView | undefined;
   activeIndex: number;
   dndAreaNullEnable: boolean;
@@ -84,6 +95,10 @@ export interface BaseNotebookModel {
   onCommandModeChanged: Event<boolean>;
 
   onContentChanged: Event<boolean>;
+
+  onSourceChanged: Event<boolean>;
+
+  onCellViewChanged: Event<CellViewChange>;
 
   getCells: () => CellView[];
 
@@ -110,6 +125,8 @@ export interface BaseNotebookModel {
   canUndo?: boolean;
 
   canRedo?: boolean;
+
+  mouseMode?: MouseMode;
 
   /**
    * The metadata associated with the notebook.
@@ -154,6 +171,8 @@ export interface BaseNotebookModel {
 
   onChange?: () => void;
 
+  onSourceChange?: () => void;
+
   interrupt?: () => void;
 
   canRun?: () => boolean;
@@ -175,6 +194,12 @@ export interface BaseNotebookModel {
   setCustomKey: (key: string, val: any) => void;
 
   libroViewClass: string;
+
+  onScrollToCellView: Event<ScrollParams>;
+
+  scrollToCellView: (params: ScrollParams) => void;
+
+  disposeScrollToCellViewEmitter: () => void;
 }
 
 export const notebookViewFactoryId = 'notebook-view-factory';
@@ -207,6 +232,20 @@ export interface CellView extends View {
   toJSON: () => ICell;
 
   toJSONWithoutId: () => ICell;
+
+  editorAreaHeight?: number;
+
+  cellViewTopPos?: number;
+
+  noEditorAreaHeight: number;
+
+  editorStatus?: EditorStatus;
+
+  calcEditorAreaHeight?: () => number;
+
+  calcEditorOffset?: () => number;
+
+  renderEditorIntoVirtualized?: boolean;
 }
 export function isCellView(view: View): view is CellView {
   return View.is(view) && 'model' in view;
@@ -232,11 +271,18 @@ export interface CellViewOptions {
   [key: string]: any;
 }
 
+export interface CellViewChange {
+  insert?: { cells: CellView[]; index: number };
+  delete?: { index: number; number: number };
+}
+
 export interface CellModel extends IModel, Disposable {
   /**
    * A unique identifier for the cell.
    */
   id: string;
+
+  source: string;
 
   /**
    * The type of the cell.
@@ -287,10 +333,9 @@ export const DragAreaKey = Symbol('DragAreaKey');
 
 export type MouseMode = 'multipleSelection' | 'mouseDown' | 'drag';
 export interface DndListModel {
-  mouseMode?: MouseMode;
   active?: CellView | undefined;
   hover?: CellView | undefined;
-  selectCell: (cell: CellView) => void;
+  selectCell: (cell?: CellView) => void;
   addCell: (cell: CellView, position?: number, mode?: string) => void;
   insertCells: (cells: CellView[], position?: number, mode?: string) => void;
   invertCell: (toAddcell: CellView, position: number) => void;

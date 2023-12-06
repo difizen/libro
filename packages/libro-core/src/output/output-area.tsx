@@ -1,7 +1,6 @@
 import type { IOutput } from '@difizen/libro-common';
 import { isError, isStream } from '@difizen/libro-common';
-import type { ViewComponent } from '@difizen/mana-app';
-import type { Contribution } from '@difizen/mana-app';
+import type { ViewComponent, Contribution } from '@difizen/mana-app';
 import {
   ViewOption,
   getOrigin,
@@ -12,10 +11,8 @@ import {
   view,
   ViewInstance,
 } from '@difizen/mana-app';
-import { Emitter } from '@difizen/mana-app';
-import { contrib, inject, transient } from '@difizen/mana-app';
-import { prop } from '@difizen/mana-app';
-import React, { useEffect } from 'react';
+import { Emitter, prop, contrib, inject, transient } from '@difizen/mana-app';
+import { useEffect, forwardRef } from 'react';
 import { v4 } from 'uuid';
 
 import { ExecutableCellView } from '../cell/index.js';
@@ -28,16 +25,24 @@ import type {
 } from './output-protocol.js';
 import { OutputContribution } from './output-protocol.js';
 
-const LibroOutputAreaRender = React.forwardRef<HTMLDivElement>(
-  function LibroOutputAreaRender(_props, ref) {
+const LibroOutputAreaRender = forwardRef<HTMLDivElement>(
+  function LibroOutputAreaRender(props, ref) {
     const outputArea = useInject<LibroOutputArea>(ViewInstance);
+
+    // const cellModel = outputArea.cell.model;
+    // const executing = ExecutableCellModel.is(cellModel) && cellModel.executing;
 
     useEffect(() => {
       outputArea.onUpdateEmitter.fire();
     }, [outputArea.onUpdateEmitter, outputArea.outputs]);
 
     return (
-      <div className="libro-output-area" ref={ref}>
+      <div
+        className="libro-output-area"
+        ref={ref}
+        //设置最小高度，用于优化长文本输出再次执行时的页面的滚动控制
+        // style={{ minHeight: `${executing ? outputArea.lastOutputContainerHeight + 'px' : 'unset'}` }}
+      >
         {outputArea.outputs.map((output) => {
           return <ViewRender view={output} key={output.id} />;
         })}
@@ -50,12 +55,13 @@ const LibroOutputAreaRender = React.forwardRef<HTMLDivElement>(
 @view('libro-output-area')
 export class LibroOutputArea extends BaseView implements BaseOutputArea {
   override view: ViewComponent = LibroOutputAreaRender;
+  @contrib(OutputContribution)
+  outputProvider: Contribution.Provider<OutputContribution>;
   cell: CellView;
   @prop()
   outputs: BaseOutputView[] = [];
 
-  @contrib(OutputContribution)
-  outputProvider: Contribution.Provider<OutputContribution>;
+  // lastOutputContainerHeight?: number;
 
   constructor(@inject(ViewOption) option: IOutputAreaOption) {
     super();
@@ -187,7 +193,7 @@ export class LibroOutputArea extends BaseView implements BaseOutputArea {
    * messages of the same type.
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected shouldCombine(_options: {
+  protected shouldCombine(options: {
     output: IOutput;
     lastModel: BaseOutputView;
   }): boolean {

@@ -13,9 +13,9 @@ export class LirboContextKey {
   protected toDisposeOnActiveChanged?: Disposable;
   protected commandModeEnabled = true;
   protected isCommandMode = false;
-  active!: IContextKey<boolean>;
-  focus!: IContextKey<boolean>;
-  commandMode!: IContextKey<boolean>;
+  active: IContextKey<boolean>;
+  focus: IContextKey<boolean>;
+  commandMode: IContextKey<boolean>;
 
   constructor(
     @inject(ContextKeyService) contextKeyService: ContextKeyService,

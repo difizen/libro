@@ -1,44 +1,49 @@
 import { ToTopOutlined } from '@ant-design/icons';
 import { concatMultilineString } from '@difizen/libro-common';
-import { ConfigurationService, useConfigurationValue } from '@difizen/mana-app';
-import { getOrigin, prop, watch } from '@difizen/mana-app';
-import { Deferred, Disposable, DisposableCollection, Emitter } from '@difizen/mana-app';
 import {
-  Slot,
-  ViewManager,
+  equals,
+  useInject,
+  inject,
+  transient,
   BaseView,
+  Slot,
   view,
   ViewInstance,
+  ViewManager,
   ViewOption,
+  Deferred,
+  Disposable,
+  DisposableCollection,
+  Emitter,
+  getOrigin,
+  prop,
+  watch,
+  ConfigurationService,
+  useConfigurationValue,
 } from '@difizen/mana-app';
-import { inject, transient, useInject, equals } from '@difizen/mana-app';
-import { Spin, Button, FloatButton } from 'antd';
+import { BackTop, Button, Spin } from 'antd';
 import type { FC, ForwardRefExoticComponent, RefAttributes } from 'react';
-import { useEffect, useRef, useCallback, memo, forwardRef } from 'react';
+import { forwardRef, memo, useCallback, useEffect, useRef } from 'react';
 import { v4 } from 'uuid';
 
 import {
   CellService,
+  EditorCellView,
   ExecutableCellModel,
   ExecutableCellView,
-  EditorCellView,
 } from './cell/index.js';
+import type { LibroCellModel } from './cell/libro-cell-model.js';
 import { CollapseServiceFactory } from './collapse-service.js';
 import type { CollapseService } from './collapse-service.js';
 import {
   CustomDragLayer,
-  DefaultDndContent,
+  DndCellContainer,
   DndCellItemRender,
   DndContext,
   DndList,
+  VirtualizedManager,
 } from './components/index.js';
 import { LibroViewHeader } from './components/libro-view-header.js';
-import {
-  AutoInsertWhenNoCell,
-  EnterEditModeWhenAddCell,
-  HeaderToolbarVisible,
-  RightContentFixed,
-} from './configuration/libro-configuration.js';
 import { LirboContextKey } from './libro-context-key.js';
 import { LibroModel } from './libro-model.js';
 import { NotebookService, notebookViewFactoryId } from './libro-protocol.js';
@@ -52,11 +57,18 @@ import type {
   NotebookOption,
 } from './libro-protocol.js';
 import { LibroService } from './libro-service.js';
+import {
+  AutoInsertWhenNoCell,
+  EnterEditModeWhenAddCell,
+  HeaderToolbarVisible,
+  RightContentFixed,
+} from './libro-setting.js';
 import { LibroSlotManager, LibroSlotView } from './slot/index.js';
 import './index.less';
 
 export const LibroContentComponent = memo(function LibroContentComponent() {
   const libroSlotManager = useInject(LibroSlotManager);
+  const ref = useRef<HTMLDivElement | null>(null);
   const libroViewTopRef = useRef<HTMLDivElement>(null);
   const libroViewRightContentRef = useRef<HTMLDivElement>(null);
   const libroViewLeftContentRef = useRef<HTMLDivElement>(null);
@@ -67,6 +79,7 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
   const [rightContentFixed] = useConfigurationValue(RightContentFixed);
 
   const handleScroll = useCallback(() => {
+    instance.cellScrollEmitter.fire();
     const cellRightToolbar = instance.container?.current?.getElementsByClassName(
       'libro-cell-right-toolbar',
     )[instance.model.activeIndex] as HTMLDivElement;
@@ -133,7 +146,7 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
         <div className="libro-view-content-left" ref={libroViewLeftContentRef}>
           <DndContext>
             <CustomDragLayer />
-            <DndList libroView={instance}>
+            <DndList libroView={instance} ref={ref}>
               <Slot
                 name={libroSlotManager.getSlotName(instance, 'list')}
                 slotView={LibroSlotView}
@@ -148,11 +161,11 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
             slotView={LibroSlotView}
           />
         </div>
-        <FloatButton.BackTop target={() => libroViewContentRef.current || document}>
+        <BackTop target={() => libroViewContentRef.current || document}>
           <div className="libro-totop-button">
             <Button shape="circle" icon={<ToTopOutlined />} />
           </div>
-        </FloatButton.BackTop>
+        </BackTop>
         <Slot
           name={libroSlotManager.getSlotName(instance, 'content')}
           slotView={LibroSlotView}
@@ -166,74 +179,85 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
   );
 });
 
-export const LibroRender = forwardRef<HTMLDivElement>(
-  function LibroRender(_props, ref) {
-    const instance = useInject<LibroView>(ViewInstance);
-    const libroService = useInject(LibroService);
+export const LibroRender = forwardRef<HTMLDivElement>(function LibroRender(props, ref) {
+  const instance = useInject<LibroView>(ViewInstance);
+  const libroService = useInject(LibroService);
 
-    const handleMouseDown = useCallback(
-      (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.defaultPrevented) {
-          return;
-        }
-        if (!instance.model.commandMode) {
-          instance.enterCommandMode(true);
-        }
-      },
-      [instance],
-    );
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (e.defaultPrevented) {
+        return;
+      }
+      if (!instance.model.commandMode) {
+        instance.enterCommandMode(true);
+      }
+    },
+    [instance],
+  );
 
-    const handFocus = useCallback(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      (_e: React.FocusEvent<HTMLDivElement>) => {
-        if (!equals(libroService.active, instance)) {
-          libroService.active = instance;
-        }
-        if (!equals(libroService.focus, instance)) {
-          libroService.focus = instance;
-        }
-      },
-      [instance, libroService],
-    );
+  const handFocus = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    (e: React.FocusEvent<HTMLDivElement>) => {
+      if (!equals(libroService.active, instance)) {
+        libroService.active = instance;
+      }
+      if (!equals(libroService.focus, instance)) {
+        libroService.focus = instance;
+      }
+    },
+    [instance, libroService],
+  );
 
-    const handBlur = useCallback(
-      (e: React.FocusEvent<HTMLDivElement>) => {
-        if (typeof ref !== 'function' && !ref?.current?.contains(e.relatedTarget)) {
-          instance.enterCommandMode(false);
-          libroService.focus = undefined;
-          instance.onBlurEmitter.fire('');
+  const handBlur = useCallback(
+    (e: React.FocusEvent<HTMLDivElement>) => {
+      if (typeof ref === 'function') {
+        return;
+      }
+      if (ref?.current?.contains(e.relatedTarget)) {
+        const dndDom = ref?.current?.getElementsByClassName(
+          'libro-dnd-cells-container',
+        )[0];
+        if (!dndDom?.contains(e.relatedTarget) && instance.model.readOnly) {
+          instance.selectCell(undefined);
         }
-      },
-      [instance, libroService, ref],
-    );
+      } else {
+        instance.enterCommandMode(false);
+        libroService.focus = undefined;
+        instance.onBlurEmitter.fire('');
+        if (instance.model.readOnly) {
+          instance.selectCell(undefined);
+        }
+      }
+    },
+    [instance, libroService, ref],
+  );
 
-    return (
-      <div
-        className={`${instance.model.libroViewClass} libro-view`}
-        onMouseDown={handleMouseDown}
-        ref={ref}
-        tabIndex={0}
-        onFocus={handFocus}
-        onBlur={handBlur}
-      >
-        <LibroContentComponent />
-      </div>
-    );
-  },
-);
+  return (
+    <div
+      className={`${instance.model.libroViewClass} libro-view`}
+      onMouseDown={handleMouseDown}
+      ref={ref}
+      tabIndex={0}
+      onFocus={handFocus}
+      onBlur={handBlur}
+    >
+      <LibroContentComponent />
+    </div>
+  );
+});
 
 @transient()
 @view(notebookViewFactoryId)
 export class LibroView extends BaseView implements NotebookView {
   protected override toDispose = new DisposableCollection();
   model: NotebookModel;
-  headerRender: FC = LibroViewHeader;
-  loadingRender: FC = () => (
+  headerRender: FC<any> = LibroViewHeader;
+  loadingRender: FC<any> = () => (
     <div className="libro-loading">
       <Spin />
     </div>
   );
-  dndContentRender: FC<DndContentProps> = DefaultDndContent;
+  dndContentRender: FC<DndContentProps> = DndCellContainer;
   dndItemRender: ForwardRefExoticComponent<
     DndItemProps & RefAttributes<HTMLDivElement>
   > = DndCellItemRender;
@@ -252,14 +276,18 @@ export class LibroView extends BaseView implements NotebookView {
   @inject(LibroSlotManager) libroSlotManager: LibroSlotManager;
   @inject(LirboContextKey) contextKey: LirboContextKey;
 
-  @inject(ViewManager) protected viewManager: ViewManager;
-  @inject(ConfigurationService) protected configurationService: ConfigurationService;
+  protected viewManager: ViewManager;
+  protected configurationService: ConfigurationService;
   protected notebookService: NotebookService;
   protected collapseService: CollapseService;
+  protected virtualizedManager: VirtualizedManager;
   isDragging = false;
 
   @prop()
   collapserVisible = false;
+
+  @prop()
+  outputsScroll = false;
 
   get hasModal() {
     return this.model.cells.some((item) => item.hasModal);
@@ -278,6 +306,11 @@ export class LibroView extends BaseView implements NotebookView {
     return this.runCellEmitter.event;
   }
 
+  cellScrollEmitter = new Emitter<void>();
+  get onCellScroll() {
+    return this.cellScrollEmitter.event;
+  }
+
   protected initializedDefer = new Deferred<void>();
 
   get initialized() {
@@ -285,16 +318,22 @@ export class LibroView extends BaseView implements NotebookView {
   }
 
   constructor(
-    @inject(ViewOption) options: NotebookOption,
-    @inject(CollapseServiceFactory) collapseServiceFactory: CollapseServiceFactory,
+    @inject(ViewManager) viewManager: ViewManager,
     @inject(NotebookService) notebookService: NotebookService,
+    @inject(ViewOption) options: NotebookOption,
+    @inject(ConfigurationService) configurationService: ConfigurationService,
+    @inject(CollapseServiceFactory) collapseServiceFactory: CollapseServiceFactory,
+    @inject(VirtualizedManager) virtualizedManager: VirtualizedManager,
   ) {
     super();
     if (options.id) {
       this.id = options.id;
     }
+    this.virtualizedManager = virtualizedManager;
     this.notebookService = notebookService;
     this.model = this.notebookService.getOrCreateModel(options);
+    this.viewManager = viewManager;
+    this.configurationService = configurationService;
     this.collapseService = collapseServiceFactory({ view: this });
     this.collapserVisible = this.collapseService.collapserVisible;
 
@@ -331,7 +370,7 @@ export class LibroView extends BaseView implements NotebookView {
         }
         return;
       })
-      .catch(() => {
+      .catch((e) => {
         //
       });
     await this.insertCells(options);
@@ -350,12 +389,13 @@ export class LibroView extends BaseView implements NotebookView {
           }
           return;
         })
-        .catch(() => {
+        .catch((e) => {
           //
         });
       this.toDispose.push(
         watch(this.model, 'cells', () => {
           this.model.onChange?.();
+          this.model.onSourceChange?.();
         }),
       );
       this.initializedDefer.resolve();
@@ -367,6 +407,13 @@ export class LibroView extends BaseView implements NotebookView {
   override onViewMount = () => {
     this.libroService.active = this;
     this.libroSlotManager.setup(this);
+
+    // this.libroService.libroPerformanceStatistics.setRenderEnd(new Date());
+
+    // console.log(
+    //   '[performance] render Time: ',
+    //   this.libroService.libroPerformanceStatistics.getRenderTime(),
+    // );
   };
 
   override onViewUnmount = () => {
@@ -411,7 +458,7 @@ export class LibroView extends BaseView implements NotebookView {
     this.model.insertCells(cellView, position);
   };
 
-  selectCell = (cell: CellView) => {
+  selectCell = (cell?: CellView) => {
     this.model.active = cell;
     this.model.selectCell(cell);
   };
@@ -428,6 +475,10 @@ export class LibroView extends BaseView implements NotebookView {
 
   get activeCell(): CellView | undefined {
     return this.model.active;
+  }
+
+  get activeCellIndex(): number {
+    return this.model.activeIndex;
   }
 
   findCellIndex = (cell: CellView) => {
@@ -465,7 +516,7 @@ export class LibroView extends BaseView implements NotebookView {
           }
           return;
         })
-        .catch(() => {
+        .catch((e) => {
           //
         });
     } else {
@@ -486,7 +537,7 @@ export class LibroView extends BaseView implements NotebookView {
           }
           return;
         })
-        .catch(() => {
+        .catch((e) => {
           //
         });
     }
@@ -502,7 +553,7 @@ export class LibroView extends BaseView implements NotebookView {
       return false;
     }
 
-    return Promise.all(
+    Promise.all(
       cells.map((cell) => {
         if (ExecutableCellModel.is(cell.model)) {
           return this.executeCellRun(cell);
@@ -565,14 +616,11 @@ export class LibroView extends BaseView implements NotebookView {
             this.enterEditMode();
             return;
           })
-          .catch(() => {
+          .catch((e) => {
             //
           });
       }
       this.runCells(toRunCells);
-      if (this.activeCell) {
-        this.model.scrollToView(this.activeCell);
-      }
     } else {
       const selectIndex = this.findCellIndex(cell);
       if (selectIndex >= 0 && selectIndex < this.model.cells.length - 1) {
@@ -587,14 +635,24 @@ export class LibroView extends BaseView implements NotebookView {
             this.enterEditMode();
             return;
           })
-          .catch(() => {
+          .catch((e) => {
             //
           });
       }
       this.runCells([cell]);
-      if (this.activeCell) {
-        this.model.scrollToView(this.activeCell);
-      }
+    }
+    if (this.virtualizedManager.isVirtualized) {
+      setTimeout(() => {
+        if (this.activeCell) {
+          this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
+        }
+      });
+    } else {
+      setTimeout(() => {
+        if (this.activeCell) {
+          this.model.scrollToView(this.activeCell);
+        }
+      });
     }
   };
 
@@ -711,10 +769,7 @@ export class LibroView extends BaseView implements NotebookView {
       return equals(item, cell);
     });
     const pasteCells = getOrigin(this.model.clipboard);
-    if (!this.model.lastClipboardInteraction) {
-      return;
-    }
-    if (!pasteCells) {
+    if (!this.model.lastClipboardInteraction || !pasteCells) {
       return;
     }
     if (this.model.lastClipboardInteraction === 'copy') {
@@ -748,10 +803,7 @@ export class LibroView extends BaseView implements NotebookView {
       return equals(item, cell);
     });
     const pasteCells = getOrigin(this.model.clipboard);
-    if (!this.model.lastClipboardInteraction) {
-      return;
-    }
-    if (!pasteCells) {
+    if (!this.model.lastClipboardInteraction || !pasteCells) {
       return;
     }
     if (this.model.lastClipboardInteraction === 'copy') {
@@ -787,15 +839,31 @@ export class LibroView extends BaseView implements NotebookView {
     if (this.model.selections.length !== 0 && this.isSelected(cell)) {
       for (const selectedCell of this.model.selections) {
         const cellOptions: CellOptions = {
-          cell: { cell_type: type, source: selectedCell.toJSON().source, metadata: {} },
+          cell: {
+            cell_type: type,
+            source: selectedCell.model.source,
+            metadata: {
+              ...selectedCell.model.metadata,
+              libroFormatter: (selectedCell.model as LibroCellModel).libroFormatType,
+            },
+          },
         };
         const cellView = await this.getCellViewByOption(cellOptions);
         this.model.invertCell(cellView, cellIndex);
       }
     } else {
       const cellOptions: CellOptions = {
-        cell: { cell_type: type, source: cell.toJSON().source, metadata: {} },
+        cell: {
+          cell_type: type,
+          source: cell.model.source,
+          metadata: {
+            ...cell.model.metadata,
+            libroFormatter: (cell.model as LibroCellModel).libroFormatType,
+            libroCellType: type,
+          },
+        },
       };
+
       const cellView = await this.getCellViewByOption(cellOptions);
       this.model.invertCell(cellView, cellIndex);
     }
@@ -809,21 +877,27 @@ export class LibroView extends BaseView implements NotebookView {
           ExecutableCellModel.is(selectedCell.model)
         ) {
           selectedCell.clearExecution();
+          selectedCell.model.executing = false;
           selectedCell.model.hasOutputHidden = false;
         }
       }
     } else {
       if (ExecutableCellView.is(cell) && ExecutableCellModel.is(cell.model)) {
         cell.clearExecution();
+        cell.model.executing = false;
         cell.model.hasOutputHidden = false;
       }
     }
   };
 
   clearAllOutputs = () => {
+    if (this.virtualizedManager.isVirtualized) {
+      this.model.scrollToCellView({ cellIndex: 0 });
+    } // 清空所有 cell滚动到最上面
     for (const cell of this.model.cells) {
       if (ExecutableCellView.is(cell) && ExecutableCellModel.is(cell.model)) {
         cell.clearExecution();
+        cell.model.executing = false;
         cell.model.hasOutputHidden = false;
       }
     }
@@ -933,7 +1007,7 @@ export class LibroView extends BaseView implements NotebookView {
    * Whether a cell is selected.
    */
   isSelected(cell: CellView): boolean {
-    if (this.activeCell === cell) {
+    if (equals(this.activeCell, cell)) {
       return true;
     }
     if (this.model.selections.length !== 0) {
@@ -954,7 +1028,11 @@ export class LibroView extends BaseView implements NotebookView {
       if (this.findCellIndex(this.activeCell) > 0) {
         this.extendContiguousSelectionTo(activeIndex - 1);
       }
-      this.model.scrollToView(this.activeCell);
+      if (this.virtualizedManager.isVirtualized) {
+        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
+      } else {
+        this.model.scrollToView(this.activeCell);
+      }
     }
   };
 
@@ -963,7 +1041,11 @@ export class LibroView extends BaseView implements NotebookView {
       if (this.findCellIndex(this.activeCell) > 0) {
         this.extendContiguousSelectionTo(0);
       }
-      this.model.scrollToView(this.activeCell);
+      if (this.virtualizedManager.isVirtualized) {
+        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
+      } else {
+        this.model.scrollToView(this.activeCell);
+      }
     }
   };
 
@@ -977,7 +1059,11 @@ export class LibroView extends BaseView implements NotebookView {
       if (this.findCellIndex(this.activeCell) >= 0) {
         this.extendContiguousSelectionTo(activeIndex + 1);
       }
-      this.model.scrollToView(this.activeCell);
+      if (this.virtualizedManager.isVirtualized) {
+        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
+      } else {
+        this.model.scrollToView(this.activeCell);
+      }
     }
   };
 
@@ -986,7 +1072,11 @@ export class LibroView extends BaseView implements NotebookView {
       if (this.findCellIndex(this.activeCell) > 0) {
         this.extendContiguousSelectionTo(this.model.cells.length - 1);
       }
-      this.model.scrollToView(this.activeCell);
+      if (this.virtualizedManager.isVirtualized) {
+        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
+      } else {
+        this.model.scrollToView(this.activeCell);
+      }
     }
   };
 
@@ -1090,6 +1180,7 @@ export class LibroView extends BaseView implements NotebookView {
   };
 
   disableOutputScrolling = (cell: CellView) => {
+    this.outputsScroll = false;
     if (this.model.selections.length !== 0 && this.isSelected(cell)) {
       for (const selectedCell of this.model.selections) {
         if (ExecutableCellModel.is(selectedCell.model)) {
@@ -1099,6 +1190,24 @@ export class LibroView extends BaseView implements NotebookView {
     } else {
       if (ExecutableCellModel.is(cell.model)) {
         cell.model.hasOutputsScrolled = false;
+      }
+    }
+  };
+
+  disableAllOutputScrolling = () => {
+    this.outputsScroll = false;
+    for (const cell of this.model.cells) {
+      if (ExecutableCellModel.is(cell.model)) {
+        cell.model.hasOutputsScrolled = false;
+      }
+    }
+  };
+
+  enableAllOutputScrolling = () => {
+    this.outputsScroll = true;
+    for (const cell of this.model.cells) {
+      if (ExecutableCellModel.is(cell.model)) {
+        cell.model.hasOutputsScrolled = true;
       }
     }
   };
@@ -1136,7 +1245,11 @@ export class LibroView extends BaseView implements NotebookView {
     if (newSelectedCell) {
       this.model.selectCell(newSelectedCell);
       this.model.selections = [];
-      this.model.scrollToView(newSelectedCell);
+      if (this.virtualizedManager.isVirtualized) {
+        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
+      } else {
+        this.model.scrollToView(newSelectedCell);
+      }
     }
   };
 
@@ -1145,7 +1258,11 @@ export class LibroView extends BaseView implements NotebookView {
     if (newSelectedCell) {
       this.model.selectCell(newSelectedCell);
       this.model.selections = [];
-      this.model.scrollToView(newSelectedCell);
+      if (this.virtualizedManager.isVirtualized) {
+        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
+      } else {
+        this.model.scrollToView(newSelectedCell);
+      }
     }
   };
 
@@ -1254,12 +1371,14 @@ export class LibroView extends BaseView implements NotebookView {
   splitCell = async (cell: CellView) => {
     const index = this.findCellIndex(cell);
     if (EditorCellView.is(cell)) {
-      const selections = cell.getSelections();
+      const selections = cell.editor?.getSelections() ?? [];
       const offsets = [0];
       for (let i = 0; i < selections.length; i++) {
         // append start and end to handle selections
         // cursors will have same start and end
-        const { start, end } = cell.getSelectionsOffsetAt(selections[i]);
+        const select = selections[i];
+        const start = cell.editor?.getOffsetAt(select.start) ?? 0;
+        const end = cell.editor?.getOffsetAt(select.end) ?? 0;
         if (start < end) {
           offsets.push(start);
           offsets.push(end);

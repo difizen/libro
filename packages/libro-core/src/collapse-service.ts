@@ -63,7 +63,7 @@ export class DefaultCollapseService implements CollapseService {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getCollapsibleChildNumber(_cell: CellView) {
+  getCollapsibleChildNumber(cell: CellView) {
     return 0;
   }
 }

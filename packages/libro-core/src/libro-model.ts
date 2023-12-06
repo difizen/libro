@@ -9,30 +9,51 @@ import type {
   ISharedNotebook,
   NotebookChange,
 } from '@difizen/libro-shared-model';
-import { YNotebook, createMutex } from '@difizen/libro-shared-model';
-import { ConfigurationService } from '@difizen/mana-app';
-import { getOrigin } from '@difizen/mana-app';
+import { createMutex, YNotebook } from '@difizen/libro-shared-model';
+import { getOrigin, ConfigurationService } from '@difizen/mana-app';
 import { Emitter } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
 import { prop } from '@difizen/mana-app';
+import { inject, transient } from '@difizen/mana-app';
 import { v4 } from 'uuid';
 
+import { VirtualizedManager } from './components/index.js';
 import { LibroContentService } from './content/index.js';
+import { isCellView, NotebookOption } from './libro-protocol.js';
 import type {
-  NotebookModel,
   CellOptions,
+  CellViewChange,
   DndListModel,
+  NotebookModel,
+  ScrollParams,
   CellView,
   MouseMode,
 } from './libro-protocol.js';
-import { isCellView, NotebookOption } from './libro-protocol.js';
-import { EnterEditModeWhenAddCell } from './configuration/libro-configuration.js';
+import { EnterEditModeWhenAddCell } from './libro-setting.js';
 
 @transient()
 export class LibroModel implements NotebookModel, DndListModel {
   @inject(NotebookOption) options: NotebookOption;
   @inject(LibroContentService) libroContentService: LibroContentService;
+  @inject(VirtualizedManager) protected virtualizedManager: VirtualizedManager;
   @inject(ConfigurationService) configurationService: ConfigurationService;
+
+  protected scrollToCellViewEmitter: Emitter;
+  get onScrollToCellView() {
+    return this.scrollToCellViewEmitter.event;
+  }
+
+  protected cellViewChangeEmitter: Emitter<CellViewChange> = new Emitter();
+  get onCellViewChanged() {
+    return this.cellViewChangeEmitter.event;
+  }
+
+  scrollToCellView = (params: ScrollParams) => {
+    this.scrollToCellViewEmitter.fire(params);
+  };
+
+  disposeScrollToCellViewEmitter() {
+    this.scrollToCellViewEmitter.dispose();
+  }
 
   protected onCommandModeChangedEmitter: Emitter<boolean> = new Emitter();
   get onCommandModeChanged() {
@@ -42,6 +63,11 @@ export class LibroModel implements NotebookModel, DndListModel {
   protected onContentChangedEmitter: Emitter<boolean> = new Emitter();
   get onContentChanged() {
     return this.onContentChangedEmitter.event;
+  }
+
+  protected onSourceChangedEmitter: Emitter<boolean> = new Emitter();
+  get onSourceChanged() {
+    return this.onSourceChangedEmitter.event;
   }
 
   id: string = v4();
@@ -102,7 +128,7 @@ export class LibroModel implements NotebookModel, DndListModel {
   executeCount = 0;
 
   @prop()
-  mouseMode?: MouseMode;
+  mouseMode: MouseMode;
 
   @prop()
   selections: CellView[] = [];
@@ -164,6 +190,7 @@ export class LibroModel implements NotebookModel, DndListModel {
       disableDocumentWideUndoRedo: false,
       cellTypeAdaptor: this.cellTypeAdaptor,
     });
+    this.scrollToCellViewEmitter = new Emitter<ScrollParams>();
     this.sharedModel.changed(this.onSharedModelChanged);
     this.sharedModel.undoChanged((value) => {
       if (value !== this.canUndo) {
@@ -187,8 +214,14 @@ export class LibroModel implements NotebookModel, DndListModel {
         });
         this.insertCellsView(cellViews, currpos);
         currpos += delta.insert.length;
+        this.cellViewChangeEmitter.fire({
+          insert: { index: currpos, cells: cellViews },
+        });
       } else if (delta.delete !== null && delta.delete !== undefined) {
         this.removeRange(currpos, currpos + delta.delete);
+        this.cellViewChangeEmitter.fire({
+          delete: { index: currpos, number: delta.delete },
+        });
       } else if (delta.retain !== null && delta.retain !== undefined) {
         currpos += delta.retain;
       }
@@ -198,9 +231,17 @@ export class LibroModel implements NotebookModel, DndListModel {
       return;
     }
     this.selectCell(this.cells[this.activeIndex]);
-    if (this.cells[this.activeIndex]) {
-      this.scrollToView(this.cells[this.activeIndex]);
+
+    if (this.virtualizedManager.isVirtualized) {
+      if (this.cells[this.activeIndex]) {
+        this.scrollToCellView({ cellIndex: this.activeIndex });
+      }
+    } else {
+      if (this.cells[this.activeIndex]) {
+        this.scrollToView(this.cells[this.activeIndex]);
+      }
     }
+
     this.configurationService
       .get(EnterEditModeWhenAddCell)
       .then((value) => {
@@ -218,12 +259,8 @@ export class LibroModel implements NotebookModel, DndListModel {
       });
   };
 
-  toString = () => {
-    return JSON.stringify(this.toJSON());
-  };
-  fromString = (value: string) => {
-    this.fromJSON(JSON.parse(value));
-  };
+  toString: () => string;
+  fromString: (value: string) => void;
 
   /**
    * Serialize the model to JSON.
@@ -270,6 +307,11 @@ export class LibroModel implements NotebookModel, DndListModel {
     this.onContentChangedEmitter.fire(true);
   }
 
+  onSourceChange() {
+    this.dirty = true;
+    this.onSourceChangedEmitter.fire(true);
+  }
+
   /**
    * override this method to load notebook from server
    * @returns
@@ -279,7 +321,7 @@ export class LibroModel implements NotebookModel, DndListModel {
   }
 
   async saveNotebookContent(): Promise<void> {
-    //
+    return this.libroContentService.saveLibroContent(this.options, this);
   }
 
   async initialize(): Promise<CellOptions[]> {
@@ -352,8 +394,13 @@ export class LibroModel implements NotebookModel, DndListModel {
       if (offsetTop < _scrollTop) {
         target.offsetParent.parentElement.scrollTop = offsetTop;
       } else {
-        target.offsetParent.parentElement.scrollTop =
-          offsetTop + _targetheight - _height + 30; // 加缓冲向上不贴底部
+        //目标cell的高度大于屏幕的高度
+        if (_targetheight >= _height) {
+          target.offsetParent.parentElement.scrollTop = offsetTop - _height / 2;
+        } else {
+          target.offsetParent.parentElement.scrollTop =
+            offsetTop + _targetheight - _height + 30; // 加缓冲向上不贴底部
+        }
       }
     }
   }
@@ -422,7 +469,13 @@ export class LibroModel implements NotebookModel, DndListModel {
 
   protected insertCellsView = (cell: CellView[], position?: number) => {
     if (position === 0) {
-      this.cells.unshift(...cell);
+      // unshift 存在性能问题
+      // this.cells.unshift(...cell);
+
+      const arr = [...this.cells];
+      arr.splice(0, 0, ...cell);
+      this.cells = arr;
+
       return;
     }
     if (position !== undefined) {
@@ -441,7 +494,11 @@ export class LibroModel implements NotebookModel, DndListModel {
   };
 
   removeRange(start: number, end: number) {
-    this.cells.splice(start, end - start);
+    // this.cells.splice(start, end - start);
+    // 不使用splice的写法，除非设置了 ObservableConfig.async = true
+    const arr = [...this.cells];
+    arr.splice(start, end - start);
+    this.cells = arr;
   }
 
   deleteCell(id: string | number): boolean;
@@ -576,7 +633,11 @@ export class LibroModel implements NotebookModel, DndListModel {
       this.cells = cells;
       setTimeout(() => {
         // 上下移动也需要调整可视区域范围
-        this.scrollToView(sourceItem);
+        if (this.virtualizedManager.isVirtualized) {
+          this.scrollToCellView({ cellIndex: sourceIndex });
+        } else {
+          this.scrollToView(sourceItem);
+        }
       }, 300);
       return true;
     }
