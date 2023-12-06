@@ -1,0 +1,98 @@
+.libro-create-file-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 24px;
+  height: 100px;
+  width: 100px;
+  border: 1px solid rgba(0, 10, 26, 10%);
+  border-radius: 4px;
+  cursor: pointer;
+
+  &.active {
+    border: 1px solid #1677ff;
+    background-color: rgba(22, 122, 255, 9%);
+  }
+
+  &.active::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    right: 18px;
+    height: 0;
+    width: 0;
+    border-top: 12px solid #1677ff;
+    border-left: 12px solid transparent;
+  }
+}
+
+.libro-create-file-modal,
+.libro-create-dir-modal,
+.libro-rename-file-modal {
+  .ant-modal-content {
+    padding: unset;
+  }
+
+  .ant-modal-body {
+    padding: 20px 24px;
+  }
+
+  .ant-modal-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(0, 10, 26, 7%);
+    margin: unset;
+  }
+
+  .ant-modal-footer {
+    margin: unset;
+    padding: 10px 24px;
+    border-top: 1px solid rgba(0, 10, 26, 7%);
+  }
+
+  .ant-modal-title {
+    font-weight: 500;
+    color: rgba(0, 10, 26, 89%);
+  }
+}
+
+.libro-remove-file-modal {
+  .ant-modal-confirm-title {
+    font-weight: 500;
+    color: rgba(0, 0, 0, 88%);
+  }
+}
+
+.libro-create-file-modal {
+  .ant-form-item-control-input {
+    width: 370px;
+  }
+}
+
+.libro-create-dir-modal,
+.libro-rename-file-modal {
+  .ant-form-item-control-input {
+    width: 316px;
+  }
+}
+
+.libro-create-file-path-container {
+  margin-bottom: 8px;
+}
+
+.libro-create-file-des {
+  margin-bottom: 8px;
+  display: inline-block;
+  color: rgba(0, 0, 0, 85%);
+  letter-spacing: 0;
+  line-height: 22px;
+}
+
+.libro-create-file-path {
+  color: rgba(0, 0, 0, 65%);
+}
+
+.libro-create-file-type-text {
+  margin-top: 8px;
+  color: rgba(0, 10, 26, 68%);
+}

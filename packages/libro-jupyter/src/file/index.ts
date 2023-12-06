@@ -4,3 +4,4 @@ export * from './navigatable-view.js';
 export * from './open-handler-contribution.js';
 export * from './file-service.js';
 export * from './file-protocol.js';
+export * from './file-icon.js';
