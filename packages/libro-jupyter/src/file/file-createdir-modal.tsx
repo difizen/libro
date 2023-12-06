@@ -10,15 +10,13 @@ import { JupyterFileService } from './file-service.js';
 import { FileView } from './file-view/index.js';
 import './index.less';
 
-export interface ModalItemType {
+export interface FileDirCreateModalItemType {
   path: string;
 }
 
-export const FileCreateDirModalComponent: React.FC<ModalItemProps<ModalItemType>> = ({
-  visible,
-  close,
-  data,
-}: ModalItemProps<ModalItemType>) => {
+export const FileCreateDirModalComponent: React.FC<
+  ModalItemProps<FileDirCreateModalItemType>
+> = ({ visible, close, data }: ModalItemProps<FileDirCreateModalItemType>) => {
   const fileService = useInject(JupyterFileService);
   const viewManager = useInject(ViewManager);
   const inputRef = useRef<InputRef>(null);
@@ -104,7 +102,7 @@ export const FileCreateDirModalComponent: React.FC<ModalItemProps<ModalItemType>
   );
 };
 
-export const FileDirCreateModal: ModalItem<ModalItemType> = {
+export const FileDirCreateModal: ModalItem<FileDirCreateModalItemType> = {
   id: 'file.createdir.modal',
   component: FileCreateDirModalComponent,
 };

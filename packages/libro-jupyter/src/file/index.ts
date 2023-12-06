@@ -5,3 +5,5 @@ export * from './open-handler-contribution.js';
 export * from './file-service.js';
 export * from './file-protocol.js';
 export * from './file-icon.js';
+export * from './file-create-modal.js';
+export * from './file-createdir-modal.js';

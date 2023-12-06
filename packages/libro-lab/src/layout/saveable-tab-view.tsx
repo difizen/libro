@@ -1,12 +1,12 @@
 import { CloseOutlined } from '@ant-design/icons';
 import type { View } from '@difizen/mana-app';
-import { Saveable } from '@difizen/mana-app';
 import {
   CardTabView,
   MenuRender,
   transient,
   view,
   ViewContext,
+  Saveable,
 } from '@difizen/mana-app';
 import { Dropdown } from '@difizen/mana-react';
 import { Badge } from 'antd';
