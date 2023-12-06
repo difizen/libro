@@ -1,11 +1,13 @@
-import { singleton, Slot, useInject, view } from '@difizen/mana-app';
+import { inject, singleton, Slot, useInject, view } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
 import { BoxPanel } from '@difizen/mana-react';
 import { Alert } from 'antd';
 import { forwardRef } from 'react';
+
 import { Loadding } from '../common/icon.js';
 
 import './index.less';
+import type { VisibilityMap } from './layout-service.js';
 import { LayoutService } from './layout-service.js';
 import { LibroLabLayoutSlots } from './protocol.js';
 
@@ -45,4 +47,15 @@ export const LibroLabLayoutContainerComponent = forwardRef(
 @view('libro-lab-layout')
 export class LibroLabLayoutView extends BaseView {
   override view = LibroLabLayoutContainerComponent;
+
+  @inject(LayoutService) layoutService: LayoutService;
+
+  storeState(): object {
+    return { visibilityMap: this.layoutService.visibilityMap };
+  }
+
+  restoreState(oldState: object): void {
+    const state = oldState as { visibilityMap: VisibilityMap };
+    this.layoutService.visibilityMap = state.visibilityMap;
+  }
 }

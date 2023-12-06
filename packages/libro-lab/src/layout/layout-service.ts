@@ -20,7 +20,7 @@ export class LayoutService {
   @prop()
   serverSatus: StatusType = 'loading';
   @prop()
-  protected visibilityMap: VisibilityMap = {
+  visibilityMap: VisibilityMap = {
     [LibroLabLayoutSlots.header]: true,
     [LibroLabLayoutSlots.container]: true,
     [LibroLabLayoutSlots.main]: true,
