@@ -1,6 +1,6 @@
 import { CloseOutlined } from '@ant-design/icons';
-import { EditorView } from '@difizen/libro-jupyter';
 import type { View } from '@difizen/mana-app';
+import { Saveable } from '@difizen/mana-app';
 import {
   CardTabView,
   MenuRender,
@@ -13,8 +13,8 @@ import { Badge } from 'antd';
 import classnames from 'classnames';
 
 @transient()
-@view('LibroLabEditorTab')
-export class EditorTabView extends CardTabView {
+@view('LibroLabSaveableTab')
+export class SaveableTabView extends CardTabView {
   protected override renderTab(item: View) {
     return (
       <ViewContext view={item}>
@@ -38,9 +38,8 @@ export class EditorTabView extends CardTabView {
       </ViewContext>
     );
   }
-
   protected renderTail(item: View) {
-    const isDirty = EditorView.is(item) && item.dirty;
+    const isDirty = Saveable.is(item) && Saveable.isDirty(item);
     return (
       <div className="libro-lab-editor-tab-tail">
         {isDirty ? (
