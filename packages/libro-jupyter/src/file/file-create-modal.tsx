@@ -16,6 +16,7 @@ import {
 
 export interface ModalItemType {
   path: string;
+  fileType?: FileType;
 }
 
 type FileType = '.ipynb' | '.py' | '.json' | '.sql' | undefined;
@@ -27,7 +28,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
 }: ModalItemProps<ModalItemType>) => {
   const fileService = useInject(JupyterFileService);
   const viewManager = useInject(ViewManager);
-  const [fileType, setFileType] = useState<FileType>(undefined);
+  const [fileType, setFileType] = useState<FileType>(data.fileType);
   const [fileView, setFileView] = useState<FileView>();
   const inputRef = useRef<InputRef>(null);
   const [form] = Form.useForm();

@@ -12,12 +12,12 @@ import {
 import { GithubLinkView } from './github-link/index.js';
 import { KernelManagerView } from './kernel-manager/index.js';
 import { LibroLabApp } from './lab-app.js';
-import { SaveableTabView } from './layout/editor-tab-view.js';
 import {
   LibroLabLayoutModule,
   LibroLabLayoutSlots,
   LibroLabLayoutView,
 } from './layout/index.js';
+import { SaveableTabView } from './layout/saveable-tab-view.js';
 import './index.less';
 import { LibroLabHeaderMenuModule } from './menu/module.js';
 import { LibroLabTocModule } from './toc/module.js';

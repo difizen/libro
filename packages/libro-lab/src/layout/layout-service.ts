@@ -2,7 +2,6 @@ import type { SlotView, View, ViewOpenHandlerOptions } from '@difizen/mana-app';
 import {
   DefaultSlotView,
   inject,
-  Notifier,
   prop,
   singleton,
   SlotViewManager,
@@ -59,7 +58,7 @@ export class LayoutService {
     if (this.isAreaVisible(slot)) {
       const slotView = this.slotViewManager.getSlotView(slot);
       if (slotView instanceof DefaultSlotView) {
-        return Notifier.find(slotView, 'active')?.onChange(() => handler());
+        return slotView.onActiveChange(handler);
       }
     }
     return undefined;

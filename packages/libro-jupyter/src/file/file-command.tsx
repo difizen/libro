@@ -257,7 +257,7 @@ export class FileCommandContribution
     });
     command.registerCommand(FileCommands.CREATE_FILE, {
       execute: async (data) => {
-        let path = '/';
+        let path = this.fileView.model.location?.path.toString() || '/';
         if (FileStatNode.is(data)) {
           path = data.fileStat.isDirectory
             ? data.uri.path.toString()
@@ -270,7 +270,7 @@ export class FileCommandContribution
     });
     command.registerCommand(FileCommands.CREATE_DIR, {
       execute: async (data) => {
-        let path = '/';
+        let path = this.fileView.model.location?.path.toString() || '/';
         if (FileStatNode.is(data)) {
           path = data.fileStat.isDirectory
             ? data.uri.path.toString()
@@ -284,7 +284,7 @@ export class FileCommandContribution
 
     command.registerCommand(FileCommands.COPY_PATH, {
       execute: async (data) => {
-        let path = '/';
+        let path = this.fileView.model.location?.path.toString() || '/';
         if (FileStatNode.is(data)) {
           path = data.uri.path.toString();
         }

@@ -10,8 +10,9 @@ import {
 } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
 import { forwardRef } from 'react';
-import { WelcomeIcon } from '../common/index.js';
+
 import { LayoutService } from '../layout/layout-service.js';
+
 import { EntryPointView } from './entry-point-view.js';
 
 import './index.less';
@@ -35,7 +36,7 @@ export const WelcomeComponent = forwardRef(function WelcomeComponent() {
           WsURL: {`${serverConnection.settings.wsUrl}`}
         </div>
       </div>
-      {layoutService.serverSatus !== 'loading' && (
+      {layoutService.serverSatus === 'success' && (
         <ViewRender view={instance.entryPointView}></ViewRender>
       )}
     </div>
@@ -52,11 +53,12 @@ export class WelcomeView extends BaseView {
     super();
     this.title.icon = '🙌 ';
     this.title.label = '欢迎使用';
+    this.title.closable = false;
     this.viewManager = viewManager;
     this.viewManager
       .getOrCreateView(EntryPointView)
-      .then((view) => {
-        this.entryPointView = view;
+      .then((entryPointView) => {
+        this.entryPointView = entryPointView;
         return;
       })
       .catch(() => {

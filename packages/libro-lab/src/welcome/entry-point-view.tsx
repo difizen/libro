@@ -1,19 +1,43 @@
-import { singleton, view } from '@difizen/mana-app';
-import { BaseView } from '@difizen/mana-app';
 import {
   NotebookIcon,
   PythonIcon,
   JSONIcon,
-  SQLIcon,
   MoreIcon,
+  FileCreateModal,
+  FileView,
 } from '@difizen/libro-jupyter';
+import {
+  ModalService,
+  singleton,
+  useInject,
+  view,
+  ViewManager,
+} from '@difizen/mana-app';
+import { BaseView } from '@difizen/mana-app';
 import { Col, Row } from 'antd';
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
+
 import { KeybindIcon, PreferenceIcon, TerminalIcon } from '../common/icon.js';
 
 import './index.less';
 
 export const EntryPointComponent = forwardRef(function EntryPointComponent() {
+  const modalService = useInject(ModalService);
+  const viewManager = useInject(ViewManager);
+  const [fileView, setFileView] = useState<FileView>();
+
+  useEffect(() => {
+    viewManager
+      .getOrCreateView(FileView)
+      .then((curfileView) => {
+        setFileView(curfileView);
+        return;
+      })
+      .catch(() => {
+        //
+      });
+  }, [viewManager]);
+
   return (
     <div className="libro-lab-entry-point">
       <div className="libro-lab-entry-point-title">请选择你要创建的文件类型：</div>
@@ -23,7 +47,15 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
           className="gutter-row"
           style={{ paddingLeft: 'unset', paddingRight: '32px' }}
         >
-          <div className="libro-lab-entry-point-item">
+          <div
+            className="libro-lab-entry-point-item"
+            onClick={() => {
+              modalService.openModal(FileCreateModal, {
+                path: fileView?.model.location?.path.toString() || '/',
+                fileType: '.ipynb',
+              });
+            }}
+          >
             <NotebookIcon />
             <span className="libro-lab-entry-point-item-text">Notebook</span>
           </div>
@@ -32,7 +64,15 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
           className="gutter-row"
           style={{ paddingLeft: 'unset', paddingRight: '32px' }}
         >
-          <div className="libro-lab-entry-point-item">
+          <div
+            className="libro-lab-entry-point-item"
+            onClick={() => {
+              modalService.openModal(FileCreateModal, {
+                path: fileView?.model.location?.path.toString() || '/',
+                fileType: '.py',
+              });
+            }}
+          >
             <PythonIcon />
             <span className="libro-lab-entry-point-item-text">Python</span>
           </div>
@@ -41,7 +81,15 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
           className="gutter-row"
           style={{ paddingLeft: 'unset', paddingRight: '32px' }}
         >
-          <div className="libro-lab-entry-point-item">
+          <div
+            className="libro-lab-entry-point-item"
+            onClick={() => {
+              modalService.openModal(FileCreateModal, {
+                path: fileView?.model.location?.path.toString() || '/',
+                fileType: '.json',
+              });
+            }}
+          >
             <JSONIcon />
             <span className="libro-lab-entry-point-item-text">JSON</span>
           </div>
@@ -50,16 +98,14 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
           className="gutter-row"
           style={{ paddingLeft: 'unset', paddingRight: '32px' }}
         >
-          <div className="libro-lab-entry-point-item">
-            <SQLIcon />
-            <span className="libro-lab-entry-point-item-text">SQL</span>
-          </div>
-        </Col>
-        <Col
-          className="gutter-row"
-          style={{ paddingLeft: 'unset', paddingRight: '32px' }}
-        >
-          <div className="libro-lab-entry-point-item">
+          <div
+            className="libro-lab-entry-point-item"
+            onClick={() => {
+              modalService.openModal(FileCreateModal, {
+                path: fileView?.model.location?.path.toString() || '/',
+              });
+            }}
+          >
             <MoreIcon />
             <span className="libro-lab-entry-point-item-text">其他</span>
           </div>

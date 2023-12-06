@@ -12,8 +12,8 @@ import {
   ViewRender,
 } from '@difizen/mana-app';
 import { Empty } from 'antd';
-import { TocIcon } from '../common/index.js';
 
+import { TocIcon } from '../common/index.js';
 import { LayoutService } from '../layout/layout-service.js';
 import { LibroLabLayoutSlots } from '../layout/protocol.js';
 
@@ -69,6 +69,7 @@ export class TocPanelView extends BaseView {
 
   handleEditTabChange = () => {
     if (!this.libroNavigatableView) {
+      this.libroTocView = undefined;
       return;
     }
     this.viewManager
