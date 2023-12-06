@@ -12,7 +12,7 @@ import {
 import { GithubLinkView } from './github-link/index.js';
 import { KernelManagerView } from './kernel-manager/index.js';
 import { LibroLabApp } from './lab-app.js';
-import { EditorTabView } from './layout/editor-tab-view.js';
+import { SaveableTabView } from './layout/editor-tab-view.js';
 import {
   LibroLabLayoutModule,
   LibroLabLayoutSlots,
@@ -52,7 +52,7 @@ export const LibroLabModule = ManaModule.create()
       slot: RootSlotId,
     }),
     createSlotPreference({
-      view: EditorTabView,
+      view: SaveableTabView,
       slot: LibroLabLayoutSlots.content,
     }),
     createSlotPreference({

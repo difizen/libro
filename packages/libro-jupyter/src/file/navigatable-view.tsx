@@ -1,7 +1,6 @@
 import type { LibroView } from '@difizen/libro-core';
-import { LibroService } from '@difizen/libro-core';
-import type { NavigatableView } from '@difizen/mana-app';
-import { CommandRegistry } from '@difizen/mana-app';
+import { LibroService, DocumentCommands } from '@difizen/libro-core';
+import type { NavigatableView, Saveable } from '@difizen/mana-app';
 import {
   BaseView,
   inject,
@@ -17,10 +16,10 @@ import {
   ViewRender,
   Deferred,
   URI,
+  CommandRegistry,
+  Emitter,
 } from '@difizen/mana-app';
 import { createRef, forwardRef } from 'react';
-
-import type { EditorView } from './file-protocol.js';
 
 export const LibroEditorComponent = forwardRef(function LibroEditorComponent() {
   const instance = useInject<LibroNavigatableView>(ViewInstance);
@@ -37,7 +36,7 @@ export const LibroNavigatableViewFactoryId = 'libro-navigatable-view-factory';
 @view(LibroNavigatableViewFactoryId)
 export class LibroNavigatableView
   extends BaseView
-  implements NavigatableView, EditorView
+  implements NavigatableView, Saveable
 {
   @inject(LibroService) protected libroService: LibroService;
 
@@ -48,6 +47,14 @@ export class LibroNavigatableView
   codeRef = createRef<HTMLDivElement>();
 
   @prop() filePath?: string;
+
+  dirtyEmitter = new Emitter<void>();
+
+  get onDirtyChanged() {
+    return this.dirtyEmitter.event;
+  }
+
+  readonly autoSave = 'off';
 
   @prop()
   dirty: boolean;
@@ -80,6 +87,14 @@ export class LibroNavigatableView
     this.getOrCreateLibroView();
   }
 
+  save = () => {
+    this.commandRegistry.executeCommand(
+      DocumentCommands['Save'].id,
+      undefined,
+      this.libroView,
+    );
+  };
+
   protected async getOrCreateLibroView() {
     const libroView = await this.libroService.getOrCreateView({
       id: this.filePath,
@@ -91,9 +106,11 @@ export class LibroNavigatableView
     this.libroView = libroView;
     this.libroView.model.onContentChanged(() => {
       this.dirty = true;
+      this.dirtyEmitter.fire();
     });
     this.libroView.onSave(() => {
       this.dirty = false;
+      this.dirtyEmitter.fire();
     });
     await this.libroView.initialized;
     this.libroView.focus();
