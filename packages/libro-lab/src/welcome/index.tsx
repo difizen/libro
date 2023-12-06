@@ -50,7 +50,7 @@ export class WelcomeView extends BaseView {
   entryPointView: EntryPointView;
   constructor(@inject(ViewManager) viewManager: ViewManager) {
     super();
-    this.title.icon = <WelcomeIcon />;
+    this.title.icon = '🙌 ';
     this.title.label = '欢迎使用';
     this.viewManager = viewManager;
     this.viewManager

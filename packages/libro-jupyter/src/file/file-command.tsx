@@ -28,6 +28,7 @@ import { FileRenameModal } from './file-rename-modal.js';
 import { JupyterFileService } from './file-service.js';
 import { FileView } from './file-view/index.js';
 import { copy2clipboard } from './utils.js';
+import './index.less';
 
 const FileCommands = {
   OPEN_FILE: {
@@ -181,8 +182,12 @@ export class FileCommandContribution
         if (FileStatNode.is(node)) {
           const filePath = node.uri.path.toString();
           Modal.confirm({
-            title: '确认删除一下文件或文件夹？',
-            content: filePath,
+            width: 424,
+            title: '确认要删除这个文件/文件夹吗？',
+            content: `请确认是否删除文件 ${filePath} ，删除后将不可恢复，请谨慎操作。`,
+            wrapClassName: 'libro-remove-file-modal',
+            cancelText: '取消',
+            okText: '确定',
             onOk: async () => {
               try {
                 await this.fileService.delete(node.uri);
@@ -252,7 +257,7 @@ export class FileCommandContribution
     });
     command.registerCommand(FileCommands.CREATE_FILE, {
       execute: async (data) => {
-        let path = '/workspace';
+        let path = '/';
         if (FileStatNode.is(data)) {
           path = data.fileStat.isDirectory
             ? data.uri.path.toString()
@@ -265,7 +270,7 @@ export class FileCommandContribution
     });
     command.registerCommand(FileCommands.CREATE_DIR, {
       execute: async (data) => {
-        let path = '/workspace';
+        let path = '/';
         if (FileStatNode.is(data)) {
           path = data.fileStat.isDirectory
             ? data.uri.path.toString()
@@ -279,7 +284,7 @@ export class FileCommandContribution
 
     command.registerCommand(FileCommands.COPY_PATH, {
       execute: async (data) => {
-        let path = '/workspace';
+        let path = '/';
         if (FileStatNode.is(data)) {
           path = data.uri.path.toString();
         }
@@ -291,7 +296,7 @@ export class FileCommandContribution
       execute: async (data) => {
         let relative = '';
         if (FileStatNode.is(data)) {
-          relative = pathUtil.relative('/workspace', data.uri.path.toString());
+          relative = pathUtil.relative('/', data.uri.path.toString());
         }
         copy2clipboard(relative);
       },

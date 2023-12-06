@@ -1,16 +1,15 @@
 import { singleton, view } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
+import {
+  NotebookIcon,
+  PythonIcon,
+  JSONIcon,
+  SQLIcon,
+  MoreIcon,
+} from '@difizen/libro-jupyter';
 import { Col, Row } from 'antd';
 import { forwardRef } from 'react';
-import {
-  KeybindIcon,
-  MoreIcon,
-  NotebookIcon,
-  PreferenceIcon,
-  PythonIcon,
-  SQLIcon,
-  TerminalIcon,
-} from '../common/icon.js';
+import { KeybindIcon, PreferenceIcon, TerminalIcon } from '../common/icon.js';
 
 import './index.less';
 
@@ -36,6 +35,15 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
           <div className="libro-lab-entry-point-item">
             <PythonIcon />
             <span className="libro-lab-entry-point-item-text">Python</span>
+          </div>
+        </Col>
+        <Col
+          className="gutter-row"
+          style={{ paddingLeft: 'unset', paddingRight: '32px' }}
+        >
+          <div className="libro-lab-entry-point-item">
+            <JSONIcon />
+            <span className="libro-lab-entry-point-item-text">JSON</span>
           </div>
         </Col>
         <Col
