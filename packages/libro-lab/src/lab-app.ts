@@ -19,6 +19,8 @@ import {
 import { LibroLabLayoutSlots } from './layout/index.js';
 import { LayoutService } from './layout/layout-service.js';
 
+const ShouldPreventStoreViewKey = 'mana-should-prevent-store-view';
+
 @singleton({ contrib: ApplicationContribution })
 export class LibroLabApp implements ApplicationContribution {
   @inject(ServerConnection) serverConnection: ServerConnection;
@@ -30,6 +32,7 @@ export class LibroLabApp implements ApplicationContribution {
   @inject(LayoutService) layoutService: LayoutService;
 
   async onStart() {
+    localStorage.setItem(ShouldPreventStoreViewKey, 'false');
     this.configurationService.set(
       LibroJupyterConfiguration['OpenSlot'],
       LibroLabLayoutSlots.content,
@@ -42,7 +45,9 @@ export class LibroLabApp implements ApplicationContribution {
         this.initialWorkspace();
         return;
       })
-      .catch();
+      .catch(() => {
+        //
+      });
   }
 
   protected async initialWorkspace() {
