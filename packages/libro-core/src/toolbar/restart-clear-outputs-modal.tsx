@@ -5,11 +5,11 @@ import { useCallback } from 'react';
 import { NotebookCommands } from '../command/index.js';
 import type { LibroView } from '../libro-view.js';
 
-export const RestartClearOutputModalComponent: React.FC<ModalItemProps<LibroView>> = ({
+export function RestartClearOutputModalComponent({
   visible,
   close,
   data,
-}: ModalItemProps<LibroView>) => {
+}: ModalItemProps<LibroView>) {
   const handleRestart = useCallback(() => {
     data?.restartClearOutput();
     close();
@@ -29,7 +29,7 @@ export const RestartClearOutputModalComponent: React.FC<ModalItemProps<LibroView
       Do you want to restart the current kernel? All variables will be lost.
     </Modal>
   );
-};
+}
 
 export const RestartClearOutputModal: ModalItem<LibroView> = {
   id: NotebookCommands['RestartClearOutput'].id,

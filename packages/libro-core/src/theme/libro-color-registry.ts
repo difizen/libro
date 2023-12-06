@@ -366,6 +366,12 @@ export class LibroColorRegistry implements ColorContribution {
         defaults: { dark: '#788491', light: '#9f9f9f' },
         description: '',
       },
+
+      {
+        id: 'libro.cell.selected.bg.color',
+        defaults: { dark: '#353638', light: '#F1FAFF' },
+        description: '',
+      },
     );
   }
 }

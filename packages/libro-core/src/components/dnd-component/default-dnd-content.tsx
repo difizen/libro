@@ -1,36 +1,81 @@
-import { useConfigurationValue } from '@difizen/mana-app';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { getOrigin, useInject, ViewInstance } from '@difizen/mana-app';
+import { useConfigurationValue } from '@difizen/mana-app';
 import type { Identifier } from 'dnd-core';
-import React, { useEffect, useRef, useState, useCallback, forwardRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  forwardRef,
+} from 'react';
 import { useDrag, useDragDropManager, useDrop } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
+import 'resize-observer-polyfill';
 
-import { CellService } from '../../cell/index.js';
+import type { CellService } from '../../cell/index.js';
+import { LibroCellService } from '../../cell/index.js';
 import { CellCollapsible } from '../../collapse-service.js';
-import { MultiSelectionWhenShiftClick } from '../../configuration/libro-configuration.js';
-import { isCellView, DragAreaKey } from '../../libro-protocol.js';
+import { DragAreaKey, isCellView } from '../../libro-protocol.js';
 import type { CellView, DndContentProps } from '../../libro-protocol.js';
+import { MultiSelectionWhenShiftClick } from '../../libro-setting.js';
 import type { LibroView } from '../../libro-view.js';
 import { HolderOutlined, PlusOutlined } from '../../material-from-designer.js';
-import { hasErrorOutput } from '../../output/index.js';
 import { BetweenCellProvider } from '../cell-protocol.js';
+
+import { VirtualizedManager } from './virtualized-manager.js';
 
 export interface Dragparams {
   cell: CellView;
   index: number;
 }
 
-export const DefaultDndContent: React.FC<DndContentProps> = ({ cell, index }) => {
+export const DndCellContainer: React.FC<DndContentProps> = ({ cell, index }) => {
   const ref = useRef<HTMLDivElement>(null);
   const instance = useInject<LibroView>(ViewInstance);
   const [multiSelectionWhenShiftClick] = useConfigurationValue(
     MultiSelectionWhenShiftClick,
   );
   const BetweenCellContent = useInject<BetweenCellProvider>(BetweenCellProvider);
-  const cellService = useInject<CellService>(CellService);
+  const cellService = useInject<CellService>(LibroCellService);
+  const virtualizedManager = useInject(VirtualizedManager);
   const dragDropManager = useDragDropManager();
   const dragDropMonitor = dragDropManager.getMonitor();
   const ItemRender = getOrigin(instance.dndItemRender);
+
+  useLayoutEffect(() => {
+    if (typeof ref !== 'object') {
+      return () => {
+        //
+      };
+    }
+    const el = ref?.current;
+    if (!el) {
+      return () => {
+        //
+      };
+    }
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        const isVisible =
+          entry.contentRect.width !== 0 && entry.contentRect.height !== 0;
+
+        if (isVisible) {
+          cell.noEditorAreaHeight = ref.current?.clientHeight || 0;
+        }
+      });
+    });
+
+    resizeObserver.observe(el as HTMLElement);
+    return () => {
+      cell.noEditorAreaHeight = 0;
+      resizeObserver.disconnect();
+    };
+  }, [ref, cell]);
+
   const handleFocus = useCallback(
     (e: React.FocusEvent<HTMLElement>) => {
       const className = (e.target as HTMLDivElement).className;
@@ -75,6 +120,9 @@ export const DefaultDndContent: React.FC<DndContentProps> = ({ cell, index }) =>
     instance.model.selections = [];
   }, [instance, cell]);
 
+  const scrollTimer = useRef<null | NodeJS.Timeout>(null);
+  const unsubscribe = useRef<null | any>(null);
+
   const [{ isDrag }, drag, preview] = useDrag(
     {
       type: DragAreaKey,
@@ -84,40 +132,46 @@ export const DefaultDndContent: React.FC<DndContentProps> = ({ cell, index }) =>
       }),
       end() {
         instance.isDragging = false;
+        if (scrollTimer.current) {
+          clearInterval(scrollTimer.current);
+        }
       },
     },
     [cell, index],
   );
-  dragDropMonitor.subscribeToStateChange(() => {
-    instance.isDragging = dragDropMonitor.isDragging();
-  });
+
   const libroViewContent = instance.container?.current?.getElementsByClassName(
     'libro-view-content',
   )[0] as HTMLElement;
-  const scrollTimer = useRef<null | NodeJS.Timeout>(null);
+
   useEffect(() => {
-    scrollTimer.current = setInterval(() => {
-      const currentOffset = dragDropMonitor.getClientOffset();
-      if (libroViewContent && instance.isDragging && currentOffset) {
-        const libroViewClientRect = libroViewContent.getBoundingClientRect();
-        const { top, bottom } = libroViewClientRect;
-        const { y } = currentOffset;
-        const topLimit = top + 30;
-        const bottomLimit = bottom - 50;
-        if (y < topLimit) {
-          libroViewContent.scrollTop -= 0.5;
-        } else if (y > bottomLimit) {
-          libroViewContent.scrollTop += 0.5;
+    unsubscribe.current = dragDropMonitor.subscribeToStateChange(() => {
+      instance.isDragging = dragDropMonitor.isDragging();
+      scrollTimer.current = setInterval(() => {
+        const currentOffset = dragDropMonitor.getClientOffset();
+        if (libroViewContent && instance.isDragging && currentOffset) {
+          const libroViewClientRect = libroViewContent.getBoundingClientRect();
+          const { top, bottom } = libroViewClientRect;
+          const { y } = currentOffset;
+          const topLimit = top + 30;
+          const bottomLimit = bottom - 50;
+          if (y < topLimit) {
+            libroViewContent.scrollTop -= 0.5;
+          } else if (y > bottomLimit) {
+            libroViewContent.scrollTop += 0.5;
+          }
         }
-      }
-    }, 10);
-    return () => {
-      if (scrollTimer.current) {
-        clearInterval(scrollTimer.current);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      }, 10);
+      return () => {
+        if (scrollTimer.current) {
+          clearInterval(scrollTimer.current);
+        }
+        if (unsubscribe.current) {
+          unsubscribe.current();
+        }
+      };
+    });
+  }, [dragDropMonitor]);
 
   useEffect(() => {
     // This gets called after every render, by default
@@ -155,7 +209,7 @@ export const DefaultDndContent: React.FC<DndContentProps> = ({ cell, index }) =>
           view.dispose();
           return;
         })
-        .catch(() => {
+        .catch((e) => {
           //
         });
       if (isCellView(item.cell)) {
@@ -183,17 +237,31 @@ export const DefaultDndContent: React.FC<DndContentProps> = ({ cell, index }) =>
           }
           if (isDragInSelections) {
             instance.model.exchangeCells(instance.model.selections, dropIndex);
-            instance.model.scrollToView(cell);
+            if (virtualizedManager.isVirtualized) {
+              instance.model.scrollToCellView({ cellIndex: dropIndex });
+            } else {
+              instance.model.scrollToView(cell);
+            }
+
             return;
           }
         }
         if (dragIndex < dropIndex) {
           instance.model.exchangeCell(dragIndex, dropIndex - 1);
-          instance.model.scrollToView(cell);
+
+          if (virtualizedManager.isVirtualized) {
+            instance.model.scrollToCellView({ cellIndex: dropIndex });
+          } else {
+            instance.model.scrollToView(cell);
+          }
         }
         if (dragIndex > dropIndex) {
           instance.model.exchangeCell(dragIndex, dropIndex);
-          instance.model.scrollToView(cell);
+          if (virtualizedManager.isVirtualized) {
+            instance.model.scrollToCellView({ cellIndex: dropIndex });
+          } else {
+            instance.model.scrollToView(cell);
+          }
         }
       }
       return;
@@ -214,15 +282,18 @@ export const DefaultDndContent: React.FC<DndContentProps> = ({ cell, index }) =>
     instance.model.mouseMode = 'drag';
   }
 
-  const isSelected = instance.isSelected(cell);
+  const isMultiSelected =
+    instance.model.selections.length !== 0 && instance.isSelected(cell);
   // let isMouseOver = false;
   const [isMouseOverDragArea, setIsMouseOverDragArea] = useState(false);
-  const hasCellHidden = cell.hasCellHidden();
-  const hasErrorOutputs = hasErrorOutput(cell);
+  const hasCellHidden = useMemo(() => {
+    return cell.hasCellHidden();
+  }, [cell]);
   const isCollapsible = CellCollapsible.is(cell);
+
   return (
     <div
-      className={`libro-dnd-cell-container ${isSelected ? 'selected' : ''} ${
+      className={`libro-dnd-cell-container ${isMultiSelected ? 'multi-selected' : ''} ${
         hasCellHidden ? 'hidden' : ''
       }`}
       data-handler-id={handlerId}
@@ -245,7 +316,7 @@ export const DefaultDndContent: React.FC<DndContentProps> = ({ cell, index }) =>
         tabIndex={-1}
         onFocus={handleFocus}
         // onClick={e => e.preventDefault()}
-        className={`libro-dnd-cell-content ${hasErrorOutputs ? 'error' : ''}`}
+        className="libro-dnd-cell-content"
       >
         <ItemRender
           isDragOver={!!isDragOver}

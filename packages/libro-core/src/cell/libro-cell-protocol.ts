@@ -6,6 +6,8 @@ import type { CellModel, CellOptions, CellView } from '../libro-protocol.js';
 
 export type LibroCellMetadata = ICellMetadata & {
   libroCellType?: string;
+  libroFormatter?: string;
+  libroFormatterOptions?: object;
 };
 export interface LibroCustomCell extends IBaseCell {
   metadata: Partial<LibroCellMetadata>;

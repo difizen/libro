@@ -24,10 +24,19 @@ export class LibroCellView extends BaseView implements CellView {
   options: CellViewOptions;
 
   @prop()
+  noEditorAreaHeight = 0;
+
+  @prop()
+  cellViewTopPos = 0;
+
+  @prop()
+  renderEditorIntoVirtualized = false;
+
+  @prop()
   model: CellModel;
   protected cellService: CellService;
   override view: ViewComponent = LibroCellComponent;
-  parent!: NotebookView;
+  parent: NotebookView;
 
   @prop()
   override className?: string | undefined = 'libro-cell-view-container';
@@ -49,7 +58,6 @@ export class LibroCellView extends BaseView implements CellView {
     this.cellService = cellService;
     this.options = options;
     this.hasInputHidden = false;
-
     const model = cellService.getModelFromCache(options.parentId, options.modelId);
     if (!model) {
       console.warn('cell model does not exist');
@@ -63,11 +71,13 @@ export class LibroCellView extends BaseView implements CellView {
     this.toDispose.push(
       watch(this.model, 'value', () => {
         this.parent.model.onChange?.();
+        this.parent.model.onSourceChange?.();
       }),
     );
     this.toDispose.push(
       watch(this.model, 'type', () => {
         this.parent.model.onChange?.();
+        this.parent.model.onSourceChange?.();
       }),
     );
     if (ExecutableCellModel.is(this.model)) {
@@ -79,6 +89,11 @@ export class LibroCellView extends BaseView implements CellView {
     }
   }
 
+  // 计算编辑器区相对于编辑器区垂直方向的偏移量
+  calcEditorOffset() {
+    return 16 + 1;
+  }
+
   hasCellHidden() {
     return this.hasInputHidden;
   }
@@ -88,7 +103,7 @@ export class LibroCellView extends BaseView implements CellView {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  shouldEnterEditorMode(_e: React.FocusEvent<HTMLElement>) {
+  shouldEnterEditorMode(e: React.FocusEvent<HTMLElement>) {
     return false;
   }
 
@@ -96,17 +111,14 @@ export class LibroCellView extends BaseView implements CellView {
     //
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  focus(_isEdit: boolean) {
+  focus(isEdit: boolean) {
     //
   }
 
   disposed = false;
   override dispose() {
-    if (!this.disposed) {
-      this.toDispose.dispose();
-      super.dispose();
-    }
-    this.disposed = true;
+    this.toDispose.dispose();
+    super.dispose();
   }
   toJSON(): LibroCell {
     const meta = { ...(this.model.toJSON() as LibroCell) };

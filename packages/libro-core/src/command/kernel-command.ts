@@ -31,6 +31,9 @@ export const KernelCommands: Record<string, Command & { keybind?: string }> = {
     id: 'notebook:shutdown-kernel',
     label: `Shutdown Kernel`,
   },
+  ShowKernelStatus: {
+    id: 'notebook:show-kernel-status',
+  },
   // TODO: remove this command
   ShowKernelStatusAndSelector: {
     id: 'notebook:show-kernel-status-and-selector',

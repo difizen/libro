@@ -4,24 +4,41 @@ import {
   ModalService,
   singleton,
   ToolbarContribution,
+  useObserve,
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 
 import { DocumentCommands, NotebookCommands } from '../command/index.js';
+import { LibroService } from '../libro-service.js';
 
+import { AllOutputsScrollIcon } from './all-outputs-scroll-icon.js';
 import { ToolItemSelect } from './change-cell-to-selector.js';
 import { HideAllSelect } from './hide-all-selector.js';
 // import { RunSelect } from './run-selector';
 import { SaveIcon } from './save-icon.js';
 import { SideToolbarMoreSelect } from './side-toolar-more-select.js';
 // import { SideToolbarRunSelect } from './side-toolbar-run-select';
+
+function OutputsScorllTooltip({ libroService }: { libroService: LibroService }) {
+  const service = useObserve(libroService);
+
+  return (
+    <div className="libro-tooltip">
+      <span className="libro-tooltip-text">
+        {l10n.t(
+          service.active?.outputsScroll
+            ? '取消固定 Output 展示高度'
+            : '固定 Output 展示高度',
+        )}
+      </span>
+    </div>
+  );
+}
+
 @singleton({ contrib: [ToolbarContribution] })
 export class LibroToolbarContribution implements ToolbarContribution {
-  protected readonly modalService: ModalService;
-
-  constructor(@inject(ModalService) modalService: ModalService) {
-    this.modalService = modalService;
-  }
+  @inject(ModalService) protected readonly modalService: ModalService;
+  @inject(LibroService) protected readonly libroService: LibroService;
 
   registerToolbarItems(registry: ToolbarRegistry): void {
     registry.registerItem({
@@ -154,6 +171,14 @@ export class LibroToolbarContribution implements ToolbarContribution {
 
       group: ['group3'],
       order: 'h2',
+    });
+    registry.registerItem({
+      id: NotebookCommands['EnableOrDisableAllOutputScrolling'].id,
+      command: NotebookCommands['EnableOrDisableAllOutputScrolling'].id,
+      tooltip: <OutputsScorllTooltip libroService={this.libroService} />,
+      group: ['group3'],
+      order: 'h2',
+      icon: AllOutputsScrollIcon,
     });
     registry.registerItem({
       id: NotebookCommands['HideAllCell'].id,

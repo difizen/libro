@@ -4,6 +4,7 @@ import {
   getOrigin,
   ToolbarInstance,
   useInject,
+  useObserve,
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 import { Menu, MenuContext } from '@difizen/mana-react';
@@ -93,7 +94,7 @@ export const LibroSideToolbarMoreMenu: React.FC = () => {
   const toolbar = useInject<Toolbar>(ToolbarInstance);
   const data = toolbar.currentArgs as LibroToolbarArags;
   const args = getOrigin(data) || [];
-  const cell = args[0];
+  const cell = useObserve(args[0]);
   if (!cell) {
     return null;
   }

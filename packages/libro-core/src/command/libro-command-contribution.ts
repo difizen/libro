@@ -15,6 +15,7 @@ import type { CellView, NotebookView } from '../libro-protocol.js';
 import { LibroToolbarArea } from '../libro-protocol.js';
 import { LibroService } from '../libro-service.js';
 import { LibroView } from '../libro-view.js';
+import { SettingsModal } from '../settings/settings-modal.js';
 import { RestartClearOutputModal } from '../toolbar/restart-clear-outputs-modal.js';
 import { ShutdownModal } from '../toolbar/shutdown-modal.js';
 
@@ -24,29 +25,17 @@ import { NotebookCommands } from './notebook-commands.js';
 
 @singleton({ contrib: CommandContribution })
 export class LibroCommandContribution implements CommandContribution {
-  protected readonly modalService: ModalService;
-  protected readonly libroCommand: LibroCommandRegister;
-  protected readonly libroService: LibroService;
-  protected readonly lirboContextKey: LirboContextKey;
-
-  constructor(
-    @inject(ModalService) modalService: ModalService,
-    @inject(LibroCommandRegister) libroCommand: LibroCommandRegister,
-    @inject(LibroService) libroService: LibroService,
-    @inject(LirboContextKey) lirboContextKey: LirboContextKey,
-  ) {
-    this.libroCommand = libroCommand;
-    this.modalService = modalService;
-    this.libroService = libroService;
-    this.lirboContextKey = lirboContextKey;
-  }
+  @inject(ModalService) protected readonly modalService: ModalService;
+  @inject(LibroCommandRegister) protected readonly libroCommand: LibroCommandRegister;
+  @inject(LibroService) protected readonly libroService: LibroService;
+  @inject(LirboContextKey) protected readonly lirboContextKey: LirboContextKey;
 
   registerCommands(command: CommandRegistry): void {
     this.libroCommand.registerLibroCommand(command, NotebookCommands['EnterEditMode'], {
       execute: async () => {
         this.libroService.active?.enterEditMode();
       },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
           return false;
         }
@@ -87,7 +76,7 @@ export class LibroCommandContribution implements CommandContribution {
         }
         libro.runCell(cell);
       },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
           return false;
         }
@@ -95,7 +84,7 @@ export class LibroCommandContribution implements CommandContribution {
       },
     });
     this.libroCommand.registerLibroCommand(command, NotebookCommands['RunAllCells'], {
-      execute: async (_cell, libro) => {
+      execute: async (cell, libro) => {
         if (!libro || !(libro instanceof LibroView)) {
           return;
         }
@@ -143,7 +132,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.runCellandSelectNext(cell);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -166,7 +155,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.runCellandInsertBelow(cell);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -175,16 +164,15 @@ export class LibroCommandContribution implements CommandContribution {
       },
     );
     this.libroCommand.registerLibroCommand(command, NotebookCommands['Interrupt'], {
-      execute: async (_cell, libro) => {
+      execute: async (cell, libro) => {
         if (!libro || !(libro instanceof LibroView)) {
           return false;
         }
         if (libro.model.interrupt) {
           libro.model.interrupt();
         }
-        return;
       },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView)) {
           return false;
         }
@@ -196,7 +184,7 @@ export class LibroCommandContribution implements CommandContribution {
             ) >= 0
         );
       },
-      isVisible: (_cell, libro, path) => {
+      isVisible: (cell, libro, path) => {
         if (!libro || !(libro instanceof LibroView)) {
           return false;
         }
@@ -211,14 +199,13 @@ export class LibroCommandContribution implements CommandContribution {
       command,
       NotebookCommands['RestartClearOutput'],
       {
-        execute: async (_cell, libro) => {
+        execute: async (cell, libro) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
           this.modalService.openModal(RestartClearOutputModal, libro);
-          return;
         },
-        isVisible: (_cell, libro, path) => {
+        isVisible: (cell, libro, path) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
@@ -234,12 +221,11 @@ export class LibroCommandContribution implements CommandContribution {
       command,
       NotebookCommands['CloseAndShutdown'],
       {
-        execute: async (_cell, libro) => {
+        execute: async (cell, libro) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
           this.modalService.openModal(ShutdownModal, libro);
-          return;
         },
         isVisible: () => false,
         // isVisible: (cell, libro, path) => {
@@ -274,13 +260,13 @@ export class LibroCommandContribution implements CommandContribution {
           }
         },
         // isVisible: () => false,
-        isVisible: (_cell, libro, path) => {
+        isVisible: (cell, libro, path) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
           return !libro?.model.readOnly && path === LibroToolbarArea.CellRight;
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -312,7 +298,7 @@ export class LibroCommandContribution implements CommandContribution {
             );
           }
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -385,7 +371,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.mergeCellBelow(cell);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -408,7 +394,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.mergeCellAbove(cell);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -428,7 +414,7 @@ export class LibroCommandContribution implements CommandContribution {
         }
         libro.mergeCells(cell);
       },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
           return false;
         }
@@ -447,13 +433,13 @@ export class LibroCommandContribution implements CommandContribution {
         }
         libro.deleteCell(cell);
       },
-      isVisible: (_cell, libro, path) => {
+      isVisible: (cell, libro, path) => {
         if (!libro || !(libro instanceof LibroView)) {
           return false;
         }
         return !libro?.model.readOnly && path === LibroToolbarArea.CellRight;
       },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
           return false;
         }
@@ -475,7 +461,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.clearOutputs(cell);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -498,13 +484,13 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.clearAllOutputs();
         },
-        isVisible: (_cell, libro, path) => {
+        isVisible: (cell, libro, path) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
           return !libro?.model.readOnly && path === LibroToolbarArea.HeaderCenter;
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -524,7 +510,7 @@ export class LibroCommandContribution implements CommandContribution {
         }
         libro.moveUpCell(cell);
       },
-      isVisible: (_cell, _libro, path) => {
+      isVisible: (cell, libro, path) => {
         return path === LibroToolbarArea.CellRight;
       },
       isEnabled: (cell, libro) => {
@@ -570,7 +556,7 @@ export class LibroCommandContribution implements CommandContribution {
           .findIndex((item) => equals(item, cell));
         return cellIndex !== libro.model.getCells().length - 1;
       },
-      isVisible: (_cell, _libro, path) => {
+      isVisible: (cell, libro, path) => {
         return path === LibroToolbarArea.CellRight;
       },
     });
@@ -595,7 +581,7 @@ export class LibroCommandContribution implements CommandContribution {
       //   }
       //   return true;
       // },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
           return false;
         }
@@ -623,7 +609,7 @@ export class LibroCommandContribution implements CommandContribution {
       //   }
       //   return true;
       // },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
           return false;
         }
@@ -645,7 +631,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.pasteCellAbove(cell);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -677,7 +663,7 @@ export class LibroCommandContribution implements CommandContribution {
         //   }
         //   return true;
         // },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -697,7 +683,7 @@ export class LibroCommandContribution implements CommandContribution {
         }
         libro.hideCellCode(cell);
       },
-      isVisible: (_cell, _libro, path) => {
+      isVisible: (cell, libro, path) => {
         if (path === LibroToolbarArea.HeaderCenter) {
           return true;
         }
@@ -736,7 +722,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.hideOutputs(cell);
         },
-        isVisible: (cell, _libro, path) => {
+        isVisible: (cell, libro, path) => {
           if (
             cell &&
             cell instanceof LibroCellView &&
@@ -804,13 +790,13 @@ export class LibroCommandContribution implements CommandContribution {
       execute: () => {
         //
       },
-      isVisible: (_cell, libro, path) => {
+      isVisible: (cell, libro, path) => {
         if (!libro || !(libro instanceof LibroView)) {
           return false;
         }
         return !libro?.model.readOnly && path === LibroToolbarArea.HeaderCenter;
       },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
           return false;
         }
@@ -950,12 +936,12 @@ export class LibroCommandContribution implements CommandContribution {
       },
     );
     command.registerCommand(NotebookCommands['ChangeCellTo'], {
-      execute: async (cell, libro, _path, targetType) => {
+      execute: async (cell, libro, path, targetType) => {
         if (
           !cell ||
           !libro ||
-          !(cell instanceof LibroCellView) ||
-          !(libro instanceof LibroView)
+          !(libro instanceof LibroView) ||
+          !(cell instanceof LibroCellView)
         ) {
           return;
         }
@@ -964,13 +950,13 @@ export class LibroCommandContribution implements CommandContribution {
           libro.invertCell(cell, targetType);
         }
       },
-      isVisible: (_cell, libro, path) => {
+      isVisible: (cell, libro, path) => {
         if (!libro || !(libro instanceof LibroView)) {
           return false;
         }
         return !libro?.model.readOnly && path === LibroToolbarArea.HeaderCenter;
       },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
           return false;
         }
@@ -992,7 +978,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.invertCell(cell, 'code');
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -1015,7 +1001,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.invertCell(cell, 'markdown');
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -1057,52 +1043,82 @@ export class LibroCommandContribution implements CommandContribution {
         },
       },
     );
+    this.libroCommand.registerLibroCommand(
+      command,
+      NotebookCommands['EnableOrDisableAllOutputScrolling'],
+      {
+        execute: (cell: CellView | undefined, libro: NotebookView | undefined) => {
+          if (
+            !cell ||
+            !libro ||
+            !(cell instanceof LibroCellView) ||
+            !(libro instanceof LibroView)
+          ) {
+            return;
+          }
+          if (libro.outputsScroll) {
+            libro.disableAllOutputScrolling();
+          } else {
+            libro.enableAllOutputScrolling();
+          }
+        },
+        isVisible: (cell, libro, path) => {
+          if (!libro || !(libro instanceof LibroView)) {
+            return false;
+          }
+          return !libro?.model.readOnly && path === LibroToolbarArea.HeaderCenter;
+        },
+      },
+    );
     this.libroCommand.registerLibroCommand(command, DocumentCommands['Save'], {
-      execute: async (_cell, libro) => {
+      execute: async (cell, libro) => {
         if (!libro || !(libro instanceof LibroView)) {
           return;
         }
         libro.save();
       },
-      isVisible: (_cell, libro, path) => {
+      isVisible: (cell, libro, path) => {
         if (!libro || !(libro instanceof LibroView)) {
           return false;
         }
         return !libro?.model.readOnly && path === LibroToolbarArea.HeaderCenter;
       },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
           return false;
         }
         return true;
       },
     });
-    // this.libroCommand.registerLibroCommand(command, DocumentCommands['OpenSettings'], {
-    //   execute: async () => {
-    //     this.modalService.openModal(SettingsModal);
-    //   },
-    //   isVisible: (cell, libro, path) => {
-    //     return path === LibroToolbarArea.HeaderCenter;
-    //   },
-    // });
+    this.libroCommand.registerLibroCommand(command, DocumentCommands['OpenSettings'], {
+      execute: async () => {
+        this.modalService.openModal(SettingsModal);
+      },
+      isVisible: (cell, libro, path) => {
+        if (!libro || !(libro instanceof LibroView)) {
+          return false;
+        }
+        return !libro?.model.readOnly && path === LibroToolbarArea.HeaderRight;
+      },
+    });
     this.libroCommand.registerLibroCommand(
       command,
       NotebookCommands['UndoCellAction'],
       {
-        execute: async (_cell, libro) => {
+        execute: async (cell, libro) => {
           if (!libro || !(libro instanceof LibroView)) {
             return;
           }
 
           libro.model.undo();
         },
-        isVisible: (_cell, libro, path) => {
+        isVisible: (cell, libro, path) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
           return !libro?.model.readOnly && path === LibroToolbarArea.HeaderCenter;
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -1115,19 +1131,19 @@ export class LibroCommandContribution implements CommandContribution {
       command,
       NotebookCommands['RedoCellAction'],
       {
-        execute: async (_cell, libro) => {
+        execute: async (cell, libro) => {
           if (!libro || !(libro instanceof LibroView)) {
             return;
           }
           libro.model.redo();
         },
-        isVisible: (_cell, libro, path) => {
+        isVisible: (cell, libro, path) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
           return !libro?.model.readOnly && path === LibroToolbarArea.HeaderCenter;
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -1150,7 +1166,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.splitCell(cell);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -1165,7 +1181,7 @@ export class LibroCommandContribution implements CommandContribution {
         }
         (cell as LibroEditorCellView).redo();
       },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
           return false;
         }
@@ -1179,7 +1195,7 @@ export class LibroCommandContribution implements CommandContribution {
         }
         (cell as LibroEditorCellView).undo();
       },
-      isEnabled: (_cell, libro) => {
+      isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
           return false;
         }
@@ -1201,7 +1217,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.setMarkdownHeader(cell, 1);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -1224,7 +1240,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.setMarkdownHeader(cell, 2);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -1247,7 +1263,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.setMarkdownHeader(cell, 3);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -1270,7 +1286,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.setMarkdownHeader(cell, 4);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -1293,7 +1309,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.setMarkdownHeader(cell, 5);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -1316,7 +1332,7 @@ export class LibroCommandContribution implements CommandContribution {
           }
           libro.setMarkdownHeader(cell, 6);
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
@@ -1326,12 +1342,12 @@ export class LibroCommandContribution implements CommandContribution {
     );
 
     this.libroCommand.registerLibroCommand(command, NotebookCommands['More'], {
-      execute: async (_cell, libro) => {
+      execute: async (cell, libro) => {
         if (!libro || !(libro instanceof LibroView)) {
           return;
         }
       },
-      isVisible: (_cell, _libro, path) => {
+      isVisible: (cell, libro, path) => {
         return path === LibroToolbarArea.CellRight;
       },
     });

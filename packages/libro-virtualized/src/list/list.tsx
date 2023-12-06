@@ -10,8 +10,8 @@ import type {
   OverscanIndicesGetter,
   RenderedSection,
   Scroll as GridScroll,
-} from '../Grid/index.js';
-import Grid, { accessibilityOverscanIndicesGetter } from '../Grid/index.js';
+} from '../grid/index.js';
+import Grid, { accessibilityOverscanIndicesGetter } from '../grid/index.js';
 
 import type { RenderedRows, RowRenderer, Scroll } from './types.js';
 

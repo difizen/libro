@@ -2,9 +2,10 @@ import { Model } from '@difizen/libro-code-editor';
 import type { ICell } from '@difizen/libro-common';
 import { concatMultilineString } from '@difizen/libro-common';
 import { DisposableCollection } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
-import { prop } from '@difizen/mana-app';
+import { prop, inject, postConstruct, transient } from '@difizen/mana-app';
 
+import type { DefaultDecodedFormatter } from '../formatter/index.js';
+import { DefaultEncodedFormatter, LibroFormatterManager } from '../formatter/index.js';
 import { CellOptions } from '../libro-protocol.js';
 import type { CellModel } from '../libro-protocol.js';
 
@@ -16,6 +17,16 @@ export class LibroCellModel extends Model implements CellModel {
   toDispose = new DisposableCollection();
 
   options: CellOptions;
+
+  libroFormatType: string;
+
+  _decodeObject: DefaultDecodedFormatter;
+
+  @inject(LibroFormatterManager)
+  libroFormatterManager: LibroFormatterManager<
+    DefaultDecodedFormatter,
+    DefaultDecodedFormatter
+  >;
 
   @prop()
   metadata: Partial<LibroCellMetadata>;
@@ -30,8 +41,50 @@ export class LibroCellModel extends Model implements CellModel {
     });
     this.options = options;
     this.type = getLibroCellType(options);
-    this.metadata = options?.cell?.metadata || {};
+    this.libroFormatType = 'formatter-string';
+
+    this.metadata = {
+      ...options?.cell?.metadata,
+      libroFormatter: this.libroFormatType,
+    };
     this.trusted = options?.cell?.metadata?.trusted ?? false;
+  }
+
+  @postConstruct()
+  init() {
+    const formatValue: DefaultEncodedFormatter = DefaultEncodedFormatter.is(
+      this.options?.cell,
+    )
+      ? this.options?.cell
+      : {
+          ...this.options?.cell,
+          metadata: {
+            ...this.options?.cell.metadata,
+            libroFormatter: this.libroFormatType,
+          },
+        };
+
+    this.decodeObject = this.libroFormatterManager.adapter(
+      this.libroFormatType,
+      formatValue,
+    );
+  }
+
+  get source(): string {
+    const encodedValue = this.libroFormatterManager.encode(
+      this.libroFormatType,
+      this.decodeObject,
+    );
+    return concatMultilineString(encodedValue.source);
+  }
+
+  set decodeObject(data: DefaultDecodedFormatter) {
+    this.value = data.value;
+    this._decodeObject = data;
+  }
+
+  get decodeObject() {
+    return { ...this._decodeObject, value: this.value };
   }
 
   async run() {
@@ -43,7 +96,7 @@ export class LibroCellModel extends Model implements CellModel {
       id: this.id,
       cell_type: this.type,
       metadata: this.metadata,
-      source: this.value,
+      source: this.source,
     };
   }
 

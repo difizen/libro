@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useInject, ViewInstance } from '@difizen/mana-app';
 import { ViewRender } from '@difizen/mana-app';
-import type { CSSProperties, FC } from 'react';
+import type { FC, CSSProperties } from 'react';
 import { useState, useEffect, memo } from 'react';
 import type { XYCoord } from 'react-dnd';
 import { useDragLayer } from 'react-dnd';
@@ -49,10 +50,9 @@ const MultipleSelectionPreview: FC<{ activeCell: CellView }> = ({ activeCell }) 
         setMultipleSelectionPreview(view);
         return;
       })
-      .catch(() => {
+      .catch((e) => {
         //
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -86,10 +86,9 @@ const SingleSelectionDragPreview: FC<{ activeCell: CellView }> = ({ activeCell }
         setSingleSelectionPreview(view);
         return;
       })
-      .catch(() => {
+      .catch((e) => {
         //
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -103,7 +102,7 @@ export const SingleSelectionPreviewMemo: FC<SelectionPreviewProps> = memo(
   SingleSelectionDragPreview,
 );
 
-export const CustomDragLayer: FC = () => {
+export const CustomDragLayer = () => {
   const { isDragging, item, currentOffset } = useDragLayer((monitor) => ({
     item: monitor.getItem(),
     itemType: monitor.getItemType(),

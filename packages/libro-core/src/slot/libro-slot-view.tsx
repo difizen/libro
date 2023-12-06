@@ -1,15 +1,12 @@
 import { DefaultSlotView, view, ViewRender, ViewInstance } from '@difizen/mana-app';
 import { transient } from '@difizen/mana-app';
 import { equals, prop, useInject } from '@difizen/mana-app';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import { isDisplayView } from './libro-slot-protocol.js';
 
 export const LibroExtensionViewComponent = forwardRef(
-  function LibroExtensionViewComponent(
-    _props,
-    ref: React.ForwardedRef<HTMLDivElement>,
-  ) {
+  function LibroExtensionViewComponent(props, ref: React.ForwardedRef<HTMLDivElement>) {
     const instance = useInject<LibroSlotView>(ViewInstance);
     //过滤出实现了DisplayView接口的View,用于控制抢占逻辑
     const filteredChildren = instance.children.filter((item) => {
