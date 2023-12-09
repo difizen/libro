@@ -1,0 +1,54 @@
+.libro-llm-hljs {
+  overflow-x: auto;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  text-shadow: unset !important;
+  color: var(--mana-libro-editor-variable-color) !important;
+
+  .hljs-title.function_ {
+    color: var(--mana-libro-editor-def-color);
+  }
+
+  .hljs-keyword {
+    color: var(--mana-libro-editor-keyword-color);
+  }
+
+  .hljs-number {
+    color: var(--mana-libro-editor-number-color);
+  }
+
+  .hljs-comment {
+    color: var(--mana-libro-editor-comment-color);
+  }
+
+  .hljs-string {
+    color: var(--mana-libro-editor-string-color);
+  }
+
+  .hljs-built_in {
+    color: var(--mana-libro-editor-builtin-color);
+  }
+}
+
+.libro-llm-output-render {
+  p {
+    color: var(--mana-libro-llm-response-output-text-color);
+  }
+}
+
+.libro-prompt-output-render-container {
+  padding: 10px 24px;
+}
+
+.libro-prompt-output-llm-render {
+  .libro-llm-output-render pre {
+    background: #f4f6fb;
+    padding: 16px;
+  }
+}
+
+.libro-prompt-output-btn {
+  cursor: pointer;
+  color: #1677ff;
+  margin-left: 24px;
+}
