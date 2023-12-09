@@ -1,4 +1,5 @@
 import { FileView, LibroJupyterModule } from '@difizen/libro-jupyter';
+import { LibroPromptCellModule } from '@difizen/libro-prompt-cell';
 import {
   ManaModule,
   createSlotPreference,
@@ -20,8 +21,8 @@ import {
 import './index.less';
 import { LibroLabHeaderMenuModule } from './menu/module.js';
 import { LibroLabTocModule } from './toc/module.js';
-import { WelcomeView } from './welcome/index.js';
 import { EntryPointView } from './welcome/entry-point-view.js';
+import { WelcomeView } from './welcome/index.js';
 
 export const LibroLabModule = ManaModule.create()
   .register(
@@ -87,4 +88,5 @@ export const LibroLabModule = ManaModule.create()
     LibroLabLayoutModule,
     LibroLabHeaderMenuModule,
     LibroLabTocModule,
+    LibroPromptCellModule,
   );
