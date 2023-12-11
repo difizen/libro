@@ -16,11 +16,10 @@ import { LanguageGrammarDefinitionContribution } from './textmate-contribution.j
 import { TextmateRegistry } from './textmate-registry.js';
 import { TextmateThemeContribution } from './textmate-theme-contribution.js';
 
-console.warn(onig);
-
 export function fetchOniguruma(): Promise<ArrayBuffer> {
   return new Promise((resolve, reject) => {
-    const onigurumaPath = onig; // webpack doing its magic here
+    // const onigurumaPath = 'https://unpkg.com/vscode-oniguruma@2.0.1/release/onig.wasm'; // webpack doing its magic here
+    const onigurumaPath = onig;
     const request = new XMLHttpRequest();
 
     request.onreadystatechange = function (): void {
@@ -57,8 +56,8 @@ const vscodeOnigurumaLib = fetchOniguruma().then((buffer) =>
 
 export const TextmateModule = Module()
   .register(
-    OnigurumaPromise,
     {
+      token: OnigurumaPromise,
       useValue: isBasicWasmSupported
         ? vscodeOnigurumaLib
         : Promise.reject(new Error('wasm not supported')),
