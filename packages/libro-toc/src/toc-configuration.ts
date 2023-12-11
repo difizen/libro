@@ -1,5 +1,5 @@
-import { ConfigurationContribution } from '@difizen/mana-app';
 import type { ConfigurationNode } from '@difizen/mana-app';
+import { ConfigurationContribution } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 

@@ -179,23 +179,23 @@ export class LanguageServerManager implements ILanguageServerManager {
     if (!this._enabled) {
       return;
     }
-    const response = await this.serverConnection.makeRequest(this.statusUrl, {});
-
-    this._statusCode = response.status;
-    if (!response.ok) {
-      if (this._retries > 0) {
-        this._retries -= 1;
-        setTimeout(this.fetchSessions.bind(this), this._retriesInterval);
-      } else {
-        this._ready.resolve(undefined);
-        console.warn('Missing jupyter_lsp server extension, skipping.');
-      }
-      return;
-    }
 
     let sessions: Record<string, any>;
 
     try {
+      const response = await this.serverConnection.makeRequest(this.statusUrl, {});
+
+      this._statusCode = response.status;
+      if (!response.ok) {
+        if (this._retries > 0) {
+          this._retries -= 1;
+          setTimeout(this.fetchSessions.bind(this), this._retriesInterval);
+        } else {
+          this._ready.resolve(undefined);
+          console.warn('Missing jupyter_lsp server extension, skipping.');
+        }
+        return;
+      }
       const data = await response.json();
       sessions = data.sessions;
       try {
