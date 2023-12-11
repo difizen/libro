@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "setup": "father build",
-    "build": "father build",
+    "build": "pnpm run build:worker && father build",
     "test": ": Note: lint task is delegated to test:* scripts",
     "test:vitest": "vitest run",
     "test:jest": "jest",
@@ -43,17 +43,22 @@
     "coverage:jest": "jest --coverage",
     "lint": ": Note: lint task is delegated to lint:* scripts",
     "lint:eslint": "eslint src",
-    "build:worker": "webpack --config ./scripts/webpack.worker.js",
+    "build:worker": "webpack --config ./scripts/webpack.worker.cjs",
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/mana-app": "latest",
     "@difizen/libro-cofine-editor-contribution": "^0.1.0",
+    "@difizen/mana-app": "latest",
     "@difizen/monaco-editor-core": "latest",
     "debug": "^4.3.2",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.6"
+    "@types/debug": "^4.1.6",
+    "file-loader": "^6.2.0",
+    "source-map-loader": "^4.0.1",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   }
 }
