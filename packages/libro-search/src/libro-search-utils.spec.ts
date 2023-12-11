@@ -1,7 +1,7 @@
-import 'reflect-metadata';
 import assert from 'assert';
 
-import type { SearchMatch } from './libro-search-protocol.js';
+import type { SearchMatch } from '@difizen/libro-code-editor';
+
 import { LibroSearchUtils } from './libro-search-utils.js';
 
 describe('libro search utils', () => {

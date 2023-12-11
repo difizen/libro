@@ -117,8 +117,8 @@ class IndentMarkersClass implements PluginValue {
   view: EditorView;
   decorations!: DecorationSet;
 
-  private unitWidth: number;
-  private currentLineNumber: number;
+  protected unitWidth: number;
+  protected currentLineNumber: number;
 
   constructor(view: EditorView) {
     this.view = view;
@@ -149,7 +149,7 @@ class IndentMarkersClass implements PluginValue {
     }
   }
 
-  private generate(state: EditorState) {
+  protected generate(state: EditorState) {
     const builder = new RangeSetBuilder<Decoration>();
 
     const lines = getVisibleLines(this.view, state);

@@ -109,8 +109,8 @@ export class ArrayIterator<T> implements IIterator<T> {
     return this._source[this._index++];
   }
 
-  private _index = 0;
-  private _source: ArrayLike<T>;
+  protected _index = 0;
+  protected _source: ArrayLike<T>;
 }
 
 /**

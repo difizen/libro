@@ -1,24 +1,21 @@
-import { LibroModel } from '@difizen/libro-core';
-import type {
-  IContentsModel,
-  ExecutableNotebookModel,
-  IContentsCheckpointModel,
-  IKernelConnection,
-} from '@difizen/libro-kernel';
+import { LibroModel, VirtualizedManager } from '@difizen/libro-core';
 import {
-  LibroKernelConnectionManager,
-  ServerManager,
   ContentsManager,
+  ExecutableNotebookModel,
+  LibroKernelConnectionManager,
   ServerConnection,
+  ServerManager,
 } from '@difizen/libro-kernel';
-import { prop, ModalService, getOrigin } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+import type { IKernelConnection } from '@difizen/libro-kernel';
+import type { IContentsCheckpointModel, IContentsModel } from '@difizen/libro-kernel';
+import { getOrigin, ModalService, prop } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
+import { inject, transient } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 
 import {
-  LibroFileService,
   ExecutedWithKernelCellModel,
+  LibroFileService,
 } from './libro-jupyter-protocol.js';
 import { SaveFileErrorModal } from './toolbar/save-file-error.js';
 import { getDefaultKernel } from './utils/index.js';
@@ -26,6 +23,17 @@ import { getDefaultKernel } from './utils/index.js';
 type IModel = IContentsModel;
 @transient()
 export class LibroJupyterModel extends LibroModel implements ExecutableNotebookModel {
+  static is = (arg: Record<any, any> | undefined): arg is LibroJupyterModel => {
+    return (
+      !!arg &&
+      ExecutableNotebookModel.is(arg) &&
+      'kernelConnection' in arg &&
+      typeof (arg as any).kernelConnection === 'object' &&
+      'lspEnabled' in arg &&
+      typeof (arg as any).lspEnabled === 'boolean'
+    );
+  };
+
   protected libroFileService: LibroFileService;
 
   get fileService() {
@@ -42,13 +50,14 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
   kernelConnection?: IKernelConnection;
 
   @prop()
-  lspEnabled = false;
+  lspEnabled = true;
 
   protected kernelConnectionManager: LibroKernelConnectionManager;
   protected serverManager: ServerManager;
   protected serverConnection: ServerConnection;
   protected readonly contentsManager: ContentsManager;
   protected readonly modalService: ModalService;
+  protected override virtualizedManager: VirtualizedManager;
 
   constructor(
     @inject(LibroFileService) libroFileService: LibroFileService,
@@ -58,6 +67,7 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
     @inject(ServerConnection) serverConnection: ServerConnection,
     @inject(ContentsManager) contentsManager: ContentsManager,
     @inject(ModalService) modalService: ModalService,
+    @inject(VirtualizedManager) virtualizedManager: VirtualizedManager,
   ) {
     super();
     this.kernelSelection = getDefaultKernel();
@@ -68,6 +78,7 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
     this.contentsManager = contentsManager;
     this.modalService = modalService;
     this.dndAreaNullEnable = true;
+    this.virtualizedManager = virtualizedManager;
   }
 
   get isKernelIdle() {
@@ -154,9 +165,7 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
         }
         return;
       })
-      .catch(() => {
-        //
-      });
+      .catch(console.error);
   }
 
   override async saveNotebookContent(): Promise<void> {
@@ -257,9 +266,7 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
           }
           return;
         })
-        .catch(() => {
-          //
-        });
+        .catch(console.error);
       return;
     }
 
@@ -283,7 +290,12 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
     });
     if (runningCellIndex > -1) {
       this.selectCell(this.cells[runningCellIndex]);
-      this.scrollToView(this.cells[runningCellIndex]);
+
+      if (this.virtualizedManager.isVirtualized) {
+        this.scrollToCellView({ cellIndex: runningCellIndex });
+      } else {
+        this.scrollToView(this.cells[runningCellIndex]);
+      }
     }
   }
 }

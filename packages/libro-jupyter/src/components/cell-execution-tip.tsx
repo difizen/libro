@@ -8,6 +8,7 @@ import {
 import { useObserve } from '@difizen/mana-app';
 import classnames from 'classnames';
 import moment from 'moment';
+import { useState } from 'react';
 
 import type { JupyterCodeCellModel } from '../cell/jupyter-code-cell-model.js';
 import {
@@ -21,6 +22,7 @@ import { InfoCircle } from './icons.js';
 import './index.less';
 
 export function CellExecutionTip({ cell }: { cell: CellView }) {
+  const [, setCurrentTime] = useState<number>();
   const observableCell = useObserve(cell);
 
   if (!ExecutableCellView.is(cell)) {
@@ -32,7 +34,8 @@ export function CellExecutionTip({ cell }: { cell: CellView }) {
   }
 
   const isHidden = observableCell.model.hasOutputHidden;
-  const kernelExecuting = (cell.model as JupyterCodeCellModel).kernelExecuting;
+  const kernelExecuting = (cell.model as unknown as JupyterCodeCellModel)
+    .kernelExecuting;
   const executionInfo = parseExecutionInfoFromModel(cell.model);
 
   const output = cell.outputArea.outputs;
@@ -73,6 +76,9 @@ export function CellExecutionTip({ cell }: { cell: CellView }) {
       </div>
     );
   } else if (kernelExecuting) {
+    setTimeout(() => {
+      setCurrentTime(Date.now());
+    }, 100);
     return (
       <div
         className={classnames(

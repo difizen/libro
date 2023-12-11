@@ -1,23 +1,34 @@
+// Copyright (c) Jupyter Development Team.
+// Distributed under the terms of the Modified BSD License.
+
 import { getOrigin, prop } from '@difizen/mana-app';
-import { BaseView, view, ViewOption } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
-import { Deferred, Emitter } from '@difizen/mana-app';
+import {
+  inject,
+  transient,
+  Deferred,
+  Emitter,
+  BaseView,
+  ThemeService,
+  view,
+  ViewOption,
+} from '@difizen/mana-app';
 import { forwardRef, memo } from 'react';
 
-import type { IEditor } from './code-editor.js';
+import { CodeEditorInfoManager } from './code-editor-info-manager.js';
+import type { CodeEditorFactory } from './code-editor-manager.js';
+import type { IModel } from './code-editor-model.js';
 import type {
-  CodeEditorFactory,
+  CompletionProvider,
   ICoordinate,
   IEditorConfig,
   IEditorSelectionStyle,
-  CompletionProvider,
   TooltipProvider,
-  LSPProvider,
-} from './code-editor.js';
-import type { IModel } from './model.js';
+} from './code-editor-protocol.js';
+import type { IEditor } from './code-editor-protocol.js';
+import { CodeEditorSettings } from './code-editor-settings.js';
 
 export const CodeEditorRender = memo(
-  forwardRef<HTMLDivElement>((_props, ref) => {
+  forwardRef<HTMLDivElement>((props, ref) => {
     return <div ref={ref} />;
   }),
 );
@@ -49,6 +60,11 @@ const leadingWhitespaceRe = /^\s+$/;
 @transient()
 @view('code-editor-view')
 export class CodeEditorView extends BaseView {
+  @inject(ThemeService) protected readonly themeService: ThemeService;
+  @inject(CodeEditorSettings) protected readonly codeEditorSettings: CodeEditorSettings;
+
+  codeEditorInfoManager: CodeEditorInfoManager;
+
   override view = CodeEditorRender;
 
   protected classlist: string[] = [];
@@ -56,6 +72,8 @@ export class CodeEditorView extends BaseView {
   protected options: CodeEditorViewOptions;
 
   protected modalChangeEmitter = new Emitter();
+
+  protected editorHostRef: any;
 
   get onModalChange() {
     return this.modalChangeEmitter.event;
@@ -65,7 +83,7 @@ export class CodeEditorView extends BaseView {
    * Get the editor wrapped by the widget.
    */
   @prop()
-  editor: IEditor | undefined;
+  editor: IEditor;
   protected editorReadyDeferred: Deferred<void> = new Deferred<void>();
   get editorReady() {
     return this.editorReadyDeferred.promise;
@@ -73,23 +91,36 @@ export class CodeEditorView extends BaseView {
   /**
    * Construct a new code editor widget.
    */
-  constructor(@inject(ViewOption) options: CodeEditorViewOptions) {
+  constructor(
+    @inject(ViewOption) options: CodeEditorViewOptions,
+    @inject(CodeEditorInfoManager) codeEditorInfoManager: CodeEditorInfoManager,
+  ) {
     super();
     this.options = options;
+    this.codeEditorInfoManager = codeEditorInfoManager;
   }
 
-  override onViewMount() {
-    const node = this.container?.current;
-    if (node) {
+  override async onViewMount() {
+    const settings = await this.codeEditorSettings.fetchEditorSettings();
+
+    const editorHostId = this.options.editorHostId;
+    const editorHostRef = editorHostId
+      ? this.codeEditorInfoManager.getEditorHostRef(editorHostId)
+      : undefined;
+
+    this.editorHostRef =
+      editorHostRef && editorHostRef.current ? editorHostRef : this.container;
+
+    if (this.editorHostRef.current && this.options.factory) {
       this.editor = this.options.factory({
-        host: node,
+        ...this.options,
+        host: this.editorHostRef.current,
         model: this.options.model,
         uuid: this.options.uuid,
-        config: this.options.config,
+        config: { ...this.options.config, ...settings },
         selectionStyle: this.options.selectionStyle,
         tooltipProvider: this.options.tooltipProvider,
         completionProvider: this.options.completionProvider,
-        lspProvider: this.options.lspProvider,
       });
       this.editorReadyDeferred.resolve();
       this.editor.onModalChange((val) => this.modalChangeEmitter.fire(val));
@@ -99,30 +130,48 @@ export class CodeEditorView extends BaseView {
         getOrigin(this.editor).focus();
       }
 
-      node.addEventListener('focus', this.onViewActive);
-      node.addEventListener('dragenter', this._evtDragEnter);
-      node.addEventListener('dragleave', this._evtDragLeave);
-      node.addEventListener('dragover', this._evtDragOver);
-      node.addEventListener('drop', this._evtDrop);
+      this.editorHostRef.current.addEventListener('focus', this.onViewActive);
+      this.editorHostRef.current.addEventListener('dragenter', this._evtDragEnter);
+      this.editorHostRef.current.addEventListener('dragleave', this._evtDragLeave);
+      this.editorHostRef.current.addEventListener('dragover', this._evtDragOver);
+      this.editorHostRef.current.addEventListener('drop', this._evtDrop);
+
+      this.toDispose.push(
+        this.codeEditorSettings.onCodeEditorSettingsChange((e) => {
+          this.editor.setOption(e.key, e.value);
+        }),
+      );
     }
   }
 
+  removeChildNodes = (parent: any) => {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
+  };
+
   override onViewUnmount() {
-    const node = this.container?.current;
+    const node = this.editorHostRef?.current;
     if (node) {
       node.removeEventListener('focus', this.onViewActive);
       node.removeEventListener('dragenter', this._evtDragEnter);
       node.removeEventListener('dragleave', this._evtDragLeave);
       node.removeEventListener('dragover', this._evtDragOver);
       node.removeEventListener('drop', this._evtDrop);
+
+      this.removeChildNodes(node);
     }
+  }
+
+  override onViewResize() {
+    this.editor?.resizeToFit();
   }
 
   /**
    * Get the model used by the widget.
    */
-  get model(): IModel | undefined {
-    return this.editor?.model;
+  get model(): IModel {
+    return this.editor.model;
   }
 
   /**
@@ -133,11 +182,11 @@ export class CodeEditorView extends BaseView {
       return;
     }
     super.dispose();
-    this.editor?.dispose();
+    this.editor.dispose();
   }
 
   protected onViewActive = (): void => {
-    this.editor?.focus();
+    this.editor.focus();
   };
 
   /**
@@ -145,7 +194,7 @@ export class CodeEditorView extends BaseView {
    */
   protected onResize(): void {
     if (this.isVisible) {
-      this.editor?.resizeToFit();
+      this.editor.resizeToFit();
     }
   }
 
@@ -164,9 +213,6 @@ export class CodeEditorView extends BaseView {
    * Handle a change in model selections.
    */
   protected _onSelectionsChanged(): void {
-    if (!this.editor) {
-      return;
-    }
     const { start, end } = this.editor.getSelection();
 
     if (start.column !== end.column || start.line !== end.line) {
@@ -191,9 +237,6 @@ export class CodeEditorView extends BaseView {
    * Handle the `'lm-dragenter'` event for the widget.
    */
   protected _evtDragEnter = (event: DragEvent): void => {
-    if (!this.editor) {
-      return;
-    }
     if (this.editor.getOption('readOnly') === true) {
       return;
     }
@@ -210,9 +253,6 @@ export class CodeEditorView extends BaseView {
    * Handle the `'lm-dragleave'` event for the widget.
    */
   protected _evtDragLeave = (event: DragEvent): void => {
-    if (!this.editor) {
-      return;
-    }
     this.removeClass(DROP_TARGET_CLASS);
     if (this.editor.getOption('readOnly') === true) {
       return;
@@ -229,9 +269,6 @@ export class CodeEditorView extends BaseView {
    * Handle the `'lm-dragover'` event for the widget.
    */
   protected _evtDragOver = (event: DragEvent): void => {
-    if (!this.editor) {
-      return;
-    }
     this.removeClass(DROP_TARGET_CLASS);
     if (this.editor.getOption('readOnly') === true) {
       return;
@@ -250,9 +287,6 @@ export class CodeEditorView extends BaseView {
    * Handle the `'lm-drop'` event for the widget.
    */
   protected _evtDrop = (event: DragEvent): void => {
-    if (!this.editor) {
-      return;
-    }
     if (this.editor.getOption('readOnly') === true) {
       return;
     }
@@ -292,7 +326,7 @@ export class CodeEditorView extends BaseView {
 /**
  * The options used to initialize a code editor widget.
  */
-export interface CodeEditorViewOptions {
+export interface CodeEditorViewOptions<Config extends IEditorConfig = IEditorConfig> {
   /**
    * A code editor factory.
    *
@@ -300,7 +334,12 @@ export interface CodeEditorViewOptions {
    * The widget needs a factory and a model instead of a `CodeEditor.IEditor`
    * object because it needs to provide its own node as the host.
    */
-  factory: CodeEditorFactory;
+  factory?: CodeEditorFactory;
+
+  /**
+   * where to mount the editor
+   */
+  editorHostId?: string;
 
   /**
    * The model used to initialize the code editor.
@@ -315,7 +354,7 @@ export interface CodeEditorViewOptions {
   /**
    * The configuration options for the editor.
    */
-  config?: Partial<IEditorConfig>;
+  config?: Partial<Config>;
 
   /**
    * The default selection style for the editor.
@@ -324,9 +363,10 @@ export interface CodeEditorViewOptions {
 
   tooltipProvider?: TooltipProvider;
   completionProvider?: CompletionProvider;
-  lspProvider?: LSPProvider;
 
   autoFocus?: boolean;
+
+  [key: string]: any;
 }
 
 /**

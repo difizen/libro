@@ -1,4 +1,4 @@
-import type { SearchMatch } from './libro-search-protocol.js';
+import type { SearchMatch } from '@difizen/libro-code-editor';
 
 /**
  * Search for regular expression matches in a string.

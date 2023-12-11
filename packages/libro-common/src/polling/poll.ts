@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Event } from '@difizen/mana-common';
-import { Emitter, Deferred } from '@difizen/mana-common';
+import type { Event } from '@difizen/mana-app';
+import { Emitter, Deferred } from '@difizen/mana-app';
 
 import { deepEqual } from '../json.js';
 

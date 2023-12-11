@@ -7,7 +7,7 @@ import {
   Priority,
 } from '@difizen/mana-app';
 
-import { LibroJupyterConfiguration } from '../configuration/index.js';
+import { LibroJupyterConfiguration } from '../config/index.js';
 
 import type { LibroNavigatableView } from './navigatable-view.js';
 import { LibroNavigatableViewFactoryId } from './navigatable-view.js';

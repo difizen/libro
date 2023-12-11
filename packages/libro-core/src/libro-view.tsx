@@ -276,11 +276,12 @@ export class LibroView extends BaseView implements NotebookView {
   @inject(LibroSlotManager) libroSlotManager: LibroSlotManager;
   @inject(LirboContextKey) contextKey: LirboContextKey;
 
-  protected viewManager: ViewManager;
-  protected configurationService: ConfigurationService;
+  @inject(ViewManager) protected viewManager: ViewManager;
+  @inject(ConfigurationService) protected configurationService: ConfigurationService;
+  @inject(VirtualizedManager) virtualizedManager: VirtualizedManager;
+
   protected notebookService: NotebookService;
   protected collapseService: CollapseService;
-  protected virtualizedManager: VirtualizedManager;
   isDragging = false;
 
   @prop()
@@ -318,22 +319,16 @@ export class LibroView extends BaseView implements NotebookView {
   }
 
   constructor(
-    @inject(ViewManager) viewManager: ViewManager,
-    @inject(NotebookService) notebookService: NotebookService,
     @inject(ViewOption) options: NotebookOption,
-    @inject(ConfigurationService) configurationService: ConfigurationService,
     @inject(CollapseServiceFactory) collapseServiceFactory: CollapseServiceFactory,
-    @inject(VirtualizedManager) virtualizedManager: VirtualizedManager,
+    @inject(NotebookService) notebookService: NotebookService,
   ) {
     super();
     if (options.id) {
       this.id = options.id;
     }
-    this.virtualizedManager = virtualizedManager;
     this.notebookService = notebookService;
     this.model = this.notebookService.getOrCreateModel(options);
-    this.viewManager = viewManager;
-    this.configurationService = configurationService;
     this.collapseService = collapseServiceFactory({ view: this });
     this.collapserVisible = this.collapseService.collapserVisible;
 
@@ -553,7 +548,7 @@ export class LibroView extends BaseView implements NotebookView {
       return false;
     }
 
-    Promise.all(
+    return Promise.all(
       cells.map((cell) => {
         if (ExecutableCellModel.is(cell.model)) {
           return this.executeCellRun(cell);

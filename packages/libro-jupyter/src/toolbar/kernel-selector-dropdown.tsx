@@ -150,9 +150,7 @@ export const KernelSelector: React.FC = () => {
             (libroView.model as LibroJupyterModel).kernelConnecting = false;
             return;
           })
-          .catch(() => {
-            //
-          });
+          .catch(console.error);
 
         return;
       }
@@ -173,9 +171,7 @@ export const KernelSelector: React.FC = () => {
             (libroView.model as LibroJupyterModel).kernelConnecting = false;
             return;
           })
-          .catch(() => {
-            //
-          });
+          .catch(console.error);
       }
 
       libroView.model.kernelConnecting = false;

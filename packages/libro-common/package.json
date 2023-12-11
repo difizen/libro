@@ -45,7 +45,7 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/mana-common": "latest",
+    "@difizen/mana-app": "latest",
     "path-browserify": "^1.0.0",
     "sanitize-html": "^2.7.2",
     "url-parse": "^1.5.10"

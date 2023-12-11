@@ -10,8 +10,7 @@ import {
   useConfigurationValue,
   SchemaValidator,
 } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
-import { Card, Form } from 'antd';
+import { Form } from 'antd';
 import React from 'react';
 
 import './index.less';
@@ -68,17 +67,15 @@ export const DefaultConfigurationViewComponent: React.FC = () => {
   const viewInstance = useInject<ConfigurationPanelView>(ViewInstance);
   const configs = viewInstance.configurationNodes;
   return (
-    <div>
-      <div className="libro-configuration-site-card">
-        <Card title={l10n.t('配置')} bordered={false} style={{ width: 340 }}>
-          <Form {...layout} form={form}>
-            {configs?.map((config) => {
-              return <ConfigurationNodeRender node={config} key={config.id} />;
-            })}
-          </Form>
-        </Card>
-      </div>
-    </div>
+    <Form
+      {...layout}
+      form={form}
+      className={`libro-configuration-site-card ${viewInstance.className}`}
+    >
+      {configs?.map((config) => {
+        return <ConfigurationNodeRender node={config} key={config.id} />;
+      })}
+    </Form>
   );
 };
 

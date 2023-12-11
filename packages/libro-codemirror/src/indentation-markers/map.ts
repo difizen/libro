@@ -22,19 +22,19 @@ export interface IndentEntry {
  */
 export class IndentationMap {
   /** The {@link EditorState} indentation is derived from. */
-  private state: EditorState;
+  protected state: EditorState;
 
   /** The set of lines that are used as an entrypoint. */
-  private lines: Set<Line>;
+  protected lines: Set<Line>;
 
   /** The internal mapping of line numbers to {@link IndentEntry} objects. */
-  private map: Map<number, IndentEntry>;
+  protected map: Map<number, IndentEntry>;
 
   /** The width of the editor's indent unit. */
-  private unitWidth: number;
+  protected unitWidth: number;
 
   /** The type of indentation to use (terminate at end of scope vs last non-empty line in scope) */
-  private markerType: 'fullScope' | 'codeOnly';
+  protected markerType: 'fullScope' | 'codeOnly';
 
   /**
    * @param lines - The set of lines to get the indentation map for.
@@ -96,7 +96,7 @@ export class IndentationMap {
    * @param col - The visual beginning whitespace width of the line.
    * @param level - The indentation level of the line.
    */
-  private set(line: Line, col: number, level: number) {
+  protected set(line: Line, col: number, level: number) {
     const empty = !line.text.trim().length;
     const entry: IndentEntry = { line, col, level, empty };
     this.map.set(entry.line.number, entry);
@@ -109,7 +109,7 @@ export class IndentationMap {
    *
    * @param line - The {@link Line} to add to the map.
    */
-  private add(line: Line) {
+  protected add(line: Line) {
     if (this.has(line)) {
       return this.get(line);
     }
@@ -165,7 +165,7 @@ export class IndentationMap {
    * @param from - The {@link Line} to start from.
    * @param dir - The direction to search in. Either `1` or `-1`.
    */
-  private closestNonEmpty(from: Line, dir: -1 | 1) {
+  protected closestNonEmpty(from: Line, dir: -1 | 1) {
     let lineNo = from.number + dir;
 
     while (dir === -1 ? lineNo >= 1 : lineNo <= this.state.doc.lines) {
@@ -205,7 +205,7 @@ export class IndentationMap {
    * Finds the state's active block (via the current selection) and sets all
    * the active indent level for the lines in the block.
    */
-  private findAndSetActiveLines() {
+  protected findAndSetActiveLines() {
     const currentLine = getCurrentLine(this.state);
 
     if (!this.has(currentLine)) {

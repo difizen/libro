@@ -1,23 +1,8 @@
+import type { SearchMatch } from '@difizen/libro-code-editor';
 import type { CellView } from '@difizen/libro-core';
 import type { Disposable, Event } from '@difizen/mana-app';
 import type { View } from '@difizen/mana-app';
 import { Syringe } from '@difizen/mana-app';
-
-/**
- * Base search match interface
- */
-export interface SearchMatch {
-  /**
-   * Text of the exact match itself
-   */
-  readonly text: string;
-
-  /**
-   * Start location of the match (in a text, this is the column)
-   */
-  position: number;
-}
-
 /**
  * HTML search match interface
  */

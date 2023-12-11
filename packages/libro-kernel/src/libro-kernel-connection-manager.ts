@@ -12,7 +12,7 @@ export class LibroKernelConnectionManager {
   protected kernelManager: LibroKernelManager;
 
   @prop()
-  private kernelConnectionMap: Map<string, IKernelConnection>;
+  protected kernelConnectionMap: Map<string, IKernelConnection>;
 
   constructor(
     @inject(LibroSessionManager) sessionManager: LibroSessionManager,

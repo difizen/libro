@@ -51,16 +51,12 @@ export function moveCompletionSelection(
       );
     }
     const { length } = cState.open.options;
-    let selected;
-    if (cState.open.selected > -1) {
-      selected = cState.open.selected + step * (forward ? 1 : -1);
-    } else {
-      if (forward) {
-        selected = 0;
-      } else {
-        selected = length - 1;
-      }
-    }
+    let selected =
+      cState.open.selected > -1
+        ? cState.open.selected + step * (forward ? 1 : -1)
+        : forward
+          ? 0
+          : length - 1;
     if (selected < 0) {
       selected = by === 'page' ? 0 : length - 1;
     } else if (selected >= length) {
@@ -238,9 +234,7 @@ export const completionPlugin = ViewPlugin.fromClass(
             return undefined;
           },
         )
-        .catch(() => {
-          //
-        });
+        .catch(console.error);
     }
 
     scheduleAccept() {

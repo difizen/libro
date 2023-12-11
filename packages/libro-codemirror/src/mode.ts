@@ -1,6 +1,6 @@
 import { markdown } from '@codemirror/lang-markdown';
-import { LanguageDescription } from '@codemirror/language';
 import type { LanguageSupport } from '@codemirror/language';
+import { LanguageDescription } from '@codemirror/language';
 import { defaultMimeType } from '@difizen/libro-code-editor';
 import { PathExt } from '@difizen/libro-common';
 import { highlightTree } from '@lezer/highlight';

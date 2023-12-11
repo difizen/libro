@@ -1,5 +1,5 @@
 import { DisplayWrapComponent } from '@difizen/libro-common';
-import type { BetweenCellProvider, LibroView } from '@difizen/libro-core';
+import type { BetweenCellProvider, CellOptions, LibroView } from '@difizen/libro-core';
 import { CellService } from '@difizen/libro-core';
 import { CommandRegistry, useInject, ViewInstance } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
@@ -36,8 +36,13 @@ const AddCellOutlined: React.FC = () => (
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const LibroCommonBetweenCellContent: BetweenCellProvider = forwardRef(
-  function LibroCommonBetweenCellContent(props, _ref) {
-    // eslint-disable-next-line react/prop-types
+  function LibroCommonBetweenCellContent(
+    props: {
+      index: number;
+      addCell: (option: CellOptions, position?: number | undefined) => Promise<void>;
+    },
+    ref,
+  ) {
     const { addCell, index } = props;
     const { cellsMeta } = useInject<CellService>(CellService);
     const anchorRef = useRef<HTMLDivElement>(null);
@@ -62,7 +67,7 @@ export const LibroCommonBetweenCellContent: BetweenCellProvider = forwardRef(
       clearTimeout(delayRef.current);
     };
 
-    const openTooltip = (_nextOpen: boolean, delay = 0.5) => {
+    const openTooltip = (nextOpen: boolean, delay = 0.5) => {
       clearDelay();
 
       if (delay === 0) {
@@ -117,7 +122,7 @@ export const LibroCommonBetweenCellContent: BetweenCellProvider = forwardRef(
             tabIndex={10}
             className="libro-add-between-cell-anchor"
             style={{
-              position: 'fixed',
+              position: 'absolute',
               top: position.top + 5,
               left: position.left + 5,
               width: 1,
@@ -153,7 +158,9 @@ export const LibroCommonBetweenCellContent: BetweenCellProvider = forwardRef(
             closeTooltip();
             setGutterVisible(true);
             setMenuVisible(true);
-            setPosition({ top: e.clientY, left: e.clientX });
+
+            // TODO: 位置不准确
+            setPosition({ top: e.nativeEvent.offsetY, left: e.nativeEvent.offsetX });
             anchorRef.current?.focus();
           }}
         >
@@ -189,8 +196,10 @@ export const LibroCommonBetweenCellContent: BetweenCellProvider = forwardRef(
   },
 );
 
-export const LibroWrappedBetweenCellContent: BetweenCellProvider = (props) => {
-  // eslint-disable-next-line react/prop-types
+export const LibroWrappedBetweenCellContent: BetweenCellProvider = (props: {
+  index: number;
+  addCell: (option: CellOptions, position?: number | undefined) => Promise<void>;
+}) => {
   const { index, addCell } = props;
   const instance = useInject<LibroView>(ViewInstance);
   return (

@@ -1,4 +1,4 @@
-import { defaultKeymap, historyKeymap, history } from '@codemirror/commands';
+import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
 import { pythonLanguage } from '@codemirror/lang-python';
 import {
   bracketMatching,
@@ -17,23 +17,23 @@ import { Compartment, EditorState, StateEffect } from '@codemirror/state';
 import type { KeyBinding } from '@codemirror/view';
 import {
   crosshairCursor,
-  rectangularSelection,
-  dropCursor,
   drawSelection,
-  highlightSpecialChars,
-  highlightActiveLineGutter,
+  dropCursor,
   EditorView,
   highlightActiveLine,
+  highlightActiveLineGutter,
+  highlightSpecialChars,
   keymap,
   lineNumbers,
   placeholder,
+  rectangularSelection,
 } from '@codemirror/view';
 import type { IEditorConfig } from '@difizen/libro-code-editor';
 
 import {
+  autocompletion,
   closeBrackets,
   closeBracketsKeymap,
-  autocompletion,
   completionKeymap,
 } from './auto-complete/index.js';
 import { kernelCompletions } from './completion.js';
@@ -41,6 +41,9 @@ import type { IOptions } from './editor.js';
 import { hyperLink } from './hyperlink.js';
 import { indentationMarkers } from './indentation-markers/index.js';
 import { FoldIcon, UnFoldIcon } from './libro-icon.js';
+import { lspPythonCompletion } from './lsp/completion.js';
+import { formatKeymap } from './lsp/format.js';
+import { lspLint, lspTooltip } from './lsp/index.js';
 import { ensure } from './mode.js';
 import { getTheme, defaultTheme } from './theme.js';
 import { tabTooltip, tooltipKeymap } from './tooltip.js';
@@ -58,12 +61,6 @@ export interface CodeMirrorConfig extends IEditorConfig {
    * content mimetype
    */
   mimetype?: string;
-
-  /**
-   * The theme to style the editor with. see editortheme.ts for an example
-   * of how to design a theme for CodeMirror 6.
-   */
-  theme?: string;
 
   // FIXME-TRANS: Handle theme localizable names
   // themeDisplayName?: string
@@ -257,7 +254,7 @@ class FacetWrapper<T, U> extends ExtensionBuilder<T> {
     return this._facet.of(value);
   }
 
-  private _facet: Facet<T, U>;
+  protected _facet: Facet<T, U>;
 }
 /**
  * Extension builder that provides an extension depending
@@ -274,8 +271,8 @@ class ConditionalExtension extends ExtensionBuilder<boolean> {
     return value ? this._truthy : this._falsy;
   }
 
-  private _truthy: Extension;
-  private _falsy: Extension;
+  protected _truthy: Extension;
+  protected _falsy: Extension;
 }
 
 /**
@@ -293,8 +290,8 @@ class GenConditionalExtension<T> extends ExtensionBuilder<T> {
     return this._builder.of(this._fn(value));
   }
 
-  private _fn: (a: T) => boolean;
-  private _builder: ConditionalExtension;
+  protected _fn: (a: T) => boolean;
+  protected _builder: ConditionalExtension;
 }
 
 /**
@@ -325,8 +322,8 @@ class ConfigurableBuilder implements IConfigurableBuilder {
     );
   }
 
-  private _compartment: Compartment;
-  private _builder: IExtensionBuilder;
+  protected _compartment: Compartment;
+  protected _builder: IExtensionBuilder;
 }
 
 /*
@@ -348,7 +345,7 @@ class ThemeBuilder implements IConfigurableBuilder {
     return this._compartment.reconfigure(getTheme(v));
   }
 
-  private _compartment: Compartment;
+  protected _compartment: Compartment;
 }
 
 /*
@@ -370,7 +367,7 @@ class PlaceHolderBuilder implements IConfigurableBuilder {
     return this._compartment.reconfigure(placeholder(v));
   }
 
-  private _compartment: Compartment;
+  protected _compartment: Compartment;
 }
 
 /**
@@ -508,17 +505,31 @@ export class EditorConfiguration {
         'jupyterKernelCompletion',
         createConditionalBuilder(
           pythonLanguage.data.of({
-            autocomplete: kernelCompletions(options['completionProvider']),
+            autocomplete: kernelCompletions(options.completionProvider),
           }),
         ),
       ],
       [
         'jupyterKernelTooltip',
-        createConditionalBuilder(tabTooltip(options['tooltipProvider'])),
+        createConditionalBuilder(tabTooltip(options.tooltipProvider)),
       ],
       ['indentationMarkers', createConditionalBuilder(indentationMarkers())],
       ['hyperLink', createConditionalBuilder(hyperLink)],
       ['placeholder', createPlaceHolderBuilder()],
+      [
+        'lspTooltip',
+        createConditionalBuilder(lspTooltip({ lspProvider: options.lspProvider })),
+      ],
+      [
+        'lspLint',
+        createConditionalBuilder(lspLint({ lspProvider: options.lspProvider })),
+      ],
+      [
+        'lspCompletion',
+        createConditionalBuilder(
+          lspPythonCompletion({ lspProvider: options.lspProvider }),
+        ),
+      ],
     ]);
     this._themeOverloaderSpec = { '&': {}, '.cm-line': {} };
     this._themeOverloader = new Compartment();
@@ -607,6 +618,7 @@ export class EditorConfiguration {
       ...completionKeymap,
       ...lintKeymap,
       ...tooltipKeymap,
+      ...formatKeymap,
     ];
 
     const keymapExt = builder!.of(
@@ -635,7 +647,7 @@ export class EditorConfiguration {
     return extensions;
   }
 
-  private updateThemeOverload(
+  protected updateThemeOverload(
     config: Partial<CodeMirrorConfig> | Record<string, any>,
   ): Extension {
     const { fontFamily, fontSize, lineHeight, lineWrap, wordWrapColumn } = config;
@@ -679,11 +691,11 @@ export class EditorConfiguration {
     return EditorView.theme(this._themeOverloaderSpec);
   }
 
-  private get(key: string): IConfigurableBuilder | undefined {
+  protected get(key: string): IConfigurableBuilder | undefined {
     return this._configurableBuilderMap.get(key);
   }
 
-  private _configurableBuilderMap: Map<string, IConfigurableBuilder>;
-  private _themeOverloaderSpec: Record<string, Record<string, string>>;
-  private _themeOverloader: Compartment;
+  protected _configurableBuilderMap: Map<string, IConfigurableBuilder>;
+  protected _themeOverloaderSpec: Record<string, Record<string, string>>;
+  protected _themeOverloader: Compartment;
 }

@@ -143,7 +143,7 @@ export class GenericSearchProvider extends AbstractSearchProvider {
    *
    * @returns A promise that resolves with a boolean indicating whether a replace occurred.
    */
-  async replaceCurrentMatch(_newText: string, _loop?: boolean): Promise<boolean> {
+  async replaceCurrentMatch(newText: string, loop?: boolean): Promise<boolean> {
     return Promise.resolve(false);
   }
 
@@ -154,7 +154,7 @@ export class GenericSearchProvider extends AbstractSearchProvider {
    *
    * @returns A promise that resolves with a boolean indicating whether a replace occurred.
    */
-  async replaceAllMatches(_newText: string): Promise<boolean> {
+  async replaceAllMatches(newText: string): Promise<boolean> {
     // This is read only, but we could loosen this in theory for input boxes...
     return Promise.resolve(false);
   }
@@ -166,7 +166,7 @@ export class GenericSearchProvider extends AbstractSearchProvider {
    * @param query A RegExp to be use to perform the search
    * @param filters Filter parameters to pass to provider
    */
-  startQuery = async (query: RegExp | null, _filters = {}): Promise<void> => {
+  startQuery = async (query: RegExp | null, filters = {}): Promise<void> => {
     await this.endQuery();
     this._query = query;
 
@@ -281,8 +281,8 @@ export class GenericSearchProvider extends AbstractSearchProvider {
   }
 
   protected async _onWidgetChanged(
-    _mutations: MutationRecord[],
-    _observer: MutationObserver,
+    mutations: MutationRecord[],
+    observer: MutationObserver,
   ) {
     this._currentMatchIndex = -1;
     // This is typically cheap, but we do not control the rate of change or size of the output
@@ -290,7 +290,7 @@ export class GenericSearchProvider extends AbstractSearchProvider {
     this._stateChanged.fire();
   }
 }
-function elementInViewport(el: HTMLElement): boolean {
+export function elementInViewport(el: HTMLElement): boolean {
   const boundingClientRect = el.getBoundingClientRect();
   return (
     boundingClientRect.top >= 0 &&

@@ -43,7 +43,7 @@ const tooltipField = StateField.define<Tooltip | null>({
     return null;
   },
 
-  update(_tooltips, tr) {
+  update(tooltips, tr) {
     const { effects } = tr;
     for (const effect of effects) {
       if (effect.is(closeTooltipEffect)) {
@@ -119,9 +119,7 @@ class TooltipPlugin implements PluginValue {
               });
               return undefined;
             })
-            .catch(() => {
-              //
-            });
+            .catch(console.error);
         }
       }
     });

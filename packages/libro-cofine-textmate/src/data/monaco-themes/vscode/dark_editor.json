@@ -1,0 +1,116 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "Dark (e2-editor)",
+  "include": "dark_plus.json",
+  "colors": {
+    "editor.background": "#1F2740",
+    "editor.lineHighlightBackground": "#353D53",
+    "editorCursor.foreground": "#E9E9EC",
+    "editorIndentGuide.background": "#353D53",
+    "editor.selectionBackground": "#2858D8",
+    "editorBracketMatch.background": "#2858D8",
+    "editor.selectionHighlightBackground": "#223979",
+    "editor.findMatchBackground": "#FFC600"
+  },
+  "tokenColors": [
+    {
+      "name": "Default Scope",
+      "scope": [""],
+      "settings": {
+        "foreground": "#ffffff",
+        "background": "#353D53"
+      }
+    },
+    {
+      "name": "Default Scope",
+      "scope": ["keywords", "customKeywords"],
+      "settings": {
+        "foreground": "#46AAFF"
+      }
+    },
+    {
+      "name": "Default Scope",
+      "scope": ["comment"],
+      "settings": {
+        "foreground": "#787D8C"
+      }
+    },
+    {
+      "name": "Default Scope",
+      "scope": ["builtinFunctions", "function"],
+      "settings": {
+        "foreground": "#FD85F4"
+      }
+    },
+    {
+      "name": "Default Scope",
+      "scope": ["operator"],
+      "settings": {
+        "foreground": "#C8D3EC"
+      }
+    },
+    {
+      "name": "Default Scope",
+      "scope": ["string"],
+      "settings": {
+        "foreground": "#E5B200"
+      }
+    },
+    {
+      "name": "Default Scope",
+      "scope": ["number"],
+      "settings": {
+        "foreground": "#B9DCA6"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-info"],
+      "settings": {
+        "foreground": "#008800"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-alert"],
+      "settings": {
+        "foreground": "#EABA19"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-date"],
+      "settings": {
+        "foreground": "#E9E9EC"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-error"],
+      "settings": {
+        "foreground": "#FF4B61"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-links"],
+      "settings": {
+        "foreground": "#1292FF"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-failed"],
+      "settings": {
+        "foreground": "#FF4B61"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-success"],
+      "settings": {
+        "foreground": "#E9E9EC"
+      }
+    }
+  ]
+}

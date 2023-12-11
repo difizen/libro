@@ -23,7 +23,7 @@ export function renderHref(slug: string) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function renderAttrs(_slug: string) {
+export function renderAttrs(slug: string) {
   return {};
 }
 

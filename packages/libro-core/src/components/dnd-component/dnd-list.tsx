@@ -130,13 +130,16 @@ export const DndCellsRender = forwardRef<
 export const DndList = forwardRef<
   HTMLDivElement,
   { libroView: LibroView; children: ReactNode }
->(function DndList({
-  libroView,
-  children,
-}: {
-  libroView: LibroView;
-  children: ReactNode;
-}) {
+>(function DndList(
+  {
+    libroView,
+    children,
+  }: {
+    libroView: LibroView;
+    children: ReactNode;
+  },
+  ref,
+) {
   const cellService = useInject<CellService>(LibroCellService);
 
   const [, drop] = useDrop<Dragparams>(() => ({

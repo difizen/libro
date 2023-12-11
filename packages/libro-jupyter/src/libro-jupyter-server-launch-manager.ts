@@ -2,8 +2,12 @@ import { ServerManager, ServerConnection } from '@difizen/libro-kernel';
 import { inject, singleton } from '@difizen/mana-app';
 import { ApplicationContribution } from '@difizen/mana-app';
 
-@singleton({ contrib: [ApplicationContribution] })
-export class JupyterServerLaunchManager implements ApplicationContribution {
+import { ServerLaunchManager } from './libro-jupyter-protocol.js';
+
+@singleton({ contrib: [ServerLaunchManager, ApplicationContribution] })
+export class JupyterServerLaunchManager
+  implements ServerLaunchManager, ApplicationContribution
+{
   protected serverManager: ServerManager;
   protected serverConnection: ServerConnection;
 
@@ -18,6 +22,15 @@ export class JupyterServerLaunchManager implements ApplicationContribution {
   }
 
   async onStart() {
-    this.serverConnection.updateSettings({});
+    const host = location.host;
+    this.serverConnection.updateSettings({
+      baseUrl: `http://${host}`,
+      wsUrl: `ws://${host}`,
+    });
+    this.launch();
+  }
+
+  launch() {
+    return this.serverManager.launch();
   }
 }

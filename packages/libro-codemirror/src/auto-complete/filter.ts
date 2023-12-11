@@ -63,13 +63,11 @@ export class FuzzyMatcher {
     // at the start
     if (chars.length === 1) {
       const first = codePointAt(word, 0);
-      if (first === chars[0]) {
-        return [0, 0, codePointSize(first)];
-      }
-      if (first === folded[0]) {
-        return [Penalty.CaseFold, 0, codePointSize(first)];
-      }
-      return null;
+      return first === chars[0]
+        ? [0, 0, codePointSize(first)]
+        : first === folded[0]
+          ? [Penalty.CaseFold, 0, codePointSize(first)]
+          : null;
     }
     const direct = word.indexOf(this.pattern);
     if (direct === 0) {

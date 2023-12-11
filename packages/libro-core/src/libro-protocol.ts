@@ -126,8 +126,6 @@ export interface BaseNotebookModel {
 
   canRedo?: boolean;
 
-  mouseMode?: MouseMode;
-
   /**
    * The metadata associated with the notebook.
    */
@@ -333,6 +331,7 @@ export const DragAreaKey = Symbol('DragAreaKey');
 
 export type MouseMode = 'multipleSelection' | 'mouseDown' | 'drag';
 export interface DndListModel {
+  mouseMode?: MouseMode;
   active?: CellView | undefined;
   hover?: CellView | undefined;
   selectCell: (cell?: CellView) => void;

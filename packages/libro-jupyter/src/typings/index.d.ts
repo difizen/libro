@@ -4,6 +4,13 @@ declare module 'plotly.js' {
   export type Frame = Record<string, any>;
   export function addFrames(root: Plotly.Root, frames: Frame[]): Promise<void>;
   export function animate(root: Plotly.Root): void;
+  export function react(
+    root: Plotly.Root,
+    data: Data[],
+    layout: Layout,
+    config: any,
+  ): Promise<Plotly.Root>;
+  export function toImage(root: Plotly.Root, options: any): Promise<string>;
   export type Data = any;
   export type Layout = any;
 
@@ -26,6 +33,4 @@ declare module 'plotly.js' {
     layout: Layout;
     on(event: PlotlyEvent, callback: (update: any) => void): void;
   }
-  export function react(node: HTMLElement, data: any, layout: any, config: any): void;
-  export function toImage(...args: any[]): Promise<string>;
 }
