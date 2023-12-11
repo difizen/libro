@@ -34,7 +34,10 @@ import {
   LibroJupyterKeybindingContribution,
 } from './command/index.js';
 import { CellExecutionTip, CellInputBottomBlank } from './components/index.js';
-import { ConfigAppContribution, LibroSettingContribution } from './config/index.js';
+import {
+  ConfigAppContribution,
+  LibroJupyterSettingContribution,
+} from './config/index.js';
 import { LibroJupyterContentContribution } from './contents/index.js';
 import { LibroJupyterFileModule } from './file/index.js';
 import { KeybindInstructionsModule } from './keybind-instructions/index.js';
@@ -55,7 +58,6 @@ import {
 export const LibroJupyterModule = ManaModule.create()
   .register(
     LibroJupyterFileService,
-    LibroSettingContribution,
     LibroJupyterCommandContribution,
     LibroJupyterKeybindingContribution,
     LibroJupyterToolbarContribution,
@@ -65,6 +67,7 @@ export const LibroJupyterModule = ManaModule.create()
     LibroJupyterContentContribution,
     LibroJupyterOutputArea,
     LibroJupyterColorContribution,
+    LibroJupyterSettingContribution,
     JupyterServerLaunchManager,
     LibroJupyterView,
     {
