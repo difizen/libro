@@ -23,7 +23,7 @@ import type {
   IAttachments,
   IUnrecognizedCell,
 } from '@difizen/libro-common';
-import type { Disposable, Event } from '@difizen/mana-common';
+import type { Disposable, Event } from '@difizen/mana-app';
 
 /**
  * Changes on Sequence-like data are expressed as Quill-inspired deltas.

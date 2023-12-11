@@ -19,7 +19,7 @@ export const kernelCompletions: EditorCompletion =
     try {
       result = await Promise.any([
         provider({ cursorPosition: context.pos }),
-        new Promise<CompletionReply>((_resolve, reject) => {
+        new Promise<CompletionReply>((resolve, reject) => {
           setTimeout(() => {
             reject(`request time out in ${timeout}ms`);
           }, timeout);
@@ -45,7 +45,7 @@ export const kernelCompletions: EditorCompletion =
         return {
           label: item['text'] as string,
           type: item['type'] === '<unknown>' ? undefined : (item['type'] as string),
-        } as Completion;
+        };
       });
     } else {
       items = result.matches.map((item) => {

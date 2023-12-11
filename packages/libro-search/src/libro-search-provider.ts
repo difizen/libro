@@ -1,18 +1,30 @@
+import type { SearchMatch } from '@difizen/libro-code-editor';
 import type { CellView } from '@difizen/libro-core';
-import { LibroView } from '@difizen/libro-core';
-import { inject, prop, transient, watch, equals } from '@difizen/mana-app';
+import { EditorCellView, LibroView, VirtualizedManager } from '@difizen/libro-core';
+import { inject, prop, transient, equals } from '@difizen/mana-app';
 import { Deferred, DisposableCollection } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 
 import { AbstractSearchProvider } from './abstract-search-provider.js';
 import { LibroCellSearchProvider } from './libro-cell-search-provider.js';
+import { SearchProviderOption } from './libro-search-protocol.js';
 import type {
   CellSearchProvider,
   SearchFilter,
-  SearchMatch,
   SearchFilters,
 } from './libro-search-protocol.js';
-import { SearchProviderOption } from './libro-search-protocol.js';
+
+export function elementInViewport(el: HTMLElement): boolean {
+  const boundingClientRect = el.getBoundingClientRect();
+  return (
+    boundingClientRect.top >= 0 &&
+    boundingClientRect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    boundingClientRect.left >= 0 &&
+    boundingClientRect.right <=
+      (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
 
 export type LibroSearchProviderFactory = (
   option: SearchProviderOption,
@@ -44,6 +56,7 @@ export class LibroSearchProvider extends AbstractSearchProvider {
   @prop() protected providerMap = new Map<string, CellSearchProvider>();
   protected documentHasChanged = false;
   protected override view: LibroView;
+  protected virtualizedManager: VirtualizedManager;
 
   updateSearchCellOutput(value: boolean): void {
     this.searchCellOutput = value;
@@ -52,16 +65,19 @@ export class LibroSearchProvider extends AbstractSearchProvider {
   /**
    * @param option Provide the view to search in
    */
-  constructor(@inject(SearchProviderOption) option: SearchProviderOption) {
+  constructor(
+    @inject(SearchProviderOption) option: SearchProviderOption,
+    @inject(VirtualizedManager) virtualizedManager: VirtualizedManager,
+  ) {
     super(option);
     this.view = option.view as LibroView;
-    this.toDispose.push(watch(this.view.model, 'active', this.onActiveCellChanged));
-    this.toDispose.push(watch(this.view.model, 'cells', this.onCellsChanged));
+    this.virtualizedManager = virtualizedManager;
   }
 
   protected getProvider = (cell: CellView) => {
     return this.providerMap.get(cell.id);
   };
+
   /**
    * Report whether or not this provider has the ability to search on the given object
    *
@@ -230,7 +246,7 @@ export class LibroSearchProvider extends AbstractSearchProvider {
    */
   startQuery = async (
     query: RegExp,
-    _filters?: SearchFilters,
+    filters?: SearchFilters,
     highlightNext = true,
   ): Promise<void> => {
     if (!this.view) {
@@ -379,12 +395,11 @@ export class LibroSearchProvider extends AbstractSearchProvider {
     this.onSearchProviderChanged();
     this.cellsChangeDeferred = undefined;
   };
-  protected onCellsChanged = async (): Promise<void> => {
+
+  onCellsChanged = async (): Promise<void> => {
     if (!this.cellsChangeDeferred) {
       this.cellsChangeDeferred = new Deferred();
-      this.cellsChangeDeferred.promise.then(this.doCellsChanged).catch(() => {
-        //
-      });
+      this.cellsChangeDeferred.promise.then(this.doCellsChanged).catch(console.error);
       this.cellsChangeDeferred.resolve();
     }
   };
@@ -401,35 +416,62 @@ export class LibroSearchProvider extends AbstractSearchProvider {
     }
     return index;
   };
+
+  protected selectCell(selectIndex: number) {
+    if (selectIndex >= 0 && selectIndex < this.view.model.cells.length - 1) {
+      this.view.model.selectCell(this.view.model.cells[selectIndex]);
+    }
+  }
+
   protected stepNext = async (
     reverse = false,
     loop = false,
   ): Promise<SearchMatch | undefined> => {
-    const activateNewMatch = async () => {
-      // if (this.getActiveIndex() !== this._currentProviderIndex!) {
-      //   this.widget.content.activeCellIndex = this._currentProviderIndex!;
-      // }
-      // const activeCell = this.view.activeCell;
-      // if (!activeCell.inViewport) {
-      //   try {
-      //     if (this.view.activeCell) {
-      //       this.view.model.scrollToView(this.view.activeCell);
-      //     }
-      //   } catch (error) {
-      //     // no-op
-      //   }
-      // }
-      // // Unhide cell
-      // if (activeCell.inputHidden) {
-      //   activeCell.inputHidden = false;
-      // }
-      // if (!activeCell.inViewport) {
-      //   // It will not be possible the cell is not in the view
-      //   return;
-      // }
-      // await activeCell.ready;
-      // const editor = activeCell.editor! as CodeMirrorEditor;
-      // editor.revealSelection(editor.getSelection());
+    const activateNewMatch = async (match: SearchMatch) => {
+      if (this.getActiveIndex() !== this.currentProviderIndex!) {
+        this.selectCell(this.currentProviderIndex!);
+      }
+      const activeCell = this.view.activeCell;
+
+      if (!activeCell) {
+        return;
+      }
+
+      const node = activeCell.container?.current;
+
+      if (!elementInViewport(node!)) {
+        try {
+          if (this.view.activeCell) {
+            if (this.virtualizedManager.isVirtualized) {
+              if (EditorCellView.is(activeCell)) {
+                const line = activeCell.editor?.getPositionAt(match.position)?.line;
+
+                this.view.model.scrollToCellView({
+                  cellIndex: this.view.activeCellIndex,
+                  lineIndex: line,
+                });
+              }
+            } else {
+              this.view.model.scrollToView(this.view.activeCell);
+            }
+          }
+        } catch (error) {
+          // no-op
+        }
+      }
+      // Unhide cell
+      if (activeCell.hasInputHidden) {
+        activeCell.hasInputHidden = false;
+      }
+      if (!elementInViewport(node!)) {
+        // It will not be possible the cell is not in the view
+        return;
+      }
+      if (EditorCellView.is(activeCell)) {
+        // await activeCell.editor;
+        const editor = activeCell.editor;
+        editor?.revealSelection(editor.getSelection());
+      }
     };
     if (this.currentProviderIndex === undefined) {
       this.currentProviderIndex = this.getActiveIndex()!;
@@ -441,7 +483,7 @@ export class LibroSearchProvider extends AbstractSearchProvider {
         ? await searchEngine?.highlightPrevious()
         : await searchEngine?.highlightNext();
       if (match) {
-        await activateNewMatch();
+        await activateNewMatch(match);
         return match;
       } else {
         this.currentProviderIndex = this.currentProviderIndex + (reverse ? -1 : 1);
@@ -469,7 +511,7 @@ export class LibroSearchProvider extends AbstractSearchProvider {
         : await searchEngine?.highlightNext();
 
       if (match) {
-        await activateNewMatch();
+        await activateNewMatch(match);
         return match;
       }
     }
@@ -478,7 +520,7 @@ export class LibroSearchProvider extends AbstractSearchProvider {
     return undefined;
   };
 
-  protected onActiveCellChanged = async () => {
+  onActiveCellChanged = async () => {
     await this._onSelectionChanged();
 
     if (this.getActiveIndex() !== this.currentProviderIndex) {

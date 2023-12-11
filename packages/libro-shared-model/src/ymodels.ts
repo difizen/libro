@@ -13,8 +13,8 @@ import type {
   CellType,
 } from '@difizen/libro-common';
 import { deepCopy, deepEqual } from '@difizen/libro-common';
-import type { Event } from '@difizen/mana-common';
-import { Emitter } from '@difizen/mana-common';
+import type { Event } from '@difizen/mana-app';
+import { Emitter } from '@difizen/mana-app';
 import { v4 } from 'uuid';
 import { Awareness } from 'y-protocols/awareness';
 import * as Y from 'yjs';
@@ -181,7 +181,7 @@ export class YDocument<T extends DocumentChange> implements ISharedDocument {
 
   protected _changedEmitter = new Emitter<T>();
   protected _changed = this._changedEmitter.event;
-  private _isDisposed = false;
+  protected _isDisposed = false;
 }
 
 /**
@@ -280,7 +280,7 @@ export class YFile
   /**
    * Handle a change to the ymodel.
    */
-  private _modelObserver = (event: Y.YTextEvent) => {
+  protected _modelObserver = (event: Y.YTextEvent) => {
     this._changedEmitter.fire({ sourceChange: event.changes.delta as Delta<string> });
   };
 }
@@ -827,7 +827,7 @@ export class YBaseCell<Metadata extends IBaseCellMetadata>
   /**
    * Handle a change to the ymodel.
    */
-  private _modelObserver = (events: Y.YEvent<any>[]) => {
+  protected _modelObserver = (events: Y.YEvent<any>[]) => {
     this._changedEmitter.fire(this.getChanges(events));
   };
 
@@ -837,13 +837,13 @@ export class YBaseCell<Metadata extends IBaseCellMetadata>
    * The notebook that this cell belongs to.
    */
   protected _notebook: YNotebook | null = null;
-  private _awareness: Awareness | null;
-  private _changedEmitter = new Emitter<CellChange<Metadata>>();
-  private _changed = this._changedEmitter.event;
-  private _isDisposed = false;
-  private _prevSourceLength: number;
-  private _undoManager: Y.UndoManager | null = null;
-  private _ysource: Y.Text;
+  protected _awareness: Awareness | null;
+  protected _changedEmitter = new Emitter<CellChange<Metadata>>();
+  protected _changed = this._changedEmitter.event;
+  protected _isDisposed = false;
+  protected _prevSourceLength: number;
+  protected _undoManager: Y.UndoManager | null = null;
+  protected _ysource: Y.Text;
 }
 
 /**
@@ -999,7 +999,7 @@ export class YCodeCell extends YBaseCell<IBaseCellMetadata> implements ISharedCo
     return changes;
   }
 
-  private _youtputs: Y.Array<IOutput>;
+  protected _youtputs: Y.Array<IOutput>;
 }
 
 class YAttachmentCell
@@ -1469,7 +1469,7 @@ export class YNotebook extends YDocument<NotebookChange> implements ISharedNoteb
   /**
    * Handle a change to the ystate.
    */
-  private _onMetaChanged = (event: Y.YMapEvent<any>) => {
+  protected _onMetaChanged = (event: Y.YMapEvent<any>) => {
     if (event.keysChanged.has('metadata')) {
       const change = event.changes.keys.get('metadata');
       const metadataChange = {
@@ -1530,7 +1530,7 @@ export class YNotebook extends YDocument<NotebookChange> implements ISharedNoteb
   /**
    * Handle a change to the list of cells.
    */
-  private _onYCellsChanged = (event: Y.YArrayEvent<Y.Map<any>>) => {
+  protected _onYCellsChanged = (event: Y.YArrayEvent<Y.Map<any>>) => {
     // update the type cell mapping by iterating through the added/removed types
     event.changes.added.forEach((item) => {
       const type = (item.content as Y.ContentType).type as Y.Map<any>;
@@ -1604,6 +1604,6 @@ export class YNotebook extends YDocument<NotebookChange> implements ISharedNoteb
    */
   protected readonly _ycells: Y.Array<Y.Map<any>> = this.ydoc.getArray('cells');
 
-  private _disableDocumentWideUndoRedo: boolean;
-  private _ycellMapping: WeakMap<Y.Map<any>, YCellType> = new WeakMap();
+  protected _disableDocumentWideUndoRedo: boolean;
+  protected _ycellMapping: WeakMap<Y.Map<any>, YCellType> = new WeakMap();
 }

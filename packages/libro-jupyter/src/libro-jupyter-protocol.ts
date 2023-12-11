@@ -52,3 +52,8 @@ export interface LibroFileService {
     currentFileContents: IContentsModel,
   ) => Promise<IContentsModel | undefined>;
 }
+
+export const ServerLaunchManager = Symbol('ServerLaunchManager');
+export interface ServerLaunchManager {
+  launch: () => Promise<any>;
+}

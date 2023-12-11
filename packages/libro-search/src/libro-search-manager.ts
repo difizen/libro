@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import type { CommandRegistry, KeybindingRegistry } from '@difizen/mana-app';
 import {
   LibroCommandRegister,
   LibroExtensionSlotContribution,
@@ -8,13 +9,13 @@ import type {
   LibroSlot,
   LibroView,
 } from '@difizen/libro-core';
-import type { CommandRegistry, KeybindingRegistry } from '@difizen/mana-app';
 import {
   ViewManager,
   CommandContribution,
   KeybindingContribution,
+  inject,
+  singleton,
 } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
 
 import { LibroSearchView } from './libro-search-view.js';
 
@@ -60,7 +61,7 @@ export class LibroSearchManager
       commands,
       LibroSearchToggleCommand.ShowLibroSearch,
       {
-        execute: (_cell, libro, _position) => {
+        execute: (cell, libro, position) => {
           if (libro) {
             this.showSearchView(libro);
           }

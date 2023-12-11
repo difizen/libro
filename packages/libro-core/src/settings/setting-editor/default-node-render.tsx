@@ -1,55 +1,65 @@
 import type { RenderProps } from '@difizen/mana-app';
-import { Input, Checkbox, InputNumber, Switch, Select, DatePicker } from 'antd';
-import moment from 'moment';
-import type { FC } from 'react';
+import { l10n } from '@difizen/mana-l10n';
+import { Checkbox, DatePicker, Input, InputNumber, Select, Switch } from 'antd';
+import dayjs from 'dayjs';
+import React from 'react';
 
 const { Option } = Select;
 
-export const DefaultInput: FC<RenderProps<string>> = ({ value, onChange }) => (
+export const DefaultInput: React.FC<RenderProps<string>> = ({ value, onChange }) => (
   <Input value={value} onChange={(event) => onChange(event.target.value)} />
 );
 
-export function DefaultInputNumber({ value, onChange, schema }: RenderProps<number>) {
-  return (
-    <InputNumber
-      value={value}
-      min={schema.minimum ?? Number.MIN_SAFE_INTEGER}
-      max={schema.maximum ?? Number.MAX_SAFE_INTEGER}
-      onChange={(val) => onChange(val)}
-    />
-  );
-}
+export const DefaultInputNumber: React.FC<RenderProps<number>> = ({
+  value,
+  onChange,
+  schema,
+}) => (
+  <InputNumber
+    value={value}
+    min={schema.minimum ?? Number.MIN_SAFE_INTEGER}
+    max={schema.maximum ?? Number.MAX_SAFE_INTEGER}
+    onChange={(val) => onChange(val)}
+  />
+);
 
-export function DefaultCheckbox({ value, onChange }: RenderProps<boolean>) {
+export const DefaultCheckbox: React.FC<RenderProps<boolean>> = ({
+  value,
+  onChange,
+}) => {
   return (
     <Checkbox checked={value} onChange={(event) => onChange(event.target.checked)}>
-      {String(value)}
+      {value ? l10n.t('开启') : l10n.t('关闭')}
     </Checkbox>
   );
-}
+};
 
-export function DefaultSwitch({ value, onChange }: RenderProps<boolean>) {
-  return <Switch checked={value} onChange={(checked: boolean) => onChange(checked)} />;
-}
-export function DefaultSelect({ value, onChange, schema }: RenderProps<string>) {
-  return (
-    <Select value={value} onChange={(val: string) => onChange(val)}>
-      {schema['enum'].map((val: string) => (
-        <Option key={val} value={val}>
-          {val}
-        </Option>
-      ))}
-    </Select>
-  );
-}
+export const DefaultSwitch: React.FC<RenderProps<boolean>> = ({ value, onChange }) => (
+  <Switch checked={value} onChange={(checked: boolean) => onChange(checked)} />
+);
+
+export const DefaultSelect: React.FC<RenderProps<string>> = ({
+  value,
+  onChange,
+  schema,
+}) => (
+  <Select value={value} onChange={(val: string) => onChange(val)}>
+    {schema['enum'].map((val: string) => (
+      <Option key={val} value={val}>
+        {val}
+      </Option>
+    ))}
+  </Select>
+);
 
 const dateFormat = 'YYYY/MM/DD';
 
-export function DefaultDatePicker({ value, onChange }: RenderProps<string>) {
-  return (
-    <DatePicker
-      value={moment(value, dateFormat)}
-      onChange={(date, dateString) => onChange(dateString)}
-    />
-  );
-}
+export const DefaultDatePicker: React.FC<RenderProps<string>> = ({
+  value,
+  onChange,
+}) => (
+  <DatePicker
+    value={dayjs(value, dateFormat)}
+    onChange={(date, dateString) => onChange(dateString)}
+  />
+);

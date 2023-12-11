@@ -2,19 +2,21 @@
   position: absolute;
   top: 0;
   right: 0;
-  box-shadow: 0 2px 2px 0 #7c68681a;
-  background-color: var(--mana-color-bg-elevated);
   z-index: 2000;
+  background-color: var(--mana-color-bg-elevated);
+  box-shadow: 0 2px 2px 0 #7c68681a;
 }
 
 .libro-search-content {
   display: flex;
   align-items: center;
-  padding: 2px 6px;
   min-width: 320px;
+  padding: 2px 6px;
 }
 
 .libro-search-row {
+  display: flex;
+  align-items: center;
   height: 32px;
 
   input {
@@ -22,18 +24,18 @@
   }
 
   .ant-btn {
+    margin-left: 4px;
     border: none;
     box-shadow: none;
-    margin-left: 4px;
   }
 }
 
 .libro-search-replace-toggle {
-  padding: 4px;
   display: flex;
   align-items: center;
   height: 100%;
   margin-right: 4px;
+  padding: 4px;
   cursor: pointer;
 
   &:hover {
@@ -42,8 +44,8 @@
 }
 
 .libro-search-input {
-  align-items: center;
   flex: 1;
+  align-items: center;
 
   .ant-input-affix-wrapper-sm {
     margin-right: 4px;
@@ -67,12 +69,12 @@
 }
 
 .libro-search-index {
-  // width: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 4px;
+  width: 50px;
   margin-right: 16px;
+  margin-left: 4px;
 }
 
 .libro-search-action {

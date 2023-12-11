@@ -1,6 +1,5 @@
+import type { SearchMatch } from '@difizen/libro-code-editor';
 import { singleton } from '@difizen/mana-app';
-
-import type { SearchMatch } from './libro-search-protocol.js';
 
 /**
  * Search Utils
@@ -69,15 +68,18 @@ export class LibroSearchUtils {
     const queryText = regex
       ? queryString
       : queryString.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
-    const ret = new RegExp(queryText, flag);
+    try {
+      const ret = new RegExp(queryText, flag);
+      // If the empty string is hit, the search logic will freeze the browser tab
+      //  Trying /^/ or /$/ on the codemirror search demo, does not find anything.
+      //  So this is a limitation of the editor.
+      if (ret.test('')) {
+        return undefined;
+      }
 
-    // If the empty string is hit, the search logic will freeze the browser tab
-    //  Trying /^/ or /$/ on the codemirror search demo, does not find anything.
-    //  So this is a limitation of the editor.
-    if (ret.test('')) {
+      return ret;
+    } catch (error) {
       return undefined;
     }
-
-    return ret;
   }
 }

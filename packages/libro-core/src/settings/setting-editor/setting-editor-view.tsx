@@ -12,18 +12,31 @@ import {
   ConfigurationRegistry,
 } from '@difizen/mana-app';
 import { SplitPanel } from '@difizen/mana-react';
+import { useEffect, useState } from 'react';
 
 import { ConfigurationPanelView } from './configuration-panel-view.js';
-import { SettingTreeFactoryId, SettingTreeView } from './setting-tree-view.js';
+import { SettingTreeView } from './setting-tree-view.js';
 
 export const SettingEditorComponent: React.FC = () => {
   const viewInstance = useInject<SettingEditorView>(ViewInstance);
+  const viewManager = useInject<ViewManager>(ViewManager);
   const PanelView = viewInstance.configurationPanel?.view;
+
+  const [treeView, setTreeView] = useState<SettingTreeView>();
+  useEffect(() => {
+    viewManager
+      .getOrCreateView(SettingTreeView)
+      .then((item) => {
+        setTreeView(item);
+        return;
+      })
+      .catch(console.error);
+  });
+
   return (
     <SplitPanel id="">
       <SplitPanel.Pane className="" id="" defaultSize={200}>
-        {/* TODO: fix */}
-        <ViewRender instanceOrFactoryId={SettingTreeFactoryId} />
+        {treeView && <ViewRender view={treeView} />}
       </SplitPanel.Pane>
       <SplitPanel.Pane className="" id="" flex={1}>
         {PanelView && <PanelView />}

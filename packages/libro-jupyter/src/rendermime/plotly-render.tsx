@@ -1,6 +1,6 @@
 import type { BaseOutputView } from '@difizen/libro-core';
-import { RenderMimeRegistry } from '@difizen/libro-rendermime';
 import type { IRenderMimeRegistry } from '@difizen/libro-rendermime';
+import { RenderMimeRegistry } from '@difizen/libro-rendermime';
 import { useInject } from '@difizen/mana-app';
 import { useEffect, useRef } from 'react';
 import type { FC } from 'react';

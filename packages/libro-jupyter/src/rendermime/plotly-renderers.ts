@@ -73,19 +73,19 @@ export class RenderedPlotly {
     }
   }
 
-  private hasGraphElement() {
+  protected hasGraphElement() {
     // Check for the presence of the .plot-container element that plotly.js
     // places at the top of the figure structure
     return this.node.querySelector('.plot-container') !== null;
   }
 
-  private updateImage(png_data: string) {
+  protected updateImage(png_data: string) {
     this.hideGraph();
     this._img_el.src = 'data:image/png;base64,' + png_data;
     this.showImage();
   }
 
-  private hideGraph() {
+  protected hideGraph() {
     // Hide the graph if there is one
     const el = <HTMLDivElement>this.node.querySelector('.plot-container');
     if (el !== null && el !== undefined) {
@@ -93,7 +93,7 @@ export class RenderedPlotly {
     }
   }
 
-  private showGraph() {
+  protected showGraph() {
     // Show the graph if there is one
     const el = <HTMLDivElement>this.node.querySelector('.plot-container');
     if (el !== null && el !== undefined) {
@@ -101,7 +101,7 @@ export class RenderedPlotly {
     }
   }
 
-  private hideImage() {
+  protected hideImage() {
     // Hide the image element
     const el = <HTMLImageElement>this.node.querySelector('.plot-img');
     if (el !== null && el !== undefined) {
@@ -109,7 +109,7 @@ export class RenderedPlotly {
     }
   }
 
-  private showImage() {
+  protected showImage() {
     // Show the image element
     const el = <HTMLImageElement>this.node.querySelector('.plot-img');
     if (el !== null && el !== undefined) {
@@ -117,7 +117,7 @@ export class RenderedPlotly {
     }
   }
 
-  private createGraph(model: BaseOutputView): Promise<void> {
+  protected createGraph(model: BaseOutputView): Promise<void> {
     const { data, layout, frames, config } = model.data[this._mimeType] as
       | any
       | IPlotlySpec;
@@ -158,21 +158,19 @@ export class RenderedPlotly {
               }
               return;
             })
-            .catch(() => {
-              //
-            });
+            .catch(console.error);
         }
         return;
       });
   }
 
-  private _mimeType: string;
-  private _img_el: HTMLImageElement;
-  private _model: BaseOutputView;
-  private node: HTMLElement;
-  private static Plotly: typeof PlotlyType | null = null;
-  private static _resolveLoadingPlotly: () => void;
-  private static loadingPlotly = new Promise<void>((resolve) => {
+  protected _mimeType: string;
+  protected _img_el: HTMLImageElement;
+  protected _model: BaseOutputView;
+  protected node: HTMLElement;
+  protected static Plotly: typeof PlotlyType | null = null;
+  protected static _resolveLoadingPlotly: () => void;
+  protected static loadingPlotly = new Promise<void>((resolve) => {
     RenderedPlotly._resolveLoadingPlotly = resolve;
   });
 }

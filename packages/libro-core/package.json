@@ -55,6 +55,7 @@
     "@difizen/mana-l10n": "latest",
     "@difizen/mana-react": "latest",
     "classnames": "^2.3.2",
+    "dayjs": "^1.11.10",
     "dnd-core": "^16.0.1",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",

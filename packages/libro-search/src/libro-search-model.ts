@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// Copyright (c) Jupyter Development Team.
+// Distributed under the terms of the Modified BSD License.
+
 import type { Disposable } from '@difizen/mana-app';
 import { DisposableCollection, Emitter } from '@difizen/mana-app';
 import { inject, singleton } from '@difizen/mana-app';
@@ -12,15 +16,15 @@ import { LibroSearchUtils } from './libro-search-utils.js';
  */
 @singleton()
 export class LibroSearchModel implements Disposable {
-  utils: LibroSearchUtils;
-  protected _disposed?: boolean = false;
+  @inject(LibroSearchUtils) utils: LibroSearchUtils;
+  protected _disposed?: boolean | undefined = false;
   protected _caseSensitive = false;
   protected parsingError = '';
   protected _filters: SearchFilters = {
     searchCellOutput: true,
     onlySearchSelectedCells: false,
   };
-  protected _replaceText = '';
+  protected _replaceText: string;
   protected searchDebouncer: any;
   protected _searchExpression = '';
   protected _useRegex = false;
@@ -32,19 +36,14 @@ export class LibroSearchModel implements Disposable {
   }
 
   get disposed() {
-    return !!this._disposed;
+    return this._disposed;
   }
   /**
    * Search document model
    * @param searchProvider Provider for the current document
    * @param searchDebounceTime Debounce search time
    */
-  constructor(
-    @inject(LibroSearchUtils) utils: LibroSearchUtils,
-    searchProvider: SearchProvider,
-    searchDebounceTime: number,
-  ) {
-    this.utils = utils;
+  constructor(searchProvider: SearchProvider, searchDebounceTime: number) {
     this.searchProvider = searchProvider;
     // this._filters = {};
     // if (this.searchProvider.getFilters) {
@@ -227,7 +226,7 @@ export class LibroSearchModel implements Disposable {
    * @param name Filter name
    * @param v Filter value
    */
-  async setFilter(_name: string, _v: boolean): Promise<void> {
+  async setFilter(name: string, v: boolean): Promise<void> {
     // if (this._filters[name] !== v) {
     //   if (this.searchProvider.validateFilter) {
     //     this._filters[name] = await this.searchProvider.validateFilter(name, v);

@@ -197,7 +197,7 @@ export class LibroWidgets implements IWidgets {
    * Dictionary of model ids and model instance promises
    */
   @prop()
-  private models: Map<string, WidgetView> = new Map();
+  protected models: Map<string, WidgetView> = new Map();
 
   /**
    * The comm target name to register

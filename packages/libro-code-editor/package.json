@@ -46,10 +46,9 @@
   },
   "dependencies": {
     "@difizen/mana-app": "latest",
-    "@difizen/libro-common": "^0.1.1",
-    "@difizen/libro-shared-model": "^0.1.1",
-    "uuid": "^9.0.0",
-    "vscode-languageserver-protocol": "^3.17.0"
+    "@difizen/mana-l10n": "latest",
+    "@difizen/libro-common": "^0.1.0",
+    "uuid": "^9.0.0"
   },
   "peerDependencies": {
     "react": "^18.2.0"

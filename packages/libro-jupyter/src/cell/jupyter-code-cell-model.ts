@@ -1,12 +1,12 @@
-import { LibroCodeCellModel } from '@difizen/libro-codemirror-code-cell';
+import { LibroCodeCellModel } from '@difizen/libro-code-cell';
 import type { ICellMetadata } from '@difizen/libro-common';
 import { CellOptions } from '@difizen/libro-core';
 import { inject, transient } from '@difizen/mana-app';
 import { prop, ViewManager } from '@difizen/mana-app';
 
 import type {
-  ExecutedWithKernelCellModel,
   CodeCellMetadata,
+  ExecutedWithKernelCellModel,
 } from '../libro-jupyter-protocol.js';
 
 @transient()
@@ -24,12 +24,14 @@ export class JupyterCodeCellModel
     @inject(ViewManager) viewManager: ViewManager,
   ) {
     super(options, viewManager);
-    this.metadata = options.cell?.metadata || {};
+    this.metadata = {
+      ...options?.cell?.metadata,
+      libroFormatter: this.libroFormatType,
+    };
   }
 
   override clearExecution = () => {
     this.executeCount = null;
-    this.executing = false;
     this.kernelExecuting = false;
     this.metadata.execution = {};
   };

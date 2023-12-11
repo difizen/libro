@@ -1,5 +1,5 @@
-import { LibroExecutableCellView } from '@difizen/libro-core';
 import type { CellView } from '@difizen/libro-core';
+import { LibroExecutableCellView, LibroOutputArea } from '@difizen/libro-core';
 import { useObserve } from '@difizen/mana-app';
 
 import { isWaitingExecute } from '../utils/index.js';
@@ -7,16 +7,21 @@ import { isWaitingExecute } from '../utils/index.js';
 export function CellInputBottomBlank({ cell }: { cell: CellView }) {
   const observableCell = useObserve(cell) as LibroExecutableCellView;
 
-  if (!(cell instanceof LibroExecutableCellView)) {
+  if (
+    !(cell instanceof LibroExecutableCellView) ||
+    !(observableCell.outputArea instanceof LibroOutputArea)
+  ) {
     return null;
   }
 
   const outputs = observableCell.outputArea.outputs;
-  const hasNoneOutput =
-    (!outputs || outputs.length === 0) && observableCell.model.executeCount;
+  const hasNoneOutput = !outputs || outputs.length === 0;
 
   // 有output时 或者 没有被执行过，不显示input底部的空白
-  if (hasNoneOutput || isWaitingExecute(observableCell.model)) {
+  if (
+    hasNoneOutput &&
+    (observableCell.model.executeCount || isWaitingExecute(observableCell.model))
+  ) {
     return <div className="libro-cell-bottom-blank" />;
   }
 

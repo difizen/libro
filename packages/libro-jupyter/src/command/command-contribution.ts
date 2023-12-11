@@ -30,12 +30,12 @@ export class LibroJupyterCommandContribution implements CommandContribution {
       command,
       KernelCommands['ShowKernelStatusAndSelector'],
       {
-        execute: async (_cell, libro) => {
+        execute: async (cell, libro) => {
           if (!libro || !(libro instanceof LibroView)) {
             return;
           }
         },
-        isVisible: (_cell, libro, path) => {
+        isVisible: (cell, libro, path) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
@@ -45,7 +45,7 @@ export class LibroJupyterCommandContribution implements CommandContribution {
             path === LibroToolbarArea.HeaderLeft
           );
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
@@ -79,7 +79,7 @@ export class LibroJupyterCommandContribution implements CommandContribution {
           }
           return !!cell;
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
@@ -113,7 +113,7 @@ export class LibroJupyterCommandContribution implements CommandContribution {
             path === LibroToolbarArea.CellRight
           );
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
@@ -129,7 +129,7 @@ export class LibroJupyterCommandContribution implements CommandContribution {
       command,
       NotebookCommands['SelectLastRunCell'],
       {
-        execute: async (_cell, libro) => {
+        execute: async (cell, libro) => {
           if (!libro || !(libro instanceof LibroView)) {
             return;
           }
@@ -137,13 +137,17 @@ export class LibroJupyterCommandContribution implements CommandContribution {
             libro.model.findRunningCell();
           }
         },
-        isVisible: (_cell, libro, path) => {
+        isVisible: (cell, libro, path) => {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
-          return path === LibroToolbarArea.HeaderCenter && !libro.model.readOnly;
+          return (
+            !libro?.model.quickEditMode &&
+            path === LibroToolbarArea.HeaderCenter &&
+            !libro.model.readOnly
+          );
         },
-        isEnabled: (_cell, libro) => {
+        isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }

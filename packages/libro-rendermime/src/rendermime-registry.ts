@@ -294,8 +294,8 @@ export class RenderMimeRegistry implements IRenderMimeRegistry {
     this._types = null;
   }
 
-  private _id = 0;
-  private _ranks: RankMap = {};
-  private _types: string[] | null = null;
-  private _factories: FactoryMap = {};
+  protected _id = 0;
+  protected _ranks: RankMap = {};
+  protected _types: string[] | null = null;
+  protected _factories: FactoryMap = {};
 }

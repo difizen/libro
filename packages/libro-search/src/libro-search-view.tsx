@@ -1,22 +1,21 @@
 import {
-  RightOutlined,
-  ArrowUpOutlined,
   ArrowDownOutlined,
-  EllipsisOutlined,
+  ArrowUpOutlined,
   CloseOutlined,
   createFromIconfontCN,
+  EllipsisOutlined,
+  RightOutlined,
 } from '@ant-design/icons';
 import type { LibroView } from '@difizen/libro-core';
 import { LirboContextKey } from '@difizen/libro-core';
-import { prop, useInject } from '@difizen/mana-app';
+import { prop, useInject, watch } from '@difizen/mana-app';
 import { BaseView, view, ViewInstance } from '@difizen/mana-app';
 import { inject, transient } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import { Input, Button, Checkbox, Tag } from 'antd';
+import { Button, Checkbox, Input, Tag } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import type { InputRef } from 'antd/es/input';
 import classnames from 'classnames';
-import type { FC } from 'react';
 import { forwardRef, useEffect, useRef } from 'react';
 
 import type { LibroSearchProvider } from './libro-search-provider.js';
@@ -27,7 +26,7 @@ const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/a/font_3381673_65wfctnq7rt.js',
 });
 
-export const ReplaceToggle: FC = () => {
+export const ReplaceToggle = () => {
   const instance = useInject<LibroSearchView>(ViewInstance);
   return (
     <div className="libro-search-replace-toggle" onClick={instance.toggleReplace}>
@@ -41,16 +40,24 @@ export const ReplaceToggle: FC = () => {
   );
 };
 
-export const SearchIndex: FC = () => {
+export const SearchIndex = () => {
   const instance = useInject<LibroSearchView>(ViewInstance);
+
+  // TODO: trigger update when current match index changed, matchesCount dont work
+  useEffect(() => {
+    //
+  }, [instance.currentMatchIndex]);
+
   return (
     <div className="libro-search-index">
-      {instance.currentMatchIndex ?? '-'}/{instance.matchesCount ?? '-'}
+      {instance.matchesCount !== undefined
+        ? `${instance.currentMatchIndex}/${instance.matchesCount}`
+        : '无结果'}
     </div>
   );
 };
 
-export const SearchContent: FC = () => {
+export const SearchContent = () => {
   const instance = useInject<LibroSearchView>(ViewInstance);
   const findInputRef = useRef<InputRef>(null);
   useEffect(() => {
@@ -67,6 +74,7 @@ export const SearchContent: FC = () => {
     }
     return;
   }, [instance]);
+
   return (
     <div
       className="libro-search-content"
@@ -81,6 +89,7 @@ export const SearchContent: FC = () => {
               value={instance.findStr}
               onChange={instance.handleFindChange}
               size="small"
+              placeholder="搜索"
               suffix={
                 <span className="libro-search-input-suffix">
                   <IconFont
@@ -89,6 +98,7 @@ export const SearchContent: FC = () => {
                     })}
                     onClick={instance.toggleCaseSensitive}
                     type="icon-Aa"
+                    title="Match Case"
                   />
 
                   <IconFont
@@ -97,6 +107,7 @@ export const SearchContent: FC = () => {
                     })}
                     onClick={instance.toggleUseRegex}
                     type="icon-zhengzeshi"
+                    title="Use Regular Expression"
                   />
                 </span>
               }
@@ -106,11 +117,13 @@ export const SearchContent: FC = () => {
             <SearchIndex />
             <div>
               <Button
+                title="Previous Match"
                 onClick={instance.previous}
                 icon={<ArrowUpOutlined />}
                 size="small"
               />
               <Button
+                title="Next Match"
                 onClick={instance.next}
                 icon={<ArrowDownOutlined />}
                 size="small"
@@ -131,6 +144,7 @@ export const SearchContent: FC = () => {
                 value={instance.replaceStr}
                 onChange={instance.handleReplaceChange}
                 size="small"
+                placeholder="替换"
               />
             </td>
             <td className="libro-search-action">
@@ -139,12 +153,14 @@ export const SearchContent: FC = () => {
                   onClick={instance.replace}
                   icon={<IconFont type="icon-zifuchuantihuan_2" />}
                   size="small"
+                  title="Replace"
                 />
 
                 <Button
                   onClick={instance.replaceAll}
                   icon={<IconFont type="icon-tihuantupian" />}
                   size="small"
+                  title="Replace All"
                 />
               </div>
             </td>
@@ -171,7 +187,7 @@ export const SearchContent: FC = () => {
 };
 // TODO: 更改图标
 export const SearchComponent = forwardRef<HTMLDivElement>(function SearchComponent(
-  _props: { top?: number },
+  props: { top?: number },
   ref,
 ) {
   const instance = useInject<LibroSearchView>(ViewInstance);
@@ -193,41 +209,18 @@ export const SearchComponent = forwardRef<HTMLDivElement>(function SearchCompone
 @view('libro-search-view')
 export class LibroSearchView extends BaseView {
   findInputRef?: React.RefObject<InputRef> | null;
-  contextKey: LirboContextKey;
-  utils: LibroSearchUtils;
-  searchProviderFactory: LibroSearchProviderFactory;
-
-  constructor(
-    @inject(LirboContextKey) contextKey: LirboContextKey,
-    @inject(LibroSearchUtils) utils: LibroSearchUtils,
-    @inject(LibroSearchProviderFactory)
-    searchProviderFactory: LibroSearchProviderFactory,
-  ) {
-    super();
-    this.contextKey = contextKey;
-    this.utils = utils;
-    this.searchProviderFactory = searchProviderFactory;
-  }
-
-  protected _libro?: LibroView;
-
-  get libro(): LibroView | undefined {
-    return this._libro;
-  }
-
-  set libro(value: LibroView | undefined) {
-    this._libro = value;
-    this.searchProvider = this.searchProviderFactory({ view: this.libro! });
-  }
-
+  @inject(LirboContextKey) contextKey: LirboContextKey;
+  @inject(LibroSearchUtils) utils: LibroSearchUtils;
+  @inject(LibroSearchProviderFactory) searchProviderFactory: LibroSearchProviderFactory;
+  libro?: LibroView;
   @prop() searchProvider?: LibroSearchProvider;
   @prop() searchVisible = false;
   get replaceVisible(): boolean {
     return this.searchProvider?.replaceMode ?? false;
   }
   @prop() settingVisible = false;
-  @prop() findStr?: string | undefined = undefined;
-  @prop() lastSearch?: string | undefined = undefined;
+  @prop() findStr?: string = undefined;
+  @prop() lastSearch?: string = undefined;
   @prop() replaceStr = '';
   @prop() caseSensitive = false;
   @prop() useRegex = false;
@@ -255,8 +248,31 @@ export class LibroSearchView extends BaseView {
     return this.searchProvider?.matchesCount;
   }
 
-  onviewWillUnmount = () => {
-    this.searchProvider?.endQuery();
+  override onViewMount = () => {
+    if (!this.searchProvider && this.libro) {
+      this.searchProvider = this.searchProviderFactory({ view: this.libro });
+      this.toDispose.push(watch(this.libro.model, 'active', this.onActiveCellChanged));
+      this.toDispose.push(
+        this.libro.model.onSourceChanged(() => this.onCellsChanged()),
+      );
+    }
+  };
+
+  onActiveCellChanged = () => {
+    if (this.searchVisible) {
+      this.searchProvider?.onActiveCellChanged();
+    }
+  };
+
+  onCellsChanged = () => {
+    if (this.searchVisible) {
+      this.searchProvider?.onCellsChanged();
+    }
+  };
+
+  onviewWillUnmount = async () => {
+    await this.searchProvider?.endQuery();
+    this.searchProvider?.dispose();
   };
 
   show = () => {
@@ -269,6 +285,9 @@ export class LibroSearchView extends BaseView {
     this.searchVisible = false;
     this.contextKey.enableCommandMode();
     this.searchProvider?.endQuery();
+    if (this.searchProvider) {
+      this.searchProvider.replaceMode = false;
+    }
     this.libro?.focus();
   };
 
@@ -316,6 +335,7 @@ export class LibroSearchView extends BaseView {
 
   toggleUseRegex = () => {
     this.useRegex = !this.useRegex;
+    this.search();
   };
 
   next = () => {
@@ -342,8 +362,8 @@ export class LibroSearchView extends BaseView {
     const init = this.searchProvider?.getInitialQuery();
     if (init) {
       this.findStr = init;
-      this.search(false);
     }
+    this.search(false);
   };
   getHeaderHeight = () => {
     let height = 32;

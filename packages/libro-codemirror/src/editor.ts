@@ -4,34 +4,36 @@ import type {
   ChangeSet,
   Extension,
   Range,
-  StateEffectType,
   StateCommand,
+  StateEffectType,
   Text,
 } from '@codemirror/state';
 import {
-  Prec,
-  EditorState,
   EditorSelection,
+  EditorState,
+  Prec,
   StateEffect,
   StateField,
 } from '@codemirror/state';
-import { Decoration, EditorView } from '@codemirror/view';
 import type { Command, DecorationSet, ViewUpdate } from '@codemirror/view';
+import { Decoration, EditorView } from '@codemirror/view';
+import { defaultConfig, defaultSelectionStyle } from '@difizen/libro-code-editor';
 import type {
+  ICoordinate,
   IEditor,
   IEditorConfig,
-  IEditorSelectionStyle,
-  KeydownHandler,
   IEditorOptions,
+  IEditorSelectionStyle,
   IModel,
   IPosition,
   IRange,
-  ICoordinate,
   ITextSelection,
   IToken,
+  KeydownHandler,
+  SearchMatch,
 } from '@difizen/libro-code-editor';
-import { defaultSelectionStyle, defaultConfig } from '@difizen/libro-code-editor';
 import { findFirstArrayIndex, removeAllWhereFromArray } from '@difizen/libro-common';
+import type { LSPProvider } from '@difizen/libro-lsp';
 import { Disposable, Emitter } from '@difizen/mana-app';
 import { getOrigin, watch } from '@difizen/mana-app';
 import type { SyntaxNodeRef } from '@lezer/common';
@@ -90,7 +92,7 @@ export const codeMirrorDefaultConfig: Required<CodeMirrorConfig> = {
   ...defaultConfig,
   mode: 'null',
   mimetype: 'text/x-python',
-  theme: 'jupyter',
+  theme: { light: 'jupyter', dark: 'jupyter', hc: 'jupyter' },
   smartIndent: true,
   electricChars: true,
   keyMap: 'default',
@@ -108,7 +110,6 @@ export const codeMirrorDefaultConfig: Required<CodeMirrorConfig> = {
   styleSelectedText: true,
   selectionPointer: false,
   handlePaste: true,
-  lineWrap: 'off',
 
   //
   highlightActiveLineGutter: false,
@@ -135,12 +136,21 @@ export const codeMirrorDefaultConfig: Required<CodeMirrorConfig> = {
 };
 
 export class CodeMirrorEditor implements IEditor {
+  // highlight
+  protected highlightEffect: StateEffectType<{
+    matches: SearchMatch[];
+    currentIndex: number | undefined;
+  }>;
+  protected highlightMark: Decoration;
+  protected selectedMatchMark: Decoration;
+  protected highlightField: StateField<DecorationSet>;
+
   /**
    * Construct a CodeMirror editor.
    */
   constructor(options: IOptions) {
     this._editorConfig = new EditorConfiguration(options);
-    const host = (this.host = options['host']);
+    const host = (this.host = options.host);
 
     host.classList.add(EDITOR_CLASS);
     host.classList.add('jp-Editor');
@@ -148,7 +158,7 @@ export class CodeMirrorEditor implements IEditor {
     host.addEventListener('blur', this, true);
     host.addEventListener('scroll', this, true);
 
-    this._uuid = options['uuid'] || v4();
+    this._uuid = options.uuid || v4();
 
     // State and effects for handling the selection marks
     this._addMark = StateEffect.define<ICollabSelectionText>();
@@ -186,20 +196,84 @@ export class CodeMirrorEditor implements IEditor {
       provide: (f) => EditorView.decorations.from(f),
     });
 
+    // handle highlight
+    this.highlightEffect = StateEffect.define<{
+      matches: SearchMatch[];
+      currentIndex: number | undefined;
+    }>({
+      map: (value, mapping) => ({
+        matches: value.matches.map((v) => ({
+          text: v.text,
+          position: mapping.mapPos(v.position),
+        })),
+        currentIndex: value.currentIndex,
+      }),
+    });
+    this.highlightMark = Decoration.mark({ class: 'cm-searchMatch' });
+    this.selectedMatchMark = Decoration.mark({
+      class: 'cm-searchMatch cm-searchMatch-selected libro-selectedtext',
+    });
+    this.highlightField = StateField.define<DecorationSet>({
+      create: () => {
+        return Decoration.none;
+      },
+      update: (highlights, transaction) => {
+        // eslint-disable-next-line no-param-reassign
+        highlights = highlights.map(transaction.changes);
+        for (const ef of transaction.effects) {
+          if (ef.is(this.highlightEffect)) {
+            const e = ef as StateEffect<{
+              matches: SearchMatch[];
+              currentIndex: number | undefined;
+            }>;
+            if (e.value.matches.length) {
+              // eslint-disable-next-line no-param-reassign
+              highlights = highlights.update({
+                add: e.value.matches.map((m, index) => {
+                  if (index === e.value.currentIndex) {
+                    return this.selectedMatchMark.range(
+                      m.position,
+                      m.position + m.text.length,
+                    );
+                  }
+                  return this.highlightMark.range(
+                    m.position,
+                    m.position + m.text.length,
+                  );
+                }),
+                filter: (from, to) => {
+                  return (
+                    !e.value.matches.some(
+                      (m) => m.position >= from && m.position + m.text.length <= to,
+                    ) || from === to
+                  );
+                },
+              });
+            } else {
+              // eslint-disable-next-line no-param-reassign
+              highlights = Decoration.none;
+            }
+          }
+        }
+        return highlights;
+      },
+      provide: (f) => EditorView.decorations.from(f),
+    });
+
     // Handle selection style.
-    const style = options['selectionStyle'] || {};
+    const style = options.selectionStyle || {};
     this._selectionStyle = {
       ...defaultSelectionStyle,
       ...(style as IEditorSelectionStyle),
     };
 
-    const model = (this._model = options['model']);
+    const model = (this._model = options.model);
 
     const config = options.config || {};
     const fullConfig = (this._config = {
       ...codeMirrorDefaultConfig,
       ...config,
-      mimetype: options['model'].mimeType,
+      mimetype: options.model.mimeType,
     });
 
     // this._initializeEditorBinding();
@@ -207,16 +281,13 @@ export class CodeMirrorEditor implements IEditor {
     // Extension for handling DOM events
     const domEventHandlers = EditorView.domEventHandlers({
       keydown: (event: KeyboardEvent) => {
-        const index = findFirstArrayIndex(
-          this._keydownHandlers,
-          (handler: KeydownHandler) => {
-            if (handler(this, event) === true) {
-              event.preventDefault();
-              return true;
-            }
-            return false;
-          },
-        );
+        const index = findFirstArrayIndex(this._keydownHandlers, (handler) => {
+          if (handler(this, event) === true) {
+            event.preventDefault();
+            return true;
+          }
+          return false;
+        });
         if (index === -1) {
           return this.onKeydown(event);
         }
@@ -261,10 +332,6 @@ export class CodeMirrorEditor implements IEditor {
     watch(model, 'mimeType', this._onMimeTypeChanged);
   }
 
-  handleTooltipChange = (val: boolean) => {
-    this.modalChangeEmitter.fire(val);
-  };
-
   /**
    * Initialize the editor binding.
    */
@@ -277,9 +344,7 @@ export class CodeMirrorEditor implements IEditor {
   //   };
   // }
 
-  save: () => void = () => {
-    //
-  };
+  save: () => void;
   /**
    * A signal emitted when either the top or bottom edge is requested.
    */
@@ -360,7 +425,7 @@ export class CodeMirrorEditor implements IEditor {
   /**
    * Tests whether the editor is disposed.
    */
-  get isDisposed(): boolean {
+  get disposed(): boolean {
     return this._isDisposed;
   }
 
@@ -368,7 +433,7 @@ export class CodeMirrorEditor implements IEditor {
    * Dispose of the resources held by the widget.
    */
   dispose(): void {
-    if (this.isDisposed) {
+    if (this.disposed) {
       return;
     }
     this._isDisposed = true;
@@ -394,7 +459,7 @@ export class CodeMirrorEditor implements IEditor {
     // Don't bother setting the option if it is already the same.
     if (this._config[option] !== value) {
       this._config[option] = value;
-      this._editorConfig.reconfigureExtension(this._editor, option as string, value);
+      this._editorConfig.reconfigureExtension(this._editor, option, value);
     }
 
     if (option === 'readOnly') {
@@ -537,6 +602,16 @@ export class CodeMirrorEditor implements IEditor {
     return this.state.sliceDoc(fromOffset, toOffset);
   }
 
+  getSelectionValue(range?: IRange) {
+    const fromOffset = range
+      ? this.getOffsetAt(range.start)
+      : this.editor.state.selection.main.from;
+    const toOffset = range
+      ? this.getOffsetAt(range.end)
+      : this.editor.state.selection.main.to;
+    return this.state.sliceDoc(fromOffset, toOffset);
+  }
+
   /**
    * Add a keydown handler to the editor.
    *
@@ -547,10 +622,7 @@ export class CodeMirrorEditor implements IEditor {
   addKeydownHandler(handler: KeydownHandler): Disposable {
     this._keydownHandlers.push(handler);
     return Disposable.create(() => {
-      removeAllWhereFromArray(
-        this._keydownHandlers,
-        (val: KeydownHandler) => val === handler,
-      );
+      removeAllWhereFromArray(this._keydownHandlers, (val) => val === handler);
     });
   }
 
@@ -682,9 +754,40 @@ export class CodeMirrorEditor implements IEditor {
    *
    * @param text The text to be inserted.
    */
-  replaceSelection(text: string): void {
-    this.editor.dispatch(this.state.replaceSelection(text));
+  replaceSelection(text: string, range: IRange): void {
+    this.editor.dispatch({
+      changes: {
+        from: this.getOffsetAt(range.start),
+        to: this.getOffsetAt(range.end),
+        insert: text,
+      },
+    });
   }
+
+  replaceSelections(edits: { text: string; range: IRange }[]): void {
+    // const trans = this.state.replaceSelection(text);
+    this.editor.dispatch({
+      changes: edits.map((item) => ({
+        from: this.getOffsetAt(item.range.start),
+        to: this.getOffsetAt(item.range.end),
+        insert: item.text,
+      })),
+    });
+  }
+
+  highlightMatches(matches: SearchMatch[], currentIndex: number | undefined) {
+    const effects: StateEffect<unknown>[] = [
+      this.highlightEffect.of({ matches: matches, currentIndex: currentIndex }),
+    ];
+    if (!this.state.field(this.highlightField, false)) {
+      effects.push(StateEffect.appendConfig.of([this.highlightField]));
+    }
+    this.editor.dispatch({ effects });
+  }
+
+  handleTooltipChange = (val: boolean) => {
+    this.modalChangeEmitter.fire(val);
+  };
 
   /**
    * Get a list of tokens for the current editor text content.
@@ -806,10 +909,36 @@ export class CodeMirrorEditor implements IEditor {
     });
   }
 
+  /**
+   * Handles a selections change.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected _onSelectionsChanged(args: ITextSelection[]): void {
+    // const uuid = args.key;
+    // if (uuid !== this.uuid) {
+    //   this._cleanSelections(uuid);
+    //   if (args.type !== 'remove' && args.newValue) {
+    //     this._markSelections(uuid, args.newValue);
+    //   }
+    // }
+  }
+
+  /**
+   * Clean selections for the given uuid.
+   */
+  protected _cleanSelections(uuid: string) {
+    this.editor.dispatch({
+      effects: this._removeMark.of({
+        uuid: uuid,
+        decorations: this._selectionMarkers[uuid],
+      }),
+    });
+  }
+
   protected _buildMarkDecoration(
     uuid: string,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _selections: ISelectionText[],
+    selections: ISelectionText[],
   ) {
     const decorations: Range<Decoration>[] = [];
 
@@ -887,6 +1016,20 @@ export class CodeMirrorEditor implements IEditor {
   // }
 
   /**
+   * Marks selections.
+   */
+  protected _markSelections(uuid: string, selections: ITextSelection[]) {
+    const sel = selections.map((selection) => ({
+      from: this.getOffsetAt(selection.start),
+      to: this.getOffsetAt(selection.end),
+      style: selection.style,
+    }));
+    this.editor.dispatch({
+      effects: this._addMark.of({ uuid: uuid, selections: sel }),
+    });
+  }
+
+  /**
    * Handles a cursor activity event.
    */
   protected _onCursorActivity(): void {
@@ -943,7 +1086,6 @@ export class CodeMirrorEditor implements IEditor {
     if (update.docChanged) {
       this._lastChange = update.changes;
     }
-
     this.model.value = update.state.doc.toJSON().join('\n');
   }
   /**
@@ -1013,13 +1155,47 @@ export class CodeMirrorEditor implements IEditor {
       this._caretHover = null;
     }
   }
+  /**
+   * Check for an out of sync editor.
+   */
+  protected _checkSync(): void {
+    const change = this._lastChange;
+    if (!change) {
+      return;
+    }
+    this._lastChange = null;
+    const doc = this.doc;
+    if (doc.toString() === this._model.value) {
+      return;
+    }
+
+    // void showDialog({
+    //   title: this._trans.__('Code Editor out of Sync'),
+    //   body: this._trans.__(
+    //     'Please open your browser JavaScript console for bug report instructions',
+    //   ),
+    // });
+    console.warn(
+      'If you are able and willing to publicly share the text or code in your editor, you can help us debug the "Code Editor out of Sync" message by pasting the following to the public issue at https://github.com/jupyterlab/jupyterlab/issues/2951. Please note that the data below includes the text/code in your editor.',
+    );
+    console.warn(
+      JSON.stringify({
+        model: this._model.value,
+        view: doc.toString(),
+        selections: this.getSelections(),
+        cursor: this.getCursorPosition(),
+        lineSep: this.state.facet(EditorState.lineSeparator),
+        change,
+      }),
+    );
+  }
   protected _model: IModel;
   protected _editor: EditorView;
   protected _selectionMarkers: Record<string, Range<Decoration>[]> = {};
-  protected _caretHover: HTMLElement | null = null;
+  protected _caretHover: HTMLElement | null;
   protected _config: IConfig;
-  protected _hoverTimeout: number | undefined = undefined;
-  protected _hoverId: string | undefined = undefined;
+  protected _hoverTimeout: number;
+  protected _hoverId: string;
   protected _keydownHandlers = new Array<KeydownHandler>();
   protected _selectionStyle: IEditorSelectionStyle;
   protected _uuid = '';
@@ -1036,7 +1212,7 @@ export class CodeMirrorEditor implements IEditor {
 export type IConfig = CodeMirrorConfig;
 
 export interface IOptions extends IEditorOptions {
-  [x: string]: any;
+  lspProvider?: LSPProvider;
   /**
    * The configuration options for the editor.
    */

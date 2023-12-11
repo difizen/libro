@@ -1,0 +1,11 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "Light (e2-editor)",
+  "include": "light_plus.json",
+  "tokenColors": [],
+  "colors": {
+    "activityBar.background": "#ececec",
+    "activityBar.activeBorder": "#000000",
+    "activityBar.foreground": "#000000"
+  }
+}

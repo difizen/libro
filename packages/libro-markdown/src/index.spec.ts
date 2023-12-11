@@ -1,10 +1,10 @@
+import 'reflect-metadata';
 import assert from 'assert';
 
-import { MarkdownRender } from './index.js';
-import 'reflect-metadata';
+import { MarkdownModule } from './index.js';
 
 describe('libro-markdown', () => {
   it('#import', () => {
-    assert(MarkdownRender);
+    assert(MarkdownModule);
   });
 });

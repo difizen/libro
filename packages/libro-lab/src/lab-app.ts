@@ -45,9 +45,7 @@ export class LibroLabApp implements ApplicationContribution {
         this.initialWorkspace();
         return;
       })
-      .catch(() => {
-        //
-      });
+      .catch(console.error);
   }
 
   protected async initialWorkspace() {

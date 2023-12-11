@@ -8,7 +8,7 @@ class CssProp {
   /*
    * Numeric base expressions used to help build more complex regular expressions
    */
-  private static readonly N = {
+  protected static readonly N = {
     integer: `[+-]?[0-9]+`,
     integer_pos: `[+]?[0-9]+`,
     integer_zero_ff: `([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])`,
@@ -21,7 +21,7 @@ class CssProp {
   /*
    * Base expressions of common CSS syntax elements
    */
-  private static readonly B = {
+  protected static readonly B = {
     angle: `(${CssProp.N.number}(deg|rad|grad|turn)|0)`,
     frequency: `${CssProp.N.number}(Hz|kHz)`,
     ident: String.raw`-?([_a-z]|[\xA0-\xFF]|\\[0-9a-f]{1,6}(\r\n|[ \t\r\n\f])?|\\[^\r\n\f0-9a-f])([_a-z0-9-]|[\xA0-\xFF]|\\[0-9a-f]{1,6}(\r\n|[ \t\r\n\f])?|\\[^\r\n\f0-9a-f])*`,
@@ -40,7 +40,7 @@ class CssProp {
   /*
    * Atomic (i.e. not dependant on other regular expressions) sub RegEx segments
    */
-  private static readonly A = {
+  protected static readonly A = {
     absolute_size: `xx-small|x-small|small|medium|large|x-large|xx-large`,
     attachment: `scroll|fixed|local`,
     bg_origin: `border-box|padding-box|content-box`,
@@ -62,7 +62,7 @@ class CssProp {
   /*
    * Color definition sub expressions
    */
-  private static readonly _COLOR = {
+  protected static readonly _COLOR = {
     hex: `\\#(0x)?[0-9a-f]+`,
     name: `aliceblue|antiquewhite|aqua|aquamarine|azure|beige|bisque|black|blanchedalmond|blue|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk|crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgreen|darkkhaki|darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen|darkslateblue|darkslategray|darkturquoise|darkviolet|deeppink|deepskyblue|dimgray|dodgerblue|firebrick|floralwhite|forestgreen|fuchsia|gainsboro|ghostwhite|gold|goldenrod|gray|green|greenyellow|honeydew|hotpink|indianred|indigo|ivory|khaki|lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan|lightgoldenrodyellow|lightgreen|lightgrey|lightpink|lightsalmon|lightseagreen|lightskyblue|lightslategray|lightsteelblue|lightyellow|lime|limegreen|linen|magenta|maroon|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen|mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|midnightblue|mintcream|mistyrose|moccasin|navajowhite|navy|oldlace|olive|olivedrab|orange|orangered|orchid|palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum|powderblue|purple|red|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell|sienna|silver|skyblue|slateblue|slategray|snow|springgreen|steelblue|tan|teal|thistle|tomato|turquoise|transparent|violet|wheat|white|whitesmoke|yellow|yellowgreen`,
     rgb: String.raw`rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)`,
@@ -72,7 +72,7 @@ class CssProp {
   /*
    * Compound (i.e. dependant on other (sub) regular expressions) sub RegEx segments
    */
-  private static readonly _C = {
+  protected static readonly _C = {
     alpha: `${CssProp.N.integer_zero_ff}|${CssProp.N.number_zero_one}|${CssProp.B.percentage_zero_hundred}`,
     alphavalue: CssProp.N.number_zero_one,
     bg_position: `((${CssProp.B.len_or_perc}|left|center|right|top|bottom)\\s*){1,4}`,
@@ -96,29 +96,29 @@ class CssProp {
     top: `${CssProp.B.length}|auto`,
   };
 
-  private static readonly _C1 = {
+  protected static readonly _C1 = {
     image_list: `image\\(\\s*(${CssProp.B.url})*\\s*(${CssProp.B.url}|${CssProp._C.color})\\s*\\)`,
     linear_color_stop: `(${CssProp._C.color})(\\s*${CssProp._C.color_stop_length})?`,
     // eslint-disable-next-line no-useless-escape
     shadow: `((${CssProp._C.color})\\s+((${CssProp.B.length})\\s*){2,4}(\s+inset)?)|((inset\\s+)?((${CssProp.B.length})\\s*){2,4}\\s*(${CssProp._C.color})?)`,
   };
 
-  private static readonly _C2 = {
+  protected static readonly _C2 = {
     color_stop_list: `((${CssProp._C1.linear_color_stop})(\\s*(${CssProp._C.linear_color_hint}))?\\s*,\\s*)+(${CssProp._C1.linear_color_stop})`,
     shape: `rect\\(\\s*(${CssProp._C.top})\\s*,\\s*(${CssProp._C.right})\\s*,\\s*(${CssProp._C.bottom})\\s*,\\s*(${CssProp._C.left})\\s*\\)`,
   };
 
-  private static readonly _C3 = {
+  protected static readonly _C3 = {
     linear_gradient: `linear-gradient\\((((${CssProp.B.angle})|to\\s+(${CssProp.A.side_or_corner}))\\s*,\\s*)?\\s*(${CssProp._C2.color_stop_list})\\s*\\)`,
     radial_gradient: `radial-gradient\\(((((${CssProp.A.ending_shape})|(${CssProp._C.size}))\\s*)*\\s*(at\\s+${CssProp._C.position})?\\s*,\\s*)?\\s*(${CssProp._C2.color_stop_list})\\s*\\)`,
   };
 
-  private static readonly _C4 = {
+  protected static readonly _C4 = {
     image: `${CssProp.B.url}|${CssProp._C3.linear_gradient}|${CssProp._C3.radial_gradient}|${CssProp._C1.image_list}`,
     bg_image: `(${CssProp.B.url}|${CssProp._C3.linear_gradient}|${CssProp._C3.radial_gradient}|${CssProp._C1.image_list})|none`,
   };
 
-  private static readonly C = {
+  protected static readonly C = {
     ...CssProp._C,
     ...CssProp._C1,
     ...CssProp._C2,
@@ -129,7 +129,7 @@ class CssProp {
   /*
    * Property value regular expressions not dependant on other sub expressions
    */
-  private static readonly AP = {
+  protected static readonly AP = {
     border_collapse: `collapse|separate`,
     box: `normal|none|contents`,
     box_sizing: `content-box|padding-box|border-box`,
@@ -170,7 +170,7 @@ class CssProp {
   /*
    * Compound propertiy value regular expressions (i.e. dependant on other sub expressions)
    */
-  private static readonly _CP = {
+  protected static readonly _CP = {
     background_attachment: `${CssProp.A.attachment}(,\\s*${CssProp.A.attachment})*`,
     background_color: CssProp.C.color,
     background_origin: `${CssProp.A.box}(,\\s*${CssProp.A.box})*`,
@@ -268,11 +268,11 @@ class CssProp {
     min_width: `${CssProp.B.length_pos}|${CssProp.B.percentage_pos}|auto`,
   };
 
-  private static readonly _CP1 = {
+  protected static readonly _CP1 = {
     font: `(((((${CssProp.AP.font_style}|${CssProp.AP.font_variant}|${CssProp.AP.font_weight})\\s*){1,3})?\\s*(${CssProp._CP.font_size})\\s*(\\/\\s*(${CssProp._CP.line_height}))?\\s+(${CssProp._CP.font_family}))|caption|icon|menu|message-box|small-caption|status-bar)`,
   };
 
-  private static readonly CP = { ...CssProp._CP, ...CssProp._CP1 };
+  protected static readonly CP = { ...CssProp._CP, ...CssProp._CP1 };
 
   // CSS Property value validation regular expressions for use with sanitize-html
 
@@ -456,7 +456,7 @@ export class Sanitizer implements ISanitizer {
     return sanitize(dirty, { ...this._options, ...(options || {}) });
   }
 
-  private _options: sanitize.IOptions = {
+  protected _options: sanitize.IOptions = {
     // HTML tags that are allowed to be used. Tags were extracted from Google Caja
     allowedTags: [
       'a',

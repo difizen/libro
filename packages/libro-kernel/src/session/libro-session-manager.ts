@@ -294,7 +294,7 @@ export class LibroSessionManager {
   /**
    * Send a PATCH to the server, updating the session path or the kernel.
    */
-  private async _patch(
+  protected async _patch(
     body: DeepPartial<SessionIModel>,
     sessionId?: string,
   ): Promise<SessionIModel> {

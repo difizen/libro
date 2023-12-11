@@ -192,9 +192,14 @@ const CellOutput: React.FC<{ cell: CellView }> = forwardRef(function CellOutput(
 
   const isExecutingRef = useRef<boolean | null>(null);
 
+  let executing = false;
+  if (ExecutableCellModel.is(cell.model)) {
+    executing = cell.model.executing;
+  }
+
   useLayoutEffect(() => {
-    isExecutingRef.current = !!cell.model.executing;
-  }, [cell.model.executing]);
+    isExecutingRef.current = !!executing;
+  }, [executing]);
 
   useLayoutEffect(() => {
     if (!outputRef || !isExecutingRef || !outputRef?.current) {

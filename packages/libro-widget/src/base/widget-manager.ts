@@ -37,5 +37,5 @@ export class LibroWidgetManager implements ApplicationContribution {
    * Dictionary of model ids and model instance promises
    */
   @prop()
-  private widgets: Map<string, LibroWidgets> = new Map();
+  protected widgets: Map<string, LibroWidgets> = new Map();
 }

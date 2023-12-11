@@ -3,12 +3,12 @@ import { ConfigurationContribution, ConfigurationService } from '@difizen/mana-a
 import { ApplicationContribution } from '@difizen/mana-app';
 import { inject, singleton } from '@difizen/mana-app';
 
-import { LibroAutosaveSetting } from './config.js';
+import { LibroAutosaveSetting, LibroJupyterConfiguration } from './config.js';
 
 @singleton({ contrib: ConfigurationContribution })
 export class LibroSettingContribution implements ConfigurationContribution {
   registerConfigurations() {
-    return [LibroAutosaveSetting];
+    return [LibroAutosaveSetting, LibroJupyterConfiguration['OpenSlot']];
   }
 }
 @singleton({ contrib: ApplicationContribution })

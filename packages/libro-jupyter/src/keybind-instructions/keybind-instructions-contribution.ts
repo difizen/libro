@@ -20,12 +20,12 @@ export class KeybindInstructionsContribution
 
   registerCommands(command: CommandRegistry) {
     this.libroCommand.registerLibroCommand(command, KeybindInstructionsCommand, {
-      execute: async (_cell, libro) => {
+      execute: async (cell, libro) => {
         if (!libro || !(libro instanceof LibroView)) {
           return;
         }
       },
-      isVisible: (_cell, _libro, path) => {
+      isVisible: (cell, libro, path) => {
         return path === LibroToolbarArea.HeaderRight;
       },
     });

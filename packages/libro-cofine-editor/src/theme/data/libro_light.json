@@ -1,0 +1,170 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "libro light",
+  "include": "jupyter-light",
+  "colors": {
+    "activityBar.background": "#ececec",
+    "activityBar.activeBorder": "#000000",
+    "activityBar.foreground": "#000000"
+  },
+  "tokenColors": [
+    {
+      "scope": "storage.type.function",
+      "settings": {
+        "foreground": "#098658",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "scope": "support.function.builtin.python",
+      "settings": {
+        "foreground": "#098658"
+      }
+    },
+    {
+      "scope": "comment.line.number-sign.python",
+      "settings": {
+        "foreground": "#6A8B93",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "keyword.control",
+      "settings": {
+        "foreground": "#098658",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "scope": "keyword.operator",
+      "settings": {
+        "foreground": "#c700c7"
+      }
+    },
+    {
+      "scope": "meta.member.access",
+      "settings": {
+        "foreground": "#2060a0"
+      }
+    },
+    {
+      "scope": "constant.language",
+      "settings": {
+        "foreground": "#098658",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "scope": "string.quoted",
+      "settings": {
+        "foreground": "#c03030"
+      }
+    },
+    {
+      "scope": "entity.name.function",
+      "settings": {
+        "foreground": "#003cff"
+      }
+    },
+
+    {
+      "name": "SQL Scope",
+      "scope": ["keywords", "customKeywords"],
+      "settings": {
+        "foreground": "#236fd9"
+      }
+    },
+    {
+      "name": "SQL Scope",
+      "scope": ["comment"],
+      "settings": {
+        "foreground": "#999999"
+      }
+    },
+    {
+      "name": "SQL Scope",
+      "scope": ["builtinFunctions", "function"],
+      "settings": {
+        "foreground": "#CB3BC1"
+      }
+    },
+    {
+      "name": "SQL Scope",
+      "scope": ["operator"],
+      "settings": {
+        "foreground": "#232226"
+      }
+    },
+    {
+      "name": "SQL Scope",
+      "scope": ["string"],
+      "settings": {
+        "foreground": "#D45E00"
+      }
+    },
+    {
+      "name": "SQL Scope",
+      "scope": ["number"],
+      "settings": {
+        "foreground": "#2E7F01"
+      }
+    },
+    {
+      "name": "SQL Scope",
+      "scope": ["variable"],
+      "settings": {
+        "foreground": "#B8DBA6"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-info"],
+      "settings": {
+        "foreground": "#008800"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-alert"],
+      "settings": {
+        "foreground": "#DE9504"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-date"],
+      "settings": {
+        "foreground": "#171617"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-error"],
+      "settings": {
+        "foreground": "#FF4B61"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-links"],
+      "settings": {
+        "foreground": "#1292FF"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-failed"],
+      "settings": {
+        "foreground": "#FF4B61"
+      }
+    },
+    {
+      "name": "Log Scope",
+      "scope": ["log-success"],
+      "settings": {
+        "foreground": "#171617"
+      }
+    }
+  ],
+  "semanticHighlighting": true
+}

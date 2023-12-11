@@ -1,3 +1,4 @@
+import type { SearchMatch } from '@difizen/libro-code-editor';
 import type { Event } from '@difizen/mana-app';
 import type { View } from '@difizen/mana-app';
 import { Emitter } from '@difizen/mana-app';
@@ -6,10 +7,8 @@ import { transient } from '@difizen/mana-app';
 import type {
   SearchFilter,
   SearchFilters,
-  SearchMatch,
   SearchProvider,
 } from './libro-search-protocol.js';
-
 /**
  * Abstract class implementing the search provider interface.
  */

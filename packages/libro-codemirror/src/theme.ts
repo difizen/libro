@@ -14,7 +14,7 @@ export const jupyterEditorTheme = EditorView.theme({
    * these things differently.
    */
   '&': {
-    background: 'var(--jp-layout-color0)',
+    background: 'var(--mana-libro-input-background)',
     color: 'var(--mana-libro-text-default-color)',
   },
 
@@ -88,9 +88,9 @@ export const jupyterEditorTheme = EditorView.theme({
     lineHeight: '20px',
   },
 
-  // '.cm-editor': {
-  //   paddingTop: '24px',
-  // },
+  '.cm-editor': {
+    background: 'var(--mana-libro-input-background)',
+  },
 
   '.cm-searchMatch': {
     backgroundColor: 'var(--jp-search-unselected-match-background-color)',

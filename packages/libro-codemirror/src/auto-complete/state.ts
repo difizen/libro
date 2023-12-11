@@ -49,7 +49,7 @@ function sortOptions(active: readonly ActiveSource[], state: EditorState) {
         let match;
         for (const option of a.result.options) {
           if ((match = matcher.match(option.label))) {
-            if (option.boost !== undefined) {
+            if (option.boost) {
               match[0] += option.boost;
             }
             options.push(new Option(option, a, match));
@@ -68,9 +68,7 @@ function sortOptions(active: readonly ActiveSource[], state: EditorState) {
       !prev ||
       prev.label !== opt.completion.label ||
       prev.detail !== opt.completion.detail ||
-      (prev.type !== null &&
-        opt.completion.type !== null &&
-        prev.type !== opt.completion.type) ||
+      (prev.type && opt.completion.type && prev.type !== opt.completion.type) ||
       prev.apply !== opt.completion.apply
     ) {
       result.push(opt);
@@ -191,16 +189,15 @@ export class CompletionState {
     ) {
       active = this.active;
     }
-    let open;
-    if (
+
+    let open =
       tr.selection ||
       active.some((a) => a.hasResult() && tr.changes.touchesRange(a.from, a.to)) ||
       !sameResults(active, this.active)
-    ) {
-      open = CompletionDialog.build(active, state, this.id, this.open, conf);
-    } else {
-      open = this.open && tr.docChanged ? this.open.map(tr.changes) : this.open;
-    }
+        ? CompletionDialog.build(active, state, this.id, this.open, conf)
+        : this.open && tr.docChanged
+          ? this.open.map(tr.changes)
+          : this.open;
     if (
       !open &&
       active.every((a) => a.state !== State.Pending) &&
@@ -277,13 +274,11 @@ export const enum State {
 }
 
 export function getUserEvent(tr: Transaction): 'input' | 'delete' | null {
-  if (tr.isUserEvent('input.type')) {
-    return 'input';
-  }
-  if (tr.isUserEvent('delete.backward')) {
-    return 'delete';
-  }
-  return null;
+  return tr.isUserEvent('input.type')
+    ? 'input'
+    : tr.isUserEvent('delete.backward')
+      ? 'delete'
+      : null;
 }
 
 export class ActiveSource {

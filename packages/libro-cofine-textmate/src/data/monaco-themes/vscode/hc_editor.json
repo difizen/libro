@@ -1,0 +1,7 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "Dark High Contrast (e2-editor)",
+  "colors": {},
+  "tokenColors": [],
+  "include": "hc_black.json"
+}

@@ -47,7 +47,7 @@ export class LibroCommandContribution implements CommandContribution {
       NotebookCommands['EnterCommandMode'],
       {
         execute: () => {
-          this.libroService.active?.enterCommandMode(true);
+          return this.libroService.active?.enterCommandMode(true);
         },
       },
     );
@@ -169,7 +169,7 @@ export class LibroCommandContribution implements CommandContribution {
           return false;
         }
         if (libro.model.interrupt) {
-          libro.model.interrupt();
+          return libro.model.interrupt();
         }
       },
       isEnabled: (cell, libro) => {
@@ -203,7 +203,7 @@ export class LibroCommandContribution implements CommandContribution {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
-          this.modalService.openModal(RestartClearOutputModal, libro);
+          return this.modalService.openModal(RestartClearOutputModal, libro);
         },
         isVisible: (cell, libro, path) => {
           if (!libro || !(libro instanceof LibroView)) {
@@ -225,7 +225,7 @@ export class LibroCommandContribution implements CommandContribution {
           if (!libro || !(libro instanceof LibroView)) {
             return false;
           }
-          this.modalService.openModal(ShutdownModal, libro);
+          return this.modalService.openModal(ShutdownModal, libro);
         },
         isVisible: () => false,
         // isVisible: (cell, libro, path) => {
