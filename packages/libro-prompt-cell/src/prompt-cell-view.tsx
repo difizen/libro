@@ -69,8 +69,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
         .then(() => {
           if (instance.modelSelection.length > 0) {
             setSelectedModel(instance.modelSelection[0].label);
-            (instance.model as LibroPromptCellModel).modelType =
-              instance.modelSelection[0].label;
+            instance.model.modelType = instance.modelSelection[0].label;
             return;
           }
           return;
@@ -81,7 +80,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
     }, [instance]);
 
     const handleChange = (value: string) => {
-      (instance.model as LibroPromptCellModel).modelType = value;
+      instance.model.modelType = value;
       setSelectedModel(value);
     };
 
@@ -119,6 +118,8 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
 @view('prompt-editor-cell-view')
 export class LibroPromptCellView extends LibroExecutableCellView {
   override view = PropmtEditorViewComponent;
+
+  declare model: LibroPromptCellModel;
 
   @prop()
   modelSelection: IModelSelectionItem[] = [];
@@ -326,7 +327,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
 
     // const cellContent = '%prompt ' + toBase64(this.model.value) + ',model:';
     const promptObj = {
-      model_name: (this.model as LibroPromptCellModel).modelType || 'CodeGPT',
+      model_name: this.model.modelType || 'CodeGPT',
       prompt: this.model.value,
     };
 
@@ -353,25 +354,22 @@ export class LibroPromptCellView extends LibroExecutableCellView {
       future.onIOPub = (msg: any) => {
         this.model.msgChangeEmitter.fire(msg);
         if (msg.header.msg_type === 'execute_input') {
-          (this.model as LibroPromptCellModel).kernelExecuting = true;
+          this.model.kernelExecuting = true;
           startTimeStr = msg.header.date as string;
-          const meta = (this.model as LibroPromptCellModel).metadata
-            .execution as ExecutionMeta;
+          const meta = this.model.metadata.execution as ExecutionMeta;
           if (meta) {
             meta['shell.execute_reply.started'] = startTimeStr;
           }
         }
         if (msg.header.msg_type === 'error') {
-          (this.model as LibroPromptCellModel).hasExecutedError = true;
+          this.model.hasExecutedError = true;
         }
       };
 
       const msgPromise = await future.done;
       this.model.executing = false;
-      (this.model as LibroPromptCellModel).kernelExecuting = false;
-      (this.model as LibroPromptCellModel).hasExecutedSuccess = !(
-        this.model as LibroPromptCellModel
-      ).hasExecutedError;
+      this.model.kernelExecuting = false;
+      this.model.hasExecutedSuccess = !this.model.hasExecutedError;
 
       startTimeStr = msgPromise.metadata['started'] as string; // 更新startTimeStr
       const endTimeStr = msgPromise.header.date;
