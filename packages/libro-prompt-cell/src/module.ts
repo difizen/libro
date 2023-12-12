@@ -4,7 +4,7 @@ import { ManaModule } from '@difizen/mana-app';
 
 import { PromptCellContribution } from './prompt-cell-contribution.js';
 import { LibroPromptCellModel } from './prompt-cell-model.js';
-import { LibroPromptOutputArea } from './prompt-cell-outputArea.js';
+import { LibroPromptOutputArea } from './prompt-cell-output-area.js';
 import { LibroPromptCellModelFactory } from './prompt-cell-protocol.js';
 import { LibroPromptCellView } from './prompt-cell-view.js';
 import { LibroPromptOutputMimeTypeContribution } from './prompt-output-rendermime-contribution.js';
