@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-lab",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "keywords": [
     "libro",
@@ -48,9 +48,9 @@
   "dependencies": {
     "@difizen/mana-app": "latest",
     "@difizen/mana-react": "latest",
-    "@difizen/libro-jupyter": "^0.1.0",
-    "@difizen/libro-toc": "^0.1.0",
-    "@difizen/libro-prompt-cell": "^0.1.0",
+    "@difizen/libro-jupyter": "^0.1.1",
+    "@difizen/libro-toc": "^0.1.1",
+    "@difizen/libro-prompt-cell": "^0.1.1",
     "@ant-design/icons": "^5.1.0",
     "classnames": "^2.2.6"
   },

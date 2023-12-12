@@ -1,5 +1,12 @@
 # @difizen/libro-markdown
 
+## 0.1.1
+
+### Patch Changes
+
+- 1. Prompt cell is now available 🎉.
+  2. Better lab UI.
+
 ## 0.1.0
 
 ### Minor Changes

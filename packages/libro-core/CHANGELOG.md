@@ -1,5 +1,16 @@
 # @difizen/libro-core
 
+## 0.1.1
+
+### Patch Changes
+
+- 1. Prompt cell is now available 🎉.
+  2. Better lab UI.
+- Updated dependencies
+  - @difizen/libro-code-editor@0.1.1
+  - @difizen/libro-common@0.1.1
+  - @difizen/libro-shared-model@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes

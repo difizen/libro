@@ -1,5 +1,16 @@
 # @difizen/libro-lab
 
+## 0.1.1
+
+### Patch Changes
+
+- 1. Prompt cell is now available 🎉.
+  2. Better lab UI.
+- Updated dependencies
+  - @difizen/libro-jupyter@0.1.1
+  - @difizen/libro-prompt-cell@0.1.1
+  - @difizen/libro-toc@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes

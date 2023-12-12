@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-search-codemirror-cell",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "keywords": [
     "libro",
@@ -45,12 +45,12 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-codemirror": "^0.1.0",
-    "@difizen/libro-codemirror-code-cell": "^0.1.0",
-    "@difizen/libro-common": "^0.1.0",
-    "@difizen/libro-code-editor": "^0.1.0",
-    "@difizen/libro-search": "^0.1.0",
-    "@difizen/libro-core": "^0.1.0",
+    "@difizen/libro-codemirror": "^0.1.1",
+    "@difizen/libro-codemirror-code-cell": "^0.1.1",
+    "@difizen/libro-common": "^0.1.1",
+    "@difizen/libro-code-editor": "^0.1.1",
+    "@difizen/libro-search": "^0.1.1",
+    "@difizen/libro-core": "^0.1.1",
     "@difizen/mana-app": "latest",
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.2.2"

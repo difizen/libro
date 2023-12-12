@@ -1,5 +1,17 @@
 # @difizen/libro-widget
 
+## 0.1.1
+
+### Patch Changes
+
+- 1. Prompt cell is now available 🎉.
+  2. Better lab UI.
+- Updated dependencies
+  - @difizen/libro-common@0.1.1
+  - @difizen/libro-core@0.1.1
+  - @difizen/libro-kernel@0.1.1
+  - @difizen/libro-rendermime@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
