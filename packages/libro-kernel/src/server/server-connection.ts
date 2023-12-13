@@ -26,20 +26,21 @@ export class ServerConnection {
   settings: ISettings;
 
   constructor() {
-    this.updateSettings({
-      baseUrl: 'http://localhost:8000/',
-      wsUrl: 'ws://localhost:8888/',
-    });
+    this.updateSettings({});
   }
 
   updateSettings(options: Partial<ISettings> = {}): ISettings {
     const pageBaseUrl = PageConfig.getBaseUrl();
     const pageWsUrl = PageConfig.getWsUrl();
-    const baseUrl = URL.normalize(options.baseUrl) || pageBaseUrl;
-    let wsUrl = options.wsUrl;
-    // Prefer the default wsUrl if we are using the default baseUrl.
-    if (!wsUrl && baseUrl === pageBaseUrl) {
-      wsUrl = pageWsUrl;
+    let baseUrl = URL.normalize(options.baseUrl) || pageBaseUrl;
+    if (!baseUrl) {
+      baseUrl = window.location.origin + '/';
+    } else if (baseUrl.startsWith('/')) {
+      baseUrl = window.location.origin + baseUrl;
+    }
+    let wsUrl = options.wsUrl || pageWsUrl;
+    if (wsUrl.startsWith('/')) {
+      wsUrl = 'ws' + (window.location.origin + wsUrl).slice(4);
     }
     // Otherwise convert the baseUrl to a wsUrl if possible.
     if (!wsUrl && baseUrl.indexOf('http') === 0) {
