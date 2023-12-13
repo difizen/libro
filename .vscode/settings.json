@@ -34,8 +34,8 @@
   },
   "[python]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": false,
-      "source.fixAll": true
+      "source.organizeImports": "never",
+      "source.fixAll": "explicit"
     },
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
@@ -97,6 +97,16 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
       "source.fixAll.stylelint": true
+    }
+  },
+  "[css][less]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    }
+  },
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
     }
   }
 }
