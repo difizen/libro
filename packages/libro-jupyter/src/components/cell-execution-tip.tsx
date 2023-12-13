@@ -94,7 +94,7 @@ export function CellExecutionTip({ cell }: { cell: CellView }) {
       <div
         className={classnames(
           `libro-cell-execution-tip`,
-          waitingExecute && 'libro-cell-execution-tip-without-output',
+          !existOutput && 'libro-cell-execution-tip-without-output',
         )}
       >
         <div className="libro-cell-execution-tip-border" />
