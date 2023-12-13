@@ -9,6 +9,7 @@ import {
   HeaderArea,
 } from '@difizen/mana-app';
 
+import { LabConfigAppContribution } from './config/config-contribution.js';
 import { GithubLinkView } from './github-link/index.js';
 import { KernelManagerView } from './kernel-manager/index.js';
 import { LibroLabApp } from './lab-app.js';
@@ -29,6 +30,7 @@ export const LibroLabModule = ManaModule.create()
     LibroLabApp,
     LibroLabLayoutView,
     GithubLinkView,
+    LabConfigAppContribution,
     createViewPreference({
       view: GithubLinkView,
       slot: HeaderArea.right,
