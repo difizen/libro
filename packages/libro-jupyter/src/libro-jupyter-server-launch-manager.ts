@@ -18,10 +18,6 @@ export class JupyterServerLaunchManager implements ApplicationContribution {
   }
 
   async onStart() {
-    const host = location.host;
-    this.serverConnection.updateSettings({
-      baseUrl: `http://${host}`,
-      wsUrl: `ws://${host}`,
-    });
+    this.serverConnection.updateSettings({});
   }
 }

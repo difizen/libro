@@ -14,8 +14,8 @@ export class LibroApp implements ApplicationContribution {
 
   async onStart() {
     this.serverConnection.updateSettings({
-      baseUrl: "http://localhost:8888/",
-      wsUrl: "ws://localhost:8888/",
+      baseUrl: 'http://localhost:8888/',
+      wsUrl: 'ws://localhost:8888/',
     });
     this.serverManager.launch();
   }
