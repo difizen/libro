@@ -56,6 +56,10 @@ export class LibroLabLayoutView extends BaseView {
 
   restoreState(oldState: object): void {
     const state = oldState as { visibilityMap: VisibilityMap };
-    this.layoutService.visibilityMap = state.visibilityMap;
+    this.layoutService.visibilityMap = {
+      ...state.visibilityMap,
+      [LibroLabLayoutSlots.navigator]: false,
+      [LibroLabLayoutSlots.alert]: true,
+    };
   }
 }
