@@ -2,9 +2,12 @@ import type {
   MixedTheme,
   ITextmateThemeSetting,
 } from '@difizen/libro-cofine-editor-core';
-import { MixedThemeRegistry } from '@difizen/libro-cofine-editor-core';
+import {
+  MixedThemeRegistry,
+  InitializeContribution,
+} from '@difizen/libro-cofine-editor-core';
 import type { Color } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
+import { Emitter, inject, singleton } from '@difizen/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 import { StandaloneServices } from '@difizen/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
 import { IStandaloneThemeService } from '@difizen/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme';
@@ -15,13 +18,24 @@ export interface MixStandaloneTheme {
   themeData: MixedTheme;
 }
 
-@singleton({ contrib: MixedThemeRegistry })
-export class MonacoThemeRegistry implements MixedThemeRegistry {
+@singleton({ contrib: [MixedThemeRegistry, InitializeContribution] })
+export class MonacoThemeRegistry implements MixedThemeRegistry, InitializeContribution {
+  @inject(MonacoGrammarRegistry)
   protected readonly grammarRegistry: MonacoGrammarRegistry;
-  constructor(@inject(MonacoGrammarRegistry) grammarRegistry: MonacoGrammarRegistry) {
-    this.grammarRegistry = grammarRegistry;
-  }
+
   protected registedTheme: string[] = [];
+
+  onInitialize() {
+    const standaloneThemeService = StandaloneServices.standaloneThemeService.get();
+    standaloneThemeService.onDidColorThemeChange(() => {
+      this.themeChangedEmitter.fire();
+    });
+  }
+
+  protected themeChangedEmitter = new Emitter<void>();
+
+  onThemeChanged = this.themeChangedEmitter.event;
+
   getThemeData(): MixedTheme;
   getThemeData(name: string): MixedTheme | undefined;
   getThemeData(name?: string): MixedTheme | undefined {
@@ -35,8 +49,13 @@ export class MonacoThemeRegistry implements MixedThemeRegistry {
     return this.doGetTheme(name);
   }
 
+  getMonacoThemeName() {
+    return StandaloneServices.standaloneThemeService.get().getColorTheme()
+      .themeName as string;
+  }
+
   protected doGetTheme(name: string | undefined): MixStandaloneTheme | undefined {
-    const standaloneThemeService = StandaloneServices.get(IStandaloneThemeService);
+    const standaloneThemeService = StandaloneServices.standaloneThemeService.get();
     const theme = !name
       ? standaloneThemeService.getTheme()
       : standaloneThemeService._knownThemes.get(name);
@@ -70,7 +89,12 @@ export class MonacoThemeRegistry implements MixedThemeRegistry {
       settings: [],
     };
     if (typeof option.include !== 'undefined') {
-      const parentOption = themeOptions[option.include];
+      const themeName = option.include
+        .replaceAll('/', '')
+        .replaceAll('_', '-')
+        .replaceAll('.json', '');
+
+      const parentOption = themeOptions[themeName];
       if (!parentOption || this.registedTheme.includes(parentOption.name)) {
         console.error(`Couldn't resolve includes theme ${option.include}.`);
       } else {

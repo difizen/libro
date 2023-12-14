@@ -49,30 +49,24 @@ export class E2Editor<
     if (MonacoEnvironment.lazy) {
       // 资源懒加载场景
       if (!isDiff) {
-        // 先不设置方言
-        const allLanguage = monaco.languages.getLanguages();
-        const isRegister = allLanguage.some((item) => item.id === options.language);
         this.model = monaco.editor.createModel(
           options.value || '',
-          isRegister ? options.language : '',
+          options.language,
+          options.uri,
         );
+        const language = this.model.getLanguageId();
         (this as E2Editor<monaco.editor.IStandaloneCodeEditor>).codeEditor =
           monaco.editor.create(node, { ...options, model: this.model });
-        this.handleEditorLanguageFeatureBefore(options.language);
+        this.handleEditorLanguageFeatureBefore(language);
         MonacoEnvironment.initModule()
           .then(() => {
             // 设置方言和主题
-            if (!isRegister) {
-              const codeEditor = (this as E2Editor<monaco.editor.IStandaloneCodeEditor>)
-                .codeEditor;
-              // 为了触发onCreate事件
-              codeEditor.setModel(
-                monaco.editor.createModel(
-                  codeEditor.getValue() || '',
-                  options.language,
-                ),
-              );
-            }
+            const codeEditor = (this as E2Editor<monaco.editor.IStandaloneCodeEditor>)
+              .codeEditor;
+            // 为了触发onCreate事件
+            codeEditor.setModel(
+              monaco.editor.createModel(codeEditor.getValue() || '', language),
+            );
             this.language = options.language;
             monaco.editor.setTheme(options.theme || '');
             // 调用回调函数
