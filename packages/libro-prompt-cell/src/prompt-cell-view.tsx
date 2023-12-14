@@ -67,9 +67,10 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
           instance.handleQueryResponse,
         )
         .then(() => {
-          if (instance.modelSelection.length > 0) {
-            setSelectedModel(instance.modelSelection[0].label);
-            instance.model.modelType = instance.modelSelection[0].label;
+          const len = instance.modelSelection.length;
+          if (len > 0) {
+            setSelectedModel(instance.modelSelection[len - 1].label);
+            instance.model.modelType = instance.modelSelection[len - 1].label;
             return;
           }
           return;
@@ -77,7 +78,8 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
         .catch(() => {
           //
         });
-    }, [instance]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleChange = (value: string) => {
       instance.model.modelType = value;
