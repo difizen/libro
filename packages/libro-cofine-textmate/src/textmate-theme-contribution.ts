@@ -3,7 +3,7 @@ import type { ThemeRegistry } from '@difizen/libro-cofine-editor-core';
 import { ThemeContribution } from '@difizen/libro-cofine-editor-core';
 import { singleton } from '@difizen/mana-app';
 
-import darkDefault from './data/monaco-themes/vscode/dark_defaults.json';
+import darkDefaults from './data/monaco-themes/vscode/dark_defaults.json';
 import darkEditor from './data/monaco-themes/vscode/dark_editor.json';
 import darkPlus from './data/monaco-themes/vscode/dark_plus.json';
 import darkVS from './data/monaco-themes/vscode/dark_vs.json';
@@ -22,18 +22,18 @@ export class TextmateThemeContribution implements ThemeContribution {
       console.warn('cannot register textmate themes');
       return;
     }
-    registry.registerMixedTheme(darkDefault, 'dark_defaults.json');
-    registry.registerMixedTheme(darkVS, 'dark_vs.json');
-    registry.registerMixedTheme(darkPlus, 'dark_plus.json');
+    registry.registerMixedTheme(darkDefaults, 'dark-defaults', 'vs-dark');
+    registry.registerMixedTheme(darkVS, 'dark-vs', 'vs-dark');
+    registry.registerMixedTheme(darkPlus, 'dark-plus', 'vs-dark');
     registry.registerMixedTheme(darkEditor, 'e2-dark', 'vs-dark');
 
-    registry.registerMixedTheme(lightDefault, 'light_defaults.json');
-    registry.registerMixedTheme(lightVS, 'light_vs.json');
-    registry.registerMixedTheme(lightPlus, 'light_plus.json');
+    registry.registerMixedTheme(lightDefault, 'light-defaults', 'vs');
+    registry.registerMixedTheme(lightVS, 'light-vs', 'vs');
+    registry.registerMixedTheme(lightPlus, 'light-plus', 'vs');
     registry.registerMixedTheme(lightEditor, 'e2-light', 'vs');
 
-    registry.registerMixedTheme(HCBlackDefault, 'hc_black_defaults.json');
-    registry.registerMixedTheme(HCBlack, 'hc_black.json');
+    registry.registerMixedTheme(HCBlackDefault, 'hc-black-defaults', 'hc-black');
+    registry.registerMixedTheme(HCBlack, 'hc-black', 'hc-black');
     registry.registerMixedTheme(HCEditor, 'e2-hc', 'hc-black');
   }
 }

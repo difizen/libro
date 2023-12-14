@@ -7,6 +7,8 @@ export type Options = monaco.editor.IStandaloneEditorConstructionOptions &
   monaco.editor.IDiffEditorConstructionOptions & {
     modified?: string;
     original?: string;
+  } & {
+    uri?: monaco.Uri;
   };
 
 export interface EditorProvider {

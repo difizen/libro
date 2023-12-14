@@ -1,7 +1,12 @@
 import { EditorHandlerContribution } from '@difizen/libro-cofine-editor-core';
 import type { Contribution } from '@difizen/mana-app';
-import { Disposable, DisposableCollection } from '@difizen/mana-app';
-import { contrib, inject, singleton } from '@difizen/mana-app';
+import {
+  Disposable,
+  DisposableCollection,
+  contrib,
+  inject,
+  singleton,
+} from '@difizen/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 import { TokenizationRegistry } from '@difizen/monaco-editor-core/esm/vs/editor/common/languages';
 import { ILanguageService } from '@difizen/monaco-editor-core/esm/vs/editor/common/languages/language';
@@ -30,25 +35,21 @@ export class MonacoTextmateService implements EditorHandlerContribution {
   };
 
   protected readonly _activatedLanguages = new Set<string>();
+
+  @contrib(LanguageGrammarDefinitionContribution)
   protected readonly grammarProviders: Contribution.Provider<LanguageGrammarDefinitionContribution>;
+
+  @inject(TextmateRegistry)
   protected readonly textmateRegistry: TextmateRegistry;
+  @inject(MonacoGrammarRegistry)
   protected readonly grammarRegistry: MonacoGrammarRegistry;
+
+  @inject(OnigurumaPromise)
   protected readonly onigasmPromise: OnigurumaPromise;
+
+  @inject(MonacoThemeRegistry)
   protected readonly monacoThemeRegistry: MonacoThemeRegistry;
-  constructor(
-    @contrib(LanguageGrammarDefinitionContribution)
-    grammarProviders: Contribution.Provider<LanguageGrammarDefinitionContribution>,
-    @inject(TextmateRegistry) textmateRegistry: TextmateRegistry,
-    @inject(MonacoGrammarRegistry) grammarRegistry: MonacoGrammarRegistry,
-    @inject(OnigurumaPromise) onigasmPromise: OnigurumaPromise,
-    @inject(MonacoThemeRegistry) monacoThemeRegistry: MonacoThemeRegistry,
-  ) {
-    this.grammarProviders = grammarProviders;
-    this.textmateRegistry = textmateRegistry;
-    this.grammarRegistry = grammarRegistry;
-    this.onigasmPromise = onigasmPromise;
-    this.monacoThemeRegistry = monacoThemeRegistry;
-  }
+
   beforeCreate() {
     this.initialize();
   }
@@ -68,33 +69,34 @@ export class MonacoTextmateService implements EditorHandlerContribution {
       return;
     }
 
-    for (const grammarProvider of this.grammarProviders.getContributions({
-      cache: false,
-    })) {
+    for (const grammarProvider of this.grammarProviders.getContributions()) {
       try {
-        if (grammarProvider._finishRegisterTextmateLanguage) {
-          return;
-        }
         grammarProvider.registerTextmateLanguage(this.textmateRegistry);
-        grammarProvider._finishRegisterTextmateLanguage = true;
       } catch (err) {
         console.error(err);
       }
     }
+    for (const id of this.textmateRegistry.languages) {
+      this.activateLanguage(id);
+    }
+
+    this.monacoThemeRegistry.onThemeChanged(() => {
+      this.updateTheme();
+      this.setupGrammerRegistry();
+    });
+  }
+
+  protected setupGrammerRegistry() {
     const theme = this.monacoThemeRegistry.getThemeData(this.currentEditorTheme);
     if (!theme) {
       return;
     }
     this.grammarRegistry.setupRegistry(theme);
-
-    for (const id of this.textmateRegistry.languages) {
-      this.activateLanguage(id);
-    }
   }
 
   protected readonly toDisposeOnUpdateTheme = new DisposableCollection();
 
-  protected updateTheme(): void {
+  protected updateTheme = (): void => {
     this.toDisposeOnUpdateTheme.dispose();
 
     const { currentEditorTheme } = this;
@@ -111,10 +113,10 @@ export class MonacoTextmateService implements EditorHandlerContribution {
 
     // then trigger tokenization by setting monaco theme
     monaco.editor.setTheme(currentEditorTheme);
-  }
+  };
 
   protected get currentEditorTheme(): string {
-    return MonacoThemeRegistry.DARK_DEFAULT_THEME;
+    return this.monacoThemeRegistry.getMonacoThemeName();
   }
 
   activateLanguage(language: string): Disposable {
@@ -196,6 +198,7 @@ export class MonacoTextmateService implements EditorHandlerContribution {
         tokenizer,
       );
       support!.tokenize = adapter.tokenize.bind(adapter);
+      this.updateTheme();
     } catch (error) {
       console.warn('No grammar for this language id', languageId, error);
     }
