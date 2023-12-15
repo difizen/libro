@@ -29,6 +29,7 @@ const Terminal = function Terminal(props: {
   const [writeLineVal, setWriteLineVal] = useState('');
   const [writeVal, setWriteVal] = useState('');
   const [selection, setSelection] = useState('');
+  const [ready, setReady] = useState(false);
 
   // const [view, setView] = useState<LibroTerminalView | null>(null);
   const view = props.viewRender;
@@ -64,6 +65,10 @@ const Terminal = function Terminal(props: {
       });
       view.onTitleChange(() => {
         forceUpdate({});
+      });
+
+      view.onReady(() => {
+        setReady(true);
       });
     }
   }, [view]);
@@ -220,6 +225,7 @@ const Terminal = function Terminal(props: {
       </Card.Grid>
       <Card.Grid style={gridStyle}>
         <Flex gap={10} vertical={true}>
+          <Card.Meta title={`terminal ready: ${ready}`} />
           <Card.Meta title={`hasSelection: ${view.hasSelection()}`} />
           <Card.Meta title={`onDidOpenVal: ${onDidOpenVal}`} />
           <Card.Meta title={`onDidOpenFailureVal: ${onDidOpenFailureVal}`} />
