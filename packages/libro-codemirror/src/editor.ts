@@ -110,6 +110,7 @@ export const codeMirrorDefaultConfig: Required<CodeMirrorConfig> = {
   styleSelectedText: true,
   selectionPointer: false,
   handlePaste: true,
+  scrollBarHeight: 8,
 
   //
   highlightActiveLineGutter: false,
@@ -492,8 +493,7 @@ export class CodeMirrorEditor implements IEditor {
    */
   getLine(line: number): string | undefined {
     // TODO: CM6 remove +1 when CM6 first line number has propagated
-    const _line = line + 1;
-    return _line <= this.doc.lines ? this.doc.line(_line).text : undefined;
+    return line <= this.doc.lines ? this.doc.line(line).text : undefined;
   }
 
   /**
@@ -501,7 +501,7 @@ export class CodeMirrorEditor implements IEditor {
    */
   getOffsetAt(position: IPosition): number {
     // TODO: CM6 remove +1 when CM6 first line number has propagated
-    return this.doc.line(position.line + 1).from + position.column;
+    return this.doc.line(position.line).from + position.column - 1;
   }
 
   /**

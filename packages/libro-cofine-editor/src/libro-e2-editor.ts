@@ -25,13 +25,15 @@ import {
 } from '@difizen/mana-app';
 import { Disposable, DisposableCollection, Emitter } from '@difizen/mana-app';
 import { editor, Selection } from '@difizen/monaco-editor-core';
+import 'resize-observer-polyfill';
 import { v4 } from 'uuid';
 
-import './index.less';
+import { LSPContribution } from './language/lsp/lsp-contribution.js';
 import { LanguageSpecRegistry } from './language-specs.js';
 import { PlaceholderContentWidget } from './placeholder.js';
 import type { MonacoEditorOptions, MonacoEditorType, MonacoMatch } from './types.js';
 import { MonacoRange, MonacoUri } from './types.js';
+import './index.less';
 
 export interface LibroE2EditorConfig extends IEditorConfig {
   /**
@@ -216,6 +218,7 @@ export const libroE2DefaultConfig: Required<LibroE2EditorConfig> = {
     light: 'libro-light',
     hc: 'e2-hc',
   },
+  scrollBarHeight: 12,
   mode: 'null',
   mimetype: 'text/x-python',
   smartIndent: true,
@@ -272,8 +275,10 @@ export const LibroE2URIScheme = 'libro-e2';
 @transient()
 export class LibroE2Editor implements IEditor {
   protected readonly themeService: ThemeService;
+
   protected readonly languageSpecRegistry: LanguageSpecRegistry;
-  protected readonly commandRegistry: CommandRegistry;
+  @inject(CommandRegistry) protected readonly commandRegistry: CommandRegistry;
+  @inject(LSPContribution) protected lspContribution: LSPContribution;
 
   protected defaultLineHeight = 20;
 
@@ -293,6 +298,8 @@ export class LibroE2Editor implements IEditor {
   protected oldDeltaDecorations: string[] = [];
 
   protected _config: LibroE2EditorConfig;
+
+  private resizeObserver: ResizeObserver;
 
   protected _uuid = '';
   /**
@@ -335,13 +342,12 @@ export class LibroE2Editor implements IEditor {
   protected isLayouting = false;
   constructor(
     @inject(LibroE2EditorOptions) options: LibroE2EditorOptions,
-    @inject(LanguageSpecRegistry) languageSpecRegistry: LanguageSpecRegistry,
     @inject(ThemeService) themeService: ThemeService,
-    @inject(CommandRegistry) commandRegistry: CommandRegistry,
+    @inject(LanguageSpecRegistry)
+    languageSpecRegistry: LanguageSpecRegistry,
   ) {
-    this.languageSpecRegistry = languageSpecRegistry;
     this.themeService = themeService;
-    this.commandRegistry = commandRegistry;
+    this.languageSpecRegistry = languageSpecRegistry;
     this.host = options.host;
     this.host.classList.add('libro-e2-editor-container');
     this._uuid = options.uuid || v4();
@@ -507,7 +513,18 @@ export class LibroE2Editor implements IEditor {
   }
 
   protected inspectResize() {
-    // TODO
+    this.resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        const isVisible =
+          entry.contentRect.width !== 0 && entry.contentRect.height !== 0;
+
+        if (isVisible) {
+          this.updateEditorSize();
+        }
+      });
+    });
+
+    this.resizeObserver.observe(this.host);
   }
 
   protected getEditorNode() {
@@ -895,6 +912,8 @@ export class LibroE2Editor implements IEditor {
     }
     this.placeholder.dispose();
     this.toDispose.dispose();
+    this.resizeObserver.disconnect();
+    this.lspContribution.beforeDestory();
     this._isDisposed = true;
   }
 }

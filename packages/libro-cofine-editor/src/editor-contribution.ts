@@ -2,11 +2,13 @@ import type { CodeEditorFactory } from '@difizen/libro-code-editor';
 import { CodeEditorContribution } from '@difizen/libro-code-editor';
 import { inject, singleton } from '@difizen/mana-app';
 
-import { LibroE2EditorFactory } from './libro-e2-editor.js';
+import { libroE2DefaultConfig, LibroE2EditorFactory } from './libro-e2-editor.js';
 
 @singleton({ contrib: [CodeEditorContribution] })
 export class LibroE2EditorContribution implements CodeEditorContribution {
   factory: CodeEditorFactory;
+
+  defaultConfig = libroE2DefaultConfig;
 
   constructor(
     @inject(LibroE2EditorFactory) libroE2EditorFactory: LibroE2EditorFactory,

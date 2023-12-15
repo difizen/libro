@@ -276,7 +276,6 @@ export default class RowCellSizeAndPositionManager {
       stop++;
 
       offset = this.getSizeAndPositionOfCell(stop).offset;
-      // offset += this.getSizeAndPositionOfCell(stop).offset;
     }
 
     return {

@@ -101,7 +101,7 @@ export class CodeEditorView extends BaseView {
   }
 
   override async onViewMount() {
-    const settings = await this.codeEditorSettings.fetchEditorSettings();
+    const settings = this.codeEditorSettings.getUserEditorSettings();
 
     const editorHostId = this.options.editorHostId;
     const editorHostRef = editorHostId
@@ -117,7 +117,7 @@ export class CodeEditorView extends BaseView {
         host: this.editorHostRef.current,
         model: this.options.model,
         uuid: this.options.uuid,
-        config: { ...this.options.config, ...settings },
+        config: { ...settings, ...this.options.config },
         selectionStyle: this.options.selectionStyle,
         tooltipProvider: this.options.tooltipProvider,
         completionProvider: this.options.completionProvider,
@@ -151,6 +151,10 @@ export class CodeEditorView extends BaseView {
   };
 
   override onViewUnmount() {
+    if (this.editor.dispose) {
+      this.editor.dispose();
+    }
+
     const node = this.editorHostRef?.current;
     if (node) {
       node.removeEventListener('focus', this.onViewActive);

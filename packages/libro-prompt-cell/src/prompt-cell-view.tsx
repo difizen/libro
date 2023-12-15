@@ -302,11 +302,11 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     this.outputArea.clear();
   };
 
-  override getSelections = (): [] => {
+  getSelections = (): [] => {
     return this.editor?.getSelections() as [];
   };
 
-  override getSelectionsOffsetAt = (selection: IRange) => {
+  getSelectionsOffsetAt = (selection: IRange) => {
     const isSelect = selection;
     const start = this.editor?.getOffsetAt(isSelect.start) ?? 0;
     const end = this.editor?.getOffsetAt(isSelect.end) ?? 0;

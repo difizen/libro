@@ -5,7 +5,7 @@ import {
 import { LibroService } from '@difizen/libro-core';
 import type { LSPConnection } from '@difizen/libro-lsp';
 import { ILSPDocumentConnectionManager } from '@difizen/libro-lsp';
-import { inject, singleton } from '@difizen/mana-app';
+import { DisposableCollection, inject, singleton } from '@difizen/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 
 import { LibroE2URIScheme } from '../../libro-e2-editor.js';
@@ -19,22 +19,15 @@ import { SignatureHelpProvider } from './signature-help-provider.js';
   contrib: [EditorHandlerContribution],
 })
 export class LSPContribution implements EditorHandlerContribution {
+  @inject(LanguageOptionsRegistry)
   protected readonly optionsResgistry: LanguageOptionsRegistry;
 
-  protected readonly libroService: LibroService;
+  @inject(LibroService) protected readonly libroService: LibroService;
 
+  @inject(ILSPDocumentConnectionManager)
   protected readonly lspDocumentConnectionManager: ILSPDocumentConnectionManager;
 
-  constructor(
-    @inject(LanguageOptionsRegistry) optionsResgistry: LanguageOptionsRegistry,
-    @inject(LibroService) libroService: LibroService,
-    @inject(ILSPDocumentConnectionManager)
-    lspDocumentConnectionManager: ILSPDocumentConnectionManager,
-  ) {
-    this.optionsResgistry = optionsResgistry;
-    this.libroService = libroService;
-    this.lspDocumentConnectionManager = lspDocumentConnectionManager;
-  }
+  protected toDispose = new DisposableCollection();
 
   protected lspLangs = ['python'];
 
@@ -100,18 +93,31 @@ export class LSPContribution implements EditorHandlerContribution {
         if (!lspConnection || !virtualDocument) {
           return;
         }
-        monaco.languages.registerCompletionItemProvider(
-          this.getLanguageSelector(model),
-          new CompletionProvider(this.libroService, lspConnection, virtualDocument),
+        this.toDispose.push(
+          monaco.languages.registerCompletionItemProvider(
+            this.getLanguageSelector(model),
+            new CompletionProvider(this.libroService, lspConnection, virtualDocument),
+          ),
         );
-        monaco.languages.registerHoverProvider(
-          this.getLanguageSelector(model),
-          new HoverProvider(this.libroService, lspConnection, virtualDocument),
+
+        this.toDispose.push(
+          monaco.languages.registerHoverProvider(
+            this.getLanguageSelector(model),
+            new HoverProvider(this.libroService, lspConnection, virtualDocument),
+          ),
         );
+
         new DiagnosticProvider(this.libroService, lspConnection, virtualDocument);
-        monaco.languages.registerSignatureHelpProvider(
-          this.getLanguageSelector(model),
-          new SignatureHelpProvider(this.libroService, lspConnection, virtualDocument),
+
+        this.toDispose.push(
+          monaco.languages.registerSignatureHelpProvider(
+            this.getLanguageSelector(model),
+            new SignatureHelpProvider(
+              this.libroService,
+              lspConnection,
+              virtualDocument,
+            ),
+          ),
         );
         // const formatProvider = new FormatProvider(
         //   this.libroService,
@@ -141,7 +147,13 @@ export class LSPContribution implements EditorHandlerContribution {
   get disposed() {
     return this.isDisposed;
   }
+
+  beforeDestory() {
+    this.toDispose.dispose();
+  }
+
   dispose() {
+    this.toDispose.dispose();
     this.isDisposed = false;
   }
 }

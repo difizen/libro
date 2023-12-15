@@ -23,7 +23,7 @@ import {
 } from '@difizen/mana-app';
 import { createRef, forwardRef } from 'react';
 
-import { LibroAutosaveSetting } from '../config/config.js';
+import { LibroConfigAutoSave } from '../config/config.js';
 
 export const LibroEditorComponent = forwardRef(function LibroEditorComponent() {
   const instance = useInject<LibroNavigatableView>(ViewInstance);
@@ -91,7 +91,7 @@ export class LibroNavigatableView
     this.title.icon = <div className={iconClass} />;
     this.title.label = uri.displayName;
     configurationService
-      .get(LibroAutosaveSetting)
+      .get(LibroConfigAutoSave)
       .then((value) => {
         if (value) {
           this.autoSave = 'on';

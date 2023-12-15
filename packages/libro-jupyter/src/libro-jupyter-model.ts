@@ -1,4 +1,5 @@
-import { LibroModel, VirtualizedManager } from '@difizen/libro-core';
+import { LibroModel, VirtualizedManagerHelper } from '@difizen/libro-core';
+import type { VirtualizedManager } from '@difizen/libro-core';
 import {
   ContentsManager,
   ExecutableNotebookModel,
@@ -57,7 +58,7 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
   protected serverConnection: ServerConnection;
   protected readonly contentsManager: ContentsManager;
   protected readonly modalService: ModalService;
-  protected override virtualizedManager: VirtualizedManager;
+  protected virtualizedManager: VirtualizedManager;
 
   constructor(
     @inject(LibroFileService) libroFileService: LibroFileService,
@@ -67,7 +68,8 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
     @inject(ServerConnection) serverConnection: ServerConnection,
     @inject(ContentsManager) contentsManager: ContentsManager,
     @inject(ModalService) modalService: ModalService,
-    @inject(VirtualizedManager) virtualizedManager: VirtualizedManager,
+    @inject(VirtualizedManagerHelper)
+    virtualizedManagerHelper: VirtualizedManagerHelper,
   ) {
     super();
     this.kernelSelection = getDefaultKernel();
@@ -78,7 +80,7 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
     this.contentsManager = contentsManager;
     this.modalService = modalService;
     this.dndAreaNullEnable = true;
-    this.virtualizedManager = virtualizedManager;
+    this.virtualizedManager = virtualizedManagerHelper.getOrCreate(this);
   }
 
   get isKernelIdle() {

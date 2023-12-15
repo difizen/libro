@@ -16,7 +16,6 @@ import { prop } from '@difizen/mana-app';
 import { inject, transient } from '@difizen/mana-app';
 import { v4 } from 'uuid';
 
-import { VirtualizedManager } from './components/index.js';
 import { LibroContentService } from './content/index.js';
 import { isCellView, NotebookOption } from './libro-protocol.js';
 import type {
@@ -29,12 +28,13 @@ import type {
   MouseMode,
 } from './libro-protocol.js';
 import { EnterEditModeWhenAddCell } from './libro-setting.js';
+import { VirtualizedManagerHelper } from './virtualized-manager-helper.js';
 
 @transient()
 export class LibroModel implements NotebookModel, DndListModel {
   @inject(NotebookOption) options: NotebookOption;
   @inject(LibroContentService) libroContentService: LibroContentService;
-  @inject(VirtualizedManager) protected virtualizedManager: VirtualizedManager;
+  @inject(VirtualizedManagerHelper) virtualizedManagerHelper: VirtualizedManagerHelper;
   @inject(ConfigurationService) configurationService: ConfigurationService;
 
   protected scrollToCellViewEmitter: Emitter;
@@ -70,7 +70,7 @@ export class LibroModel implements NotebookModel, DndListModel {
     return this.onSourceChangedEmitter.event;
   }
 
-  id: string = v4();
+  id: string;
 
   /**
    * The shared notebook model.
@@ -186,6 +186,7 @@ export class LibroModel implements NotebookModel, DndListModel {
   cellTypeAdaptor?: CellTypeAdaptor;
 
   constructor() {
+    this.id = v4();
     this.sharedModel = YNotebook.create({
       disableDocumentWideUndoRedo: false,
       cellTypeAdaptor: this.cellTypeAdaptor,
@@ -232,7 +233,8 @@ export class LibroModel implements NotebookModel, DndListModel {
     }
     this.selectCell(this.cells[this.activeIndex]);
 
-    if (this.virtualizedManager.isVirtualized) {
+    const virtualizedManager = this.virtualizedManagerHelper.getOrCreate(this);
+    if (virtualizedManager.isVirtualized) {
       if (this.cells[this.activeIndex]) {
         this.scrollToCellView({ cellIndex: this.activeIndex });
       }
@@ -631,9 +633,10 @@ export class LibroModel implements NotebookModel, DndListModel {
       cells.splice(sourceIndex, 1);
       cells.splice(targetIndex, 0, sourceItem);
       this.cells = cells;
+      const virtualizedManager = this.virtualizedManagerHelper.getOrCreate(this);
       setTimeout(() => {
         // 上下移动也需要调整可视区域范围
-        if (this.virtualizedManager.isVirtualized) {
+        if (virtualizedManager.isVirtualized) {
           this.scrollToCellView({ cellIndex: sourceIndex });
         } else {
           this.scrollToView(sourceItem);

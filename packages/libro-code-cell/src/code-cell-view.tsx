@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-parameter-properties */
 /* eslint-disable @typescript-eslint/parameter-properties */
 import type { CodeEditorViewOptions, CodeEditorView } from '@difizen/libro-code-editor';
-import { CodeEditorManager } from '@difizen/libro-code-editor';
+import { CodeEditorManager, CodeEditorSettings } from '@difizen/libro-code-editor';
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
 import { isOutput } from '@difizen/libro-common';
 import type {
@@ -14,9 +15,8 @@ import {
   EditorStatus,
   LibroExecutableCellView,
   LibroOutputArea,
-  VirtualizedManager,
+  VirtualizedManagerHelper,
 } from '@difizen/libro-core';
-import { Deferred } from '@difizen/mana-app';
 import {
   getOrigin,
   inject,
@@ -30,8 +30,8 @@ import {
   ViewRender,
   watch,
 } from '@difizen/mana-app';
-import type { ViewSize } from '@difizen/mana-app';
-import React, { useEffect, useRef } from 'react';
+import { Deferred } from '@difizen/mana-app';
+import { useEffect, useMemo, useRef, memo, forwardRef } from 'react';
 
 import type { LibroCodeCellModel } from './code-cell-model.js';
 
@@ -42,7 +42,10 @@ function countLines(inputString: string) {
 
 const CellEditor: React.FC = () => {
   const instance = useInject<LibroCodeCellView>(ViewInstance);
-  const virtualizedManager = useInject(VirtualizedManager);
+  const virtualizedManagerHelper = useInject(VirtualizedManagerHelper);
+  const virtualizedManager = virtualizedManagerHelper.getOrCreate(
+    instance.parent.model,
+  );
   const editorRef = useRef(null);
 
   useEffect(() => {
@@ -51,9 +54,12 @@ const CellEditor: React.FC = () => {
     }
   }, [instance, instance.editorView?.editor]);
 
+  const editorAreaHeight = useMemo(() => {
+    return instance.calcEditorAreaHeight();
+  }, [instance.model.value]);
+
   if (virtualizedManager.isVirtualized) {
     instance.renderEditorIntoVirtualized = true;
-    const editorAreaHeight = instance.calcEditorAreaHeight();
     if (instance.setEditorHost) {
       instance.setEditorHost(editorRef);
     }
@@ -72,9 +78,9 @@ const CellEditor: React.FC = () => {
   }
 };
 
-export const CellEditorMemo = React.memo(CellEditor);
+export const CellEditorMemo = memo(CellEditor);
 
-const CodeEditorViewComponent = React.forwardRef<HTMLDivElement>(
+const CodeEditorViewComponent = forwardRef<HTMLDivElement>(
   function CodeEditorViewComponent(props, ref) {
     const instance = useInject<LibroCodeCellView>(ViewInstance);
 
@@ -130,28 +136,34 @@ export class LibroCodeCellView extends LibroExecutableCellView {
     return this.outputAreaDeferred.promise;
   }
 
-  override onViewResize(size: ViewSize) {
-    if (size.height) {
-      this.editorAreaHeight = size.height;
+  protected codeEditorSettings: CodeEditorSettings;
+
+  override renderEditor = () => {
+    if (this.editorView) {
+      return <ViewRender view={this.editorView} />;
     }
-  }
+    return null;
+  };
+
+  // onViewResize(size: ViewSize) {
+  //   if (size.height) this.editorAreaHeight = size.height;
+  // }
 
   calcEditorAreaHeight() {
-    if (
-      this.editorStatus === EditorStatus.NOTLOADED ||
-      this.editorStatus === EditorStatus.LOADING
-    ) {
-      const codeHeight = countLines(this.model.value) * 20;
-      const editorPadding = 12 + 18;
+    // if (
+    //   this.editorStatus === EditorStatus.NOTLOADED ||
+    //   this.editorStatus === EditorStatus.LOADING
+    // ) {
 
-      const scrollbarHeight = 12;
+    const { lineHeight, paddingTop, paddingBottom, scrollBarHeight } =
+      this.codeEditorManager.getUserEditorConfig(this.model);
 
-      // TODO: 滚动条有条件显示
+    const codeHeight = countLines(this.model.value) * (lineHeight || 20);
+    const editorPadding = paddingTop + paddingBottom;
 
-      const editorAreaHeight = codeHeight + editorPadding + scrollbarHeight;
+    const editorAreaHeight = codeHeight + editorPadding + scrollBarHeight;
 
-      this.editorAreaHeight = editorAreaHeight;
-    }
+    this.editorAreaHeight = editorAreaHeight;
 
     // 编辑器已经加载的情况下cell高度都由对它的高度监听得到。
     return this.editorAreaHeight;
@@ -162,11 +174,13 @@ export class LibroCodeCellView extends LibroExecutableCellView {
     @inject(CellService) cellService: CellService,
     @inject(ViewManager) viewManager: ViewManager,
     @inject(CodeEditorManager) codeEditorManager: CodeEditorManager,
+    @inject(CodeEditorSettings) codeEditorSettings: CodeEditorSettings,
   ) {
     super(options, cellService);
     this.options = options;
     this.viewManager = viewManager;
     this.codeEditorManager = codeEditorManager;
+    this.codeEditorSettings = codeEditorSettings;
 
     this.outputs = options.cell?.outputs as IOutput[];
     this.className = this.className + ' code';
@@ -255,7 +269,7 @@ export class LibroCodeCellView extends LibroExecutableCellView {
 
   protected async afterEditorReady() {
     watch(this.parent.model, 'readOnly', () => {
-      this.editorView?.editor.setOption(
+      this.editorView?.editor?.setOption(
         'readOnly',
         getOrigin(this.parent.model.readOnly),
       );
@@ -283,24 +297,24 @@ export class LibroCodeCellView extends LibroExecutableCellView {
         this.editorReady
           .then(() => {
             this.editorView?.editorReady.then(() => {
-              this.editorView?.editor.setOption('styleActiveLine', true);
-              this.editorView?.editor.setOption('highlightActiveLineGutter', true);
-              if (this.editorView?.editor.hasFocus()) {
+              this.editorView?.editor?.setOption('styleActiveLine', true);
+              this.editorView?.editor?.setOption('highlightActiveLineGutter', true);
+              if (this.editorView?.editor?.hasFocus()) {
                 return;
               }
-              this.editorView?.editor.focus();
+              this.editorView?.editor?.focus();
               return;
             });
             return;
           })
           .catch(console.error);
       } else {
-        this.editorView?.editor.setOption('styleActiveLine', true);
-        this.editorView?.editor.setOption('highlightActiveLineGutter', true);
-        if (this.editorView?.editor.hasFocus()) {
+        this.editorView?.editor?.setOption('styleActiveLine', true);
+        this.editorView?.editor?.setOption('highlightActiveLineGutter', true);
+        if (this.editorView?.editor?.hasFocus()) {
           return;
         }
-        this.editorView?.editor.focus();
+        this.editorView?.editor?.focus();
       }
     } else {
       if (this.container?.current?.parentElement?.contains(document.activeElement)) {

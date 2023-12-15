@@ -10,10 +10,10 @@ import { LibroCellService } from '../../cell/index.js';
 import type { CellView, DndContentProps } from '../../libro-protocol.js';
 import { DragAreaKey, isCellView } from '../../libro-protocol.js';
 import type { LibroView } from '../../libro-view.js';
+import { VirtualizedManagerHelper } from '../../virtualized-manager-helper.js';
 import { LibroCellsOutputRender } from '../libro-virtualized-render.js';
 
 import type { Dragparams } from './default-dnd-content.js';
-import { VirtualizedManager } from './virtualized-manager.js';
 import './index.less';
 
 export const DndCellRender: FC<DndContentProps> = memo(function DndCellRender({
@@ -49,7 +49,8 @@ export const DndCellsRender = forwardRef<
   ref,
 ) {
   const LoadingRender = getOrigin(libroView.loadingRender);
-  const virtualizedManager = useInject(VirtualizedManager);
+  const virtualizedManagerHelper = useInject(VirtualizedManagerHelper);
+  const virtualizedManager = virtualizedManagerHelper.getOrCreate(libroView.model);
 
   const cells = libroView.model.getCells().reduce<CellView[]>(function (a, b) {
     if (a.indexOf(b) < 0) {
@@ -67,15 +68,18 @@ export const DndCellsRender = forwardRef<
     }
 
     let size = undefined;
+    let path = undefined;
+
     // TODO: 类型处理
     const model = libroView.model as any;
     if (model.currentFileContents && model.currentFileContents.size) {
       size = parseFloat((model.currentFileContents.size / 1048576).toFixed(3)); // 单位MB
+      path = model.currentFileContents.path || '';
     }
 
     setIsJudging(true);
     virtualizedManager
-      .openVirtualized(cells.length, size)
+      .openVirtualized(cells.length, size, path)
       .then((willOpen) => {
         setIsVirtualList(willOpen);
         return;

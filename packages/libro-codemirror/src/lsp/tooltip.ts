@@ -15,7 +15,7 @@ export const lspTooltip: CMLSPExtension = (options) => {
       editor,
     } = await options.lspProvider();
 
-    if (!connection.isReady || !connection.provides('hoverProvider')) {
+    if (!connection || !connection.isReady || !connection.provides('hoverProvider')) {
       return null;
     }
 
