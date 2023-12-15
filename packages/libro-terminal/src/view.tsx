@@ -14,7 +14,6 @@ import {
   useInject,
   view,
 } from '@difizen/mana-app';
-// import throttle from '@types/lodash.throttle';
 import { forwardRef } from 'react';
 import type { ITerminalOptions } from 'xterm';
 import { Terminal } from 'xterm';
@@ -60,11 +59,8 @@ export class LibroTerminalView extends BaseView {
   protected termOpened = false;
   protected initialData = '';
   protected fitAddon: FitAddon;
-  // @inject(TerminalConfiguration)
   protected readonly config: TerminalConfiguration;
-  // @inject(TerminalThemeService)
   protected readonly themeService: TerminalThemeService;
-  // @inject(TerminalManager)
   protected readonly terminalManager: TerminalManager;
 
   protected readonly toDisposeOnConnect = new DisposableCollection();
@@ -73,38 +69,28 @@ export class LibroTerminalView extends BaseView {
   readonly onDidOpen = this.onDidOpenEmitter.event;
 
   protected readonly onDidOpenFailureEmitter = new Emitter<unknown>();
-  public readonly onDidOpenFailure = this.onDidOpenFailureEmitter.event;
 
   protected readonly onSizeChangedEmitter = new Emitter<{
     cols: number;
     rows: number;
   }>();
-  public readonly onSizeChanged = this.onSizeChangedEmitter.event;
 
   protected readonly onDataEmitter = new Emitter<string>();
-  public readonly onData = this.onDataEmitter.event;
 
   protected readonly onKeyEmitter = new Emitter<{
     key: string;
     domEvent: KeyboardEvent;
   }>();
-  public readonly onKey = this.onKeyEmitter.event;
 
   protected readonly onDidCloseEmitter = new Emitter<LibroTerminalView>();
-  public readonly onDidClose = this.onDidCloseEmitter.event;
 
   protected readonly onTitleChangeEmitter = new Emitter<string>();
-  public readonly onTitleChange = this.onTitleChangeEmitter.event;
 
   protected connection?: TerminalConnection;
 
   protected _isReady = false;
 
   protected onReadyEmitter = new Emitter<boolean>();
-
-  // get ready() {
-  //   return this._isReady;
-  // }
 
   constructor(
     @inject(ViewOption) options: TerminalViewOption, // 这里是 server需要的配置
@@ -403,12 +389,6 @@ export class LibroTerminalView extends BaseView {
   };
 
   protected resizeTerminal = (): void => {
-    // const geo = this.fitAddon.proposeDimensions();
-    // if (geo) {
-    //   const cols = geo.cols;
-    //   const rows = geo.rows; // - 1; // subtract one row for margin
-    //   this.term.resize(cols, rows);
-    // }
     this.fitAddon.fit();
   };
 
@@ -446,12 +426,6 @@ export class LibroTerminalView extends BaseView {
     this.resizeTerminal();
     this.setSessionSize();
   };
-
-  // protected processResize = throttle<() => void>(() => {
-  //   this.open();
-  //   this.resizeTerminal();
-  //   this.setSessionSize();
-  // }, 1000);
 
   protected open = (): void => {
     try {
@@ -526,7 +500,12 @@ export class LibroTerminalView extends BaseView {
     }
   }
 
-  //  --- public
+  public readonly onDidOpenFailure = this.onDidOpenFailureEmitter.event;
+  public readonly onSizeChanged = this.onSizeChangedEmitter.event;
+  public readonly onData = this.onDataEmitter.event;
+  public readonly onKey = this.onKeyEmitter.event;
+  public readonly onDidClose = this.onDidCloseEmitter.event;
+  public readonly onTitleChange = this.onTitleChangeEmitter.event;
   /**
    * Terminal is ready event
    */
