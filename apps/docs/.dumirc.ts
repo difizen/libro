@@ -77,4 +77,21 @@ export default defineConfig({
     docDirs: ['docs'],
     codeBlockMode: 'passive',
   },
+
+  // dev
+  proxy: {
+    '/api': {
+      target: 'http://localhost:8888/',
+      changeOrigin: true,
+      secure: false,
+      pathRewrite: {},
+      ws: true,
+    },
+    '/lsp': {
+      target: 'http://localhost:8888/',
+      changeOrigin: true,
+      secure: false,
+      ws: true,
+    },
+  },
 });
