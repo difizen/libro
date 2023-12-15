@@ -24,6 +24,7 @@
     "@difizen/libro-jupyter": "^0.1.1",
     "@difizen/libro-lab": "^0.1.1",
     "@difizen/libro-core": "^0.1.1",
+    "@difizen/libro-terminal": "^0.1.1",
     "@ant-design/icons": "^5.1.0",
     "react": "^18.2.0",
     "antd": "^5.8.6"

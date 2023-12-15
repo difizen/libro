@@ -24,7 +24,8 @@ export class TerminalRestAPI {
     };
     const response = await this.serverConnection.makeRequest(url, init, settings);
 
-    if (response.status !== 201) {
+    // 后端返回200
+    if (response.status !== 200) {
       const err = await createResponseError(response);
       throw err;
     }

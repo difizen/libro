@@ -3,7 +3,7 @@
 
 import { Poll } from '@difizen/libro-common';
 import type { ISettings } from '@difizen/libro-kernel';
-import { NetworkError } from '@difizen/libro-kernel';
+import { NetworkError, ServerConnection } from '@difizen/libro-kernel';
 import type { Disposable, Disposed, Event } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
 import { Emitter, inject } from '@difizen/mana-app';
@@ -31,12 +31,16 @@ export class TerminalManager implements Disposable, Disposed {
   }
 
   @inject(TerminalRestAPI) terminalRestAPI: TerminalRestAPI;
+  // @inject(ServerConnection) serverConnection: ServerConnection;
   @inject(TerminalConnectionFactory)
   terminalConnectionFactory: TerminalConnectionFactory;
   /**
    * Construct a new terminal manager.
    */
-  constructor() {
+  constructor(@inject(ServerConnection) serverConnection: ServerConnection) {
+    this.serverSettings = serverConnection.settings;
+
+    //
     // Start polling with exponential backoff.
     this._pollModels = new Poll({
       auto: false,
@@ -198,7 +202,7 @@ export class TerminalManager implements Disposable, Disposed {
   /**
    * Execute a request to the server to poll running terminals and update state.
    */
-  protected async requestRunning(): Promise<void> {
+  async requestRunning(): Promise<void> {
     let models: TerminalModel[];
     try {
       models = await this.terminalRestAPI.listRunning(this.serverSettings);

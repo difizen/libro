@@ -1,6 +1,7 @@
 import type { JSONPrimitive } from '@difizen/libro-common';
 import { URL } from '@difizen/libro-common';
 import type { ISettings } from '@difizen/libro-kernel';
+import { ServerConnection } from '@difizen/libro-kernel';
 import type { Disposable, Disposed, Event } from '@difizen/mana-app';
 import { transient } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
@@ -38,7 +39,11 @@ export class TerminalConnection implements Disposable, Disposed {
   /**
    * Construct a new terminal session.
    */
-  constructor(@inject(TerminalOption) options: TerminalOption & { name: string }) {
+  constructor(
+    @inject(TerminalOption) options: TerminalOption & { name: string },
+    @inject(ServerConnection) serverConnection: ServerConnection,
+  ) {
+    this.serverSettings = serverConnection.settings;
     this._name = options.name;
     this._createSocket();
   }
@@ -135,7 +140,7 @@ export class TerminalConnection implements Disposable, Disposed {
   /**
    * Reconnect to a terminal.
    */
-  reconnect(): Promise<void> {
+  reconnect = (): Promise<void> => {
     this._errorIfDisposed();
     const result = new Deferred<void>();
 
@@ -162,7 +167,7 @@ export class TerminalConnection implements Disposable, Disposed {
     // Return the promise that should resolve on connection or reject if the
     // retries don't work.
     return result.promise;
-  }
+  };
 
   /**
    * Attempt a connection if we have not exhausted connection attempts.
