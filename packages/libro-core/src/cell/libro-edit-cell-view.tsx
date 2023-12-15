@@ -1,5 +1,6 @@
 import type { IEditor } from '@difizen/libro-code-editor';
 import { prop } from '@difizen/mana-app';
+import type { ReactNode } from 'react';
 
 import type { CellView, EditorStatus } from '../libro-protocol.js';
 import { isCellView } from '../libro-protocol.js';
@@ -12,6 +13,8 @@ export interface EditorCellView extends CellView {
   redo: () => void;
 
   undo: () => void;
+
+  renderEditor: () => ReactNode;
 }
 
 export const EditorCellView = {
@@ -41,6 +44,8 @@ export abstract class LibroEditorCellView
 
   @prop()
   editorStatus: EditorStatus;
+
+  renderEditor: () => ReactNode;
 
   get wrapperCls() {
     return '';

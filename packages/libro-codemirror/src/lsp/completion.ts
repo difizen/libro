@@ -56,7 +56,11 @@ export const lspPythonCompletion: CMLSPExtension = ({ lspProvider }) => {
     const { state } = context;
     let { pos } = context;
 
-    if (!lspConnection.isReady || !lspConnection.provides('completionProvider')) {
+    if (
+      !lspConnection ||
+      !lspConnection.isReady ||
+      !lspConnection.provides('completionProvider')
+    ) {
       return null;
     }
 

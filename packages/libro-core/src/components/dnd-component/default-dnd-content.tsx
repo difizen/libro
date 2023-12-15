@@ -23,9 +23,8 @@ import type { CellView, DndContentProps } from '../../libro-protocol.js';
 import { MultiSelectionWhenShiftClick } from '../../libro-setting.js';
 import type { LibroView } from '../../libro-view.js';
 import { HolderOutlined, PlusOutlined } from '../../material-from-designer.js';
+import { VirtualizedManagerHelper } from '../../virtualized-manager-helper.js';
 import { BetweenCellProvider } from '../cell-protocol.js';
-
-import { VirtualizedManager } from './virtualized-manager.js';
 
 export interface Dragparams {
   cell: CellView;
@@ -40,7 +39,8 @@ export const DndCellContainer: React.FC<DndContentProps> = ({ cell, index }) => 
   );
   const BetweenCellContent = useInject<BetweenCellProvider>(BetweenCellProvider);
   const cellService = useInject<CellService>(LibroCellService);
-  const virtualizedManager = useInject(VirtualizedManager);
+  const virtualizedManagerHelper = useInject(VirtualizedManagerHelper);
+  const virtualizedManager = virtualizedManagerHelper.getOrCreate(cell.parent.model);
   const dragDropManager = useDragDropManager();
   const dragDropMonitor = dragDropManager.getMonitor();
   const ItemRender = getOrigin(instance.dndItemRender);

@@ -4,16 +4,16 @@ import type { Disposable, Event, ThemeType } from '@difizen/mana-app';
 import type { IModel } from './code-editor-model.js';
 
 /**
- * A zero-based position in the editor.
+ * A one-based position in the editor.
  */
 export interface IPosition extends JSONObject {
   /**
-   * The cursor line number.
+   * The cursor line number. one-based.
    */
   readonly line: number;
 
   /**
-   * The cursor column number.
+   * The cursor column number. one-based.
    */
   readonly column: number;
 }
@@ -265,13 +265,13 @@ export interface IEditor extends ISelectionOwner, Disposable {
    * @returns The value of the line.
    *
    * #### Notes
-   * Lines are 0-based, and accessing a line out of range returns
+   * Lines are 1-based, and accessing a line out of range returns
    * `undefined`.
    */
   getLine: (line: number) => string | undefined;
 
   /**
-   * Find an offset for the given position.
+   * Find an zero-based offset for the given position.
    *
    * @param position - The position of interest.
    *
@@ -388,6 +388,8 @@ export interface IEditor extends ISelectionOwner, Disposable {
   // newIndentedLine: () => void;
 
   onModalChange: Event<boolean>;
+
+  dispose: () => void;
 }
 
 export type EditorTheme = Record<ThemeType, string>;
@@ -396,7 +398,6 @@ export type EditorTheme = Record<ThemeType, string>;
  * The configuration options for an editor.
  */
 export interface IEditorConfig {
-  value: string;
   theme: EditorTheme;
   /**
    * Half-period in milliseconds used for cursor blinking.
@@ -498,13 +499,18 @@ export interface IEditorConfig {
   placeholder?: HTMLElement | string;
 
   lspEnabled: boolean;
+
+  paddingTop: number;
+
+  paddingBottom: number;
+
+  scrollBarHeight: number;
 }
 
 /**
  * The default configuration options for an editor.
  */
-export const defaultConfig: IEditorConfig = {
-  value: '',
+export const defaultConfig: Required<IEditorConfig> = {
   theme: {
     light: 'light',
     dark: 'dark',
@@ -532,6 +538,10 @@ export const defaultConfig: IEditorConfig = {
   styleActiveLine: false,
   highlightActiveLineGutter: false,
   lspEnabled: true,
+  paddingTop: 12,
+  paddingBottom: 18,
+  scrollBarHeight: 0,
+  placeholder: '',
 };
 
 export type TooltipProviderOption = { cursorPosition: number };

@@ -1,6 +1,10 @@
 import type { SearchMatch } from '@difizen/libro-code-editor';
-import type { CellView } from '@difizen/libro-core';
-import { EditorCellView, LibroView, VirtualizedManager } from '@difizen/libro-core';
+import type { CellView, VirtualizedManager } from '@difizen/libro-core';
+import {
+  EditorCellView,
+  LibroView,
+  VirtualizedManagerHelper,
+} from '@difizen/libro-core';
 import { inject, prop, transient, equals } from '@difizen/mana-app';
 import { Deferred, DisposableCollection } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
@@ -67,11 +71,12 @@ export class LibroSearchProvider extends AbstractSearchProvider {
    */
   constructor(
     @inject(SearchProviderOption) option: SearchProviderOption,
-    @inject(VirtualizedManager) virtualizedManager: VirtualizedManager,
+    @inject(VirtualizedManagerHelper)
+    virtualizedManagerHelper: VirtualizedManagerHelper,
   ) {
     super(option);
     this.view = option.view as LibroView;
-    this.virtualizedManager = virtualizedManager;
+    this.virtualizedManager = virtualizedManagerHelper.getOrCreate(this.view.model);
   }
 
   protected getProvider = (cell: CellView) => {

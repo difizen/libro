@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { AutoSizer, List } from '@difizen/libro-virtualized';
-import { ViewRender } from '@difizen/mana-app';
 import type { ReactNode } from 'react';
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 
+import { EditorCellView } from '../cell/index.js';
 import type { CellView, ScrollParams } from '../libro-protocol.js';
 import type { LibroView } from '../libro-view.js';
 
@@ -13,6 +13,7 @@ interface LibroVirtualizedRowProps {
   style: Record<string, string>;
   cell: CellView;
 }
+
 export const LibroVirtualizedRow: React.FC<LibroVirtualizedRowProps> = memo(
   function LibroVirtualizedRow({ style, cell }: LibroVirtualizedRowProps) {
     const itemRef = useRef(null);
@@ -22,11 +23,11 @@ export const LibroVirtualizedRow: React.FC<LibroVirtualizedRowProps> = memo(
 
     return (
       <div ref={itemRef} style={{ ...style, visibility: 'hidden' }}>
-        {isHidden || !cell.renderEditorIntoVirtualized ? (
+        {isHidden || !cell.renderEditorIntoVirtualized || !EditorCellView.is(cell) ? (
           <></>
         ) : (
-          // TODO: 类型处理
-          (cell as any).editorView && <ViewRender view={(cell as any).editorView} />
+          // cell.editorView && <ViewRender view={cell.editorView} />
+          cell.renderEditor && cell.renderEditor()
         )}
       </div>
     );
@@ -40,15 +41,15 @@ export const LibroCellsOutputRender: React.FC<{
   addCellButtons: ReactNode;
 }> = ({ cells, libroView, addCellButtons }) => {
   const parentRef = useRef(null);
-  const listRef = useRef<any | null>(null);
+  const listRef = useRef<List | null>(null);
   const noEditorAreaRef = useRef<HTMLDivElement | null>(null);
 
   const [editorsOffset, setEditorsOffset] = useState<number[]>([]);
 
   const editorAreaHeight = useMemo(() => {
     const inputHeight = cells.map((cell: CellView) => {
-      if (cell.calcEditorAreaHeight) {
-        return cell.calcEditorAreaHeight();
+      if (cell.editorAreaHeight) {
+        return cell.editorAreaHeight;
       } else {
         return 0;
       }

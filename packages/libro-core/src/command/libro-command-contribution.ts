@@ -667,7 +667,7 @@ export class LibroCommandContribution implements CommandContribution {
           if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
             return false;
           }
-          return !!libro.model.lastClipboardInteraction;
+          return true;
         },
       },
     );

@@ -54,6 +54,7 @@
     "@difizen/libro-common": "^0.1.0",
     "@difizen/libro-core": "^0.1.0",
     "@difizen/mana-app": "latest",
+    "resize-observer-polyfill": "^1.5.1",
     "vscode-languageserver-protocol": "^3.17.4",
     "uuid": "^9.0.0"
   },

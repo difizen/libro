@@ -8,11 +8,12 @@ import type {
   INotebookMetadata,
 } from '@difizen/libro-common';
 import type { ISharedNotebook } from '@difizen/libro-shared-model';
-import { View } from '@difizen/mana-app';
 import type { Disposable, Event } from '@difizen/mana-app';
+import type { View } from '@difizen/mana-app';
 
 import type { LibroCell } from './cell/index.js';
 import type { LibroView } from './libro-view.js';
+import type { VirtualizedManager } from './virtualized-manager.js';
 
 export const LibroContextKeys = {
   active: 'active',
@@ -37,6 +38,9 @@ export interface NotebookOption extends Options {
   modelId?: string;
   [key: string]: any;
 }
+
+export const PerformaceStatisticOption = Symbol('PerformaceStatisticOption');
+export type PerformaceStatisticOption = Options;
 
 export const ModelFactory = Symbol('ModelFactory');
 export type ModelFactory<T = NotebookOption> = (options: T) => NotebookModel;
@@ -70,8 +74,8 @@ export interface BaseNotebookModel {
    */
   dirty: boolean;
   executeCount: number;
-  lastClipboardInteraction?: string | undefined;
-  clipboard?: undefined | CellView | CellView[];
+  lastClipboardInteraction?: string;
+  clipboard?: CellView | CellView[];
   active?: CellView | undefined;
   activeIndex: number;
   dndAreaNullEnable: boolean;
@@ -245,8 +249,23 @@ export interface CellView extends View {
 
   renderEditorIntoVirtualized?: boolean;
 }
+function isView(data: object): data is View {
+  return (
+    !!data &&
+    typeof data === 'object' &&
+    'id' in data &&
+    'view' in data &&
+    typeof data['view'] === 'function'
+  );
+}
 export function isCellView(view: View): view is CellView {
-  return View.is(view) && 'model' in view;
+  return (
+    isView(view) &&
+    'model' in view &&
+    'parent' in view &&
+    'run' in view &&
+    'toJSON' in view
+  );
 }
 
 export const CellOptions = Symbol('CellOptions');
@@ -312,8 +331,8 @@ export interface CellModel extends IModel, Disposable {
    * 输出时的字段顺序也要保持稳定
    */
   toJSON: () => Omit<ICell, 'outputs'>;
-  options: CellOptions;
 
+  options: CellOptions;
   // run: () => Promise<boolean>;
 }
 
@@ -330,6 +349,7 @@ export interface NotebookService {
 export const DragAreaKey = Symbol('DragAreaKey');
 
 export type MouseMode = 'multipleSelection' | 'mouseDown' | 'drag';
+
 export interface DndListModel {
   mouseMode?: MouseMode;
   active?: CellView | undefined;
@@ -364,3 +384,16 @@ export interface DndItemProps {
   isMouseOverDragArea?: boolean;
 }
 //#endregion
+
+export interface VirtualizedManagerOption {
+  libroModel: NotebookModel;
+}
+export const VirtualizedManagerOption = Symbol('VirtualizedManagerOption');
+
+export const VirtualizedManagerOptionFactory = Symbol(
+  'VirtualizedManagerOptionFactory',
+);
+
+export type VirtualizedManagerOptionFactory = (
+  meta: VirtualizedManagerOption,
+) => VirtualizedManager;

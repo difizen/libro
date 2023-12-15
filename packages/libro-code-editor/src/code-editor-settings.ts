@@ -147,6 +147,8 @@ export class CodeEditorSettings
 
   protected toDispose = new DisposableCollection();
 
+  protected useSettings: Partial<IEditorConfig> | undefined;
+
   constructor(
     @inject(ConfigurationService)
     configurationService: ConfigurationService,
@@ -165,11 +167,15 @@ export class CodeEditorSettings
     ];
   }
 
-  onStart() {
+  async onStart() {
+    this.useSettings = await this.fetchUserEditorSettings();
     this.handleEditorSettingsChange();
   }
+  getUserEditorSettings(): Partial<IEditorConfig> | undefined {
+    return this.useSettings;
+  }
 
-  async fetchEditorSettings(): Promise<Partial<IEditorConfig>> {
+  protected async fetchUserEditorSettings(): Promise<Partial<IEditorConfig>> {
     const result: Partial<IEditorConfig> = {};
     Object.typedKeys(CodeEditorSetting).forEach(async (key) => {
       result[key] = await this.configurationService.get(CodeEditorSetting[key]!);

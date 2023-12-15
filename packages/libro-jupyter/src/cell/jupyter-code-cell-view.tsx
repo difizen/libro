@@ -1,5 +1,5 @@
 import { CellEditorMemo, LibroCodeCellView } from '@difizen/libro-code-cell';
-import { CodeEditorManager } from '@difizen/libro-code-editor';
+import { CodeEditorManager, CodeEditorSettings } from '@difizen/libro-code-editor';
 import type {
   CodeEditorViewOptions,
   CompletionProvider,
@@ -54,8 +54,9 @@ export class JupyterCodeCellView extends LibroCodeCellView {
     @inject(ILSPDocumentConnectionManager)
     lspDocumentConnectionManager: ILSPDocumentConnectionManager,
     @inject(CodeEditorManager) codeEditorManager: CodeEditorManager,
+    @inject(CodeEditorSettings) codeEditorSettings: CodeEditorSettings,
   ) {
-    super(options, cellService, viewManager, codeEditorManager);
+    super(options, cellService, viewManager, codeEditorManager, codeEditorSettings);
     this.lspDocumentConnectionManager = lspDocumentConnectionManager;
   }
 

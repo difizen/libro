@@ -22,6 +22,9 @@ class LintPlugin implements PluginValue {
     this.options
       .lspProvider()
       .then(({ lspConnection, virtualDocument, editor }) => {
+        if (!lspConnection) {
+          return;
+        }
         lspConnection.serverNotifications['textDocument/publishDiagnostics'].event(
           (e) => {
             const diagnostics = e.diagnostics

@@ -10,7 +10,6 @@ import {
   DefaultCollapseService,
 } from './collapse-service.js';
 import { LibroCommandModule } from './command/index.js';
-import { VirtualizedManager } from './components/dnd-component/virtualized-manager.js';
 import {
   BetweenCellProvider,
   CellExecutionTimeProvider,
@@ -25,7 +24,12 @@ import { LibroContentModule } from './content/index.js';
 import { LibroFormatterModule } from './formatter/index.js';
 import { LirboContextKey } from './libro-context-key.js';
 import { LibroModel } from './libro-model.js';
-import { ModelFactory, NotebookOption } from './libro-protocol.js';
+import {
+  ModelFactory,
+  NotebookOption,
+  VirtualizedManagerOption,
+  VirtualizedManagerOptionFactory,
+} from './libro-protocol.js';
 import { LibroService } from './libro-service.js';
 import { LibroSettingContribution } from './libro-setting-contribution.js';
 import { LibroViewTracker } from './libro-view-tracker.js';
@@ -33,6 +37,8 @@ import { LibroView } from './libro-view.js';
 import { OutputModule } from './output/index.js';
 import { LibroSlotModule } from './slot/index.js';
 import { LibroColorRegistry } from './theme/libro-color-registry.js';
+import { VirtualizedManagerHelper } from './virtualized-manager-helper.js';
+import { VirtualizedManager } from './virtualized-manager.js';
 
 export const LibroModule = ManaModule.create()
   .register(
@@ -62,6 +68,18 @@ export const LibroModule = ManaModule.create()
           const child = ctx.container.createChild();
           child.register({ token: CollapseServiceOption, useValue: options });
           return child.get(CollapseService);
+        };
+      },
+    },
+    VirtualizedManagerHelper,
+    VirtualizedManager,
+    {
+      token: VirtualizedManagerOptionFactory,
+      useFactory: (ctx) => {
+        return (target: VirtualizedManagerOptionFactory) => {
+          const child = ctx.container.createChild();
+          child.register({ token: VirtualizedManagerOption, useValue: target });
+          return child.get(VirtualizedManager);
         };
       },
     },

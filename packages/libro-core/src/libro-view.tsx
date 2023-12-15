@@ -1,5 +1,9 @@
 import { ToTopOutlined } from '@ant-design/icons';
-import { concatMultilineString } from '@difizen/libro-common';
+import {
+  concatMultilineString,
+  copy2clipboard,
+  readFromClipboard,
+} from '@difizen/libro-common';
 import {
   equals,
   useInject,
@@ -32,6 +36,7 @@ import {
   ExecutableCellModel,
   ExecutableCellView,
 } from './cell/index.js';
+import type { LibroCell } from './cell/index.js';
 import type { LibroCellModel } from './cell/libro-cell-model.js';
 import { CollapseServiceFactory } from './collapse-service.js';
 import type { CollapseService } from './collapse-service.js';
@@ -41,7 +46,6 @@ import {
   DndCellItemRender,
   DndContext,
   DndList,
-  VirtualizedManager,
 } from './components/index.js';
 import { LibroViewHeader } from './components/libro-view-header.js';
 import { LirboContextKey } from './libro-context-key.js';
@@ -64,7 +68,14 @@ import {
   RightContentFixed,
 } from './libro-setting.js';
 import { LibroSlotManager, LibroSlotView } from './slot/index.js';
+import { VirtualizedManagerHelper } from './virtualized-manager-helper.js';
+import type { VirtualizedManager } from './virtualized-manager.js';
 import './index.less';
+
+export interface ClipboardType {
+  action: 'copy' | 'cut';
+  cells: LibroCell[];
+}
 
 export const LibroContentComponent = memo(function LibroContentComponent() {
   const libroSlotManager = useInject(LibroSlotManager);
@@ -278,8 +289,9 @@ export class LibroView extends BaseView implements NotebookView {
 
   @inject(ViewManager) protected viewManager: ViewManager;
   @inject(ConfigurationService) protected configurationService: ConfigurationService;
-  @inject(VirtualizedManager) virtualizedManager: VirtualizedManager;
 
+  protected virtualizedManager: VirtualizedManager;
+  protected virtualizedManagerHelper: VirtualizedManagerHelper;
   protected notebookService: NotebookService;
   protected collapseService: CollapseService;
   isDragging = false;
@@ -322,6 +334,8 @@ export class LibroView extends BaseView implements NotebookView {
     @inject(ViewOption) options: NotebookOption,
     @inject(CollapseServiceFactory) collapseServiceFactory: CollapseServiceFactory,
     @inject(NotebookService) notebookService: NotebookService,
+    @inject(VirtualizedManagerHelper)
+    virtualizedManagerHelper: VirtualizedManagerHelper,
   ) {
     super();
     if (options.id) {
@@ -331,6 +345,8 @@ export class LibroView extends BaseView implements NotebookView {
     this.model = this.notebookService.getOrCreateModel(options);
     this.collapseService = collapseServiceFactory({ view: this });
     this.collapserVisible = this.collapseService.collapserVisible;
+    this.virtualizedManagerHelper = virtualizedManagerHelper;
+    this.virtualizedManager = virtualizedManagerHelper.getOrCreate(this.model);
 
     this.initialize();
     this.initView();
@@ -737,59 +753,61 @@ export class LibroView extends BaseView implements NotebookView {
 
   copyCell = (cell: CellView) => {
     if (this.model.selections.length !== 0 && this.isSelected(cell)) {
-      this.model.clipboard = this.model.selections;
-      this.model.selections = [];
+      const clipboard: ClipboardType = {
+        action: 'copy',
+        cells: this.model.selections.map((selection) => selection.toJSONWithoutId()),
+      };
+      copy2clipboard(JSON.stringify(clipboard));
     } else {
-      this.model.clipboard = cell;
+      const clipboard: ClipboardType = {
+        action: 'copy',
+        cells: [cell.toJSONWithoutId()],
+      };
+      copy2clipboard(JSON.stringify(clipboard));
     }
-    this.model.lastClipboardInteraction = 'copy';
   };
 
   cutCell = (cell: CellView) => {
     if (this.model.selections.length !== 0 && this.isSelected(cell)) {
-      this.model.clipboard = this.model.selections;
-      this.model.selections = [];
-      for (const cutCell of this.model.clipboard) {
+      const clipboard: ClipboardType = {
+        action: 'cut',
+        cells: this.model.selections.map((selection) => selection.toJSONWithoutId()),
+      };
+      copy2clipboard(JSON.stringify(clipboard));
+      for (const cutCell of this.model.selections) {
         this.deleteCell(cutCell);
       }
     } else {
-      this.model.clipboard = cell;
+      const clipboard: ClipboardType = {
+        action: 'cut',
+        cells: [cell.toJSONWithoutId()],
+      };
+      copy2clipboard(JSON.stringify(clipboard));
+
       this.deleteCell(cell);
     }
-    this.model.lastClipboardInteraction = 'cut';
   };
 
-  pasteCell = (cell: CellView) => {
-    let pasteIndex = this.model.getCells().findIndex((item) => {
+  pasteCell = async (cell: CellView) => {
+    const pasteIndex = this.model.getCells().findIndex((item) => {
       return equals(item, cell);
     });
-    const pasteCells = getOrigin(this.model.clipboard);
-    if (!this.model.lastClipboardInteraction || !pasteCells) {
-      return;
-    }
-    if (this.model.lastClipboardInteraction === 'copy') {
-      if (Array.isArray(pasteCells)) {
-        for (const pasteCell of pasteCells) {
-          const cellOptions = pasteCell.toJSONWithoutId();
-          this.addCell({ id: v4(), cell: cellOptions }, pasteIndex + 1);
-          pasteIndex++;
-        }
-      } else {
-        const cellOptions = pasteCells.toJSONWithoutId();
-        this.addCell({ id: v4(), cell: cellOptions }, pasteIndex + 1);
+    try {
+      const pasteValue = JSON.parse(await readFromClipboard()) as ClipboardType;
+      if (pasteValue.action === 'copy' || pasteValue.action === 'cut') {
+        this.insertCells(
+          pasteValue.cells.map((item) => {
+            return {
+              id: v4(),
+              cell: item,
+            };
+          }),
+          pasteIndex + 1,
+        );
+        return;
       }
-    } else {
-      if (Array.isArray(pasteCells)) {
-        for (const pasteCell of pasteCells) {
-          this.model.addCell(pasteCell, pasteIndex + 1);
-          this.model.deletedCells.splice(this.model.deletedCells.indexOf(pasteCell), 1);
-          pasteIndex++;
-        }
-      } else {
-        this.model.addCell(pasteCells, pasteIndex + 1);
-        this.model.deletedCells.splice(this.model.deletedCells.indexOf(pasteCells), 1);
-      }
-      this.model.lastClipboardInteraction = '';
+    } catch (e) {
+      console.error(e);
     }
   };
 
