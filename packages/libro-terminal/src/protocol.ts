@@ -85,8 +85,9 @@ export interface TerminalViewOption extends TerminalOption {
 
   /**
    * Whether it is a pseudo terminal where an extension controls its input and output.
+   * 在jupyter中默认用的pseudo terminal
    */
-  readonly isPseudoTerminal?: boolean;
+  // readonly isPseudoTerminal?: boolean;
 
   /**
    * Terminal attributes. Can be useful to apply some implementation specific information.

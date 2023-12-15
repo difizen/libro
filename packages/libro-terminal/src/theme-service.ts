@@ -157,7 +157,7 @@ export class TerminalThemeService {
     const cursorAccentColor =
       this.colorRegistry.getCurrentColor('terminalCursor.background') ||
       backgroundColor;
-    const selectionColor = this.colorRegistry.getCurrentColor(
+    const selectionBackground = this.colorRegistry.getCurrentColor(
       'terminal.selectionBackground',
     );
 
@@ -166,7 +166,8 @@ export class TerminalThemeService {
       foreground: foregroundColor,
       cursor: cursorColor,
       cursorAccent: cursorAccentColor,
-      selection: selectionColor,
+      selectionBackground: selectionBackground,
+      // selection: selectionColor,
     };
     // eslint-disable-next-line guard-for-in
     for (const id in terminalAnsiColorMap) {
@@ -177,4 +178,35 @@ export class TerminalThemeService {
     }
     return theme;
   }
+
+  getTheme(type: 'light' | 'dark' | 'default' = 'dark'): ITheme {
+    switch (type) {
+      case 'light':
+        return this.lightTheme;
+      case 'dark':
+        return this.darkTheme;
+      case 'default':
+      default:
+        return this.theme;
+    }
+  }
+
+  // jupyter terminal theme
+  lightTheme: ITheme = {
+    foreground: '#000',
+    background: '#fff',
+    cursor: '#616161', // md-grey-700
+    cursorAccent: '#F5F5F5', // md-grey-100
+    selectionBackground: 'rgba(97, 97, 97, 0.3)', // md-grey-700
+    selectionInactiveBackground: 'rgba(189, 189, 189, 0.3)', // md-grey-400
+  };
+
+  darkTheme: ITheme = {
+    foreground: '#fff',
+    background: '#000',
+    cursor: '#fff',
+    cursorAccent: '#000',
+    selectionBackground: 'rgba(255, 255, 255, 0.3)',
+    selectionInactiveBackground: 'rgba(238, 238, 238, 0.3)', // md-grey-200
+  };
 }
