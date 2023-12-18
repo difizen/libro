@@ -24,7 +24,6 @@ import './index.less';
 export function CellExecutionTip({ cell }: { cell: CellView }) {
   const [, setCurrentTime] = useState<number>();
   const observableCell = useObserve(cell);
-  const [currentTime, setCurrentTime] = useState<number>();
 
   if (!ExecutableCellView.is(cell)) {
     return null;
