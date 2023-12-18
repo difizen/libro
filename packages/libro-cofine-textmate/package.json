@@ -50,10 +50,10 @@
     "@difizen/mana-app": "latest",
     "fast-plist": "^0.1.2",
     "vscode-oniguruma": "^1.5.1",
-    "vscode-textmate": "^5.4.0"
+    "vscode-textmate": "^9.0.0"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.6",
-    "@difizen/monaco-editor-core": "latest"
+    "@difizen/monaco-editor-core": "latest",
+    "@types/debug": "^4.1.6"
   }
 }

@@ -16,29 +16,24 @@ import { LanguageGrammarDefinitionContribution } from './textmate-contribution.j
 import { TextmateRegistry } from './textmate-registry.js';
 import { TextmateThemeContribution } from './textmate-theme-contribution.js';
 
-export function fetchOniguruma(): Promise<ArrayBuffer> {
-  return new Promise((resolve, reject) => {
-    // const onigurumaPath = 'https://unpkg.com/vscode-oniguruma@2.0.1/release/onig.wasm'; // webpack doing its magic here
-    const onigurumaPath = onig;
-    const request = new XMLHttpRequest();
+export async function fetchOniguruma(): Promise<ArrayBuffer | Response> {
+  // const onigurumaPath = 'https://unpkg.com/vscode-oniguruma@2.0.1/release/onig.wasm'; // webpack doing its magic here
+  const onigurumaPath = onig;
+  let onigurumaUrl = onigurumaPath;
+  if (typeof onigurumaPath !== 'string' && onigurumaPath.default) {
+    onigurumaUrl = onigurumaPath.default;
+  }
 
-    request.onreadystatechange = function (): void {
-      if (this.readyState === XMLHttpRequest.DONE) {
-        if (this.status === 200) {
-          resolve(this.response);
-        } else {
-          reject(new Error('Could not fetch onigasm'));
-        }
-      }
-    };
-    let onigurumaUrl = onigurumaPath;
-    if (typeof onigurumaPath !== 'string' && onigurumaPath.default) {
-      onigurumaUrl = onigurumaPath.default;
-    }
-    request.open('GET', onigurumaUrl, true);
-    request.responseType = 'arraybuffer';
-    request.send();
-  });
+  const response = await fetch(onigurumaUrl);
+  const contentType = response.headers.get('content-type');
+  if (contentType === 'application/wasm') {
+    return response;
+  }
+
+  // Using the response directly only works if the server sets the MIME type 'application/wasm'.
+  // Otherwise, a TypeError is thrown when using the streaming compiler.
+  // We therefore use the non-streaming compiler :(.
+  return await response.arrayBuffer();
 }
 
 const vscodeOnigurumaLib = fetchOniguruma().then(async (buffer) => {
