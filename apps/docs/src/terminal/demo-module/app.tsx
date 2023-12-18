@@ -1,3 +1,5 @@
+import type { TerminalViewOption } from '@difizen/libro-terminal';
+import { TerminalManager, LibroTerminalView } from '@difizen/libro-terminal';
 import {
   BaseView,
   ViewInstance,
@@ -10,10 +12,6 @@ import {
 } from '@difizen/mana-app';
 import { Button, Card, Checkbox, Flex, Form, Input, Space } from 'antd';
 import { forwardRef, useCallback, useEffect, useState } from 'react';
-
-import { TerminalManager } from './manager.js';
-import type { TerminalViewOption } from './protocol.js';
-import { LibroTerminalView } from './view.js';
 
 const gridStyle: React.CSSProperties = {
   width: '50%',

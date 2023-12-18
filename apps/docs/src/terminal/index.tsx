@@ -1,7 +1,7 @@
-import { TerminalDemoModule } from '@difizen/libro-terminal';
 import { ManaAppPreset, ManaComponents, ManaModule } from '@difizen/mana-app';
 
 import { LibroApp } from './app.js';
+import { TerminalDemoModule } from './demo-module/index.js';
 import './index.less';
 
 const BaseModule = ManaModule.create().register(LibroApp);
