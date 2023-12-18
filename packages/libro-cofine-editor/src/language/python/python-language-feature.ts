@@ -13,8 +13,8 @@ import { inject, singleton } from '@difizen/mana-app';
 import { languages } from '@difizen/monaco-editor-core';
 import * as monaco from '@difizen/monaco-editor-core';
 
-import platformGrammar from './data/MagicPython.tmLanguage.json';
-import cGrammar from './data/MagicRegExp.tmLanguage.json';
+import pythonGrammar from './data/MagicPython.tmLanguage.json';
+import regExpGrammar from './data/MagicRegExp.tmLanguage.json';
 import snippetsJson from './data/snippets/python.snippets.json';
 
 export interface PythonLanguageOption {
@@ -121,7 +121,7 @@ export class PythonContribution
   }
 
   registerSnippetSuggest(registry: SnippetSuggestRegistry) {
-    registry.fromJSON(snippetsJson as any, {
+    registry.fromJSON(snippetsJson, {
       language: [this.id],
       source: 'Python Language',
     });
@@ -137,7 +137,7 @@ export class PythonContribution
       async getGrammarDefinition(): Promise<GrammarDefinition> {
         return {
           format: 'json',
-          content: platformGrammar,
+          content: pythonGrammar,
         };
       },
     });
@@ -146,7 +146,7 @@ export class PythonContribution
       async getGrammarDefinition(): Promise<GrammarDefinition> {
         return {
           format: 'json',
-          content: cGrammar,
+          content: regExpGrammar,
         };
       },
     });

@@ -912,8 +912,11 @@ export class LibroE2Editor implements IEditor {
     }
     this.placeholder.dispose();
     this.toDispose.dispose();
-    this.resizeObserver.disconnect();
+    this.disposeResizeObserver();
     this.lspContribution.beforeDestory();
     this._isDisposed = true;
   }
+  protected disposeResizeObserver = () => {
+    this.resizeObserver.disconnect();
+  };
 }

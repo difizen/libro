@@ -80,6 +80,7 @@ export function createTextmateTokenizer(
         processedLine = line.substr(0, options.lineLimit);
       }
       const result = grammar.tokenizeLine(processedLine, state.ruleStack);
+
       return {
         endState: new TokenizerState(result.ruleStack),
         tokens: result.tokens.map((t) => ({

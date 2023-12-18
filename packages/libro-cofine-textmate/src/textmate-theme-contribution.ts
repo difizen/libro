@@ -10,7 +10,7 @@ import darkVS from './data/monaco-themes/vscode/dark_vs.json';
 import HCBlack from './data/monaco-themes/vscode/hc_black.json';
 import HCBlackDefault from './data/monaco-themes/vscode/hc_black_defaults.json';
 import HCEditor from './data/monaco-themes/vscode/hc_editor.json';
-import lightDefault from './data/monaco-themes/vscode/light_defaults.json';
+import lightDefaults from './data/monaco-themes/vscode/light_defaults.json';
 import lightEditor from './data/monaco-themes/vscode/light_editor.json';
 import lightPlus from './data/monaco-themes/vscode/light_plus.json';
 import lightVS from './data/monaco-themes/vscode/light_vs.json';
@@ -27,7 +27,7 @@ export class TextmateThemeContribution implements ThemeContribution {
     registry.registerMixedTheme(darkPlus, 'dark-plus', 'vs-dark');
     registry.registerMixedTheme(darkEditor, 'e2-dark', 'vs-dark');
 
-    registry.registerMixedTheme(lightDefault, 'light-defaults', 'vs');
+    registry.registerMixedTheme(lightDefaults, 'light-defaults', 'vs');
     registry.registerMixedTheme(lightVS, 'light-vs', 'vs');
     registry.registerMixedTheme(lightPlus, 'light-plus', 'vs');
     registry.registerMixedTheme(lightEditor, 'e2-light', 'vs');

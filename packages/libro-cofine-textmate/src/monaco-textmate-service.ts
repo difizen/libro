@@ -79,19 +79,14 @@ export class MonacoTextmateService implements EditorHandlerContribution {
     for (const id of this.textmateRegistry.languages) {
       this.activateLanguage(id);
     }
-
+    // const theme = this.monacoThemeRegistry.getThemeData(this.currentEditorTheme);
+    // if (!theme) {
+    //   return;
+    // }
+    // this.grammarRegistry.setupRegistry(theme);
     this.monacoThemeRegistry.onThemeChanged(() => {
       this.updateTheme();
-      this.setupGrammerRegistry();
     });
-  }
-
-  protected setupGrammerRegistry() {
-    const theme = this.monacoThemeRegistry.getThemeData(this.currentEditorTheme);
-    if (!theme) {
-      return;
-    }
-    this.grammarRegistry.setupRegistry(theme);
   }
 
   protected readonly toDisposeOnUpdateTheme = new DisposableCollection();
@@ -107,8 +102,8 @@ export class MonacoTextmateService implements EditorHandlerContribution {
 
     // first update registry to run tokenization with the proper theme
     const theme = this.monacoThemeRegistry.getThemeData(currentEditorTheme);
-    if (this.grammarRegistry.registry && theme) {
-      this.grammarRegistry.registry.setTheme(theme);
+    if (theme) {
+      this.grammarRegistry.setupRegistry(theme);
     }
 
     // then trigger tokenization by setting monaco theme

@@ -48,7 +48,6 @@
     "@difizen/monaco-editor-core": "latest",
     "@difizen/libro-cofine-editor-core": "^0.1.0",
     "@difizen/libro-cofine-textmate": "^0.1.0",
-    "@difizen/libro-cofine-language-python": "^0.1.0",
     "@difizen/libro-lsp": "^0.1.0",
     "@difizen/libro-code-editor": "^0.1.0",
     "@difizen/libro-common": "^0.1.0",
