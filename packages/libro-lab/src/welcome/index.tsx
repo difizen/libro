@@ -24,9 +24,6 @@ export const WelcomeComponent = forwardRef(function WelcomeComponent() {
   return (
     <div className="libro-lab-welcome-page">
       <div className="libro-lab-welcome-page-title">欢迎使用 Notebook 工作台 🎉🎉</div>
-      <div className="libro-lab-welcome-page-title-tip">
-        👋 你好，服务正在加载中，请稍后开启你的研发之旅吧～
-      </div>
       <div className="libro-lab-welcome-page-server-info">
         <div className="libro-lab-welcome-page-server-info-title">服务连接信息</div>
         <div className="libro-lab-welcome-page-server-info-item">
@@ -61,8 +58,6 @@ export class WelcomeView extends BaseView {
         this.entryPointView = entryPointView;
         return;
       })
-      .catch(() => {
-        //
-      });
+      .catch(console.error);
   }
 }

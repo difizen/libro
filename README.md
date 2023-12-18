@@ -23,7 +23,7 @@ notebook 产品前端解决方案。
 
 ### notebook 集成研发环境
 
-TODO
+![image](https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*6eDdTovoKwsAAAAAAAAAAAAADjOxAQ/original)
 
 ### 大模型工作流研发工具
 
