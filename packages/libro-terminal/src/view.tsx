@@ -1,4 +1,5 @@
 import { CodeOutlined } from '@ant-design/icons';
+import type { StatefulView } from '@difizen/mana-app';
 import {
   BaseView,
   Disposable,
@@ -52,7 +53,7 @@ export const TerminalComponent = forwardRef<HTMLDivElement>(function TerminalCom
 
 @transient()
 @view('libro-terminal-view')
-export class LibroTerminalView extends BaseView {
+export class LibroTerminalView extends BaseView implements StatefulView {
   protected term: Terminal;
   override view = TerminalComponent;
   protected options: TerminalViewOption;
@@ -87,6 +88,8 @@ export class LibroTerminalView extends BaseView {
   protected readonly onTitleChangeEmitter = new Emitter<string>();
 
   protected connection?: TerminalConnection;
+
+  protected restoreObj?: object;
 
   protected _isReady = false;
 
@@ -125,9 +128,10 @@ export class LibroTerminalView extends BaseView {
       }
     });
 
-    this.createConnection()
+    this.initConnection()
       .then((connection) => {
         this._isReady = true;
+        this.connection = connection;
         this.onReadyEmitter.fire(true);
 
         this.toDispose.push(connection.messageReceived(this.onMessage));
@@ -216,6 +220,33 @@ export class LibroTerminalView extends BaseView {
     );
   }
 
+  async initConnection() {
+    const connection = await this.createConnection();
+    if (
+      this.restoreObj &&
+      connection.name === (this.restoreObj as { name: string }).name
+    ) {
+      return connection;
+    }
+    connection.dispose();
+    const options = { ...this.options, ...this.restoreObj };
+    const restoreConnection = await this.terminalManager.getOrCreate(options);
+    return restoreConnection;
+  }
+
+  storeState(): object {
+    return { name: this.name };
+  }
+
+  restoreState(oldState: object): void {
+    const state = oldState as { name: string };
+    this.terminalManager.runningChanged((model) => {
+      if (model.findIndex((value) => value.name === state.name) > -1) {
+        this.restoreObj = state;
+      }
+    });
+  }
+
   // todo merge options to initcommand
 
   override dispose(): void {
@@ -229,7 +260,6 @@ export class LibroTerminalView extends BaseView {
 
   protected createConnection = async () => {
     const connection = await this.terminalManager.getOrCreate(this.options);
-    this.connection = connection;
     return connection;
   };
 
