@@ -179,7 +179,7 @@ export class TerminalThemeService {
     return theme;
   }
 
-  getTheme(type: 'light' | 'dark' | 'default' = 'dark'): ITheme {
+  getTheme(type: 'light' | 'dark' | 'default' = 'light'): ITheme {
     switch (type) {
       case 'light':
         return this.lightTheme;

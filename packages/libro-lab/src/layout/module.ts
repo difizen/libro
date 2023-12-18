@@ -8,6 +8,7 @@ import {
 
 import { BrandView } from './brand/index.js';
 import { LibroLabLayoutContainerView } from './container.js';
+import { ContentBottomTabView } from './content-bottom-tab-view.js';
 import { LibroLabCurrentFileFooterView } from './footer/current-file-footer-view.js';
 import { FooterArea, LibroLabLayoutFooterView } from './footer/footer-view.js';
 import { LibroLabStatusFooterView } from './footer/status-footer-view.js';
@@ -23,6 +24,7 @@ export const LibroLabLayoutModule = ManaModule.create('LibroLabLayoutModule').re
   LibroLabLayoutMainView,
   BrandView,
   SaveableTabView,
+  ContentBottomTabView,
   LibroLabLayoutFooterView,
   LibroLabCurrentFileFooterView,
   LayoutService,

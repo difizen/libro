@@ -51,14 +51,17 @@
     "@difizen/libro-jupyter": "^0.1.1",
     "@difizen/libro-toc": "^0.1.1",
     "@difizen/libro-prompt-cell": "^0.1.1",
+    "@difizen/libro-terminal": "^0.1.1",
     "@ant-design/icons": "^5.1.0",
-    "classnames": "^2.3.2"
+    "classnames": "^2.3.2",
+    "uuid": "^9.0.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",
     "antd": "^5.8.6"
   },
   "devDependencies": {
-    "@types/react": "^18.2.25"
+    "@types/react": "^18.2.25",
+    "@types/uuid": "^9.0.2"
   }
 }
