@@ -1,5 +1,6 @@
 import { FileView, LibroJupyterModule } from '@difizen/libro-jupyter';
 import { LibroPromptCellModule } from '@difizen/libro-prompt-cell';
+import { TerminalModule } from '@difizen/libro-terminal';
 import {
   ManaModule,
   createSlotPreference,
@@ -13,6 +14,7 @@ import { LabConfigAppContribution } from './config/config-contribution.js';
 import { GithubLinkView } from './github-link/index.js';
 import { KernelManagerView } from './kernel-manager/index.js';
 import { LibroLabApp } from './lab-app.js';
+import { ContentBottomTabView } from './layout/content-bottom-tab-view.js';
 import {
   LibroLabLayoutModule,
   LibroLabLayoutSlots,
@@ -58,6 +60,10 @@ export const LibroLabModule = ManaModule.create()
       slot: LibroLabLayoutSlots.content,
     }),
     createSlotPreference({
+      view: ContentBottomTabView,
+      slot: LibroLabLayoutSlots.contentBottom,
+    }),
+    createSlotPreference({
       view: SideTabView,
       slot: LibroLabLayoutSlots.navigator,
       options: {
@@ -91,4 +97,5 @@ export const LibroLabModule = ManaModule.create()
     LibroLabHeaderMenuModule,
     LibroLabTocModule,
     LibroPromptCellModule,
+    TerminalModule,
   );

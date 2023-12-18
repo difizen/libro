@@ -4,6 +4,7 @@ import {
   LibroService,
   NotebookCommands,
 } from '@difizen/libro-jupyter';
+import { LibroTerminalView, TerminalManager } from '@difizen/libro-terminal';
 import type { MenuRegistry } from '@difizen/mana-app';
 import {
   CommandContribution,
@@ -12,7 +13,12 @@ import {
   MAIN_MENU_BAR,
   MenuContribution,
   singleton,
+  ViewManager,
 } from '@difizen/mana-app';
+import { v4 } from 'uuid';
+
+import { LayoutService } from '../layout/layout-service.js';
+import { LibroLabLayoutSlots } from '../layout/protocol.js';
 
 import { MenuCommands } from './menu-command.js';
 
@@ -29,6 +35,9 @@ export namespace HeaderMenus {
 export class HeaderMenu implements MenuContribution, CommandContribution {
   @inject(CommandRegistry) protected commandRegistry: CommandRegistry;
   @inject(LibroService) protected libroService: LibroService;
+  @inject(LayoutService) protected layoutService: LayoutService;
+  @inject(TerminalManager) terminalManager: TerminalManager;
+  @inject(ViewManager) viewManager: ViewManager;
 
   registerMenus(menu: MenuRegistry) {
     menu.registerSubmenu(HeaderMenus.FILE, { label: '文件' });
@@ -211,7 +220,21 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
   registerCommands(commands: CommandRegistry) {
     commands.registerCommand(MenuCommands.OpenTerminal, {
       execute: () => {
-        //TODO: 增加终端
+        this.viewManager
+          .getOrCreateView<LibroTerminalView>(LibroTerminalView, {
+            id: v4(),
+          })
+          .then((terminalView) => {
+            this.layoutService.setAreaVisible(LibroLabLayoutSlots.contentBottom, true);
+            this.layoutService.addView(terminalView, {
+              slot: LibroLabLayoutSlots.contentBottom,
+              reveal: true,
+            });
+            return;
+          })
+          .catch(() => {
+            //
+          });
       },
     });
     commands.registerCommand(MenuCommands.About, {
