@@ -11,7 +11,6 @@ import { ViewManager } from '@difizen/mana-app';
 import {
   CommandContribution,
   FileStatNode,
-  FileTreeCommand,
   inject,
   MenuContribution,
   ModalService,
@@ -70,6 +69,10 @@ const FileCommands = {
   REFRESH: {
     id: 'fileTree.command.refresh',
     label: '刷新',
+  },
+  REMOVE: {
+    id: 'fileTree.command.remove',
+    label: '删除',
   },
 };
 export const FileTreeContextMenuPath: MenuPath = ['file-tree-context-menu'];
@@ -177,7 +180,7 @@ export class FileCommandContribution
         return FileStatNode.is(node) && node.fileStat.isFile;
       },
     });
-    command.registerHandler(FileTreeCommand.REMOVE.id, {
+    command.registerHandler(FileCommands.REMOVE.id, {
       execute: (node) => {
         if (FileStatNode.is(node)) {
           const filePath = node.uri.path.toString();
