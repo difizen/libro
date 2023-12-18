@@ -14,8 +14,6 @@ export const loadE2 = async (libroContainer: Syringe.Container) => {
   await MonacoEnvironment.loadModule(async (container) => {
     const textmate = await import('@difizen/libro-cofine-textmate');
     container.load(textmate.TextmateModule);
-    // const module = await import('@difizen/libro-cofine-language-python');
-    // container.load(module.default);
     container.load(PythonLanguageFeature);
     container.load(LibroE2ThemeModule);
     container.load(LSPFeatureModule);

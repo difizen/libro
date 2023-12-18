@@ -41,18 +41,10 @@ export function fetchOniguruma(): Promise<ArrayBuffer> {
   });
 }
 
-const vscodeOnigurumaLib = fetchOniguruma().then((buffer) =>
-  oniguruma.loadWASM(buffer).then(() => {
-    return {
-      createOnigScanner(patterns: string[]) {
-        return new oniguruma.OnigScanner(patterns);
-      },
-      createOnigString(s: string) {
-        return new oniguruma.OnigString(s);
-      },
-    };
-  }),
-);
+const vscodeOnigurumaLib = fetchOniguruma().then(async (buffer) => {
+  await oniguruma.loadWASM(buffer);
+  return oniguruma;
+});
 
 export const TextmateModule = Module()
   .register(

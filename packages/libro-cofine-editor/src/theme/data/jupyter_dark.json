@@ -1,7 +1,7 @@
 {
   "name": "Jupyter Theme Dark",
   "type": "dark",
-  "includes": "dark-plus",
+  "include": "dark-plus",
   "colors": {
     "menu.background": "#1e202b",
     "menubar.selectionBackground": "#1e202b",

@@ -71,12 +71,6 @@ export class LibroLanguageSpecs implements LanguageSpecContribution {
       language: 'python',
       ext: ['.py'],
       mime: 'text/x-python',
-      // load: async container => {
-      // const textmate = await import('@difizen/libro-cofine-textmate');
-      // container.load(textmate.TextmateModule);
-      // const module = await import('@difizen/libro-cofine-language-python');
-      // container.load(module.default);
-      // },
       editorConfig: {},
     });
     register.registerLanguageSpec({

@@ -26,7 +26,7 @@ export class MonacoThemeRegistry implements MixedThemeRegistry, InitializeContri
   protected registedTheme: string[] = [];
 
   onInitialize() {
-    const standaloneThemeService = StandaloneServices.standaloneThemeService.get();
+    const standaloneThemeService = StandaloneServices.get(IStandaloneThemeService);
     standaloneThemeService.onDidColorThemeChange(() => {
       this.themeChangedEmitter.fire();
     });
@@ -50,12 +50,12 @@ export class MonacoThemeRegistry implements MixedThemeRegistry, InitializeContri
   }
 
   getMonacoThemeName() {
-    return StandaloneServices.standaloneThemeService.get().getColorTheme()
-      .themeName as string;
+    const standaloneThemeService = StandaloneServices.get(IStandaloneThemeService);
+    return standaloneThemeService.getColorTheme().themeName as string;
   }
 
   protected doGetTheme(name: string | undefined): MixStandaloneTheme | undefined {
-    const standaloneThemeService = StandaloneServices.standaloneThemeService.get();
+    const standaloneThemeService = StandaloneServices.get(IStandaloneThemeService);
     const theme = !name
       ? standaloneThemeService.getTheme()
       : standaloneThemeService._knownThemes.get(name);
@@ -129,11 +129,10 @@ export class MonacoThemeRegistry implements MixedThemeRegistry, InitializeContri
       for (const setting of result.settings) {
         this.transform(setting, (rule) => result.rules.push(rule));
       }
+      const standaloneThemeService = StandaloneServices.get(IStandaloneThemeService);
 
       // the default rule (scope empty) is always the first rule. Ignore all other default rules.
-      const defaultTheme = StandaloneServices.get(
-        IStandaloneThemeService,
-      )._knownThemes.get(result.base)!;
+      const defaultTheme = standaloneThemeService._knownThemes.get(result.base)!;
       const foreground =
         result.colors['editor.foreground'] ||
         defaultTheme.getColor('editor.foreground');

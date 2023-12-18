@@ -1,3 +1,0 @@
-# libro-notebook
-
-cell

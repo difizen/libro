@@ -52,6 +52,10 @@ export class MonacoGrammarRegistry {
     });
   }
   setupRegistry(theme: IRawTheme): void {
+    if (this.registry) {
+      this.registry.setTheme(theme);
+      return;
+    }
     this.registry = new Registry({
       onigLib: this.onigasmPromise,
       theme,

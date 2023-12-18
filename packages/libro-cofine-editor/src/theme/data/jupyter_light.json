@@ -1,7 +1,7 @@
 {
   "name": "Jupyter Theme Light",
   "type": "light",
-  "includes": "light-plus",
+  "include": "light-plus",
   "colors": {
     "editor.background": "#f5f5f5",
     "editor.foreground": "#333333"
