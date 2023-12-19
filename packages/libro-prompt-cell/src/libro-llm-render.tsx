@@ -20,6 +20,7 @@ marked.use(
       return hljs.highlight(code, { language }).value;
     },
   }),
+  { headerIds: false, mangle: false },
 );
 
 export const LibroLLMRender: React.FC<{ data: string }> = (props: { data: string }) => {
@@ -50,7 +51,7 @@ export const LibroLLMRender: React.FC<{ data: string }> = (props: { data: string
         hljsElement.parentNode?.insertBefore(newElement, hljsElement.nextSibling);
       }
     }
-  }, [data, renderExtraList]);
+  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="libro-llm-output-render" ref={renderMarkdownRef}>
