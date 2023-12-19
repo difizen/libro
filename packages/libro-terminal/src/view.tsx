@@ -1,7 +1,5 @@
 import { CodeOutlined } from '@ant-design/icons';
-import type { StatefulView } from '@difizen/mana-app';
 import {
-  BaseView,
   Disposable,
   DisposableCollection,
   Emitter,
@@ -33,6 +31,7 @@ import type { TerminalConnection } from './connection.js';
 import { TerminalManager } from './manager.js';
 import type { TerminalMessage, TerminalViewOption } from './protocol.js';
 import 'xterm/css/xterm.css';
+import { BaseStatefulView } from './stateful-view.js';
 import { TerminalThemeService } from './theme-service.js';
 
 export const TerminalComponent = forwardRef<HTMLDivElement>(function TerminalComponent(
@@ -53,7 +52,7 @@ export const TerminalComponent = forwardRef<HTMLDivElement>(function TerminalCom
 
 @transient()
 @view('libro-terminal-view')
-export class LibroTerminalView extends BaseView implements StatefulView {
+export class LibroTerminalView extends BaseStatefulView {
   protected term: Terminal;
   override view = TerminalComponent;
   protected options: TerminalViewOption;
@@ -109,7 +108,6 @@ export class LibroTerminalView extends BaseView implements StatefulView {
     this.terminalManager = terminalManager;
 
     this.createTerm();
-
     // 设置自定义事件
     this.term.attachCustomKeyEventHandler((e) => {
       return this.customKeyHandler(e);
@@ -127,24 +125,6 @@ export class LibroTerminalView extends BaseView implements StatefulView {
         });
       }
     });
-
-    this.initConnection()
-      .then((connection) => {
-        this._isReady = true;
-        this.connection = connection;
-        this.onReadyEmitter.fire(true);
-
-        this.toDispose.push(connection.messageReceived(this.onMessage));
-        this.toDispose.push(connection);
-
-        const dispose = connection.connectionStatusChanged(() => {
-          this.initOnceAfterConnected(dispose);
-        });
-        return connection;
-      })
-      .catch((e) => {
-        console.error(e);
-      });
 
     // dispose tern
     if (this.options.destroyOnClose === true) {
@@ -220,18 +200,34 @@ export class LibroTerminalView extends BaseView implements StatefulView {
     );
   }
 
+  override afterRestore() {
+    this.initConnection()
+      .then((connection) => {
+        this._isReady = true;
+        this.connection = connection;
+        this.onReadyEmitter.fire(true);
+
+        this.toDispose.push(connection.messageReceived(this.onMessage));
+        this.toDispose.push(connection);
+
+        const dispose = connection.connectionStatusChanged(() => {
+          this.initOnceAfterConnected(dispose);
+        });
+        return connection;
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
   async initConnection() {
-    const connection = await this.createConnection();
-    if (
-      this.restoreObj &&
-      connection.name === (this.restoreObj as { name: string }).name
-    ) {
+    if (!this.restoreObj) {
+      const connection = await this.createConnection();
       return connection;
+    } else {
+      const options = { ...this.options, ...this.restoreObj };
+      const restoreConnection = await this.terminalManager.getOrCreate(options);
+      return restoreConnection;
     }
-    connection.dispose();
-    const options = { ...this.options, ...this.restoreObj };
-    const restoreConnection = await this.terminalManager.getOrCreate(options);
-    return restoreConnection;
   }
 
   storeState(): object {
@@ -240,11 +236,7 @@ export class LibroTerminalView extends BaseView implements StatefulView {
 
   restoreState(oldState: object): void {
     const state = oldState as { name: string };
-    this.terminalManager.runningChanged((model) => {
-      if (model.findIndex((value) => value.name === state.name) > -1) {
-        this.restoreObj = state;
-      }
-    });
+    this.restoreObj = state;
   }
 
   // todo merge options to initcommand
@@ -402,7 +394,7 @@ export class LibroTerminalView extends BaseView implements StatefulView {
   }
 
   override onViewUnmount(): void {
-    this.dispose();
+    this.termOpened = false;
   }
 
   /**
@@ -463,7 +455,6 @@ export class LibroTerminalView extends BaseView implements StatefulView {
         return;
       }
       const node = this.container?.current;
-
       if (node) {
         this.term.open(node);
       }
