@@ -1,6 +1,10 @@
-import type { CodeEditorViewOptions, IRange } from '@difizen/libro-code-editor';
-import { CodeEditorView } from '@difizen/libro-code-editor';
-import { CodeMirrorEditor, codeMirrorEditorFactory } from '@difizen/libro-codemirror';
+import { CodeEditorManager } from '@difizen/libro-code-editor';
+import type {
+  CodeEditorViewOptions,
+  IRange,
+  CodeEditorView,
+} from '@difizen/libro-code-editor';
+
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
 import { isOutput } from '@difizen/libro-common';
 import type {
@@ -13,6 +17,7 @@ import {
   LibroExecutableCellView,
   LibroOutputArea,
   LibroViewTracker,
+  EditorStatus,
 } from '@difizen/libro-core';
 import type { ExecutionMeta, KernelMessage } from '@difizen/libro-jupyter';
 import { KernelError, LibroJupyterModel } from '@difizen/libro-jupyter';
@@ -128,6 +133,8 @@ export class LibroPromptCellView extends LibroExecutableCellView {
 
   viewManager: ViewManager;
 
+  codeEditorManager: CodeEditorManager;
+
   outputs: IOutput[];
 
   libroViewTracker: LibroViewTracker;
@@ -151,11 +158,13 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     @inject(CellService) cellService: CellService,
     @inject(ViewManager) viewManager: ViewManager,
     @inject(LibroViewTracker) libroViewTracker: LibroViewTracker,
+    @inject(CodeEditorManager) codeEditorManager: CodeEditorManager,
   ) {
     super(options, cellService);
     this.options = options;
     this.viewManager = viewManager;
     this.className = this.className + ' prompt';
+    this.codeEditorManager = codeEditorManager;
 
     this.outputs = options.cell?.outputs as IOutput[];
     this.libroViewTracker = libroViewTracker;
@@ -208,14 +217,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
 
   protected getEditorOption(): CodeEditorViewOptions {
     const option: CodeEditorViewOptions = {
-      factory: (editorOption) =>
-        codeMirrorEditorFactory({
-          ...editorOption,
-          config: {
-            ...editorOption.config,
-            ...{ readOnly: this.parent.model.readOnly },
-          },
-        }),
+      editorHostId: this.parent.id + this.id,
       model: this.model,
       config: {
         readOnly: this.parent.model.readOnly,
@@ -227,22 +229,31 @@ export class LibroPromptCellView extends LibroExecutableCellView {
 
   async createEditor() {
     const option = this.getEditorOption();
-    this.viewManager
-      .getOrCreateView<CodeEditorView, CodeEditorViewOptions>(CodeEditorView, option)
-      .then((editorView) => {
-        this.editorView = editorView;
-        this.editorViewReadyDeferred.resolve();
-        watch(this.parent.model, 'readOnly', () => {
-          this.editorView?.editor?.setOption('readOnly', this.parent.model.readOnly);
-          if (this.editorView?.editor instanceof CodeMirrorEditor) {
-            this.editorView?.editor.setOption('placeholder', '请输入代码');
-          }
-        });
-        return;
-      })
-      .catch(() => {
-        //
-      });
+
+    this.editorStatus = EditorStatus.LOADING;
+
+    // 防止虚拟滚动中编辑器被频繁创建
+    if (this.editorView) {
+      this.editorStatus = EditorStatus.LOADED;
+      return;
+    }
+    const editorView = await this.codeEditorManager.getOrCreateEditorView(option);
+
+    this.editorView = editorView;
+    this.editorViewReadyDeferred.resolve();
+    this.editorStatus = EditorStatus.LOADED;
+
+    await this.afterEditorReady();
+  }
+
+  protected async afterEditorReady() {
+    watch(this.parent.model, 'readOnly', () => {
+      this.editorView?.editor?.setOption(
+        'readOnly',
+        getOrigin(this.parent.model.readOnly),
+      );
+    });
+    this.editorView?.onModalChange((val) => (this.hasModal = val));
   }
 
   override shouldEnterEditorMode(e: React.FocusEvent<HTMLElement>) {
