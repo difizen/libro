@@ -13,7 +13,7 @@ import { Badge } from 'antd';
 import classnames from 'classnames';
 
 @transient()
-@view('LibroLabSaveableTab')
+@view('libro-lab-saveable-tab')
 export class SaveableTabView extends CardTabView {
   protected override renderTab(item: View) {
     return (

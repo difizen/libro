@@ -86,6 +86,7 @@ export class TerminalConnection implements Disposable, Disposed {
       return;
     }
     this.disposed = true;
+    this.shutdown().catch(console.error);
     this._updateConnectionStatus('disconnected');
     this._clearSocket();
   }
