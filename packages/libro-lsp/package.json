@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-lsp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
   "keywords": [
     "libro",
@@ -45,10 +45,10 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-core": "^0.1.2",
-    "@difizen/libro-kernel": "^0.1.2",
-    "@difizen/libro-common": "^0.1.2",
-    "@difizen/libro-code-editor": "^0.1.2",
+    "@difizen/libro-core": "^0.1.3",
+    "@difizen/libro-kernel": "^0.1.3",
+    "@difizen/libro-common": "^0.1.3",
+    "@difizen/libro-code-editor": "^0.1.3",
     "@difizen/mana-app": "latest",
     "lodash.mergewith": "^4.6.2",
     "uuid": "^9.0.0",

@@ -1,5 +1,11 @@
 # @difizen/libro-l10n
 
+## 0.1.3
+
+### Patch Changes
+
+- Fix the content format issue of prompt cell
+
 ## 0.1.2
 
 ### Patch Changes

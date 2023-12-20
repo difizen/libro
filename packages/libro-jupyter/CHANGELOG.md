@@ -1,5 +1,27 @@
 # @difizen/libro-jupyter
 
+## 0.1.3
+
+### Patch Changes
+
+- Fix the content format issue of prompt cell
+- Updated dependencies
+  - @difizen/libro-code-cell@0.1.3
+  - @difizen/libro-code-editor@0.1.3
+  - @difizen/libro-codemirror@0.1.3
+  - @difizen/libro-cofine-editor@0.1.3
+  - @difizen/libro-common@0.1.3
+  - @difizen/libro-core@0.1.3
+  - @difizen/libro-kernel@0.1.3
+  - @difizen/libro-l10n@0.1.3
+  - @difizen/libro-lsp@0.1.3
+  - @difizen/libro-markdown-cell@0.1.3
+  - @difizen/libro-output@0.1.3
+  - @difizen/libro-raw-cell@0.1.3
+  - @difizen/libro-rendermime@0.1.3
+  - @difizen/libro-search@0.1.3
+  - @difizen/libro-search-code-cell@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes

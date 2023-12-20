@@ -1,5 +1,16 @@
 # @difizen/libro-lab
 
+## 0.1.3
+
+### Patch Changes
+
+- Fix the content format issue of prompt cell
+- Updated dependencies
+  - @difizen/libro-jupyter@0.1.3
+  - @difizen/libro-prompt-cell@0.1.3
+  - @difizen/libro-terminal@0.1.3
+  - @difizen/libro-toc@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes
