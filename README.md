@@ -5,33 +5,51 @@
 </div>
 
 <div id="top" align="center">
-notebook 产品前端解决方案。
+大模型时代的 notebook 产品方案
 </div>
 
 [![Code: CI](https://github.com/difizen/libro/actions/workflows/ci.yml/badge.svg)](https://github.com/difizen/libro/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/difizen/libro/graph/badge.svg?token=8LWLNZK78Z)](https://codecov.io/gh/difizen/libro)
 
-- 优雅的交互和丰富的功能
-- 方便扩展和二次开发
-- React 快速集成
+- 定义大模型工作流，内置大模型交互和辅助开发能力。
+- 更优雅的交互体验，兼容 jupyter notebook。
+- 方便集成和扩展，全面模块化设置。
 
-## 预置方案
+## 如何使用
 
-### notebook 编辑器
+您需要安装 [libro-server](https://github.com/difizen/libro-server) 来体验完整的 libro 能力。
 
-![image](https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*jfLFTqY-l6EAAAAAAAAAAAAADjOxAQ/original)
-
-### notebook 集成研发环境
+### lab 研发环境
 
 ![image](https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*6eDdTovoKwsAAAAAAAAAAAAADjOxAQ/original)
 
-### 大模型工作流研发工具
+### 大模型工作流
+
+使用 libro 大模型能力，您还需要访问至少一个模型提供商。
+
+#### Prompt
+
+您可以在自己的工作流中因为 prompt cell，快速完成与大模型的交互，生成的结果也可以在上下文中继续访问。
 
 TODO
 
-## 模块
+#### Copilot
 
-用户可以根据自己的需求组装不同的模块，构建自己的 notebook 产品。
+TODO
+
+## 如何集成
+
+libro 是完全模块化的，您可以自由选择 libro 提供的原生能力模块，也可以选择增加自定义模块来完成二次开发，模块化研发方案您可以通过 [mana](https://github.com/difizen/mana) 来了解。
+
+您可以根据自己的需求组装不同的模块，构建自己的 notebook 产品。例如仅因为编辑器相关的模块继承到 IDE 或其他研发环境中，或者引入更多模块来组成 lab 形态的产品。
+
+您至少需要安装 jupyter-server 来支持 libro 运行，此时您可以使用 jupyter notebook 的能力，如果需要使用更多 libro 定义的能力，您需要安装 libro-server。
+
+### 编辑器
+
+![image](https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*jfLFTqY-l6EAAAAAAAAAAAAADjOxAQ/original)
+
+### 模块
 
 通常用户只需要引入 `libro-jupyter` 模块即可，该模块包含了 notebook 常用的模块。用户可以通过增加自定义模块来完成个性化定制需求。
 
@@ -48,8 +66,6 @@ TODO
 - [全文搜索](./packages/libro-search/README.md)：提供对单元格编辑区域和输出区域的全文搜索能力，支持自定义提供搜索能力。
 - [本地化](./packages/libro-l10n/README.md)：提供多语言支持。
 - [jupyter](./packages/libro-jupyter/README.md)：面向 jupyter 服务的预设模块。
-
-## 使用
 
 ### 组件化消费
 
