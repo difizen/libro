@@ -1,5 +1,18 @@
 # @difizen/libro-codemirror
 
+## 0.1.2
+
+### Patch Changes
+
+- 1. Support monaco editor, code cell is migrated to monaco editor by default.
+  2. Support virtual lists to improve performance.
+  3. libro lab can now use terminal.
+- Updated dependencies
+  - @difizen/libro-code-editor@0.1.2
+  - @difizen/libro-common@0.1.2
+  - @difizen/libro-lsp@0.1.2
+  - @difizen/libro-rendermime@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

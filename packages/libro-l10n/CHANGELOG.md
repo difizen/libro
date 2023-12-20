@@ -1,5 +1,13 @@
 # @difizen/libro-l10n
 
+## 0.1.2
+
+### Patch Changes
+
+- 1. Support monaco editor, code cell is migrated to monaco editor by default.
+  2. Support virtual lists to improve performance.
+  3. libro lab can now use terminal.
+
 ## 0.1.1
 
 ### Patch Changes

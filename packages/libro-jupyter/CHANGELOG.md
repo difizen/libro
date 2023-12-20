@@ -1,5 +1,29 @@
 # @difizen/libro-jupyter
 
+## 0.1.2
+
+### Patch Changes
+
+- 1. Support monaco editor, code cell is migrated to monaco editor by default.
+  2. Support virtual lists to improve performance.
+  3. libro lab can now use terminal.
+- Updated dependencies
+  - @difizen/libro-code-cell@0.1.2
+  - @difizen/libro-code-editor@0.1.2
+  - @difizen/libro-codemirror@0.1.2
+  - @difizen/libro-cofine-editor@0.1.2
+  - @difizen/libro-common@0.1.2
+  - @difizen/libro-core@0.1.2
+  - @difizen/libro-kernel@0.1.2
+  - @difizen/libro-l10n@0.1.2
+  - @difizen/libro-lsp@0.1.2
+  - @difizen/libro-markdown-cell@0.1.2
+  - @difizen/libro-output@0.1.2
+  - @difizen/libro-raw-cell@0.1.2
+  - @difizen/libro-rendermime@0.1.2
+  - @difizen/libro-search@0.1.2
+  - @difizen/libro-search-code-cell@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes
