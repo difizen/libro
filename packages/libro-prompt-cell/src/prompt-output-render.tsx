@@ -3,11 +3,12 @@ import type {
   MultilineString,
   PartialJSONObject,
 } from '@difizen/libro-common';
+import { copy2clipboard } from '@difizen/libro-common';
 import { concatMultilineString } from '@difizen/libro-common';
 import type { BaseOutputView } from '@difizen/libro-jupyter';
 import { NotebookCommands } from '@difizen/libro-jupyter';
 import { CommandRegistry, useInject } from '@difizen/mana-app';
-import React from 'react';
+import React, { useState } from 'react';
 import { v4 } from 'uuid';
 
 import { LibroLLMRenderMemo } from './libro-llm-render.js';
@@ -27,6 +28,7 @@ export const PromptOutputRender: React.FC<{
   const { model } = props;
   const renderHTMLRef = React.createRef<HTMLDivElement>();
   const commandRegistry = useInject(CommandRegistry);
+  const [selection, setSelection] = useState('');
 
   if (!model.data['application/vnd.libro.prompt+json']) {
     return null;
@@ -39,20 +41,19 @@ export const PromptOutputRender: React.FC<{
   }
   const modelData = getModelOutput(data);
   const sourceArr = getPythonCode(modelData ?? '');
-  const handleOutput = async () => {
+  const insertAndRun = async () => {
     const libro = model.cell.parent;
     const insertIndex = libro.model.cells.findIndex((c) => c.id === model.cell.id);
 
     await Promise.all(
       sourceArr.map(async (value, index) => {
-        const newView = await libro.addCell(
+        await libro.addCell(
           {
             id: v4(),
             cell: { cell_type: 'code', source: value, metadata: {} },
           },
           insertIndex + index + 1,
         );
-        return newView;
       }),
     );
 
@@ -66,18 +67,60 @@ export const PromptOutputRender: React.FC<{
       }),
     );
   };
+  const insert = async () => {
+    const libro = model.cell.parent;
+    const insertIndex = libro.model.cells.findIndex((c) => c.id === model.cell.id);
+    await Promise.all(
+      sourceArr.map(async (value, index) => {
+        await libro.addCell(
+          {
+            id: v4(),
+            cell: { cell_type: 'code', source: value, metadata: {} },
+          },
+          insertIndex + index + 1,
+        );
+      }),
+    );
+  };
+
+  const copy = async () => {
+    copy2clipboard(concatMultilineString(sourceArr));
+  };
+
+  const copySelection = async () => {
+    copy2clipboard(selection);
+  };
+
+  const updateSelection = () => {
+    const tmpSelection = document.getSelection()?.toString();
+    if (tmpSelection) {
+      setSelection(tmpSelection);
+    }
+  };
+
   return (
-    <div className="libro-prompt-output-render-container">
+    <div className="libro-prompt-output-render-container" onMouseUp={updateSelection}>
       <div className="prompt-output-render" ref={renderHTMLRef}>
         <div className="libro-prompt-output-llm-render">
           <LibroLLMRenderMemo data={modelData} />
         </div>
       </div>
       {sourceArr.length > 0 && (
-        <span onClick={handleOutput} className="libro-prompt-output-btn">
-          插入并运行
-        </span>
+        <>
+          <span onClick={insertAndRun} className="libro-prompt-output-btn">
+            插入并运行
+          </span>
+          <span onClick={insert} className="libro-prompt-output-btn">
+            插入代码
+          </span>
+        </>
       )}
+      <span onClick={copy} className="libro-prompt-output-btn">
+        复制代码
+      </span>
+      <span onClick={copySelection} className="libro-prompt-output-btn">
+        复制选中内容
+      </span>
     </div>
   );
 };
