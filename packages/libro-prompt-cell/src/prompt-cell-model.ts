@@ -1,4 +1,3 @@
-import { concatMultilineString } from '@difizen/libro-common';
 import type {
   ICellMetadata,
   ExecutionCount,
@@ -65,36 +64,19 @@ export class LibroPromptCellModel
     this.executeCount = (options.cell as ICodeCell).execution_count || null;
     this.hasOutputHidden = false;
     this.hasOutputsScrolled = false;
-    this.mimeType = 'text/x-python';
-    this.metadata = options?.cell?.metadata || {};
-    this.fromSource(concatMultilineString(options?.cell?.source));
-  }
-
-  fromSource(source: string) {
-    try {
-      const run = source.split('%%prompt \n')[1];
-      const runValue = JSON.parse(run);
-      this.value = runValue.prompt;
-      this.modelType = runValue.model_name;
-    } catch {
-      () => {
-        //
-      };
-    }
+    this.libroFormatType = 'formatter-prompt-magic';
+    this.mimeType = 'application/vnd.libro.prompt+json';
+    this.metadata = {
+      ...options?.cell?.metadata,
+      libroFormatter: this.libroFormatType,
+    };
   }
 
   override toJSON(): Omit<ICodeCell, 'outputs'> {
-    // const outputs = this.outputArea?.toJSON() ?? this.outputs;
-    const promptObj = {
-      model_name: this.modelType || 'CodeGPT',
-      prompt: this.value,
-    };
-    const encodeValue = `%%prompt \n${JSON.stringify(promptObj)}`;
-
     return {
       id: this.id,
       cell_type: this.type,
-      source: encodeValue,
+      source: this.source,
       metadata: this.metadata,
       execution_count: this.executeCount,
       // outputs: this.outputs,
