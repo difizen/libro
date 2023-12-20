@@ -4,7 +4,6 @@ import type {
   IRange,
   CodeEditorView,
 } from '@difizen/libro-code-editor';
-
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
 import { isOutput } from '@difizen/libro-common';
 import type {
@@ -74,8 +73,12 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
         .then(() => {
           const len = instance.modelSelection.length;
           if (len > 0) {
-            setSelectedModel(instance.modelSelection[len - 1].label);
-            instance.model.modelType = instance.modelSelection[len - 1].label;
+            instance.model.decodeObject = {
+              modelType: instance.modelSelection[len - 1].label,
+              ...instance.model.decodeObject,
+            };
+            setSelectedModel(instance.model.decodeObject['modelType']);
+            instance.model.modelType = instance.model.decodeObject['modelType'];
             return;
           }
           return;
@@ -88,6 +91,10 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
 
     const handleChange = (value: string) => {
       instance.model.modelType = value;
+      instance.model.decodeObject = {
+        ...instance.model.decodeObject,
+        modelType: value,
+      };
       setSelectedModel(value);
     };
 
@@ -338,13 +345,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
 
     const kernelConnection = getOrigin(libroModel.kernelConnection);
 
-    // const cellContent = '%prompt ' + toBase64(this.model.value) + ',model:';
-    const promptObj = {
-      model_name: this.model.modelType || 'CodeGPT',
-      prompt: this.model.value,
-    };
-
-    const cellContent = `%%prompt \n${JSON.stringify(promptObj)}`;
+    const cellContent = this.model.source;
 
     try {
       // Promise.resolve().then(() => {
@@ -410,7 +411,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     content: KernelMessage.IExecuteRequestMsg['content'],
     ioCallback: (msg: KernelMessage.IIOPubMessage) => any,
   ) => {
-    const model = this.parent!.model! as LibroJupyterModel;
+    const model = this.parent?.model as LibroJupyterModel;
     await model.kcReady;
     const connection = model.kernelConnection!;
     const future = connection.requestExecute(content);
