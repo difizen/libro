@@ -11,6 +11,7 @@ import type * as rpc from 'vscode-jsonrpc';
 import type * as lsp from 'vscode-languageserver-protocol';
 
 import type { WidgetLSPAdapter } from './adapters/adapter.js';
+import type { IURIs } from './connection-manager.js';
 import type { IForeignCodeExtractor } from './extractors/types.js';
 import type {
   AnyCompletion,
@@ -464,6 +465,8 @@ export interface ILSPDocumentConnectionManager {
    * @param  adapter - the adapter need to be registered
    */
   registerAdapter(path: string, adapter: WidgetLSPAdapter<NotebookView>): void;
+
+  solveUris(virtualDocument: VirtualDocument, language: string): IURIs | undefined;
 }
 
 /**
@@ -535,6 +538,7 @@ export interface ILSPCodeExtractorsManager {
   ): void;
 }
 
+export const ILSPOptions = Symbol('ILSPOptions');
 /**
  * Argument for creating a connection to the LSP proxy server.
  */
@@ -752,7 +756,7 @@ export type ServerRequests<
 /**
  * @alpha
  *
- * Interface describing he connection to the language server.
+ * Interface describing the connection to the language server.
  */
 export interface ILSPConnection extends ILspConnection {
   /**

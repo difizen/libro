@@ -4,7 +4,7 @@ import { ServerManager } from '@difizen/libro-kernel';
 import { ApplicationContribution } from '@difizen/mana-app';
 import { inject, singleton } from '@difizen/mana-app';
 
-import { NotebookAdapter } from './adapters/notebook-adapter.js';
+import { NotebookAdapterFactory } from './adapters/notebook-adapter.js';
 import {
   ILSPCodeExtractorsManager,
   ILSPDocumentConnectionManager,
@@ -20,6 +20,7 @@ export class LSPAppContribution implements ApplicationContribution {
   connectionManager: ILSPDocumentConnectionManager;
   @inject(ILSPFeatureManager) featureManager: ILSPFeatureManager;
   @inject(ILSPCodeExtractorsManager) codeExtractorManager: ILSPCodeExtractorsManager;
+  @inject(NotebookAdapterFactory) notebookAdapterFactory: NotebookAdapterFactory;
 
   onStart() {
     /**
@@ -72,7 +73,8 @@ export class LSPAppContribution implements ApplicationContribution {
     await notebook.initialized;
     await this.serverManager.ready;
 
-    const adapter = new NotebookAdapter(notebook, {
+    const adapter = this.notebookAdapterFactory({
+      editorWidget: notebook,
       connectionManager: this.connectionManager,
       featureManager: this.featureManager,
       foreignCodeExtractorsManager: this.codeExtractorManager,

@@ -233,17 +233,6 @@ export class LibroModel implements NotebookModel, DndListModel {
     }
     this.selectCell(this.cells[this.activeIndex]);
 
-    const virtualizedManager = this.virtualizedManagerHelper.getOrCreate(this);
-    if (virtualizedManager.isVirtualized) {
-      if (this.cells[this.activeIndex]) {
-        this.scrollToCellView({ cellIndex: this.activeIndex });
-      }
-    } else {
-      if (this.cells[this.activeIndex]) {
-        this.scrollToView(this.cells[this.activeIndex]);
-      }
-    }
-
     this.configurationService
       .get(EnterEditModeWhenAddCell)
       .then((value) => {

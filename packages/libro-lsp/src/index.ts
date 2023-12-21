@@ -6,6 +6,7 @@
  */
 
 export * from './module.js';
+export * from './monitor.js';
 export * from './adapters/adapter.js';
 export * from './connection-manager.js';
 export * from './extractors/index.js';

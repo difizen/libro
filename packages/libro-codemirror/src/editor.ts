@@ -433,7 +433,7 @@ export class CodeMirrorEditor implements IEditor {
   /**
    * Dispose of the resources held by the widget.
    */
-  dispose(): void {
+  dispose = (): void => {
     if (this.disposed) {
       return;
     }
@@ -442,9 +442,8 @@ export class CodeMirrorEditor implements IEditor {
     this.host.removeEventListener('blur', this, true);
     this.host.removeEventListener('scroll', this, true);
     this._keydownHandlers.length = 0;
-    // this._poll.dispose();
     this.editor.destroy();
-  }
+  };
 
   /**
    * Get a config option for the editor.
@@ -460,7 +459,9 @@ export class CodeMirrorEditor implements IEditor {
     // Don't bother setting the option if it is already the same.
     if (this._config[option] !== value) {
       this._config[option] = value;
-      this._editorConfig.reconfigureExtension(this._editor, option, value);
+      if (!this.disposed) {
+        this._editorConfig.reconfigureExtension(this._editor, option, value);
+      }
     }
 
     if (option === 'readOnly') {
@@ -1087,6 +1088,7 @@ export class CodeMirrorEditor implements IEditor {
       this._lastChange = update.changes;
     }
     this.model.value = update.state.doc.toJSON().join('\n');
+    this.host.style.height = update.view.dom.offsetHeight + 'px';
   }
   /**
    * Handle the DOM events for the editor.

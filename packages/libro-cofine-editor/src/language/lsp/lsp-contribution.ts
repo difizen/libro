@@ -5,7 +5,7 @@ import {
 import { LibroService } from '@difizen/libro-core';
 import type { LSPConnection } from '@difizen/libro-lsp';
 import { ILSPDocumentConnectionManager } from '@difizen/libro-lsp';
-import { DisposableCollection, inject, singleton } from '@difizen/mana-app';
+import { Disposable, DisposableCollection, inject, singleton } from '@difizen/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 
 import { LibroE2URIScheme } from '../../libro-e2-editor.js';
@@ -107,7 +107,12 @@ export class LSPContribution implements EditorHandlerContribution {
           ),
         );
 
-        new DiagnosticProvider(this.libroService, lspConnection, virtualDocument);
+        const provider = new DiagnosticProvider(
+          this.libroService,
+          lspConnection,
+          virtualDocument,
+        );
+        this.toDispose.push(Disposable.create(() => provider.dispose()));
 
         this.toDispose.push(
           monaco.languages.registerSignatureHelpProvider(
@@ -144,16 +149,17 @@ export class LSPContribution implements EditorHandlerContribution {
   }
 
   protected isDisposed = false;
+
   get disposed() {
     return this.isDisposed;
   }
 
-  beforeDestory() {
+  disposeLanguageFeature() {
     this.toDispose.dispose();
   }
 
   dispose() {
-    this.toDispose.dispose();
+    this.disposeLanguageFeature();
     this.isDisposed = false;
   }
 }

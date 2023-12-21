@@ -10,7 +10,7 @@
 // Introduced modifications are BSD licenced, copyright JupyterLab development team.
 
 import type { Disposable, Event } from '@difizen/mana-app';
-import { Emitter } from '@difizen/mana-app';
+import { Emitter, transient } from '@difizen/mana-app';
 import type * as protocol from 'vscode-languageserver-protocol';
 //TODO: vscode-ws-jsonrpc has new version
 import type { MessageConnection } from 'vscode-ws-jsonrpc';
@@ -20,8 +20,10 @@ import {
   registerServerCapability,
   unregisterServerCapability,
 } from './server-capability-registration.js';
-import type { IDocumentInfo, ILspConnection, ILspOptions } from './types.js';
+import type { ILspOptions } from './types.js';
+import type { IDocumentInfo, ILspConnection } from './types.js';
 
+@transient()
 export class LspWsConnection implements ILspConnection, Disposable {
   constructor(options: ILspOptions) {
     this._rootUri = options.rootUri;
