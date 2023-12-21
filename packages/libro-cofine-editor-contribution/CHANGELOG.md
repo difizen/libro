@@ -1,5 +1,11 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.4
+
+### Patch Changes
+
+- Fix issues with lsp and virtual list.
+
 ## 0.1.3
 
 ### Patch Changes
