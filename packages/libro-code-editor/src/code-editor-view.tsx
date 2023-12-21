@@ -1,6 +1,3 @@
-// Copyright (c) Jupyter Development Team.
-// Distributed under the terms of the Modified BSD License.
-
 import { getOrigin, prop } from '@difizen/mana-app';
 import {
   inject,
@@ -21,10 +18,10 @@ import type {
   CompletionProvider,
   ICoordinate,
   IEditorConfig,
+  IEditor,
   IEditorSelectionStyle,
   TooltipProvider,
 } from './code-editor-protocol.js';
-import type { IEditor } from './code-editor-protocol.js';
 import { CodeEditorSettings } from './code-editor-settings.js';
 
 export const CodeEditorRender = memo(
@@ -151,6 +148,8 @@ export class CodeEditorView extends BaseView {
   };
 
   override onViewUnmount = () => {
+    this.editor.dispose();
+
     if (this.editor.dispose) {
       this.editor.dispose();
     }

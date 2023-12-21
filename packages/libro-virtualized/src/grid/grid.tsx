@@ -618,7 +618,7 @@ class Grid extends React.PureComponent<Props, State> {
         cellIndex,
       );
 
-    const scrollTop = offset + (lineIndex - 1) * 20 + 12; // 上padding 为12
+    const scrollTop = offset + (lineIndex - 1) * 20 - 12; // 上padding 为12
 
     this.scrollToPosition({ scrollTop });
   }

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-parameter-properties */
 /* eslint-disable @typescript-eslint/parameter-properties */
 import type { CodeEditorViewOptions, CodeEditorView } from '@difizen/libro-code-editor';
-import { CodeEditorManager, CodeEditorSettings } from '@difizen/libro-code-editor';
+import { CodeEditorManager } from '@difizen/libro-code-editor';
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
 import { isOutput } from '@difizen/libro-common';
 import type {
@@ -17,6 +17,7 @@ import {
   LibroOutputArea,
   VirtualizedManagerHelper,
 } from '@difizen/libro-core';
+import type { ViewSize } from '@difizen/mana-app';
 import {
   getOrigin,
   inject,
@@ -29,9 +30,9 @@ import {
   ViewOption,
   ViewRender,
   watch,
+  Deferred,
 } from '@difizen/mana-app';
-import { Deferred } from '@difizen/mana-app';
-import { useEffect, useMemo, useRef, memo, forwardRef } from 'react';
+import { useEffect, useRef, memo, forwardRef } from 'react';
 
 import type { LibroCodeCellModel } from './code-cell-model.js';
 
@@ -54,15 +55,13 @@ const CellEditor: React.FC = () => {
     }
   }, [instance, instance.editorView?.editor]);
 
-  const editorAreaHeight = useMemo(() => {
-    return instance.calcEditorAreaHeight();
-  }, [instance.model.value]);
-
   if (virtualizedManager.isVirtualized) {
     instance.renderEditorIntoVirtualized = true;
     if (instance.setEditorHost) {
       instance.setEditorHost(editorRef);
     }
+
+    const editorAreaHeight = instance.calcEditorAreaHeight();
 
     return (
       <div
@@ -136,8 +135,6 @@ export class LibroCodeCellView extends LibroExecutableCellView {
     return this.outputAreaDeferred.promise;
   }
 
-  protected codeEditorSettings: CodeEditorSettings;
-
   override renderEditor = () => {
     if (this.editorView) {
       return <ViewRender view={this.editorView} />;
@@ -145,25 +142,27 @@ export class LibroCodeCellView extends LibroExecutableCellView {
     return null;
   };
 
-  // onViewResize(size: ViewSize) {
-  //   if (size.height) this.editorAreaHeight = size.height;
-  // }
+  override onViewResize(size: ViewSize) {
+    if (size.height) {
+      this.editorAreaHeight = size.height;
+    }
+  }
 
   calcEditorAreaHeight() {
-    // if (
-    //   this.editorStatus === EditorStatus.NOTLOADED ||
-    //   this.editorStatus === EditorStatus.LOADING
-    // ) {
+    if (
+      this.editorStatus === EditorStatus.NOTLOADED ||
+      this.editorStatus === EditorStatus.LOADING
+    ) {
+      const { lineHeight, paddingTop, paddingBottom, scrollBarHeight } =
+        this.codeEditorManager.getUserEditorConfig(this.model);
 
-    const { lineHeight, paddingTop, paddingBottom, scrollBarHeight } =
-      this.codeEditorManager.getUserEditorConfig(this.model);
+      const codeHeight = countLines(this.model.value) * (lineHeight ?? 20);
+      const editorPadding = paddingTop + paddingBottom;
 
-    const codeHeight = countLines(this.model.value) * (lineHeight || 20);
-    const editorPadding = paddingTop + paddingBottom;
+      const editorAreaHeight = codeHeight + editorPadding + scrollBarHeight;
 
-    const editorAreaHeight = codeHeight + editorPadding + scrollBarHeight;
-
-    this.editorAreaHeight = editorAreaHeight;
+      this.editorAreaHeight = editorAreaHeight;
+    }
 
     // 编辑器已经加载的情况下cell高度都由对它的高度监听得到。
     return this.editorAreaHeight;
@@ -174,13 +173,11 @@ export class LibroCodeCellView extends LibroExecutableCellView {
     @inject(CellService) cellService: CellService,
     @inject(ViewManager) viewManager: ViewManager,
     @inject(CodeEditorManager) codeEditorManager: CodeEditorManager,
-    @inject(CodeEditorSettings) codeEditorSettings: CodeEditorSettings,
   ) {
     super(options, cellService);
     this.options = options;
     this.viewManager = viewManager;
     this.codeEditorManager = codeEditorManager;
-    this.codeEditorSettings = codeEditorSettings;
 
     this.outputs = options.cell?.outputs as IOutput[];
     this.className = this.className + ' code';

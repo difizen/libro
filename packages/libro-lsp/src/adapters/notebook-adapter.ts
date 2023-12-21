@@ -13,23 +13,33 @@ import type {
 import { EditorCellView } from '@difizen/libro-core';
 import type { ExecutableNotebookModel } from '@difizen/libro-kernel';
 import {} from '@difizen/mana-app';
-import { watch, Deferred } from '@difizen/mana-app';
+import { inject, transient, watch, Deferred } from '@difizen/mana-app';
 
 import type { IVirtualPosition } from '../positioning.js';
 import type { Document } from '../tokens.js';
 import { untilReady } from '../utils.js';
-import { VirtualDocument } from '../virtual/document.js';
+import type { VirtualDocument } from '../virtual/document.js';
+import { VirtualDocumentFactory } from '../virtual/document.js';
 
 import type { IAdapterOptions } from './adapter.js';
 import { WidgetLSPAdapter } from './adapter.js';
 
 type ILanguageInfoMetadata = nbformat.ILanguageInfoMetadata;
 
+export const NotebookAdapterFactory = Symbol('NotebookAdapterFactory');
+export type NotebookAdapterFactory = (
+  options: NotebookAdapterOptions,
+) => NotebookAdapter;
+export const NotebookAdapterOptions = Symbol('NotebookAdapterOptions');
+export interface NotebookAdapterOptions extends IAdapterOptions {
+  editorWidget: LibroView;
+}
+
+@transient()
 export class NotebookAdapter extends WidgetLSPAdapter<LibroView> {
-  constructor(
-    public editorWidget: LibroView,
-    protected override options: IAdapterOptions,
-  ) {
+  @inject(VirtualDocumentFactory) protected readonly docFactory: VirtualDocumentFactory;
+  constructor(@inject(NotebookAdapterOptions) options: NotebookAdapterOptions) {
+    const editorWidget = options.editorWidget;
     super(editorWidget, options);
     this._editorToCell = new Map();
     this.editor = editorWidget;
@@ -300,7 +310,7 @@ export class NotebookAdapter extends WidgetLSPAdapter<LibroView> {
    * Generate the virtual document associated with the document.
    */
   createVirtualDocument(): VirtualDocument {
-    return new VirtualDocument({
+    return this.docFactory({
       language: this.language,
       foreignCodeExtractors: this.options.foreignCodeExtractorsManager,
       path: this.documentPath,

@@ -8,10 +8,14 @@
 
 import type { Event } from '@difizen/mana-app';
 import { Emitter } from '@difizen/mana-app';
+import { inject, transient } from '@difizen/mana-app';
 import type * as lsp from 'vscode-languageserver-protocol';
 import type { MessageConnection } from 'vscode-ws-jsonrpc';
 
-import { Method } from './tokens.js';
+import type { AnyMethodType, IMessageLog } from './lsp-protocol.js';
+import { MessageKind } from './lsp-protocol.js';
+import { LSPMonitor } from './monitor.js';
+import { Method, ILSPOptions } from './tokens.js';
 import type {
   ClientNotifications,
   ClientRequests,
@@ -20,7 +24,6 @@ import type {
   IClientResult,
   IDocumentInfo,
   ILSPConnection,
-  ILSPOptions,
   IServerRequestHandler,
   IServerRequestParams,
   IServerResult,
@@ -148,17 +151,6 @@ export const Provider: Record<string, keyof lsp.ServerCapabilities> = {
   WORKSPACE: 'workspace',
 };
 
-type AnyMethodType =
-  | typeof Method.ServerNotification
-  | typeof Method.ClientNotification
-  | typeof Method.ClientRequest
-  | typeof Method.ServerRequest;
-type AnyMethod =
-  | Method.ServerNotification
-  | Method.ClientNotification
-  | Method.ClientRequest
-  | Method.ServerRequest;
-
 /**
  * Create a map between the request method and its handler
  */
@@ -173,22 +165,13 @@ function createMethodMap<T, H, U extends keyof T = keyof T>(
   return result as T;
 }
 
-enum MessageKind {
-  clientNotifiedServer,
-  serverNotifiedClient,
-  serverRequested,
-  clientRequested,
-  resultForClient,
-  responseForServer,
-}
+export const LSPConnectionFactory = Symbol('LSPConnectionFactory');
+export type LSPConnectionFactory = (options: ILSPOptions) => LSPConnection;
 
-interface IMessageLog<T extends AnyMethod = AnyMethod> {
-  method: T;
-  message: any;
-}
-
+@transient()
 export class LSPConnection extends LspWsConnection implements ILSPConnection {
-  constructor(options: ILSPOptions) {
+  @inject(LSPMonitor) lspmonitor: LSPMonitor;
+  constructor(@inject(ILSPOptions) options: ILSPOptions) {
     super(options);
     this._options = options;
     this.logAllCommunication = false;
@@ -285,6 +268,12 @@ export class LSPConnection extends LspWsConnection implements ILSPConnection {
       // eslint-disable-next-line no-console
       console.log(kind, message);
     }
+    this.lspmonitor.log({
+      serverIdentifier: this.serverIdentifier ?? '',
+      serverLanguage: this.serverLanguage ?? '',
+      kind,
+      message,
+    });
   }
 
   /**

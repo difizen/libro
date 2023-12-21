@@ -15,7 +15,8 @@ import { Emitter, inject, singleton } from '@difizen/mana-app';
 import type * as protocol from 'vscode-languageserver-protocol';
 
 import type { WidgetLSPAdapter } from './adapters/adapter.js';
-import { LSPConnection } from './connection.js';
+import type { LSPConnection } from './connection.js';
+import { LSPConnectionFactory } from './connection.js';
 import type { ClientCapabilities } from './lsp.js';
 import type { AskServersToSendTraceNotifications } from './plugin.js';
 import type {
@@ -42,6 +43,8 @@ import type { VirtualDocument } from './virtual/document.js';
  */
 @singleton({ token: ILSPDocumentConnectionManager })
 export class DocumentConnectionManager implements ILSPDocumentConnectionManager {
+  @inject(LSPConnectionFactory)
+  protected readonly lspConnectionFactory: LSPConnectionFactory;
   constructor(
     @inject(ILanguageServerManagerFactory)
     languageServerManagerFactory: ILanguageServerManagerFactory,
@@ -51,7 +54,58 @@ export class DocumentConnectionManager implements ILSPDocumentConnectionManager 
     this.adapters = new Map();
     this._ignoredLanguages = new Set();
     this.languageServerManager = languageServerManagerFactory({});
-    Private.setLanguageServerManager(this.languageServerManager);
+  }
+
+  private _connections: Map<TLanguageServerId, LSPConnection> = new Map();
+
+  protected disconnectServer(languageServerId: TLanguageServerId): void {
+    const connection = this._connections.get(languageServerId);
+    if (connection) {
+      connection.close();
+      this._connections.delete(languageServerId);
+    }
+  }
+
+  /**
+   * Return (or create and initialize) the WebSocket associated with the language
+   */
+  protected async connection(
+    language: string,
+    languageServerId: TLanguageServerId,
+    uris: IURIs,
+    onCreate: (connection: LSPConnection) => void,
+    capabilities: ClientCapabilities,
+  ): Promise<LSPConnection> {
+    let connection = this._connections.get(languageServerId);
+    if (!connection) {
+      const socket = new WebSocket(uris.socket);
+
+      const connection = this.lspConnectionFactory({
+        languageId: language,
+        serverUri: uris.server,
+        rootUri: uris.base,
+        serverIdentifier: languageServerId,
+        capabilities: capabilities,
+      });
+
+      this._connections.set(languageServerId, connection);
+      connection.connect(socket);
+      onCreate(connection);
+    }
+
+    connection = this._connections.get(languageServerId)!;
+
+    return connection;
+  }
+
+  protected updateServerConfiguration(
+    languageServerId: TLanguageServerId,
+    settings: protocol.DidChangeConfigurationParams,
+  ): void {
+    const connection = this._connections.get(languageServerId);
+    if (connection) {
+      connection.sendConfigurationChange(settings);
+    }
   }
 
   /**
@@ -121,7 +175,50 @@ export class DocumentConnectionManager implements ILSPDocumentConnectionManager 
    * Promise resolved when the language server manager is ready.
    */
   get ready(): Promise<void> {
-    return Private.getLanguageServerManager().ready;
+    return this.languageServerManager.ready;
+  }
+
+  /**
+   * Generate the URI of a virtual document from input
+   *
+   * @param  virtualDocument - the virtual document
+   * @param  language - language of the document
+   */
+  solveUris(virtualDocument: VirtualDocument, language: string): IURIs | undefined {
+    const wsBase = PageConfig.getBaseUrl().replace(/^http/, 'ws');
+    const rootUri = PageConfig.getOption('rootUri');
+    const virtualDocumentsUri = PageConfig.getOption('virtualDocumentsUri');
+
+    const baseUri = virtualDocument.hasLspSupportedFile ? rootUri : virtualDocumentsUri;
+
+    // for now take the best match only
+    const matchingServers = this.languageServerManager.getMatchingServers({
+      language,
+    });
+    const languageServerId = matchingServers.length === 0 ? null : matchingServers[0];
+
+    if (languageServerId === null) {
+      return;
+    }
+
+    // workaround url-parse bug(s) (see https://github.com/jupyter-lsp/jupyterlab-lsp/issues/595)
+    let documentUri = URL.join(baseUri, virtualDocument.uri);
+    if (!documentUri.startsWith('file:///') && documentUri.startsWith('file://')) {
+      documentUri = documentUri.replace('file://', 'file:///');
+      if (
+        documentUri.startsWith('file:///users/') &&
+        baseUri.startsWith('file:///Users/')
+      ) {
+        documentUri = documentUri.replace('file:///users/', 'file:///Users/');
+      }
+    }
+
+    return {
+      base: baseUri,
+      document: documentUri,
+      server: URL.join('ws://jupyter-lsp', language),
+      socket: URL.join(wsBase, 'lsp', 'ws', languageServerId),
+    };
   }
 
   /**
@@ -222,7 +319,7 @@ export class DocumentConnectionManager implements ILSPDocumentConnectionManager 
         settings: parsedSettings,
       };
 
-      Private.updateServerConfiguration(languageServerId, serverSettings);
+      this.updateServerConfiguration(languageServerId, serverSettings);
     }
   }
 
@@ -320,7 +417,7 @@ export class DocumentConnectionManager implements ILSPDocumentConnectionManager 
    * language.
    */
   disconnect(languageId: TLanguageServerId): void {
-    Private.disconnect(languageId);
+    this.disconnect(languageId);
   }
 
   /**
@@ -415,7 +512,7 @@ export class DocumentConnectionManager implements ILSPDocumentConnectionManager 
 
     this.connectDocumentSignals(virtualDocument);
 
-    const uris = DocumentConnectionManager.solveUris(virtualDocument, language);
+    const uris = this.solveUris(virtualDocument, language);
     const matchingServers = this.languageServerManager.getMatchingServers({
       language,
     });
@@ -429,7 +526,7 @@ export class DocumentConnectionManager implements ILSPDocumentConnectionManager 
     if (!uris) {
       return;
     }
-    const connection = await Private.connection(
+    const connection = await this.connection(
       language,
       languageServerId!,
       uris,
@@ -476,151 +573,28 @@ export class DocumentConnectionManager implements ILSPDocumentConnectionManager 
    */
   protected _ignoredLanguages: Set<string>;
 }
-
-export namespace DocumentConnectionManager {
-  export interface IOptions {
-    /**
-     * The language server manager instance.
-     */
-    languageServerManager: ILanguageServerManager;
-  }
-
+export interface IURIs {
   /**
-   * Generate the URI of a virtual document from input
+   * The root URI set by server.
    *
-   * @param  virtualDocument - the virtual document
-   * @param  language - language of the document
    */
-  export function solveUris(
-    virtualDocument: VirtualDocument,
-    language: string,
-  ): IURIs | undefined {
-    const wsBase = PageConfig.getBaseUrl().replace(/^http/, 'ws');
-    const rootUri = PageConfig.getOption('rootUri');
-    const virtualDocumentsUri = PageConfig.getOption('virtualDocumentsUri');
-
-    const baseUri = virtualDocument.hasLspSupportedFile ? rootUri : virtualDocumentsUri;
-
-    // for now take the best match only
-    const matchingServers = Private.getLanguageServerManager().getMatchingServers({
-      language,
-    });
-    const languageServerId = matchingServers.length === 0 ? null : matchingServers[0];
-
-    if (languageServerId === null) {
-      return;
-    }
-
-    // workaround url-parse bug(s) (see https://github.com/jupyter-lsp/jupyterlab-lsp/issues/595)
-    let documentUri = URL.join(baseUri, virtualDocument.uri);
-    if (!documentUri.startsWith('file:///') && documentUri.startsWith('file://')) {
-      documentUri = documentUri.replace('file://', 'file:///');
-      if (
-        documentUri.startsWith('file:///users/') &&
-        baseUri.startsWith('file:///Users/')
-      ) {
-        documentUri = documentUri.replace('file:///users/', 'file:///Users/');
-      }
-    }
-
-    return {
-      base: baseUri,
-      document: documentUri,
-      server: URL.join('ws://jupyter-lsp', language),
-      socket: URL.join(wsBase, 'lsp', 'ws', languageServerId),
-    };
-  }
-
-  export interface IURIs {
-    /**
-     * The root URI set by server.
-     *
-     */
-    base: string;
-
-    /**
-     * The URI to the virtual document.
-     *
-     */
-    document: string;
-
-    /**
-     * Address of websocket endpoint for LSP services.
-     *
-     */
-    server: string;
-
-    /**
-     * Address of websocket endpoint for the language server.
-     *
-     */
-    socket: string;
-  }
-}
-
-/**
- * Namespace primarily for language-keyed cache of LSPConnections
- */
-namespace Private {
-  const _connections: Map<TLanguageServerId, LSPConnection> = new Map();
-  let _languageServerManager: ILanguageServerManager;
-
-  export function getLanguageServerManager(): ILanguageServerManager {
-    return _languageServerManager;
-  }
-  export function setLanguageServerManager(
-    languageServerManager: ILanguageServerManager,
-  ): void {
-    _languageServerManager = languageServerManager;
-  }
-
-  export function disconnect(languageServerId: TLanguageServerId): void {
-    const connection = _connections.get(languageServerId);
-    if (connection) {
-      connection.close();
-      _connections.delete(languageServerId);
-    }
-  }
+  base: string;
 
   /**
-   * Return (or create and initialize) the WebSocket associated with the language
+   * The URI to the virtual document.
+   *
    */
-  export async function connection(
-    language: string,
-    languageServerId: TLanguageServerId,
-    uris: DocumentConnectionManager.IURIs,
-    onCreate: (connection: LSPConnection) => void,
-    capabilities: ClientCapabilities,
-  ): Promise<LSPConnection> {
-    let connection = _connections.get(languageServerId);
-    if (!connection) {
-      const socket = new WebSocket(uris.socket);
+  document: string;
 
-      const connection = new LSPConnection({
-        languageId: language,
-        serverUri: uris.server,
-        rootUri: uris.base,
-        serverIdentifier: languageServerId,
-        capabilities: capabilities,
-      });
+  /**
+   * Address of websocket endpoint for LSP services.
+   *
+   */
+  server: string;
 
-      _connections.set(languageServerId, connection);
-      connection.connect(socket);
-      onCreate(connection);
-    }
-
-    connection = _connections.get(languageServerId)!;
-
-    return connection;
-  }
-
-  export function updateServerConfiguration(
-    languageServerId: TLanguageServerId,
-    settings: protocol.DidChangeConfigurationParams,
-  ): void {
-    const connection = _connections.get(languageServerId);
-    if (connection) {
-      connection.sendConfigurationChange(settings);
-    }
-  }
+  /**
+   * Address of websocket endpoint for the language server.
+   *
+   */
+  socket: string;
 }

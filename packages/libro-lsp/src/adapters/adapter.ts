@@ -2,7 +2,7 @@
 // Distributed under the terms of the Modified BSD License.
 
 import type { NotebookView } from '@difizen/libro-core';
-import { Emitter } from '@difizen/mana-app';
+import { Emitter, injectable } from '@difizen/mana-app';
 import type { Disposable, Event, View } from '@difizen/mana-app';
 import type {} from '@difizen/mana-app';
 import mergeWith from 'lodash.mergewith';
@@ -59,6 +59,7 @@ export interface IAdapterOptions {
  * as this would make the logic of inspections caching impossible to maintain, thus the WidgetAdapter
  * has to handle that, keeping multiple connections and multiple virtual documents.
  */
+@injectable()
 export abstract class WidgetLSPAdapter<T extends NotebookView> implements Disposable {
   // note: it could be using namespace/IOptions pattern,
   // but I do not know how to make it work with the generic type T

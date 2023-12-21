@@ -3,23 +3,24 @@
 // Distributed under the terms of the Modified BSD License.
 
 import type {
-  IRange,
   IPosition as CodeEditorPosition,
+  IRange,
 } from '@difizen/libro-code-editor';
-import { Emitter } from '@difizen/mana-app';
 import type { Disposable, Event } from '@difizen/mana-app';
+import { Emitter } from '@difizen/mana-app';
+import { inject, transient } from '@difizen/mana-app';
 
-import { DocumentConnectionManager } from '../connection-manager.js';
 import type { IForeignCodeExtractor } from '../extractors/types.js';
 import type { LanguageIdentifier } from '../lsp.js';
 import type {
-  Position,
   IEditorPosition,
   IRootPosition,
   ISourcePosition,
   IVirtualPosition,
+  Position,
 } from '../positioning.js';
 import type { Document, ILSPCodeExtractorsManager } from '../tokens.js';
+import { ILSPDocumentConnectionManager } from '../tokens.js';
 import { DefaultMap, untilReady } from '../utils.js';
 import type { IDocumentInfo } from '../ws-connection/types.js';
 
@@ -97,16 +98,26 @@ export function isWithinRange(position: CodeEditorPosition, range: IRange): bool
   );
 }
 
+export const VirtualDocumentInfoFactory = Symbol('VirtualDocumentInfoFactory');
+export type VirtualDocumentInfoFactory = (
+  document: VirtualDocument,
+) => VirtualDocumentInfo;
+export const VirtualDocumentInfoOptions = Symbol('VirtualDocumentInfoOptions');
+export type VirtualDocumentInfoOptions = VirtualDocument;
+
 /**
  * A virtual implementation of IDocumentInfo
  */
+@transient()
 export class VirtualDocumentInfo implements IDocumentInfo {
+  @inject(ILSPDocumentConnectionManager)
+  connectionManager: ILSPDocumentConnectionManager;
   /**
    * Creates an instance of VirtualDocumentInfo.
    * @param document - the virtual document need to
    * be wrapped.
    */
-  constructor(document: VirtualDocument) {
+  constructor(@inject(VirtualDocumentInfoOptions) document: VirtualDocument) {
     this._document = document;
   }
 
@@ -128,7 +139,7 @@ export class VirtualDocumentInfo implements IDocumentInfo {
    * value before using it.
    */
   get uri(): string {
-    const uris = DocumentConnectionManager.solveUris(this._document, this.languageId);
+    const uris = this.connectionManager.solveUris(this._document, this.languageId);
     if (!uris) {
       return '';
     }
@@ -192,6 +203,12 @@ export interface IVirtualDocumentOptions {
   parent?: VirtualDocument;
 }
 
+export const VirtualDocumentFactory = Symbol('VirtualDocumentFactory');
+export type VirtualDocumentFactory = (
+  options: IVirtualDocumentOptions,
+) => VirtualDocument;
+export const IVirtualDocumentOptions = Symbol('IVirtualDocumentOptions');
+
 /**
  *
  * A notebook can hold one or more virtual documents; there is always one,
@@ -213,8 +230,13 @@ export interface IVirtualDocumentOptions {
  * No dependency on editor implementation (such as CodeMirrorEditor)
  * is allowed for VirtualEditor.
  */
+@transient()
 export class VirtualDocument implements Disposable {
-  constructor(options: IVirtualDocumentOptions) {
+  @inject(VirtualDocumentFactory) protected readonly factory: VirtualDocumentFactory;
+  constructor(
+    @inject(IVirtualDocumentOptions) options: IVirtualDocumentOptions,
+    @inject(VirtualDocumentInfoFactory) docInfofactory: VirtualDocumentInfoFactory,
+  ) {
     this.options = options;
     this.path = this.options.path;
     this.fileExtension = options.fileExtension;
@@ -234,6 +256,8 @@ export class VirtualDocument implements Disposable {
     this._remainingLifetime = 6;
 
     this.unusedDocuments = new Set();
+    this.documentInfo = docInfofactory(this);
+
     this.documentInfo = new VirtualDocumentInfo(this);
     this.updateManager = new UpdateManager(this);
     this.updateManager.updateBegan(this._updateBeganSlot, this);
@@ -959,7 +983,7 @@ export class VirtualDocument implements Disposable {
     standalone: boolean,
     fileExtension: string,
   ): VirtualDocument {
-    const document = new VirtualDocument({
+    const document = this.factory({
       ...this.options,
       parent: this,
       standalone: standalone,

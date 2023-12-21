@@ -301,6 +301,8 @@ export class LibroE2Editor implements IEditor {
 
   private resizeObserver: ResizeObserver;
 
+  private editorContentHeight: number;
+
   protected _uuid = '';
   /**
    * The uuid of this editor;
@@ -437,6 +439,8 @@ export class LibroE2Editor implements IEditor {
       rulers: editorConfig.rulers,
       wordWrapColumn: editorConfig.wordWrapColumn,
       'semanticHighlighting.enabled': true,
+      maxTokenizationLineLength: 10000,
+      // wrappingStrategy: 'advanced',
     };
   }
 
@@ -477,7 +481,7 @@ export class LibroE2Editor implements IEditor {
       this.monacoEditor?.onDidChangeModelContent(() => {
         const value = this.monacoEditor?.getValue();
         this.model.value = value ?? '';
-        this.updateEditorSize();
+        // this.updateEditorSize();
       }) ?? Disposable.NONE,
     );
     this.toDispose.push(
@@ -513,18 +517,16 @@ export class LibroE2Editor implements IEditor {
   }
 
   protected inspectResize() {
-    this.resizeObserver = new ResizeObserver((entries) => {
-      entries.forEach((entry) => {
-        const isVisible =
-          entry.contentRect.width !== 0 && entry.contentRect.height !== 0;
-
-        if (isVisible) {
-          this.updateEditorSize();
-        }
-      });
-    });
-
-    this.resizeObserver.observe(this.host);
+    // this.resizeObserver = new ResizeObserver((entries) => {
+    //   entries.forEach((entry) => {
+    //     const isVisible =
+    //       entry.contentRect.width !== 0 && entry.contentRect.height !== 0;
+    //     if (isVisible) {
+    //       this.updateEditorSize();
+    //     }
+    //   });
+    // });
+    // this.resizeObserver.observe(this.host);
   }
 
   protected getEditorNode() {
@@ -534,10 +536,19 @@ export class LibroE2Editor implements IEditor {
   }
 
   protected updateEditorSize() {
-    const contentHeight = this.monacoEditor?.getContentHeight() ?? 20;
-    this.host.style.height = `${contentHeight + 30}px`;
     try {
       this.isLayouting = true;
+      const contentHeight =
+        this.monacoEditor?.getContentHeight() ?? this.defaultLineHeight;
+      if (this.editorContentHeight === contentHeight) {
+        return;
+      } else {
+        this.editorContentHeight = contentHeight;
+      }
+
+      this.host.style.height = `${
+        contentHeight + this.getOption('paddingTop') + this.getOption('paddingBottom')
+      }px`;
       this.monacoEditor?.layout({
         width: this.host.offsetWidth,
         height: contentHeight,
@@ -906,17 +917,24 @@ export class LibroE2Editor implements IEditor {
   get disposed(): boolean {
     return this._isDisposed;
   }
-  dispose() {
+  dispose = () => {
     if (this.disposed) {
       return;
     }
     this.placeholder.dispose();
-    this.toDispose.dispose();
     this.disposeResizeObserver();
-    this.lspContribution.beforeDestory();
+    this.disposeLSP();
+    this.toDispose.dispose();
     this._isDisposed = true;
+  };
+
+  disposeLSP() {
+    this.lspContribution.disposeLanguageFeature();
   }
-  protected disposeResizeObserver = () => {
-    this.resizeObserver.disconnect();
+
+  disposeResizeObserver = () => {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
   };
 }
