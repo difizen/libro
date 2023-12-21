@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.4
+
+### Patch Changes
+
+- Fix issues with lsp and virtual list.
+- Updated dependencies
+  - @difizen/libro-cofine-editor-core@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes

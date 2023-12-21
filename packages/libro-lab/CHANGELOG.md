@@ -1,5 +1,16 @@
 # @difizen/libro-lab
 
+## 0.1.4
+
+### Patch Changes
+
+- Fix issues with lsp and virtual list.
+- Updated dependencies
+  - @difizen/libro-jupyter@0.1.4
+  - @difizen/libro-toc@0.1.4
+  - @difizen/libro-prompt-cell@0.1.4
+  - @difizen/libro-terminal@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes

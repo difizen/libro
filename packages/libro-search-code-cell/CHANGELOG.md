@@ -1,5 +1,17 @@
 # @difizen/libro-search-codemirror-cell
 
+## 0.1.4
+
+### Patch Changes
+
+- Fix issues with lsp and virtual list.
+- Updated dependencies
+  - @difizen/libro-code-editor@0.1.4
+  - @difizen/libro-code-cell@0.1.4
+  - @difizen/libro-core@0.1.4
+  - @difizen/libro-common@0.1.4
+  - @difizen/libro-search@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes
