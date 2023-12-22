@@ -11,8 +11,8 @@ import type { VisibilityMap } from './layout-service.js';
 import { LayoutService } from './layout-service.js';
 import { LibroLabLayoutSlots } from './protocol.js';
 
-export const LibroLabLayoutContainerComponent = forwardRef(
-  function LibroLabLayoutContainerComponent() {
+export const LibroLabLayoutComponent = forwardRef(
+  function LibroLabLayoutComponent() {
     const layoutService = useInject(LayoutService);
 
     return (
@@ -46,7 +46,7 @@ export const LibroLabLayoutContainerComponent = forwardRef(
 @singleton()
 @view('libro-lab-layout')
 export class LibroLabLayoutView extends BaseView {
-  override view = LibroLabLayoutContainerComponent;
+  override view = LibroLabLayoutComponent;
 
   @inject(LayoutService) layoutService: LayoutService;
 
