@@ -1,5 +1,19 @@
 # @difizen/libro-lab
 
+## 0.1.5
+
+### Patch Changes
+
+- 1. Support image preview.
+  2. Export the definition and implementation of the libro lab module.
+- Updated dependencies
+  - @difizen/libro-core@0.1.5
+  - @difizen/libro-jupyter@0.1.5
+  - @difizen/libro-kernel@0.1.5
+  - @difizen/libro-prompt-cell@0.1.5
+  - @difizen/libro-terminal@0.1.5
+  - @difizen/libro-toc@0.1.5
+
 ## 0.1.4
 
 ### Patch Changes
