@@ -12,6 +12,7 @@ import {
 
 import { LabConfigAppContribution } from './config/config-contribution.js';
 import { GithubLinkView } from './github-link/index.js';
+import { ImageViewerModule } from './image-viewer/index.js';
 import { KernelManagerView } from './kernel-manager/index.js';
 import { LibroLabApp } from './lab-app.js';
 import { ContentBottomTabView } from './layout/content-bottom-tab-view.js';
@@ -98,4 +99,5 @@ export const LibroLabModule = ManaModule.create()
     LibroLabTocModule,
     LibroPromptCellModule,
     TerminalModule,
+    ImageViewerModule,
   );
