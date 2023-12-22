@@ -46,19 +46,22 @@
     "lint:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/mana-app": "latest",
-    "@difizen/mana-react": "latest",
+    "@ant-design/icons": "^5.1.0",
+    "@difizen/libro-core": "^0.1.4",
     "@difizen/libro-jupyter": "^0.1.4",
-    "@difizen/libro-toc": "^0.1.4",
+    "@difizen/libro-kernel": "^0.1.4",
     "@difizen/libro-prompt-cell": "^0.1.4",
     "@difizen/libro-terminal": "^0.1.4",
-    "@ant-design/icons": "^5.1.0",
+    "@difizen/libro-toc": "^0.1.4",
+    "@difizen/mana-app": "latest",
+    "@difizen/mana-react": "latest",
     "classnames": "^2.3.2",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "viewerjs": "^1.11.6"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "antd": "^5.8.6"
+    "antd": "^5.8.6",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.25",
