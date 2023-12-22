@@ -1,5 +1,18 @@
 # @difizen/libro-search-codemirror-cell
 
+## 0.1.5
+
+### Patch Changes
+
+- 1. Support image preview.
+  2. Export the definition and implementation of the libro lab module.
+- Updated dependencies
+  - @difizen/libro-code-cell@0.1.5
+  - @difizen/libro-code-editor@0.1.5
+  - @difizen/libro-common@0.1.5
+  - @difizen/libro-core@0.1.5
+  - @difizen/libro-search@0.1.5
+
 ## 0.1.4
 
 ### Patch Changes
