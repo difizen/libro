@@ -11,6 +11,7 @@ import {
 } from '@difizen/mana-app';
 
 import { LabConfigAppContribution } from './config/config-contribution.js';
+import { CodeEditorViewerModule } from './editor-viewer/index.js';
 import { GithubLinkView } from './github-link/index.js';
 import { ImageViewerModule } from './image-viewer/index.js';
 import { KernelManagerView } from './kernel-manager/index.js';
@@ -100,4 +101,5 @@ export const LibroLabModule = ManaModule.create()
     LibroPromptCellModule,
     TerminalModule,
     ImageViewerModule,
+    CodeEditorViewerModule,
   );
