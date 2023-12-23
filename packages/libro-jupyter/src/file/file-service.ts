@@ -55,6 +55,8 @@ export class JupyterFileService extends FileService {
   async write(filePath: string, content: string): Promise<string | undefined> {
     await this.contentsManager.save(filePath, {
       content,
+      type: 'file',
+      format: 'text',
     });
     return filePath;
   }
