@@ -1,5 +1,19 @@
 # @difizen/libro-lab
 
+## 0.1.6
+
+### Patch Changes
+
+- Support code file editing.
+- Updated dependencies
+  - @difizen/libro-cofine-editor-core@0.1.6
+  - @difizen/libro-core@0.1.6
+  - @difizen/libro-jupyter@0.1.6
+  - @difizen/libro-kernel@0.1.6
+  - @difizen/libro-prompt-cell@0.1.6
+  - @difizen/libro-terminal@0.1.6
+  - @difizen/libro-toc@0.1.6
+
 ## 0.1.5
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @difizen/libro-output
 
+## 0.1.6
+
+### Patch Changes
+
+- Support code file editing.
+- Updated dependencies
+  - @difizen/libro-common@0.1.6
+  - @difizen/libro-core@0.1.6
+  - @difizen/libro-rendermime@0.1.6
+
 ## 0.1.5
 
 ### Patch Changes

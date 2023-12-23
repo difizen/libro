@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.6
+
+### Patch Changes
+
+- Support code file editing.
+- Updated dependencies
+  - @difizen/libro-cofine-editor-contribution@0.1.6
+
 ## 0.1.5
 
 ### Patch Changes

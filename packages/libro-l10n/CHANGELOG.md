@@ -1,5 +1,11 @@
 # @difizen/libro-l10n
 
+## 0.1.6
+
+### Patch Changes
+
+- Support code file editing.
+
 ## 0.1.5
 
 ### Patch Changes

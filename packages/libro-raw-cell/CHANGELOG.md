@@ -1,5 +1,15 @@
 # @difizen/libro-codemirror-raw-cell
 
+## 0.1.6
+
+### Patch Changes
+
+- Support code file editing.
+- Updated dependencies
+  - @difizen/libro-code-editor@0.1.6
+  - @difizen/libro-common@0.1.6
+  - @difizen/libro-core@0.1.6
+
 ## 0.1.5
 
 ### Patch Changes
