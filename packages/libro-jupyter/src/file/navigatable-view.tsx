@@ -115,6 +115,8 @@ export class LibroNavigatableView
       DocumentCommands['Save'].id,
       undefined,
       this.libroView,
+      undefined,
+      { reason: 'autoSave' },
     );
   };
 
