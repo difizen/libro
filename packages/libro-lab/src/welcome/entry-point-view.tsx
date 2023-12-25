@@ -7,6 +7,7 @@ import {
   FileView,
 } from '@difizen/libro-jupyter';
 import {
+  CommandRegistry,
   ModalService,
   singleton,
   useInject,
@@ -18,12 +19,14 @@ import { Col, Row } from 'antd';
 import { forwardRef, useEffect, useState } from 'react';
 
 import { KeybindIcon, PreferenceIcon, TerminalIcon } from '../common/icon.js';
+import { MenuCommands } from '../menu/index.js';
 
 import './index.less';
 
 export const EntryPointComponent = forwardRef(function EntryPointComponent() {
   const modalService = useInject(ModalService);
   const viewManager = useInject(ViewManager);
+  const commandRegistry = useInject(CommandRegistry);
   const [fileView, setFileView] = useState<FileView>();
 
   useEffect(() => {
@@ -117,7 +120,12 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
           className="gutter-row"
           style={{ paddingLeft: 'unset', paddingRight: '32px' }}
         >
-          <div className="libro-lab-entry-point-item">
+          <div
+            className="libro-lab-entry-point-item"
+            onClick={() => {
+              commandRegistry.executeCommand(MenuCommands.OpenTerminal.id);
+            }}
+          >
             <TerminalIcon />
             <span className="libro-lab-entry-point-item-text">Terminal</span>
           </div>
