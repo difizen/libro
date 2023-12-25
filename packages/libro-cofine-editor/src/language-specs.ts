@@ -87,13 +87,13 @@ export class LibroLanguageSpecs implements LanguageSpecContribution {
       name: 'Markdown',
       language: 'markdown',
       mime: 'text/x-markdown',
-      ext: ['md', 'markdown', 'mkd'],
+      ext: ['.md', '.markdown', '.mkd'],
     });
     register.registerLanguageSpec({
       name: 'Prompt',
-      language: 'markdown',
+      language: 'prompt',
       mime: 'application/vnd.libro.prompt+json',
-      ext: ['md', 'markdown', 'mkd'],
+      ext: [],
     });
   };
 }
