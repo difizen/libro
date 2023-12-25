@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-lab",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "",
   "keywords": [
     "libro",
@@ -47,13 +47,13 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.0",
-    "@difizen/libro-core": "^0.1.6",
-    "@difizen/libro-jupyter": "^0.1.6",
-    "@difizen/libro-kernel": "^0.1.6",
-    "@difizen/libro-prompt-cell": "^0.1.6",
-    "@difizen/libro-terminal": "^0.1.6",
-    "@difizen/libro-toc": "^0.1.6",
-    "@difizen/libro-cofine-editor-core": "^0.1.6",
+    "@difizen/libro-core": "^0.1.7",
+    "@difizen/libro-jupyter": "^0.1.7",
+    "@difizen/libro-kernel": "^0.1.7",
+    "@difizen/libro-prompt-cell": "^0.1.7",
+    "@difizen/libro-terminal": "^0.1.7",
+    "@difizen/libro-toc": "^0.1.7",
+    "@difizen/libro-cofine-editor-core": "^0.1.7",
     "@difizen/mana-app": "latest",
     "@difizen/mana-react": "latest",
     "classnames": "^2.3.2",

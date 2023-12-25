@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.1.7
+
+### Patch Changes
+
+- Clean lab modules.
+- Updated dependencies
+  - @difizen/libro-core@0.1.7
+  - @difizen/libro-jupyter@0.1.7
+  - @difizen/libro-lab@0.1.7
+  - @difizen/libro-terminal@0.1.7
+
 ## 0.1.6
 
 ### Patch Changes

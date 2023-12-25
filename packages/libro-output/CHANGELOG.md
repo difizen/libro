@@ -1,5 +1,15 @@
 # @difizen/libro-output
 
+## 0.1.7
+
+### Patch Changes
+
+- Clean lab modules.
+- Updated dependencies
+  - @difizen/libro-common@0.1.7
+  - @difizen/libro-core@0.1.7
+  - @difizen/libro-rendermime@0.1.7
+
 ## 0.1.6
 
 ### Patch Changes

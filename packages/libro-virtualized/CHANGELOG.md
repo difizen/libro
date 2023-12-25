@@ -1,5 +1,11 @@
 # @difizen/libro-code-editor
 
+## 0.1.7
+
+### Patch Changes
+
+- Clean lab modules.
+
 ## 0.1.6
 
 ### Patch Changes
