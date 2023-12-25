@@ -24,6 +24,7 @@ import {
 } from './layout/index.js';
 import { SaveableTabView } from './layout/saveable-tab-view.js';
 import './index.less';
+import { LibroLabSideTabView } from './layout/side-tab-view.js';
 import { LibroLabHeaderMenuModule } from './menu/module.js';
 import { LibroLabTocModule } from './toc/module.js';
 import { EntryPointView } from './welcome/entry-point-view.js';
@@ -35,6 +36,7 @@ export const LibroLabModule = ManaModule.create()
     LibroLabLayoutView,
     GithubLinkView,
     LabConfigAppContribution,
+    LibroLabSideTabView,
     createViewPreference({
       view: GithubLinkView,
       slot: HeaderArea.right,
@@ -66,7 +68,7 @@ export const LibroLabModule = ManaModule.create()
       slot: LibroLabLayoutSlots.contentBottom,
     }),
     createSlotPreference({
-      view: SideTabView,
+      view: LibroLabSideTabView,
       slot: LibroLabLayoutSlots.navigator,
       options: {
         sort: true,
