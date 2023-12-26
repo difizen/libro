@@ -133,7 +133,7 @@ export class CodeEditorViewer extends BaseView implements NavigatableView, Savea
        * language ia an uri:
        */
       theme: 'libro-light',
-      language: this.languageSpec.language,
+      language: this.languageSpec.language || 'markdown',
       uri,
       value: content,
     };
