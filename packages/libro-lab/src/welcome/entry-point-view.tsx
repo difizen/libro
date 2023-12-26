@@ -18,7 +18,7 @@ import { BaseView } from '@difizen/mana-app';
 import { Col, Row } from 'antd';
 import { forwardRef, useEffect, useState } from 'react';
 
-import { KeybindIcon, PreferenceIcon, TerminalIcon } from '../common/icon.js';
+import { TerminalIcon } from '../common/icon.js';
 import { MenuCommands } from '../menu/index.js';
 
 import './index.less';
@@ -145,7 +145,7 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
           </div>
         </Col>
       </Row> */}
-      <div className="libro-lab-entry-point-item-title">系统设置</div>
+      {/* <div className="libro-lab-entry-point-item-title">系统设置</div>
       <Row>
         <Col
           className="gutter-row"
@@ -165,7 +165,7 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
             <span className="libro-lab-entry-point-item-config-text">快捷键设置</span>
           </div>
         </Col>
-      </Row>
+      </Row> */}
     </div>
   );
 });
