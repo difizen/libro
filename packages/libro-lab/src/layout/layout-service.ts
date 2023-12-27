@@ -1,4 +1,6 @@
+import { LibroNavigatableView, LibroService } from '@difizen/libro-jupyter';
 import type { View, ViewOpenHandlerOptions } from '@difizen/mana-app';
+import { observable } from '@difizen/mana-app';
 import {
   DefaultSlotView,
   inject,
@@ -14,7 +16,17 @@ export type VisibilityMap = Record<LibroLabLayoutSlotsType, boolean>;
 
 @singleton()
 export class LayoutService {
-  @inject(SlotViewManager) protected readonly slotViewManager: SlotViewManager;
+  protected readonly slotViewManager: SlotViewManager;
+  protected readonly libroService: LibroService;
+
+  constructor(
+    @inject(SlotViewManager) slotViewManager: SlotViewManager,
+    @inject(LibroService) libroService: LibroService,
+  ) {
+    this.slotViewManager = slotViewManager;
+    this.libroService = libroService;
+    this.onOpenSlotActiveChange();
+  }
 
   @prop()
   serverSatus: StatusType = 'loading';
@@ -61,5 +73,25 @@ export class LayoutService {
       }
     }
     return undefined;
+  }
+
+  async onOpenSlotActiveChange() {
+    if (this.isAreaVisible(LibroLabLayoutSlots.content)) {
+      const slotView = await this.slotViewManager.getOrCreateSlotView(
+        LibroLabLayoutSlots.content,
+      );
+      observable(slotView);
+      if (slotView instanceof DefaultSlotView) {
+        slotView.onActiveChange(() => {
+          const active = slotView.active;
+          if (active instanceof LibroNavigatableView) {
+            active.libroView?.focus();
+            this.libroService.active = active.libroView;
+          } else {
+            this.libroService.active = undefined;
+          }
+        });
+      }
+    }
   }
 }
