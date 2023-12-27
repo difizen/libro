@@ -247,7 +247,7 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
         //TODO: 保存
       },
     });
-    commands.registerCommand(MenuCommands.UndoCellAction, {
+    commands.registerCommandWithContext(MenuCommands.UndoCellAction, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -257,8 +257,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.RedoCellAction, {
+    commands.registerCommandWithContext(MenuCommands.RedoCellAction, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -268,8 +275,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.CutCell, {
+    commands.registerCommandWithContext(MenuCommands.CutCell, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -279,8 +293,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.CopyCell, {
+    commands.registerCommandWithContext(MenuCommands.CopyCell, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -290,8 +311,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.DeleteCell, {
+    commands.registerCommandWithContext(MenuCommands.DeleteCell, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -301,8 +329,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.PasteCellBelow, {
+    commands.registerCommandWithContext(MenuCommands.PasteCellBelow, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -312,8 +347,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.PasteCellAbove, {
+    commands.registerCommandWithContext(MenuCommands.PasteCellAbove, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -323,8 +365,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.PasteAndReplaceCell, {
+    commands.registerCommandWithContext(MenuCommands.PasteAndReplaceCell, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -334,8 +383,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.SelectAll, {
+    commands.registerCommandWithContext(MenuCommands.SelectAll, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -345,18 +401,25 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
     // commands.registerCommand(MenuCommands.DeselectAll, {
     //   execute: async () => {
-    //     if (this.libroService.active)
+    //     if (libro)
     //       this.commandRegistry.executeCommand(
     //         NotebookCommands.DeselectAll.id,
-    //         this.libroService.active.activeCell,
-    //         this.libroService.active,
+    //         libro.activeCell,
+    //         libro,
     //       );
     //   },
     // });
-    commands.registerCommand(MenuCommands.MoveCellUp, {
+    commands.registerCommandWithContext(MenuCommands.MoveCellUp, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -366,8 +429,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.MoveCellDown, {
+    commands.registerCommandWithContext(MenuCommands.MoveCellDown, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -377,8 +447,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.SplitCellAntCursor, {
+    commands.registerCommandWithContext(MenuCommands.SplitCellAntCursor, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -388,8 +465,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.MergeCells, {
+    commands.registerCommandWithContext(MenuCommands.MergeCells, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -399,8 +483,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.MergeCellAbove, {
+    commands.registerCommandWithContext(MenuCommands.MergeCellAbove, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -410,8 +501,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.MergeCellBelow, {
+    commands.registerCommandWithContext(MenuCommands.MergeCellBelow, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -421,8 +519,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.ClearCellOutput, {
+    commands.registerCommandWithContext(MenuCommands.ClearCellOutput, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -432,8 +537,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.ClearAllCellOutput, {
+    commands.registerCommandWithContext(MenuCommands.ClearAllCellOutput, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -443,8 +555,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.HideOrShowCellCode, {
+    commands.registerCommandWithContext(MenuCommands.HideOrShowCellCode, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -454,8 +573,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.HideOrShowOutputs, {
+    commands.registerCommandWithContext(MenuCommands.HideOrShowOutputs, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -465,8 +591,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.EnableOutputScrolling, {
+    commands.registerCommandWithContext(MenuCommands.EnableOutputScrolling, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -476,8 +609,15 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
           );
         }
       },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
+      },
     });
-    commands.registerCommand(MenuCommands.DisableOutputScrolling, {
+    commands.registerCommandWithContext(MenuCommands.DisableOutputScrolling, this, {
       execute: async () => {
         if (this.libroService.active) {
           this.commandRegistry.executeCommand(
@@ -486,6 +626,13 @@ export class HeaderMenu implements MenuContribution, CommandContribution {
             this.libroService.active,
           );
         }
+      },
+      isEnabled: (ctx) => {
+        const libro = ctx.libroService.active;
+        if (libro && libro instanceof LibroJupyterView) {
+          return true;
+        }
+        return false;
       },
     });
     commands.registerCommandWithContext(MenuCommands.RunCell, this, {
