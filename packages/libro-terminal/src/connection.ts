@@ -1,6 +1,5 @@
 import type { JSONPrimitive } from '@difizen/libro-common';
 import { URL } from '@difizen/libro-common';
-import type { ISettings } from '@difizen/libro-kernel';
 import { ServerConnection } from '@difizen/libro-kernel';
 import type { Disposable, Disposed, Event } from '@difizen/mana-app';
 import { transient } from '@difizen/mana-app';
@@ -33,17 +32,14 @@ export class TerminalConnection implements Disposable, Disposed {
   protected _reconnectAttempt = 0;
   protected _pendingMessages: TerminalMessage[] = [];
   @inject(TerminalRestAPI) terminalRestAPI: TerminalRestAPI;
+  @inject(ServerConnection) serverConnection: ServerConnection;
 
   disposed = false;
 
   /**
    * Construct a new terminal session.
    */
-  constructor(
-    @inject(TerminalOption) options: TerminalOption & { name: string },
-    @inject(ServerConnection) serverConnection: ServerConnection,
-  ) {
-    this.serverSettings = serverConnection.settings;
+  constructor(@inject(TerminalOption) options: TerminalOption & { name: string }) {
     this._name = options.name;
     this._createSocket();
   }
@@ -76,7 +72,9 @@ export class TerminalConnection implements Disposable, Disposed {
   /**
    * The server settings for the session.
    */
-  readonly serverSettings: ISettings;
+  get serverSettings() {
+    return this.serverConnection.settings;
+  }
 
   /**
    * Dispose of the resources held by the session.

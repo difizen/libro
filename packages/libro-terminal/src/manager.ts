@@ -2,7 +2,6 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { Poll } from '@difizen/libro-common';
-import type { ISettings } from '@difizen/libro-kernel';
 import { NetworkError, ServerConnection } from '@difizen/libro-kernel';
 import type { Disposable, Disposed, Event } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
@@ -34,12 +33,12 @@ export class TerminalManager implements Disposable, Disposed {
   // @inject(ServerConnection) serverConnection: ServerConnection;
   @inject(TerminalConnectionFactory)
   terminalConnectionFactory: TerminalConnectionFactory;
+  @inject(ServerConnection) serverConnection: ServerConnection;
+
   /**
    * Construct a new terminal manager.
    */
-  constructor(@inject(ServerConnection) serverConnection: ServerConnection) {
-    this.serverSettings = serverConnection.settings;
-
+  constructor() {
     //
     // Start polling with exponential backoff.
     this._pollModels = new Poll({
@@ -65,7 +64,9 @@ export class TerminalManager implements Disposable, Disposed {
   /**
    * The server settings of the manager.
    */
-  readonly serverSettings: ISettings;
+  get serverSettings() {
+    return this.serverConnection.settings;
+  }
 
   /**
    * Test whether the manager is ready.
