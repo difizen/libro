@@ -1,5 +1,16 @@
 # @difizen/libro-codemirror-raw-cell
 
+## 0.1.8
+
+### Patch Changes
+
+- 1. Support json and other file formats.
+  2. Dynamic shortcut keys and menus when switching tabs.
+- Updated dependencies
+  - @difizen/libro-code-editor@0.1.8
+  - @difizen/libro-common@0.1.8
+  - @difizen/libro-core@0.1.8
+
 ## 0.1.7
 
 ### Patch Changes
