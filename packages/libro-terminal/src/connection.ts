@@ -32,15 +32,19 @@ export class TerminalConnection implements Disposable, Disposed {
   protected _reconnectAttempt = 0;
   protected _pendingMessages: TerminalMessage[] = [];
   @inject(TerminalRestAPI) terminalRestAPI: TerminalRestAPI;
-  @inject(ServerConnection) serverConnection: ServerConnection;
+  serverConnection: ServerConnection;
 
   disposed = false;
 
   /**
    * Construct a new terminal session.
    */
-  constructor(@inject(TerminalOption) options: TerminalOption & { name: string }) {
+  constructor(
+    @inject(TerminalOption) options: TerminalOption & { name: string },
+    @inject(ServerConnection) serverConnection: ServerConnection,
+  ) {
     this._name = options.name;
+    this.serverConnection = serverConnection;
     this._createSocket();
   }
 

@@ -33,12 +33,13 @@ export class TerminalManager implements Disposable, Disposed {
   // @inject(ServerConnection) serverConnection: ServerConnection;
   @inject(TerminalConnectionFactory)
   terminalConnectionFactory: TerminalConnectionFactory;
-  @inject(ServerConnection) serverConnection: ServerConnection;
+  serverConnection: ServerConnection;
 
   /**
    * Construct a new terminal manager.
    */
-  constructor() {
+  constructor(@inject(ServerConnection) serverConnection: ServerConnection) {
+    this.serverConnection = serverConnection;
     //
     // Start polling with exponential backoff.
     this._pollModels = new Poll({
