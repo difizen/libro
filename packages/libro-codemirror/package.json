@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-codemirror",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "",
   "keywords": [
     "libro",
@@ -57,10 +57,10 @@
     "@codemirror/search": "^6.0.0",
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.2.2",
-    "@difizen/libro-code-editor": "^0.1.8",
-    "@difizen/libro-common": "^0.1.8",
-    "@difizen/libro-rendermime": "^0.1.8",
-    "@difizen/libro-lsp": "^0.1.8",
+    "@difizen/libro-code-editor": "^0.1.9",
+    "@difizen/libro-common": "^0.1.9",
+    "@difizen/libro-rendermime": "^0.1.9",
+    "@difizen/libro-lsp": "^0.1.9",
     "@difizen/mana-app": "latest",
     "@lezer/common": "^1.1.0",
     "@lezer/highlight": "^1.1.4",

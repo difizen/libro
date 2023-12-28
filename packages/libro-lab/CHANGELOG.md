@@ -1,5 +1,19 @@
 # @difizen/libro-lab
 
+## 0.1.9
+
+### Patch Changes
+
+- ad803e2: 1. use codeEditorViewer as the last resort file viewer. 2. fix terminal
+- Updated dependencies [ad803e2]
+  - @difizen/libro-terminal@0.1.9
+  - @difizen/libro-cofine-editor-core@0.1.9
+  - @difizen/libro-core@0.1.9
+  - @difizen/libro-jupyter@0.1.9
+  - @difizen/libro-kernel@0.1.9
+  - @difizen/libro-prompt-cell@0.1.9
+  - @difizen/libro-toc@0.1.9
+
 ## 0.1.8
 
 ### Patch Changes
