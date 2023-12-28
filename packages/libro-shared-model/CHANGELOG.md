@@ -1,5 +1,13 @@
 # @difizen/libro-shared-model
 
+## 0.1.9
+
+### Patch Changes
+
+- ad803e2: 1. use codeEditorViewer as the last resort file viewer. 2. fix terminal
+- Updated dependencies [ad803e2]
+  - @difizen/libro-common@0.1.9
+
 ## 0.1.8
 
 ### Patch Changes
