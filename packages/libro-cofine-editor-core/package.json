@@ -44,7 +44,7 @@
     "lint": ": Note: lint task is delegated to lint:* scripts",
     "lint:eslint": "eslint src",
     "build:worker": "webpack --config ./scripts/webpack.worker.cjs",
-    "lint:tsc": "tsc --noEmit"
+    "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
     "@difizen/libro-cofine-editor-contribution": "^0.1.8",

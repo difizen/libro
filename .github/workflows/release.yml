@@ -1,0 +1,51 @@
+# https://github.com/sveltejs/kit/blob/32afba695088b946aefe96da75b36de9b0667fbe/.github/workflows/release.yml
+name: 'Release'
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  changesets:
+    # prevents this action from running on forks
+    if: github.repository == 'difizen/libro'
+
+    name: Changesets
+    uses: difizen/actions/.github/workflows/release-changesets.yml@main
+    secrets:
+      BOT_APP_ID: ${{ secrets.BOT_APP_ID }}
+      BOT_PRIVATE_KEY: ${{ secrets.BOT_PRIVATE_KEY }}
+
+    permissions:
+      pull-requests: write
+      contents: write
+
+  ci:
+    needs: [changesets]
+    if: |
+      needs.changesets.outputs.should-release == 'true'
+
+    name: Prerelease CI
+    uses: ./.github/workflows/ci.yml
+
+    permissions:
+      contents: read
+      actions: read
+
+  publish:
+    needs: [ci]
+    if: |
+      needs.ci.result == 'success'
+
+    name: Publish
+    uses: difizen/actions/.github/workflows/release-publish.yml@main
+
+    with:
+      node-version: '18'
+      python-version: '3.8'
+
+    permissions:
+      contents: write
+
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

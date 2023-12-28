@@ -43,7 +43,7 @@
     "coverage:jest": "jest --coverage",
     "lint": ": Note: lint task is delegated to lint:* scripts",
     "lint:eslint": "eslint src",
-    "lint:tsc": "tsc --noEmit"
+    "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
     "@difizen/mana-app": "latest",

@@ -7,65 +7,17 @@ on:
       - edited
       - reopened
       - synchronize
-  push:
-    branches:
-      - main
-
-permissions:
-  contents: 'read'
-  actions: 'read'
+  workflow_call:
 
 jobs:
-  ci:
-    runs-on: ubuntu-latest
-
+  ci-javascript:
+    name: 'CI: JavaScript'
+    uses: difizen/actions/.github/workflows/ci-javascript.yml@main
+    with:
+      node-version: ${{ matrix.node-version }}
+      python-version: ${{ matrix.python-version }}
     strategy:
       fail-fast: false
       matrix:
-        node-version: ['16.20.x']
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - uses: nrwl/nx-set-shas@v3
-        # https://nx.dev/recipes/ci/monorepo-ci-github-actions
-        # https://github.com/marketplace/actions/nx-set-shas
-        with:
-          main-branch-name: 'main'
-
-      - name: Use PNPM
-        uses: pnpm/action-setup@v2
-        with:
-          version: ^8.6.0
-          run_install: false
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Cache Nx output
-        uses: actions/cache@v3
-        with:
-          path: node_modules/.cache/nx
-          key: |
-            cache-nx
-            -${{ runner.os }}
-            -${{ matrix.node-version }}
-            -${{ github.ref }}
-
-      - name: Setup projects
-        run: pnpm bootstrap
-
-      - name: Run linters and tests
-        run: pnpm run ci:affected
-        env:
-          JEST_MAX_WORKER: ${{ env.JEST_MAX_WORKER }}
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        node-version: ['16']
+        python-version: ['3.8']
