@@ -111,7 +111,7 @@ export class CodeEditorViewer extends BaseView implements NavigatableView, Savea
       return;
     }
     const content = await getOrigin(this.fileService).read(this.filePath);
-    if (typeof content !== 'string' || !this.languageSpec) {
+    if (typeof content !== 'string') {
       return;
     }
     if (!this.codeRef || !this.codeRef.current) {
@@ -119,13 +119,13 @@ export class CodeEditorViewer extends BaseView implements NavigatableView, Savea
     }
 
     await MonacoEnvironment.init();
-    await this.languageSpec.beforeEditorInit?.();
+    await this.languageSpec?.beforeEditorInit?.();
     const editorPorvider =
       MonacoEnvironment.container.get<EditorProvider>(EditorProvider);
 
     const uri = MonacoUri.from({
       scheme: LibroLabE2URIScheme,
-      path: `${this.filePath}${this.languageSpec.ext[0]}`,
+      path: `${this.filePath}${this.languageSpec?.ext[0]}`,
     });
 
     const options: MonacoEditorOptions = {
@@ -133,7 +133,7 @@ export class CodeEditorViewer extends BaseView implements NavigatableView, Savea
        * language ia an uri:
        */
       theme: 'libro-light',
-      language: this.languageSpec.language || 'markdown',
+      language: this.languageSpec?.language || 'markdown',
       uri,
       value: content,
     };
