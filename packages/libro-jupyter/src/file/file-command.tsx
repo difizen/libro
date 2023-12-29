@@ -136,6 +136,11 @@ export class FileCommandContribution
       order: 'd',
     });
     menu.registerMenuAction(FileTreeContextMenuPath, {
+      command: FileCommands.REMOVE.id,
+      order: 'd',
+      ...FileCommands.REMOVE,
+    });
+    menu.registerMenuAction(FileTreeContextMenuPath, {
       id: FileCommands.RENAME.id,
       command: FileCommands.RENAME.id,
       order: 'e',

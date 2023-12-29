@@ -16,7 +16,7 @@ export class CodeEditorViewerOpenHandler extends NavigatableViewOpenHandler<Code
   canHandle(uri: URI, options?: ViewOpenHandlerOptions) {
     if (
       uri.scheme === 'file' &&
-      !['.tar', '.zip', '.7z', '.gz', 'rar'].includes(uri.path.ext)
+      !['.tar', '.zip', '.7z', '.gz', '.rar', '.whl'].includes(uri.path.ext)
     ) {
       return 100;
     }
