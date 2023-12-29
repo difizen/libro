@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.10
+
+### Patch Changes
+
+- ccdd12d: 1. add remove action in file tree menu
+- Updated dependencies [ccdd12d]
+  - @difizen/libro-cofine-editor-contribution@0.1.10
+
 ## 0.1.9
 
 ### Patch Changes

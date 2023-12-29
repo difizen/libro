@@ -1,5 +1,15 @@
 # @difizen/libro-widget
 
+## 0.1.10
+
+### Patch Changes
+
+- ccdd12d: 1. add remove action in file tree menu
+- Updated dependencies [ccdd12d]
+  - @difizen/libro-common@0.1.10
+  - @difizen/libro-core@0.1.10
+  - @difizen/libro-kernel@0.1.10
+
 ## 0.1.9
 
 ### Patch Changes
