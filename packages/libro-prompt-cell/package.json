@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-prompt-cell",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "",
   "keywords": [
     "libro",
@@ -45,12 +45,12 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-code-editor": "^0.1.9",
-    "@difizen/libro-jupyter": "^0.1.9",
-    "@difizen/libro-rendermime": "^0.1.9",
-    "@difizen/libro-codemirror": "^0.1.9",
-    "@difizen/libro-common": "^0.1.9",
-    "@difizen/libro-core": "^0.1.9",
+    "@difizen/libro-code-editor": "^0.1.10",
+    "@difizen/libro-jupyter": "^0.1.10",
+    "@difizen/libro-rendermime": "^0.1.10",
+    "@difizen/libro-codemirror": "^0.1.10",
+    "@difizen/libro-common": "^0.1.10",
+    "@difizen/libro-core": "^0.1.10",
     "@difizen/mana-app": "latest",
     "highlight.js": "^11.8.0",
     "marked": "^5.1.1",

@@ -1,5 +1,11 @@
 # @difizen/libro-common
 
+## 0.1.10
+
+### Patch Changes
+
+- ccdd12d: 1. add remove action in file tree menu
+
 ## 0.1.9
 
 ### Patch Changes
