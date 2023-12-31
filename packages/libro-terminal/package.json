@@ -47,22 +47,24 @@
     "@difizen/libro-core": "^0.1.10",
     "@difizen/libro-common": "^0.1.10",
     "@difizen/libro-kernel": "^0.1.10",
-    "@difizen/mana-app": "latest",
     "@ant-design/icons": "^5.1.0",
+    "@difizen/mana-app": "latest",
+    "lodash.throttle": "^4.1.1",
+    "uuid": "^9.0.0",
     "xterm-addon-search": "^0.13.0",
     "xterm": "~5.1.0",
     "xterm-addon-canvas": "~0.3.0",
     "xterm-addon-fit": "~0.7.0",
     "xterm-addon-web-links": "~0.8.0",
-    "xterm-addon-webgl": "~0.14.0",
-    "@types/lodash.throttle": "^4.1.1",
-    "lodash.throttle": "^4.1.1"
+    "xterm-addon-webgl": "~0.14.0"
   },
   "peerDependencies": {
     "antd": "^5.8.6",
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.25"
+    "@types/lodash.throttle": "^4.1.1",
+    "@types/react": "^18.2.25",
+    "@types/uuid": "^9.0.2"
   }
 }

@@ -1,9 +1,10 @@
 import {
   LibroService,
-  ServerConnection,
   LibroJupyterConfiguration,
+  ServerConnection,
   ServerManager,
 } from '@difizen/libro-jupyter';
+import { terminalDefaultSlot } from '@difizen/libro-terminal';
 import type { FileTreeView } from '@difizen/mana-app';
 import {
   ConfigurationService,
@@ -36,6 +37,10 @@ export class LibroLabApp implements ApplicationContribution {
     this.configurationService.set(
       LibroJupyterConfiguration['OpenSlot'],
       LibroLabLayoutSlots.content,
+    );
+    this.configurationService.set(
+      terminalDefaultSlot,
+      LibroLabLayoutSlots.contentBottom,
     );
     this.serverManager.ready
       .then(() => {

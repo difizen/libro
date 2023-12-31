@@ -6,6 +6,7 @@ import {
   FileCreateModal,
   FileView,
 } from '@difizen/libro-jupyter';
+import { TerminalCommands } from '@difizen/libro-terminal';
 import {
   CommandRegistry,
   ModalService,
@@ -19,7 +20,6 @@ import { Col, Row } from 'antd';
 import { forwardRef, useEffect, useState } from 'react';
 
 import { TerminalIcon } from '../common/icon.js';
-import { MenuCommands } from '../menu/index.js';
 
 import './index.less';
 
@@ -123,7 +123,7 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
           <div
             className="libro-lab-entry-point-item"
             onClick={() => {
-              commandRegistry.executeCommand(MenuCommands.OpenTerminal.id);
+              commandRegistry.executeCommand(TerminalCommands['OpenTerminal'].id);
             }}
           >
             <TerminalIcon />

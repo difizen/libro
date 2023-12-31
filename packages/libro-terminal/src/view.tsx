@@ -1,4 +1,5 @@
 import { CodeOutlined } from '@ant-design/icons';
+import { ConfigurationService } from '@difizen/mana-app';
 import {
   Disposable,
   DisposableCollection,
@@ -14,7 +15,7 @@ import {
   view,
 } from '@difizen/mana-app';
 import { forwardRef } from 'react';
-import type { ITerminalOptions } from 'xterm';
+import type { FontWeight, ITerminalOptions } from 'xterm';
 import { Terminal } from 'xterm';
 import { CanvasAddon } from 'xterm-addon-canvas';
 import { FitAddon } from 'xterm-addon-fit';
@@ -22,9 +23,26 @@ import { WebLinksAddon } from 'xterm-addon-web-links';
 import { WebglAddon } from 'xterm-addon-webgl';
 
 import type { CursorStyle, TerminalRendererType } from './configuration.js';
+import { terminalIntegratedCursorStyle } from './configuration.js';
+import { terminalIntegratedCopyOnSelection } from './configuration.js';
+import { terminalEnablePaste } from './configuration.js';
+import { terminalEnableCopy } from './configuration.js';
+import { terminalIntegratedRendererType } from './configuration.js';
+import { terminalIntegratedFastScrollSensitivity } from './configuration.js';
+import { terminalIntegratedScrollback } from './configuration.js';
+import { terminalIntegratedLineHeight } from './configuration.js';
+import { terminalIntegratedLetterSpacing } from './configuration.js';
+import { terminalIntegratedDrawBoldTextInBrightColors } from './configuration.js';
+import {
+  terminalIntegratedCursorBlinking,
+  terminalIntegratedCursorWidth,
+  terminalIntegratedFontFamily,
+  terminalIntegratedFontSize,
+  terminalIntegratedFontWeight,
+  terminalIntegratedFontWeightBold,
+} from './configuration.js';
 import {
   DEFAULT_TERMINAL_RENDERER_TYPE,
-  TerminalConfiguration,
   isTerminalRendererType,
 } from './configuration.js';
 import type { TerminalConnection } from './connection.js';
@@ -59,7 +77,7 @@ export class LibroTerminalView extends BaseStatefulView {
   protected termOpened = false;
   protected initialData = '';
   protected fitAddon: FitAddon;
-  protected readonly config: TerminalConfiguration;
+  protected readonly config: ConfigurationService;
   protected readonly themeService: TerminalThemeService;
   protected readonly terminalManager: TerminalManager;
 
@@ -96,7 +114,7 @@ export class LibroTerminalView extends BaseStatefulView {
 
   constructor(
     @inject(ViewOption) options: TerminalViewOption, // 这里是 server需要的配置
-    @inject(TerminalConfiguration) config: TerminalConfiguration,
+    @inject(ConfigurationService) config: ConfigurationService,
     @inject(TerminalThemeService) themeService: TerminalThemeService,
     @inject(TerminalManager) terminalManager: TerminalManager,
   ) {
@@ -312,24 +330,21 @@ export class LibroTerminalView extends BaseStatefulView {
 
   protected createTerm = () => {
     const options = {
-      cursorBlink: this.config.get('terminal.integrated.cursorBlinking'),
+      cursorBlink: terminalIntegratedCursorBlinking.defaultValue,
       cursorStyle: this.getCursorStyle(),
-      cursorWidth: this.config.get('terminal.integrated.cursorWidth'),
-      fontFamily: this.config.get('terminal.integrated.fontFamily'),
-      fontSize: this.config.get('terminal.integrated.fontSize'),
-      fontWeight: this.config.get('terminal.integrated.fontWeight'),
-      fontWeightBold: this.config.get('terminal.integrated.fontWeightBold'),
-      drawBoldTextInBrightColors: this.config.get(
-        'terminal.integrated.drawBoldTextInBrightColors',
-      ),
-      letterSpacing: this.config.get('terminal.integrated.letterSpacing'),
-      lineHeight: this.config.get('terminal.integrated.lineHeight'),
-      scrollback: this.config.get('terminal.integrated.scrollback'),
-      fastScrollSensitivity: this.config.get(
-        'terminal.integrated.fastScrollSensitivity',
-      ),
+      cursorWidth: terminalIntegratedCursorWidth.defaultValue,
+      fontFamily: terminalIntegratedFontFamily.defaultValue,
+      fontSize: terminalIntegratedFontSize.defaultValue,
+      fontWeight: terminalIntegratedFontWeight.defaultValue as FontWeight,
+      fontWeightBold: terminalIntegratedFontWeightBold.defaultValue as FontWeight,
+      drawBoldTextInBrightColors:
+        terminalIntegratedDrawBoldTextInBrightColors.defaultValue,
+      letterSpacing: terminalIntegratedLetterSpacing.defaultValue,
+      lineHeight: terminalIntegratedLineHeight.defaultValue,
+      scrollback: terminalIntegratedScrollback.defaultValue,
+      fastScrollSensitivity: terminalIntegratedFastScrollSensitivity.defaultValue,
       rendererType: this.getTerminalRendererType(
-        this.config.get('terminal.integrated.rendererType'),
+        terminalIntegratedRendererType.defaultValue,
       ),
       theme: this.themeService.getTheme(),
     };
@@ -340,15 +355,15 @@ export class LibroTerminalView extends BaseStatefulView {
   };
 
   protected get enableCopy(): boolean {
-    return this.config.get('terminal.enableCopy');
+    return terminalEnableCopy.defaultValue;
   }
 
   protected get enablePaste(): boolean {
-    return this.config.get('terminal.enablePaste');
+    return terminalEnablePaste.defaultValue;
   }
 
   protected get copyOnSelection(): boolean {
-    return this.config.get('terminal.integrated.copyOnSelection');
+    return terminalIntegratedCopyOnSelection.defaultValue;
   }
 
   protected customKeyHandler = (event: KeyboardEvent): boolean => {
@@ -372,7 +387,7 @@ export class LibroTerminalView extends BaseStatefulView {
    * @returns CursorStyle
    */
   protected getCursorStyle = (): CursorStyle => {
-    const value = this.config.get('terminal.integrated.cursorStyle');
+    const value = terminalIntegratedCursorStyle.defaultValue as CursorStyle | 'line';
     return value === 'line' ? 'bar' : value;
   };
   /**

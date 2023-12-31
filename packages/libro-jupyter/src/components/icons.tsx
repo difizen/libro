@@ -101,7 +101,7 @@ export const Location: React.FC = () => (
         id="2.0-kernel-启动前"
         transform="translate(-738.000000, -80.000000)"
         fill="#7B7B7B"
-        fillRule="nonzero"
+        // fillRule="nonzero"
       >
         <g id="编组-24" transform="translate(637.000000, 80.000000)">
           <g id="location" transform="translate(99.000000, 0.000000)">

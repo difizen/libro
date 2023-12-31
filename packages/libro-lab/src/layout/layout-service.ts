@@ -1,5 +1,5 @@
 import { LibroNavigatableView, LibroService } from '@difizen/libro-jupyter';
-import type { View, ViewOpenHandlerOptions } from '@difizen/mana-app';
+import type { View, ViewOpenHandlerOptions, ViewOpenOption } from '@difizen/mana-app';
 import { observable } from '@difizen/mana-app';
 import {
   DefaultSlotView,
@@ -13,7 +13,6 @@ import type { LibroLabLayoutSlotsType, StatusType } from './protocol.js';
 import { LibroLabLayoutSlots } from './protocol.js';
 
 export type VisibilityMap = Record<LibroLabLayoutSlotsType, boolean>;
-
 @singleton()
 export class LayoutService {
   protected readonly slotViewManager: SlotViewManager;
@@ -26,6 +25,9 @@ export class LayoutService {
     this.slotViewManager = slotViewManager;
     this.libroService = libroService;
     this.onOpenSlotActiveChange();
+    this.slotViewManager.onViewAdded((args) => {
+      this.onViewAdded(args.slot, args.view, args.option);
+    });
   }
 
   @prop()
@@ -50,8 +52,27 @@ export class LayoutService {
     this.visibilityMap[slot] = visible;
   }
 
+  protected onViewAdded(
+    slot: string,
+    view: View | undefined,
+    option: ViewOpenOption | undefined,
+  ) {
+    if (!view) {
+      // TODO: hide slot
+      return;
+    }
+    if (Object.keys(this.visibilityMap).includes(slot)) {
+      if (option?.reveal) {
+        this.setAreaVisible(slot as LibroLabLayoutSlotsType, true);
+      }
+    }
+  }
+
   async addView(view: View, option?: ViewOpenHandlerOptions): Promise<void> {
     const { slot = LibroLabLayoutSlots.main, ...viewOpenOption } = option || {};
+    if (option?.reveal) {
+      this.setAreaVisible(slot, true);
+    }
     await this.slotViewManager.addView(view, slot, viewOpenOption);
   }
 
