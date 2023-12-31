@@ -1,10 +1,10 @@
 import { createSlotPreference, HeaderArea, ManaModule } from '@difizen/mana-app';
 
+import { LabMenu } from './lab-menu-contribution.js';
 import { MenuBarView } from './menu-bar-view.js';
-import { HeaderMenu } from './menu-contribution.js';
 
 export const LibroLabHeaderMenuModule = ManaModule.create().register(
-  HeaderMenu,
+  LabMenu,
   MenuBarView,
   createSlotPreference({
     slot: HeaderArea.middle,

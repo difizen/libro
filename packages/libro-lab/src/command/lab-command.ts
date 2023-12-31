@@ -1,12 +1,12 @@
-export const MenuCommands = {
+export const LabCommands = {
   About: {
     id: 'libro-lab-header-menu-help-about',
     label: '关于',
   },
-  OpenTerminal: {
-    id: 'libro-lab-header-menu-terminal-open',
-    label: '新建终端',
-  },
+  // OpenTerminal: {
+  //   id: 'libro-lab-header-menu-terminal-open',
+  //   label: '新建终端',
+  // },
   Save: {
     id: 'libro-lab-header-menu-file-save',
     label: '保存',
@@ -134,5 +134,9 @@ export const MenuCommands = {
   RunCellAndSelectNext: {
     id: 'libro-lab-header-menu-run-cell-and-select-next',
     label: `执行并选中下一个单元格`,
+  },
+  ToggleBottom: {
+    id: 'libro-lab-toggle-bottom',
+    label: `切换底部面板`,
   },
 };

@@ -6,6 +6,7 @@ import { NetworkError, ServerConnection } from '@difizen/libro-kernel';
 import type { Disposable, Disposed, Event } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
 import { Emitter, inject } from '@difizen/mana-app';
+import { v4 } from 'uuid';
 
 import type { TerminalConnection } from './connection.js';
 import type { TerminalModel, TerminalOption } from './protocol.js';
@@ -282,5 +283,8 @@ export class TerminalManager implements Disposable, Disposed {
       connection = await this.startNew({ cwd });
     }
     return connection;
+  };
+  newTerminalName = () => {
+    return v4();
   };
 }

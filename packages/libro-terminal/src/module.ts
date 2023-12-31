@@ -5,6 +5,7 @@ import {
 } from '@difizen/libro-kernel';
 import { ManaModule } from '@difizen/mana-app';
 
+import { TerminalCommandContribution } from './command.js';
 import { TerminalConfiguration } from './configuration.js';
 import { TerminalConnection } from './connection.js';
 import './index.less';
@@ -19,6 +20,7 @@ import { TerminalThemeService } from './theme-service.js';
 import { LibroTerminalView } from './view.js';
 
 export const TerminalModule = ManaModule.create().register(
+  TerminalCommandContribution,
   TerminalConfiguration,
   TerminalConnection,
   TerminalManager,

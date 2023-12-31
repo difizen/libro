@@ -9,6 +9,7 @@ import {
   HeaderArea,
 } from '@difizen/mana-app';
 
+import { LibroLabHeaderMenuModule } from './command/module.js';
 import { LabConfigAppContribution } from './config/config-contribution.js';
 import { CodeEditorViewerModule } from './editor-viewer/index.js';
 import { GithubLinkView } from './github-link/index.js';
@@ -24,7 +25,6 @@ import {
 import { SaveableTabView } from './layout/saveable-tab-view.js';
 import './index.less';
 import { LibroLabSideTabView } from './layout/side-tab-view.js';
-import { LibroLabHeaderMenuModule } from './menu/module.js';
 import { LibroLabTocModule } from './toc/module.js';
 import { EntryPointView } from './welcome/entry-point-view.js';
 import { WelcomeView } from './welcome/index.js';
