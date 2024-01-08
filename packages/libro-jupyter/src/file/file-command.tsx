@@ -29,7 +29,7 @@ import { FileView } from './file-view/index.js';
 import { copy2clipboard } from './utils.js';
 import './index.less';
 
-const FileCommands = {
+export const FileCommands = {
   OPEN_FILE: {
     id: 'fileTree.command.openfile',
     label: '打开',

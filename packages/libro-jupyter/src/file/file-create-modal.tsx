@@ -37,7 +37,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
     await form.validateFields();
     close();
     try {
-      await fileService.newFile(values.fileName + fileType || '', new URI(data.path));
+      await fileService.newFile(values.fileName + (fileType || ''), new URI(data.path));
       if (fileView) {
         fileView.model.refresh();
       }
