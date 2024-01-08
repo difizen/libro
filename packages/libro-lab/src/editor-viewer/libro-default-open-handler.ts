@@ -1,23 +1,18 @@
 import { LibroJupyterConfiguration } from '@difizen/libro-jupyter';
 import type { URI, ViewOpenHandlerOptions } from '@difizen/mana-app';
 import { ConfigurationService, inject } from '@difizen/mana-app';
-import { Priority } from '@difizen/mana-app';
 import { NavigatableViewOpenHandler, OpenHandler, singleton } from '@difizen/mana-app';
-
-import type { CodeEditorViewer } from './code-editor-viewer.js';
-import { CodeEditorViewerFactory, textFileTypes } from './protocol.js';
+import { LibroDefaultViewerFactory } from './protocol.js';
+import type { LibroDefaultViewer } from './libro-default-viewer.js';
 
 @singleton({ contrib: OpenHandler })
-export class CodeEditorViewerOpenHandler extends NavigatableViewOpenHandler<CodeEditorViewer> {
+export class LibroDefaultViewerOpenHandler extends NavigatableViewOpenHandler<LibroDefaultViewer> {
   @inject(ConfigurationService) protected configurationService: ConfigurationService;
 
-  id = CodeEditorViewerFactory;
+  id = LibroDefaultViewerFactory;
 
-  canHandle(uri: URI, options?: ViewOpenHandlerOptions) {
-    if (uri.scheme === 'file' && textFileTypes.includes(uri.path.ext)) {
-      return 100;
-    }
-    return Priority.IDLE;
+  canHandle() {
+    return 100;
   }
 
   override async open(uri: URI, options: ViewOpenHandlerOptions = {}) {
