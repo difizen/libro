@@ -100,6 +100,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
             }`}
             onClick={() => {
               setFileType('.ipynb');
+              inputRef.current?.focus();
             }}
           >
             <NotebookIcon />
@@ -114,6 +115,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
             className={`libro-create-file-type ${fileType === '.py' ? 'active' : ''}`}
             onClick={() => {
               setFileType('.py');
+              inputRef.current?.focus();
             }}
           >
             <PythonIcon />
@@ -128,6 +130,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
             className={`libro-create-file-type ${fileType === '.json' ? 'active' : ''}`}
             onClick={() => {
               setFileType('.json');
+              inputRef.current?.focus();
             }}
           >
             <JSONIcon />
@@ -144,6 +147,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
             }`}
             onClick={() => {
               setFileType(undefined);
+              inputRef.current?.focus();
             }}
           >
             <MoreIcon />
@@ -163,7 +167,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
           label="文件名称"
           rules={[{ required: true, validator: validateFileName }]}
         >
-          <Input addonAfter={fileType || ''} />
+          <Input addonAfter={fileType || ''} ref={inputRef} />
         </Form.Item>
       </Form>
     </Modal>
