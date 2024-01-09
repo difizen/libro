@@ -103,9 +103,10 @@ export class LayoutService {
       );
       observable(slotView);
       if (slotView instanceof DefaultSlotView) {
-        slotView.onActiveChange(() => {
+        slotView.onActiveChange(async () => {
           const active = slotView.active;
           if (active instanceof LibroNavigatableView) {
+            await active.ready;
             active.libroView?.focus();
             this.libroService.active = active.libroView;
           } else {
