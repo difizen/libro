@@ -1,4 +1,4 @@
-import { FolderFilled } from '@ant-design/icons';
+import { ExclamationCircleFilled, FolderFilled } from '@ant-design/icons';
 import type { TreeNode, ViewOpenHandler } from '@difizen/mana-app';
 import { FileTreeViewFactory } from '@difizen/mana-app';
 import {
@@ -20,6 +20,7 @@ import {
   inject,
   singleton,
 } from '@difizen/mana-app';
+import { Modal } from 'antd';
 import React from 'react';
 
 import type { LibroNavigatableView } from '../navigatable-view.js';
@@ -29,6 +30,10 @@ import './index.less';
 const FileTreeModule = ManaModule.create()
   .register(FileTree, FileTreeModel)
   .dependOn(TreeViewModule);
+
+const { confirm } = Modal;
+
+const noVerifyFileType = ['.ipynb', '.py'];
 
 @singleton()
 @view(FileTreeViewFactory, FileTreeModule)
@@ -61,12 +66,36 @@ export class FileView extends FileTreeView {
 
   openNode = async (treeNode: TreeNode) => {
     if (FileStatNode.is(treeNode) && !treeNode.fileStat.isDirectory) {
-      const opener = (await this.openService.getOpener(
-        treeNode.uri,
-      )) as ViewOpenHandler<LibroNavigatableView>;
-      if (opener) {
-        opener.open(treeNode.uri, {
-          viewOptions: { name: treeNode.fileStat.name },
+      if (
+        (treeNode.fileStat.size || 0) / (1024 * 1024) < 10 ||
+        noVerifyFileType.includes(treeNode.fileStat.resource.path.ext)
+      ) {
+        const opener = (await this.openService.getOpener(
+          treeNode.uri,
+        )) as ViewOpenHandler<LibroNavigatableView>;
+        if (opener) {
+          opener.open(treeNode.uri, {
+            viewOptions: {
+              name: treeNode.fileStat.name,
+              fileSize: treeNode.fileStat.size,
+            },
+          });
+        }
+      } else {
+        confirm({
+          title: '文件大小警告',
+          icon: <ExclamationCircleFilled />,
+          content: '您正尝试打开大于 10 MB 的文件，这可能会影响当前页面/服务的性能。',
+          onOk: async () => {
+            const opener = (await this.openService.getOpener(
+              treeNode.uri,
+            )) as ViewOpenHandler<LibroNavigatableView>;
+            if (opener) {
+              opener.open(treeNode.uri, {
+                viewOptions: { name: treeNode.fileStat.name },
+              });
+            }
+          },
         });
       }
     }
