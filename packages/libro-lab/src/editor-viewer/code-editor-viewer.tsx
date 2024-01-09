@@ -170,6 +170,13 @@ export class CodeEditorViewer extends BaseView implements NavigatableView, Savea
     return new URI(this.filePath);
   }
 
+  override onViewResize = () => {
+    if (!this.e2Editor) {
+      return;
+    }
+    this.e2Editor.codeEditor.layout();
+  };
+
   createMoveToUri(resourceUri: URI): URI | undefined {
     this.filePath = resourceUri.path.toString();
     return resourceUri;
