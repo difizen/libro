@@ -1,5 +1,32 @@
 # @difizen/libro-jupyter
 
+## 0.1.11
+
+### Patch Changes
+
+- 236634d: 1.libro keybind not work when switching tabs
+  2.auto focus when input file name.
+  3.editor resize when CodeEditorViewer resize
+  4.add file size warning
+  5.add UI for file formats not supported for viewing
+  6.file name error when select other format
+- Updated dependencies [236634d]
+  - @difizen/libro-core@0.1.11
+  - @difizen/libro-code-cell@0.1.11
+  - @difizen/libro-code-editor@0.1.11
+  - @difizen/libro-codemirror@0.1.11
+  - @difizen/libro-cofine-editor@0.1.11
+  - @difizen/libro-common@0.1.11
+  - @difizen/libro-kernel@0.1.11
+  - @difizen/libro-l10n@0.1.11
+  - @difizen/libro-lsp@0.1.11
+  - @difizen/libro-markdown-cell@0.1.11
+  - @difizen/libro-output@0.1.11
+  - @difizen/libro-raw-cell@0.1.11
+  - @difizen/libro-rendermime@0.1.11
+  - @difizen/libro-search@0.1.11
+  - @difizen/libro-search-code-cell@0.1.11
+
 ## 0.1.10
 
 ### Patch Changes
