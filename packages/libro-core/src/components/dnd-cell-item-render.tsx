@@ -400,7 +400,13 @@ export const DndCellItemContainer = memo(function DndCellItemContainer(
       <ExecuteTooltipArea cell={cell} isMouseOverDragArea={isMouseOverDragArea} />
       <DndCellItemContent cell={cell} />
       {sideToolbarVisible && (
-        <div className="libro-cell-right-toolbar">
+        <div
+          className="libro-cell-right-toolbar"
+          tabIndex={0}
+          onFocus={(e) => {
+            e.stopPropagation();
+          }}
+        >
           {isActive && !isDrag && instance.model.readOnly !== true && (
             <ToolbarRender
               data={rightToolbarArgs}
