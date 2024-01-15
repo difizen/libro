@@ -199,6 +199,7 @@ export class FileCommandContribution
             onOk: async () => {
               try {
                 await this.fileService.delete(node.uri);
+                this.fileService.fileRemoveEmitter.fire(node.uri.path.toString());
               } catch {
                 message.error('删除文件失败!');
               }

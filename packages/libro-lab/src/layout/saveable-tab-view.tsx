@@ -1,5 +1,9 @@
 import { CloseOutlined } from '@ant-design/icons';
-import type { View } from '@difizen/mana-app';
+import { JupyterFileService } from '@difizen/libro-jupyter';
+import type { CardTabOption, View } from '@difizen/mana-app';
+import { ViewManager, ViewOption } from '@difizen/mana-app';
+import { NavigatableView } from '@difizen/mana-app';
+import { inject } from '@difizen/mana-app';
 import {
   CardTabView,
   MenuRender,
@@ -15,6 +19,23 @@ import classnames from 'classnames';
 @transient()
 @view('libro-lab-saveable-tab')
 export class SaveableTabView extends CardTabView {
+  constructor(
+    @inject(ViewOption) option: CardTabOption,
+    @inject(ViewManager) manager: ViewManager,
+    @inject(JupyterFileService) fileService: JupyterFileService,
+  ) {
+    super(option, manager);
+    fileService.onFileRemove((e) => {
+      const toDisposeView = this.children.find((item) => {
+        if (NavigatableView.is(item) && item.getResourceUri()?.path.toString() === e) {
+          return true;
+        }
+        return undefined;
+      });
+      toDisposeView?.dispose();
+    });
+  }
+
   protected override renderTab(item: View) {
     return (
       <ViewContext view={item}>
