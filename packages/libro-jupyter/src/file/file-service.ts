@@ -7,7 +7,9 @@ import type {
   FileStatWithMetadata,
   MoveFileOptions,
   ResolveFileOptions,
+  Event as ManaEvent,
 } from '@difizen/mana-app';
+import { Emitter } from '@difizen/mana-app';
 import { FileService, URI, inject, singleton } from '@difizen/mana-app';
 import { message } from 'antd';
 
@@ -26,6 +28,11 @@ interface DirectoryModel extends IContentsModel {
 
 @singleton({ token: FileService })
 export class JupyterFileService extends FileService {
+  fileRemoveEmitter: Emitter<string> = new Emitter<string>();
+
+  get onFileRemove(): ManaEvent<string> {
+    return this.fileRemoveEmitter.event;
+  }
   @inject(ContentsManager) protected readonly contentsManager: ContentsManager;
   // '/read'
   // '/read-dir'
