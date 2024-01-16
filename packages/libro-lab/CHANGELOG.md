@@ -1,5 +1,19 @@
 # @difizen/libro-lab
 
+## 0.1.12
+
+### Patch Changes
+
+- bf45fa2: 1. fix:close the open tab when delete the file 2. stop propagation when focus cell right toolbar
+- Updated dependencies [bf45fa2]
+  - @difizen/libro-jupyter@0.1.12
+  - @difizen/libro-core@0.1.12
+  - @difizen/libro-cofine-editor-core@0.1.12
+  - @difizen/libro-kernel@0.1.12
+  - @difizen/libro-prompt-cell@0.1.12
+  - @difizen/libro-terminal@0.1.12
+  - @difizen/libro-toc@0.1.12
+
 ## 0.1.11
 
 ### Patch Changes
