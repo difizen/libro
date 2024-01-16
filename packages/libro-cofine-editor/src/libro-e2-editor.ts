@@ -407,7 +407,7 @@ export class LibroE2Editor implements IEditor {
       lineDecorationsWidth: 15,
       lineNumbersMinChars: 3,
       suggestSelection: 'first',
-      wordBasedSuggestions: false,
+      wordBasedSuggestions: 'off',
       scrollBeyondLastLine: false,
       /**
        * 使用该选项可以让modal widget出现在正确的范围，而不是被遮挡,解决z-index问题,但是会导致hover组件之类的无法被选中
