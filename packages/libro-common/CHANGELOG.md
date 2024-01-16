@@ -1,5 +1,11 @@
 # @difizen/libro-common
 
+## 0.1.12
+
+### Patch Changes
+
+- bf45fa2: 1. fix:close the open tab when delete the file 2. stop propagation when focus cell right toolbar
+
 ## 0.1.11
 
 ### Patch Changes
