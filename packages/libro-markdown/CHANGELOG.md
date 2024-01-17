@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.1.13
+
+### Patch Changes
+
+- 262ba79: 1. fix the editor in CodeEditorView is undefined
+
 ## 0.1.12
 
 ### Patch Changes
