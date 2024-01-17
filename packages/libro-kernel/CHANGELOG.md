@@ -1,5 +1,14 @@
 # @difizen/libro-kernel
 
+## 0.1.13
+
+### Patch Changes
+
+- 262ba79: 1. fix the editor in CodeEditorView is undefined
+- Updated dependencies [262ba79]
+  - @difizen/libro-core@0.1.13
+  - @difizen/libro-common@0.1.13
+
 ## 0.1.12
 
 ### Patch Changes

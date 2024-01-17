@@ -1,5 +1,27 @@
 # @difizen/libro-jupyter
 
+## 0.1.13
+
+### Patch Changes
+
+- 262ba79: 1. fix the editor in CodeEditorView is undefined
+- Updated dependencies [262ba79]
+  - @difizen/libro-cofine-editor@0.1.13
+  - @difizen/libro-code-editor@0.1.13
+  - @difizen/libro-core@0.1.13
+  - @difizen/libro-code-cell@0.1.13
+  - @difizen/libro-codemirror@0.1.13
+  - @difizen/libro-common@0.1.13
+  - @difizen/libro-kernel@0.1.13
+  - @difizen/libro-l10n@0.1.13
+  - @difizen/libro-lsp@0.1.13
+  - @difizen/libro-markdown-cell@0.1.13
+  - @difizen/libro-output@0.1.13
+  - @difizen/libro-raw-cell@0.1.13
+  - @difizen/libro-rendermime@0.1.13
+  - @difizen/libro-search@0.1.13
+  - @difizen/libro-search-code-cell@0.1.13
+
 ## 0.1.12
 
 ### Patch Changes
