@@ -148,8 +148,6 @@ export class CodeEditorView extends BaseView {
   };
 
   override onViewUnmount = () => {
-    this.editor.dispose();
-
     if (this.editor.dispose) {
       this.editor.dispose();
     }
