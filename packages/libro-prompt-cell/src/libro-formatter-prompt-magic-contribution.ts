@@ -27,7 +27,7 @@ export class FormatterPromptMagicContribution
 
   encode = (source: PromptDecodedFormatter) => {
     const promptObj = {
-      model_name: source.modelType || 'CodeGPT',
+      model_name: source.modelType || 'chatgpt',
       prompt: source.value,
     };
     const encodeValue = `%%prompt \n${JSON.stringify(promptObj)}`;

@@ -34,20 +34,40 @@ import {
   watch,
 } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
-import { Select } from 'antd';
+import { Select, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 import type { LibroPromptCellModel } from './prompt-cell-model.js';
 import { PromptScript } from './prompt-cell-script.js';
 
-export interface IModelSelectionItem {
-  value: string;
-  label: string;
-}
-export interface IModelItem {
-  value: string;
+export interface IChatSelectionItem {
+  name: string;
+  type: string;
 }
 
+const SelectionItemLabel: React.FC<{ item: IChatSelectionItem }> = (props: {
+  item: IChatSelectionItem;
+}) => {
+  const item = props.item;
+  const colorMap: Record<string, any> = {
+    VARIABLE: 'red',
+    LLM: 'blue',
+    API: 'green',
+    CUSTOM: undefined,
+  };
+
+  return (
+    <span className="libro-prompt-cell-selection-label">
+      <Tag
+        color={colorMap[item.type] || undefined}
+        className="libro-prompt-cell-header-selection-type"
+      >
+        {item.type}
+      </Tag>
+      <span className="libro-prompt-cell-header-selection-name">{item.name}</span>
+    </span>
+  );
+};
 const CellEditor: React.FC = () => {
   const instance = useInject<LibroPromptCellView>(ViewInstance);
   useEffect(() => {
@@ -66,15 +86,12 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
     const [selectedModel, setSelectedModel] = useState<string>('暂无内置模型');
     useEffect(() => {
       instance
-        .fetch(
-          { code: PromptScript.get_models, store_history: false },
-          instance.handleQueryResponse,
-        )
+        .updateChatList()
         .then(() => {
-          const len = instance.modelSelection.length;
+          const len = instance.selection.length;
           if (len > 0) {
             instance.model.decodeObject = {
-              modelType: instance.modelSelection[len - 1].label,
+              modelType: instance.selection[len - 1].name,
               ...instance.model.decodeObject,
             };
             setSelectedModel(instance.model.decodeObject['modelType']);
@@ -111,13 +128,10 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
               value={selectedModel}
               style={{ width: 160 }}
               onChange={handleChange}
-              options={instance.modelSelection}
+              options={instance.selection.map(instance.toSelectionOption)}
               bordered={false}
               onFocus={async () => {
-                await instance.fetch(
-                  { code: PromptScript.get_models, store_history: false },
-                  instance.handleQueryResponse,
-                );
+                await instance.updateChatList();
               }}
             />
           </div>
@@ -136,11 +150,12 @@ export class LibroPromptCellView extends LibroExecutableCellView {
   declare model: LibroPromptCellModel;
 
   @prop()
-  modelSelection: IModelSelectionItem[] = [];
+  selection: IChatSelectionItem[] = [];
 
   viewManager: ViewManager;
 
-  codeEditorManager: CodeEditorManager;
+  @inject(CodeEditorManager) codeEditorManager: CodeEditorManager;
+  @inject(PromptScript) promptScript: PromptScript;
 
   outputs: IOutput[];
 
@@ -165,13 +180,11 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     @inject(CellService) cellService: CellService,
     @inject(ViewManager) viewManager: ViewManager,
     @inject(LibroViewTracker) libroViewTracker: LibroViewTracker,
-    @inject(CodeEditorManager) codeEditorManager: CodeEditorManager,
   ) {
     super(options, cellService);
     this.options = options;
     this.viewManager = viewManager;
     this.className = this.className + ' prompt';
-    this.codeEditorManager = codeEditorManager;
 
     this.outputs = options.cell?.outputs as IOutput[];
     this.libroViewTracker = libroViewTracker;
@@ -421,6 +434,20 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     return future.done as Promise<KernelMessage.IExecuteReplyMsg>;
   };
 
+  updateChatList = async () => {
+    return this.fetch(
+      { code: this.promptScript.toList, store_history: false },
+      this.handleQueryResponse,
+    );
+  };
+
+  toSelectionOption = (item: IChatSelectionItem) => {
+    return {
+      value: item.name,
+      label: <SelectionItemLabel item={item} />,
+    };
+  };
+
   handleQueryResponse = (response: KernelMessage.IIOPubMessage) => {
     const msgType = response.header.msg_type;
     switch (msgType) {
@@ -432,10 +459,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
           content = content.replace(/\\"/g, '"').replace(/\\'/g, "'");
         }
 
-        const update = JSON.parse(content) as string[];
-        this.modelSelection = update.map((item) => {
-          return { value: item, label: item };
-        });
+        this.selection = JSON.parse(content) as IChatSelectionItem[];
         break;
       }
       case 'stream': {
@@ -446,11 +470,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
           contentStream = contentStream.replace(/\\"/g, '"').replace(/\\'/g, "'");
         }
 
-        const updateStream = JSON.parse(contentStream) as string[];
-
-        this.modelSelection = updateStream.map((item) => {
-          return { value: item, label: item };
-        });
+        this.selection = JSON.parse(contentStream) as IChatSelectionItem[];
         break;
       }
       default:
