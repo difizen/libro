@@ -34,6 +34,8 @@ export interface KernelMeta {
   last_activity: string;
   execution_state: KernelStatus;
   connections: number;
+  readonly reason?: string;
+  readonly traceback?: string;
 }
 
 export const KernelMetaOption = Symbol('KernelMetaOption');

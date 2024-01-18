@@ -78,6 +78,10 @@ export class LayoutService {
     await this.slotViewManager.addView(view, slot, viewOpenOption);
   }
 
+  getAllSlotView(slot: LibroLabLayoutSlotsType) {
+    return this.slotViewManager.getSlotView(slot);
+  }
+
   getActiveView(slot: LibroLabLayoutSlotsType) {
     if (this.isAreaVisible(slot)) {
       const slotView = this.slotViewManager.getSlotView(slot);

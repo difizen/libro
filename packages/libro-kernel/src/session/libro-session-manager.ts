@@ -52,8 +52,15 @@ export class LibroSessionManager {
   protected _ready: Promise<void>;
   protected _isReady = false;
   protected storageService: StorageService;
+
+  @prop()
   protected _models: Map<string, SessionIModel>;
+
   protected _sessionConnections: Map<string, IKernelConnection>; // sessionId -> kernelConnection
+
+  get running(): Map<string, SessionIModel> {
+    return this._models;
+  }
 
   constructor(
     @inject(LibroKernelManager) kernelManager: LibroKernelManager,
@@ -115,6 +122,27 @@ export class LibroSessionManager {
         this._connectionFailure.fire(err);
       }
       throw err;
+    }
+
+    if (
+      this._models.size === models.length &&
+      models.every((model) => {
+        const existing = this._models.get(model.id);
+        if (!existing) {
+          return false;
+        }
+        return (
+          existing.kernel?.id === model.kernel?.id &&
+          existing.kernel?.name === model.kernel?.name &&
+          existing.name === model.name &&
+          existing.path === model.path &&
+          existing.type === model.type
+        );
+      })
+    ) {
+      // Identical models list (presuming models does not contain duplicate
+      // ids), so just return
+      return;
     }
 
     this._models = new Map(models.map((x) => [x.id, x]));

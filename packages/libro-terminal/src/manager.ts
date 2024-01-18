@@ -4,6 +4,7 @@
 import { Poll } from '@difizen/libro-common';
 import { NetworkError, ServerConnection } from '@difizen/libro-kernel';
 import type { Disposable, Disposed, Event } from '@difizen/mana-app';
+import { prop } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
 import { Emitter, inject } from '@difizen/mana-app';
 import { v4 } from 'uuid';
@@ -23,7 +24,10 @@ export class TerminalManager implements Disposable, Disposed {
   protected _runningChanged = new Emitter<TerminalModel[]>();
   protected _connectionFailure = new Emitter<Error>();
   // As an optimization, we unwrap the models to just store the names.
+
+  @prop()
   protected _names: string[] = [];
+
   protected get _models(): TerminalModel[] {
     return this._names.map((name) => {
       return { name };
@@ -141,6 +145,10 @@ export class TerminalManager implements Disposable, Disposed {
    */
   running(): IterableIterator<TerminalModel> {
     return this._models[Symbol.iterator]();
+  }
+
+  get runningModels() {
+    return this._names;
   }
 
   /**
@@ -284,7 +292,13 @@ export class TerminalManager implements Disposable, Disposed {
     }
     return connection;
   };
-  newTerminalName = () => {
-    return v4();
+
+  // 新建和打开一个已有Terminal，二者所需参数不一样
+  getTerminalArgs = (name?: string) => {
+    if (name) {
+      return { name: name };
+    } else {
+      return { id: v4() };
+    }
   };
 }

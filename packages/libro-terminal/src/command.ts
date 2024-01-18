@@ -36,15 +36,14 @@ export class TerminalCommandContribution
 
   registerCommands(commands: CommandRegistry): void {
     commands.registerCommand(TerminalCommands['OpenTerminal'], {
-      execute: async () => {
+      execute: async (name?: string) => {
         try {
           const terminalView =
             await this.viewManager.getOrCreateView<LibroTerminalView>(
               LibroTerminalView,
-              {
-                id: this.manager.newTerminalName(),
-              },
+              this.manager.getTerminalArgs(name),
             );
+
           const slot = await this.config.get(terminalDefaultSlot);
           if (slot) {
             this.slotManager.addView(terminalView, slot, {
