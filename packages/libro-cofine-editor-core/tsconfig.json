@@ -3,9 +3,9 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "es",
-    "declarationDir": "es"
+    "declarationDir": "es",
   },
   "types": ["jest"],
   "exclude": ["node_modules"],
-  "include": ["src", "typings", "package.json"]
+  "include": ["src", "typings", "package.json"],
 }

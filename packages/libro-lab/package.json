@@ -52,6 +52,7 @@
     "@difizen/libro-kernel": "^0.1.14",
     "@difizen/libro-prompt-cell": "^0.1.14",
     "@difizen/libro-terminal": "^0.1.14",
+    "@difizen/libro-lsp": "^0.1.14",
     "@difizen/libro-toc": "^0.1.14",
     "@difizen/libro-cofine-editor-core": "^0.1.14",
     "@difizen/mana-app": "latest",

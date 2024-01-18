@@ -15,6 +15,7 @@ import { CodeEditorViewerModule } from './editor-viewer/index.js';
 import { GithubLinkView } from './github-link/index.js';
 import { ImageViewerModule } from './image-viewer/index.js';
 // import { KernelManagerView } from './kernel-manager/index.js';
+import { LibroKernelAndTerminalPanelModule } from './kernel-and-terminal-panel/module.js';
 import { LibroLabApp } from './lab-app.js';
 import { ContentBottomTabView } from './layout/content-bottom-tab-view.js';
 import {
@@ -100,6 +101,7 @@ export const LibroLabModule = ManaModule.create()
     LibroLabLayoutModule,
     LibroLabHeaderMenuModule,
     LibroLabTocModule,
+    LibroKernelAndTerminalPanelModule,
     LibroPromptCellModule,
     TerminalModule,
     ImageViewerModule,

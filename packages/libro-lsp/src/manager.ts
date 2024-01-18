@@ -43,6 +43,19 @@ export class LanguageServerManager implements ILanguageServerManager {
       .catch(console.error);
   }
 
+  async refreshRunning() {
+    // TODO: refreshRunning
+  }
+
+  async shutdownAll() {
+    // TODO: shutdownAll
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async shutdown(key: string) {
+    // TODO: shutdown
+  }
+
   /**
    * Check if the manager is enabled or disabled
    */

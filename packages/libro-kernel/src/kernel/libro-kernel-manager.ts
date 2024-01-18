@@ -12,6 +12,7 @@ import type {
   KernelStatus,
   KernelConnectionOptions,
   IKernelModel,
+  KernelMeta,
 } from './libro-kernel-protocol.js';
 import {
   LibroKernelFactory,
@@ -31,6 +32,9 @@ export class LibroKernelManager {
   @prop()
   kernelMap = new Map<KernelId, LibroKernel>();
 
+  @prop()
+  private _models = new Map<string, KernelMeta>();
+
   protected _pollModels: Poll;
   protected _isReady = false;
   protected _ready: Promise<void>;
@@ -47,6 +51,10 @@ export class LibroKernelManager {
 
   getLibroKernel(kernelId: KernelId) {
     return this.kernelMap.get(kernelId);
+  }
+
+  get runningKernels(): Map<string, KernelMeta> {
+    return this._models;
   }
 
   constructor(@inject(ServerManager) serverManager: ServerManager) {
@@ -111,6 +119,22 @@ export class LibroKernelManager {
    */
   async shutdown(id: string): Promise<void> {
     await this.kernelRestAPI.shutdownKernel(id);
+    await this.refreshRunning();
+  }
+
+  /**
+   * Shut down all kernels.
+   */
+  async shutdownAll(): Promise<void> {
+    // Update the list of models to make sure our list is current.
+    await this.refreshRunning();
+
+    // Shut down all models.
+    await Promise.all(
+      [...this._models.keys()].map((id) => this.kernelRestAPI.shutdownKernel(id)),
+    );
+
+    // Update the list of models to clear out our state.
     await this.refreshRunning();
   }
 
@@ -180,8 +204,10 @@ export class LibroKernelManager {
    * Execute a request to the server to poll running kernels and update state.
    */
   protected async requestRunning(): Promise<void> {
+    let models: KernelMeta[];
+
     try {
-      await this.kernelRestAPI.listRunning();
+      models = await this.kernelRestAPI.listRunning();
     } catch (err: any) {
       // Handle network errors, as well as cases where we are on a
       // JupyterHub and the server is not running. JupyterHub returns a
@@ -195,5 +221,29 @@ export class LibroKernelManager {
       }
       throw err;
     }
+
+    if (
+      this._models.size === models.length &&
+      models.every((model) => {
+        const existing = this._models.get(model.id);
+        if (!existing) {
+          return false;
+        }
+        return (
+          existing.connections === model.connections &&
+          existing.execution_state === model.execution_state &&
+          existing.last_activity === model.last_activity &&
+          existing.name === model.name &&
+          existing.reason === model.reason &&
+          existing.traceback === model.traceback
+        );
+      })
+    ) {
+      // Identical models list (presuming models does not contain duplicate
+      // ids), so just return
+      return;
+    }
+
+    this._models = new Map(models.map((x) => [x.id, x]));
   }
 }

@@ -82,6 +82,12 @@ export type TLanguageId = string;
 // export const ILanguageServerManager = Symbol('ILanguageServerManager');
 
 export interface ILanguageServerManager extends Disposable {
+  shutdownAll: () => Promise<void>;
+
+  shutdown: (key: string) => Promise<void>;
+
+  refreshRunning: () => Promise<void>;
+
   /**
    * @alpha
    *
