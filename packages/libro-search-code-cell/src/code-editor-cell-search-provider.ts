@@ -3,6 +3,7 @@ import type { IPosition, SearchMatch } from '@difizen/libro-code-editor';
 import type { BaseSearchProvider, SearchFilters } from '@difizen/libro-search';
 import { searchText } from '@difizen/libro-search';
 import type { Event } from '@difizen/mana-app';
+import { Disposable } from '@difizen/mana-app';
 import { prop } from '@difizen/mana-app';
 import { DisposableCollection, Emitter } from '@difizen/mana-app';
 import { watch } from '@difizen/mana-app';
@@ -17,7 +18,7 @@ import { CodeEditorSearchHighlighterFactory } from './code-cell-search-protocol.
 export class CodeEditorCellSearchProvider implements BaseSearchProvider {
   protected toDispose = new DisposableCollection();
   /**
-   * CodeMirror search highlighter
+   * code editor search highlighter
    */
   @prop() protected editorHighlighter: CodeEditorSearchHighlighter;
   /**
@@ -58,14 +59,21 @@ export class CodeEditorCellSearchProvider implements BaseSearchProvider {
 
     this.toDispose.push(watch(this.cell.model, 'value', this.updateMatches));
     this.toDispose.push(
-      watch(this.cell, 'editor', async () => {
-        await this.cell.editorReady;
-        if (this.cell.hasInputHidden === true) {
-          this.endQuery();
-        } else {
-          this.startQuery(this.query, this.filters);
+      this.cell.editorView?.onEditorStatusChange((e) => {
+        if (e.status === 'ready') {
+          const editor = this.cell.editorView?.editor;
+          if (editor) {
+            this.editorHighlighter.setEditor(editor);
+          }
+          if (e.prevState === 'init') {
+            if (this.cell.hasInputHidden === true) {
+              this.endQuery();
+            } else {
+              this.startQuery(this.query, this.filters);
+            }
+          }
         }
-      }),
+      }) ?? Disposable.NONE,
     );
   }
 
@@ -86,8 +94,7 @@ export class CodeEditorCellSearchProvider implements BaseSearchProvider {
   }
 
   protected async setEditor() {
-    await this.cell.editorReady;
-    if (this.cell.editor) {
+    if (this.cell.editor && this.cell.editorView?.editorStatus === 'ready') {
       this.editorHighlighter.setEditor(this.cell.editor);
     }
   }
@@ -363,11 +370,19 @@ export class CodeEditorCellSearchProvider implements BaseSearchProvider {
         const matches = await searchText(this.query, this.cell.model.value);
         this.editorHighlighter.matches = matches;
         if (this.isCellSelected) {
-          const cursorOffset = this.cell.editor!.getOffsetAt(
+          const cursorOffset = this.cell.editor?.getOffsetAt(
             this.cell.editor?.getCursorPosition() ?? { column: 0, line: 0 },
           );
-          const index = matches.findIndex((item) => item.position >= cursorOffset);
-          this.currentIndex = index;
+          if (cursorOffset === undefined) {
+            return;
+          }
+          const index = matches.findIndex(
+            (item) => item.position + item.text.length >= cursorOffset,
+          );
+          if (index >= 0) {
+            this.currentIndex = index;
+            this.editorHighlighter.currentIndex = index;
+          }
         }
       } else {
         this.editorHighlighter.matches = [];

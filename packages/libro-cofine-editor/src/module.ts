@@ -1,4 +1,4 @@
-import type { IEditorOptions } from '@difizen/libro-code-editor';
+import type { EditorState, IEditorOptions } from '@difizen/libro-code-editor';
 import { CodeEditorModule } from '@difizen/libro-code-editor';
 import { ManaModule } from '@difizen/mana-app';
 
@@ -12,6 +12,7 @@ import {
   LibroE2Editor,
   LibroE2EditorFactory,
   LibroE2EditorOptions,
+  LibroE2EditorState,
 } from './libro-e2-editor.js';
 import { loadE2 } from './libro-e2-preload.js';
 import { LibroSQLRequestAPI } from './libro-sql-api.js';
@@ -26,9 +27,10 @@ export const LibroE2EditorModule = ManaModule.create()
     {
       token: LibroE2EditorFactory,
       useFactory: (ctx) => {
-        return (options: IEditorOptions) => {
+        return (options: IEditorOptions, editorState: EditorState) => {
           const child = ctx.container.createChild();
           child.register({ token: LibroE2EditorOptions, useValue: options });
+          child.register({ token: LibroE2EditorState, useValue: editorState });
           return child.get(LibroE2Editor);
         };
       },

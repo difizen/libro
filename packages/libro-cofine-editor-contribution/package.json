@@ -49,6 +49,6 @@
     "@difizen/mana-app": "latest"
   },
   "devDependencies": {
-    "@difizen/monaco-editor-core": "latest"
+    "@difizen/monaco-editor-core": "0.39.4"
   }
 }

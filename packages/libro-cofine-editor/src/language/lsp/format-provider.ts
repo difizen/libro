@@ -38,7 +38,8 @@ export class FormatProvider
     }
 
     const { virtualDocument: doc } = provider;
-    const result = await this.lspConnection.clientRequests[
+    const lspConnection = await this.getLSPConnection();
+    const result = await lspConnection.clientRequests[
       'textDocument/rangeFormatting'
     ].request({
       // TODO: range transform

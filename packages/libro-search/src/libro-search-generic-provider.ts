@@ -23,7 +23,7 @@ export const GenericSearchProviderFactory = Symbol('GenericSearchProviderFactory
 @transient()
 export class GenericSearchProvider extends AbstractSearchProvider {
   protected _query: RegExp | null;
-  protected _currentMatchIndex: number;
+  @prop() protected _currentMatchIndex: number;
   @prop() protected _matches: HTMLSearchMatch[] = [];
   protected _mutationObserver: MutationObserver = new MutationObserver(
     this._onWidgetChanged.bind(this),
@@ -159,6 +159,24 @@ export class GenericSearchProvider extends AbstractSearchProvider {
     return Promise.resolve(false);
   }
 
+  isMatchChanged(matches: HTMLSearchMatch[], newMatches: HTMLSearchMatch[]): boolean {
+    if (matches.length !== newMatches.length) {
+      return true;
+    }
+    for (let i = 0; i < matches.length; i++) {
+      if (matches[i].text !== newMatches[i].text) {
+        return true;
+      }
+      if (matches[i].position !== newMatches[i].position) {
+        return true;
+      }
+      if (matches[i].node !== newMatches[i].node) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * Initialize the search using the provided options.  Should update the UI
    * to highlight all matches and "select" whatever the first match should be.
@@ -167,16 +185,22 @@ export class GenericSearchProvider extends AbstractSearchProvider {
    * @param filters Filter parameters to pass to provider
    */
   startQuery = async (query: RegExp | null, filters = {}): Promise<void> => {
-    await this.endQuery();
     this._query = query;
 
     if (query === null) {
+      await this.endQuery();
       return Promise.resolve();
     }
 
     const matches = this.view.container?.current
       ? await searchInHTML(query, this.view.container?.current)
       : [];
+
+    if (!this.isMatchChanged(this.matches, matches)) {
+      return Promise.resolve();
+    }
+
+    await this.endQuery();
 
     // Transform the DOM
     let nodeIdx = 0;

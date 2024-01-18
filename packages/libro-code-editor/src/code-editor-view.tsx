@@ -1,8 +1,6 @@
-import { getOrigin, prop } from '@difizen/mana-app';
 import {
   inject,
   transient,
-  Deferred,
   Emitter,
   BaseView,
   ThemeService,
@@ -12,7 +10,6 @@ import {
 import { forwardRef, memo } from 'react';
 
 import { CodeEditorInfoManager } from './code-editor-info-manager.js';
-import type { CodeEditorFactory } from './code-editor-manager.js';
 import type { IModel } from './code-editor-model.js';
 import type {
   CompletionProvider,
@@ -21,12 +18,14 @@ import type {
   IEditor,
   IEditorSelectionStyle,
   TooltipProvider,
+  CodeEditorFactory,
 } from './code-editor-protocol.js';
 import { CodeEditorSettings } from './code-editor-settings.js';
+import { CodeEditorStateManager } from './code-editor-state-manager.js';
 
 export const CodeEditorRender = memo(
   forwardRef<HTMLDivElement>((props, ref) => {
-    return <div ref={ref} />;
+    return <div tabIndex={0} ref={ref} />;
   }),
 );
 
@@ -51,6 +50,8 @@ const DROP_TARGET_CLASS = 'jp-mod-dropTarget';
  */
 const leadingWhitespaceRe = /^\s+$/;
 
+export type CodeEditorViewStatus = 'init' | 'ready' | 'disposed';
+
 /**
  * A widget which hosts a code editor.
  */
@@ -59,6 +60,8 @@ const leadingWhitespaceRe = /^\s+$/;
 export class CodeEditorView extends BaseView {
   @inject(ThemeService) protected readonly themeService: ThemeService;
   @inject(CodeEditorSettings) protected readonly codeEditorSettings: CodeEditorSettings;
+  @inject(CodeEditorStateManager)
+  protected readonly codeEditorStateManager: CodeEditorStateManager;
 
   codeEditorInfoManager: CodeEditorInfoManager;
 
@@ -79,12 +82,16 @@ export class CodeEditorView extends BaseView {
   /**
    * Get the editor wrapped by the widget.
    */
-  @prop()
   editor: IEditor;
-  protected editorReadyDeferred: Deferred<void> = new Deferred<void>();
-  get editorReady() {
-    return this.editorReadyDeferred.promise;
-  }
+
+  editorStatus: CodeEditorViewStatus = 'init';
+
+  protected editorStatusChangeEmitter = new Emitter<{
+    status: CodeEditorViewStatus;
+    prevState: CodeEditorViewStatus;
+  }>();
+  onEditorStatusChange = this.editorStatusChangeEmitter.event;
+
   /**
    * Construct a new code editor widget.
    */
@@ -97,34 +104,60 @@ export class CodeEditorView extends BaseView {
     this.codeEditorInfoManager = codeEditorInfoManager;
   }
 
-  override async onViewMount() {
-    const settings = this.codeEditorSettings.getUserEditorSettings();
-
+  protected getEditorHost() {
     const editorHostId = this.options.editorHostId;
     const editorHostRef = editorHostId
       ? this.codeEditorInfoManager.getEditorHostRef(editorHostId)
       : undefined;
 
-    this.editorHostRef =
-      editorHostRef && editorHostRef.current ? editorHostRef : this.container;
+    return editorHostRef && editorHostRef.current ? editorHostRef : this.container;
+  }
+
+  override async onViewMount() {
+    const state = await this.codeEditorStateManager.getOrCreateEditorState({
+      uuid: this.options.uuid,
+      model: this.options.model,
+    });
+
+    const settings = this.codeEditorSettings.getUserEditorSettings();
+
+    this.editorHostRef = this.getEditorHost();
 
     if (this.editorHostRef.current && this.options.factory) {
-      this.editor = this.options.factory({
-        ...this.options,
-        host: this.editorHostRef.current,
-        model: this.options.model,
-        uuid: this.options.uuid,
-        config: { ...settings, ...this.options.config },
-        selectionStyle: this.options.selectionStyle,
-        tooltipProvider: this.options.tooltipProvider,
-        completionProvider: this.options.completionProvider,
-      });
-      this.editorReadyDeferred.resolve();
+      this.editor = this.options.factory(
+        {
+          ...this.options,
+          host: this.editorHostRef.current,
+          model: this.options.model,
+          uuid: this.options.uuid,
+          config: { ...settings, ...this.options.config },
+          selectionStyle: this.options.selectionStyle,
+          tooltipProvider: this.options.tooltipProvider,
+          completionProvider: this.options.completionProvider,
+        },
+        state,
+      );
+
+      await this.editor.editorReady;
+
+      const { cursorPosition, selections } = state;
+
+      const prevState = this.editorStatus;
+      this.editorStatus = 'ready';
+      this.editorStatusChangeEmitter.fire({ status: 'ready', prevState: prevState });
+
+      if (cursorPosition) {
+        this.editor.setCursorPosition(cursorPosition);
+      }
+      if (selections) {
+        this.editor.setSelections(selections);
+      }
+
       this.editor.onModalChange((val) => this.modalChangeEmitter.fire(val));
       // this.editor.model.selections.changed(this._onSelectionsChanged);
 
       if (this.options.autoFocus) {
-        getOrigin(this.editor).focus();
+        this.editor.focus();
       }
 
       this.editorHostRef.current.addEventListener('focus', this.onViewActive);
@@ -148,9 +181,19 @@ export class CodeEditorView extends BaseView {
   };
 
   override onViewUnmount = () => {
-    if (this.editor) {
-      this.editor.dispose();
+    if (this.editor.hasFocus()) {
+      // 保存编辑器状态
+      const editorState = this.editor.getState();
+      this.codeEditorStateManager.updateEditorState(this.options.uuid, editorState);
+      // focus 到 host 避免进入命令模式
+      this.editorHostRef = this.getEditorHost();
+      this.editorHostRef?.current?.focus();
     }
+    this.editor.dispose();
+
+    const prevState = this.editorStatus;
+    this.editorStatus = 'disposed';
+    this.editorStatusChangeEmitter.fire({ status: 'disposed', prevState: prevState });
 
     const node = this.editorHostRef?.current;
     if (node) {
@@ -349,8 +392,9 @@ export interface CodeEditorViewOptions<Config extends IEditorConfig = IEditorCon
 
   /**
    * The desired uuid for the editor.
+   * editor share id with cell.
    */
-  uuid?: string;
+  uuid: string;
 
   /**
    * The configuration options for the editor.

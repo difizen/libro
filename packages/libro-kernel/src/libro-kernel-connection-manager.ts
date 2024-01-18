@@ -23,12 +23,16 @@ export class LibroKernelConnectionManager {
     this.kernelConnectionMap = new Map<string, IKernelConnection>();
   }
 
+  private mpKey(fileInfo: IContentsModel) {
+    return fileInfo.path || fileInfo.name; // 优先用path作为key
+  }
+
   async startNew(fileInfo: IContentsModel): Promise<IKernelConnection | undefined> {
     const connection = await this.sessionManager.startNew(fileInfo);
     if (!connection) {
       throw new Error('start new kernel connection failed');
     }
-    this.kernelConnectionMap.set(fileInfo.name, connection);
+    this.kernelConnectionMap.set(this.mpKey(fileInfo), connection);
     return connection;
   }
 
@@ -43,20 +47,19 @@ export class LibroKernelConnectionManager {
     if (!connection) {
       throw new Error('change kernel connection failed');
     }
-    this.kernelConnectionMap.set(fileInfo.name, connection);
+    this.kernelConnectionMap.set(this.mpKey(fileInfo), connection);
     return connection;
   }
 
   async shutdownKC(fileInfo: IContentsModel) {
-    const fileName = fileInfo.name;
-    const kc = this.kernelConnectionMap.get(fileName);
+    const kc = this.kernelConnectionMap.get(this.mpKey(fileInfo));
 
     if (!kc) {
       throw new Error('interrupt connection failed');
     }
 
     await this.sessionManager.shutdownKC(fileInfo, kc);
-    this.kernelConnectionMap.delete(fileName);
+    this.kernelConnectionMap.delete(this.mpKey(fileInfo));
   }
 
   getAllKernelConnections() {
@@ -64,7 +67,7 @@ export class LibroKernelConnectionManager {
   }
 
   getKernelConnection(fileInfo: IContentsModel) {
-    const connection = this.kernelConnectionMap.get(fileInfo.name);
+    const connection = this.kernelConnectionMap.get(this.mpKey(fileInfo));
     if (connection && !connection.isDisposed) {
       return connection;
     }

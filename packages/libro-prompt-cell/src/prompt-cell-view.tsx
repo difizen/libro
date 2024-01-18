@@ -17,6 +17,7 @@ import {
   LibroOutputArea,
   LibroViewTracker,
   EditorStatus,
+  LirboContextKey,
 } from '@difizen/libro-core';
 import type { ExecutionMeta, KernelMessage } from '@difizen/libro-jupyter';
 import { KernelError, LibroJupyterModel } from '@difizen/libro-jupyter';
@@ -145,6 +146,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
 @transient()
 @view('prompt-editor-cell-view')
 export class LibroPromptCellView extends LibroExecutableCellView {
+  @inject(LirboContextKey) protected readonly lirboContextKey: LirboContextKey;
   override view = PropmtEditorViewComponent;
 
   declare model: LibroPromptCellModel;
@@ -167,12 +169,6 @@ export class LibroPromptCellView extends LibroExecutableCellView {
   protected outputAreaDeferred = new Deferred<LibroOutputArea>();
   get outputAreaReady() {
     return this.outputAreaDeferred.promise;
-  }
-
-  protected editorViewReadyDeferred: Deferred<void> = new Deferred<void>();
-
-  get editorReady() {
-    return this.editorViewReadyDeferred.promise;
   }
 
   constructor(
@@ -237,6 +233,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
 
   protected getEditorOption(): CodeEditorViewOptions {
     const option: CodeEditorViewOptions = {
+      uuid: `${this.parent.model.id}-${this.model.id}`,
       editorHostId: this.parent.id + this.id,
       model: this.model,
       config: {
@@ -260,7 +257,6 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     const editorView = await this.codeEditorManager.getOrCreateEditorView(option);
 
     this.editorView = editorView;
-    this.editorViewReadyDeferred.resolve();
     this.editorStatus = EditorStatus.LOADED;
 
     await this.afterEditorReady();
@@ -289,37 +285,25 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     this.editorView?.editor?.setOption('highlightActiveLineGutter', false);
   };
 
+  protected focusEditor() {
+    //选中cell、编辑模式、非只读时才focus
+    if (
+      this.editorView?.editor &&
+      this.editorView.editorStatus === 'ready' &&
+      this.parent.model.active?.id === this.id &&
+      !this.parent.model.commandMode &&
+      this.lirboContextKey.commandModeEnabled === true && // 排除弹窗等情况
+      this.parent.model.readOnly === false
+    ) {
+      this.editorView?.editor.setOption('styleActiveLine', true);
+      this.editorView?.editor.setOption('highlightActiveLineGutter', true);
+      this.editorView?.editor.focus();
+    }
+  }
+
   override focus = (toEdit: boolean) => {
     if (toEdit) {
-      if (this.parent.model.readOnly === true) {
-        return;
-      }
-      if (!this.editorView) {
-        this.editorReady
-          .then(async () => {
-            await this.editorView?.editorReady;
-            this.editorView?.editor?.setOption('styleActiveLine', true);
-            this.editorView?.editor?.setOption('highlightActiveLineGutter', true);
-            if (this.editorView?.editor?.hasFocus()) {
-              return;
-            }
-            this.editorView?.editor?.focus();
-            return;
-          })
-          .catch(() => {
-            //
-          });
-      } else {
-        if (!this.editorView?.editor) {
-          return;
-        }
-        this.editorView.editor.setOption('styleActiveLine', true);
-        this.editorView.editor.setOption('highlightActiveLineGutter', true);
-        if (this.editorView.editor.hasFocus()) {
-          return;
-        }
-        this.editorView.editor.focus();
-      }
+      this.focusEditor();
     } else {
       if (this.container?.current?.parentElement?.contains(document.activeElement)) {
         return;

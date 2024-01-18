@@ -140,10 +140,9 @@ export class CompletionProvider
     if (!original) {
       return;
     }
+    const lspConnection = await this.getLSPConnection();
     const itemResult =
-      await this.lspConnection.clientRequests['completionItem/resolve'].request(
-        original,
-      );
+      await lspConnection.clientRequests['completionItem/resolve'].request(original);
     if (token.isCancellationRequested) {
       return;
     }

@@ -1,6 +1,8 @@
 import type {
   CodeEditorFactory,
   CompletionProvider,
+  EditorState,
+  EditorStateFactory,
   ICoordinate,
   IEditor,
   IEditorConfig,
@@ -18,6 +20,8 @@ import { NotebookCommands } from '@difizen/libro-core';
 import type { LSPProvider } from '@difizen/libro-lsp';
 import {
   CommandRegistry,
+  Deferred,
+  getOrigin,
   inject,
   ThemeService,
   transient,
@@ -34,6 +38,8 @@ import { PlaceholderContentWidget } from './placeholder.js';
 import type { MonacoEditorOptions, MonacoEditorType, MonacoMatch } from './types.js';
 import { MonacoRange, MonacoUri } from './types.js';
 import './index.less';
+
+import * as monaco from '@difizen/monaco-editor-core';
 
 export interface LibroE2EditorConfig extends IEditorConfig {
   /**
@@ -211,6 +217,9 @@ export interface LibroE2EditorOptions extends IEditorOptions {
   config?: Partial<LibroE2EditorConfig>;
 }
 
+export const LibroE2EditorState = Symbol('LibroE2EditorState');
+export type LibroE2EditorState = EditorState<E2EditorState>;
+
 export const libroE2DefaultConfig: Required<LibroE2EditorConfig> = {
   ...defaultConfig,
   theme: {
@@ -272,8 +281,39 @@ export const E2EditorClassname = 'libro-e2-editor';
 
 export const LibroE2URIScheme = 'libro-e2';
 
+export type E2EditorState = monaco.editor.ITextModel | null;
+
+export const e2StateFactory: (
+  languageSpecRegistry: LanguageSpecRegistry,
+) => EditorStateFactory<E2EditorState> = (languageSpecRegistry) => (options) => {
+  const spec = languageSpecRegistry.languageSpecs.find(
+    (item) => item.mime === options.model.mimeType,
+  );
+  const uri = MonacoUri.from({
+    scheme: LibroE2URIScheme,
+    path: `${options.uuid}${spec?.ext[0]}`,
+  });
+  const monacoModel = monaco.editor.createModel(
+    options.model.value,
+    spec?.language,
+    uri,
+  );
+  return {
+    state: monacoModel,
+    toJSON: () => {
+      return {};
+    },
+    dispose: () => {
+      monacoModel.dispose();
+    },
+  } as EditorState<E2EditorState>;
+};
+
 @transient()
 export class LibroE2Editor implements IEditor {
+  protected editorReadyDeferred = new Deferred<void>();
+  editorReady = this.editorReadyDeferred.promise;
+
   protected readonly themeService: ThemeService;
 
   protected readonly languageSpecRegistry: LanguageSpecRegistry;
@@ -299,7 +339,7 @@ export class LibroE2Editor implements IEditor {
 
   protected _config: LibroE2EditorConfig;
 
-  private resizeObserver: ResizeObserver;
+  private intersectionObserver: IntersectionObserver;
 
   private editorContentHeight: number;
 
@@ -321,6 +361,8 @@ export class LibroE2Editor implements IEditor {
   get model(): IModel {
     return this._model;
   }
+
+  editorState: EditorState<E2EditorState>;
 
   protected _editor?: E2Editor<MonacoEditorType>;
   get editor(): E2Editor<MonacoEditorType> | undefined {
@@ -344,6 +386,7 @@ export class LibroE2Editor implements IEditor {
   protected isLayouting = false;
   constructor(
     @inject(LibroE2EditorOptions) options: LibroE2EditorOptions,
+    @inject(LibroE2EditorState) state: LibroE2EditorState,
     @inject(ThemeService) themeService: ThemeService,
     @inject(LanguageSpecRegistry)
     languageSpecRegistry: LanguageSpecRegistry,
@@ -370,6 +413,7 @@ export class LibroE2Editor implements IEditor {
     this.editorHost = document.createElement('div');
     this.host.append(this.editorHost);
 
+    this.editorState = state;
     this.createEditor(this.editorHost, fullConfig);
 
     this.onMimeTypeChanged();
@@ -407,7 +451,7 @@ export class LibroE2Editor implements IEditor {
       lineDecorationsWidth: 15,
       lineNumbersMinChars: 3,
       suggestSelection: 'first',
-      wordBasedSuggestions: 'off',
+      wordBasedSuggestions: false,
       scrollBeyondLastLine: false,
       /**
        * 使用该选项可以让modal widget出现在正确的范围，而不是被遮挡,解决z-index问题,但是会导致hover组件之类的无法被选中
@@ -441,6 +485,19 @@ export class LibroE2Editor implements IEditor {
       'semanticHighlighting.enabled': true,
       maxTokenizationLineLength: 10000,
       // wrappingStrategy: 'advanced',
+      hover: {
+        enabled: true,
+      },
+    };
+  }
+
+  getState(): EditorState<E2EditorState> {
+    const cursorPosition = this.getCursorPosition();
+    const selections = this.getSelections();
+    return {
+      ...this.editorState,
+      cursorPosition,
+      selections,
     };
   }
 
@@ -459,10 +516,7 @@ export class LibroE2Editor implements IEditor {
     const editorPorvider =
       MonacoEnvironment.container.get<EditorProvider>(EditorProvider);
 
-    const uri = MonacoUri.from({
-      scheme: LibroE2URIScheme,
-      path: `${this.uuid}${this.languageSpec.ext[0]}`,
-    });
+    const model = this.editorState.state;
 
     const options: MonacoEditorOptions = {
       ...this.toMonacoOptions(editorConfig),
@@ -470,13 +524,11 @@ export class LibroE2Editor implements IEditor {
        * language ia an uri:
        */
       language: this.languageSpec.language,
-      uri,
       theme: this.theme,
-      value: this.model.value,
+      model,
     };
 
-    const e2Editor = editorPorvider.create(host, options);
-    this._editor = e2Editor;
+    this._editor = editorPorvider.create(host, options);
     this.toDispose.push(
       this.monacoEditor?.onDidChangeModelContent(() => {
         const value = this.monacoEditor?.getValue();
@@ -503,6 +555,7 @@ export class LibroE2Editor implements IEditor {
       config.placeholder,
       this.monacoEditor!,
     );
+    this.editorReadyDeferred.resolve();
 
     // console.log(
     //   'editor._themeService.getColorTheme()',
@@ -517,16 +570,12 @@ export class LibroE2Editor implements IEditor {
   }
 
   protected inspectResize() {
-    // this.resizeObserver = new ResizeObserver((entries) => {
-    //   entries.forEach((entry) => {
-    //     const isVisible =
-    //       entry.contentRect.width !== 0 && entry.contentRect.height !== 0;
-    //     if (isVisible) {
-    //       this.updateEditorSize();
-    //     }
-    //   });
-    // });
-    // this.resizeObserver.observe(this.host);
+    this.intersectionObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        this.updateEditorSize();
+      }
+    });
+    this.intersectionObserver.observe(this.host);
   }
 
   protected getEditorNode() {
@@ -735,7 +784,9 @@ export class LibroE2Editor implements IEditor {
     this.monacoEditor?.trigger('source', 'redo', {});
   };
   focus = () => {
-    this.monacoEditor?.focus();
+    window.requestAnimationFrame(() => {
+      this.monacoEditor?.focus();
+    });
   };
   hasFocus = () => {
     return this.monacoEditor?.hasWidgetFocus() ?? false;
@@ -933,8 +984,8 @@ export class LibroE2Editor implements IEditor {
   }
 
   disposeResizeObserver = () => {
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
+    if (this.intersectionObserver) {
+      getOrigin(this.intersectionObserver).disconnect();
     }
   };
 }

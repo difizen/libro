@@ -19,6 +19,27 @@ export const IsDiff = Symbol('IsDiff');
 export class E2Editor<
   T extends monaco.editor.IStandaloneCodeEditor | monaco.editor.IStandaloneDiffEditor,
 > {
+  static createMonacoModel(
+    value: string,
+    language?: string,
+    uri?: monaco.Uri,
+  ): monaco.editor.ITextModel {
+    return monaco.editor.createModel(value, language, uri);
+  }
+
+  static createMonacoEditor(
+    node: HTMLElement,
+    options: Options,
+  ): monaco.editor.IStandaloneCodeEditor {
+    return monaco.editor.create(node, options);
+  }
+
+  static createMonacoDiffEditor(
+    node: HTMLElement,
+    options: Options,
+  ): monaco.editor.IStandaloneDiffEditor {
+    return monaco.editor.createDiffEditor(node, options);
+  }
   codeEditor!: T;
   model!: monaco.editor.ITextModel;
   modified!: monaco.editor.ITextModel;
@@ -49,11 +70,9 @@ export class E2Editor<
     if (MonacoEnvironment.lazy) {
       // 资源懒加载场景
       if (!isDiff) {
-        this.model = monaco.editor.createModel(
-          options.value || '',
-          options.language,
-          options.uri,
-        );
+        this.model =
+          options.model ??
+          monaco.editor.createModel(options.value || '', options.language, options.uri);
         const language = this.model.getLanguageId();
         (this as E2Editor<monaco.editor.IStandaloneCodeEditor>).codeEditor =
           monaco.editor.create(node, { ...options, model: this.model });
@@ -112,7 +131,9 @@ export class E2Editor<
       this.handleEditorLanguageFeatureBefore(options.language);
 
       if (!isDiff) {
-        this.model = monaco.editor.createModel(options.value || '', options.language);
+        this.model =
+          options.model ??
+          monaco.editor.createModel(options.value || '', options.language, options.uri);
         (this as E2Editor<monaco.editor.IStandaloneCodeEditor>).codeEditor =
           monaco.editor.create(node, { ...options, model: this.model });
         this.toDispose.push(

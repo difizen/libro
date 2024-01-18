@@ -224,6 +224,11 @@ export const LibroRender = forwardRef<HTMLDivElement>(function LibroRender(props
       if (typeof ref === 'function') {
         return;
       }
+      // focus编辑器host
+      if (!e.relatedTarget) {
+        return;
+      }
+      // focus编辑器外部区域
       if (ref?.current?.contains(e.relatedTarget)) {
         const dndDom = ref?.current?.getElementsByClassName(
           'libro-dnd-cells-container',
@@ -653,11 +658,10 @@ export class LibroView extends BaseView implements NotebookView {
       this.runCells([cell]);
     }
     if (this.virtualizedManager.isVirtualized) {
-      setTimeout(() => {
-        if (this.activeCell) {
-          this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
-        }
-      });
+      // 通过用户反馈，这里跳动会严重影响体验
+      // setTimeout(() => {
+      //   if (this.activeCell) this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
+      // });
     } else {
       setTimeout(() => {
         if (this.activeCell) {
