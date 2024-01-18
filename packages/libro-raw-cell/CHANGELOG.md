@@ -1,5 +1,15 @@
 # @difizen/libro-codemirror-raw-cell
 
+## 0.1.14
+
+### Patch Changes
+
+- 0b882d3: 1. prompt cell adapt to the api of libro-server 2.fix the editor in CodeEditorView is undefined
+- Updated dependencies [0b882d3]
+  - @difizen/libro-code-editor@0.1.14
+  - @difizen/libro-common@0.1.14
+  - @difizen/libro-core@0.1.14
+
 ## 0.1.13
 
 ### Patch Changes
