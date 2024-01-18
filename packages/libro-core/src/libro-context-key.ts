@@ -11,7 +11,7 @@ export class LirboContextKey {
   protected readonly contextKeyService: ContextKeyService;
   protected readonly libroService: LibroService;
   protected toDisposeOnActiveChanged?: Disposable;
-  protected commandModeEnabled = true;
+  commandModeEnabled = true;
   protected isCommandMode = false;
   active: IContextKey<boolean>;
   focus: IContextKey<boolean>;

@@ -1,6 +1,6 @@
 import type { LibroService } from '@difizen/libro-core';
 import { EditorCellView } from '@difizen/libro-core';
-import type { LSPConnection, VirtualDocument } from '@difizen/libro-lsp';
+import type { ILSPDocumentConnectionManager } from '@difizen/libro-lsp';
 import { DisposableCollection } from '@difizen/mana-app';
 import type { Disposable } from '@difizen/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
@@ -28,10 +28,9 @@ export class DiagnosticProvider extends LangaugeFeatureProvider implements Dispo
   protected toDispose = new DisposableCollection();
   constructor(
     libroService: LibroService,
-    lspConnection: LSPConnection,
-    virtualDocument: VirtualDocument,
+    lspDocumentConnectionManager: ILSPDocumentConnectionManager,
   ) {
-    super(libroService, lspConnection, virtualDocument);
+    super(libroService, lspDocumentConnectionManager);
     this.processDiagnostic();
   }
 
@@ -79,71 +78,79 @@ export class DiagnosticProvider extends LangaugeFeatureProvider implements Dispo
   }
 
   async processDiagnostic() {
-    const toDispose = this.lspConnection.serverNotifications[
+    const lspConnection = await this.getLSPConnection();
+    const toDispose = lspConnection.serverNotifications[
       'textDocument/publishDiagnostics'
-    ].event((e) => {
+    ].event(async (e) => {
       this.diagnosticList = [];
-      e.diagnostics.forEach((diagnostic) => {
-        const { range } = diagnostic;
-        // the diagnostic range must be in current editor
-        const editor = this.getEditorFromLSPPosition(range);
-        if (!editor || editor.getOption('lspEnabled') !== true) {
-          return;
-        }
-        const model = editor?.monacoEditor?.getModel();
-        if (!model) {
-          return;
-        }
+      await Promise.all(
+        e.diagnostics.map(async (diagnostic) => {
+          const { range } = diagnostic;
+          // the diagnostic range must be in current editor
+          const editor = await this.getEditorFromLSPPosition(range);
+          if (!editor || editor.getOption('lspEnabled') !== true) {
+            return;
+          }
+          const model = editor?.monacoEditor?.getModel();
+          if (!model) {
+            return;
+          }
 
-        const editorStart = this.virtualDocument.transformVirtualToEditor({
-          line: range.start.line,
-          ch: range.start.character,
-          isVirtual: true,
-        });
+          const virtualDocument = await this.getVirtualDocument();
+          if (!virtualDocument) {
+            return;
+          }
 
-        const editorEnd = this.virtualDocument.transformVirtualToEditor({
-          line: range.end.line,
-          ch: range.end.character,
-          isVirtual: true,
-        });
+          const editorStart = virtualDocument.transformVirtualToEditor({
+            line: range.start.line,
+            ch: range.start.character,
+            isVirtual: true,
+          });
 
-        if (!editorStart || !editorEnd) {
-          return;
-        }
+          const editorEnd = virtualDocument.transformVirtualToEditor({
+            line: range.end.line,
+            ch: range.end.character,
+            isVirtual: true,
+          });
 
-        const markerRange = new MonacoRange(
-          editorStart.line + 1,
-          editorStart.ch,
-          editorEnd.line + 1,
-          editorEnd.ch,
-        );
+          if (!editorStart || !editorEnd) {
+            return;
+          }
 
-        const marker: monaco.editor.IMarkerData = {
-          source: diagnostic.source,
-          tags: diagnostic.tags,
-          message: diagnostic.message,
-          code: String(diagnostic.code),
-          severity: diagnostic.severity
-            ? vererityMap[diagnostic.severity]
-            : monaco.MarkerSeverity.Info,
-          relatedInformation: diagnostic.relatedInformation?.map((item) => {
-            return {
-              message: item.message,
-              resource: MonacoUri.parse(item.location.uri),
-              startLineNumber: markerRange.startLineNumber,
-              startColumn: markerRange.startColumn,
-              endLineNumber: markerRange.endLineNumber,
-              endColumn: markerRange.endColumn,
-            };
-          }),
-          startLineNumber: editorStart.line + 1,
-          startColumn: editorStart.ch + 1,
-          endLineNumber: editorEnd.line + 1,
-          endColumn: editorEnd.ch + 1,
-        };
+          const markerRange = new MonacoRange(
+            editorStart.line + 1,
+            editorStart.ch,
+            editorEnd.line + 1,
+            editorEnd.ch,
+          );
 
-        this.addDiagnostic(model, marker);
-      });
+          const marker: monaco.editor.IMarkerData = {
+            source: diagnostic.source,
+            tags: diagnostic.tags,
+            message: diagnostic.message,
+            code: String(diagnostic.code),
+            severity: diagnostic.severity
+              ? vererityMap[diagnostic.severity]
+              : monaco.MarkerSeverity.Info,
+            relatedInformation: diagnostic.relatedInformation?.map((item) => {
+              return {
+                message: item.message,
+                resource: MonacoUri.parse(item.location.uri),
+                startLineNumber: markerRange.startLineNumber,
+                startColumn: markerRange.startColumn,
+                endLineNumber: markerRange.endLineNumber,
+                endColumn: markerRange.endColumn,
+              };
+            }),
+            startLineNumber: editorStart.line + 1,
+            startColumn: editorStart.ch + 1,
+            endLineNumber: editorEnd.line + 1,
+            endColumn: editorEnd.ch + 1,
+          };
+
+          this.addDiagnostic(model, marker);
+        }),
+      );
 
       this.displayDiagnostic();
     });

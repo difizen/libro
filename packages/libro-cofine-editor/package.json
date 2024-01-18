@@ -45,7 +45,7 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/monaco-editor-core": "latest",
+    "@difizen/monaco-editor-core": "0.39.4",
     "@difizen/libro-cofine-editor-core": "^0.1.14",
     "@difizen/libro-cofine-textmate": "^0.1.14",
     "@difizen/libro-lsp": "^0.1.14",

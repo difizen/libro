@@ -49,7 +49,7 @@
   "dependencies": {
     "@difizen/libro-cofine-editor-contribution": "^0.1.14",
     "@difizen/mana-app": "latest",
-    "@difizen/monaco-editor-core": "latest",
+    "@difizen/monaco-editor-core": "0.39.4",
     "debug": "^4.3.2",
     "reflect-metadata": "^0.1.13"
   },

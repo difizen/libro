@@ -53,8 +53,21 @@ export class MonacoTextmateService implements EditorHandlerContribution {
   beforeCreate() {
     this.initialize();
   }
-  afterCreate() {
-    //
+  afterCreate(
+    editor: monaco.editor.IStandaloneCodeEditor | monaco.editor.IStandaloneDiffEditor,
+  ) {
+    const toDispose = new DisposableCollection(
+      Disposable.create(() => {
+        /* mark as not disposed */
+      }),
+    );
+    // 激活语言必须在创建编辑器实例后
+    const lang = (editor as monaco.editor.IStandaloneCodeEditor)
+      .getModel()
+      ?.getLanguageId();
+    if (lang) {
+      this.doActivateLanguage(lang, toDispose);
+    }
   }
   canHandle() {
     return true;
@@ -215,6 +228,14 @@ export class MonacoTextmateService implements EditorHandlerContribution {
         });
       }
     }
+    // dont work
+    // return monaco.editor.onDidCreateEditor((editor) => {
+    //   if (editor.getModel()?.getLanguageId() === language) {
+    //     cb();
+    //   }
+    // });
+
+    // triggered on model create, too early if we create model before editor
     return monaco.languages.onLanguage(language, cb);
   }
 }

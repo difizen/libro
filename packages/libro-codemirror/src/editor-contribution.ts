@@ -3,7 +3,7 @@ import { CodeEditorContribution } from '@difizen/libro-code-editor';
 import { singleton } from '@difizen/mana-app';
 
 import { codeMirrorDefaultConfig } from './editor.js';
-import { codeMirrorEditorFactory } from './factory.js';
+import { codeMirrorEditorFactory, stateFactory } from './factory.js';
 
 @singleton({ contrib: [CodeEditorContribution] })
 export class CodeMirrorEditorContribution implements CodeEditorContribution {
@@ -13,5 +13,6 @@ export class CodeMirrorEditorContribution implements CodeEditorContribution {
     return 50;
   }
   factory: CodeEditorFactory = codeMirrorEditorFactory;
+  stateFactory = stateFactory;
   defaultConfig = codeMirrorDefaultConfig;
 }

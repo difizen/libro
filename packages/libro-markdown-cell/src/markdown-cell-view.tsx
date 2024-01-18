@@ -144,6 +144,7 @@ export class MarkdownCellView extends LibroEditorCellView implements CellCollaps
 
   protected getEditorOption(): CodeEditorViewOptions {
     const option: CodeEditorViewOptions = {
+      uuid: `${this.parent.model.id}-${this.model.id}`,
       model: this.model,
       config: {
         lineNumbers: false,
@@ -171,11 +172,14 @@ export class MarkdownCellView extends LibroEditorCellView implements CellCollaps
     const editorView = await this.codeEditorManager.getOrCreateEditorView(option);
 
     this.editorView = editorView;
-    await editorView.editorReady;
 
     this.editorStatus = EditorStatus.LOADED;
 
-    await this.afterEditorReady();
+    editorView.onEditorStatusChange((e) => {
+      if (e.status === 'ready') {
+        this.afterEditorReady();
+      }
+    });
   }
 
   protected async afterEditorReady() {

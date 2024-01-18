@@ -1,5 +1,6 @@
-import type { JSONObject } from '@difizen/libro-common';
+import type { JSONObject, JSONValue } from '@difizen/libro-common';
 import type { Disposable, Event, ThemeType } from '@difizen/mana-app';
+import { Syringe } from '@difizen/mana-app';
 
 import type { IModel } from './code-editor-model.js';
 
@@ -203,7 +204,8 @@ export type EdgeLocation = 'top' | 'topLine' | 'bottom';
 /**
  * A widget that provides a code editor.
  */
-export interface IEditor extends ISelectionOwner, Disposable {
+export interface IEditor<S = any> extends ISelectionOwner, Disposable {
+  editorReady: Promise<void>;
   /**
    * A signal emitted when either the top or bottom edge is requested.
    */
@@ -390,6 +392,8 @@ export interface IEditor extends ISelectionOwner, Disposable {
   onModalChange: Event<boolean>;
 
   dispose: () => void;
+
+  getState: () => EditorState<S>;
 }
 
 export type EditorTheme = Record<ThemeType, string>;
@@ -560,14 +564,9 @@ export type CompletionProvider = (
 ) => Promise<CompletionReply>;
 
 /**
- * The options used to initialize an editor.
+ * The options used to initialize an editor state.
  */
-export interface IEditorOptions {
-  /**
-   * The host widget used by the editor.
-   */
-  host: HTMLElement;
-
+export interface IEditorStateOptions {
   /**
    * The model used by the editor.
    */
@@ -576,7 +575,17 @@ export interface IEditorOptions {
   /**
    * The desired uuid for the editor.
    */
-  uuid?: string;
+  uuid: string;
+}
+
+/**
+ * The options used to initialize an editor.
+ */
+export interface IEditorOptions extends IEditorStateOptions {
+  /**
+   * The host widget used by the editor.
+   */
+  host: HTMLElement;
 
   /**
    * The default selection style for the editor.
@@ -611,4 +620,39 @@ export interface SearchMatch {
    * Start location of the match (in a text, this is the column)
    */
   position: number;
+}
+
+export interface EditorState<T = any> {
+  // monaco model or codemirror state or other editor state
+  state: T;
+  cursorPosition?: IPosition;
+  selections?: IRange[];
+  toJSON: () => JSONValue;
+  dispose: (state: T) => void;
+}
+
+export type EditorStateFactory<T = any> = (
+  options: IEditorStateOptions,
+) => EditorState<T>;
+
+/**
+ * A factory used to create a code editor.
+ */
+export type CodeEditorFactory<T = EditorState> = (
+  options: IEditorOptions,
+  state?: T,
+) => IEditor<T>;
+
+export const CodeEditorContribution = Syringe.defineToken('CodeEditorContribution');
+export interface CodeEditorContribution<T = any> {
+  canHandle(mime: string): number;
+  /**
+   * editor factory
+   */
+  factory: CodeEditorFactory<T>;
+  /**
+   * editor state factory
+   */
+  stateFactory?: EditorStateFactory<T>;
+  defaultConfig: IEditorConfig;
 }

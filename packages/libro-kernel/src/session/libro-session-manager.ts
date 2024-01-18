@@ -181,7 +181,7 @@ export class LibroSessionManager {
         kernel: {
           kernelName: reuseKernelInfo
             ? reuseKernelInfo.name
-            : fileInfo.content.metadata.kernelspec?.name || firstKernelSpecName, // 使用ipynb文件原本的kernel name，或者使用kernel spec轮询得到的第一个kernel name
+            : fileInfo.content?.metadata?.kernelspec?.name || firstKernelSpecName, // 使用ipynb文件原本的kernel name，或者使用kernel spec轮询得到的第一个kernel name
         },
         path: fileInfo.path,
         type: fileInfo.type,
@@ -328,7 +328,7 @@ export class LibroSessionManager {
         {
           name: fileInfo.name,
           kernel: {
-            kernelName: options.name || fileInfo.content.metadata.kernelspec.name,
+            kernelName: options.name || fileInfo.content?.metadata?.kernelspec.name,
           },
           path: fileInfo.path,
           type: fileInfo.type,

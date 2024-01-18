@@ -33,9 +33,11 @@ export class CodeCellSearchProvider extends CodeEditorCellSearchProvider {
     this.currentProviderIndex = -1;
     this.outputsProvider = [];
     this.setupOutputProvider();
-    this.cell.outputArea.onUpdate(() => {
-      this.setupOutputProvider();
-    });
+    this.toDispose.push(
+      this.cell.outputArea.onUpdate(() => {
+        this.setupOutputProvider();
+      }),
+    );
 
     this.toDispose.push(
       watch(this.cell.model, 'hasOutputHidden', async () => {
@@ -220,7 +222,7 @@ export class CodeCellSearchProvider extends CodeEditorCellSearchProvider {
       return this.genericSearchProviderFactory({ view: output });
     });
     if (this.isActive && this.query && this.filters?.searchCellOutput !== false) {
-      this.refresh();
+      await this.refresh();
     }
     this.stateChangedEmitter.fire();
   };

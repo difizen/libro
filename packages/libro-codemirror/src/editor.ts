@@ -19,6 +19,7 @@ import type { Command, DecorationSet, ViewUpdate } from '@codemirror/view';
 import { Decoration, EditorView } from '@codemirror/view';
 import { defaultConfig, defaultSelectionStyle } from '@difizen/libro-code-editor';
 import type {
+  EditorState as LibroEditorState,
   ICoordinate,
   IEditor,
   IEditorConfig,
@@ -34,13 +35,14 @@ import type {
 } from '@difizen/libro-code-editor';
 import { findFirstArrayIndex, removeAllWhereFromArray } from '@difizen/libro-common';
 import type { LSPProvider } from '@difizen/libro-lsp';
-import { Disposable, Emitter } from '@difizen/mana-app';
+import { Deferred, Disposable, Emitter } from '@difizen/mana-app';
 import { getOrigin, watch } from '@difizen/mana-app';
 import type { SyntaxNodeRef } from '@lezer/common';
 import { v4 } from 'uuid';
 
 import type { CodeMirrorConfig } from './config.js';
 import { EditorConfiguration } from './config.js';
+import { stateFactory } from './factory.js';
 import { ensure } from './mode.js';
 import { monitorPlugin } from './monitor.js';
 
@@ -137,6 +139,8 @@ export const codeMirrorDefaultConfig: Required<CodeMirrorConfig> = {
 };
 
 export class CodeMirrorEditor implements IEditor {
+  protected editorReadyDeferred = new Deferred<void>();
+  editorReady = this.editorReadyDeferred.promise;
   // highlight
   protected highlightEffect: StateEffectType<{
     matches: SearchMatch[];
@@ -145,6 +149,8 @@ export class CodeMirrorEditor implements IEditor {
   protected highlightMark: Decoration;
   protected selectedMatchMark: Decoration;
   protected highlightField: StateField<DecorationSet>;
+
+  protected editorState: LibroEditorState;
 
   /**
    * Construct a CodeMirror editor.
@@ -160,6 +166,8 @@ export class CodeMirrorEditor implements IEditor {
     host.addEventListener('scroll', this, true);
 
     this._uuid = options.uuid || v4();
+    this.editorState =
+      options.state ?? stateFactory({ uuid: options.uuid, model: options.model });
 
     // State and effects for handling the selection marks
     this._addMark = StateEffect.define<ICollabSelectionText>();
@@ -314,6 +322,8 @@ export class CodeMirrorEditor implements IEditor {
       ],
     );
 
+    this.editorReadyDeferred.resolve();
+
     // every time the model is switched, we need to re-initialize the editor binding
     // this.model.sharedModelSwitched.connect(this._initializeEditorBinding, this);
 
@@ -331,6 +341,14 @@ export class CodeMirrorEditor implements IEditor {
     // });
 
     watch(model, 'mimeType', this._onMimeTypeChanged);
+  }
+
+  getState(): LibroEditorState {
+    return {
+      ...this.editorState,
+      cursorPosition: this.getCursorPosition(),
+      selections: this.getSelections(),
+    };
   }
 
   /**
@@ -545,14 +563,14 @@ export class CodeMirrorEditor implements IEditor {
    * Brings browser focus to this editor text.
    */
   focus(): void {
-    this._editor.focus();
+    getOrigin(this._editor).focus();
   }
 
   /**
    * Test whether the editor has keyboard focus.
    */
   hasFocus(): boolean {
-    return this._editor.hasFocus;
+    return getOrigin(this._editor).hasFocus;
   }
 
   /**
@@ -1219,6 +1237,7 @@ export interface IOptions extends IEditorOptions {
    * The configuration options for the editor.
    */
   config?: Partial<IConfig>;
+  state?: LibroEditorState;
 }
 
 export function createEditor(

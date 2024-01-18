@@ -16,6 +16,7 @@ import {
   LibroExecutableCellView,
   LibroOutputArea,
   VirtualizedManagerHelper,
+  LirboContextKey,
 } from '@difizen/libro-core';
 import type { ViewSize } from '@difizen/mana-app';
 import {
@@ -99,6 +100,7 @@ const CodeEditorViewComponent = forwardRef<HTMLDivElement>(
 @transient()
 @view('code-editor-cell-view')
 export class LibroCodeCellView extends LibroExecutableCellView {
+  @inject(LirboContextKey) protected readonly lirboContextKey: LirboContextKey;
   override view = CodeEditorViewComponent;
 
   viewManager: ViewManager;
@@ -123,12 +125,6 @@ export class LibroCodeCellView extends LibroExecutableCellView {
 
   @prop()
   override editorStatus: EditorStatus = EditorStatus.NOTLOADED;
-
-  protected editorViewReadyDeferred: Deferred<void> = new Deferred<void>();
-
-  get editorReady() {
-    return this.editorViewReadyDeferred.promise;
-  }
 
   protected outputAreaDeferred = new Deferred<LibroOutputArea>();
   get outputAreaReady() {
@@ -219,20 +215,16 @@ export class LibroCodeCellView extends LibroExecutableCellView {
 
   override onViewMount() {
     this.createEditor();
-    //选中cell时才focus
-    if (this.parent.model.active?.id === this.id) {
-      this.focus(!this.parent.model.commandMode);
-    }
   }
 
   setEditorHost(ref: any) {
     const editorHostId = this.parent.id + this.id;
-
     this.codeEditorManager.setEditorHostRef(editorHostId, ref);
   }
 
   protected getEditorOption(): CodeEditorViewOptions {
     const option: CodeEditorViewOptions = {
+      uuid: `${this.parent.model.id}-${this.model.id}`,
       editorHostId: this.parent.id + this.id,
       model: this.model,
       config: {
@@ -258,10 +250,14 @@ export class LibroCodeCellView extends LibroExecutableCellView {
     const editorView = await this.codeEditorManager.getOrCreateEditorView(option);
 
     this.editorView = editorView;
-    this.editorViewReadyDeferred.resolve();
     this.editorStatus = EditorStatus.LOADED;
 
-    await this.afterEditorReady();
+    editorView.onEditorStatusChange((e) => {
+      if (e.status === 'ready') {
+        this.editor = this.editorView!.editor;
+        this.afterEditorReady();
+      }
+    });
   }
 
   protected async afterEditorReady() {
@@ -272,6 +268,23 @@ export class LibroCodeCellView extends LibroExecutableCellView {
       );
     });
     this.editorView?.onModalChange((val) => (this.hasModal = val));
+    this.focusEditor();
+  }
+
+  protected focusEditor() {
+    //选中cell、编辑模式、非只读时才focus
+    if (
+      this.editorView?.editor &&
+      this.editorView.editorStatus === 'ready' &&
+      this.parent.model.active?.id === this.id &&
+      !this.parent.model.commandMode &&
+      this.lirboContextKey.commandModeEnabled === true && // 排除弹窗等情况
+      this.parent.model.readOnly === false
+    ) {
+      this.editorView?.editor.setOption('styleActiveLine', true);
+      this.editorView?.editor.setOption('highlightActiveLineGutter', true);
+      this.editorView?.editor.focus();
+    }
   }
 
   override shouldEnterEditorMode(e: React.FocusEvent<HTMLElement>) {
@@ -287,32 +300,7 @@ export class LibroCodeCellView extends LibroExecutableCellView {
 
   override focus = (toEdit: boolean) => {
     if (toEdit) {
-      if (this.parent.model.readOnly === true) {
-        return;
-      }
-      if (!this.editorView) {
-        this.editorReady
-          .then(() => {
-            this.editorView?.editorReady.then(() => {
-              this.editorView?.editor?.setOption('styleActiveLine', true);
-              this.editorView?.editor?.setOption('highlightActiveLineGutter', true);
-              if (this.editorView?.editor?.hasFocus()) {
-                return;
-              }
-              this.editorView?.editor?.focus();
-              return;
-            });
-            return;
-          })
-          .catch(console.error);
-      } else {
-        this.editorView?.editor?.setOption('styleActiveLine', true);
-        this.editorView?.editor?.setOption('highlightActiveLineGutter', true);
-        if (this.editorView?.editor?.hasFocus()) {
-          return;
-        }
-        this.editorView?.editor?.focus();
-      }
+      this.focusEditor();
     } else {
       if (this.container?.current?.parentElement?.contains(document.activeElement)) {
         return;

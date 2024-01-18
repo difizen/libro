@@ -1,11 +1,19 @@
-import type { CodeEditorFactory } from '@difizen/libro-code-editor';
+import type { CodeEditorFactory, EditorStateFactory } from '@difizen/libro-code-editor';
 import { CodeEditorContribution } from '@difizen/libro-code-editor';
 import { inject, singleton } from '@difizen/mana-app';
 
-import { libroE2DefaultConfig, LibroE2EditorFactory } from './libro-e2-editor.js';
+import { LanguageSpecRegistry } from './language-specs.js';
+import {
+  e2StateFactory,
+  libroE2DefaultConfig,
+  LibroE2EditorFactory,
+} from './libro-e2-editor.js';
 
 @singleton({ contrib: [CodeEditorContribution] })
 export class LibroE2EditorContribution implements CodeEditorContribution {
+  @inject(LanguageSpecRegistry)
+  protected readonly languageSpecRegistry: LanguageSpecRegistry;
+
   factory: CodeEditorFactory;
 
   defaultConfig = libroE2DefaultConfig;
@@ -15,6 +23,13 @@ export class LibroE2EditorContribution implements CodeEditorContribution {
   ) {
     this.factory = libroE2EditorFactory;
   }
+
+  stateFactory: EditorStateFactory<any> = (options) => {
+    return e2StateFactory(this.languageSpecRegistry)({
+      uuid: options.uuid,
+      model: options.model,
+    });
+  };
 
   canHandle(mime: string): number {
     const mimes = [

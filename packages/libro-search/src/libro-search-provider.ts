@@ -44,7 +44,7 @@ export class LibroSearchProvider extends AbstractSearchProvider {
 
   protected toDispose = new DisposableCollection();
   @prop() protected currentProviderIndex: number | undefined = undefined;
-  @prop() searchCellOutput = true;
+  @prop() searchCellOutput = false;
   @prop() protected onlySearchSelectedCells = false;
   @prop() replaceMode = false;
 

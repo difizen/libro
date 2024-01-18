@@ -3,9 +3,8 @@
 import type { CodeEditorViewOptions, CodeEditorView } from '@difizen/libro-code-editor';
 import { CodeEditorManager } from '@difizen/libro-code-editor';
 import type { CellViewOptions } from '@difizen/libro-core';
-import { CellService, LibroEditorCellView } from '@difizen/libro-core';
+import { CellService, LibroEditorCellView, LirboContextKey } from '@difizen/libro-core';
 import { getOrigin, prop, useInject, watch } from '@difizen/mana-app';
-import { Deferred } from '@difizen/mana-app';
 import {
   view,
   ViewInstance,
@@ -44,6 +43,7 @@ const CodeEditorViewComponent = React.forwardRef<HTMLDivElement>(
 @transient()
 @view('raw-cell-view')
 export class LibroRawCellView extends LibroEditorCellView {
+  @inject(LirboContextKey) protected readonly lirboContextKey: LirboContextKey;
   declare model: LibroRawCellModel;
   override view = CodeEditorViewComponent;
 
@@ -53,12 +53,6 @@ export class LibroRawCellView extends LibroEditorCellView {
 
   @prop()
   editorView?: CodeEditorView;
-
-  protected editorViewReadyDeferred: Deferred<void> = new Deferred<void>();
-
-  get editorReady() {
-    return this.editorViewReadyDeferred.promise;
-  }
 
   constructor(
     @inject(ViewOption) options: CellViewOptions,
@@ -82,6 +76,8 @@ export class LibroRawCellView extends LibroEditorCellView {
 
   protected getEditorOption(): CodeEditorViewOptions {
     const option: CodeEditorViewOptions = {
+      uuid: `${this.parent.model.id}-${this.model.id}`,
+      editorHostId: this.parent.id + this.id,
       model: this.model,
       config: {
         readOnly: this.parent.model.readOnly,
@@ -102,7 +98,6 @@ export class LibroRawCellView extends LibroEditorCellView {
     const editorView = await this.codeEditorManager.getOrCreateEditorView(option);
 
     this.editorView = editorView;
-    await editorView.editorReady;
     await this.afterEditorReady();
   }
 
@@ -124,30 +119,25 @@ export class LibroRawCellView extends LibroEditorCellView {
     //
   };
 
+  protected focusEditor() {
+    //选中cell、编辑模式、非只读时才focus
+    if (
+      this.editorView?.editor &&
+      this.editorView.editorStatus === 'ready' &&
+      this.parent.model.active?.id === this.id &&
+      !this.parent.model.commandMode &&
+      this.lirboContextKey.commandModeEnabled === true && // 排除弹窗等情况
+      this.parent.model.readOnly === false
+    ) {
+      this.editorView?.editor.setOption('styleActiveLine', true);
+      this.editorView?.editor.setOption('highlightActiveLineGutter', true);
+      this.editorView?.editor.focus();
+    }
+  }
+
   override focus = (toEdit: boolean) => {
     if (toEdit) {
-      if (this.parent.model.readOnly === true) {
-        return;
-      }
-      if (!this.editorView) {
-        this.editorReady
-          .then(() => {
-            this.editorView?.editorReady.then(() => {
-              if (this.editorView?.editor.hasFocus()) {
-                return;
-              }
-              this.editorView?.editor.focus();
-              return;
-            });
-            return;
-          })
-          .catch(console.error);
-      } else {
-        if (this.editorView?.editor.hasFocus()) {
-          return;
-        }
-        this.editorView?.editor.focus();
-      }
+      this.focusEditor();
     } else {
       if (this.container?.current?.parentElement?.contains(document.activeElement)) {
         return;

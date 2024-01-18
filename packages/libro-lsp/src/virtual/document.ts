@@ -111,7 +111,7 @@ export type VirtualDocumentInfoOptions = VirtualDocument;
 @transient()
 export class VirtualDocumentInfo implements IDocumentInfo {
   @inject(ILSPDocumentConnectionManager)
-  connectionManager: ILSPDocumentConnectionManager;
+  protected readonly connectionManager: ILSPDocumentConnectionManager;
   /**
    * Creates an instance of VirtualDocumentInfo.
    * @param document - the virtual document need to
@@ -258,7 +258,6 @@ export class VirtualDocument implements Disposable {
     this.unusedDocuments = new Set();
     this.documentInfo = docInfofactory(this);
 
-    this.documentInfo = new VirtualDocumentInfo(this);
     this.updateManager = new UpdateManager(this);
     this.updateManager.updateBegan(this._updateBeganSlot, this);
     this.updateManager.blockAdded(this._blockAddedSlot, this);

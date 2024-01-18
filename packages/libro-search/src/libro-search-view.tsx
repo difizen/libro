@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import type { LibroView } from '@difizen/libro-core';
 import { LirboContextKey } from '@difizen/libro-core';
-import { prop, useInject, watch } from '@difizen/mana-app';
+import { prop, useInject, useObserve, watch } from '@difizen/mana-app';
 import { BaseView, view, ViewInstance } from '@difizen/mana-app';
 import { inject, transient } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
@@ -16,7 +16,7 @@ import { Button, Checkbox, Input, Tag } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import type { InputRef } from 'antd/es/input';
 import classnames from 'classnames';
-import { forwardRef, useEffect, useRef } from 'react';
+import { forwardRef, memo, useEffect, useRef } from 'react';
 
 import type { LibroSearchProvider } from './libro-search-provider.js';
 import { LibroSearchProviderFactory } from './libro-search-provider.js';
@@ -40,22 +40,25 @@ export const ReplaceToggle = () => {
   );
 };
 
-export const SearchIndex = () => {
+export const SearchIndex: React.FC = () => {
   const instance = useInject<LibroSearchView>(ViewInstance);
+  const currentMatchIndex = useObserve(instance.currentMatchIndex);
+  const matchesCount = useObserve(instance.matchesCount);
 
-  // TODO: trigger update when current match index changed, matchesCount dont work
-  useEffect(() => {
-    //
-  }, [instance.currentMatchIndex]);
+  if (instance.isSearching) {
+    return <>searching...</>;
+  }
 
   return (
     <div className="libro-search-index">
       {instance.matchesCount !== undefined
-        ? `${instance.currentMatchIndex}/${instance.matchesCount}`
+        ? `${currentMatchIndex ?? '-'}/${matchesCount ?? ' -'}`
         : '无结果'}
     </div>
   );
 };
+
+export const SearchIndexMemo = memo(SearchIndex);
 
 export const SearchContent = () => {
   const instance = useInject<LibroSearchView>(ViewInstance);
@@ -114,7 +117,7 @@ export const SearchContent = () => {
             />
           </td>
           <td className="libro-search-action">
-            <SearchIndex />
+            <SearchIndexMemo />
             <div>
               <Button
                 title="Previous Match"
@@ -224,6 +227,7 @@ export class LibroSearchView extends BaseView {
   @prop() replaceStr = '';
   @prop() caseSensitive = false;
   @prop() useRegex = false;
+  @prop() isSearching = false;
 
   override view = SearchComponent;
 
@@ -270,7 +274,7 @@ export class LibroSearchView extends BaseView {
     }
   };
 
-  onviewWillUnmount = async () => {
+  onViewWillUnmount = async () => {
     await this.searchProvider?.endQuery();
     this.searchProvider?.dispose();
   };
@@ -301,7 +305,7 @@ export class LibroSearchView extends BaseView {
     }
   };
 
-  search = (hightlightNext = true) => {
+  search = async (hightlightNext = true) => {
     if (this.searchProvider) {
       this.lastSearch = this.findStr;
       const query = this.utils.parseQuery(
@@ -310,9 +314,11 @@ export class LibroSearchView extends BaseView {
         this.useRegex,
       );
       if (query) {
-        this.searchProvider?.startQuery(query, undefined, hightlightNext);
+        this.isSearching = true;
+        await this.searchProvider?.startQuery(query, undefined, hightlightNext);
+        this.isSearching = false;
       } else {
-        this.searchProvider?.endQuery();
+        await this.searchProvider?.endQuery();
       }
     }
   };
@@ -377,11 +383,11 @@ export class LibroSearchView extends BaseView {
     return height;
   };
 
-  nextMatch = (reverse: boolean) => {
+  nextMatch = async (reverse: boolean) => {
     if (reverse) {
-      this.searchProvider?.highlightPrevious();
+      await this.searchProvider?.highlightPrevious();
     } else {
-      this.searchProvider?.highlightNext();
+      await this.searchProvider?.highlightNext();
     }
   };
 
@@ -408,16 +414,13 @@ export class LibroSearchView extends BaseView {
     }
   };
 
-  protected doHandleFindChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.findStr = e.target.value;
-  };
-
   handleFindChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.findStr = e.target.value;
     if (this.findStr !== this.lastSearch) {
       this.search(false);
     }
   };
+
   handleReplaceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.replaceStr = e.target.value;
   };
