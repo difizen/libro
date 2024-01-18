@@ -41,26 +41,56 @@ import React, { useEffect, useState } from 'react';
 import type { LibroPromptCellModel } from './prompt-cell-model.js';
 import { PromptScript } from './prompt-cell-script.js';
 
-export interface IChatSelectionItem {
+export interface ChatItem {
   name: string;
   type: string;
+  order: number;
+  key: string;
+}
+export interface ChatTypeOptions {
+  order?: number;
+  color?: string;
 }
 
-const SelectionItemLabel: React.FC<{ item: IChatSelectionItem }> = (props: {
-  item: IChatSelectionItem;
+const ChatItemOptions = (type: string): ChatTypeOptions => {
+  switch (type) {
+    case 'LLM':
+      return {
+        order: 1,
+        color: 'blue',
+      };
+    case 'VARIABLE':
+      return {
+        order: 2,
+        color: 'red',
+      };
+    case 'API':
+      return {
+        order: 3,
+        color: 'green',
+      };
+    case 'CUSTOM':
+      return {
+        order: 4,
+        color: undefined,
+      };
+    default:
+      return {
+        order: undefined,
+        color: undefined,
+      };
+  }
+};
+
+const SelectionItemLabel: React.FC<{ item: ChatItem }> = (props: {
+  item: ChatItem;
 }) => {
   const item = props.item;
-  const colorMap: Record<string, any> = {
-    VARIABLE: 'red',
-    LLM: 'blue',
-    API: 'green',
-    CUSTOM: undefined,
-  };
 
   return (
     <span className="libro-prompt-cell-selection-label">
       <Tag
-        color={colorMap[item.type] || undefined}
+        color={ChatItemOptions(item.type).color}
         className="libro-prompt-cell-header-selection-type"
       >
         {item.type}
@@ -89,10 +119,10 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
       instance
         .updateChatList()
         .then(() => {
-          const len = instance.selection.length;
+          const len = instance.chatItems.length;
           if (len > 0) {
             instance.model.decodeObject = {
-              modelType: instance.selection[len - 1].name,
+              modelType: instance.chatItems[len - 1].key,
               ...instance.model.decodeObject,
             };
             setSelectedModel(instance.model.decodeObject['modelType']);
@@ -129,7 +159,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
               value={selectedModel}
               style={{ width: 160 }}
               onChange={handleChange}
-              options={instance.selection.map(instance.toSelectionOption)}
+              options={instance.sortedChatItems.map(instance.toSelectionOption)}
               bordered={false}
               onFocus={async () => {
                 await instance.updateChatList();
@@ -152,7 +182,21 @@ export class LibroPromptCellView extends LibroExecutableCellView {
   declare model: LibroPromptCellModel;
 
   @prop()
-  selection: IChatSelectionItem[] = [];
+  chatItems: ChatItem[] = [];
+
+  get sortedChatItems(): ChatItem[] {
+    return [...this.chatItems].sort((a, b) => {
+      if (a.type !== b.type) {
+        const aOrder = ChatItemOptions(a.type).order || 0;
+        const bOrder = ChatItemOptions(b.type).order || 0;
+        if (aOrder === bOrder && aOrder === 0) {
+          return a.type.localeCompare(b.type);
+        }
+        return aOrder - bOrder;
+      }
+      return a.order - b.order;
+    });
+  }
 
   viewManager: ViewManager;
 
@@ -425,9 +469,9 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     );
   };
 
-  toSelectionOption = (item: IChatSelectionItem) => {
+  toSelectionOption = (item: ChatItem) => {
     return {
-      value: item.name,
+      value: item.key,
       label: <SelectionItemLabel item={item} />,
     };
   };
@@ -443,7 +487,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
           content = content.replace(/\\"/g, '"').replace(/\\'/g, "'");
         }
 
-        this.selection = JSON.parse(content) as IChatSelectionItem[];
+        this.chatItems = JSON.parse(content) as ChatItem[];
         break;
       }
       case 'stream': {
@@ -454,7 +498,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
           contentStream = contentStream.replace(/\\"/g, '"').replace(/\\'/g, "'");
         }
 
-        this.selection = JSON.parse(contentStream) as IChatSelectionItem[];
+        this.chatItems = JSON.parse(contentStream) as ChatItem[];
         break;
       }
       default:
