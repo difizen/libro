@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.14
+
+### Patch Changes
+
+- 0b882d3: 1. prompt cell adapt to the api of libro-server 2.fix the editor in CodeEditorView is undefined
+- Updated dependencies [0b882d3]
+  - @difizen/libro-cofine-editor-core@0.1.14
+
 ## 0.1.13
 
 ### Patch Changes

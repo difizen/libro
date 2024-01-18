@@ -1,5 +1,11 @@
 # @difizen/libro-common
 
+## 0.1.14
+
+### Patch Changes
+
+- 0b882d3: 1. prompt cell adapt to the api of libro-server 2.fix the editor in CodeEditorView is undefined
+
 ## 0.1.13
 
 ### Patch Changes
