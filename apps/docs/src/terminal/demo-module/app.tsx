@@ -1,5 +1,6 @@
 import type { TerminalViewOption } from '@difizen/libro-terminal';
 import { TerminalManager, LibroTerminalView } from '@difizen/libro-terminal';
+import type { Disposable } from '@difizen/mana-app';
 import {
   BaseView,
   ViewInstance,
@@ -10,18 +11,19 @@ import {
   useInject,
   view,
 } from '@difizen/mana-app';
-import { Button, Card, Checkbox, Flex, Form, Input, Space } from 'antd';
+import { Button, Card, Checkbox, Flex, Form, Input, Space, Tabs } from 'antd';
+import type { FC } from 'react';
 import { forwardRef, useCallback, useEffect, useState } from 'react';
 
 const gridStyle: React.CSSProperties = {
   width: '50%',
 };
 
-const Terminal = function Terminal(props: {
+const Terminal: FC<{
   // options: TerminalViewOption;
   viewRender: LibroTerminalView;
   updateList: () => void;
-}) {
+}> = function Terminal(props) {
   // const instance = useInject<AppView>(ViewInstance);
   const [pasteVal, setPasteVal] = useState('');
   const [writeLineVal, setWriteLineVal] = useState('');
@@ -42,34 +44,59 @@ const Terminal = function Terminal(props: {
 
   // message
   useEffect(() => {
+    const disposes: Disposable[] = [];
     if (view) {
-      view.onDidOpen((v) => {
-        setonDidOpenVal(JSON.stringify(v));
-      });
-      view.onDidOpenFailure((v) => {
-        setonDidOpenFailureVal(JSON.stringify(v));
-      });
-      view.onSizeChanged((v) => {
-        setonSizeChangedVal(JSON.stringify(v));
-      });
-      view.onData((v) => {
-        setonDataVal(JSON.stringify(v));
-      });
-      view.onKey((v) => {
-        setonKeyVal(JSON.stringify(v));
-      });
-      view.onReady(() => {
-        forceUpdate({});
-      });
-      view.onTitleChange(() => {
-        forceUpdate({});
-      });
+      disposes.push(
+        view.onDidOpen((v) => {
+          setonDidOpenVal(JSON.stringify(v));
+        }),
+      );
 
-      view.onReady(() => {
-        setReady(true);
-      });
+      disposes.push(
+        view.onDidOpenFailure((v) => {
+          setonDidOpenFailureVal(JSON.stringify(v));
+        }),
+      );
+      disposes.push(
+        view.onSizeChanged((v) => {
+          setonSizeChangedVal(JSON.stringify(v));
+        }),
+      );
+      disposes.push(
+        view.onData((v) => {
+          setonDataVal(JSON.stringify(v));
+        }),
+      );
+      disposes.push(
+        view.onKey((v) => {
+          setonKeyVal(JSON.stringify(v));
+        }),
+      );
+      disposes.push(
+        view.onReady(() => {
+          forceUpdate({});
+        }),
+      );
+      disposes.push(
+        view.onTitleChange(() => {
+          forceUpdate({});
+          props.updateList();
+        }),
+      );
+
+      disposes.push(
+        view.onReady(() => {
+          setReady(true);
+        }),
+      );
     }
-  }, [view]);
+
+    return () => {
+      disposes.forEach((d) => {
+        d.dispose();
+      });
+    };
+  }, [props, view]);
 
   if (view === null) {
     return null;
@@ -250,84 +277,12 @@ const Terminal = function Terminal(props: {
 };
 
 export const App = forwardRef(function App() {
-  const instance = useInject<AppView>(ViewInstance);
-
-  // const [terminalViews, setTerminalViews] = useState<Record<string, LibroTerminalView>>(
-  //   {},
-  // );
-
-  // const updateList = useCallback(() => {
-  //   instance.terminalManager.requestRunning();
-  // }, [instance.terminalManager]);
-
-  // useEffect(() => {
-  //   const disposed = instance.terminalManager.runningChanged((models) => {
-  //     // delete
-  //     function diffAndDeleteRender() {
-  //       function diffValuesInA1(a1: string[], a2: string[]): string[] {
-  //         // 存储差异值的数组
-  //         const diffArr: string[] = [];
-
-  //         // 遍历 a2 数组中的每个值
-  //         for (const value of a2) {
-  //           // 如果该值在 a1 中不存在，则将其加入差异值数组
-  //           if (!a1.includes(value)) {
-  //             diffArr.push(value);
-  //           }
-  //         }
-
-  //         return diffArr;
-  //       }
-  //       const diff = diffValuesInA1(
-  //         models.map((v) => v.name),
-  //         Object.keys(terminalViews),
-  //       );
-  //       console.log('delete ids', diff);
-  //       diff.forEach((v) => {
-  //         delete terminalViews[v];
-  //       });
-  //     }
-  //     diffAndDeleteRender();
-
-  //     if (Object.keys(terminalViews).length === 0) {
-  //       const initRenderLise = (models: TerminalModel[]) => {
-  //         Promise.all(
-  //           models
-  //             .filter((v) => {
-  //               return !terminalViews[v.name];
-  //             })
-  //             .map(async (m) => {
-  //               const view = await instance.factory(m);
-  //               return { [m.name]: view };
-  //             }),
-  //         )
-  //           .then((views) => {
-  //             setTerminalViews((s) => {
-  //               return {
-  //                 ...s,
-  //                 ...views.reduce((acc, v) => {
-  //                   return {
-  //                     ...acc,
-  //                     ...v,
-  //                   };
-  //                 }, {}),
-  //               };
-  //             });
-  //             return;
-  //           })
-  //           .catch((e) => {
-  //             console.error(e);
-  //           });
-  //       };
-  //       initRenderLise(models);
-  //     }
-  //   });
-  //   return () => {
-  //     disposed.dispose();
-  //   };
-  // }, [instance, instance.terminalManager, terminalViews]);
-
   const [views, setViews] = useState<LibroTerminalView[]>([]);
+
+  const [activeKey, setActiveKey] = useState(views[0]?.id);
+  //
+
+  const instance = useInject<AppView>(ViewInstance);
 
   const updateViews = useCallback(
     function updateViews() {
@@ -337,6 +292,8 @@ export const App = forwardRef(function App() {
         )
         .then((v) => {
           setViews(v);
+          setActiveKey(v[v.length - 1]?.id);
+
           return;
         })
         .catch((e) => {
@@ -368,6 +325,14 @@ export const App = forwardRef(function App() {
       disposed.dispose();
     };
   }, [instance, updateViews, views.length]);
+
+  const items = views.map((v) => {
+    return {
+      label: (v.title.label as string) || 'loading',
+      children: <Terminal key={v.id} viewRender={v} updateList={updateViews} />,
+      key: v.id,
+    };
+  });
 
   return (
     <div id="libro-lab-content-layout" style={{ padding: '24px' }}>
@@ -431,9 +396,25 @@ export const App = forwardRef(function App() {
           </Form>
         </Card>
 
-        {views.map((view) => {
+        <Tabs
+          hideAdd
+          onChange={(key: string) => {
+            setActiveKey(key);
+          }}
+          activeKey={activeKey}
+          type="editable-card"
+          onEdit={(targetKey: any, action: 'add' | 'remove') => {
+            if (action === 'remove') {
+              const targetView = views.find((v) => v.id === targetKey);
+              targetView?.dispose();
+              updateViews();
+            }
+          }}
+          items={items}
+        ></Tabs>
+        {/* {views.map((view) => {
           return <Terminal key={view.id} viewRender={view} updateList={updateViews} />;
-        })}
+        })} */}
       </Space>
     </div>
   );

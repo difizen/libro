@@ -182,6 +182,7 @@ export class LibroTerminalView extends BaseStatefulView {
     this.toDispose.push(
       this.term.onResize((data) => {
         this.onSizeChangedEmitter.fire(data);
+        this.setSessionSize();
       }),
     );
 
@@ -455,13 +456,22 @@ export class LibroTerminalView extends BaseStatefulView {
     if (!this.isVisible) {
       return;
     }
+    if (this.container?.current) {
+      if (this.container.current.offsetHeight === 0) {
+        return;
+      }
+      if (this.container.current.offsetWidth === 0) {
+        return;
+      }
+    }
+
+    // 触发term的resize 事件
     this.processResize();
   };
 
   protected processResize = () => {
     this.open();
     this.resizeTerminal();
-    this.setSessionSize();
   };
 
   protected open = (): void => {
