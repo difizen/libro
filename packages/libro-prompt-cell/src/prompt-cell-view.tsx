@@ -38,8 +38,10 @@ import { Deferred } from '@difizen/mana-app';
 import { Select, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 
-import type { LibroPromptCellModel } from './prompt-cell-model.js';
+import { LibroPromptCellModel } from './prompt-cell-model.js';
 import { PromptScript } from './prompt-cell-script.js';
+import { VariableNameInput } from './variable-handler/index.js';
+import './index.less';
 
 export interface ChatItem {
   name: string;
@@ -99,7 +101,7 @@ const SelectionItemLabel: React.FC<{ item: ChatItem }> = (props: {
     </span>
   );
 };
-const CellEditor: React.FC = () => {
+const CellEditorRaw: React.FC = () => {
   const instance = useInject<LibroPromptCellView>(ViewInstance);
   useEffect(() => {
     if (instance.editorView?.editor) {
@@ -109,13 +111,15 @@ const CellEditor: React.FC = () => {
   return <>{instance.editorView && <ViewRender view={instance.editorView} />}</>;
 };
 
-export const CellEditorMemo = React.memo(CellEditor);
+export const CellEditor = React.memo(CellEditorRaw);
 
 const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
   function MaxPropmtEditorViewComponent(props, ref) {
     const instance = useInject<LibroPromptCellView>(ViewInstance);
     const [selectedModel, setSelectedModel] = useState<string>('暂无内置模型');
     useEffect(() => {
+      // TODO: Data initialization should not depend on view initialization, which causes limitations in usage scenarios and multiple renderings.
+      instance.model.variableName = instance.model.decodeObject['variableName'];
       instance
         .updateChatList()
         .then(() => {
@@ -138,11 +142,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
     }, []);
 
     const handleChange = (value: string) => {
-      instance.model.modelType = value;
-      instance.model.decodeObject = {
-        ...instance.model.decodeObject,
-        modelType: value,
-      };
+      instance.handleModelNameChange(value);
       setSelectedModel(value);
     };
 
@@ -166,8 +166,13 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
               }}
             />
           </div>
+          <VariableNameInput
+            value={instance.model.variableName}
+            checkVariableNameAvailable={instance.checkVariableNameAvailable}
+            handleVariableNameChange={instance.handleVariableNameChange}
+          />
         </div>
-        <CellEditorMemo />
+        <CellEditor />
       </div>
     );
   },
@@ -464,7 +469,10 @@ export class LibroPromptCellView extends LibroExecutableCellView {
 
   updateChatList = async () => {
     return this.fetch(
-      { code: this.promptScript.toList, store_history: false },
+      {
+        code: this.promptScript.toList,
+        store_history: false,
+      },
       this.handleQueryResponse,
     );
   };
@@ -504,5 +512,29 @@ export class LibroPromptCellView extends LibroExecutableCellView {
       default:
         break;
     }
+  };
+
+  checkVariableNameAvailable = (variableName: string) => {
+    return (
+      this.parent.model.cells.findIndex(
+        (cell) =>
+          cell.model instanceof LibroPromptCellModel &&
+          cell.model.variableName === variableName,
+      ) > -1
+    );
+  };
+  handleModelNameChange = (key: string) => {
+    this.model.decodeObject = {
+      ...this.model.decodeObject,
+      modelType: key,
+    };
+    this.model.modelType = key;
+  };
+  handleVariableNameChange = (variableName: string) => {
+    this.model.decodeObject = {
+      ...this.model.decodeObject,
+      variableName: variableName,
+    };
+    this.model.variableName = variableName;
   };
 }

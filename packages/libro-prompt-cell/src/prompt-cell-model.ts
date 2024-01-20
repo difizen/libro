@@ -37,6 +37,10 @@ export class LibroPromptCellModel
   kernelExecuting = false;
 
   modelType: string;
+
+  @prop()
+  variableName: string;
+
   @prop()
   executing: boolean;
   @prop()
