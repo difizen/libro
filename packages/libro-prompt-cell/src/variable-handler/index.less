@@ -1,0 +1,46 @@
+.libro-variable-name-input {
+  border-left: 1px solid var(--mana-color-border);
+
+  svg {
+    margin-left: 4px;
+  }
+
+  &-label {
+    padding-left: 16px;
+    color: var(--mana-libro-cell-header-title);
+    font-weight: 400;
+    font-size: 14px;
+    font-family: SFProText;
+    line-height: 36px;
+    letter-spacing: 0;
+  }
+
+  &-input {
+    width: 120px;
+    height: 32px;
+    border: 1px solid #d6d8da;
+    border-radius: 6px;
+    box-shadow: unset;
+  }
+
+  &-popover {
+    vertical-align: middle;
+  }
+
+  &-warning-text {
+    margin-top: 4px;
+    color: #faad14;
+  }
+
+  &-actions {
+    padding: 2px 0;
+
+    span + span {
+      margin-left: 8px;
+    }
+
+    span {
+      color: #1890ff;
+    }
+  }
+}
