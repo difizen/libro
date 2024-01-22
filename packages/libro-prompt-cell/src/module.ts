@@ -6,7 +6,6 @@ import { FormatterPromptMagicContribution } from './libro-formatter-prompt-magic
 import { LibroPromptCellCommandContribution } from './prompt-cell-command-contribution.js';
 import { PromptCellContribution } from './prompt-cell-contribution.js';
 import { LibroPromptCellModel } from './prompt-cell-model.js';
-import { LibroPromptOutputArea } from './prompt-cell-output-area.js';
 import { LibroPromptCellModelFactory } from './prompt-cell-protocol.js';
 import { PromptScript } from './prompt-cell-script.js';
 import { LibroPromptCellView } from './prompt-cell-view.js';
@@ -18,7 +17,6 @@ export const LibroPromptCellModule = ManaModule.create()
     PromptScript,
     LibroPromptCellView,
     LibroPromptCellModel,
-    LibroPromptOutputArea,
     LibroPromptOutputMimeTypeContribution,
     LibroPromptCellCommandContribution,
     FormatterPromptMagicContribution,
