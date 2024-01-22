@@ -11,10 +11,10 @@ import type {
   LibroCell,
   CellViewOptions,
 } from '@difizen/libro-core';
+import { LibroOutputArea } from '@difizen/libro-core';
 import {
   CellService,
   LibroExecutableCellView,
-  LibroOutputArea,
   LibroViewTracker,
   EditorStatus,
   LirboContextKey,
@@ -487,7 +487,8 @@ export class LibroPromptCellView extends LibroExecutableCellView {
   handleQueryResponse = (response: KernelMessage.IIOPubMessage) => {
     const msgType = response.header.msg_type;
     switch (msgType) {
-      case 'execute_result': {
+      case 'execute_result':
+      case 'display_data': {
         const payload = response as KernelMessage.IExecuteResultMsg;
         let content: string = payload.content.data['text/plain'] as string;
         if (content.slice(0, 1) === "'" || content.slice(0, 1) === '"') {
