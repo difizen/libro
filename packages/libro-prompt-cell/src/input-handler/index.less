@@ -1,0 +1,89 @@
+.libro-chat-record-input {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px;
+
+  &-select {
+    min-width: 180px;
+    padding: 0 8px;
+  }
+
+  &-value {
+    padding-left: 2px;
+
+    span {
+      margin-inline-end: 0;
+    }
+  }
+
+  &-label {
+    padding-left: 16px;
+    color: var(--mana-libro-cell-header-title);
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+
+  svg {
+    margin-left: 4px;
+    color: #bdc0c4 !important;
+
+    &:hover {
+      color: #1590ff !important;
+    }
+  }
+}
+
+.libro-variable-name-input {
+  border-left: 1px solid var(--mana-color-border);
+  display: inline-flex;
+  align-items: center;
+
+  svg {
+    margin-left: 4px;
+    color: #bdc0c4 !important;
+
+    &:hover {
+      color: #1590ff !important;
+    }
+  }
+
+  &-value {
+    padding-left: 2px;
+  }
+
+  &-label {
+    padding-left: 16px;
+    color: var(--mana-libro-cell-header-title);
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+
+  &-input {
+    width: 120px;
+    height: 32px;
+    border: 1px solid #d6d8da;
+    border-radius: 6px;
+    box-shadow: unset;
+  }
+
+  &-popover {
+    vertical-align: middle;
+  }
+
+  &-warning-text {
+    margin-top: 4px;
+    color: #faad14;
+  }
+
+  &-actions {
+    padding: 2px 0;
+
+    span + span {
+      margin-left: 8px;
+    }
+
+    span {
+      color: #1890ff;
+    }
+  }
+}
