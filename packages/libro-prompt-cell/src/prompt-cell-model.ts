@@ -36,8 +36,6 @@ export class LibroPromptCellModel
   @prop()
   kernelExecuting = false;
 
-  cellId: string;
-
   @prop()
   record: string;
 
@@ -68,7 +66,7 @@ export class LibroPromptCellModel
       modelType: this.modelType,
       record: this.record,
       value: this.value,
-      cellId: this.cellId,
+      cellId: this.id,
     };
   }
 
@@ -76,7 +74,6 @@ export class LibroPromptCellModel
     super.decodeObject = value;
     this.variableName = value.variableName;
     this.modelType = value.modelType;
-    this.cellId = value.cellId;
     this.record = value.record;
   }
 
