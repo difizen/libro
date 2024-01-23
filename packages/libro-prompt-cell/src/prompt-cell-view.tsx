@@ -61,19 +61,24 @@ const ChatObjectOptions = (type: string): ChatObjectOptions => {
         order: 1,
         color: 'blue',
       };
-    case 'VARIABLE':
+    case 'LMM':
       return {
         order: 2,
+        color: 'cyan',
+      };
+    case 'VARIABLE':
+      return {
+        order: 3,
         color: 'red',
       };
     case 'API':
       return {
-        order: 3,
+        order: 4,
         color: 'green',
       };
     case 'CUSTOM':
       return {
-        order: 4,
+        order: 5,
         color: undefined,
       };
     default:
