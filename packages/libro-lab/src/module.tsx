@@ -71,6 +71,7 @@ export const LibroLabModule = ManaModule.create()
       slot: LibroLabLayoutSlots.navigator,
       options: {
         sort: true,
+        contentToggable: true,
       },
     }),
     createViewPreference({
