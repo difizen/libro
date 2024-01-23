@@ -1,5 +1,6 @@
 import { LibroNavigatableView, LibroService } from '@difizen/libro-jupyter';
 import type { View, ViewOpenHandlerOptions, ViewOpenOption } from '@difizen/mana-app';
+import { SideTabView } from '@difizen/mana-app';
 import { observable } from '@difizen/mana-app';
 import {
   DefaultSlotView,
@@ -32,6 +33,7 @@ export class LayoutService {
 
   @prop()
   serverSatus: StatusType = 'loading';
+
   @prop()
   visibilityMap: VisibilityMap = {
     [LibroLabLayoutSlots.header]: true,
@@ -94,6 +96,17 @@ export class LayoutService {
       }
     }
     return undefined;
+  }
+
+  shouldRenderNavigatorContent(): boolean {
+    if (!this.visibilityMap[LibroLabLayoutSlots.navigator]) {
+      return false;
+    }
+    const slotView = this.slotViewManager.getSlotView(LibroLabLayoutSlots.navigator);
+    if (slotView instanceof SideTabView) {
+      return !!slotView.showTabContent;
+    }
+    return false;
   }
 
   async onOpenSlotActiveChange() {

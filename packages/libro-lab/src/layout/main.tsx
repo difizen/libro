@@ -10,6 +10,18 @@ import { LibroLabLayoutSlots } from './protocol.js';
 export const LibroLabLayoutMainComponent = forwardRef(
   function LibroLabLayoutMainComponent() {
     const layoutService = useInject(LayoutService);
+    const navigatorSize = layoutService.shouldRenderNavigatorContent()
+      ? {
+          minSize: 40,
+          defaultSize: 300,
+          maxSize: undefined,
+        }
+      : {
+          minSize: 40,
+          defaultSize: 40,
+          maxSize: 40,
+          noResize: true,
+        };
 
     return (
       <SplitPanel id="libro-lab-content-layout">
@@ -17,7 +29,7 @@ export const LibroLabLayoutMainComponent = forwardRef(
           <SplitPanel.Pane
             id="libro-lab-content-layout-left"
             className="libro-lab-content-layout-left"
-            defaultSize={300}
+            {...navigatorSize}
           >
             <Slot name={LibroLabLayoutSlots.navigator} />
           </SplitPanel.Pane>
