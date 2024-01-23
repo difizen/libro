@@ -414,7 +414,6 @@ export class LibroPromptCellView extends LibroExecutableCellView {
 
   override async run() {
     const libroModel = this.parent.model;
-    this.model.cellId = this.id;
 
     if (
       !libroModel ||
