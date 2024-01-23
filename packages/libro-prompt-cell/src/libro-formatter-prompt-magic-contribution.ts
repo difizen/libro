@@ -11,6 +11,8 @@ import { singleton } from '@difizen/mana-app';
 export interface PromptDecodedFormatter extends DefaultDecodedFormatter {
   modelType?: string;
   variableName?: string;
+  cellId?: string;
+  record?: string;
 }
 
 @singleton({ contrib: FormatterContribution })
@@ -31,6 +33,8 @@ export class FormatterPromptMagicContribution
       model_name: source.modelType || 'chatgpt',
       prompt: source.value,
       variable_name: source.variableName,
+      cell_id: source.cellId,
+      record: source.record,
     };
     const encodeValue = `%%prompt \n${JSON.stringify(promptObj)}`;
     return {
@@ -49,10 +53,14 @@ export class FormatterPromptMagicContribution
       const codeValue = runValue.prompt;
       const modelType = runValue.model_name;
       const variableName = runValue.variable_name;
+      const cellId = runValue.cell_id;
+      const record = runValue.record;
       return {
         value: codeValue,
         variableName,
         modelType,
+        cellId,
+        record,
       };
     }
     return {

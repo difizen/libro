@@ -36,6 +36,12 @@ export class LibroPromptCellModel
   @prop()
   kernelExecuting = false;
 
+  cellId: string;
+
+  @prop()
+  record: string;
+
+  @prop()
   modelType: string;
 
   @prop()
@@ -53,6 +59,25 @@ export class LibroPromptCellModel
 
   get msgChange(): ManaEvent<any> {
     return this.msgChangeEmitter.event;
+  }
+
+  override get decodeObject() {
+    return {
+      ...this._decodeObject,
+      variableName: this.variableName,
+      modelType: this.modelType,
+      record: this.record,
+      value: this.value,
+      cellId: this.cellId,
+    };
+  }
+
+  override set decodeObject(value) {
+    super.decodeObject = value;
+    this.variableName = value.variableName;
+    this.modelType = value.modelType;
+    this.cellId = value.cellId;
+    this.record = value.record;
   }
 
   viewManager: ViewManager;

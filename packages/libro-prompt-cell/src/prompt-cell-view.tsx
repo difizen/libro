@@ -38,23 +38,23 @@ import { Deferred } from '@difizen/mana-app';
 import { Select, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 
+import { ChatRecordInput, VariableNameInput } from './input-handler/index.js';
 import { LibroPromptCellModel } from './prompt-cell-model.js';
 import { PromptScript } from './prompt-cell-script.js';
-import { VariableNameInput } from './variable-handler/index.js';
 import './index.less';
 
-export interface ChatItem {
+export interface ChatObject {
   name: string;
   type: string;
   order: number;
   key: string;
 }
-export interface ChatTypeOptions {
+export interface ChatObjectOptions {
   order?: number;
   color?: string;
 }
 
-const ChatItemOptions = (type: string): ChatTypeOptions => {
+const ChatObjectOptions = (type: string): ChatObjectOptions => {
   switch (type) {
     case 'LLM':
       return {
@@ -84,15 +84,15 @@ const ChatItemOptions = (type: string): ChatTypeOptions => {
   }
 };
 
-const SelectionItemLabel: React.FC<{ item: ChatItem }> = (props: {
-  item: ChatItem;
+const SelectionItemLabel: React.FC<{ item: ChatObject }> = (props: {
+  item: ChatObject;
 }) => {
   const item = props.item;
 
   return (
     <span className="libro-prompt-cell-selection-label">
       <Tag
-        color={ChatItemOptions(item.type).color}
+        color={ChatObjectOptions(item.type).color}
         className="libro-prompt-cell-header-selection-type"
       >
         {item.type}
@@ -119,18 +119,18 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
     const [selectedModel, setSelectedModel] = useState<string>('暂无内置模型');
     useEffect(() => {
       // TODO: Data initialization should not depend on view initialization, which causes limitations in usage scenarios and multiple renderings.
-      instance.model.variableName = instance.model.decodeObject['variableName'];
+      instance.model.variableName = instance.model.decodeObject.variableName;
       instance
-        .updateChatList()
+        .updateChatObjects()
         .then(() => {
-          const len = instance.chatItems.length;
+          const len = instance.chatObjects.length;
           if (len > 0) {
-            instance.model.decodeObject = {
-              modelType: instance.chatItems[len - 1].key,
-              ...instance.model.decodeObject,
-            };
-            setSelectedModel(instance.model.decodeObject['modelType']);
-            instance.model.modelType = instance.model.decodeObject['modelType'];
+            if (!instance.model.decodeObject.modelType) {
+              instance.model.modelType = instance.chatObjects[len - 1].key;
+            } else {
+              instance.model.modelType = instance.model.decodeObject.modelType;
+            }
+            setSelectedModel(instance.model.modelType);
             return;
           }
           return;
@@ -138,6 +138,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
         .catch(() => {
           //
         });
+      instance.updateChatRecords();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -154,23 +155,33 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
         onBlur={instance.blur}
       >
         <div className="libro-prompt-cell-header">
-          <div className="libro-prompt-cell-header-model-config">
-            <Select
-              value={selectedModel}
-              style={{ width: 160 }}
-              onChange={handleChange}
-              options={instance.sortedChatItems.map(instance.toSelectionOption)}
-              bordered={false}
-              onFocus={async () => {
-                await instance.updateChatList();
-              }}
+          <div>
+            <span>
+              <Select
+                value={selectedModel}
+                style={{ width: 160 }}
+                onChange={handleChange}
+                options={instance.sortedChatItems.map(instance.toSelectionOption)}
+                bordered={false}
+                onFocus={async () => {
+                  await instance.updateChatObjects();
+                }}
+              />
+            </span>
+            <VariableNameInput
+              value={instance.model.variableName}
+              checkVariableNameAvailable={instance.checkVariableNameAvailable}
+              handleVariableNameChange={instance.handleVariableNameChange}
             />
           </div>
-          <VariableNameInput
-            value={instance.model.variableName}
-            checkVariableNameAvailable={instance.checkVariableNameAvailable}
-            handleVariableNameChange={instance.handleVariableNameChange}
-          />
+          <div>
+            <ChatRecordInput
+              value={instance.model.record}
+              handleChange={instance.handleRecordChange}
+              records={instance.chatRecords}
+              onFocus={instance.updateChatRecords}
+            />
+          </div>
         </div>
         <CellEditor />
       </div>
@@ -181,19 +192,23 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
 @transient()
 @view('prompt-editor-cell-view')
 export class LibroPromptCellView extends LibroExecutableCellView {
-  @inject(LirboContextKey) protected readonly lirboContextKey: LirboContextKey;
+  @inject(LirboContextKey) protected lirboContextKey: LirboContextKey;
   override view = PropmtEditorViewComponent;
 
   declare model: LibroPromptCellModel;
 
+  // TODO: Chat objects and chat message records should belong to libro rather than cell
   @prop()
-  chatItems: ChatItem[] = [];
+  chatObjects: ChatObject[] = [];
 
-  get sortedChatItems(): ChatItem[] {
-    return [...this.chatItems].sort((a, b) => {
+  @prop()
+  contextChatRecords: string[] = [];
+
+  get sortedChatItems(): ChatObject[] {
+    return [...this.chatObjects].sort((a, b) => {
       if (a.type !== b.type) {
-        const aOrder = ChatItemOptions(a.type).order || 0;
-        const bOrder = ChatItemOptions(b.type).order || 0;
+        const aOrder = ChatObjectOptions(a.type).order || 0;
+        const bOrder = ChatObjectOptions(b.type).order || 0;
         if (aOrder === bOrder && aOrder === 0) {
           return a.type.localeCompare(b.type);
         }
@@ -201,6 +216,26 @@ export class LibroPromptCellView extends LibroExecutableCellView {
       }
       return a.order - b.order;
     });
+  }
+
+  get chatRecords(): string[] {
+    let records: string[] = [];
+    const recordMap: Record<string, boolean> = {};
+    this.parent.model.cells.forEach((cell) => {
+      if (cell.model instanceof LibroPromptCellModel && cell.model.record) {
+        records = records.concat(cell.model.record);
+      }
+    });
+    return [...records, ...this.contextChatRecords]
+      .filter((r) => {
+        if (recordMap[r]) {
+          return false;
+        } else {
+          recordMap[r] = true;
+          return true;
+        }
+      })
+      .sort((a, b) => a.localeCompare(b));
   }
 
   viewManager: ViewManager;
@@ -379,6 +414,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
 
   override async run() {
     const libroModel = this.parent.model;
+    this.model.cellId = this.id;
 
     if (
       !libroModel ||
@@ -467,24 +503,50 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     return future.done as Promise<KernelMessage.IExecuteReplyMsg>;
   };
 
-  updateChatList = async () => {
+  updateChatObjects = async () => {
     return this.fetch(
       {
-        code: this.promptScript.toList,
+        code: this.promptScript.getChatObjects,
         store_history: false,
       },
-      this.handleQueryResponse,
+      (msg) =>
+        this.handleQueryResponse(msg, (result) => {
+          try {
+            this.chatObjects = JSON.parse(result) as ChatObject[];
+          } catch (e) {
+            //
+          }
+        }),
+    );
+  };
+  updateChatRecords = async () => {
+    return this.fetch(
+      {
+        code: this.promptScript.getChatRecoreds,
+        store_history: false,
+      },
+      (msg) =>
+        this.handleQueryResponse(msg, (result) => {
+          try {
+            this.contextChatRecords = JSON.parse(result) as string[];
+          } catch (e) {
+            //
+          }
+        }),
     );
   };
 
-  toSelectionOption = (item: ChatItem) => {
+  toSelectionOption = (item: ChatObject) => {
     return {
       value: item.key,
       label: <SelectionItemLabel item={item} />,
     };
   };
 
-  handleQueryResponse = (response: KernelMessage.IIOPubMessage) => {
+  handleQueryResponse = (
+    response: KernelMessage.IIOPubMessage,
+    cb: (result: string) => void,
+  ) => {
     const msgType = response.header.msg_type;
     switch (msgType) {
       case 'execute_result':
@@ -496,7 +558,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
           content = content.replace(/\\"/g, '"').replace(/\\'/g, "'");
         }
 
-        this.chatItems = JSON.parse(content) as ChatItem[];
+        cb(content);
         break;
       }
       case 'stream': {
@@ -506,8 +568,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
           contentStream = contentStream.slice(1, -1);
           contentStream = contentStream.replace(/\\"/g, '"').replace(/\\'/g, "'");
         }
-
-        this.chatItems = JSON.parse(contentStream) as ChatItem[];
+        cb(contentStream);
         break;
       }
       default:
@@ -524,18 +585,13 @@ export class LibroPromptCellView extends LibroExecutableCellView {
       ) > -1
     );
   };
-  handleModelNameChange = (key: string) => {
-    this.model.decodeObject = {
-      ...this.model.decodeObject,
-      modelType: key,
-    };
-    this.model.modelType = key;
+  handleModelNameChange = (value: string) => {
+    this.model.modelType = value;
   };
-  handleVariableNameChange = (variableName: string) => {
-    this.model.decodeObject = {
-      ...this.model.decodeObject,
-      variableName: variableName,
-    };
-    this.model.variableName = variableName;
+  handleVariableNameChange = (value: string) => {
+    this.model.variableName = value;
+  };
+  handleRecordChange = (value: string) => {
+    this.model.record = value;
   };
 }

@@ -60,6 +60,7 @@
     "marked-highlight": "^2.0.1",
     "marked-katex-extension": "^3.0.0",
     "uuid": "^9.0.0",
+    "rc-select": "^14.9.2",
     "react-dom": "^18.2.0"
   },
   "peerDependencies": {
