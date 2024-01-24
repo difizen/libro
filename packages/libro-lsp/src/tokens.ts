@@ -82,10 +82,6 @@ export type TLanguageId = string;
 // export const ILanguageServerManager = Symbol('ILanguageServerManager');
 
 export interface ILanguageServerManager extends Disposable {
-  shutdownAll: () => Promise<void>;
-
-  shutdown: (key: string) => Promise<void>;
-
   refreshRunning: () => Promise<void>;
 
   /**
@@ -364,6 +360,10 @@ export const ILSPDocumentConnectionManager = Symbol('ILSPDocumentConnectionManag
  * The LSP connection state manager
  */
 export interface ILSPDocumentConnectionManager {
+  disconnectServer: (languageServerId: TLanguageServerId) => void;
+
+  disconnectAllServers: () => void;
+
   /**
    * The mapping of document uri to the  connection to language server.
    */

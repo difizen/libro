@@ -1,7 +1,6 @@
 import { LibroKernelManager, LibroSessionManager } from '@difizen/libro-kernel';
-import { DocumentConnectionManager } from '@difizen/libro-lsp';
-import type { ILanguageServerManager } from '@difizen/libro-lsp';
-import type { ILSPDocumentConnectionManager } from '@difizen/libro-lsp';
+import type { ILanguageServerManager, TLanguageServerId } from '@difizen/libro-lsp';
+import { ILSPDocumentConnectionManager } from '@difizen/libro-lsp';
 import { TerminalManager } from '@difizen/libro-terminal';
 import {
   BaseView,
@@ -31,8 +30,13 @@ const PanelRender: React.FC = () => {
   const instance = useInject<KernelAndTerminalPanelView>(ViewInstance);
   const openedTabView = instance.getAllOpenedTabView();
 
-  const { libroKernelManager, libroSessionManager, terminalManager, lspManager } =
-    instance;
+  const {
+    libroKernelManager,
+    libroSessionManager,
+    terminalManager,
+    lspManager,
+    lspConnectionManager,
+  } = instance;
 
   const [kernelItems, setKernelItems] = useState<
     LibroPanelCollapseKernelItem[] | undefined
@@ -57,7 +61,8 @@ const PanelRender: React.FC = () => {
       items.push({
         id: key,
         name: `${key} (${session.spec.languages.join('/')})`,
-        shutdown: async () => lspManager.shutdown(key),
+        shutdown: async () =>
+          lspConnectionManager.disconnectServer(key as TLanguageServerId),
       });
     });
 
@@ -160,7 +165,7 @@ const PanelRender: React.FC = () => {
       <LibroCollapse
         type={LibroPanelCollapseItemType.LSP}
         items={lspItems}
-        shutdownAll={() => lspManager.shutdownAll()}
+        shutdownAll={async () => lspConnectionManager.disconnectAllServers()}
       />
     </div>
   );
@@ -178,13 +183,14 @@ export class KernelAndTerminalPanelView extends BaseView {
   libroKernelManager: LibroKernelManager;
   libroSessionManager: LibroSessionManager;
   terminalManager: TerminalManager;
+  lspConnectionManager: ILSPDocumentConnectionManager;
   lspManager: ILanguageServerManager;
 
   constructor(
     @inject(LibroKernelManager) libroKernelManager: LibroKernelManager,
     @inject(LibroSessionManager) libroSessionManager: LibroSessionManager,
     @inject(TerminalManager) terminalManager: TerminalManager,
-    @inject(DocumentConnectionManager)
+    @inject(ILSPDocumentConnectionManager)
     lspDocumentConnectionManager: ILSPDocumentConnectionManager,
   ) {
     super();
@@ -194,6 +200,7 @@ export class KernelAndTerminalPanelView extends BaseView {
     this.libroKernelManager = libroKernelManager;
     this.libroSessionManager = libroSessionManager;
     this.terminalManager = terminalManager;
+    this.lspConnectionManager = lspDocumentConnectionManager;
     this.lspManager = lspDocumentConnectionManager.languageServerManager;
   }
 

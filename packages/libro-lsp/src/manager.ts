@@ -44,16 +44,7 @@ export class LanguageServerManager implements ILanguageServerManager {
   }
 
   async refreshRunning() {
-    // TODO: refreshRunning
-  }
-
-  async shutdownAll() {
-    // TODO: shutdownAll
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async shutdown(key: string) {
-    // TODO: shutdown
+    this.fetchSessions();
   }
 
   /**
