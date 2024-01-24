@@ -14,6 +14,7 @@
     "build": "nx run-many --target=build",
     "lint": "nx run-many --target=lint:prettier,lint",
     "lint:prettier": "prettier --check --ignore-unknown .",
+    "prettier": "prettier --ignore-unknown . --write",
     "lint-staged": "lint-staged",
     "test": "nx run-many --target=test",
     "ci:setup": "nx run-many --target=setup",

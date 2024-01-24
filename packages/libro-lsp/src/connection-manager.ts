@@ -58,12 +58,22 @@ export class DocumentConnectionManager implements ILSPDocumentConnectionManager 
 
   private _connections: Map<TLanguageServerId, LSPConnection> = new Map();
 
-  protected disconnectServer(languageServerId: TLanguageServerId): void {
+  disconnectServer(languageServerId: TLanguageServerId): void {
     const connection = this._connections.get(languageServerId);
     if (connection) {
       connection.close();
       this._connections.delete(languageServerId);
+      this.languageServerManager.refreshRunning();
     }
+  }
+
+  disconnectAllServers(): void {
+    this.connections.forEach((connection, languageServerId) => {
+      connection.close();
+      this._connections.delete(languageServerId as TLanguageServerId);
+    });
+
+    this.languageServerManager.refreshRunning();
   }
 
   /**
