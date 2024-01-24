@@ -167,9 +167,10 @@ export class CompletionState {
     const sources =
       conf.override ||
       state
-        .languageDataAt<
-          CompletionSource | readonly (string | Completion)[]
-        >('autocomplete', cur(state))
+        .languageDataAt<CompletionSource | readonly (string | Completion)[]>(
+          'autocomplete',
+          cur(state),
+        )
         .map(asSource);
     let active: readonly ActiveSource[] = sources.map((source) => {
       const value =
