@@ -525,7 +525,7 @@ export class LibroE2Editor implements IEditor {
        */
       language: this.languageSpec.language,
       theme: this.theme,
-      model,
+      model: getOrigin(model),
     };
 
     this._editor = editorPorvider.create(host, options);
