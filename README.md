@@ -1,41 +1,28 @@
-# libro
-
-<div align="center">
-<img src="https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*cngiQYmKficAAAAAAAAAAAAADjOxAQ/original" alt="Editor" width="280">
-</div>
-
-<div id="top" align="center">
-大模型时代的 notebook 产品方案
-</div>
+# <img src="https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*i_UvSZTIo44AAAAAAAAAAAAADjOxAQ/original" width="30"> libro
 
 [![Code: CI](https://github.com/difizen/libro/actions/workflows/ci.yml/badge.svg)](https://github.com/difizen/libro/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/difizen/libro/graph/badge.svg?token=8LWLNZK78Z)](https://codecov.io/gh/difizen/libro)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+⚡ 大模型时代的 notebook 产品方案⚡
 
 - 定义大模型工作流，内置大模型交互和辅助开发能力。
 - 更优雅的交互体验，兼容 jupyter notebook。
-- 方便集成和扩展，全面模块化设置。
+- 方便集成和扩展，全面模块化设计。
 
 ## 如何使用
 
 您需要安装 [libro-server](https://github.com/difizen/libro-server) 来体验完整的 libro 能力。
 
+### Prompt cell
+
+您可以在自己的工作流中使用 [prompt cell](./packages/libro-prompt-cell/README.md)，快速完成与大模型的交互，生成的结果也可以在上下文中继续访问。
+
+![image](https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*x0SxT5lDETYAAAAAAAAAAAAADjOxAQ/original)
+
 ### lab 研发环境
 
 ![image](https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*6eDdTovoKwsAAAAAAAAAAAAADjOxAQ/original)
-
-### 大模型工作流
-
-使用 libro 大模型能力，您还需要访问至少一个模型提供商。
-
-#### Prompt
-
-您可以在自己的工作流中因为 prompt cell，快速完成与大模型的交互，生成的结果也可以在上下文中继续访问。
-
-TODO
-
-#### Copilot
-
-TODO
 
 ## 如何集成
 
@@ -57,6 +44,7 @@ libro 是完全模块化的，您可以自由选择 libro 提供的原生能力�
 
 - [内核](./packages/libro-core/README.md)：定义基础交互，提供可扩展单元格和输出规范。
 - [kernel](./packages/libro-kernel/README.md)：提供面向 jupyter 服务的 API，提供 session 和 kernel 通信封装。
+- [prompt cell](./packages/libro-prompt-cell/README.md)：大模型对话能力。
 - [markdown cell](./packages/libro-codemirror-markdown-cell/README.md)：基于 codemirror 的 markdown 单元格。
 - [code cell](./packages/libro-codemirror-code-cell/README.md)：基于 codemirror 的 code 单元格。
 - [raw cell](./packages/libro-codemirror-raw-cell/README.md)：基于 codemirror 的 raw 单元格。
