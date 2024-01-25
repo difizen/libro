@@ -201,29 +201,29 @@ const CellOutput: React.FC<{ cell: CellView }> = forwardRef(function CellOutput(
     isExecutingRef.current = !!executing;
   }, [executing]);
 
-  useLayoutEffect(() => {
-    if (!outputRef || !isExecutingRef || !outputRef?.current) {
-      return () => {
-        //
-      };
-    }
-    const el = outputRef?.current;
+  // useLayoutEffect(() => {
+  //   if (!outputRef || !isExecutingRef || !outputRef?.current) {
+  //     return () => {
+  //       //
+  //     };
+  //   }
+  //   const el = outputRef?.current;
 
-    const resizeObserver = new ResizeObserver((entries) => {
-      entries.forEach(() => {
-        const outputAreaHeight = outputRef?.current?.clientHeight || 0;
-        if (isExecutingRef.current && outputAreaHeight > 495) {
-          command.executeCommand(NotebookCommands['EnableOutputScrolling'].id);
-        }
-      });
-    });
+  //   const resizeObserver = new ResizeObserver((entries) => {
+  //     entries.forEach(() => {
+  //       const outputAreaHeight = outputRef?.current?.clientHeight || 0;
+  //       if (isExecutingRef.current && outputAreaHeight > 495) {
+  //         command.executeCommand(NotebookCommands['EnableOutputScrolling'].id);
+  //       }
+  //     });
+  //   });
 
-    resizeObserver.observe(el as HTMLElement);
-    return () => {
-      resizeObserver.unobserve(el as HTMLElement);
-      resizeObserver.disconnect();
-    };
-  }, [outputRef.current, cell, isExecutingRef]);
+  //   resizeObserver.observe(el as HTMLElement);
+  //   return () => {
+  //     resizeObserver.unobserve(el as HTMLElement);
+  //     resizeObserver.disconnect();
+  //   };
+  // }, [outputRef.current, cell, isExecutingRef]);
 
   if (!ExecutableCellView.is(cell)) {
     return null;
