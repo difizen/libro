@@ -1,6 +1,6 @@
 import { CaretDownOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { ViewContext } from '@difizen/mana-app';
-import { Empty, Popconfirm } from 'antd';
+import { Empty, message, Popconfirm } from 'antd';
 import React, { useState } from 'react';
 
 import type { SaveableTabView } from '../../index.js';
@@ -110,7 +110,10 @@ export const LibroCollapse: React.FC<Props> = (props: Props) => {
             cancelText="取消"
             onConfirm={() => {
               if (props.shutdownAll) {
-                props.shutdownAll();
+                props.shutdownAll().catch((e) => {
+                  message.error(`shutdown all ${props.type}s error`);
+                  console.error(e);
+                });
               }
             }}
           >

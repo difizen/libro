@@ -35,9 +35,11 @@ export const LibroKernelCollapseContentItem: React.FC<Props> = (props: Props) =>
         <div className="libro-panel-collapse-item-label">{item.name}</div>
         <div
           className="libro-panel-collapse-item-close"
-          onClick={(e) => {
+          onClick={async (e) => {
             if (item.shutdown) {
-              item.shutdown();
+              item.shutdown().catch((error) => {
+                console.error(error);
+              });
             }
             e.preventDefault();
             e.stopPropagation();

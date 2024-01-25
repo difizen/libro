@@ -15,6 +15,10 @@ export const TerminalCommands: Record<string, Command & { keybind?: string }> = 
     label: '新建终端',
     keybind: 'ctrl+`',
   },
+  CloseTerminal: {
+    id: 'libro-terminal-close',
+    label: '关闭终端',
+  },
 };
 
 @singleton({ contrib: [CommandContribution, KeybindingContribution] })
@@ -50,6 +54,21 @@ export class TerminalCommandContribution
               reveal: true,
             });
           }
+        } catch (e) {
+          console.error(e);
+        }
+      },
+    });
+    commands.registerCommand(TerminalCommands['CloseTerminal'], {
+      execute: async (name: string) => {
+        try {
+          const terminalView =
+            await this.viewManager.getOrCreateView<LibroTerminalView>(
+              LibroTerminalView,
+              this.manager.getTerminalArgs(name),
+            );
+
+          terminalView.dispose();
         } catch (e) {
           console.error(e);
         }

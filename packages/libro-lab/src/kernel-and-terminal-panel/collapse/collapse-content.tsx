@@ -1,6 +1,7 @@
 import { CloseOutlined } from '@ant-design/icons';
 import { TerminalCommands } from '@difizen/libro-terminal';
 import { CommandRegistry, useInject } from '@difizen/mana-app';
+import { message } from 'antd';
 import React from 'react';
 
 import {
@@ -58,7 +59,10 @@ export const LibroCollapseContent: React.FC<Props> = (props: Props) => {
                 e.stopPropagation();
                 e.preventDefault();
                 if (item.shutdown) {
-                  item.shutdown();
+                  item.shutdown().catch((error) => {
+                    message.error(`shutdown ${props.type} failed`);
+                    console.error(error);
+                  });
                 }
               }}
             >
