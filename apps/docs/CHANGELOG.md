@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.1.15
+
+### Patch Changes
+
+- 1b88a16: Feature: Better Prompt cell! Now based on better prompt magic support, you can use prompt cells to chat directly with OpenAI models. And you can put chats in context and create exciting workflows.
+- Updated dependencies [1b88a16]
+  - @difizen/libro-terminal@0.1.15
+  - @difizen/libro-jupyter@0.1.15
+  - @difizen/libro-core@0.1.15
+  - @difizen/libro-lab@0.1.15
+
 ## 0.1.14
 
 ### Patch Changes
