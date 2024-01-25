@@ -222,6 +222,7 @@ export class LibroTerminalView extends BaseStatefulView {
   override afterRestore() {
     this.initConnection()
       .then((connection) => {
+        this.terminalManager.terminalOptionsCache.set(connection.name, this.options);
         this._isReady = true;
         this.connection = connection;
         this.onReadyEmitter.fire(true);
@@ -266,6 +267,9 @@ export class LibroTerminalView extends BaseStatefulView {
         console.error(`Terminal not shut down: ${reason}`);
       });
     }
+
+    this.terminalManager.terminalOptionsCache.delete(this.name);
+
     super.dispose();
   }
 

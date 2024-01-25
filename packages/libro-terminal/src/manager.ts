@@ -23,6 +23,10 @@ export class TerminalManager implements Disposable, Disposed {
   protected _ready: Promise<void>;
   protected _runningChanged = new Emitter<TerminalModel[]>();
   protected _connectionFailure = new Emitter<Error>();
+
+  // 缓存创建terminal的参数
+  terminalOptionsCache = new Map();
+
   // As an optimization, we unwrap the models to just store the names.
 
   @prop()
@@ -295,6 +299,11 @@ export class TerminalManager implements Disposable, Disposed {
 
   // 新建和打开一个已有Terminal，二者所需参数不一样
   getTerminalArgs = (name?: string) => {
+    // 通过缓存值作为option创建终端
+    if (this.terminalOptionsCache.has(name)) {
+      return this.terminalOptionsCache.get(name);
+    }
+
     if (name) {
       return { name: name };
     } else {

@@ -1,9 +1,10 @@
 import { LibroKernelManager, LibroSessionManager } from '@difizen/libro-kernel';
 import type { ILanguageServerManager, TLanguageServerId } from '@difizen/libro-lsp';
 import { ILSPDocumentConnectionManager } from '@difizen/libro-lsp';
-import { TerminalManager } from '@difizen/libro-terminal';
+import { TerminalCommands, TerminalManager } from '@difizen/libro-terminal';
 import {
   BaseView,
+  CommandRegistry,
   inject,
   singleton,
   useInject,
@@ -36,6 +37,7 @@ const PanelRender: React.FC = () => {
     terminalManager,
     lspManager,
     lspConnectionManager,
+    commandRegistry,
   } = instance;
 
   const [kernelItems, setKernelItems] = useState<
@@ -62,7 +64,7 @@ const PanelRender: React.FC = () => {
         id: key,
         name: `${key} (${session.spec.languages.join('/')})`,
         shutdown: async () =>
-          lspConnectionManager.disconnectServer(key as TLanguageServerId),
+          await lspConnectionManager.disconnectServer(key as TLanguageServerId),
       });
     });
 
@@ -95,7 +97,7 @@ const PanelRender: React.FC = () => {
         items.set(kernel.id, {
           id: kernel.id,
           name: kernel.name,
-          shutdown: async () => libroKernelManager.shutdown(kernel.id),
+          shutdown: async () => await libroKernelManager.shutdown(kernel.id),
           notebooks: [
             { sessionId: session.id, name: session.name, path: session.path },
           ],
@@ -120,7 +122,13 @@ const PanelRender: React.FC = () => {
       items.push({
         id: 'terminal/' + terminal,
         name: terminal,
-        shutdown: async () => terminalManager.shutdown(terminal),
+        shutdown: async () => {
+          await terminalManager.shutdown(terminal);
+          commandRegistry.executeCommand(
+            TerminalCommands['CloseTerminal'].id,
+            terminal,
+          );
+        },
       });
     }
 
@@ -154,18 +162,18 @@ const PanelRender: React.FC = () => {
         items={kernelItems}
         shutdownAll={async () => {
           await libroKernelManager.shutdownAll();
-          libroSessionManager.refreshRunning();
+          await libroSessionManager.refreshRunning();
         }}
       />
       <LibroCollapse
         type={LibroPanelCollapseItemType.TERMINAL}
         items={terminalItems}
-        shutdownAll={() => terminalManager.shutdownAll()}
+        shutdownAll={async () => await terminalManager.shutdownAll()}
       />
       <LibroCollapse
         type={LibroPanelCollapseItemType.LSP}
         items={lspItems}
-        shutdownAll={async () => lspConnectionManager.disconnectAllServers()}
+        shutdownAll={async () => await lspConnectionManager.disconnectAllServers()}
       />
     </div>
   );
@@ -185,6 +193,7 @@ export class KernelAndTerminalPanelView extends BaseView {
   terminalManager: TerminalManager;
   lspConnectionManager: ILSPDocumentConnectionManager;
   lspManager: ILanguageServerManager;
+  commandRegistry: CommandRegistry;
 
   constructor(
     @inject(LibroKernelManager) libroKernelManager: LibroKernelManager,
@@ -192,6 +201,7 @@ export class KernelAndTerminalPanelView extends BaseView {
     @inject(TerminalManager) terminalManager: TerminalManager,
     @inject(ILSPDocumentConnectionManager)
     lspDocumentConnectionManager: ILSPDocumentConnectionManager,
+    @inject(CommandRegistry) commandRegistry: CommandRegistry,
   ) {
     super();
     this.title.icon = <KernelAndTerminal />;
@@ -202,6 +212,7 @@ export class KernelAndTerminalPanelView extends BaseView {
     this.terminalManager = terminalManager;
     this.lspConnectionManager = lspDocumentConnectionManager;
     this.lspManager = lspDocumentConnectionManager.languageServerManager;
+    this.commandRegistry = commandRegistry;
   }
 
   getAllOpenedTabView(): SaveableTabView {
