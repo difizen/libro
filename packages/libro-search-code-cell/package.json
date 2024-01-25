@@ -50,8 +50,6 @@
     "@difizen/libro-code-cell": "^0.1.16",
     "@difizen/libro-search": "^0.1.16",
     "@difizen/libro-core": "^0.1.16",
-    "@difizen/mana-app": "latest",
-    "@codemirror/state": "^6.4.0",
-    "@codemirror/view": "^6.23.0"
+    "@difizen/mana-app": "latest"
   }
 }

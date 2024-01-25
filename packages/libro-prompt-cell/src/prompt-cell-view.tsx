@@ -164,7 +164,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
             <span>
               <Select
                 value={selectedModel}
-                style={{ width: 160 }}
+                style={{ minWidth: 160 }}
                 onChange={handleChange}
                 options={instance.sortedChatItems.map(instance.toSelectionOption)}
                 bordered={false}
