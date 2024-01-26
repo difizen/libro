@@ -1,5 +1,22 @@
 # @difizen/libro-lab
 
+## 0.1.17
+
+### Patch Changes
+
+- b159277: insert and execute output in a cell
+- 9ff1bf9: Support file download.
+- Updated dependencies [b159277]
+- Updated dependencies [9ff1bf9]
+  - @difizen/libro-prompt-cell@0.1.17
+  - @difizen/libro-cofine-editor-core@0.1.17
+  - @difizen/libro-core@0.1.17
+  - @difizen/libro-jupyter@0.1.17
+  - @difizen/libro-kernel@0.1.17
+  - @difizen/libro-lsp@0.1.17
+  - @difizen/libro-terminal@0.1.17
+  - @difizen/libro-toc@0.1.17
+
 ## 0.1.16
 
 ### Patch Changes

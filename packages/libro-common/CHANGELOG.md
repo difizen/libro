@@ -1,5 +1,12 @@
 # @difizen/libro-common
 
+## 0.1.17
+
+### Patch Changes
+
+- b159277: insert and execute output in a cell
+- 9ff1bf9: Support file download.
+
 ## 0.1.16
 
 ### Patch Changes

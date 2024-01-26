@@ -1,5 +1,15 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.17
+
+### Patch Changes
+
+- b159277: insert and execute output in a cell
+- 9ff1bf9: Support file download.
+- Updated dependencies [b159277]
+- Updated dependencies [9ff1bf9]
+  - @difizen/libro-cofine-editor-contribution@0.1.17
+
 ## 0.1.16
 
 ### Patch Changes

@@ -1,5 +1,29 @@
 # @difizen/libro-jupyter
 
+## 0.1.17
+
+### Patch Changes
+
+- b159277: insert and execute output in a cell
+- 9ff1bf9: Support file download.
+- Updated dependencies [b159277]
+- Updated dependencies [9ff1bf9]
+  - @difizen/libro-code-cell@0.1.17
+  - @difizen/libro-code-editor@0.1.17
+  - @difizen/libro-codemirror@0.1.17
+  - @difizen/libro-cofine-editor@0.1.17
+  - @difizen/libro-common@0.1.17
+  - @difizen/libro-core@0.1.17
+  - @difizen/libro-kernel@0.1.17
+  - @difizen/libro-l10n@0.1.17
+  - @difizen/libro-lsp@0.1.17
+  - @difizen/libro-markdown-cell@0.1.17
+  - @difizen/libro-output@0.1.17
+  - @difizen/libro-raw-cell@0.1.17
+  - @difizen/libro-rendermime@0.1.17
+  - @difizen/libro-search@0.1.17
+  - @difizen/libro-search-code-cell@0.1.17
+
 ## 0.1.16
 
 ### Patch Changes
