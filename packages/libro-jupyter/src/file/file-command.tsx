@@ -1,13 +1,14 @@
 import pathUtil from 'path';
 
 import { ReloadOutlined } from '@ant-design/icons';
+import { ContentsManager } from '@difizen/libro-kernel';
 import type {
   CommandRegistry,
   MenuPath,
   MenuRegistry,
   ToolbarRegistry,
 } from '@difizen/mana-app';
-import { ViewManager } from '@difizen/mana-app';
+import { ViewManager, ConfigurationService } from '@difizen/mana-app';
 import {
   CommandContribution,
   FileStatNode,
@@ -20,6 +21,8 @@ import {
   URI,
 } from '@difizen/mana-app';
 import { message, Modal } from 'antd';
+
+import { LibroConfigAllowDownload } from '../config/index.js';
 
 import { FileCreateModal } from './file-create-modal.js';
 import { FileDirCreateModal } from './file-createdir-modal.js';
@@ -74,6 +77,10 @@ export const FileCommands = {
     id: 'fileTree.command.remove',
     label: '删除',
   },
+  DOWNLOAD: {
+    id: 'fileTree.command.download',
+    label: '下载',
+  },
 };
 export const FileTreeContextMenuPath: MenuPath = ['file-tree-context-menu'];
 
@@ -87,6 +94,9 @@ export class FileCommandContribution
   @inject(JupyterFileService) fileService: JupyterFileService;
   @inject(ModalService) modalService: ModalService;
   @inject(OpenerService) protected openService: OpenerService;
+  @inject(ConfigurationService) configurationService: ConfigurationService;
+  @inject(ContentsManager) contentsManager: ContentsManager;
+
   fileView: FileView;
   lastAction: 'COPY' | 'CUT';
   lastActionNode: FileStatNode;
@@ -148,12 +158,17 @@ export class FileCommandContribution
     menu.registerMenuAction(FileTreeContextMenuPath, {
       id: FileCommands.COPY_PATH.id,
       command: FileCommands.COPY_PATH.id,
-      order: 'g',
+      order: 'f',
     });
     menu.registerMenuAction(FileTreeContextMenuPath, {
       id: FileCommands.COPY_RELATIVE_PATH.id,
       command: FileCommands.COPY_RELATIVE_PATH.id,
       order: 'g',
+    });
+    menu.registerMenuAction(FileTreeContextMenuPath, {
+      id: FileCommands.DOWNLOAD.id,
+      command: FileCommands.DOWNLOAD.id,
+      order: 'h',
     });
   }
   registerCommands(command: CommandRegistry): void {
@@ -319,6 +334,34 @@ export class FileCommandContribution
       },
       isVisible: (view) => {
         return view instanceof FileView;
+      },
+    });
+
+    command.registerCommand(FileCommands.DOWNLOAD, {
+      execute: (data) => {
+        if (!FileStatNode.is(data)) {
+          return;
+        }
+        const path = data.uri.path.toString();
+        this.contentsManager
+          .getDownloadUrl(path)
+          .then((url) => {
+            const element = document.createElement('a');
+            element.href = url;
+            element.download = '';
+            element.target = '_blank';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            return;
+          })
+          .catch(console.error);
+      },
+      isVisible: (data) => {
+        return (
+          !!this.configurationService.get(LibroConfigAllowDownload) &&
+          FileStatNode.is(data)
+        );
       },
     });
   }
