@@ -83,6 +83,12 @@ export const FileCommands = {
   },
 };
 export const FileTreeContextMenuPath: MenuPath = ['file-tree-context-menu'];
+export const FileTreeContextMenuGroups: Record<string, MenuPath> = {
+  new: [...FileTreeContextMenuPath, 'a_new'],
+  operator: [...FileTreeContextMenuPath, 'b_operator'],
+  change: [...FileTreeContextMenuPath, 'c_change'],
+  extra: [...FileTreeContextMenuPath, 'd_extra'],
+};
 
 @singleton({
   contrib: [CommandContribution, MenuContribution, ToolbarContribution],
@@ -115,57 +121,62 @@ export class FileCommandContribution
   }
 
   registerMenus(menu: MenuRegistry) {
-    menu.registerMenuAction(FileTreeContextMenuPath, {
+    menu.registerGroupMenu(FileTreeContextMenuGroups['new']);
+    menu.registerGroupMenu(FileTreeContextMenuGroups['operator']);
+    menu.registerGroupMenu(FileTreeContextMenuGroups['change']);
+    menu.registerGroupMenu(FileTreeContextMenuGroups['extra']);
+
+    menu.registerMenuAction(FileTreeContextMenuGroups['new'], {
       id: FileCommands.CREATE_FILE.id,
       command: FileCommands.CREATE_FILE.id,
       order: 'a',
     });
-    menu.registerMenuAction(FileTreeContextMenuPath, {
+    menu.registerMenuAction(FileTreeContextMenuGroups['new'], {
       id: FileCommands.CREATE_DIR.id,
       command: FileCommands.CREATE_DIR.id,
       order: 'a',
     });
-    menu.registerMenuAction(FileTreeContextMenuPath, {
+    menu.registerMenuAction(FileTreeContextMenuGroups['new'], {
       id: FileCommands.OPEN_FILE.id,
       command: FileCommands.OPEN_FILE.id,
       order: 'a',
     });
-    menu.registerMenuAction(FileTreeContextMenuPath, {
+    menu.registerMenuAction(FileTreeContextMenuGroups['operator'], {
       id: FileCommands.COPY.id,
       command: FileCommands.COPY.id,
       order: 'b',
     });
-    menu.registerMenuAction(FileTreeContextMenuPath, {
+    menu.registerMenuAction(FileTreeContextMenuGroups['operator'], {
       id: FileCommands.PASTE.id,
       command: FileCommands.PASTE.id,
       order: 'c',
     });
-    menu.registerMenuAction(FileTreeContextMenuPath, {
+    menu.registerMenuAction(FileTreeContextMenuGroups['operator'], {
       id: FileCommands.CUT.id,
       command: FileCommands.CUT.id,
       order: 'd',
     });
-    menu.registerMenuAction(FileTreeContextMenuPath, {
+    menu.registerMenuAction(FileTreeContextMenuGroups['change'], {
       command: FileCommands.REMOVE.id,
       order: 'd',
       ...FileCommands.REMOVE,
     });
-    menu.registerMenuAction(FileTreeContextMenuPath, {
+    menu.registerMenuAction(FileTreeContextMenuGroups['change'], {
       id: FileCommands.RENAME.id,
       command: FileCommands.RENAME.id,
       order: 'e',
     });
-    menu.registerMenuAction(FileTreeContextMenuPath, {
+    menu.registerMenuAction(FileTreeContextMenuGroups['extra'], {
       id: FileCommands.COPY_PATH.id,
       command: FileCommands.COPY_PATH.id,
       order: 'f',
     });
-    menu.registerMenuAction(FileTreeContextMenuPath, {
+    menu.registerMenuAction(FileTreeContextMenuGroups['extra'], {
       id: FileCommands.COPY_RELATIVE_PATH.id,
       command: FileCommands.COPY_RELATIVE_PATH.id,
       order: 'g',
     });
-    menu.registerMenuAction(FileTreeContextMenuPath, {
+    menu.registerMenuAction(FileTreeContextMenuGroups['extra'], {
       id: FileCommands.DOWNLOAD.id,
       command: FileCommands.DOWNLOAD.id,
       order: 'h',
