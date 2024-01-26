@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-code-editor",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "",
   "keywords": [
     "libro",
@@ -47,7 +47,7 @@
   "dependencies": {
     "@difizen/mana-app": "latest",
     "@difizen/mana-l10n": "latest",
-    "@difizen/libro-common": "^0.1.15",
+    "@difizen/libro-common": "^0.1.16",
     "uuid": "^9.0.0"
   },
   "peerDependencies": {
