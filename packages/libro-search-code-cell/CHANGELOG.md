@@ -1,5 +1,19 @@
 # @difizen/libro-search-codemirror-cell
 
+## 0.1.17
+
+### Patch Changes
+
+- b159277: insert and execute output in a cell
+- 9ff1bf9: Support file download.
+- Updated dependencies [b159277]
+- Updated dependencies [9ff1bf9]
+  - @difizen/libro-code-cell@0.1.17
+  - @difizen/libro-code-editor@0.1.17
+  - @difizen/libro-common@0.1.17
+  - @difizen/libro-core@0.1.17
+  - @difizen/libro-search@0.1.17
+
 ## 0.1.16
 
 ### Patch Changes
