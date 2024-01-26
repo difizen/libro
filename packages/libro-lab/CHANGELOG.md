@@ -1,5 +1,22 @@
 # @difizen/libro-lab
 
+## 0.1.16
+
+### Patch Changes
+
+- 7d1edf3: Fix: Make Terminals opened from left panel same as the one you created, instead of creating a new terminal view.
+- 90f6f8e: Fix: Cancel observing outputs height change'
+- Updated dependencies [7d1edf3]
+- Updated dependencies [90f6f8e]
+  - @difizen/libro-cofine-editor-core@0.1.16
+  - @difizen/libro-core@0.1.16
+  - @difizen/libro-jupyter@0.1.16
+  - @difizen/libro-kernel@0.1.16
+  - @difizen/libro-lsp@0.1.16
+  - @difizen/libro-prompt-cell@0.1.16
+  - @difizen/libro-terminal@0.1.16
+  - @difizen/libro-toc@0.1.16
+
 ## 0.1.15
 
 ### Patch Changes

@@ -1,5 +1,20 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.16
+
+### Patch Changes
+
+- 7d1edf3: Fix: Make Terminals opened from left panel same as the one you created, instead of creating a new terminal view.
+- 90f6f8e: Fix: Cancel observing outputs height change'
+- Updated dependencies [7d1edf3]
+- Updated dependencies [90f6f8e]
+  - @difizen/libro-code-editor@0.1.16
+  - @difizen/libro-cofine-editor-core@0.1.16
+  - @difizen/libro-cofine-textmate@0.1.16
+  - @difizen/libro-common@0.1.16
+  - @difizen/libro-core@0.1.16
+  - @difizen/libro-lsp@0.1.16
+
 ## 0.1.15
 
 ### Patch Changes
