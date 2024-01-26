@@ -8,7 +8,12 @@ import { LibroJupyterConfiguration } from './config.js';
 @singleton({ contrib: ConfigurationContribution })
 export class LibroJupyterSettingContribution implements ConfigurationContribution {
   registerConfigurations() {
-    return [LibroJupyterConfiguration.AutoSave, LibroJupyterConfiguration.OpenSlot];
+    return [
+      LibroJupyterConfiguration.AutoSave,
+      LibroJupyterConfiguration.OpenSlot,
+      LibroJupyterConfiguration.AllowDownload,
+      LibroJupyterConfiguration.AllowUpload,
+    ];
   }
 }
 @singleton({ contrib: ApplicationContribution })
