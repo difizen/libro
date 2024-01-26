@@ -45,26 +45,21 @@ export const PromptOutputRender: React.FC<{
     const libro = model.cell.parent;
     const insertIndex = libro.model.cells.findIndex((c) => c.id === model.cell.id);
 
-    await Promise.all(
-      sourceArr.map(async (value, index) => {
-        await libro.addCell(
-          {
-            id: v4(),
-            cell: { cell_type: 'code', source: value, metadata: {} },
-          },
-          insertIndex + index + 1,
-        );
-      }),
+    await libro.addCell(
+      {
+        id: v4(),
+        cell: {
+          cell_type: 'code',
+          source: concatMultilineString(sourceArr),
+          metadata: {},
+        },
+      },
+      insertIndex + 1,
     );
-
-    await Promise.all(
-      sourceArr.map(async (_, index) => {
-        await commandRegistry.executeCommand(
-          NotebookCommands['RunCell'].id,
-          libro.model.cells[insertIndex + index + 1],
-          libro,
-        );
-      }),
+    await commandRegistry.executeCommand(
+      NotebookCommands['RunCell'].id,
+      libro.model.cells[insertIndex + 1],
+      libro,
     );
   };
   const insert = async () => {
