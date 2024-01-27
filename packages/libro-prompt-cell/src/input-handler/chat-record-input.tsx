@@ -42,6 +42,10 @@ export const ChatRecordInput: FC<ChatRecordInputProps> = (
     setSelecting(value);
   };
 
+  const handleSelectChange = (value: string) => {
+    handleChange(value);
+  };
+
   return (
     <div
       className={classNames(ChatRecordInputCls, props.classname)}
@@ -57,8 +61,14 @@ export const ChatRecordInput: FC<ChatRecordInputProps> = (
           mode="tags"
           style={{ width: '100%' }}
           placeholder="选择或输入聊天标识"
-          onSelect={handleChange}
+          onSelect={handleSelectChange}
+          onChange={handleSelectChange}
           showSearch={false}
+          allowClear
+          value={value}
+          onClear={() => {
+            handleChange('');
+          }}
           onBlur={() => {
             handleSelecting(false);
           }}
@@ -84,7 +94,7 @@ export const ChatRecordInput: FC<ChatRecordInputProps> = (
               handleSelecting(true);
             }}
           >
-            <EditFilled />
+            <EditFilled className="libro-chat-record-input-editor-icon" />
           </span>
         </>
       )}
