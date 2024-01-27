@@ -37,10 +37,13 @@ export class LibroPromptCellModel
   kernelExecuting = false;
 
   @prop()
-  record: string;
+  record?: string;
 
   @prop()
-  modelType: string;
+  modelType?: string;
+
+  @prop()
+  chatKey?: string;
 
   @prop()
   variableName: string;
@@ -63,7 +66,7 @@ export class LibroPromptCellModel
     return {
       ...this._decodeObject,
       variableName: this.variableName,
-      modelType: this.modelType,
+      chatKey: this.chatKey,
       record: this.record,
       value: this.value,
       cellId: this.id,
@@ -73,7 +76,7 @@ export class LibroPromptCellModel
   override set decodeObject(value) {
     super.decodeObject = value;
     this.variableName = value.variableName;
-    this.modelType = value.modelType;
+    this.chatKey = value.chatKey;
     this.record = value.record;
   }
 

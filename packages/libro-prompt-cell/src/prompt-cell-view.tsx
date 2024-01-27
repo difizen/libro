@@ -147,12 +147,12 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
         .then(() => {
           const len = instance.chatObjects.length;
           if (len > 0) {
-            if (!instance.model.decodeObject.modelType) {
-              instance.model.modelType = instance.chatObjects[len - 1].key;
+            if (!instance.model.decodeObject.chatKey) {
+              instance.model.chatKey = instance.chatObjects[len - 1].key;
             } else {
-              instance.model.modelType = instance.model.decodeObject.modelType;
+              instance.model.chatKey = instance.model.decodeObject.chatKey;
             }
-            setSelectedModel(instance.model.modelType);
+            setSelectedModel(instance.model.chatKey);
             return;
           }
           return;
@@ -229,8 +229,8 @@ export class LibroPromptCellView extends LibroExecutableCellView {
   get sortedChatObjects(): ChatObject[] {
     const map = new Map<string, ChatObject>();
     this.parent.model.cells.forEach((cell) => {
-      if (cell.model instanceof LibroPromptCellModel && cell.model.modelType) {
-        map.set(cell.model.modelType, ChatObjectFromKey(cell.model.modelType));
+      if (cell.model instanceof LibroPromptCellModel && cell.model.chatKey) {
+        map.set(cell.model.chatKey, ChatObjectFromKey(cell.model.chatKey));
       }
     });
     this.chatObjects.forEach((item) => {
@@ -620,12 +620,12 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     );
   };
   handleModelNameChange = (value: string) => {
-    this.model.modelType = value;
+    this.model.chatKey = value;
   };
   handleVariableNameChange = (value: string) => {
     this.model.variableName = value;
   };
-  handleRecordChange = (value: string) => {
+  handleRecordChange = (value: string | undefined) => {
     this.model.record = value;
   };
 }
