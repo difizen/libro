@@ -11,8 +11,8 @@ import { useState } from 'react';
 import './index.less';
 
 interface ChatRecordInputProps {
-  value: string;
-  handleChange: (value: string) => void;
+  value: string | undefined;
+  handleChange: (value: string | undefined) => void;
   onFocus?: () => void;
   classname?: string;
   records: string[];
@@ -33,17 +33,19 @@ export const ChatRecordInput: FC<ChatRecordInputProps> = (
     }
   }, [selecting]);
 
-  const handleSelecting = (value: boolean) => {
-    if (value) {
+  const handleSelecting = (v: boolean) => {
+    if (v) {
       contextKey.disableCommandMode();
     } else {
       contextKey.enableCommandMode();
     }
-    setSelecting(value);
+    setSelecting(v);
   };
 
-  const handleSelectChange = (value: string) => {
-    handleChange(value);
+  const handleSelectChange = (arr: string | string[]) => {
+    if (arr instanceof Array) {
+      handleChange(arr[0]);
+    }
   };
 
   return (
@@ -67,7 +69,7 @@ export const ChatRecordInput: FC<ChatRecordInputProps> = (
           allowClear
           value={value}
           onClear={() => {
-            handleChange('');
+            handleChange(undefined);
           }}
           onBlur={() => {
             handleSelecting(false);

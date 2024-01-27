@@ -10,6 +10,7 @@ import { singleton } from '@difizen/mana-app';
 
 export interface PromptDecodedFormatter extends DefaultDecodedFormatter {
   modelType?: string;
+  chatKey?: string;
   variableName?: string;
   cellId?: string;
   record?: string;
@@ -29,8 +30,10 @@ export class FormatterPromptMagicContribution
   };
 
   encode = (source: PromptDecodedFormatter) => {
+    const chat_key = source.chatKey || source.modelType || 'LLM:chatgpt';
     const promptObj = {
-      model_name: source.modelType || 'chatgpt',
+      model_name: chat_key,
+      chat_key: chat_key,
       prompt: source.value,
       variable_name: source.variableName,
       cell_id: source.cellId,
@@ -51,14 +54,14 @@ export class FormatterPromptMagicContribution
       const run = value.split('%%prompt \n')[1];
       const runValue = JSON.parse(run);
       const codeValue = runValue.prompt;
-      const modelType = runValue.model_name;
+      const chatKey = runValue.chat_key || runValue.model_name;
       const variableName = runValue.variable_name;
       const cellId = runValue.cell_id;
       const record = runValue.record;
       return {
         value: codeValue,
         variableName,
-        modelType,
+        chatKey,
         cellId,
         record,
       };
@@ -69,6 +72,9 @@ export class FormatterPromptMagicContribution
   };
 
   validate = (source: PromptDecodedFormatter): source is PromptDecodedFormatter => {
-    return DefaultDecodedFormatter.is(source) && 'modelType' in source;
+    return (
+      DefaultDecodedFormatter.is(source) &&
+      ('chatKey' in source || 'modelType ' in source)
+    );
   };
 }
