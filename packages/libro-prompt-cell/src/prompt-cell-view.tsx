@@ -36,6 +36,7 @@ import {
 } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
 import { Select, Tag } from 'antd';
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 
 import { ChatRecordInput, VariableNameInput } from './input-handler/index.js';
@@ -48,6 +49,18 @@ export interface ChatObject {
   type: string;
   order: number;
   key: string;
+  disabled?: boolean;
+}
+
+function ChatObjectFromKey(key: string): ChatObject {
+  const [type, name] = key.split(':');
+  return {
+    name,
+    type,
+    key,
+    order: 0,
+    disabled: true,
+  };
 }
 export interface ChatObjectOptions {
   order?: number;
@@ -95,14 +108,18 @@ const SelectionItemLabel: React.FC<{ item: ChatObject }> = (props: {
   const item = props.item;
 
   return (
-    <span className="libro-prompt-cell-selection-label">
+    <span
+      className={classNames('libro-prompt-cell-selection', {
+        'libro-prompt-cell-selection-disabled': item.disabled,
+      })}
+    >
       <Tag
         color={ChatObjectOptions(item.type).color}
-        className="libro-prompt-cell-header-selection-type"
+        className="libro-prompt-cell-selection-tag"
       >
         {item.type}
       </Tag>
-      <span className="libro-prompt-cell-header-selection-name">{item.name}</span>
+      <span className="libro-prompt-cell-selection-name">{item.name}</span>
     </span>
   );
 };
@@ -166,7 +183,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
                 value={selectedModel}
                 style={{ minWidth: 160 }}
                 onChange={handleChange}
-                options={instance.sortedChatItems.map(instance.toSelectionOption)}
+                options={instance.sortedChatObjects.map(instance.toSelectionOption)}
                 bordered={false}
                 onFocus={async () => {
                   await instance.updateChatObjects();
@@ -209,8 +226,20 @@ export class LibroPromptCellView extends LibroExecutableCellView {
   @prop()
   contextChatRecords: string[] = [];
 
-  get sortedChatItems(): ChatObject[] {
-    return [...this.chatObjects].sort((a, b) => {
+  get sortedChatObjects(): ChatObject[] {
+    const map = new Map<string, ChatObject>();
+    this.parent.model.cells.forEach((cell) => {
+      if (cell.model instanceof LibroPromptCellModel && cell.model.modelType) {
+        map.set(cell.model.modelType, ChatObjectFromKey(cell.model.modelType));
+      }
+    });
+    this.chatObjects.forEach((item) => {
+      map.set(item.key, item);
+    });
+    return Array.from(map.values()).sort((a, b) => {
+      if (a.disabled && !b.disabled) {
+        return 1;
+      }
       if (a.type !== b.type) {
         const aOrder = ChatObjectOptions(a.type).order || 0;
         const bOrder = ChatObjectOptions(b.type).order || 0;
@@ -544,6 +573,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     return {
       value: item.key,
       label: <SelectionItemLabel item={item} />,
+      disabled: !!item.disabled,
     };
   };
 
