@@ -22,6 +22,7 @@ import {
 import type { ExecutionMeta, KernelMessage } from '@difizen/libro-jupyter';
 import { KernelError, LibroJupyterModel } from '@difizen/libro-jupyter';
 import {
+  CommandRegistry,
   getOrigin,
   inject,
   prop,
@@ -35,7 +36,7 @@ import {
   watch,
 } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
-import { Select, Tag } from 'antd';
+import { Button, Divider, Select, Tag } from 'antd';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 
@@ -43,6 +44,9 @@ import { ChatRecordInput, VariableNameInput } from './input-handler/index.js';
 import { LibroPromptCellModel } from './prompt-cell-model.js';
 import { PromptScript } from './prompt-cell-script.js';
 import './index.less';
+import { MessageOutlined } from '@ant-design/icons';
+
+import { ChatCommands, ChatHandler } from './chat/index.js';
 
 export interface ChatObject {
   name: string;
@@ -145,10 +149,10 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
       instance
         .updateChatObjects()
         .then(() => {
-          const len = instance.chatObjects.length;
+          const len = instance.contextChatObjects.length;
           if (len > 0) {
             if (!instance.model.decodeObject.chatKey) {
-              instance.model.chatKey = instance.chatObjects[len - 1].key;
+              instance.model.chatKey = instance.contextChatObjects[len - 1].key;
             } else {
               instance.model.chatKey = instance.model.decodeObject.chatKey;
             }
@@ -190,11 +194,13 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
                 }}
               />
             </span>
-            <VariableNameInput
-              value={instance.model.variableName}
-              checkVariableNameAvailable={instance.checkVariableNameAvailable}
-              handleVariableNameChange={instance.handleVariableNameChange}
-            />
+            <span className="libro-prompt-cell-header-divider">
+              <VariableNameInput
+                value={instance.model.variableName}
+                checkVariableNameAvailable={instance.checkVariableNameAvailable}
+                handleVariableNameChange={instance.handleVariableNameChange}
+              />
+            </span>
           </div>
           <div>
             <ChatRecordInput
@@ -203,6 +209,12 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
               records={instance.chatRecords}
               onFocus={instance.updateChatRecords}
             />
+            <span className="libro-prompt-cell-header-divider libro-prompt-cell-header-actions">
+              <MessageOutlined
+                className="libro-prompt-cell-header-chat"
+                onClick={instance.openChatView}
+              />
+            </span>
           </div>
         </div>
         <CellEditor />
@@ -215,13 +227,14 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
 @view('prompt-editor-cell-view')
 export class LibroPromptCellView extends LibroExecutableCellView {
   @inject(LirboContextKey) protected lirboContextKey: LirboContextKey;
+  @inject(ChatHandler) protected chatHandler: ChatHandler;
   override view = PropmtEditorViewComponent;
 
   declare model: LibroPromptCellModel;
 
   // TODO: Chat objects and chat message records should belong to libro rather than cell
   @prop()
-  chatObjects: ChatObject[] = [];
+  contextChatObjects: ChatObject[] = [];
 
   @prop()
   contextChatRecords: string[] = [];
@@ -233,7 +246,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
         map.set(cell.model.chatKey, ChatObjectFromKey(cell.model.chatKey));
       }
     });
-    this.chatObjects.forEach((item) => {
+    this.contextChatObjects.forEach((item) => {
       map.set(item.key, item);
     });
     return Array.from(map.values()).sort((a, b) => {
@@ -276,6 +289,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
 
   @inject(CodeEditorManager) codeEditorManager: CodeEditorManager;
   @inject(PromptScript) promptScript: PromptScript;
+  @inject(CommandRegistry) commands: CommandRegistry;
 
   outputs: IOutput[];
 
@@ -522,55 +536,17 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     }
   }
 
-  fetch = async (
-    content: KernelMessage.IExecuteRequestMsg['content'],
-    ioCallback: (msg: KernelMessage.IIOPubMessage) => any,
-  ) => {
+  updateChatObjects = async () => {
     const model = this.parent?.model as LibroJupyterModel;
     await model.kcReady;
     const connection = model.kernelConnection!;
-    const future = connection.requestExecute(content);
-    future.onIOPub = (msg) => {
-      ioCallback(msg);
-    };
-    return future.done as Promise<KernelMessage.IExecuteReplyMsg>;
-  };
-
-  updateChatObjects = async () => {
-    return this.fetch(
-      {
-        code: this.promptScript.getChatObjects,
-        store_history: false,
-      },
-      (msg) =>
-        this.handleQueryResponse(msg, (result) => {
-          try {
-            const chatObjects = JSON.parse(result) as ChatObject[];
-            this.chatObjects = chatObjects.map((item) => ({
-              ...item,
-              disabled: false,
-            }));
-          } catch (e) {
-            //
-          }
-        }),
-    );
+    this.contextChatObjects = await this.chatHandler.getChatObjects(connection);
   };
   updateChatRecords = async () => {
-    return this.fetch(
-      {
-        code: this.promptScript.getChatRecoreds,
-        store_history: false,
-      },
-      (msg) =>
-        this.handleQueryResponse(msg, (result) => {
-          try {
-            this.contextChatRecords = JSON.parse(result) as string[];
-          } catch (e) {
-            //
-          }
-        }),
-    );
+    const model = this.parent?.model as LibroJupyterModel;
+    await model.kcReady;
+    const connection = model.kernelConnection!;
+    this.contextChatRecords = await this.chatHandler.getChatRecordNames(connection);
   };
 
   toSelectionOption = (item: ChatObject) => {
@@ -579,39 +555,6 @@ export class LibroPromptCellView extends LibroExecutableCellView {
       label: <SelectionItemLabel item={item} />,
       disabled: !!item.disabled,
     };
-  };
-
-  handleQueryResponse = (
-    response: KernelMessage.IIOPubMessage,
-    cb: (result: string) => void,
-  ) => {
-    const msgType = response.header.msg_type;
-    switch (msgType) {
-      case 'execute_result':
-      case 'display_data': {
-        const payload = response as KernelMessage.IExecuteResultMsg;
-        let content: string = payload.content.data['text/plain'] as string;
-        if (content.slice(0, 1) === "'" || content.slice(0, 1) === '"') {
-          content = content.slice(1, -1);
-          content = content.replace(/\\"/g, '"').replace(/\\'/g, "'");
-        }
-
-        cb(content);
-        break;
-      }
-      case 'stream': {
-        const payloadDisplay = response as KernelMessage.IStreamMsg;
-        let contentStream: string = payloadDisplay.content.text as string;
-        if (contentStream.slice(0, 1) === "'" || contentStream.slice(0, 1) === '"') {
-          contentStream = contentStream.slice(1, -1);
-          contentStream = contentStream.replace(/\\"/g, '"').replace(/\\'/g, "'");
-        }
-        cb(contentStream);
-        break;
-      }
-      default:
-        break;
-    }
   };
 
   checkVariableNameAvailable = (variableName: string) => {
@@ -631,5 +574,12 @@ export class LibroPromptCellView extends LibroExecutableCellView {
   };
   handleRecordChange = (value: string | undefined) => {
     this.model.record = value;
+  };
+
+  openChatView = async () => {
+    this.commands.executeCommand(ChatCommands['Open'].id, {
+      libroId: this.parent.id,
+      cellId: this.id,
+    });
   };
 }

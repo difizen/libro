@@ -2,6 +2,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &-divider {
+    border-left: 1px solid var(--mana-color-border);
+  }
+
+  &-actions {
+    padding: 0 8px;
+  }
+
+  &-chat {
+    padding: 4px 6px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--mana-info-color);
+    }
+  }
 }
 
 .libro-llm-hljs {
