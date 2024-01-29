@@ -22,8 +22,6 @@ import {
 } from '@difizen/mana-app';
 import { message, Modal } from 'antd';
 
-import { LibroConfigAllowDownload } from '../config/index.js';
-
 import { FileCreateModal } from './file-create-modal.js';
 import { FileDirCreateModal } from './file-createdir-modal.js';
 import { FileRenameModal } from './file-rename-modal.js';
@@ -106,6 +104,7 @@ export class FileCommandContribution
   fileView: FileView;
   lastAction: 'COPY' | 'CUT';
   lastActionNode: FileStatNode;
+  allowDownload = false;
 
   constructor(@inject(ViewManager) viewManager: ViewManager) {
     this.viewManager = viewManager;
@@ -369,10 +368,7 @@ export class FileCommandContribution
           .catch(console.error);
       },
       isVisible: (data) => {
-        return (
-          !!this.configurationService.get(LibroConfigAllowDownload) &&
-          FileStatNode.is(data)
-        );
+        return this.allowDownload && FileStatNode.is(data);
       },
     });
   }
