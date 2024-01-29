@@ -545,7 +545,11 @@ export class LibroPromptCellView extends LibroExecutableCellView {
       (msg) =>
         this.handleQueryResponse(msg, (result) => {
           try {
-            this.chatObjects = JSON.parse(result) as ChatObject[];
+            const chatObjects = JSON.parse(result) as ChatObject[];
+            this.chatObjects = chatObjects.map((item) => ({
+              ...item,
+              disabled: false,
+            }));
           } catch (e) {
             //
           }
