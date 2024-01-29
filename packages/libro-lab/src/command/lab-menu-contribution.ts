@@ -6,6 +6,9 @@ import {
 } from '@difizen/libro-jupyter';
 import { TerminalCommands, TerminalManager } from '@difizen/libro-terminal';
 import type { MenuRegistry } from '@difizen/mana-app';
+import type { KeybindingRegistry } from '@difizen/mana-app';
+import { KeybindingContribution } from '@difizen/mana-app';
+import { Saveable } from '@difizen/mana-app';
 import {
   CommandContribution,
   CommandRegistry,
@@ -16,6 +19,7 @@ import {
   ViewManager,
 } from '@difizen/mana-app';
 
+import { LibroLabLayoutSlots } from '../layout/index.js';
 import { LayoutService } from '../layout/layout-service.js';
 
 import { LabCommands } from './lab-command.js';
@@ -29,13 +33,22 @@ export namespace LabMenus {
   export const HELP = [...MAIN_MENU_BAR, '6_help'];
 }
 
-@singleton({ contrib: [MenuContribution, CommandContribution] })
-export class LabMenu implements MenuContribution, CommandContribution {
+@singleton({ contrib: [MenuContribution, CommandContribution, KeybindingContribution] })
+export class LabMenu
+  implements MenuContribution, CommandContribution, KeybindingContribution
+{
   @inject(CommandRegistry) protected commandRegistry: CommandRegistry;
   @inject(LibroService) protected libroService: LibroService;
   @inject(LayoutService) protected layoutService: LayoutService;
   @inject(TerminalManager) terminalManager: TerminalManager;
   @inject(ViewManager) viewManager: ViewManager;
+
+  registerKeybindings(keybindings: KeybindingRegistry) {
+    keybindings.registerKeybinding({
+      command: LabCommands.Save.id,
+      keybinding: LabCommands.Save.keybind,
+    });
+  }
 
   registerMenus(menu: MenuRegistry) {
     menu.registerSubmenu(LabMenus.FILE, { label: '文件' });
@@ -240,9 +253,27 @@ export class LabMenu implements MenuContribution, CommandContribution {
         //TODO: 关于
       },
     });
-    commands.registerCommand(LabCommands.Save, {
+    commands.registerCommand(LabCommands.Save);
+    commands.registerHandler(LabCommands.Save.id, {
       execute: async () => {
-        //TODO: 保存
+        const contentActive = this.layoutService.getActiveView(
+          LibroLabLayoutSlots.content,
+        );
+        if (contentActive && Saveable.is(contentActive)) {
+          contentActive.save();
+        }
+      },
+      isEnabled: () => {
+        const contentActive = this.layoutService.getActiveView(
+          LibroLabLayoutSlots.content,
+        );
+        if (contentActive && contentActive.container?.current) {
+          const contentHost = contentActive.container.current;
+          if (contentHost.contains(document.activeElement)) {
+            return true;
+          }
+        }
+        return false;
       },
     });
     commands.registerCommandWithContext(LabCommands.UndoCellAction, this, {
