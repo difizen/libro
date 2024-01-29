@@ -8,8 +8,9 @@ export const LabCommands = {
   //   label: '新建终端',
   // },
   Save: {
-    id: 'libro-lab-header-menu-file-save',
+    id: 'libro-lab-save',
     label: '保存',
+    keybind: 'ctrlcmd+s',
   },
   CreateFile: {
     id: 'libro-lab-header-menu-file-create',
