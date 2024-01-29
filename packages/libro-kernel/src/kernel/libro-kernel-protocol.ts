@@ -774,6 +774,7 @@ export interface IKernelConnection extends ObservableDisposable {
    */
   iopubMessage: Event<KernelMessage.IIOPubMessage>;
 
+  futureMessage: Event<KernelMessage.IMessage<KernelMessage.MessageType>>;
   /**
    * A signal emitted for unhandled non-iopub kernel messages that claimed to
    * be responses for messages we sent using this kernel object.

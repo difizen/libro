@@ -57,3 +57,5 @@ export const ServerLaunchManager = Symbol('ServerLaunchManager');
 export interface ServerLaunchManager {
   launch: () => Promise<any>;
 }
+
+export const libroArgsMimetype = 'application/vnd.libro.args+json';

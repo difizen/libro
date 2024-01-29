@@ -3,6 +3,7 @@ import type { VirtualizedManager } from '@difizen/libro-core';
 import {
   ContentsManager,
   ExecutableNotebookModel,
+  isDisplayDataMsg,
   LibroKernelConnectionManager,
   ServerConnection,
   ServerManager,
@@ -16,6 +17,7 @@ import { l10n } from '@difizen/mana-l10n';
 
 import {
   ExecutedWithKernelCellModel,
+  libroArgsMimetype,
   LibroFileService,
 } from './libro-jupyter-protocol.js';
 import { SaveFileErrorModal } from './toolbar/save-file-error.js';
@@ -81,6 +83,21 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
     this.modalService = modalService;
     this.dndAreaNullEnable = true;
     this.virtualizedManager = virtualizedManagerHelper.getOrCreate(this);
+    this.kcReady
+      .then(() => {
+        this.kernelConnection?.futureMessage((msg) => {
+          if (isDisplayDataMsg(msg) && libroArgsMimetype in msg.content.data) {
+            this.metadata = {
+              ...this.metadata,
+              args: msg.content.data[libroArgsMimetype],
+            };
+          }
+        });
+        return;
+      })
+      .catch(() => {
+        return;
+      });
   }
 
   get isKernelIdle() {

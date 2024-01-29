@@ -222,6 +222,10 @@ export class KernelConnection implements IKernelConnection {
     return this.iopubMessageEmitter.event;
   }
 
+  get futureMessage(): ManaEvent<KernelMessage.IMessage<KernelMessage.MessageType>> {
+    return this.futureMessageEmitter.event;
+  }
+
   /**
    * A signal emitted for unhandled kernel message.
    *
@@ -381,6 +385,7 @@ export class KernelConnection implements IKernelConnection {
     this.statusChangedEmitter.dispose();
     this.onDisposedEmitter.dispose();
     this.iopubMessageEmitter.dispose();
+    this.futureMessageEmitter.dispose();
     this.anyMessageEmitter.dispose();
     this.pendingInputEmitter.dispose();
     this.unhandledMessageEmitter.dispose();
@@ -1529,6 +1534,7 @@ export class KernelConnection implements IKernelConnection {
       const future = this._futures?.get(parentHeader.msg_id);
       if (future) {
         await future.handleMsg(msg);
+        this.futureMessageEmitter.fire(msg);
         this._assertCurrentMessage(msg);
       } else {
         // If the message was sent by us and was not iopub, it is orphaned.
@@ -1756,6 +1762,9 @@ export class KernelConnection implements IKernelConnection {
   protected connectionStatusChangedEmitter = new Emitter<ConnectionStatus>();
   protected onDisposedEmitter = new Emitter<void>();
   protected iopubMessageEmitter = new Emitter<KernelMessage.IIOPubMessage>();
+  protected futureMessageEmitter = new Emitter<
+    KernelMessage.IMessage<KernelMessage.MessageType>
+  >();
   protected anyMessageEmitter = new Emitter<IAnyMessageArgs>();
   protected pendingInputEmitter = new Emitter<boolean>();
   protected unhandledMessageEmitter = new Emitter<KernelMessage.IMessage>();
