@@ -6,7 +6,8 @@
   "description": "JavaScript + Python hybrid monorepo",
   "scripts": {
     "bootstrap": "./scripts/bootstrap.sh",
-    "test:jest": "jest --logHeapUsage --show-config",
+    "test:jest": "jest",
+    "test:jest-config": "jest --show-config",
     "coverage": "nx run-many --target=coverage",
     "coverage:jest": "jest --coverage",
     "postinstall": "is-ci || husky install",

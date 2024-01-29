@@ -4,7 +4,6 @@ import { ViewManager } from '@difizen/mana-app';
 import {
   CommandContribution,
   inject,
-  MenuContribution,
   singleton,
   ToolbarContribution,
 } from '@difizen/mana-app';
