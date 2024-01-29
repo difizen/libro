@@ -137,8 +137,8 @@ export class CodeEditorViewer extends BaseView implements NavigatableView, Savea
       uri,
       value: content,
     };
-
     this.e2Editor = editorPorvider.create(this.codeRef.current, options);
+
     this.toDispose.push(
       getOrigin(this.e2Editor.codeEditor).onDidChangeModelContent(() => {
         this.dirty = true;

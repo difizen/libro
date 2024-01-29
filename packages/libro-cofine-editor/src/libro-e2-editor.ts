@@ -30,6 +30,7 @@ import {
 import { Disposable, DisposableCollection, Emitter } from '@difizen/mana-app';
 import { editor, Selection } from '@difizen/monaco-editor-core';
 import 'resize-observer-polyfill';
+import * as monaco from '@difizen/monaco-editor-core';
 import { v4 } from 'uuid';
 
 import { LSPContribution } from './language/lsp/lsp-contribution.js';
@@ -38,8 +39,6 @@ import { PlaceholderContentWidget } from './placeholder.js';
 import type { MonacoEditorOptions, MonacoEditorType, MonacoMatch } from './types.js';
 import { MonacoRange, MonacoUri } from './types.js';
 import './index.less';
-
-import * as monaco from '@difizen/monaco-editor-core';
 
 export interface LibroE2EditorConfig extends IEditorConfig {
   /**
