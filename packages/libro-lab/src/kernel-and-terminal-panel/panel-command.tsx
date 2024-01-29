@@ -19,7 +19,7 @@ export const PanelCommand = {
 };
 
 @singleton({
-  contrib: [CommandContribution, MenuContribution, ToolbarContribution],
+  contrib: [CommandContribution, ToolbarContribution],
 })
 export class PanelCommandContribution
   implements CommandContribution, ToolbarContribution
