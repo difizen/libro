@@ -70,9 +70,20 @@ export class E2Editor<
     if (MonacoEnvironment.lazy) {
       // 资源懒加载场景
       if (!isDiff) {
-        this.model =
-          options.model ??
-          monaco.editor.createModel(options.value || '', options.language, options.uri);
+        let model = options.model;
+        if (!model) {
+          if (options.uri) {
+            model = monaco.editor.getModel(options.uri);
+          }
+        }
+        if (!model) {
+          model = monaco.editor.createModel(
+            options.value || '',
+            options.language,
+            options.uri,
+          );
+        }
+        this.model = model;
         const language = this.model.getLanguageId();
         (this as E2Editor<monaco.editor.IStandaloneCodeEditor>).codeEditor =
           monaco.editor.create(node, { ...options, model: this.model });
@@ -131,9 +142,20 @@ export class E2Editor<
       this.handleEditorLanguageFeatureBefore(options.language);
 
       if (!isDiff) {
-        this.model =
-          options.model ??
-          monaco.editor.createModel(options.value || '', options.language, options.uri);
+        let model = options.model;
+        if (!model) {
+          if (options.uri) {
+            model = monaco.editor.getModel(options.uri);
+          }
+        }
+        if (!model) {
+          model = monaco.editor.createModel(
+            options.value || '',
+            options.language,
+            options.uri,
+          );
+        }
+        this.model = model;
         (this as E2Editor<monaco.editor.IStandaloneCodeEditor>).codeEditor =
           monaco.editor.create(node, { ...options, model: this.model });
         this.toDispose.push(
