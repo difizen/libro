@@ -34,7 +34,7 @@ const configs = {
     '^.+\\.(js|jsx)$': ['@swc/jest', swcJestConfig],
   },
   transformIgnorePatterns: [
-    '^/node_modules/(?!react-dnd|dnd-core|query-string|@react-dnd)',
+    '^/node_modules/(?!react-dnd|dnd-core|query-string|lodash-es|@react-dnd)',
   ],
   maxWorkers: process.env.JEST_MAX_WORKER || '100%',
   coveragePathIgnorePatterns: [
