@@ -79,6 +79,10 @@ export const FileCommands = {
     id: 'fileTree.command.download',
     label: '下载',
   },
+  UPLOAD: {
+    id: 'fileTree.command.upload',
+    label: '上传',
+  },
 };
 export const FileTreeContextMenuPath: MenuPath = ['file-tree-context-menu'];
 export const FileTreeContextMenuGroups: Record<string, MenuPath> = {
@@ -105,6 +109,7 @@ export class FileCommandContribution
   lastAction: 'COPY' | 'CUT';
   lastActionNode: FileStatNode;
   allowDownload = false;
+  allowUpload = false;
 
   constructor(@inject(ViewManager) viewManager: ViewManager) {
     this.viewManager = viewManager;
@@ -179,6 +184,11 @@ export class FileCommandContribution
       id: FileCommands.DOWNLOAD.id,
       command: FileCommands.DOWNLOAD.id,
       order: 'h',
+    });
+    menu.registerMenuAction(FileTreeContextMenuGroups['extra'], {
+      id: FileCommands.UPLOAD.id,
+      command: FileCommands.UPLOAD.id,
+      order: 'i',
     });
   }
   registerCommands(command: CommandRegistry): void {
@@ -356,6 +366,11 @@ export class FileCommandContribution
         this.contentsManager
           .getDownloadUrl(path)
           .then((url) => {
+            const urlObj = new URL(url);
+            if (urlObj.origin !== location.origin) {
+              // not same origin
+              return;
+            }
             const element = document.createElement('a');
             element.href = url;
             element.download = '';
@@ -368,7 +383,36 @@ export class FileCommandContribution
           .catch(console.error);
       },
       isVisible: (data) => {
-        return this.allowDownload && FileStatNode.is(data);
+        return this.allowDownload && FileStatNode.is(data) && data.fileStat.isFile;
+      },
+    });
+
+    command.registerCommand(FileCommands.UPLOAD, {
+      execute: (data, view) => {
+        if (!this.allowUpload) {
+          return;
+        }
+        if (!view || !(view instanceof FileView)) {
+          return;
+        }
+        if (!data || data instanceof FileView) {
+          return view.uploadSubmit();
+        }
+        if (FileStatNode.is(data) && data.fileStat.isDirectory) {
+          return view.uploadSubmit(data.uri.path.toString());
+        }
+      },
+      isVisible: (data, view) => {
+        if (!this.allowUpload) {
+          return false;
+        }
+        if (!view || !(view instanceof FileView)) {
+          return false;
+        }
+        if (!data || data instanceof FileView) {
+          return true;
+        }
+        return FileStatNode.is(data) && data.fileStat.isDirectory;
       },
     });
   }
