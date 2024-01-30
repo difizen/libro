@@ -1,4 +1,6 @@
 import { ExclamationCircleFilled, FolderFilled } from '@ant-design/icons';
+import { ContentsManager } from '@difizen/libro-kernel';
+import type { IContentsModel } from '@difizen/libro-kernel';
 import type { TreeNode, ViewOpenHandler } from '@difizen/mana-app';
 import { FileTreeViewFactory } from '@difizen/mana-app';
 import {
@@ -39,7 +41,9 @@ const noVerifyFileType = ['.ipynb', '.py'];
 @view(FileTreeViewFactory, FileTreeModule)
 export class FileView extends FileTreeView {
   @inject(OpenerService) protected openService: OpenerService;
+  @inject(ContentsManager) protected contentsManager: ContentsManager;
   @inject(CommandRegistry) protected command: CommandRegistry;
+  uploadInput?: HTMLInputElement;
   override id = FileTreeViewFactory;
   override className = 'libro-jupyter-file-tree';
 
@@ -63,6 +67,92 @@ export class FileView extends FileTreeView {
     this.title.icon = <FolderFilled />;
     this.toDispose.push(this.model.onOpenNode(this.openNode));
   }
+
+  override onViewMount(): void {
+    super.onViewMount?.();
+    if (!this.container?.current) {
+      return;
+    }
+    const container = this.container.current;
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.multiple = true;
+    input.onclick = this.onInputClicked;
+    input.onchange = this.onInputChanged;
+    input.style.display = 'none';
+    container.appendChild(input);
+    this.uploadInput = input;
+  }
+
+  uploadSubmit = (basePath?: string) => {
+    if (this.uploadInput) {
+      this.uploadInput.setAttribute('data-path', basePath || '');
+      this.uploadInput.click();
+    }
+  };
+  /**
+   * Perform the actual upload.
+   */
+  protected async doUpload(file: File, basePath: string): Promise<IContentsModel> {
+    // Gather the file model parameters.
+    let path = basePath;
+    path = path ? path + '/' + file.name : file.name;
+    const name = file.name;
+    const type = 'file';
+    const format = 'base64';
+
+    const uploadInner = async (blob: Blob, chunk?: number): Promise<IContentsModel> => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      await new Promise((resolve, reject) => {
+        reader.onload = resolve;
+        reader.onerror = (event) => reject(`Failed to upload "${file.name}":` + event);
+      });
+
+      // remove header https://stackoverflow.com/a/24289420/907060
+      const content = (reader.result as string).split(',')[1];
+
+      const model: Partial<IContentsModel> = {
+        type,
+        format,
+        name,
+        chunk,
+        content,
+      };
+      return await this.contentsManager.save(path, model);
+    };
+
+    return await uploadInner(file);
+  }
+
+  onInputChanged = () => {
+    if (!this.uploadInput) {
+      return;
+    }
+    let path = this.uploadInput.getAttribute('data-path') || '';
+    if (!path) {
+      path = this.model.location?.path.toString() || '';
+    }
+    if (!path) {
+      return;
+    }
+    const files = Array.prototype.slice.call(this.uploadInput.files) as File[];
+    const pending = files.map((file) => this.doUpload(file, path));
+    Promise.all(pending)
+      .then(() => {
+        this.model.refresh();
+        return;
+      })
+      .catch((error) => {
+        console.error('Upload Error:', error);
+      });
+  };
+
+  onInputClicked = () => {
+    if (this.uploadInput) {
+      this.uploadInput.value = '';
+    }
+  };
 
   openNode = async (treeNode: TreeNode) => {
     if (FileStatNode.is(treeNode) && !treeNode.fileStat.isDirectory) {
