@@ -1,5 +1,31 @@
 # @difizen/libro-jupyter
 
+## 0.1.18
+
+### Patch Changes
+
+- f7c6839: File uploads can now be triggered by right-clicking on the file tree.
+- 0f9e69d: Lab supports saving of all code files.
+- 0f9e69d: More user-friendly prompt cell setting operation.
+- Updated dependencies [f7c6839]
+- Updated dependencies [0f9e69d]
+- Updated dependencies [0f9e69d]
+  - @difizen/libro-search-code-cell@0.1.18
+  - @difizen/libro-cofine-editor@0.1.18
+  - @difizen/libro-markdown-cell@0.1.18
+  - @difizen/libro-code-editor@0.1.18
+  - @difizen/libro-codemirror@0.1.18
+  - @difizen/libro-rendermime@0.1.18
+  - @difizen/libro-code-cell@0.1.18
+  - @difizen/libro-raw-cell@0.1.18
+  - @difizen/libro-common@0.1.18
+  - @difizen/libro-kernel@0.1.18
+  - @difizen/libro-output@0.1.18
+  - @difizen/libro-search@0.1.18
+  - @difizen/libro-core@0.1.18
+  - @difizen/libro-l10n@0.1.18
+  - @difizen/libro-lsp@0.1.18
+
 ## 0.1.17
 
 ### Patch Changes
