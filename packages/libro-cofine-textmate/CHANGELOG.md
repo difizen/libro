@@ -1,5 +1,17 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.18
+
+### Patch Changes
+
+- f7c6839: File uploads can now be triggered by right-clicking on the file tree.
+- 0f9e69d: Lab supports saving of all code files.
+- 0f9e69d: More user-friendly prompt cell setting operation.
+- Updated dependencies [f7c6839]
+- Updated dependencies [0f9e69d]
+- Updated dependencies [0f9e69d]
+  - @difizen/libro-cofine-editor-core@0.1.18
+
 ## 0.1.17
 
 ### Patch Changes
