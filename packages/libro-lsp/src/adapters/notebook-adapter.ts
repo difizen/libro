@@ -188,7 +188,7 @@ export class NotebookAdapter extends WidgetLSPAdapter<LibroView> {
    * @param _session - Session context of changed kernel
    * @param change - Changed data
    */
-  async onKernelChanged(): Promise<void> {
+  onKernelChanged = async (): Promise<void> => {
     try {
       // note: we need to wait until ready before updating language info
       const oldLanguageInfo = this._languageInfo;
@@ -212,7 +212,7 @@ export class NotebookAdapter extends WidgetLSPAdapter<LibroView> {
       // try to reconnect anyway
       this.reloadConnection();
     }
-  }
+  };
 
   /**
    * Dispose the widget.
@@ -397,9 +397,11 @@ export class NotebookAdapter extends WidgetLSPAdapter<LibroView> {
       return;
     }
 
-    this._activeEditorChanged.fire({
-      editor: this.getCellEditor(libroModel.active)!,
-    });
+    if (libroModel.active) {
+      this._activeEditorChanged.fire({
+        editor: this.getCellEditor(libroModel.active)!,
+      });
+    }
   }
 
   /**
