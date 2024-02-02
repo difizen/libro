@@ -25,7 +25,7 @@ export function CellExecutionTip({ cell }: { cell: CellView }) {
   const [, setCurrentTime] = useState<number>();
   const observableCell = useObserve(cell);
 
-  if (!ExecutableCellView.is(cell)) {
+  if (!ExecutableCellView.is(observableCell)) {
     return null;
   }
 
@@ -38,7 +38,7 @@ export function CellExecutionTip({ cell }: { cell: CellView }) {
     .kernelExecuting;
   const executionInfo = parseExecutionInfoFromModel(cell.model);
 
-  const output = cell.outputArea.outputs;
+  const output = observableCell.outputArea.outputs;
   const existOutput = output && output.length !== 0;
 
   const waitingExecute = isWaitingExecute(observableCell.model);
