@@ -427,7 +427,7 @@ export class DocumentConnectionManager implements ILSPDocumentConnectionManager 
    * language.
    */
   disconnect(languageId: TLanguageServerId): void {
-    this.disconnect(languageId);
+    this.disconnectServer(languageId);
   }
 
   /**
