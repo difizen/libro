@@ -59,6 +59,7 @@
     "@difizen/libro-lsp": "^0.1.18",
     "@difizen/libro-markdown-cell": "^0.1.18",
     "@difizen/libro-raw-cell": "^0.1.18",
+    "@difizen/libro-language-client": "^0.1.18",
     "@difizen/mana-app": "latest",
     "@difizen/mana-l10n": "latest",
     "@ant-design/colors": "^7.0.0",

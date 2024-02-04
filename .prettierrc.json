@@ -9,6 +9,12 @@
       "options": {
         "proseWrap": "preserve"
       }
+    },
+    {
+      "files": ["**/tsconfig.json"],
+      "options": {
+        "trailingComma": "none"
+      }
     }
   ]
 }

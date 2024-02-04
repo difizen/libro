@@ -9,3 +9,4 @@ export * from './polling/index.js';
 export * from './display-wrapper.js';
 export * from './protocol/index.js';
 export * from './dom.js';
+export * from './mime.js';

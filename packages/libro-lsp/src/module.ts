@@ -10,7 +10,6 @@ import { DocumentConnectionManager } from './connection-manager.js';
 import { LSPConnection, LSPConnectionFactory } from './connection.js';
 import { CodeExtractorsManager } from './extractors/index.js';
 import { FeatureManager } from './feature.js';
-import { LSPAppContribution } from './lsp-app-contribution.js';
 import { LanguageServerManager } from './manager.js';
 import { LSPMonitor } from './monitor.js';
 import {
@@ -29,7 +28,7 @@ import {
 
 export const LibroLSPModule = ManaModule.create()
   .register(
-    LSPAppContribution,
+    // LSPAppContribution,
     DocumentConnectionManager,
     FeatureManager,
     CodeExtractorsManager,

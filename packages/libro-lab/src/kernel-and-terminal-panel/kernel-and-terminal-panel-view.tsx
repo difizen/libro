@@ -1,6 +1,5 @@
 import { LibroKernelManager, LibroSessionManager } from '@difizen/libro-kernel';
-import type { ILanguageServerManager, TLanguageServerId } from '@difizen/libro-lsp';
-import { ILSPDocumentConnectionManager } from '@difizen/libro-lsp';
+import { LibroLanguageClientManager } from '@difizen/libro-language-client';
 import { TerminalCommands, TerminalManager } from '@difizen/libro-terminal';
 import {
   BaseView,
@@ -35,8 +34,7 @@ const PanelRender: React.FC = () => {
     libroKernelManager,
     libroSessionManager,
     terminalManager,
-    lspManager,
-    lspConnectionManager,
+    libroLanguageClientManager,
     commandRegistry,
   } = instance;
 
@@ -48,14 +46,10 @@ const PanelRender: React.FC = () => {
     LibroPanelCollapseItem[] | undefined
   >();
 
-  // const lspManager = useInject<ILSPDocumentConnectionManager>(
-  //   DocumentConnectionManager,
-  // ).languageServerManager;
-
   const [lspItems, setLSPItems] = useState<LibroPanelCollapseItem[] | undefined>();
 
-  lspManager.sessionsChanged(() => {
-    const sessions = lspManager.sessions;
+  libroLanguageClientManager.sessionsChanged(() => {
+    const sessions = libroLanguageClientManager.sessions;
 
     const items = [] as LibroPanelCollapseItem[];
 
@@ -63,8 +57,7 @@ const PanelRender: React.FC = () => {
       items.push({
         id: key,
         name: `${key} (${session.spec.languages.join('/')})`,
-        shutdown: async () =>
-          await lspConnectionManager.disconnectServer(key as TLanguageServerId),
+        shutdown: async () => await libroLanguageClientManager.closeLanguageClient(key),
       });
     });
 
@@ -173,7 +166,9 @@ const PanelRender: React.FC = () => {
       <LibroCollapse
         type={LibroPanelCollapseItemType.LSP}
         items={lspItems}
-        shutdownAll={async () => await lspConnectionManager.disconnectAllServers()}
+        shutdownAll={async () =>
+          await libroLanguageClientManager.closeAllLanguageClient()
+        }
       />
     </div>
   );
@@ -191,16 +186,15 @@ export class KernelAndTerminalPanelView extends BaseView {
   libroKernelManager: LibroKernelManager;
   libroSessionManager: LibroSessionManager;
   terminalManager: TerminalManager;
-  lspConnectionManager: ILSPDocumentConnectionManager;
-  lspManager: ILanguageServerManager;
+  libroLanguageClientManager: LibroLanguageClientManager;
   commandRegistry: CommandRegistry;
 
   constructor(
     @inject(LibroKernelManager) libroKernelManager: LibroKernelManager,
     @inject(LibroSessionManager) libroSessionManager: LibroSessionManager,
     @inject(TerminalManager) terminalManager: TerminalManager,
-    @inject(ILSPDocumentConnectionManager)
-    lspDocumentConnectionManager: ILSPDocumentConnectionManager,
+    @inject(LibroLanguageClientManager)
+    libroLanguageClientManager: LibroLanguageClientManager,
     @inject(CommandRegistry) commandRegistry: CommandRegistry,
   ) {
     super();
@@ -210,8 +204,7 @@ export class KernelAndTerminalPanelView extends BaseView {
     this.libroKernelManager = libroKernelManager;
     this.libroSessionManager = libroSessionManager;
     this.terminalManager = terminalManager;
-    this.lspConnectionManager = lspDocumentConnectionManager;
-    this.lspManager = lspDocumentConnectionManager.languageServerManager;
+    this.libroLanguageClientManager = libroLanguageClientManager;
     this.commandRegistry = commandRegistry;
   }
 
@@ -224,6 +217,6 @@ export class KernelAndTerminalPanelView extends BaseView {
   refresh() {
     this.libroSessionManager.refreshRunning();
     this.terminalManager.refreshRunning();
-    this.lspManager.refreshRunning();
+    this.libroLanguageClientManager.refreshRunning();
   }
 }

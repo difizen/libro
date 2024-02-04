@@ -2,7 +2,6 @@ import { MonacoEnvironment } from '@difizen/libro-cofine-editor-core';
 import type { Syringe } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
 
-import { LSPFeatureModule } from './language/lsp/module.js';
 import { PythonLanguageFeature } from './language/python/module.js';
 import { LibroE2ThemeModule } from './theme/module.js';
 
@@ -16,7 +15,6 @@ export const loadE2 = async (libroContainer: Syringe.Container) => {
     container.load(textmate.TextmateModule);
     container.load(PythonLanguageFeature);
     container.load(LibroE2ThemeModule);
-    container.load(LSPFeatureModule);
   });
   await MonacoEnvironment.init();
   E2LoadedDeferred.resolve();

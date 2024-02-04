@@ -26,6 +26,7 @@ import type {
   ScrollParams,
   CellView,
   MouseMode,
+  ICellContentChange,
 } from './libro-protocol.js';
 import { EnterEditModeWhenAddCell } from './libro-setting.js';
 import { VirtualizedManagerHelper } from './virtualized-manager-helper.js';
@@ -60,14 +61,23 @@ export class LibroModel implements NotebookModel, DndListModel {
     return this.onCommandModeChangedEmitter.event;
   }
 
-  protected onContentChangedEmitter: Emitter<boolean> = new Emitter();
-  get onContentChanged() {
-    return this.onContentChangedEmitter.event;
+  protected onChangedEmitter: Emitter<boolean> = new Emitter();
+  get onChanged() {
+    return this.onChangedEmitter.event;
   }
 
   protected onSourceChangedEmitter: Emitter<boolean> = new Emitter();
   get onSourceChanged() {
     return this.onSourceChangedEmitter.event;
+  }
+
+  protected onCellContentChangedEmitter: Emitter<ICellContentChange> = new Emitter();
+  get onCellContentChanged() {
+    return this.onCellContentChangedEmitter.event;
+  }
+
+  onCellContentChange(change: ICellContentChange) {
+    this.onCellContentChangedEmitter.fire(change);
   }
 
   id: string;
@@ -219,9 +229,10 @@ export class LibroModel implements NotebookModel, DndListModel {
           insert: { index: currpos, cells: cellViews },
         });
       } else if (delta.delete !== null && delta.delete !== undefined) {
+        const cellViews = this.cells.slice(currpos, currpos + delta.delete);
         this.removeRange(currpos, currpos + delta.delete);
         this.cellViewChangeEmitter.fire({
-          delete: { index: currpos, number: delta.delete },
+          delete: { index: currpos, number: delta.delete, cells: cellViews },
         });
       } else if (delta.retain !== null && delta.retain !== undefined) {
         currpos += delta.retain;
@@ -290,12 +301,9 @@ export class LibroModel implements NotebookModel, DndListModel {
     });
   }
 
-  /**
-   * cell list change or cell content change
-   */
   onChange() {
     this.dirty = true;
-    this.onContentChangedEmitter.fire(true);
+    this.onChangedEmitter.fire(true);
   }
 
   onSourceChange() {

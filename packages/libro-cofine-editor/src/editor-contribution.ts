@@ -1,5 +1,6 @@
 import type { CodeEditorFactory, EditorStateFactory } from '@difizen/libro-code-editor';
 import { CodeEditorContribution } from '@difizen/libro-code-editor';
+import { MIME } from '@difizen/libro-common';
 import { inject, singleton } from '@difizen/mana-app';
 
 import { LanguageSpecRegistry } from './language-specs.js';
@@ -32,11 +33,7 @@ export class LibroE2EditorContribution implements CodeEditorContribution {
   };
 
   canHandle(mime: string): number {
-    const mimes = [
-      'application/vnd.libro.sql+json',
-      'text/x-python',
-      'application/vnd.libro.prompt+json',
-    ];
+    const mimes = [MIME.odpssql, MIME.python, MIME.prompt] as string[];
     if (mimes.includes(mime)) {
       return 50 + 1;
     }

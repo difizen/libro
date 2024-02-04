@@ -141,7 +141,7 @@ export class LibroNavigatableView
       return;
     }
     this.libroView = libroView;
-    this.libroView.model.onContentChanged(() => {
+    this.libroView.model.onChanged(() => {
       this.dirty = true;
       this.dirtyEmitter.fire();
       if (this.autoSave === 'on') {

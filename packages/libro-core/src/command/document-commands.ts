@@ -1,4 +1,4 @@
-import { SaveOutlined, SettingOutlined } from '@ant-design/icons';
+import { ClearOutlined, SaveOutlined, SettingOutlined } from '@ant-design/icons';
 import type { Command } from '@difizen/mana-app';
 
 export const DocumentCommands: Record<string, Command & { keybind?: string }> = {
@@ -12,5 +12,10 @@ export const DocumentCommands: Record<string, Command & { keybind?: string }> = 
     id: 'document.notebook.open_setting',
     icon: SettingOutlined,
     label: 'Setting',
+  },
+  FormatCell: {
+    id: 'document.notebook.format_cell',
+    icon: ClearOutlined,
+    label: 'format cell code',
   },
 };

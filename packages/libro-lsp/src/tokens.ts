@@ -36,7 +36,7 @@ export { IDocumentInfo };
  * but at runtime any value is allowed.
  */
 export type TLanguageServerId =
-  | 'pyright-extended'
+  | 'libro-analyzer'
   | 'pyright'
   | 'pylsp'
   | 'bash-language-server'
