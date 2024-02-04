@@ -1,3 +1,7 @@
+/**
+ * Objects that can be chatted with
+ * usually from SDK presets or retrieved from the context
+ */
 export interface ChatObject {
   name: string;
   type: string;
@@ -8,7 +12,7 @@ export interface ChatObject {
 
 export function ChatObjectFromKey(
   key: string,
-  defaultOptions: Partial<ChatObject> = {},
+  options: Partial<ChatObject> = {},
 ): ChatObject {
   const [type, name] = key.split(':');
   return {
@@ -17,6 +21,6 @@ export function ChatObjectFromKey(
     key,
     order: 0,
     disabled: true,
-    ...defaultOptions,
+    ...options,
   };
 }

@@ -13,6 +13,7 @@ import { Modal } from 'antd';
 import { forwardRef } from 'react';
 
 import { ChatHandler } from './chat-handler.js';
+import type { ChatObject } from './chat-protocol.js';
 
 interface ChatComponentProps {
   className?: string;
@@ -22,6 +23,9 @@ export const ChatComponent = forwardRef<HTMLDivElement>(function ChatComponent(
   ref,
 ) {
   const instance = useInject<ChatView>(ViewInstance);
+  if (!instance.visible) {
+    return null;
+  }
   return (
     <Modal open={instance.visible} onCancel={instance.hide}>
       <div ref={ref}>ChatComponent</div>
@@ -40,6 +44,14 @@ export class ChatView extends BaseView {
   visible = false;
   @prop()
   cell?: CellView;
+
+  // TODO: Chat objects and chat message records should belong to libro rather than cell
+  @prop()
+  contextChatObjects: ChatObject[] = [];
+
+  @prop()
+  contextChatRecords: string[] = [];
+
   override view = ChatComponent;
 
   @postConstruct()

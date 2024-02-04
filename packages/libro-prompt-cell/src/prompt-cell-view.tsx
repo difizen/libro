@@ -499,7 +499,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
         if (msg.header.msg_type === 'execute_input') {
           this.model.kernelExecuting = true;
           startTimeStr = msg.header.date as string;
-          const meta = this.model.metadata.execution as ExecutionMeta;
+          const meta = this.model.metadata['execution'] as ExecutionMeta;
           if (meta) {
             meta['shell.execute_reply.started'] = startTimeStr;
           }
