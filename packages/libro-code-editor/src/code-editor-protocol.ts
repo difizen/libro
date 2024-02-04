@@ -394,6 +394,10 @@ export interface IEditor<S = any> extends ISelectionOwner, Disposable {
   dispose: () => void;
 
   getState: () => EditorState<S>;
+
+  format: () => void;
+
+  onModelContentChanged?: Event<IModelContentChange[]>;
 }
 
 export type EditorTheme = Record<ThemeType, string>;
@@ -655,4 +659,23 @@ export interface CodeEditorContribution<T = any> {
    */
   stateFactory?: EditorStateFactory<T>;
   defaultConfig: IEditorConfig;
+}
+
+export interface IModelContentChange {
+  /**
+   * The range that got replaced.
+   */
+  readonly range: IRange;
+  /**
+   * The offset of the range that got replaced.
+   */
+  readonly rangeOffset: number;
+  /**
+   * The length of the range that got replaced.
+   */
+  readonly rangeLength: number;
+  /**
+   * The new text for the range.
+   */
+  readonly text: string;
 }

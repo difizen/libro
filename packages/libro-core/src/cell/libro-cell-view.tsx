@@ -71,13 +71,13 @@ export class LibroCellView extends BaseView implements CellView {
     this.toDispose.push(
       watch(this.model, 'value', () => {
         this.parent.model.onChange?.();
-        this.parent.model.onSourceChange?.();
+        this.parent.model.onSourceChange?.([this]);
       }),
     );
     this.toDispose.push(
       watch(this.model, 'type', () => {
         this.parent.model.onChange?.();
-        this.parent.model.onSourceChange?.();
+        this.parent.model.onSourceChange?.([this]);
       }),
     );
     if (ExecutableCellModel.is(this.model)) {

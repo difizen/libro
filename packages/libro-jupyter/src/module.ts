@@ -15,7 +15,7 @@ import {
   LibroToolbarModule,
 } from '@difizen/libro-core';
 import { LibroKernelManageModule } from '@difizen/libro-kernel';
-import { LibroLSPModule } from '@difizen/libro-lsp';
+import { LibroLanguageClientModule } from '@difizen/libro-language-client';
 import { MarkdownCellModule } from '@difizen/libro-markdown-cell';
 import {
   DisplayDataOutputModule,
@@ -102,7 +102,6 @@ export const LibroJupyterModule = ManaModule.create()
     LibroSearchModule,
     SearchCodeCellModule,
     LibroAddCellModule,
-    LibroLSPModule,
     LibroE2EditorModule,
     CodeMirrorEditorModule,
     // custom module
@@ -110,4 +109,5 @@ export const LibroJupyterModule = ManaModule.create()
     KeybindInstructionsModule,
     PlotlyModule,
     LibroJupyterFileModule,
+    LibroLanguageClientModule,
   );

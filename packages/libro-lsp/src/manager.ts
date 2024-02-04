@@ -1,7 +1,7 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { URL } from '@difizen/libro-common';
+import { Poll, URL } from '@difizen/libro-common';
 import type { ISettings } from '@difizen/libro-kernel';
 import { PageConfig, ServerConnection, ServerManager } from '@difizen/libro-kernel';
 import type { Event } from '@difizen/mana-app';
@@ -21,6 +21,8 @@ import type {
 
 @transient()
 export class LanguageServerManager implements ILanguageServerManager {
+  protected _pollSessions: Poll;
+
   @inject(ServerConnection) serverConnection!: ServerConnection;
   @inject(ServerManager) serverManager!: ServerManager;
   constructor(
@@ -35,16 +37,28 @@ export class LanguageServerManager implements ILanguageServerManager {
 
   @postConstruct()
   init() {
+    this._pollSessions = new Poll({
+      auto: false,
+      factory: () => this.fetchSessions(),
+      frequency: {
+        interval: 30 * 1000,
+        backoff: true,
+        max: 300 * 1000,
+      },
+      name: `libro/fetch-lsp-sessions`,
+      standby: 'when-hidden',
+    });
     this.serverManager.ready
-      .then(() => {
-        this.fetchSessions();
+      .then(async () => {
+        this._pollSessions.start();
         return;
       })
       .catch(console.error);
   }
 
   async refreshRunning() {
-    this.fetchSessions();
+    await this._pollSessions.refresh();
+    await this._pollSessions.tick;
   }
 
   /**
@@ -127,6 +141,7 @@ export class LanguageServerManager implements ILanguageServerManager {
     if (this._isDisposed) {
       return;
     }
+    this._pollSessions.dispose();
     this._isDisposed = true;
   }
 
@@ -193,7 +208,7 @@ export class LanguageServerManager implements ILanguageServerManager {
       if (!response.ok) {
         if (this._retries > 0) {
           this._retries -= 1;
-          setTimeout(this.fetchSessions.bind(this), this._retriesInterval);
+          // setTimeout(this.fetchSessions.bind(this), this._retriesInterval);
         } else {
           this._ready.resolve(undefined);
           console.warn('Missing jupyter_lsp server extension, skipping.');
@@ -272,7 +287,7 @@ export class LanguageServerManager implements ILanguageServerManager {
   protected compareRanks(a: TLanguageServerId, b: TLanguageServerId): number {
     const DEFAULT_RANK = 50;
     const defaultServerRank: Record<TLanguageServerId, number> = {
-      'pyright-extended': DEFAULT_RANK + 3,
+      'libro-analyzer': DEFAULT_RANK + 3,
       pyright: DEFAULT_RANK + 2,
       pylsp: DEFAULT_RANK + 1,
       'bash-language-server': DEFAULT_RANK,

@@ -5,10 +5,13 @@ import { LibroView, notebookViewFactoryId } from '@difizen/libro-core';
 import { URI, view, ViewOption } from '@difizen/mana-app';
 import { inject, transient } from '@difizen/mana-app';
 
+import type { LibroJupyterModel } from './libro-jupyter-model.js';
+
 @transient()
 @view(notebookViewFactoryId)
 export class LibroJupyterView extends LibroView {
   uri: URI;
+  declare model: LibroJupyterModel;
   constructor(
     @inject(ViewOption) options: NotebookOption,
     @inject(CollapseServiceFactory) collapseServiceFactory: CollapseServiceFactory,

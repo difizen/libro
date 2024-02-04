@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/unified-signatures */
-import type { IModel } from '@difizen/libro-code-editor';
+import type { IModel, IModelContentChange } from '@difizen/libro-code-editor';
 import type {
   CellType,
   ICell,
@@ -64,6 +64,11 @@ export interface ScrollParams {
 }
 
 export type NotebookModel = BaseNotebookModel & DndListModel;
+
+export interface ICellContentChange {
+  cell: CellView;
+  changes: IModelContentChange[];
+}
 export interface BaseNotebookModel {
   id: string;
   /**
@@ -98,11 +103,25 @@ export interface BaseNotebookModel {
 
   onCommandModeChanged: Event<boolean>;
 
-  onContentChanged: Event<boolean>;
+  /**
+   * all changes
+   */
+  onChanged: Event<boolean>;
 
+  /**
+   * cell content & type
+   */
   onSourceChanged: Event<boolean>;
 
+  /**
+   * cell create & delete
+   */
   onCellViewChanged: Event<CellViewChange>;
+
+  /**
+   * cell content change detail
+   */
+  onCellContentChanged: Event<ICellContentChange>;
 
   getCells: () => CellView[];
 
@@ -171,9 +190,15 @@ export interface BaseNotebookModel {
 
   enterEditMode?: () => void;
 
+  /**
+   * all changes: cell value\cell type\cell output\ cell executecount\ cell or notebook metadata\cell create & delete
+   * @returns
+   */
   onChange?: () => void;
 
-  onSourceChange?: () => void;
+  onSourceChange?: (cells: CellView[]) => void;
+
+  onCellContentChange: (changes: ICellContentChange) => void;
 
   interrupt?: () => void;
 
@@ -290,7 +315,7 @@ export interface CellViewOptions {
 
 export interface CellViewChange {
   insert?: { cells: CellView[]; index: number };
-  delete?: { index: number; number: number };
+  delete?: { index: number; number: number; cells: CellView[] };
 }
 
 export interface CellModel extends IModel, Disposable {

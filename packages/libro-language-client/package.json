@@ -1,0 +1,69 @@
+{
+  "name": "@difizen/libro-language-client",
+  "version": "0.1.18",
+  "description": "",
+  "keywords": [
+    "libro",
+    "notebook"
+  ],
+  "repository": "git@github.com:difizen/libro.git",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "typings": "./es/index.d.ts",
+      "default": "./es/index.js"
+    },
+    "./mock": {
+      "typings": "./es/mock/index.d.ts",
+      "default": "./es/mock/index.js"
+    },
+    "./es/mock": {
+      "typings": "./es/mock/index.d.ts",
+      "default": "./es/mock/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "es/index.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "files": [
+    "es",
+    "src"
+  ],
+  "scripts": {
+    "setup": "father build",
+    "build": "father build",
+    "test": ": Note: lint task is delegated to test:* scripts",
+    "test:vitest": "vitest run",
+    "test:jest": "jest",
+    "coverage": ": Note: lint task is delegated to coverage:* scripts",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:jest": "jest --coverage",
+    "lint": ": Note: lint task is delegated to lint:* scripts",
+    "lint:eslint": "eslint src",
+    "typecheck:tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@difizen/libro-core": "^0.1.10",
+    "@difizen/libro-kernel": "^0.1.10",
+    "@difizen/libro-common": "^0.1.10",
+    "@difizen/libro-lsp": "^0.1.10",
+    "@difizen/mana-app": "latest",
+    "@difizen/mana-common": "latest",
+    "uuid": "^9.0.0",
+    "@difizen/vscode-languageserver-protocol": "^3.17.6-next.2",
+    "vscode-ws-jsonrpc": "^3.1.0",
+    "minimatch": "^9.0.3",
+    "@difizen/monaco-editor-core": "^0.39.4",
+    "vscode-uri": "^3.0.8"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.25",
+    "@types/uuid": "^9.0.2",
+    "@types/vscode": "^1.82.0"
+  }
+}

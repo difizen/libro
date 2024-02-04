@@ -19,6 +19,8 @@ import {
   LirboContextKey,
 } from '@difizen/libro-core';
 import type { ViewSize } from '@difizen/mana-app';
+import { Disposable } from '@difizen/mana-app';
+import { DisposableCollection } from '@difizen/mana-app';
 import {
   getOrigin,
   inject,
@@ -100,6 +102,7 @@ const CodeEditorViewComponent = forwardRef<HTMLDivElement>(
 @transient()
 @view('code-editor-cell-view')
 export class LibroCodeCellView extends LibroExecutableCellView {
+  protected toDisposeOnEditor = new DisposableCollection();
   @inject(LirboContextKey) protected readonly lirboContextKey: LirboContextKey;
   override view = CodeEditorViewComponent;
 
@@ -256,19 +259,30 @@ export class LibroCodeCellView extends LibroExecutableCellView {
       if (e.status === 'ready') {
         this.editor = this.editorView!.editor;
         this.afterEditorReady();
+      } else if (e.status === 'disposed') {
+        this.toDisposeOnEditor.dispose();
       }
     });
   }
 
   protected async afterEditorReady() {
-    watch(this.parent.model, 'readOnly', () => {
-      this.editorView?.editor?.setOption(
-        'readOnly',
-        getOrigin(this.parent.model.readOnly),
-      );
-    });
-    this.editorView?.onModalChange((val) => (this.hasModal = val));
     this.focusEditor();
+    this.toDisposeOnEditor.push(
+      watch(this.parent.model, 'readOnly', () => {
+        this.editorView?.editor?.setOption(
+          'readOnly',
+          getOrigin(this.parent.model.readOnly),
+        );
+      }),
+    );
+    this.toDisposeOnEditor.push(
+      this.editorView?.onModalChange((val) => (this.hasModal = val)) ?? Disposable.NONE,
+    );
+    this.toDisposeOnEditor.push(
+      this.editor?.onModelContentChanged?.((e) => {
+        this.parent.model.onCellContentChange({ cell: this, changes: e });
+      }) ?? Disposable.NONE,
+    );
   }
 
   protected focusEditor() {

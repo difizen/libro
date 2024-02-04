@@ -1,0 +1,237 @@
+/* --------------------------------------------------------------------------------------------
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ * ------------------------------------------------------------------------------------------ */
+
+import type {
+  ClientCapabilities,
+  CancellationToken,
+  ServerCapabilities,
+  DocumentSelector,
+  CodeActionOptions,
+  CodeActionRegistrationOptions,
+  CodeActionParams,
+} from '@difizen/vscode-languageserver-protocol';
+import {
+  CodeActionRequest,
+  CodeActionResolveRequest,
+  CodeActionKind,
+} from '@difizen/vscode-languageserver-protocol';
+import type {
+  Disposable,
+  TextDocument,
+  ProviderResult,
+  Range as VRange,
+  Command as VCommand,
+  CodeAction as VCodeAction,
+  CodeActionContext as VCodeActionContext,
+  CodeActionProvider,
+  CodeActionProviderMetadata,
+} from 'vscode';
+
+import type { FeatureClient } from './features.js';
+import { TextDocumentLanguageFeature, ensure } from './features.js';
+import * as UUID from './utils/uuid.js';
+import { languages as Languages } from './vscodeAdaptor/vscodeAdaptor.js';
+
+export interface ProvideCodeActionsSignature {
+  (
+    this: void,
+    document: TextDocument,
+    range: VRange,
+    context: VCodeActionContext,
+    token: CancellationToken,
+  ): ProviderResult<(VCommand | VCodeAction)[]>;
+}
+
+export interface ResolveCodeActionSignature {
+  (
+    this: void,
+    item: VCodeAction,
+    token: CancellationToken,
+  ): ProviderResult<VCodeAction>;
+}
+
+export interface CodeActionMiddleware {
+  provideCodeActions?: (
+    this: void,
+    document: TextDocument,
+    range: VRange,
+    context: VCodeActionContext,
+    token: CancellationToken,
+    next: ProvideCodeActionsSignature,
+  ) => ProviderResult<(VCommand | VCodeAction)[]>;
+  resolveCodeAction?: (
+    this: void,
+    item: VCodeAction,
+    token: CancellationToken,
+    next: ResolveCodeActionSignature,
+  ) => ProviderResult<VCodeAction>;
+}
+
+export class CodeActionFeature extends TextDocumentLanguageFeature<
+  boolean | CodeActionOptions,
+  CodeActionRegistrationOptions,
+  CodeActionProvider,
+  CodeActionMiddleware
+> {
+  constructor(client: FeatureClient<CodeActionMiddleware>) {
+    super(client, CodeActionRequest.type);
+  }
+
+  public fillClientCapabilities(capabilities: ClientCapabilities): void {
+    const cap = ensure(ensure(capabilities, 'textDocument')!, 'codeAction')!;
+    cap.dynamicRegistration = true;
+    cap.isPreferredSupport = true;
+    cap.disabledSupport = true;
+    cap.dataSupport = true;
+    // We can only resolve the edit property.
+    cap.resolveSupport = {
+      properties: ['edit', 'command'],
+    };
+    cap.codeActionLiteralSupport = {
+      codeActionKind: {
+        valueSet: [
+          CodeActionKind.Empty,
+          CodeActionKind.QuickFix,
+          CodeActionKind.Refactor,
+          CodeActionKind.RefactorExtract,
+          CodeActionKind.RefactorInline,
+          CodeActionKind.RefactorRewrite,
+          CodeActionKind.Source,
+          CodeActionKind.SourceOrganizeImports,
+        ],
+      },
+    };
+    cap.honorsChangeAnnotations = true;
+    cap.documentationSupport = true;
+  }
+
+  public initialize(
+    capabilities: ServerCapabilities,
+    documentSelector: DocumentSelector,
+  ): void {
+    const options = this.getRegistrationOptions(
+      documentSelector,
+      capabilities.codeActionProvider,
+    );
+    if (!options) {
+      return;
+    }
+    this.register({ id: UUID.generateUuid(), registerOptions: options });
+  }
+
+  protected registerLanguageProvider(
+    options: CodeActionRegistrationOptions,
+  ): [Disposable, CodeActionProvider] {
+    const selector = options.documentSelector!;
+    const provider: CodeActionProvider = {
+      provideCodeActions: (document, range, context, token) => {
+        const client = this._client;
+        const _provideCodeActions: ProvideCodeActionsSignature = async (
+          document,
+          range,
+          context,
+          token,
+        ) => {
+          const params: CodeActionParams = {
+            textDocument:
+              client.code2ProtocolConverter.asTextDocumentIdentifier(document),
+            range: client.code2ProtocolConverter.asRange(range),
+            context: client.code2ProtocolConverter.asCodeActionContextSync(context),
+          };
+          return client.sendRequest(CodeActionRequest.type, params, token).then(
+            (values) => {
+              if (
+                token.isCancellationRequested ||
+                values === null ||
+                values === undefined
+              ) {
+                return null;
+              }
+              return client.protocol2CodeConverter.asCodeActionResult(values, token);
+            },
+            (error) => {
+              return client.handleFailedRequest(
+                CodeActionRequest.type,
+                token,
+                error,
+                null,
+              );
+            },
+          );
+        };
+        const middleware = client.middleware;
+        return middleware.provideCodeActions
+          ? middleware.provideCodeActions(
+              document,
+              range,
+              context,
+              token,
+              _provideCodeActions,
+            )
+          : _provideCodeActions(document, range, context, token);
+      },
+      resolveCodeAction: options.resolveProvider
+        ? (item: VCodeAction, token: CancellationToken) => {
+            const client = this._client;
+            const middleware = this._client.middleware;
+            const resolveCodeAction: ResolveCodeActionSignature = async (
+              item,
+              token,
+            ) => {
+              return client
+                .sendRequest(
+                  CodeActionResolveRequest.type,
+                  client.code2ProtocolConverter.asCodeActionSync(item),
+                  token,
+                )
+                .then(
+                  (result) => {
+                    if (token.isCancellationRequested) {
+                      return item;
+                    }
+                    return client.protocol2CodeConverter.asCodeAction(result, token);
+                  },
+                  (error) => {
+                    return client.handleFailedRequest(
+                      CodeActionResolveRequest.type,
+                      token,
+                      error,
+                      item,
+                    );
+                  },
+                );
+            };
+            return middleware.resolveCodeAction
+              ? middleware.resolveCodeAction(item, token, resolveCodeAction)
+              : resolveCodeAction(item, token);
+          }
+        : undefined,
+    };
+    return [
+      Languages.registerCodeActionsProvider(
+        this._client.protocol2CodeConverter.asDocumentSelector(selector),
+        provider,
+        this.getMetadata(options),
+      ),
+      provider,
+    ];
+  }
+
+  private getMetadata(
+    options: CodeActionRegistrationOptions,
+  ): CodeActionProviderMetadata | undefined {
+    if (options.codeActionKinds === undefined && options.documentation === undefined) {
+      return undefined;
+    }
+    return {
+      providedCodeActionKinds: this._client.protocol2CodeConverter.asCodeActionKinds(
+        options.codeActionKinds,
+      ),
+      documentation: this._client.protocol2CodeConverter.asCodeActionDocumentations(
+        options.documentation,
+      ),
+    };
+  }
+}

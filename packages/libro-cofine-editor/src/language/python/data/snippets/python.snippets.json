@@ -189,35 +189,5 @@
     "prefix": "async/with",
     "body": ["async with ${1:expr} as ${2:var}:", "\t${3:block}"],
     "description": "Code snippet for an async with statement"
-  },
-  "ipdb": {
-    "scope": "python",
-    "prefix": "ipdb",
-    "body": ["import ipdb; ipdb.set_trace()"],
-    "description": "Code snippet for ipdb debug"
-  },
-  "pdb": {
-    "scope": "python",
-    "prefix": "pdb",
-    "body": ["import pdb; pdb.set_trace()"],
-    "description": "Code snippet for pdb debug"
-  },
-  "pudb": {
-    "scope": "python",
-    "prefix": "pudb",
-    "body": ["import pudb; pudb.set_trace()"],
-    "description": "Code snippet for pudb debug"
-  },
-  "add/new/cell": {
-    "scope": "python",
-    "prefix": "add/new/cell",
-    "body": ["# %%"],
-    "description": "Code snippet to add a new cell"
-  },
-  "mark/markdown": {
-    "scope": "python",
-    "prefix": "mark/markdown",
-    "body": ["# %% [markdown]"],
-    "description": "Code snippet to add a new markdown cell"
   }
 }

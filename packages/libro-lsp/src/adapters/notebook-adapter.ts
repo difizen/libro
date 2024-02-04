@@ -4,6 +4,7 @@
 // Distributed under the terms of the Modified BSD License.
 
 import type * as nbformat from '@difizen/libro-common';
+import { MIME } from '@difizen/libro-common';
 import type {
   CellView,
   CellViewChange,
@@ -118,9 +119,7 @@ export class NotebookAdapter extends WidgetLSPAdapter<LibroView> {
     this._editorToCell.clear();
 
     return this.editor.model.cells
-      .filter(
-        (item) => EditorCellView.is(item) && item.model.mimeType === 'text/x-python',
-      )
+      .filter((item) => EditorCellView.is(item) && item.model.mimeType === MIME.python)
       .map((cell) => {
         return {
           ceEditor: this.getCellEditor(cell)!,

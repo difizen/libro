@@ -1,5 +1,4 @@
 import { CellEditorMemo, LibroCodeCellView } from '@difizen/libro-code-cell';
-import { CodeEditorManager } from '@difizen/libro-code-editor';
 import type {
   CodeEditorViewOptions,
   CompletionProvider,
@@ -7,19 +6,17 @@ import type {
   TooltipProvider,
   TooltipProviderOption,
 } from '@difizen/libro-code-editor';
-import type { CellViewOptions } from '@difizen/libro-core';
-import { CellService } from '@difizen/libro-core';
 import { KernelError } from '@difizen/libro-kernel';
-import type { LSPConnection, LSPProvider } from '@difizen/libro-lsp';
-import { ILSPDocumentConnectionManager } from '@difizen/libro-lsp';
-import { inject, transient } from '@difizen/mana-app';
-import { view, ViewInstance, ViewManager, ViewOption } from '@difizen/mana-app';
+import { LibroCellURIScheme } from '@difizen/libro-language-client';
+import { transient, URI } from '@difizen/mana-app';
+import { view, ViewInstance } from '@difizen/mana-app';
 import { getOrigin, useInject } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 import { forwardRef } from 'react';
 
 import { LibroJupyterModel } from '../libro-jupyter-model.js';
 import type { ExecutionMeta } from '../libro-jupyter-protocol.js';
+import type { LibroJupyterView } from '../libro-jupyter-view.js';
 
 import type { JupyterCodeCellModel } from './jupyter-code-cell-model.js';
 
@@ -42,22 +39,9 @@ const JupyterCodeCellComponent = forwardRef<HTMLDivElement>(
 @transient()
 @view('jupyter-code-cell-view')
 export class JupyterCodeCellView extends LibroCodeCellView {
+  declare parent: LibroJupyterView;
   override view = JupyterCodeCellComponent;
   declare model: JupyterCodeCellModel;
-
-  protected readonly lspDocumentConnectionManager: ILSPDocumentConnectionManager;
-
-  constructor(
-    @inject(ViewOption) options: CellViewOptions,
-    @inject(CellService) cellService: CellService,
-    @inject(ViewManager) viewManager: ViewManager,
-    @inject(ILSPDocumentConnectionManager)
-    lspDocumentConnectionManager: ILSPDocumentConnectionManager,
-    @inject(CodeEditorManager) codeEditorManager: CodeEditorManager,
-  ) {
-    super(options, cellService, viewManager, codeEditorManager);
-    this.lspDocumentConnectionManager = lspDocumentConnectionManager;
-  }
 
   override clearExecution = () => {
     this.model.clearExecution();
@@ -71,51 +55,19 @@ export class JupyterCodeCellView extends LibroCodeCellView {
 
   protected override getEditorOption(): CodeEditorViewOptions {
     const options = super.getEditorOption();
+    let uri = new URI(this.parent.model.filePath);
+    uri = URI.withScheme(uri, LibroCellURIScheme);
+    uri = URI.withQuery(uri, `cellid=${this.model.id}`);
     return {
       ...options,
+      uuid: uri.toString(),
       tooltipProvider: this.tooltipProvider,
       completionProvider: this.completionProvider,
-      lspProvider: (this.parent.model as LibroJupyterModel).lspEnabled
-        ? this.lspProvider
-        : undefined,
+      // lspProvider: (this.parent.model as LibroJupyterModel).lspEnabled
+      //   ? this.lspProvider
+      //   : undefined,
     };
   }
-
-  lspProvider: LSPProvider = async () => {
-    await this.lspDocumentConnectionManager.ready;
-    const adapter = this.lspDocumentConnectionManager.adapters.get(
-      this.parent.model.id,
-    );
-    if (!adapter) {
-      throw new Error('no adapter');
-    }
-
-    await adapter.ready;
-
-    const virtualEditor = adapter.getCellEditor(this);
-
-    if (!virtualEditor) {
-      throw new Error('no virtual editor');
-    }
-
-    // Get the associated virtual document of the opened document
-    const virtualDocument = adapter.virtualDocument;
-
-    if (!virtualDocument) {
-      throw new Error('no virtualDocument');
-    }
-
-    // Get the LSP connection of the virtual document.
-    const lspConnection = this.lspDocumentConnectionManager.connections.get(
-      virtualDocument.uri,
-    ) as LSPConnection;
-
-    return {
-      virtualDocument,
-      lspConnection,
-      editor: virtualEditor,
-    };
-  };
 
   tooltipProvider: TooltipProvider = async (option: TooltipProviderOption) => {
     const cellContent = this.model.value;

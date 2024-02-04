@@ -1,9 +1,15 @@
-import { Emitter } from '@difizen/mana-app';
+import type { Disposable } from '@difizen/mana-app';
+import { DisposableCollection, Emitter } from '@difizen/mana-app';
 import { ThemeService, ViewManager } from '@difizen/mana-app';
 import { inject, singleton } from '@difizen/mana-app';
 import { prop } from '@difizen/mana-app';
 
-import type { NotebookOption, NotebookView } from './libro-protocol.js';
+import type {
+  CellView,
+  ICellContentChange,
+  NotebookOption,
+  NotebookView,
+} from './libro-protocol.js';
 import {
   notebookViewFactoryId,
   ModelFactory,
@@ -11,8 +17,24 @@ import {
 } from './libro-protocol.js';
 import { LibroViewTracker } from './libro-view-tracker.js';
 
+export interface NotebookViewChange {
+  libroView: NotebookView;
+  contentChanges: Array<{
+    range: {
+      start: number;
+      end: number;
+    };
+    addedCells: CellView[];
+    removedCells: CellView[];
+  }>;
+  cellChanges: Array<{
+    cell: CellView;
+  }>;
+}
+
 @singleton({ contrib: NotebookService })
-export class LibroService implements NotebookService {
+export class LibroService implements NotebookService, Disposable {
+  protected toDispose = new DisposableCollection();
   @inject(ModelFactory) protected libroModelFactory: ModelFactory;
   @inject(ViewManager) protected viewManager: ViewManager;
   @inject(LibroViewTracker) protected libroViewTracker: LibroViewTracker;
@@ -50,6 +72,34 @@ export class LibroService implements NotebookService {
   get onNotebookViewCreated() {
     return this.onNotebookViewCreatedEmitter.event;
   }
+  protected onNotebookViewSavedEmitter: Emitter<NotebookView> = new Emitter();
+  get onNotebookViewSaved() {
+    return this.onNotebookViewSavedEmitter.event;
+  }
+  protected onNotebookViewChangedEmitter: Emitter<NotebookViewChange> = new Emitter();
+  get onNotebookViewChanged() {
+    return this.onNotebookViewChangedEmitter.event;
+  }
+  protected onNotebookViewClosedEmitter: Emitter<NotebookView> = new Emitter();
+  get onNotebookViewClosed() {
+    return this.onNotebookViewClosedEmitter.event;
+  }
+  protected onNotebookCellCreatedEmitter: Emitter<CellView[]> = new Emitter();
+  get onNotebookCellCreated() {
+    return this.onNotebookCellCreatedEmitter.event;
+  }
+  protected onNotebookCellSavedEmitter: Emitter<CellView[]> = new Emitter();
+  get onNotebookCellSaved() {
+    return this.onNotebookCellSavedEmitter.event;
+  }
+  protected onNotebookCellChangedEmitter: Emitter<ICellContentChange> = new Emitter();
+  get onNotebookCellChanged() {
+    return this.onNotebookCellChangedEmitter.event;
+  }
+  protected onNotebookCellDeletedEmitter: Emitter<CellView[]> = new Emitter();
+  get onNotebookCellDeleted() {
+    return this.onNotebookCellDeletedEmitter.event;
+  }
 
   get focus(): NotebookView | undefined {
     return this._focus;
@@ -68,6 +118,7 @@ export class LibroService implements NotebookService {
   }
 
   deleteLibroViewFromCache(instance: NotebookView) {
+    this.onNotebookViewClosedEmitter.fire(instance);
     this.libroViewTracker.viewCache.delete(instance.id);
     this.libroViewTracker.modelCache.delete(instance.model.id);
   }
@@ -98,6 +149,52 @@ export class LibroService implements NotebookService {
     const notebookView = await notebookViewPromise;
     this.libroViewTracker.viewCache.set(notebookView.id, notebookView);
     this.onNotebookViewCreatedEmitter.fire(notebookView);
+    this.toDispose.push(
+      notebookView.onSave(() => {
+        this.onNotebookViewSavedEmitter.fire(notebookView);
+      }),
+    );
+    this.toDispose.push(
+      notebookView.model.onCellContentChanged((e) => {
+        this.onNotebookCellChangedEmitter.fire(e);
+      }),
+    );
+    this.toDispose.push(
+      notebookView.model.onCellViewChanged((e) => {
+        const changes: NotebookViewChange = {
+          libroView: notebookView,
+          cellChanges: [],
+          contentChanges: [],
+        };
+
+        if (e.delete) {
+          changes.contentChanges.push({
+            range: {
+              start: e.delete.index,
+              end: e.delete.index + e.delete?.number,
+            },
+            removedCells: e.delete.cells,
+            addedCells: [],
+          });
+          this.onNotebookCellDeletedEmitter.fire(e.delete.cells);
+        }
+
+        if (e.insert) {
+          changes.contentChanges.push({
+            range: {
+              start: e.insert.index,
+              end: e.insert.index + e.insert?.cells.length,
+            },
+            removedCells: [],
+            addedCells: e.insert.cells,
+          });
+          this.onNotebookCellCreatedEmitter.fire(e.insert.cells);
+        }
+
+        this.onNotebookViewChangedEmitter.fire(changes);
+      }),
+    );
+
     return notebookViewPromise;
   }
 
@@ -108,5 +205,14 @@ export class LibroService implements NotebookService {
 
   setHasFocus(hasFocus: boolean): void {
     this._hasFocus = hasFocus;
+  }
+
+  protected isDisposed = false;
+  get disposed() {
+    return this.isDisposed;
+  }
+  dispose() {
+    this.toDispose.dispose();
+    this.isDisposed = true;
   }
 }

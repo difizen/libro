@@ -1,3 +1,4 @@
+import { MIME } from '@difizen/libro-common';
 import type { CommandRegistry } from '@difizen/mana-app';
 import {
   inject,
@@ -8,7 +9,7 @@ import {
 import { equals } from '@difizen/mana-app';
 import { v4 } from 'uuid';
 
-import { LibroCellView, ExecutableCellModel } from '../cell/index.js';
+import { LibroCellView, ExecutableCellModel, EditorCellView } from '../cell/index.js';
 import type { LibroEditorCellView } from '../cell/index.js';
 import { LirboContextKey } from '../libro-context-key.js';
 import type { CellView, NotebookView } from '../libro-protocol.js';
@@ -1099,6 +1100,24 @@ export class LibroCommandContribution implements CommandContribution {
           return false;
         }
         return !libro?.model.readOnly && path === LibroToolbarArea.HeaderRight;
+      },
+    });
+    this.libroCommand.registerLibroCommand(command, DocumentCommands['FormatCell'], {
+      execute: async (cell) => {
+        if (EditorCellView.is(cell) && cell.editor?.model.mimeType === MIME.python) {
+          cell.editor?.format();
+        }
+      },
+      isVisible: (cell, libro, path) => {
+        if (!libro || !(libro instanceof LibroView)) {
+          return false;
+        }
+        return (
+          !libro?.model.readOnly &&
+          EditorCellView.is(cell) &&
+          cell.model.mimeType === MIME.python &&
+          path === LibroToolbarArea.CellRight
+        );
       },
     });
     this.libroCommand.registerLibroCommand(

@@ -9,6 +9,7 @@ import {
   singleton,
   SlotViewManager,
 } from '@difizen/mana-app';
+import type { Disposable } from '@difizen/mana-common';
 
 import type { LibroLabLayoutSlotsType, StatusType } from './protocol.js';
 import { LibroLabLayoutSlots } from './protocol.js';
@@ -92,7 +93,10 @@ export class LayoutService {
     return undefined;
   }
 
-  onSlotActiveChange(slot: LibroLabLayoutSlotsType, handler: () => void) {
+  onSlotActiveChange(
+    slot: LibroLabLayoutSlotsType,
+    handler: () => void,
+  ): Disposable | undefined {
     if (this.isAreaVisible(slot)) {
       const slotView = this.slotViewManager.getSlotView(slot);
       if (slotView instanceof DefaultSlotView) {

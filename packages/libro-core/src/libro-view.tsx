@@ -1,4 +1,5 @@
 import { ToTopOutlined } from '@ant-design/icons';
+import type { IModelContentChange } from '@difizen/libro-code-editor';
 import {
   concatMultilineString,
   copy2clipboard,
@@ -281,6 +282,10 @@ export class LibroView extends BaseView implements NotebookView {
   get onCellCreate() {
     return this.onCellCreateEmitter.event;
   }
+  protected onCellDeleteEmitter: Emitter<CellView> = new Emitter();
+  get onCellDelete() {
+    return this.onCellDeleteEmitter.event;
+  }
 
   onBlurEmitter: Emitter = new Emitter();
   get onBlur() {
@@ -317,6 +322,10 @@ export class LibroView extends BaseView implements NotebookView {
   onSaveEmitter: Emitter<boolean> = new Emitter();
   get onSave() {
     return this.onSaveEmitter.event;
+  }
+  onCellContentChangedEmitter: Emitter<IModelContentChange[]> = new Emitter();
+  get onCellContentChanged() {
+    return this.onCellContentChangedEmitter.event;
   }
 
   runCellEmitter: Emitter<CellView> = new Emitter();
@@ -411,7 +420,6 @@ export class LibroView extends BaseView implements NotebookView {
       this.toDispose.push(
         watch(this.model, 'cells', () => {
           this.model.onChange?.();
-          this.model.onSourceChange?.();
         }),
       );
       this.initializedDefer.resolve();

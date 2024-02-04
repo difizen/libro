@@ -33,7 +33,11 @@ import type {
   KeydownHandler,
   SearchMatch,
 } from '@difizen/libro-code-editor';
-import { findFirstArrayIndex, removeAllWhereFromArray } from '@difizen/libro-common';
+import {
+  findFirstArrayIndex,
+  MIME,
+  removeAllWhereFromArray,
+} from '@difizen/libro-common';
 import type { LSPProvider } from '@difizen/libro-lsp';
 import { Deferred, Disposable, Emitter } from '@difizen/mana-app';
 import { getOrigin, watch } from '@difizen/mana-app';
@@ -93,7 +97,7 @@ const DOWN_ARROW = 40;
 export const codeMirrorDefaultConfig: Required<CodeMirrorConfig> = {
   ...defaultConfig,
   mode: 'null',
-  mimetype: 'text/x-python',
+  mimetype: MIME.python,
   theme: { light: 'jupyter', dark: 'jupyter', hc: 'jupyter' },
   smartIndent: true,
   electricChars: true,
@@ -874,6 +878,8 @@ export class CodeMirrorEditor implements IEditor {
   execCommand(command: Command | StateCommand): void {
     command(this.editor);
   }
+
+  format: () => void;
 
   /**
    * Handle keydown events from the editor.

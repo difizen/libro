@@ -1,5 +1,5 @@
-import type { ExecutionCount } from '@difizen/libro-common';
-import type { ICodeCell } from '@difizen/libro-common';
+import { MIME } from '@difizen/libro-common';
+import type { ICodeCell, ExecutionCount } from '@difizen/libro-common';
 import type { ExecutableCellModel } from '@difizen/libro-core';
 import { CellOptions, LibroCellModel } from '@difizen/libro-core';
 import type { Event as ManaEvent } from '@difizen/mana-app';
@@ -39,7 +39,7 @@ export class LibroCodeCellModel extends LibroCellModel implements ExecutableCell
     this.executing = false;
     this.msgChangeEmitter = new Emitter<any>();
     this.executeCount = (options.cell as ICodeCell).execution_count || null;
-    this.mimeType = 'text/x-python';
+    this.mimeType = MIME.python;
     this.hasOutputHidden = false;
     this.hasOutputsScrolled = false;
     this.viewManager = viewManager;

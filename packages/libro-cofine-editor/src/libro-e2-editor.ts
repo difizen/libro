@@ -8,6 +8,7 @@ import type {
   IEditorConfig,
   IEditorOptions,
   IModel,
+  IModelContentChange,
   IPosition,
   IRange,
   SearchMatch,
@@ -16,6 +17,7 @@ import type {
 import { defaultConfig } from '@difizen/libro-code-editor';
 import type { E2Editor } from '@difizen/libro-cofine-editor-core';
 import { EditorProvider, MonacoEnvironment } from '@difizen/libro-cofine-editor-core';
+import { MIME } from '@difizen/libro-common';
 import { NotebookCommands } from '@difizen/libro-core';
 import type { LSPProvider } from '@difizen/libro-lsp';
 import {
@@ -28,12 +30,11 @@ import {
   watch,
 } from '@difizen/mana-app';
 import { Disposable, DisposableCollection, Emitter } from '@difizen/mana-app';
-import { editor, Selection } from '@difizen/monaco-editor-core';
+import { editor, KeyCode, Selection } from '@difizen/monaco-editor-core';
 import 'resize-observer-polyfill';
 import * as monaco from '@difizen/monaco-editor-core';
 import { v4 } from 'uuid';
 
-import { LSPContribution } from './language/lsp/lsp-contribution.js';
 import { LanguageSpecRegistry } from './language-specs.js';
 import { PlaceholderContentWidget } from './placeholder.js';
 import type { MonacoEditorOptions, MonacoEditorType, MonacoMatch } from './types.js';
@@ -228,7 +229,7 @@ export const libroE2DefaultConfig: Required<LibroE2EditorConfig> = {
   },
   scrollBarHeight: 12,
   mode: 'null',
-  mimetype: 'text/x-python',
+  mimetype: MIME.python,
   smartIndent: true,
   electricChars: true,
   keyMap: 'default',
@@ -278,8 +279,6 @@ export type LibroE2EditorFactory = CodeEditorFactory;
 
 export const E2EditorClassname = 'libro-e2-editor';
 
-export const LibroE2URIScheme = 'libro-e2';
-
 export type E2EditorState = monaco.editor.ITextModel | null;
 
 export const e2StateFactory: (
@@ -288,10 +287,8 @@ export const e2StateFactory: (
   const spec = languageSpecRegistry.languageSpecs.find(
     (item) => item.mime === options.model.mimeType,
   );
-  const uri = MonacoUri.from({
-    scheme: LibroE2URIScheme,
-    path: `${options.uuid}${spec?.ext[0]}`,
-  });
+
+  const uri = MonacoUri.parse(options.uuid);
   const monacoModel = monaco.editor.createModel(
     options.model.value,
     spec?.language,
@@ -317,7 +314,6 @@ export class LibroE2Editor implements IEditor {
 
   protected readonly languageSpecRegistry: LanguageSpecRegistry;
   @inject(CommandRegistry) protected readonly commandRegistry: CommandRegistry;
-  @inject(LSPContribution) protected lspContribution: LSPContribution;
 
   protected defaultLineHeight = 20;
 
@@ -375,6 +371,9 @@ export class LibroE2Editor implements IEditor {
   get lineCount(): number {
     return this.monacoEditor?.getModel()?.getLineCount() || 0;
   }
+
+  protected onModelContentChangedEmitter = new Emitter<IModelContentChange[]>();
+  onModelContentChanged = this.onModelContentChangedEmitter.event;
 
   lspProvider?: LSPProvider;
 
@@ -463,7 +462,7 @@ export class LibroE2Editor implements IEditor {
        *
        */
       // overflowWidgetsDomNode: document.getElementById('monaco-editor-overflow-widgets-root')!,
-      // fixedOverflowWidgets: true,
+      fixedOverflowWidgets: true,
       suggest: { snippetsPreventQuickSuggestions: false },
       autoClosingQuotes: editorConfig.autoClosingBrackets ? 'always' : 'never',
       autoDetectHighContrast: false,
@@ -529,10 +528,19 @@ export class LibroE2Editor implements IEditor {
 
     this._editor = editorPorvider.create(host, options);
     this.toDispose.push(
-      this.monacoEditor?.onDidChangeModelContent(() => {
+      this.monacoEditor?.onDidChangeModelContent((e) => {
         const value = this.monacoEditor?.getValue();
         this.model.value = value ?? '';
-        // this.updateEditorSize();
+        this.onModelContentChangedEmitter.fire(
+          e.changes.map((item) => {
+            return {
+              range: this.toEditorRange(item.range),
+              rangeLength: item.rangeLength,
+              rangeOffset: item.rangeOffset,
+              text: item.text,
+            };
+          }),
+        );
       }) ?? Disposable.NONE,
     );
     this.toDispose.push(
@@ -561,11 +569,6 @@ export class LibroE2Editor implements IEditor {
     //   this.monacoEditor._themeService,
     //   this.monacoEditor._themeService.getColorTheme(),
     // );
-
-    // setTimeout(() => {
-    //   this.monacoEditor?.trigger('editor', 'editor.action.formatDocument');
-    //   console.log('trigger format');
-    // }, 5000);
   }
 
   protected inspectResize() {
@@ -612,22 +615,23 @@ export class LibroE2Editor implements IEditor {
    */
   protected handleCommand(commandRegistry: CommandRegistry) {
     // need monaco 0.34
-    // editor.addKeybindingRules([
-    //   {
-    //     // disable show command center
-    //     keybinding: KeyCode.F1,
-    //     command: null,
-    //   },
-    //   {
-    //     // disable show error command
-    //     keybinding: KeyCode.F8,
-    //     command: null,
-    //   },
-    //   {
-    //     // disable toggle debugger breakpoint
-    //     keybinding: KeyCode.F9,
-    //     command: null,
-    //   },
+    editor.addKeybindingRules([
+      {
+        // disable show command center
+        keybinding: KeyCode.F1,
+        command: null,
+      },
+      {
+        // disable show error command
+        keybinding: KeyCode.F8,
+        command: null,
+      },
+      {
+        // disable toggle debugger breakpoint
+        keybinding: KeyCode.F9,
+        command: null,
+      },
+    ]);
     this.monacoEditor?.addCommand(
       9,
       () => {
@@ -817,6 +821,19 @@ export class LibroE2Editor implements IEditor {
     return monacoSelection;
   }
 
+  protected toEditorRange(range: monaco.IRange): IRange {
+    return {
+      start: {
+        line: range.startLineNumber - 1,
+        column: range.startColumn - 1,
+      },
+      end: {
+        line: range.endLineNumber - 1,
+        column: range.endColumn - 1,
+      },
+    };
+  }
+
   getSelectionValue = (range?: IRange | undefined) => {
     const selection = range ?? this.getSelection();
     return this.monacoEditor
@@ -960,6 +977,10 @@ export class LibroE2Editor implements IEditor {
     }
   };
 
+  format = () => {
+    this.monacoEditor?.trigger('libro-format', 'editor.action.formatDocument', '');
+  };
+
   protected _isDisposed = false;
   /**
    * Tests whether the editor is disposed.
@@ -973,14 +994,9 @@ export class LibroE2Editor implements IEditor {
     }
     this.placeholder.dispose();
     this.disposeResizeObserver();
-    this.disposeLSP();
     this.toDispose.dispose();
     this._isDisposed = true;
   };
-
-  disposeLSP() {
-    this.lspContribution.disposeLanguageFeature();
-  }
 
   disposeResizeObserver = () => {
     if (this.intersectionObserver) {

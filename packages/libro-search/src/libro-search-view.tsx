@@ -259,6 +259,9 @@ export class LibroSearchView extends BaseView {
       this.toDispose.push(
         this.libro.model.onSourceChanged(() => this.onCellsChanged()),
       );
+      this.toDispose.push(
+        this.libro.model.onCellViewChanged(() => this.onCellsChanged()),
+      );
     }
   };
 
