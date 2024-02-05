@@ -19,6 +19,7 @@ import {
   LibroKernelConnectionFactory,
 } from './libro-kernel-protocol.js';
 import type { LibroKernel } from './libro-kernel.js';
+import type { IKernelOptions } from './restapi.js';
 import { KernelRestAPI } from './restapi.js';
 
 @singleton()
@@ -94,6 +95,29 @@ export class LibroKernelManager {
    */
   get ready(): Promise<void> {
     return this._ready;
+  }
+
+  /**
+   * Start a new kernel.
+   *
+   * @param createOptions - The kernel creation options
+   *
+   * @param connectOptions - The kernel connection options
+   *
+   * @returns A promise that resolves with the kernel connection.
+   *
+   * #### Notes
+   * The manager `serverSettings` will be always be used.
+   */
+  async startNew(
+    createOptions: IKernelOptions = {},
+    connectOptions: Omit<KernelConnectionOptions, 'model' | 'serverSettings'> = {},
+  ): Promise<IKernelConnection> {
+    const model = await this.kernelRestAPI.startNew(createOptions);
+    return this.connectToKernel({
+      ...connectOptions,
+      model,
+    });
   }
 
   /**
