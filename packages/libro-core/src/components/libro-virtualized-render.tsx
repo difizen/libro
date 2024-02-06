@@ -95,7 +95,7 @@ export const LibroCellsOutputRender: React.FC<{
 
     libroView.model.onScrollToCellView((params: ScrollParams) => {
       // listRef.current!.scrollToRow(index);
-      listRef.current!.scrollToLine(params.cellIndex, params.lineIndex || 1);
+      listRef.current!.scrollToCellPosition(params.cellIndex, params.cellOffset);
     });
     return () => {
       libroView.model.disposeScrollToCellViewEmitter();

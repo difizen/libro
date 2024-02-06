@@ -23,7 +23,6 @@ import type { CellView, DndContentProps } from '../../libro-protocol.js';
 import { MultiSelectionWhenShiftClick } from '../../libro-setting.js';
 import type { LibroView } from '../../libro-view.js';
 import { HolderOutlined, PlusOutlined } from '../../material-from-designer.js';
-import { VirtualizedManagerHelper } from '../../virtualized-manager-helper.js';
 import { BetweenCellProvider } from '../cell-protocol.js';
 
 export interface Dragparams {
@@ -39,8 +38,6 @@ export const DndCellContainer: React.FC<DndContentProps> = ({ cell, index }) => 
   );
   const BetweenCellContent = useInject<BetweenCellProvider>(BetweenCellProvider);
   const cellService = useInject<CellService>(LibroCellService);
-  const virtualizedManagerHelper = useInject(VirtualizedManagerHelper);
-  const virtualizedManager = virtualizedManagerHelper.getOrCreate(cell.parent.model);
   const dragDropManager = useDragDropManager();
   const dragDropMonitor = dragDropManager.getMonitor();
   const ItemRender = getOrigin(instance.dndItemRender);
@@ -237,31 +234,18 @@ export const DndCellContainer: React.FC<DndContentProps> = ({ cell, index }) => 
           }
           if (isDragInSelections) {
             instance.model.exchangeCells(instance.model.selections, dropIndex);
-            if (virtualizedManager.isVirtualized) {
-              instance.model.scrollToCellView({ cellIndex: dropIndex });
-            } else {
-              instance.model.scrollToView(cell);
-            }
+            instance.model.scrollToView(cell);
 
             return;
           }
         }
         if (dragIndex < dropIndex) {
           instance.model.exchangeCell(dragIndex, dropIndex - 1);
-
-          if (virtualizedManager.isVirtualized) {
-            instance.model.scrollToCellView({ cellIndex: dropIndex });
-          } else {
-            instance.model.scrollToView(cell);
-          }
+          instance.model.scrollToView(cell);
         }
         if (dragIndex > dropIndex) {
           instance.model.exchangeCell(dragIndex, dropIndex);
-          if (virtualizedManager.isVirtualized) {
-            instance.model.scrollToCellView({ cellIndex: dropIndex });
-          } else {
-            instance.model.scrollToView(cell);
-          }
+          instance.model.scrollToView(cell);
         }
       }
       return;

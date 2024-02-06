@@ -612,13 +612,19 @@ class Grid extends React.PureComponent<Props, State> {
     this.forceUpdate();
   }
 
-  scrollToLine({ cellIndex, lineIndex }: { cellIndex: number; lineIndex: number }) {
+  scrollToCellPosition({
+    cellIndex,
+    cellOffset,
+  }: {
+    cellIndex: number;
+    cellOffset: number;
+  }) {
     const { offset } =
       this.state.instanceProps.rowSizeAndPositionManager.getSizeAndPositionOfCell(
         cellIndex,
       );
 
-    const scrollTop = offset + (lineIndex - 1) * 20 - 12; // 上padding 为12
+    const scrollTop = offset + cellOffset;
 
     this.scrollToPosition({ scrollTop });
   }

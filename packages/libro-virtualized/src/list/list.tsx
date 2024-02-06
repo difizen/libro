@@ -185,11 +185,11 @@ export default class List extends React.PureComponent<Props> {
     }
   }
 
-  scrollToLine(cellIndex = 0, lineIndex = 0) {
+  scrollToCellPosition(cellIndex = 0, cellOffset = 0) {
     if (this.Grid) {
-      this.Grid.scrollToLine({
+      this.Grid.scrollToCellPosition({
         cellIndex,
-        lineIndex,
+        cellOffset,
       });
     }
   }

@@ -1,5 +1,5 @@
-import { LibroModel, VirtualizedManagerHelper } from '@difizen/libro-core';
 import type { VirtualizedManager } from '@difizen/libro-core';
+import { LibroModel, VirtualizedManagerHelper } from '@difizen/libro-core';
 import {
   ContentsManager,
   ExecutableNotebookModel,
@@ -38,6 +38,7 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
   };
 
   protected libroFileService: LibroFileService;
+  protected virtualizedManager: VirtualizedManager;
 
   get fileService() {
     return this.libroFileService;
@@ -60,7 +61,6 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
   protected serverConnection: ServerConnection;
   protected readonly contentsManager: ContentsManager;
   protected readonly modalService: ModalService;
-  protected virtualizedManager: VirtualizedManager;
 
   constructor(
     @inject(LibroFileService) libroFileService: LibroFileService,
@@ -309,12 +309,7 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
     });
     if (runningCellIndex > -1) {
       this.selectCell(this.cells[runningCellIndex]);
-
-      if (this.virtualizedManager.isVirtualized) {
-        this.scrollToCellView({ cellIndex: runningCellIndex });
-      } else {
-        this.scrollToView(this.cells[runningCellIndex]);
-      }
+      this.scrollToView(this.cells[runningCellIndex]);
     }
   }
 }
