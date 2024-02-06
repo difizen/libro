@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { CommandRegistry, KeybindingRegistry } from '@difizen/mana-app';
 import {
   LibroCommandRegister,
   LibroExtensionSlotContribution,
@@ -9,6 +8,7 @@ import type {
   LibroSlot,
   LibroView,
 } from '@difizen/libro-core';
+import type { CommandRegistry, KeybindingRegistry } from '@difizen/mana-app';
 import {
   ViewManager,
   CommandContribution,

@@ -665,18 +665,11 @@ export class LibroView extends BaseView implements NotebookView {
       }
       this.runCells([cell]);
     }
-    if (this.virtualizedManager.isVirtualized) {
-      // 通过用户反馈，这里跳动会严重影响体验
-      // setTimeout(() => {
-      //   if (this.activeCell) this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
-      // });
-    } else {
-      setTimeout(() => {
-        if (this.activeCell) {
-          this.model.scrollToView(this.activeCell);
-        }
-      });
-    }
+    setTimeout(() => {
+      if (this.activeCell) {
+        this.model.scrollToView(this.activeCell);
+      }
+    });
   };
 
   runCellandInsertBelow = async (cell: CellView) => {
@@ -916,9 +909,8 @@ export class LibroView extends BaseView implements NotebookView {
   };
 
   clearAllOutputs = () => {
-    if (this.virtualizedManager.isVirtualized) {
-      this.model.scrollToCellView({ cellIndex: 0 });
-    } // 清空所有 cell滚动到最上面
+    // 清空所有 cell滚动到最上面
+    this.model.scrollToView(this.model.cells[0]);
     for (const cell of this.model.cells) {
       if (ExecutableCellView.is(cell) && ExecutableCellModel.is(cell.model)) {
         cell.clearExecution();
@@ -1053,11 +1045,7 @@ export class LibroView extends BaseView implements NotebookView {
       if (this.findCellIndex(this.activeCell) > 0) {
         this.extendContiguousSelectionTo(activeIndex - 1);
       }
-      if (this.virtualizedManager.isVirtualized) {
-        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
-      } else {
-        this.model.scrollToView(this.activeCell);
-      }
+      this.model.scrollToView(this.activeCell);
     }
   };
 
@@ -1066,11 +1054,7 @@ export class LibroView extends BaseView implements NotebookView {
       if (this.findCellIndex(this.activeCell) > 0) {
         this.extendContiguousSelectionTo(0);
       }
-      if (this.virtualizedManager.isVirtualized) {
-        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
-      } else {
-        this.model.scrollToView(this.activeCell);
-      }
+      this.model.scrollToView(this.activeCell);
     }
   };
 
@@ -1084,11 +1068,7 @@ export class LibroView extends BaseView implements NotebookView {
       if (this.findCellIndex(this.activeCell) >= 0) {
         this.extendContiguousSelectionTo(activeIndex + 1);
       }
-      if (this.virtualizedManager.isVirtualized) {
-        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
-      } else {
-        this.model.scrollToView(this.activeCell);
-      }
+      this.model.scrollToView(this.activeCell);
     }
   };
 
@@ -1097,11 +1077,7 @@ export class LibroView extends BaseView implements NotebookView {
       if (this.findCellIndex(this.activeCell) > 0) {
         this.extendContiguousSelectionTo(this.model.cells.length - 1);
       }
-      if (this.virtualizedManager.isVirtualized) {
-        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
-      } else {
-        this.model.scrollToView(this.activeCell);
-      }
+      this.model.scrollToView(this.activeCell);
     }
   };
 
@@ -1270,11 +1246,7 @@ export class LibroView extends BaseView implements NotebookView {
     if (newSelectedCell) {
       this.model.selectCell(newSelectedCell);
       this.model.selections = [];
-      if (this.virtualizedManager.isVirtualized) {
-        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
-      } else {
-        this.model.scrollToView(newSelectedCell);
-      }
+      this.model.scrollToView(newSelectedCell);
     }
   };
 
@@ -1283,11 +1255,7 @@ export class LibroView extends BaseView implements NotebookView {
     if (newSelectedCell) {
       this.model.selectCell(newSelectedCell);
       this.model.selections = [];
-      if (this.virtualizedManager.isVirtualized) {
-        this.model.scrollToCellView({ cellIndex: this.activeCellIndex });
-      } else {
-        this.model.scrollToView(newSelectedCell);
-      }
+      this.model.scrollToView(newSelectedCell);
     }
   };
 

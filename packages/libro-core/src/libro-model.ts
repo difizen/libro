@@ -48,10 +48,6 @@ export class LibroModel implements NotebookModel, DndListModel {
     return this.cellViewChangeEmitter.event;
   }
 
-  scrollToCellView = (params: ScrollParams) => {
-    this.scrollToCellViewEmitter.fire(params);
-  };
-
   disposeScrollToCellViewEmitter() {
     this.scrollToCellViewEmitter.dispose();
   }
@@ -369,13 +365,21 @@ export class LibroModel implements NotebookModel, DndListModel {
   /**
    * 自动滚动到可视范围内
    */
-  scrollToView(cell: CellView) {
+  scrollToView(cell: CellView, cellOffset = 0) {
+    const virtualizedManager = this.virtualizedManagerHelper.getOrCreate(this);
+    if (virtualizedManager.isVirtualized) {
+      const cellIndex = this.cells.findIndex((_cell) => _cell.id === cell.id);
+      this.scrollToCellViewEmitter.fire({ cellIndex, cellOffset });
+      return;
+    }
+
     let target = document.getElementById(cell.id);
     if (!target) {
       return;
     }
+
     const _targetheight = target?.offsetHeight || 0;
-    let offsetTop = target?.offsetTop || 0;
+    let offsetTop = (target?.offsetTop || 0) + cellOffset;
     while (
       target?.offsetParent &&
       !target?.offsetParent?.className?.includes('libro-view-content-left')
@@ -630,14 +634,9 @@ export class LibroModel implements NotebookModel, DndListModel {
       cells.splice(sourceIndex, 1);
       cells.splice(targetIndex, 0, sourceItem);
       this.cells = cells;
-      const virtualizedManager = this.virtualizedManagerHelper.getOrCreate(this);
       setTimeout(() => {
         // 上下移动也需要调整可视区域范围
-        if (virtualizedManager.isVirtualized) {
-          this.scrollToCellView({ cellIndex: sourceIndex });
-        } else {
-          this.scrollToView(sourceItem);
-        }
+        this.scrollToView(sourceItem);
       }, 300);
       return true;
     }

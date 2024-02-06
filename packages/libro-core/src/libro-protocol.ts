@@ -60,7 +60,7 @@ export type Options = {
 
 export interface ScrollParams {
   cellIndex: number;
-  lineIndex?: number;
+  cellOffset?: number;
 }
 
 export type NotebookModel = BaseNotebookModel & DndListModel;
@@ -214,7 +214,7 @@ export interface BaseNotebookModel {
 
   readonly sharedModel: ISharedNotebook;
 
-  scrollToView: (cell: CellView) => void;
+  scrollToView: (cell: CellView, cellOffset?: number) => void;
 
   customParams: Record<string, any>;
   getCustomKey: (key: string) => any;
@@ -223,8 +223,6 @@ export interface BaseNotebookModel {
   libroViewClass: string;
 
   onScrollToCellView: Event<ScrollParams>;
-
-  scrollToCellView: (params: ScrollParams) => void;
 
   disposeScrollToCellViewEmitter: () => void;
 }

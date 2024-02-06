@@ -93,6 +93,12 @@ export const SearchContent = () => {
               onChange={instance.handleFindChange}
               size="small"
               placeholder="搜索"
+              onFocus={() => {
+                instance.hasFocus = true;
+              }}
+              onBlur={() => {
+                instance.hasFocus = false;
+              }}
               suffix={
                 <span className="libro-search-input-suffix">
                   <IconFont
@@ -228,6 +234,7 @@ export class LibroSearchView extends BaseView {
   @prop() caseSensitive = false;
   @prop() useRegex = false;
   @prop() isSearching = false;
+  hasFocus = false;
 
   override view = SearchComponent;
 
@@ -261,6 +268,17 @@ export class LibroSearchView extends BaseView {
       );
       this.toDispose.push(
         this.libro.model.onCellViewChanged(() => this.onCellsChanged()),
+      );
+      this.toDispose.push(
+        this.libro.model.onCommandModeChanged((mode) => {
+          if (mode) {
+            setTimeout(() => {
+              if (this.hasFocus === false) {
+                this.hide();
+              }
+            }, 0);
+          }
+        }),
       );
     }
   };

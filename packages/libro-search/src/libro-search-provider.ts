@@ -4,6 +4,7 @@ import {
   EditorCellView,
   LibroView,
   VirtualizedManagerHelper,
+  LirboContextKey,
 } from '@difizen/libro-core';
 import { inject, prop, transient, equals } from '@difizen/mana-app';
 import { Deferred, DisposableCollection } from '@difizen/mana-app';
@@ -39,6 +40,7 @@ export const LibroSearchProviderFactory = Symbol('LibroSearchProviderFactory');
  */
 @transient()
 export class LibroSearchProvider extends AbstractSearchProvider {
+  @inject(LirboContextKey) contextKey: LirboContextKey;
   @inject(LibroCellSearchProvider) libroCellSearchProvider: LibroCellSearchProvider;
   protected cellsChangeDeferred: Deferred<void> | undefined;
 
@@ -201,7 +203,7 @@ export class LibroSearchProvider extends AbstractSearchProvider {
    * @returns Initial value used to populate the search box.
    */
   override getInitialQuery = (): string => {
-    const activeCell = this.view.model.active;
+    const activeCell = this.view.activeCell;
     if (activeCell) {
       return this.libroCellSearchProvider.getInitialQuery(activeCell);
     }
@@ -254,6 +256,10 @@ export class LibroSearchProvider extends AbstractSearchProvider {
     filters?: SearchFilters,
     highlightNext = true,
   ): Promise<void> => {
+    if (this.contextKey.commandModeEnabled === true) {
+      return;
+    }
+
     if (!this.view) {
       return;
     }
@@ -447,17 +453,9 @@ export class LibroSearchProvider extends AbstractSearchProvider {
       if (!elementInViewport(node!)) {
         try {
           if (this.view.activeCell) {
-            if (this.virtualizedManager.isVirtualized) {
-              if (EditorCellView.is(activeCell)) {
-                const line = activeCell.editor?.getPositionAt(match.position)?.line;
-
-                this.view.model.scrollToCellView({
-                  cellIndex: this.view.activeCellIndex,
-                  lineIndex: line,
-                });
-              }
-            } else {
-              this.view.model.scrollToView(this.view.activeCell);
+            if (EditorCellView.is(activeCell)) {
+              const line = activeCell.editor?.getPositionAt(match.position)?.line;
+              this.view.model.scrollToView(this.view.activeCell, (line ?? 0) * 20);
             }
           }
         } catch (error) {
