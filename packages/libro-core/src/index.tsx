@@ -23,3 +23,4 @@ export * from './virtualized-manager.js';
 export * from './virtualized-manager-helper.js';
 export * from './libro-workspace-service.js';
 export * from './libro-context-key.js';
+export * from './utils/index.js';
