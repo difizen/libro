@@ -22,3 +22,4 @@ export * from './settings/index.js';
 
 export * from './virtualized-manager.js';
 export * from './virtualized-manager-helper.js';
+export * from './utils/index.js';
