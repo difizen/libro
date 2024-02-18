@@ -16,6 +16,7 @@ export class LirboContextKey {
   active: IContextKey<boolean>;
   focus: IContextKey<boolean>;
   commandMode: IContextKey<boolean>;
+  base: IContextKey<boolean>;
 
   constructor(
     @inject(ContextKeyService) contextKeyService: ContextKeyService,
@@ -37,6 +38,10 @@ export class LirboContextKey {
     this.commandModeEnabled = true;
     this.commandMode.set(this.isCommandMode);
   };
+
+  protected setupBase() {
+    this.base = this.contextKeyService.createKey<boolean>(LibroContextKeys.base, true);
+  }
 
   protected setupActive() {
     this.libroService.onActiveChanged(() => {

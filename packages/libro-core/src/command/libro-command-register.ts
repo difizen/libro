@@ -61,7 +61,7 @@ export class LibroCommandRegister {
       if (command.keybind) {
         const needFocusStr = needFocus ? LibroContextKeys.focus : '';
         const needActiveStr = needActive ? LibroContextKeys.active : '';
-        const when = [needFocusStr, needActiveStr, command.when]
+        const when = [LibroContextKeys.base, needFocusStr, needActiveStr, command.when]
           .filter(Boolean)
           .join(' && ');
         if (command.keybind instanceof Array) {

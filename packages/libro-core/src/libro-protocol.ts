@@ -16,6 +16,7 @@ import type { LibroView } from './libro-view.js';
 import type { VirtualizedManager } from './virtualized-manager.js';
 
 export const LibroContextKeys = {
+  base: 'base',
   active: 'active',
   focus: 'focus',
   commandMode: 'commandMode',
