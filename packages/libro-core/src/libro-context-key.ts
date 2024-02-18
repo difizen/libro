@@ -24,6 +24,7 @@ export class LirboContextKey {
   ) {
     this.contextKeyService = contextKeyService;
     this.libroService = libroService;
+    this.setupBase();
     this.setupActive();
     this.setupFocus();
     this.setupCommandMode();
