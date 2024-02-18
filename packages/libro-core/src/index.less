@@ -632,26 +632,28 @@
   margin-left: 40px;
 }
 
-.libro-totop-button {
-  position: fixed;
-  right: 32px;
-  bottom: 48px;
-  width: 44px;
-  height: 44px;
-
-  button {
+.libro-totop-button-wrapper {
+  .libro-totop-button {
+    position: fixed;
+    right: 32px;
+    bottom: 48px;
     width: 44px;
     height: 44px;
-    background-color: var(--mana-color-bg-container);
-    box-shadow:
-      0 3px 6px -4px rgba(0, 10, 26, 12%),
-      0 6px 16px 0 rgba(0, 10, 26, 8%),
-      0 9px 28px 8px rgba(0, 10, 26, 5%);
-  }
 
-  svg {
-    color: rgba(105, 130, 169, 100%);
-    font-size: 22px;
+    > button {
+      width: 44px;
+      height: 44px;
+      background-color: var(--mana-color-bg-container);
+      box-shadow:
+        0 3px 6px -4px rgba(0, 10, 26, 12%),
+        0 6px 16px 0 rgba(0, 10, 26, 8%),
+        0 9px 28px 8px rgba(0, 10, 26, 5%);
+    }
+
+    svg {
+      color: rgba(105, 130, 169, 100%);
+      font-size: 22px;
+    }
   }
 }
 

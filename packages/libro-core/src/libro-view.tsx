@@ -194,7 +194,10 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
             slotView={LibroSlotView}
           />
         </div>
-        <BackTop target={() => libroViewContentRef.current || document}>
+        <BackTop
+          className="libro-totop-button-wrapper"
+          target={() => libroViewContentRef.current || document}
+        >
           <div className="libro-totop-button">
             <Button shape="circle" icon={<ToTopOutlined />} />
           </div>
