@@ -1,5 +1,20 @@
 # @difizen/libro-lab
 
+## 0.1.19
+
+### Patch Changes
+
+- fe3ee51: fix:poll kernels when serverManager ready
+- Updated dependencies [fe3ee51]
+  - @difizen/libro-kernel@0.1.19
+  - @difizen/libro-cofine-editor-core@0.1.19
+  - @difizen/libro-core@0.1.19
+  - @difizen/libro-jupyter@0.1.19
+  - @difizen/libro-language-client@0.1.19
+  - @difizen/libro-prompt-cell@0.1.19
+  - @difizen/libro-terminal@0.1.19
+  - @difizen/libro-toc@0.1.19
+
 ## 0.1.18
 
 ### Patch Changes

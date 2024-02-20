@@ -1,5 +1,15 @@
 # @difizen/libro-codemirror-raw-cell
 
+## 0.1.19
+
+### Patch Changes
+
+- fe3ee51: fix:poll kernels when serverManager ready
+- Updated dependencies [fe3ee51]
+  - @difizen/libro-code-editor@0.1.19
+  - @difizen/libro-common@0.1.19
+  - @difizen/libro-core@0.1.19
+
 ## 0.1.18
 
 ### Patch Changes

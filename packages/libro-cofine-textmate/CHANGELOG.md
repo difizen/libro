@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.19
+
+### Patch Changes
+
+- fe3ee51: fix:poll kernels when serverManager ready
+- Updated dependencies [fe3ee51]
+  - @difizen/libro-cofine-editor-core@0.1.19
+
 ## 0.1.18
 
 ### Patch Changes
