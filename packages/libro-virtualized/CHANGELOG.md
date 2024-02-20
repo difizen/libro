@@ -1,5 +1,11 @@
 # @difizen/libro-code-editor
 
+## 0.1.19
+
+### Patch Changes
+
+- fe3ee51: fix:poll kernels when serverManager ready
+
 ## 0.1.18
 
 ### Patch Changes
