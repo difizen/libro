@@ -142,7 +142,11 @@ export const SearchContent = () => {
                 icon={<EllipsisOutlined />}
                 size="small"
               />
-              <Button onClick={instance.hide} icon={<CloseOutlined />} size="small" />
+              <Button
+                onClick={() => instance.hide()}
+                icon={<CloseOutlined />}
+                size="small"
+              />
             </div>
           </td>
         </tr>
@@ -269,12 +273,13 @@ export class LibroSearchView extends BaseView {
       this.toDispose.push(
         this.libro.model.onCellViewChanged(() => this.onCellsChanged()),
       );
+      // search view 失去焦点时依然可以通过esc隐藏search
       this.toDispose.push(
         this.libro.model.onCommandModeChanged((mode) => {
           if (mode) {
             setTimeout(() => {
               if (this.hasFocus === false) {
-                this.hide();
+                this.hide(false);
               }
             }, 0);
           }
@@ -306,14 +311,16 @@ export class LibroSearchView extends BaseView {
     this.initialQuery();
     this.findInputRef?.current?.focus();
   };
-  hide = () => {
+  hide = (focus = true) => {
     this.searchVisible = false;
     this.contextKey.enableCommandMode();
     this.searchProvider?.endQuery();
     if (this.searchProvider) {
       this.searchProvider.replaceMode = false;
     }
-    this.libro?.focus();
+    if (focus) {
+      this.libro?.focus();
+    }
   };
 
   onFocus = () => {
