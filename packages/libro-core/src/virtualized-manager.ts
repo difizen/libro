@@ -1,4 +1,7 @@
-import { transient, prop } from '@difizen/mana-app';
+import { transient, prop, inject } from '@difizen/mana-app';
+
+import type { NotebookModel } from './libro-protocol.js';
+import { VirtualizedManagerOption } from './libro-protocol.js';
 
 export interface IVirtualizedManager {
   openVirtualized: (length: number, size?: number, path?: string) => Promise<boolean>;
@@ -13,6 +16,16 @@ export class VirtualizedManager implements IVirtualizedManager {
    */
   @prop()
   isVirtualized = false;
+
+  libroModel: NotebookModel;
+
+  constructor(
+    @inject(VirtualizedManagerOption)
+    virtualizedManagerOption: VirtualizedManagerOption,
+  ) {
+    this.libroModel = virtualizedManagerOption.libroModel;
+  }
+
   /**
    *
    * @param length cell个数
