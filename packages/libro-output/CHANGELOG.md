@@ -1,5 +1,15 @@
 # @difizen/libro-output
 
+## 0.1.21
+
+### Patch Changes
+
+- 9da4081: 1.fix: search view hide not focus libro view
+- Updated dependencies [9da4081]
+  - @difizen/libro-common@0.1.21
+  - @difizen/libro-core@0.1.21
+  - @difizen/libro-rendermime@0.1.21
+
 ## 0.1.20
 
 ### Patch Changes
