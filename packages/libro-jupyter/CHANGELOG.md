@@ -1,5 +1,28 @@
 # @difizen/libro-jupyter
 
+## 0.1.20
+
+### Patch Changes
+
+- f3924d3: 1.fix search scroll on large cell 2.add libroModel in VirtualizedManager
+- Updated dependencies [f3924d3]
+  - @difizen/libro-core@0.1.20
+  - @difizen/libro-code-cell@0.1.20
+  - @difizen/libro-code-editor@0.1.20
+  - @difizen/libro-codemirror@0.1.20
+  - @difizen/libro-cofine-editor@0.1.20
+  - @difizen/libro-common@0.1.20
+  - @difizen/libro-kernel@0.1.20
+  - @difizen/libro-l10n@0.1.20
+  - @difizen/libro-language-client@0.1.20
+  - @difizen/libro-lsp@0.1.20
+  - @difizen/libro-markdown-cell@0.1.20
+  - @difizen/libro-output@0.1.20
+  - @difizen/libro-raw-cell@0.1.20
+  - @difizen/libro-rendermime@0.1.20
+  - @difizen/libro-search@0.1.20
+  - @difizen/libro-search-code-cell@0.1.20
+
 ## 0.1.19
 
 ### Patch Changes

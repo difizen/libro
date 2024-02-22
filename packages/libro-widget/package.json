@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-widget",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "",
   "keywords": [
     "libro"
@@ -44,10 +44,10 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-core": "^0.1.19",
-    "@difizen/libro-common": "^0.1.19",
-    "@difizen/libro-kernel": "^0.1.19",
-    "@difizen/libro-rendermime": "^0.1.19",
+    "@difizen/libro-core": "^0.1.20",
+    "@difizen/libro-common": "^0.1.20",
+    "@difizen/libro-kernel": "^0.1.20",
+    "@difizen/libro-rendermime": "^0.1.20",
     "@difizen/mana-app": "latest"
   },
   "peerDependencies": {

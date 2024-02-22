@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.20
+
+### Patch Changes
+
+- f3924d3: 1.fix search scroll on large cell 2.add libroModel in VirtualizedManager
+- Updated dependencies [f3924d3]
+  - @difizen/libro-cofine-editor-contribution@0.1.20
+
 ## 0.1.19
 
 ### Patch Changes

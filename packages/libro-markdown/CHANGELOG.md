@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.1.20
+
+### Patch Changes
+
+- f3924d3: 1.fix search scroll on large cell 2.add libroModel in VirtualizedManager
+
 ## 0.1.19
 
 ### Patch Changes
