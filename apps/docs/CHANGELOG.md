@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.1.21
+
+### Patch Changes
+
+- 9da4081: 1.fix: search view hide not focus libro view
+- Updated dependencies [9da4081]
+  - @difizen/libro-core@0.1.21
+  - @difizen/libro-jupyter@0.1.21
+  - @difizen/libro-lab@0.1.21
+  - @difizen/libro-terminal@0.1.21
+
 ## 0.1.20
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.21
+
+### Patch Changes
+
+- 9da4081: 1.fix: search view hide not focus libro view
+- Updated dependencies [9da4081]
+  - @difizen/libro-cofine-editor-core@0.1.21
+
 ## 0.1.20
 
 ### Patch Changes
