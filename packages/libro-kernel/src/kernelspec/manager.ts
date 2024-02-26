@@ -1,5 +1,6 @@
 import { deepEqual, Poll } from '@difizen/libro-common';
 import type { Event as ManaEvent } from '@difizen/mana-app';
+import { getOrigin } from '@difizen/mana-app';
 import { Emitter, Deferred } from '@difizen/mana-app';
 import { inject, singleton } from '@difizen/mana-app';
 import { prop } from '@difizen/mana-app';
@@ -28,21 +29,6 @@ export class KernelSpecManager extends BaseManager implements KernelSpec.IManage
    */
   constructor() {
     super();
-
-    // Initialize internal data.
-    this._ready = Promise.all([this.requestSpecs()])
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .then((_) => undefined)
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .catch((_) => undefined)
-      .then(() => {
-        if (this.isDisposed) {
-          return;
-        }
-        this._isReady = true;
-        return;
-      });
-
     this._pollSpecs = new Poll({
       auto: false,
       factory: () => this.requestSpecs(),
@@ -55,10 +41,13 @@ export class KernelSpecManager extends BaseManager implements KernelSpec.IManage
       standby: 'when-hidden',
       // standby: options.standby ?? 'when-hidden',
     });
-    void this.ready.then(() => {
-      void this._pollSpecs.start();
-      return;
-    });
+    // Initialize internal data.
+    this._ready = (async () => {
+      await this.serverManager.ready;
+      await getOrigin(this._pollSpecs).start();
+      await getOrigin(this._pollSpecs).tick;
+      this._isReady = true;
+    })();
   }
 
   /**
