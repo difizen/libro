@@ -94,6 +94,10 @@ function getKernelListItems(
       type: 'divider', // Must have
     },
     {
+      key: 'RestartKernel',
+      label: 'Restart the Kernel',
+    },
+    {
       key: 'ShutDownKernel',
       label: 'Shut Down the Kernel',
     },
@@ -127,6 +131,13 @@ export const KernelSelector: React.FC = () => {
         libroView.model.kernelConnecting = false;
         if (libroView.model.shutdown) {
           libroView.model.shutdown();
+        }
+      }
+
+      if (selectValue === 'RestartKernel') {
+        libroView.model.kernelConnecting = false;
+        if (libroView.model.restart) {
+          libroView.model.restart();
         }
       }
 
