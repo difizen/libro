@@ -1,5 +1,18 @@
 # @difizen/libro-docs
 
+## 0.1.22
+
+### Patch Changes
+
+- 669e05b: fix: valid notebook
+  feat(jupyter): add restart kernel
+  fix: poll kernelSpec after serverManager ready
+- Updated dependencies [669e05b]
+  - @difizen/libro-core@0.1.22
+  - @difizen/libro-jupyter@0.1.22
+  - @difizen/libro-lab@0.1.22
+  - @difizen/libro-terminal@0.1.22
+
 ## 0.1.21
 
 ### Patch Changes
