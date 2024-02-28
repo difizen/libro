@@ -1,5 +1,33 @@
 # @difizen/libro-jupyter
 
+## 0.2.0
+
+### Minor Changes
+
+- 2db0674: fix: valid notebook
+  feat(jupyter): add restart kernel
+  fix: poll kernelSpec after serverManager ready
+
+### Patch Changes
+
+- Updated dependencies [2db0674]
+  - @difizen/libro-code-cell@0.2.0
+  - @difizen/libro-code-editor@0.2.0
+  - @difizen/libro-codemirror@0.2.0
+  - @difizen/libro-cofine-editor@0.2.0
+  - @difizen/libro-common@0.2.0
+  - @difizen/libro-core@0.2.0
+  - @difizen/libro-kernel@0.2.0
+  - @difizen/libro-l10n@0.2.0
+  - @difizen/libro-language-client@0.2.0
+  - @difizen/libro-lsp@0.2.0
+  - @difizen/libro-markdown-cell@0.2.0
+  - @difizen/libro-output@0.2.0
+  - @difizen/libro-raw-cell@0.2.0
+  - @difizen/libro-rendermime@0.2.0
+  - @difizen/libro-search@0.2.0
+  - @difizen/libro-search-code-cell@0.2.0
+
 ## 0.1.21
 
 ### Patch Changes
