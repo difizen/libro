@@ -27,7 +27,7 @@ export const FileCreateDirModalComponent: React.FC<
     await form.validateFields();
     close();
     try {
-      await fileService.newFileDir(values.dirName, new URI(data.path));
+      await fileService.newFileDir(values.dirName, new URI(data?.path));
       if (fileView) {
         fileView.model.refresh();
       }
@@ -40,7 +40,7 @@ export const FileCreateDirModalComponent: React.FC<
     if (!value || !value.length) {
       throw new Error('请输入文件夹名');
     } else {
-      const targetURI = new URI(data.path + value);
+      const targetURI = new URI(data?.path + value);
       const fileRes = await fileService.resolve(targetURI);
       if (fileRes.isDirectory) {
         throw new Error('文件夹名称已存在，请重新输入');
@@ -75,7 +75,7 @@ export const FileCreateDirModalComponent: React.FC<
       width={524}
     >
       <div className="libro-create-file-des">创建位置：</div>
-      <span className="libro-create-file-path">{data.path}</span>
+      <span className="libro-create-file-path">{data?.path}</span>
       <Form
         layout="vertical"
         autoComplete="off"
