@@ -39,7 +39,7 @@ export class LibroWorkspace implements ILibroWorkspace {
   @inject(LibroService) private readonly libroService: LibroService;
 
   isValidNotebook(view: LibroView): boolean {
-    if ((view as any).lspEnabled === true) {
+    if ((view.model as any).lspEnabled === true) {
       return true;
     }
     return false;
