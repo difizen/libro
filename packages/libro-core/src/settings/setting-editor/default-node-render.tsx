@@ -60,6 +60,6 @@ export const DefaultDatePicker: React.FC<RenderProps<string>> = ({
 }) => (
   <DatePicker
     value={dayjs(value, dateFormat)}
-    onChange={(date, dateString) => onChange(dateString)}
+    onChange={(date, dateString) => onChange(dateString.toString())}
   />
 );

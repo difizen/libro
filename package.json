@@ -25,7 +25,8 @@
     "docs": "nx run @difizen/libro-docs:start",
     "docs:build": "nx run @difizen/mana-docs:build",
     "changeset": "changeset",
-    "clean": "git clean -fX ."
+    "clean": "git clean -fX .",
+    "tsc": "nx run-many  -t typecheck:tsc"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.23.9",
