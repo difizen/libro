@@ -28,7 +28,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
 }: ModalItemProps<ModalItemType>) => {
   const fileService = useInject(JupyterFileService);
   const viewManager = useInject(ViewManager);
-  const [fileType, setFileType] = useState<FileType>(data.fileType);
+  const [fileType, setFileType] = useState<FileType>(data?.fileType);
   const [fileView, setFileView] = useState<FileView>();
   const inputRef = useRef<InputRef>(null);
   const [form] = Form.useForm();
@@ -37,7 +37,10 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
     await form.validateFields();
     close();
     try {
-      await fileService.newFile(values.fileName + (fileType || ''), new URI(data.path));
+      await fileService.newFile(
+        values.fileName + (fileType || ''),
+        new URI(data?.path),
+      );
       if (fileView) {
         fileView.model.refresh();
       }
@@ -50,7 +53,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
     if (!value || !value.length) {
       throw new Error('请输入文件名');
     } else {
-      const targetURI = new URI(data.path + value + (fileType || ''));
+      const targetURI = new URI(data?.path + value + (fileType || ''));
       const fileRes = await fileService.resolve(targetURI);
       if (fileRes.isFile) {
         throw new Error('文件名称已存在，请重新输入');
@@ -86,7 +89,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
     >
       <div className="libro-create-file-path-container">
         <div className="libro-create-file-des">创建位置：</div>
-        <span className="libro-create-file-path">{data.path}</span>
+        <span className="libro-create-file-path">{data?.path}</span>
       </div>
       <div className="libro-create-file-des">文件类型：</div>
       <Row>

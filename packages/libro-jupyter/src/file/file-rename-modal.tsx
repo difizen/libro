@@ -40,10 +40,11 @@ export const FileRenameModalComponent: React.FC<ModalItemProps<ModalItemType>> =
     await form.validateFields();
     close();
     try {
-      await fileService.rename(data.resource, values.rename);
-
-      if (fileView) {
-        fileView.model.refresh();
+      if (data && data.resource) {
+        await fileService.rename(data.resource, values.rename);
+        if (fileView) {
+          fileView.model.refresh();
+        }
       }
     } catch {
       message.error('重命名文件/文件夹失败');
@@ -54,7 +55,7 @@ export const FileRenameModalComponent: React.FC<ModalItemProps<ModalItemType>> =
     if (!value || !value.length) {
       throw new Error('请输入文件夹名');
     } else {
-      if (value === data.fileName) {
+      if (value === data?.fileName) {
         throw new Error('文件/文件夹名称已存在，请重新输入');
       }
     }
@@ -81,7 +82,7 @@ export const FileRenameModalComponent: React.FC<ModalItemProps<ModalItemType>> =
           name="rename"
           label="文件/文件夹名称"
           rules={[{ required: true, validator: validateRename }]}
-          initialValue={data.fileName}
+          initialValue={data?.fileName}
         >
           <Input
             ref={inputRef}
