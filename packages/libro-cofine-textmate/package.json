@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-cofine-textmate",
-  "version": "0.1.21",
+  "version": "0.2.0",
   "description": "",
   "keywords": [
     "libro",
@@ -46,7 +46,7 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-cofine-editor-core": "^0.1.21",
+    "@difizen/libro-cofine-editor-core": "^0.2.0",
     "@difizen/mana-app": "latest",
     "fast-plist": "^0.1.2",
     "vscode-oniguruma": "^1.5.1",
