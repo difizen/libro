@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.22
+
+### Patch Changes
+
+- 669e05b: fix: valid notebook
+  feat(jupyter): add restart kernel
+  fix: poll kernelSpec after serverManager ready
+
 ## 0.1.21
 
 ### Patch Changes

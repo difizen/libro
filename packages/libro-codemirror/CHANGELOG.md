@@ -1,5 +1,18 @@
 # @difizen/libro-codemirror
 
+## 0.1.22
+
+### Patch Changes
+
+- 669e05b: fix: valid notebook
+  feat(jupyter): add restart kernel
+  fix: poll kernelSpec after serverManager ready
+- Updated dependencies [669e05b]
+  - @difizen/libro-code-editor@0.1.22
+  - @difizen/libro-common@0.1.22
+  - @difizen/libro-lsp@0.1.22
+  - @difizen/libro-rendermime@0.1.22
+
 ## 0.1.21
 
 ### Patch Changes
