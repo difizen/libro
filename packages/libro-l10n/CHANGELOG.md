@@ -1,5 +1,11 @@
 # @difizen/libro-l10n
 
+## 0.1.23
+
+### Patch Changes
+
+- e37f319: fix: remove useless code about format button
+
 ## 0.1.22
 
 ### Patch Changes
