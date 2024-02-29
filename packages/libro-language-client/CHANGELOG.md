@@ -1,5 +1,16 @@
 # libro-langauge-client
 
+## 0.1.23
+
+### Patch Changes
+
+- e37f319: fix: remove useless code about format button
+- Updated dependencies [e37f319]
+  - @difizen/libro-core@0.1.23
+  - @difizen/libro-common@0.1.23
+  - @difizen/libro-kernel@0.1.23
+  - @difizen/libro-lsp@0.1.23
+
 ## 0.1.22
 
 ### Patch Changes

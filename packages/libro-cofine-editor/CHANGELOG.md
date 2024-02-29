@@ -1,5 +1,18 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.23
+
+### Patch Changes
+
+- e37f319: fix: remove useless code about format button
+- Updated dependencies [e37f319]
+  - @difizen/libro-core@0.1.23
+  - @difizen/libro-code-editor@0.1.23
+  - @difizen/libro-cofine-editor-core@0.1.23
+  - @difizen/libro-cofine-textmate@0.1.23
+  - @difizen/libro-common@0.1.23
+  - @difizen/libro-lsp@0.1.23
+
 ## 0.1.22
 
 ### Patch Changes

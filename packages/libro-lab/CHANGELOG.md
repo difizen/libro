@@ -1,5 +1,20 @@
 # @difizen/libro-lab
 
+## 0.1.23
+
+### Patch Changes
+
+- e37f319: fix: remove useless code about format button
+- Updated dependencies [e37f319]
+  - @difizen/libro-core@0.1.23
+  - @difizen/libro-cofine-editor-core@0.1.23
+  - @difizen/libro-jupyter@0.1.23
+  - @difizen/libro-kernel@0.1.23
+  - @difizen/libro-language-client@0.1.23
+  - @difizen/libro-prompt-cell@0.1.23
+  - @difizen/libro-terminal@0.1.23
+  - @difizen/libro-toc@0.1.23
+
 ## 0.1.22
 
 ### Patch Changes
