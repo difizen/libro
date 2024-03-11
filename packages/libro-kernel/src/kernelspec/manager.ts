@@ -17,7 +17,6 @@ import { KernelSpecRestAPI } from './restapi.js';
  */
 @singleton()
 export class KernelSpecManager extends BaseManager implements KernelSpec.IManager {
-  @inject(ServerManager)
   protected serverManager: ServerManager;
   @inject(KernelSpecRestAPI)
   protected kernelSpecRestAPI: KernelSpecRestAPI;
@@ -27,8 +26,9 @@ export class KernelSpecManager extends BaseManager implements KernelSpec.IManage
    *
    * @param options - The default options for kernel.
    */
-  constructor() {
+  constructor(@inject(ServerManager) serverManager: ServerManager) {
     super();
+    this.serverManager = serverManager;
     this._pollSpecs = new Poll({
       auto: false,
       factory: () => this.requestSpecs(),
