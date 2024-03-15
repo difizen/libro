@@ -115,9 +115,25 @@ export class MonacoLanguages implements IMonacoLanguages {
     selector: DocumentSelector,
     provider: DefinitionProvider,
   ): Disposable {
+    return monaco.languages.registerDefinitionProvider(
+      selector,
+      this.createDefinitionProvider(provider),
+    );
+  }
+  protected createDefinitionProvider(
+    provider: DefinitionProvider,
+  ): monaco.languages.DefinitionProvider {
     return {
-      dispose: () => {
-        return;
+      provideDefinition: async (model, position, token) => {
+        const params = this.m2p.asTextDocumentPositionParams(model, position);
+        const result = await provider.provideDefinition(
+          { uri: model.uri } as any,
+          this.p2c.asPosition(params.position),
+          token,
+        );
+        return (
+          result && this.p2m.asDefinitionResult(this.c2p.asDefinitionResult(result))
+        );
       },
     };
   }

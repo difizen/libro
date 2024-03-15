@@ -33,7 +33,7 @@ export class LibroLabApp implements ApplicationContribution {
   @inject(LayoutService) layoutService: LayoutService;
 
   async onStart() {
-    localStorage.setItem(ShouldPreventStoreViewKey, 'false');
+    localStorage.setItem(ShouldPreventStoreViewKey, 'true');
     this.configurationService.set(
       LibroJupyterConfiguration['OpenSlot'],
       LibroLabLayoutSlots.content,

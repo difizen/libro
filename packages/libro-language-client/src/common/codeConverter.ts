@@ -4,6 +4,7 @@
  * ------------------------------------------------------------------------------------------ */
 
 import * as proto from '@difizen/vscode-languageserver-protocol';
+import type { LocationLink } from 'vscode';
 import type {
   InlineCompletionContext,
   InlayHint,
@@ -46,6 +47,8 @@ import type {
   TextEdit,
   Uri,
   SymbolInformation as VSymbolInformation,
+  Definition,
+  DefinitionLink,
 } from 'vscode';
 
 import ProtocolCallHierarchyItem from './protocolCallHierarchyItem.js';
@@ -172,10 +175,24 @@ export interface Converter {
 
   asRanges(values: readonly Range[]): proto.Range[];
 
+  asDefinitionResult(item: Definition): proto.Definition;
+  asDefinitionResult(item: DefinitionLink[]): proto.Definition;
+  asDefinitionResult(item: undefined | null): undefined;
+  asDefinitionResult(
+    item: Definition | DefinitionLink[] | undefined | null,
+  ): proto.Definition | undefined;
+  asDefinitionResult(
+    item: Definition | DefinitionLink[] | undefined | null,
+  ): proto.Definition | undefined;
+
   asLocation(value: null): null;
   asLocation(value: undefined): undefined;
   asLocation(value: Location): proto.Location;
   asLocation(value: Location | undefined | null): proto.Location | undefined | null;
+
+  asLocationLink(item: undefined | null): undefined;
+  asLocationLink(item: LocationLink): proto.LocationLink;
+  asLocationLink(item: LocationLink | undefined | null): proto.LocationLink | undefined;
 
   asDiagnosticSeverity(value: DiagnosticSeverity): number;
   asDiagnosticTag(value: DiagnosticTag): number | undefined;
@@ -621,6 +638,63 @@ export function createConverter(uriConverter?: URIConverter): Converter {
 
   function asRanges(values: readonly Range[]): proto.Range[] {
     return values.map(asRange as (item: Range) => proto.Range);
+  }
+
+  function asLocationLink(item: undefined | null): undefined;
+  function asLocationLink(item: LocationLink): proto.LocationLink;
+  function asLocationLink(
+    item: LocationLink | undefined | null,
+  ): proto.LocationLink | undefined {
+    if (!item) {
+      return undefined;
+    }
+    const result: proto.LocationLink = {
+      targetUri: item.targetUri.toString(),
+      targetRange: asRange(item.targetSelectionRange)!, // See issue: https://github.com/Microsoft/vscode/issues/58649
+      originSelectionRange: asRange(item.originSelectionRange)!,
+      targetSelectionRange: asRange(item.targetSelectionRange)!,
+    };
+    if (!result.targetSelectionRange) {
+      throw new Error(`targetSelectionRange must not be undefined or null`);
+    }
+    return result;
+  }
+
+  // Function to check if an object is a LocationLink
+  function isLocationLink(object: any): object is LocationLink {
+    return (
+      object !== undefined &&
+      'targetUri' in object &&
+      'targetRange' in object &&
+      'targetSelectionRange' in object
+    );
+  }
+
+  function asDefinitionResult(item: Definition): proto.Definition;
+  function asDefinitionResult(item: DefinitionLink[]): proto.Definition;
+  function asDefinitionResult(item: undefined | null): undefined;
+  function asDefinitionResult(
+    item: Definition | DefinitionLink[] | undefined | null,
+  ): proto.Definition | proto.DefinitionLink[] | undefined;
+  function asDefinitionResult(
+    item: Definition | DefinitionLink[] | undefined | null,
+  ): proto.Definition | proto.DefinitionLink[] | undefined {
+    if (!item) {
+      return undefined;
+    }
+    if (Array.isArray(item)) {
+      if (item.length === 0) {
+        return undefined;
+      } else if (isLocationLink(item[0])) {
+        const links: LocationLink[] = item as unknown as LocationLink[];
+        return links.map((location) => asLocationLink(location));
+      } else {
+        const locations: Location[] = item as Location[];
+        return locations.map((location) => asLocation(location));
+      }
+    } else {
+      return asLocation(item);
+    }
   }
 
   function asLocation(value: Location): proto.Location;
@@ -1405,5 +1479,7 @@ export function createConverter(uriConverter?: URIConverter): Converter {
     asWorkspaceSymbol,
     asInlineCompletionParams,
     asInlineCompletionContext,
+    asDefinitionResult,
+    asLocationLink,
   };
 }

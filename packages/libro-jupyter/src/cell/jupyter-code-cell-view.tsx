@@ -7,8 +7,8 @@ import type {
   TooltipProviderOption,
 } from '@difizen/libro-code-editor';
 import { KernelError } from '@difizen/libro-kernel';
-import { LibroCellURIScheme } from '@difizen/libro-language-client';
-import { transient, URI } from '@difizen/mana-app';
+import { getCellURI } from '@difizen/libro-language-client';
+import { transient } from '@difizen/mana-app';
 import { view, ViewInstance } from '@difizen/mana-app';
 import { getOrigin, useInject } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
@@ -55,9 +55,8 @@ export class JupyterCodeCellView extends LibroCodeCellView {
 
   protected override getEditorOption(): CodeEditorViewOptions {
     const options = super.getEditorOption();
-    let uri = new URI(this.parent.model.filePath);
-    uri = URI.withScheme(uri, LibroCellURIScheme);
-    uri = URI.withQuery(uri, `cellid=${this.model.id}`);
+    const uri = getCellURI(this.parent.model, this.model);
+
     return {
       ...options,
       uuid: uri.toString(),

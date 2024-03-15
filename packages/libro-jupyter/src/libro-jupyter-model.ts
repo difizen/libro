@@ -2,13 +2,12 @@ import type { VirtualizedManager } from '@difizen/libro-core';
 import { LibroModel, VirtualizedManagerHelper } from '@difizen/libro-core';
 import {
   ContentsManager,
-  ExecutableNotebookModel,
   isDisplayDataMsg,
   LibroKernelConnectionManager,
   ServerConnection,
   ServerManager,
 } from '@difizen/libro-kernel';
-import type { IKernelConnection } from '@difizen/libro-kernel';
+import type { IKernelConnection, ExecutableNotebookModel } from '@difizen/libro-kernel';
 import type { IContentsCheckpointModel, IContentsModel } from '@difizen/libro-kernel';
 import { getOrigin, ModalService, prop } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
@@ -26,17 +25,6 @@ import { getDefaultKernel } from './utils/index.js';
 type IModel = IContentsModel;
 @transient()
 export class LibroJupyterModel extends LibroModel implements ExecutableNotebookModel {
-  static is = (arg: Record<any, any> | undefined): arg is LibroJupyterModel => {
-    return (
-      !!arg &&
-      ExecutableNotebookModel.is(arg) &&
-      'kernelConnection' in arg &&
-      typeof (arg as any).kernelConnection === 'object' &&
-      'lspEnabled' in arg &&
-      typeof (arg as any).lspEnabled === 'boolean'
-    );
-  };
-
   protected libroFileService: LibroFileService;
   protected virtualizedManager: VirtualizedManager;
 

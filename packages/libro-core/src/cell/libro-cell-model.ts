@@ -1,7 +1,7 @@
 import { Model } from '@difizen/libro-code-editor';
 import type { ICell } from '@difizen/libro-common';
 import { concatMultilineString } from '@difizen/libro-common';
-import { DisposableCollection } from '@difizen/mana-app';
+import { DisposableCollection, watch } from '@difizen/mana-app';
 import { prop, inject, postConstruct, transient } from '@difizen/mana-app';
 
 import type { DefaultDecodedFormatter } from '../formatter/index.js';
@@ -33,6 +33,8 @@ export class LibroCellModel extends Model implements CellModel {
 
   @prop()
   trusted: boolean;
+
+  version = 0;
 
   constructor(@inject(CellOptions) options: CellOptions) {
     super({
@@ -68,7 +70,14 @@ export class LibroCellModel extends Model implements CellModel {
       this.libroFormatType,
       formatValue,
     );
+    this.updateVersion();
   }
+
+  updateVersion = () => {
+    watch<Model>(this, 'value', () => {
+      this.version++;
+    });
+  };
 
   get source(): string {
     const encodedValue = this.libroFormatterManager.encode(

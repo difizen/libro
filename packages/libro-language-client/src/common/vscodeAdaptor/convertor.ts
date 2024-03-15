@@ -1,4 +1,5 @@
 import type { CellView, LibroView } from '@difizen/libro-core';
+import { ExecutableNotebookModel } from '@difizen/libro-kernel';
 import type { NotebookCell, NotebookDocument, NotebookRange } from 'vscode';
 
 import { NotebookDocumentSyncFeature } from '../notebook.js';
@@ -9,14 +10,14 @@ import { EndOfLine, NotebookCellKind, Uri } from './vscodeAdaptor.js';
 export const l2c = {
   asNotebookDocument(libroView: LibroView): NotebookDocument {
     const model = libroView.model as any;
-    if (model.filePath === undefined) {
-      throw new Error('no filePath: invalid libro jupyter model');
+    if (!ExecutableNotebookModel.is(model)) {
+      throw new Error('invalid libro jupyter model');
     }
     const filePath = model.filePath as string;
     return {
       uri: Uri.parse(filePath),
       notebookType: 'jupyter',
-      version: 0,
+      version: libroView.model.version,
       isDirty: libroView.model.dirty,
       isUntitled: false,
       isClosed: false,
@@ -49,7 +50,7 @@ export const l2c = {
         fileName: filePath,
         isUntitled: false,
         languageId: 'python',
-        version: 0,
+        version: cell.model.version,
         isDirty: false,
         isClosed: false,
         save: unsupported,

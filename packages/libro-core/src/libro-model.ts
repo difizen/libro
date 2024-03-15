@@ -78,6 +78,8 @@ export class LibroModel implements NotebookModel, DndListModel {
 
   id: string;
 
+  version = 0;
+
   /**
    * The shared notebook model.
    */
@@ -298,6 +300,7 @@ export class LibroModel implements NotebookModel, DndListModel {
   }
 
   onChange() {
+    this.version++;
     this.dirty = true;
     this.onChangedEmitter.fire(true);
   }
