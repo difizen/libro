@@ -889,8 +889,8 @@ export class LibroE2Editor implements IEditor {
   };
   setCursorPosition = (position: IPosition) => {
     this.monacoEditor?.setPosition({
-      column: position.column,
-      lineNumber: position.line,
+      column: position.column + 1,
+      lineNumber: position.line + 1,
     });
   };
   getSelection = () => {

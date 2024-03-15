@@ -275,8 +275,8 @@ export class LibroView extends BaseView implements NotebookView {
     </div>
   );
   dndContentRender: FC<DndContentProps> = DndCellContainer;
-  dndItemRender: ForwardRefExoticComponent<
-    DndItemProps & RefAttributes<HTMLDivElement>
+  dndItemRender: React.MemoExoticComponent<
+    ForwardRefExoticComponent<DndItemProps & RefAttributes<HTMLDivElement>>
   > = DndCellItemRender;
   protected onCellCreateEmitter: Emitter<CellView> = new Emitter();
   get onCellCreate() {

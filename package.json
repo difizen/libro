@@ -82,5 +82,6 @@
       "lint:prettier",
       "coverage:jest"
     ]
-  }
+  },
+  "repository": "git@github.com:difizen/libro.git"
 }

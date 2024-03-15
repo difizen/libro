@@ -71,6 +71,7 @@ export interface ICellContentChange {
 }
 export interface BaseNotebookModel {
   id: string;
+  version: number;
   /**
    * The dirty state of the model.
    * #### Notes
@@ -321,6 +322,8 @@ export interface CellModel extends IModel, Disposable {
    * A unique identifier for the cell.
    */
   id: string;
+
+  version: number;
 
   source: string;
 
