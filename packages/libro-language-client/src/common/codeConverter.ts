@@ -63,6 +63,7 @@ import ProtocolTypeHierarchyItem from './protocolTypeHierarchyItem.js';
 import WorkspaceSymbol from './protocolWorkspaceSymbol.js';
 import * as async from './utils/async.js';
 import * as Is from './utils/is.js';
+import { isNumber } from './vscodeAdaptor/hostTypeUtil.js';
 import type { SymbolInformation } from './vscodeAdaptor/vscodeAdaptor.js';
 import {
   SymbolKind,
@@ -267,6 +268,15 @@ export interface Converter {
   asInlineCompletionContext(
     context: InlineCompletionContext,
   ): proto.InlineCompletionContext;
+
+  asSignatureHelpResult(item: undefined | null): undefined;
+  asSignatureHelpResult(item: SignatureHelp): proto.SignatureHelp;
+  asSignatureHelpResult(
+    item: SignatureHelp | undefined | null,
+  ): proto.SignatureHelp | undefined;
+  asSignatureHelpResult(
+    item: SignatureHelp | undefined | null,
+  ): proto.SignatureHelp | undefined;
 }
 
 export interface URIConverter {
@@ -1424,6 +1434,38 @@ export function createConverter(uriConverter?: URIConverter): Converter {
     return result;
   }
 
+  function asSignatureHelpResult(item: undefined | null): undefined;
+  function asSignatureHelpResult(item: SignatureHelp): proto.SignatureHelp;
+  function asSignatureHelpResult(
+    item: SignatureHelp | undefined | null,
+  ): proto.SignatureHelp | undefined;
+  function asSignatureHelpResult(
+    item: SignatureHelp | undefined | null,
+  ): proto.SignatureHelp | undefined {
+    if (!item) {
+      return undefined;
+    }
+    const result = <proto.SignatureHelp>{};
+    if (isNumber(item.activeSignature)) {
+      result.activeSignature = item.activeSignature;
+    } else {
+      // activeSignature was optional in the past
+      result.activeSignature = 0;
+    }
+    if (isNumber(item.activeParameter)) {
+      result.activeParameter = item.activeParameter;
+    } else {
+      // activeParameter was optional in the past
+      result.activeParameter = 0;
+    }
+    if (item.signatures) {
+      result.signatures = asSignatureInformations(item.signatures);
+    } else {
+      result.signatures = [];
+    }
+    return result;
+  }
+
   return {
     asUri,
     asTextDocumentIdentifier,
@@ -1481,5 +1523,6 @@ export function createConverter(uriConverter?: URIConverter): Converter {
     asInlineCompletionContext,
     asDefinitionResult,
     asLocationLink,
+    asSignatureHelpResult,
   };
 }

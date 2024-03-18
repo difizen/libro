@@ -34,6 +34,7 @@ import type {
   TextDocument,
   MarkdownString as VMarkdownString,
   SemanticTokens as VSemanticTokens,
+  SignatureHelpContext,
 } from 'vscode';
 import { URI } from 'vscode-uri';
 
@@ -82,6 +83,7 @@ import {
   MarkdownString,
   SemanticTokens,
   LinkedEditingRanges,
+  SignatureHelpTriggerKind,
 } from './vscodeAdaptor/vscodeAdaptor.js';
 import {
   DiagnosticRelatedInformation,
@@ -603,6 +605,9 @@ export interface Converter {
   // new
 
   asTextDcouemnt(value: ls.TextDocumentIdentifier): TextDocument;
+  asSignatureHelpContext(
+    context: ls.SignatureHelpContext,
+  ): Promise<SignatureHelpContext>;
 }
 
 export interface URIConverter {
@@ -2545,6 +2550,31 @@ export function createConverter(
     } as TextDocument;
   }
 
+  function asSignatureHelpTriggerKind(
+    triggerKind: ls.SignatureHelpTriggerKind,
+  ): SignatureHelpTriggerKind {
+    switch (triggerKind) {
+      case ls.SignatureHelpTriggerKind.ContentChange:
+        return SignatureHelpTriggerKind.ContentChange;
+      case ls.SignatureHelpTriggerKind.TriggerCharacter:
+        return SignatureHelpTriggerKind.TriggerCharacter;
+      default:
+        return SignatureHelpTriggerKind.Invoke;
+    }
+  }
+
+  async function asSignatureHelpContext(
+    context: ls.SignatureHelpContext,
+  ): Promise<SignatureHelpContext> {
+    const active = await asSignatureHelp(context.activeSignatureHelp);
+    return {
+      triggerKind: asSignatureHelpTriggerKind(context.triggerKind),
+      triggerCharacter: context.triggerCharacter,
+      isRetrigger: context.isRetrigger,
+      activeSignatureHelp: active,
+    };
+  }
+
   return {
     asUri,
     asDocumentSelector,
@@ -2623,5 +2653,6 @@ export function createConverter(
     asInlineCompletionItem,
     // new
     asTextDcouemnt,
+    asSignatureHelpContext,
   };
 }
