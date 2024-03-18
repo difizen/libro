@@ -35,6 +35,7 @@ import type {
   MarkdownString as VMarkdownString,
   SemanticTokens as VSemanticTokens,
   SignatureHelpContext,
+  CodeActionContext,
 } from 'vscode';
 import { URI } from 'vscode-uri';
 
@@ -84,6 +85,7 @@ import {
   SemanticTokens,
   LinkedEditingRanges,
   SignatureHelpTriggerKind,
+  CodeActionTriggerKind,
 } from './vscodeAdaptor/vscodeAdaptor.js';
 import {
   DiagnosticRelatedInformation,
@@ -608,6 +610,11 @@ export interface Converter {
   asSignatureHelpContext(
     context: ls.SignatureHelpContext,
   ): Promise<SignatureHelpContext>;
+
+  asCodeActionContext(
+    context: ls.CodeActionContext,
+    diagnostics: ls.Diagnostic[],
+  ): Promise<CodeActionContext>;
 }
 
 export interface URIConverter {
@@ -2575,6 +2582,33 @@ export function createConverter(
     };
   }
 
+  function asCodeActionTriggerKind(
+    trigger?: ls.CodeActionTriggerKind,
+  ): CodeActionTriggerKind {
+    switch (trigger) {
+      case ls.CodeActionTriggerKind.Automatic:
+        return CodeActionTriggerKind.Automatic;
+      case ls.CodeActionTriggerKind.Invoked:
+        return CodeActionTriggerKind.Invoke;
+      default:
+        return CodeActionTriggerKind.Invoke;
+    }
+  }
+
+  async function asCodeActionContext(
+    context: ls.CodeActionContext,
+    diagnostics: ls.Diagnostic[],
+  ): Promise<CodeActionContext> {
+    if (context === void 0 || context === null) {
+      return context;
+    }
+    return {
+      diagnostics: await asDiagnostics(diagnostics),
+      only: context.only?.[0] ? asCodeActionKind(context.only[0]) : undefined,
+      triggerKind: asCodeActionTriggerKind(context.triggerKind),
+    };
+  }
+
   return {
     asUri,
     asDocumentSelector,
@@ -2654,5 +2688,6 @@ export function createConverter(
     // new
     asTextDcouemnt,
     asSignatureHelpContext,
+    asCodeActionContext,
   };
 }

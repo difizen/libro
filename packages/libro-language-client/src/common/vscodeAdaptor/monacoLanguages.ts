@@ -95,12 +95,62 @@ export class MonacoLanguages implements IMonacoLanguages {
     provider: CodeActionProvider,
     metadata?: CodeActionProviderMetadata,
   ): Disposable {
+    const codeActionProvider = this.createCodeActionProvider(provider);
+    return monaco.languages.registerCodeActionProvider(selector, codeActionProvider);
+  }
+
+  protected createCodeActionProvider(
+    provider: CodeActionProvider,
+  ): monaco.languages.CodeActionProvider {
     return {
-      dispose: () => {
-        return;
+      provideCodeActions: async (model, range, context, token) => {
+        /**
+         * This few lines of code are greatly inspired from https://github.com/microsoft/vscode/blob/e9393b096d90a5ac49b1528d1ec60483fc6b993e/src/vs/workbench/api/common/extHostLanguageFeatures.ts#L400
+         */
+        // const allDiagnostics: Diagnostic[] = [];
+        // for (const diagnostic of this.extHostDiagnostics.getDiagnostics(
+        //   model.uri.toString(),
+        // )) {
+        //   if (range.intersectRanges(this.p2m.asRange(diagnostic.range))) {
+        //     const newLen = allDiagnostics.push(diagnostic);
+        //     if (newLen > MonacoLanguages._maxCodeActionsPerFile) {
+        //       break;
+        //     }
+        //   }
+        // }
+
+        const params = this.m2p.asCodeActionParams(model, range, context, []);
+        const result = await provider.provideCodeActions(
+          this.p2c.asTextDcouemnt(params.textDocument),
+          this.p2c.asRange(params.range),
+          await this.p2c.asCodeActionContext(
+            this.m2p.asCodeActionContext(context, []),
+            [],
+          ),
+          token,
+        );
+        return (
+          result && this.p2m.asCodeActionList(await this.c2p.asCodeActionList(result))
+        );
       },
+      resolveCodeAction: provider.resolveCodeAction
+        ? async (codeAction, token) => {
+            const params = await this.p2c.asCodeAction(
+              this.m2p.asCodeAction(codeAction),
+            );
+            const result = await provider.resolveCodeAction?.(params, token);
+            if (result) {
+              const resolvedCodeAction = this.p2m.asCodeAction(
+                await this.c2p.asCodeAction(result),
+              );
+              overrideWithResolvedValue(codeAction, resolvedCodeAction);
+            }
+            return codeAction;
+          }
+        : undefined,
     };
   }
+
   registerCodeLensProvider(
     selector: DocumentSelector,
     provider: CodeLensProvider,

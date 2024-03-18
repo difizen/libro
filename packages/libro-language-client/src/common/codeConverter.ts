@@ -233,6 +233,8 @@ export interface Converter {
   ): Promise<proto.CodeActionContext>;
   asCodeActionContextSync(context: CodeActionContext): proto.CodeActionContext;
 
+  asCodeActionList(actions: (Command | CodeAction)[]): Promise<proto.CodeAction[]>;
+
   asInlineValueContext(context: InlineValueContext): proto.InlineValueContext;
 
   asCommand(item: Command): proto.Command;
@@ -1074,10 +1076,14 @@ export function createConverter(uriConverter?: URIConverter): Converter {
   }
 
   async function asCodeAction(
-    item: CodeAction,
+    item: Command | CodeAction,
     token?: CancellationToken,
   ): Promise<proto.CodeAction> {
     const result = proto.CodeAction.create(item.title);
+    if (proto.Command.is(item)) {
+      result.command = asCommand(item);
+      return result;
+    }
     if (item instanceof ProtocolCodeAction && item.data !== undefined) {
       result.data = item.data;
     }
@@ -1187,6 +1193,12 @@ export function createConverter(uriConverter?: URIConverter): Converter {
       return undefined;
     }
     return item.value;
+  }
+
+  async function asCodeActionList(
+    actions: (Command | CodeAction)[],
+  ): Promise<proto.CodeAction[]> {
+    return Promise.all(actions.map(async (action) => await asCodeAction(action)));
   }
 
   function asInlineValueContext(context: InlineValueContext): proto.InlineValueContext {
@@ -1524,5 +1536,6 @@ export function createConverter(uriConverter?: URIConverter): Converter {
     asDefinitionResult,
     asLocationLink,
     asSignatureHelpResult,
+    asCodeActionList,
   };
 }
