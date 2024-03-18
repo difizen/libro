@@ -168,7 +168,9 @@ export class Drive implements IContentsDrive {
    */
   async newUntitled(options: IContentsCreateOptions = {}): Promise<IContentsModel> {
     let body = '{}';
+    const url = this.getUrl(options.baseUrl, options.path ?? '');
     const settings = this._getSettings(options.baseUrl);
+
     if (options) {
       if (options.ext) {
         options.ext = normalizeExtension(options.ext);
@@ -179,7 +181,6 @@ export class Drive implements IContentsDrive {
       body = JSON.stringify(options);
     }
 
-    const url = this.getUrl(options.baseUrl, options.path ?? '');
     const init = {
       method: 'POST',
       body,
