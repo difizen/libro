@@ -348,12 +348,54 @@ export class MonacoLanguages implements IMonacoLanguages {
     firstItem?: string | SignatureHelpProviderMetadata,
     ...remaining: string[]
   ): Disposable {
+    const signatureHelpProvider = this.createSignatureHelpProvider(
+      provider,
+      firstItem,
+      ...remaining,
+    );
+    return monaco.languages.registerSignatureHelpProvider(
+      selector,
+      signatureHelpProvider,
+    );
+  }
+
+  protected createSignatureHelpProvider(
+    provider: SignatureHelpProvider,
+    firstItem?: string | SignatureHelpProviderMetadata,
+    ...remaining: string[]
+  ): monaco.languages.SignatureHelpProvider {
+    let triggerCharacters: string[] = [];
+    let retriggerCharacters: string[] = [];
+    if (typeof firstItem === 'string') {
+      triggerCharacters = [firstItem, ...remaining];
+    } else {
+      retriggerCharacters = [...(firstItem?.retriggerCharacters ?? [])];
+      triggerCharacters = [...(firstItem?.triggerCharacters ?? [])];
+    }
+    // const signatureHelpTriggerCharacters = [
+    //   ...(provider.triggerCharacters || triggerCharacters || []),
+    // ];
     return {
-      dispose: () => {
-        return;
+      signatureHelpTriggerCharacters: triggerCharacters,
+      signatureHelpRetriggerCharacters: retriggerCharacters,
+      provideSignatureHelp: async (model, position, token, context) => {
+        const params = this.m2p.asTextDocumentPositionParams(model, position);
+        const signatureHelp = await provider.provideSignatureHelp(
+          this.p2c.asTextDcouemnt(params.textDocument),
+          this.p2c.asPosition(params.position),
+          token,
+          await this.p2c.asSignatureHelpContext(
+            this.m2p.asSignatureHelpContext(context),
+          ),
+        );
+        return (
+          signatureHelp &&
+          this.p2m.asSignatureHelpResult(this.c2p.asSignatureHelpResult(signatureHelp))
+        );
       },
     };
   }
+
   registerCompletionItemProvider(
     selector: DocumentSelector,
     provider: CompletionItemProvider,
