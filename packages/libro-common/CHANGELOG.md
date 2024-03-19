@@ -1,5 +1,11 @@
 # @difizen/libro-common
 
+## 0.1.24
+
+### Patch Changes
+
+- 1bcfbee: 1.fix: get correct url when create notebook file 2.chore: update the peerDependencies about react
+
 ## 0.1.23
 
 ### Patch Changes

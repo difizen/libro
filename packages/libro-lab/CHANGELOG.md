@@ -1,5 +1,19 @@
 # @difizen/libro-lab
 
+## 0.1.24
+
+### Patch Changes
+
+- 1bcfbee: 1.fix: get correct url when create notebook file 2.chore: update the peerDependencies about react
+- Updated dependencies [1bcfbee]
+  - @difizen/libro-language-client@0.1.24
+  - @difizen/libro-prompt-cell@0.1.24
+  - @difizen/libro-terminal@0.1.24
+  - @difizen/libro-jupyter@0.1.24
+  - @difizen/libro-kernel@0.1.24
+  - @difizen/libro-core@0.1.24
+  - @difizen/libro-toc@0.1.24
+
 ## 0.1.23
 
 ### Patch Changes
