@@ -19,6 +19,6 @@ export * from './collapse-service.js';
 export * from './formatter/index.js';
 export * from './libro-setting.js';
 export * from './settings/index.js';
-
 export * from './virtualized-manager.js';
 export * from './virtualized-manager-helper.js';
+export * from './libro-workspace-service.js';

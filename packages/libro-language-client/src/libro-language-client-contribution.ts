@@ -42,14 +42,6 @@ export class LibroLanguageClientContribution implements ApplicationContribution 
             error: () => ({ action: ErrorAction.Continue }),
             closed: () => ({ action: CloseAction.DoNotRestart }),
           },
-          // pyright requires a workspace folder to be present, otherwise it will not work
-          workspaceFolder: {
-            index: 0,
-            name: 'workspace',
-            uri: URI.parse(
-              '/Users/ryannz/projj/github.com/difizen/libro-server/examples',
-            ), // abs path
-          },
           synchronize: {
             fileEvents: [workspace.createFileSystemWatcher('**', false)],
           },
