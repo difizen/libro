@@ -52,7 +52,7 @@
     "lodash.escape": "^4.0.1"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
+    "react": ">=16"
   },
   "devDependencies": {
     "@types/lodash.escape": "^4.0.7",

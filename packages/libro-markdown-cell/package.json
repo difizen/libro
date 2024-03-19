@@ -46,7 +46,7 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
+    "react": ">=16"
   },
   "devDependencies": {
     "@types/react": "^18.2.25"
