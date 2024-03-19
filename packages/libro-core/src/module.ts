@@ -34,6 +34,7 @@ import { LibroService } from './libro-service.js';
 import { LibroSettingContribution } from './libro-setting-contribution.js';
 import { LibroViewTracker } from './libro-view-tracker.js';
 import { LibroView } from './libro-view.js';
+import { BaseWorkspaceService } from './libro-workspace-service.js';
 import { OutputModule } from './output/index.js';
 import { LibroSlotModule } from './slot/index.js';
 import { LibroColorRegistry } from './theme/libro-color-registry.js';
@@ -42,6 +43,7 @@ import { VirtualizedManager } from './virtualized-manager.js';
 
 export const LibroModule = ManaModule.create()
   .register(
+    BaseWorkspaceService,
     VirtualizedManager,
     LibroService,
     LirboContextKey,

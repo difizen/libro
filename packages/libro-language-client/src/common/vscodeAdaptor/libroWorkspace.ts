@@ -1,7 +1,9 @@
 import type { LibroView } from '@difizen/libro-core';
-import { LibroService } from '@difizen/libro-core';
+import { LibroService, ILibroWorkspaceService } from '@difizen/libro-core';
+import { ExecutableNotebookModel } from '@difizen/libro-kernel';
 import { inject, noop, singleton } from '@difizen/mana-app';
 import type {
+  Uri,
   NotebookDocument,
   WorkspaceFolder,
   Event,
@@ -22,10 +24,10 @@ import type {
   FileWillCreateEvent,
   GlobPattern,
   FileSystemWatcher,
-  Uri,
   TextDocument,
   FileSystem,
 } from 'vscode';
+import { URI } from 'vscode-uri';
 
 import { l2c } from './convertor.js';
 import { Range } from './extHostTypes.js';
@@ -37,15 +39,25 @@ import { unsupported } from './util.js';
 @singleton({ token: ILibroWorkspace })
 export class LibroWorkspace implements ILibroWorkspace {
   @inject(LibroService) private readonly libroService: LibroService;
+  @inject(ILibroWorkspaceService)
+  private readonly libroWorkspaceService: ILibroWorkspaceService;
 
   isValidNotebook(view: LibroView): boolean {
-    if ((view.model as any).lspEnabled === true) {
+    if (ExecutableNotebookModel.is(view.model)) {
       return true;
     }
     return false;
   }
 
-  workspaceFolders: WorkspaceFolder[] | undefined = [];
+  get workspaceFolders(): WorkspaceFolder[] | undefined {
+    return [
+      {
+        index: 0,
+        uri: URI.parse(this.libroWorkspaceService.workspaceRoot.toString()),
+        name: '',
+      },
+    ];
+  }
   getWorkspaceFolder(uri: Uri): WorkspaceFolder | undefined {
     return;
   }
