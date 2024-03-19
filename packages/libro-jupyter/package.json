@@ -70,7 +70,7 @@
   },
   "peerDependencies": {
     "antd": "^5.8.6",
-    "react": "^18.2.0"
+    "react": ">=16"
   },
   "devDependencies": {
     "@types/react": "^18.2.25"
