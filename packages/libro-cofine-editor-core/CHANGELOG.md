@@ -1,5 +1,11 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.25
+
+### Patch Changes
+
+- 071ec54: fix: fix missing editor.worker.min.js
+
 ## 0.1.23
 
 ### Patch Changes
