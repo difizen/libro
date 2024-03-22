@@ -8,11 +8,11 @@ import {
   singleton,
 } from '@difizen/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
-import { TokenizationRegistry } from '@difizen/monaco-editor-core/esm/vs/editor/common/languages';
-import { ILanguageService } from '@difizen/monaco-editor-core/esm/vs/editor/common/languages/language';
-import { TokenizationSupportAdapter } from '@difizen/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneLanguages';
-import { StandaloneServices } from '@difizen/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices';
-import { IStandaloneThemeService } from '@difizen/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme';
+import { ILanguageService } from '@difizen/monaco-editor-core/esm/vs/editor/common/languages/language.js';
+import { TokenizationRegistry } from '@difizen/monaco-editor-core/esm/vs/editor/common/languages.js';
+import { TokenizationSupportAdapter } from '@difizen/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneLanguages.js';
+import { StandaloneServices } from '@difizen/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
+import { IStandaloneThemeService } from '@difizen/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme.js';
 
 import {
   isBasicWasmSupported,
