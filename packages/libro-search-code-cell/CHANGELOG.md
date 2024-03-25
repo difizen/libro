@@ -1,5 +1,17 @@
 # @difizen/libro-search-codemirror-cell
 
+## 0.1.26
+
+### Patch Changes
+
+- 6a520ad: fix: add import file extension
+- Updated dependencies [6a520ad]
+  - @difizen/libro-code-editor@0.1.26
+  - @difizen/libro-code-cell@0.1.26
+  - @difizen/libro-common@0.1.26
+  - @difizen/libro-search@0.1.26
+  - @difizen/libro-core@0.1.26
+
 ## 0.1.23
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @difizen/libro-l10n
 
+## 0.1.26
+
+### Patch Changes
+
+- 6a520ad: fix: add import file extension
+
 ## 0.1.23
 
 ### Patch Changes

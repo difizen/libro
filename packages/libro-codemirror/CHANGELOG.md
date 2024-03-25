@@ -1,5 +1,16 @@
 # @difizen/libro-codemirror
 
+## 0.1.26
+
+### Patch Changes
+
+- 6a520ad: fix: add import file extension
+- Updated dependencies [6a520ad]
+  - @difizen/libro-code-editor@0.1.26
+  - @difizen/libro-rendermime@0.1.26
+  - @difizen/libro-common@0.1.26
+  - @difizen/libro-lsp@0.1.26
+
 ## 0.1.23
 
 ### Patch Changes

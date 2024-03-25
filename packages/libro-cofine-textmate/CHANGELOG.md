@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.26
+
+### Patch Changes
+
+- 6a520ad: fix: add import file extension
+- Updated dependencies [6a520ad]
+  - @difizen/libro-cofine-editor-core@0.1.26
+
 ## 0.1.23
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.1.26
+
+### Patch Changes
+
+- 6a520ad: fix: add import file extension
+- Updated dependencies [6a520ad]
+  - @difizen/libro-terminal@0.1.26
+  - @difizen/libro-jupyter@0.1.26
+  - @difizen/libro-core@0.1.26
+  - @difizen/libro-lab@0.1.26
+
 ## 0.1.23
 
 ### Patch Changes

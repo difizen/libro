@@ -1,5 +1,20 @@
 # @difizen/libro-lab
 
+## 0.1.26
+
+### Patch Changes
+
+- 6a520ad: fix: add import file extension
+- Updated dependencies [6a520ad]
+  - @difizen/libro-language-client@0.1.26
+  - @difizen/libro-prompt-cell@0.1.26
+  - @difizen/libro-terminal@0.1.26
+  - @difizen/libro-jupyter@0.1.26
+  - @difizen/libro-kernel@0.1.26
+  - @difizen/libro-core@0.1.26
+  - @difizen/libro-toc@0.1.26
+  - @difizen/libro-cofine-editor-core@0.1.26
+
 ## 0.1.24
 
 ### Patch Changes
