@@ -1,5 +1,28 @@
 # @difizen/libro-jupyter
 
+## 0.1.26
+
+### Patch Changes
+
+- 6a520ad: fix: add import file extension
+- Updated dependencies [6a520ad]
+  - @difizen/libro-language-client@0.1.26
+  - @difizen/libro-cofine-editor@0.1.26
+  - @difizen/libro-markdown-cell@0.1.26
+  - @difizen/libro-code-editor@0.1.26
+  - @difizen/libro-rendermime@0.1.26
+  - @difizen/libro-code-cell@0.1.26
+  - @difizen/libro-raw-cell@0.1.26
+  - @difizen/libro-common@0.1.26
+  - @difizen/libro-kernel@0.1.26
+  - @difizen/libro-output@0.1.26
+  - @difizen/libro-search@0.1.26
+  - @difizen/libro-core@0.1.26
+  - @difizen/libro-lsp@0.1.26
+  - @difizen/libro-codemirror@0.1.26
+  - @difizen/libro-l10n@0.1.26
+  - @difizen/libro-search-code-cell@0.1.26
+
 ## 0.1.24
 
 ### Patch Changes

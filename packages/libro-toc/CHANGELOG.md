@@ -1,5 +1,16 @@
 # @difizen/libro-toc
 
+## 0.1.26
+
+### Patch Changes
+
+- 6a520ad: fix: add import file extension
+- Updated dependencies [6a520ad]
+  - @difizen/libro-rendermime@0.1.26
+  - @difizen/libro-common@0.1.26
+  - @difizen/libro-core@0.1.26
+  - @difizen/libro-markdown@0.1.26
+
 ## 0.1.24
 
 ### Patch Changes

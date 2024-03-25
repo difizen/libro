@@ -1,5 +1,11 @@
 # @difizen/libro-code-editor
 
+## 0.1.26
+
+### Patch Changes
+
+- 6a520ad: fix: add import file extension
+
 ## 0.1.24
 
 ### Patch Changes
