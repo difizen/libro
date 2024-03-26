@@ -94,19 +94,19 @@ export class LibroToolbarContribution implements ToolbarContribution {
       group: ['group2'],
       order: 'c-all',
     });
-    // registry.registerItem({
-    //   id: DocumentCommands['FormatCell'].id,
-    //   command: DocumentCommands['FormatCell'].id,
-    //   tooltip: (
-    //     <div className="libro-side-tooltip">
-    //       <span className="libro-tooltip-text">{l10n.t('格式化代码')}</span>
-    //       <span className="libro-tooltip-keybind">Shift+Option+F</span>
-    //     </div>
-    //   ),
+    registry.registerItem({
+      id: DocumentCommands['FormatCell'].id,
+      command: DocumentCommands['FormatCell'].id,
+      tooltip: (
+        <div className="libro-side-tooltip">
+          <span className="libro-tooltip-text">{l10n.t('格式化代码')}</span>
+          <span className="libro-tooltip-keybind">Shift+Option+F</span>
+        </div>
+      ),
 
-    //   group: ['sidetoolbar1'],
-    //   order: 'd',
-    // });
+      group: ['sidetoolbar1'],
+      order: 'd',
+    });
     registry.registerItem({
       id: NotebookCommands['MoveCellUp'].id,
       command: NotebookCommands['MoveCellUp'].id,

@@ -1,5 +1,7 @@
-import { ClearOutlined, SaveOutlined, SettingOutlined } from '@ant-design/icons';
+import { SaveOutlined, SettingOutlined } from '@ant-design/icons';
 import type { Command } from '@difizen/mana-app';
+
+import { FormatCellIcon } from '../material-from-designer.js';
 
 export const DocumentCommands: Record<string, Command & { keybind?: string }> = {
   Save: {
@@ -15,7 +17,8 @@ export const DocumentCommands: Record<string, Command & { keybind?: string }> = 
   },
   FormatCell: {
     id: 'document.notebook.format_cell',
-    icon: ClearOutlined,
+    icon: FormatCellIcon,
     label: 'format cell code',
+    keybind: 'shift+alt+f',
   },
 };

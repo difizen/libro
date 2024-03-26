@@ -24,6 +24,11 @@ export class LibroLanguageClientManager {
 
   protected clientMap = new Map<string, IConnectionData>();
 
+  /**
+   * lsp server that support notebook
+   */
+  protected supportedLSPServer: string[] = ['libro-analyzer', 'ruff-lsp', 'pylance'];
+
   @postConstruct()
   init() {
     this.languageServerManager = this.languageServerManagerFactory({});
@@ -39,7 +44,7 @@ export class LibroLanguageClientManager {
     const serverIds = this.languageServerManager.getMatchingServers({
       language,
     });
-    return serverIds;
+    return serverIds.filter((item) => this.supportedLSPServer.includes(item));
   }
 
   async getServerSpecs(language = 'python') {
@@ -72,6 +77,9 @@ export class LibroLanguageClientManager {
     languageServerId: string,
     options: LibroLanguageClientOptions,
   ) {
+    if (!this.supportedLSPServer.includes(languageServerId)) {
+      return;
+    }
     if (this.clientMap.has(languageServerId)) {
       return this.clientMap.get(languageServerId);
     }

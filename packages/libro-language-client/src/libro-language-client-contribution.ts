@@ -1,4 +1,8 @@
-import { EditorCellView, LibroService } from '@difizen/libro-core';
+import {
+  EditorCellView,
+  ILibroWorkspaceService,
+  LibroService,
+} from '@difizen/libro-core';
 import { ExecutableNotebookModel } from '@difizen/libro-kernel';
 import { ApplicationContribution, inject, singleton } from '@difizen/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
@@ -12,6 +16,8 @@ import { getCellURI, toEditorRange, toMonacoPosition } from './util.js';
 
 @singleton({ contrib: [ApplicationContribution] })
 export class LibroLanguageClientContribution implements ApplicationContribution {
+  @inject(ILibroWorkspaceService)
+  protected readonly libroWorkspaceService: ILibroWorkspaceService;
   @inject(LibroLanguageClientManager)
   protected readonly libroLanguageClientManager: LibroLanguageClientManager;
 
@@ -28,6 +34,8 @@ export class LibroLanguageClientContribution implements ApplicationContribution 
   }
 
   async startLanguageClients() {
+    // wait for workspaceFolder
+    await this.libroWorkspaceService.ready;
     await this.lspEnv.ready;
     const serverIds = await this.libroLanguageClientManager.getServers();
 
@@ -48,6 +56,16 @@ export class LibroLanguageClientContribution implements ApplicationContribution 
         },
       });
     }
+
+    this.libroLanguageClientManager
+      .getFeatureStatus('textDocument/formatting')
+      .then((status) => {
+        this.libroService.hasFormatter = status;
+        return;
+      })
+      .catch(() => {
+        return;
+      });
   }
 
   setupEditorOpener() {
