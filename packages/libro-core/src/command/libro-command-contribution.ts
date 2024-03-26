@@ -1113,6 +1113,7 @@ export class LibroCommandContribution implements CommandContribution {
           return false;
         }
         return (
+          this.libroService.hasFormatter &&
           !libro?.model.readOnly &&
           EditorCellView.is(cell) &&
           cell.model.mimeType === MIME.python &&

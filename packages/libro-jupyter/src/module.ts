@@ -46,6 +46,7 @@ import { LibroJupyterModel } from './libro-jupyter-model.js';
 import { KernelStatusAndSelectorProvider } from './libro-jupyter-protocol.js';
 import { JupyterServerLaunchManager } from './libro-jupyter-server-launch-manager.js';
 import { LibroJupyterView } from './libro-jupyter-view.js';
+import { JupyterWorkspaceService } from './libro-jupyter-workspace.js';
 import { LibroJupyterOutputArea } from './output/index.js';
 import { PlotlyModule } from './rendermime/index.js';
 import { LibroJupyterColorContribution } from './theme/index.js';
@@ -57,6 +58,7 @@ import {
 
 export const LibroJupyterModule = ManaModule.create()
   .register(
+    JupyterWorkspaceService,
     LibroJupyterFileService,
     LibroJupyterCommandContribution,
     LibroJupyterKeybindingContribution,

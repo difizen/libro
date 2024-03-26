@@ -1,10 +1,11 @@
-import { URI } from '@difizen/mana-app';
+import { Deferred, URI } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
 
 import type { NotebookView } from './libro-protocol.js';
 
 export const ILibroWorkspaceService = Symbol('ILibroWorkspaceService');
 export interface ILibroWorkspaceService {
+  ready: Promise<void>;
   get workspaceRoot(): URI;
   get notebooks(): NotebookView[];
   get files(): URI[];
@@ -12,6 +13,9 @@ export interface ILibroWorkspaceService {
 
 @singleton({ contrib: ILibroWorkspaceService })
 export class BaseWorkspaceService implements ILibroWorkspaceService {
+  protected deferred = new Deferred<void>();
+  ready = this.deferred.promise;
+
   get workspaceRoot() {
     return new URI('/');
   }

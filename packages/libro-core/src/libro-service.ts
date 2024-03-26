@@ -41,6 +41,10 @@ export class LibroService implements NotebookService, Disposable {
   protected themeService: ThemeService;
   @prop()
   themeMode: string;
+
+  @prop()
+  hasFormatter = false;
+
   constructor(@inject(ThemeService) themeService: ThemeService) {
     this.themeService = themeService;
     this.themeMode = this.themeService.getCurrentTheme().type;
