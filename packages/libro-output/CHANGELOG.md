@@ -1,5 +1,16 @@
 # @difizen/libro-output
 
+## 0.1.27
+
+### Patch Changes
+
+- 5341bd6: feat: go to definition
+  feat: signature help
+- Updated dependencies [5341bd6]
+  - @difizen/libro-common@0.1.27
+  - @difizen/libro-core@0.1.27
+  - @difizen/libro-rendermime@0.1.27
+
 ## 0.1.26
 
 ### Patch Changes

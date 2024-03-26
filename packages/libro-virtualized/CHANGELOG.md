@@ -1,5 +1,12 @@
 # @difizen/libro-code-editor
 
+## 0.1.27
+
+### Patch Changes
+
+- 5341bd6: feat: go to definition
+  feat: signature help
+
 ## 0.1.26
 
 ### Patch Changes
