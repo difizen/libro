@@ -20,10 +20,12 @@ export class JupyterWorkspaceService
   protected workspaceData: JupyterWorkspaceData;
 
   onViewStart() {
-    const settings = { ...this.serverConnection.settings };
-    const url = URL.join(settings.baseUrl, '/libro/api/workspace');
     this.serverManager.ready
-      .then(() => this.serverConnection.makeRequest(url, {}))
+      .then(() => {
+        const settings = { ...this.serverConnection.settings };
+        const url = URL.join(settings.baseUrl, '/libro/api/workspace');
+        return this.serverConnection.makeRequest(url, {});
+      })
       .then(async (res) => {
         const data = await res.json();
         this.workspaceData = data;
