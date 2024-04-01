@@ -39,6 +39,7 @@ import {
   LibroJupyterSettingContribution,
 } from './config/index.js';
 import { LibroJupyterContentContribution } from './contents/index.js';
+import { LibroJupyterContentSaveContribution } from './contents/save-content-contribution.js';
 import { LibroJupyterFileModule } from './file/index.js';
 import { KeybindInstructionsModule } from './keybind-instructions/index.js';
 import { LibroJupyterFileService } from './libro-jupyter-file-service.js';
@@ -67,6 +68,7 @@ export const LibroJupyterModule = ManaModule.create()
     SaveFileErrorContribution,
     LibroKeybindRegistry,
     LibroJupyterContentContribution,
+    LibroJupyterContentSaveContribution,
     LibroJupyterOutputArea,
     LibroJupyterColorContribution,
     LibroJupyterSettingContribution,
