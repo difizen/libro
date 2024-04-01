@@ -19,7 +19,6 @@ import {
   libroArgsMimetype,
   LibroFileService,
 } from './libro-jupyter-protocol.js';
-import { SaveFileErrorModal } from './toolbar/save-file-error.js';
 import { getDefaultKernel } from './utils/index.js';
 
 type IModel = IContentsModel;
@@ -173,61 +172,6 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
         return;
       })
       .catch(console.error);
-  }
-
-  override async saveNotebookContent(): Promise<void> {
-    const notebookContent = this.toJSON();
-    if (!this.currentFileContents) {
-      throw new Error('currentFileContents is undefined');
-    }
-
-    let res = {} as IModel | undefined;
-
-    try {
-      res = await this.libroFileService.write(
-        notebookContent,
-        this.currentFileContents,
-      );
-      if (!res) {
-        return;
-      }
-      // 文件保存失败
-      if (res.last_modified === this.last_modified || res.size === 0) {
-        const errorMsg = `File Save Error: ${res?.message} `;
-        this.libroFileService.fileSaveErrorEmitter.fire({
-          cause: res.message,
-          msg: errorMsg,
-          name: res.name,
-          path: res.path,
-          created: res.created,
-          last_modified: res.last_modified,
-          size: res.size,
-          type: res.type,
-        });
-        this.modalService.openModal(SaveFileErrorModal);
-
-        throw new Error(errorMsg);
-      }
-    } catch (e: any) {
-      if (!res) {
-        return;
-      }
-      this.libroFileService.fileSaveErrorEmitter.fire({
-        cause: e.errorCause,
-        msg: e.message,
-        name: res.name || this.currentFileContents.name,
-        path: res.path || this.currentFileContents.path,
-        created: res.created || this.currentFileContents.created,
-        last_modified: res.last_modified || this.currentFileContents.last_modified,
-        size: res.size || this.currentFileContents.size,
-        type: res.type || this.currentFileContents.type,
-      });
-      this.modalService.openModal(SaveFileErrorModal);
-
-      throw new Error('File Save Error');
-    }
-
-    await this.createCheckpoint();
   }
 
   override canRun() {
