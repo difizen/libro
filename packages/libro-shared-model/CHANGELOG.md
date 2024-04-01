@@ -1,5 +1,13 @@
 # @difizen/libro-shared-model
 
+## 0.1.28
+
+### Patch Changes
+
+- cc94f1d: 1.refactor(jupyter): use ContentSaveContribution
+- Updated dependencies [cc94f1d]
+  - @difizen/libro-common@0.1.28
+
 ## 0.1.27
 
 ### Patch Changes

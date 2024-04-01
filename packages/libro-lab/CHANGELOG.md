@@ -1,5 +1,20 @@
 # @difizen/libro-lab
 
+## 0.1.28
+
+### Patch Changes
+
+- cc94f1d: 1.refactor(jupyter): use ContentSaveContribution
+- Updated dependencies [cc94f1d]
+  - @difizen/libro-jupyter@0.1.28
+  - @difizen/libro-cofine-editor-core@0.1.28
+  - @difizen/libro-core@0.1.28
+  - @difizen/libro-kernel@0.1.28
+  - @difizen/libro-language-client@0.1.28
+  - @difizen/libro-prompt-cell@0.1.28
+  - @difizen/libro-terminal@0.1.28
+  - @difizen/libro-toc@0.1.28
+
 ## 0.1.27
 
 ### Patch Changes
