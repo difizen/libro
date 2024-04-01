@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.1.28
+
+### Patch Changes
+
+- cc94f1d: 1.refactor(jupyter): use ContentSaveContribution
+
 ## 0.1.27
 
 ### Patch Changes
