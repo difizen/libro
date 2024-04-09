@@ -382,6 +382,9 @@ export class LibroE2Editor implements IEditor {
   tooltipProvider?: TooltipProvider;
 
   protected isLayouting = false;
+
+  protected hasHorizontalScrollbar = false;
+
   constructor(
     @inject(LibroE2EditorOptions) options: LibroE2EditorOptions,
     @inject(LibroE2EditorState) state: LibroE2EditorState,
@@ -591,7 +594,21 @@ export class LibroE2Editor implements IEditor {
       this.isLayouting = true;
       const contentHeight =
         this.monacoEditor?.getContentHeight() ?? this.defaultLineHeight;
+
+      const lineHeight = this.getOption('lineHeight') ?? this.defaultLineHeight;
+
+      if (contentHeight > this.lineCount * lineHeight) {
+        this.hasHorizontalScrollbar = true;
+      } else {
+        this.hasHorizontalScrollbar = false;
+      }
       if (this.editorContentHeight === contentHeight) {
+        if (this.hasHorizontalScrollbar) {
+          this.monacoEditor?.layout({
+            height: contentHeight,
+            width: this.host.offsetWidth,
+          });
+        }
         return;
       } else {
         this.editorContentHeight = contentHeight;
