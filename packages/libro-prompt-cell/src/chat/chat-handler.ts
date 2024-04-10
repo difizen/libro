@@ -1,34 +1,50 @@
-import type { IKernelConnection, KernelMessage } from '@difizen/libro-jupyter';
-import { Deferred, Emitter, inject, singleton } from '@difizen/mana-app';
+import type {
+  CellView,
+  IKernelConnection,
+  KernelMessage,
+  LibroView,
+} from '@difizen/libro-jupyter';
+import { Deferred, inject, prop, singleton } from '@difizen/mana-app';
 
-import type { ChatObject } from './chat-protocol.js';
+import type { IChatObject, IChatChannel } from './chat-protocol.js';
+import { ChatChannelFactory } from './chat-protocol.js';
 import { ChatScript } from './chat-scripts.js';
+import { ChatViewCache } from './chat-view-cache.js';
 
 @singleton()
 export class ChatHandler {
   @inject(ChatScript) chatScript: ChatScript;
+  @inject(ChatViewCache) viewCache: ChatViewCache;
 
   enable = false;
 
-  protected onChatModalVisibleChangeEmitter = new Emitter<{
-    visible: boolean;
-    libroId: string;
-    cellId?: string;
-  }>();
+  @inject(ChatChannelFactory) channelFactory: () => IChatChannel;
 
-  get onChatModalVisibleChange() {
-    return this.onChatModalVisibleChangeEmitter.event;
+  @prop()
+  channelMaps: Map<string, IChatChannel> = new Map();
+
+  createNewChannel(): IChatChannel {
+    return this.channelFactory();
   }
 
-  openChat(libroId: string, cellId?: string) {
-    this.onChatModalVisibleChangeEmitter.fire({ visible: true, libroId, cellId });
+  getChannel(key: string): IChatChannel {
+    let channel = this.channelMaps.get(key);
+    if (!channel) {
+      channel = this.createNewChannel();
+      this.channelMaps.set(key, channel);
+    }
+    return channel;
   }
-  closeChat(libroId: string, cellId?: string) {
-    this.onChatModalVisibleChangeEmitter.fire({ visible: false, libroId, cellId });
+
+  toggleChat(libro: LibroView, cell?: CellView) {
+    const chatView = this.viewCache.getView(libro.id);
+    if (chatView) {
+      chatView.toggle(cell);
+    }
   }
 
   getChatObjects = async (connection: IKernelConnection) => {
-    const deferred = new Deferred<ChatObject[]>();
+    const deferred = new Deferred<IChatObject[]>();
     this.fetch(
       connection,
       {
@@ -38,7 +54,7 @@ export class ChatHandler {
       (msg) =>
         this.handleQueryResponse(msg, (result) => {
           try {
-            let chatObjects = JSON.parse(result) as ChatObject[];
+            let chatObjects = JSON.parse(result) as IChatObject[];
             chatObjects = chatObjects.map((item) => ({
               ...item,
               disabled: false,

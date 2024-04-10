@@ -15,6 +15,10 @@ export const ChatCommands: Record<string, Command & { keybind?: string }> = {
     id: 'libro-chat-open',
     label: '打开聊天',
   },
+  Toggle: {
+    id: 'libro-chat-toggle',
+    label: '切换聊天',
+  },
 };
 
 @singleton({ contrib: [CommandContribution, ToolbarContribution] })
@@ -32,10 +36,10 @@ export class ChatCommandContribution
   }
 
   registerCommands(commands: CommandRegistry): void {
-    this.libroCommand.registerLibroCommand(commands, ChatCommands['Open'], {
+    this.libroCommand.registerLibroCommand(commands, ChatCommands['Toggle'], {
       execute: (cell?: CellView, libro?: LibroView) => {
         if (libro) {
-          this.chatDataModel.openChat(libro.id, cell?.id);
+          this.chatDataModel.toggleChat(libro, cell);
         }
       },
       isEnabled: (cell, libro) => {

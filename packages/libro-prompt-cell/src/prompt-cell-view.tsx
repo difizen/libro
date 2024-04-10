@@ -1,3 +1,4 @@
+import { MessageOutlined } from '@ant-design/icons';
 import { CodeEditorManager } from '@difizen/libro-code-editor';
 import type {
   CodeEditorViewOptions,
@@ -19,7 +20,7 @@ import {
   EditorStatus,
   LirboContextKey,
 } from '@difizen/libro-core';
-import type { ExecutionMeta, KernelMessage } from '@difizen/libro-jupyter';
+import type { ExecutionMeta } from '@difizen/libro-jupyter';
 import { KernelError, LibroJupyterModel } from '@difizen/libro-jupyter';
 import {
   CommandRegistry,
@@ -36,17 +37,15 @@ import {
   watch,
 } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
-import { Button, Divider, Select, Tag } from 'antd';
+import { Select, Tag } from 'antd';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 
+import { ChatCommands, ChatHandler } from './chat/index.js';
 import { ChatRecordInput, VariableNameInput } from './input-handler/index.js';
 import { LibroPromptCellModel } from './prompt-cell-model.js';
 import { PromptScript } from './prompt-cell-script.js';
 import './index.less';
-import { MessageOutlined } from '@ant-design/icons';
-
-import { ChatCommands, ChatHandler } from './chat/index.js';
 
 export interface ChatObject {
   name: string;
@@ -212,7 +211,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
             <span className="libro-prompt-cell-header-divider libro-prompt-cell-header-actions">
               <MessageOutlined
                 className="libro-prompt-cell-header-chat"
-                onClick={instance.openChatView}
+                onClick={instance.toggleChatView}
               />
             </span>
           </div>
@@ -576,10 +575,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     this.model.record = value;
   };
 
-  openChatView = async () => {
-    this.commands.executeCommand(ChatCommands['Open'].id, {
-      libroId: this.parent.id,
-      cellId: this.id,
-    });
+  toggleChatView = async () => {
+    this.commands.executeCommand(ChatCommands['Toggle'].id, this, this.parent);
   };
 }
