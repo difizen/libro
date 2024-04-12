@@ -7,3 +7,4 @@ export * from './file-protocol.js';
 export * from './file-icon.js';
 export * from './file-create-modal.js';
 export * from './file-createdir-modal.js';
+export * from './file-command.js';
