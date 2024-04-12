@@ -1,5 +1,19 @@
 # @difizen/libro-search-codemirror-cell
 
+## 0.1.29
+
+### Patch Changes
+
+- d81dd35: Prompt: Migrate libro_server to libro_ai
+- d661508: Lab: open file after creation
+- Updated dependencies [d81dd35]
+- Updated dependencies [d661508]
+  - @difizen/libro-code-editor@0.1.29
+  - @difizen/libro-code-cell@0.1.29
+  - @difizen/libro-common@0.1.29
+  - @difizen/libro-search@0.1.29
+  - @difizen/libro-core@0.1.29
+
 ## 0.1.28
 
 ### Patch Changes
