@@ -1,4 +1,5 @@
 import type { ModalItemProps, ModalItem } from '@difizen/mana-app';
+import { CommandRegistry } from '@difizen/mana-app';
 import { URI, useInject, ViewManager } from '@difizen/mana-app';
 import { Col, Form, message, Row, Input, Modal } from 'antd';
 import type { InputRef } from 'antd';
@@ -27,6 +28,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
   data,
 }: ModalItemProps<ModalItemType>) => {
   const fileService = useInject(JupyterFileService);
+  const commands = useInject(CommandRegistry);
   const viewManager = useInject(ViewManager);
   const [fileType, setFileType] = useState<FileType>(data?.fileType);
   const [fileView, setFileView] = useState<FileView>();
@@ -37,13 +39,20 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
     await form.validateFields();
     close();
     try {
-      await fileService.newFile(
+      const stat = await fileService.newFile(
         values.fileName + (fileType || ''),
         new URI(data?.path),
       );
       if (fileView) {
         fileView.model.refresh();
       }
+      if (stat.isFile) {
+        commands.executeCommand('fileTree.command.openfile', {
+          fileStat: stat,
+          uri: stat.resource,
+        });
+      }
+      // message.success('新建文件成功');
     } catch {
       message.error('新建文件失败');
     }
