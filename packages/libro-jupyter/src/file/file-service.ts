@@ -205,7 +205,7 @@ export class JupyterFileService extends FileService {
       ext,
     });
     await this.rename(new URI(res.path.toString()), fileName);
-    return this.resolve(target);
+    return this.resolve(targetFileUri);
   }
 
   async newFileDir(dirName: string, target: URI): Promise<FileStatWithMetadata> {
