@@ -1,5 +1,18 @@
 # @difizen/libro-prompt-cell
 
+## 0.1.30
+
+### Patch Changes
+
+- 3c95a2c: improve keybind panel style
+- Updated dependencies [3c95a2c]
+  - @difizen/libro-jupyter@0.1.30
+  - @difizen/libro-code-editor@0.1.30
+  - @difizen/libro-codemirror@0.1.30
+  - @difizen/libro-common@0.1.30
+  - @difizen/libro-core@0.1.30
+  - @difizen/libro-rendermime@0.1.30
+
 ## 0.1.29
 
 ### Patch Changes

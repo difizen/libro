@@ -1,5 +1,11 @@
 # @difizen/libro-common
 
+## 0.1.30
+
+### Patch Changes
+
+- 3c95a2c: improve keybind panel style
+
 ## 0.1.29
 
 ### Patch Changes

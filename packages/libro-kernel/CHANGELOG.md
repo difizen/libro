@@ -1,5 +1,14 @@
 # @difizen/libro-kernel
 
+## 0.1.30
+
+### Patch Changes
+
+- 3c95a2c: improve keybind panel style
+- Updated dependencies [3c95a2c]
+  - @difizen/libro-common@0.1.30
+  - @difizen/libro-core@0.1.30
+
 ## 0.1.29
 
 ### Patch Changes
