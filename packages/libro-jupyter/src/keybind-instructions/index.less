@@ -7,6 +7,13 @@
   .@{ant-prefix}-input-group-wrapper {
     background-color: var(--mana-libro-filtered-background-color) !important;
     border-radius: 6px;
+    .@{ant-prefix}-input {
+      color: var(--mana-libro-drawer-title-color);
+
+      &::placeholder {
+        color: var(--mana-libro-keybind-tag-text-color);
+      }
+    }
   }
 
   .@{ant-prefix}-input-group-addon {
@@ -19,6 +26,7 @@
 }
 
 .libro-keybind-instructions-drawer {
+  background: var(--mana-libro-popover-background-color) !important;
   .@{ant-prefix}-drawer-content-wrapper {
     box-shadow:
       0 0 16px -8px rgba(0, 0, 0, 8%),
@@ -41,9 +49,6 @@
   }
   .@{ant-prefix}-drawer-mask {
     opacity: 0;
-  }
-  .@{ant-prefix}-drawer-content {
-    background: var(--mana-libro-popover-background-color);
   }
   .@{ant-prefix}-drawer-close {
     color: var(--mana-libro-drawer-close-color);
@@ -135,6 +140,7 @@
 .libro-magic-table {
   .@{ant-prefix}-table-thead > tr > th {
     background: var(--mana-libro-popover-background-color);
+    color: var(--mana-libro-table-title-color);
   }
 
   .@{ant-prefix}-table-tbody > tr.@{ant-prefix}-table-row:hover > td {
@@ -148,7 +154,6 @@
 
   thead tr th {
     height: 30px;
-    color: var(--mana-libro-table-title-color);
     font-weight: 600;
     font-size: 14px;
     font-family: PingFangSC;
