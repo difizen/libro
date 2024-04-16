@@ -1,5 +1,20 @@
 # @difizen/libro-lab
 
+## 0.1.30
+
+### Patch Changes
+
+- 3c95a2c: improve keybind panel style
+- Updated dependencies [3c95a2c]
+  - @difizen/libro-jupyter@0.1.30
+  - @difizen/libro-cofine-editor-core@0.1.30
+  - @difizen/libro-core@0.1.30
+  - @difizen/libro-kernel@0.1.30
+  - @difizen/libro-language-client@0.1.30
+  - @difizen/libro-prompt-cell@0.1.30
+  - @difizen/libro-terminal@0.1.30
+  - @difizen/libro-toc@0.1.30
+
 ## 0.1.29
 
 ### Patch Changes
