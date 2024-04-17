@@ -138,7 +138,7 @@ export class LibroService implements NotebookService, Disposable {
       }
     }
     const model = this.libroModelFactory(options);
-    this.libroViewTracker.modelCache.set(model.id, model);
+    this.libroViewTracker.modelCache.set(options.modelId || model.id, model);
     return model;
   }
   async getOrCreateView(options: NotebookOption): Promise<NotebookView> {
