@@ -1287,7 +1287,7 @@ export class KernelConnection implements IKernelConnection {
       // Close the comm asynchronously. We cannot block message processing on
       // kernel messages to wait for another kernel message.
       comm.close();
-      console.error('Exception opening new comm');
+      console.error('Exception opening new comm', e);
       throw e;
     }
   }

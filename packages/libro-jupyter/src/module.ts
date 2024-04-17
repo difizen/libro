@@ -25,6 +25,7 @@ import {
 import { RawCellModule } from '@difizen/libro-raw-cell';
 import { LibroSearchModule } from '@difizen/libro-search';
 import { SearchCodeCellModule } from '@difizen/libro-search-code-cell';
+import { WidgetModule } from '@difizen/libro-widget';
 import { ManaModule } from '@difizen/mana-app';
 
 import { LibroBetweenCellModule } from './add-between-cell/index.js';
@@ -56,6 +57,7 @@ import {
   LibroJupyterToolbarContribution,
   SaveFileErrorContribution,
 } from './toolbar/index.js';
+import { LibroWidgetMimeContribution } from './widget/index.js';
 
 export const LibroJupyterModule = ManaModule.create()
   .register(
@@ -74,6 +76,7 @@ export const LibroJupyterModule = ManaModule.create()
     LibroJupyterSettingContribution,
     JupyterServerLaunchManager,
     LibroJupyterView,
+    LibroWidgetMimeContribution,
     {
       token: CellExecutionTimeProvider,
       useValue: CellExecutionTip,
@@ -114,4 +117,5 @@ export const LibroJupyterModule = ManaModule.create()
     PlotlyModule,
     LibroJupyterFileModule,
     LibroLanguageClientModule,
+    WidgetModule,
   );
