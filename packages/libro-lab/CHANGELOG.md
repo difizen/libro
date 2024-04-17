@@ -1,5 +1,22 @@
 # @difizen/libro-lab
 
+## 0.1.31
+
+### Patch Changes
+
+- 3a07805: use modelId for modelCache
+- 5b23c6d: Jupyter: integrate jupyter-widgets
+- Updated dependencies [3a07805]
+- Updated dependencies [5b23c6d]
+  - @difizen/libro-jupyter@0.1.31
+  - @difizen/libro-core@0.1.31
+  - @difizen/libro-cofine-editor-core@0.1.31
+  - @difizen/libro-kernel@0.1.31
+  - @difizen/libro-language-client@0.1.31
+  - @difizen/libro-prompt-cell@0.1.31
+  - @difizen/libro-terminal@0.1.31
+  - @difizen/libro-toc@0.1.31
+
 ## 0.1.30
 
 ### Patch Changes

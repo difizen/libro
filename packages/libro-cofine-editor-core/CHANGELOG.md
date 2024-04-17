@@ -1,5 +1,15 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.31
+
+### Patch Changes
+
+- 3a07805: use modelId for modelCache
+- 5b23c6d: Jupyter: integrate jupyter-widgets
+- Updated dependencies [3a07805]
+- Updated dependencies [5b23c6d]
+  - @difizen/libro-cofine-editor-contribution@0.1.31
+
 ## 0.1.30
 
 ### Patch Changes

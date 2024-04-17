@@ -1,5 +1,12 @@
 # @difizen/libro-l10n
 
+## 0.1.31
+
+### Patch Changes
+
+- 3a07805: use modelId for modelCache
+- 5b23c6d: Jupyter: integrate jupyter-widgets
+
 ## 0.1.30
 
 ### Patch Changes
