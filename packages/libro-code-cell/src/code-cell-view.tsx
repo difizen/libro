@@ -16,7 +16,7 @@ import {
   LibroExecutableCellView,
   LibroOutputArea,
   VirtualizedManagerHelper,
-  LirboContextKey,
+  LibroContextKey,
 } from '@difizen/libro-core';
 import type { ViewSize } from '@difizen/mana-app';
 import { Disposable } from '@difizen/mana-app';
@@ -103,7 +103,7 @@ const CodeEditorViewComponent = forwardRef<HTMLDivElement>(
 @view('code-editor-cell-view')
 export class LibroCodeCellView extends LibroExecutableCellView {
   protected toDisposeOnEditor = new DisposableCollection();
-  @inject(LirboContextKey) protected readonly lirboContextKey: LirboContextKey;
+  @inject(LibroContextKey) protected readonly libroContextKey: LibroContextKey;
   override view = CodeEditorViewComponent;
 
   viewManager: ViewManager;
@@ -292,7 +292,7 @@ export class LibroCodeCellView extends LibroExecutableCellView {
       this.editorView.editorStatus === 'ready' &&
       this.parent.model.active?.id === this.id &&
       !this.parent.model.commandMode &&
-      this.lirboContextKey.commandModeEnabled === true && // 排除弹窗等情况
+      this.libroContextKey.commandModeEnabled === true && // 排除弹窗等情况
       this.parent.model.readOnly === false
     ) {
       this.editorView?.editor.setOption('styleActiveLine', true);

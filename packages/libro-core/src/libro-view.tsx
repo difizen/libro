@@ -49,7 +49,7 @@ import {
   DndList,
 } from './components/index.js';
 import { LibroViewHeader } from './components/libro-view-header.js';
-import { LirboContextKey } from './libro-context-key.js';
+import { LibroContextKey } from './libro-context-key.js';
 import { LibroModel } from './libro-model.js';
 import { NotebookService, notebookViewFactoryId } from './libro-protocol.js';
 import type {
@@ -295,7 +295,7 @@ export class LibroView extends BaseView implements NotebookView {
   @inject(CellService) cellService: CellService;
   @inject(LibroService) libroService: LibroService;
   @inject(LibroSlotManager) libroSlotManager: LibroSlotManager;
-  @inject(LirboContextKey) contextKey: LirboContextKey;
+  @inject(LibroContextKey) contextKey: LibroContextKey;
 
   @inject(ViewManager) protected viewManager: ViewManager;
   @inject(ConfigurationService) protected configurationService: ConfigurationService;

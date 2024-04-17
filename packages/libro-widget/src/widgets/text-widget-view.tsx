@@ -1,4 +1,4 @@
-import { LirboContextKey } from '@difizen/libro-core';
+import { LibroContextKey } from '@difizen/libro-core';
 import {
   view,
   ViewOption,
@@ -68,9 +68,9 @@ export class LibroTextWidget extends WidgetView {
   value: number;
   constructor(
     @inject(ViewOption) props: IWidgetViewProps,
-    @inject(LirboContextKey) lirboContextKey: LirboContextKey,
+    @inject(LibroContextKey) libroContextKey: LibroContextKey,
   ) {
-    super(props, lirboContextKey);
+    super(props, libroContextKey);
     this.bar_style = props.attributes.bar_style;
     this.description = props.attributes.description;
     this.description_tooltip = props.attributes.description_tooltip;

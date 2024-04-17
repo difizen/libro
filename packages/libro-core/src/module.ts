@@ -22,7 +22,7 @@ import {
 } from './components/index.js';
 import { LibroContentModule } from './content/index.js';
 import { LibroFormatterModule } from './formatter/index.js';
-import { LirboContextKey } from './libro-context-key.js';
+import { LibroContextKey } from './libro-context-key.js';
 import { LibroModel } from './libro-model.js';
 import {
   ModelFactory,
@@ -46,7 +46,7 @@ export const LibroModule = ManaModule.create()
     BaseWorkspaceService,
     VirtualizedManager,
     LibroService,
-    LirboContextKey,
+    LibroContextKey,
     LibroModel,
     LibroView,
     LibroSettingContribution,

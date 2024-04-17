@@ -17,7 +17,7 @@ import {
   LibroExecutableCellView,
   LibroViewTracker,
   EditorStatus,
-  LirboContextKey,
+  LibroContextKey,
 } from '@difizen/libro-core';
 import type { ExecutionMeta, KernelMessage } from '@difizen/libro-jupyter';
 import { KernelError, LibroJupyterModel } from '@difizen/libro-jupyter';
@@ -214,7 +214,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
 @transient()
 @view('prompt-editor-cell-view')
 export class LibroPromptCellView extends LibroExecutableCellView {
-  @inject(LirboContextKey) protected lirboContextKey: LirboContextKey;
+  @inject(LibroContextKey) protected libroContextKey: LibroContextKey;
   override view = PropmtEditorViewComponent;
 
   declare model: LibroPromptCellModel;
@@ -410,7 +410,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
       this.editorView.editorStatus === 'ready' &&
       this.parent.model.active?.id === this.id &&
       !this.parent.model.commandMode &&
-      this.lirboContextKey.commandModeEnabled === true && // 排除弹窗等情况
+      this.libroContextKey.commandModeEnabled === true && // 排除弹窗等情况
       this.parent.model.readOnly === false
     ) {
       this.editorView?.editor.setOption('styleActiveLine', true);

@@ -7,7 +7,7 @@ import {
   RightOutlined,
 } from '@ant-design/icons';
 import type { LibroView } from '@difizen/libro-core';
-import { LirboContextKey } from '@difizen/libro-core';
+import { LibroContextKey } from '@difizen/libro-core';
 import { prop, useInject, useObserve, watch } from '@difizen/mana-app';
 import { BaseView, view, ViewInstance } from '@difizen/mana-app';
 import { inject, transient } from '@difizen/mana-app';
@@ -222,7 +222,7 @@ export const SearchComponent = forwardRef<HTMLDivElement>(function SearchCompone
 @view('libro-search-view')
 export class LibroSearchView extends BaseView {
   findInputRef?: React.RefObject<InputRef> | null;
-  @inject(LirboContextKey) contextKey: LirboContextKey;
+  @inject(LibroContextKey) contextKey: LibroContextKey;
   @inject(LibroSearchUtils) utils: LibroSearchUtils;
   @inject(LibroSearchProviderFactory) searchProviderFactory: LibroSearchProviderFactory;
   libro?: LibroView;

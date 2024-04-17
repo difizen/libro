@@ -7,7 +7,7 @@ import { LibroContextKeys } from './libro-protocol.js';
 import { LibroService } from './libro-service.js';
 
 @singleton()
-export class LirboContextKey {
+export class LibroContextKey {
   protected readonly contextKeyService: ContextKeyService;
   protected readonly libroService: LibroService;
   protected toDisposeOnActiveChanged?: Disposable;

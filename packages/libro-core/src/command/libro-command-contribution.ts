@@ -11,7 +11,7 @@ import { v4 } from 'uuid';
 
 import { LibroCellView, ExecutableCellModel, EditorCellView } from '../cell/index.js';
 import type { LibroEditorCellView } from '../cell/index.js';
-import { LirboContextKey } from '../libro-context-key.js';
+import { LibroContextKey } from '../libro-context-key.js';
 import type { CellView, NotebookView } from '../libro-protocol.js';
 import { LibroToolbarArea } from '../libro-protocol.js';
 import { LibroService } from '../libro-service.js';
@@ -29,7 +29,7 @@ export class LibroCommandContribution implements CommandContribution {
   @inject(ModalService) protected readonly modalService: ModalService;
   @inject(LibroCommandRegister) protected readonly libroCommand: LibroCommandRegister;
   @inject(LibroService) protected readonly libroService: LibroService;
-  @inject(LirboContextKey) protected readonly lirboContextKey: LirboContextKey;
+  @inject(LibroContextKey) protected readonly libroContextKey: LibroContextKey;
 
   registerCommands(command: CommandRegistry): void {
     this.libroCommand.registerLibroCommand(command, NotebookCommands['EnterEditMode'], {

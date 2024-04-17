@@ -1,3 +1,4 @@
+import { LibroContextKey } from '@difizen/libro-core';
 import {
   view,
   ViewOption,
@@ -9,11 +10,10 @@ import {
 } from '@difizen/mana-app';
 import { forwardRef } from 'react';
 
+import { LibroWidgets } from '../base/libro-widgets.js';
 import type { IWidgetViewProps } from '../base/protocal.js';
 import { WidgetView } from '../base/widget-view.js';
 import './index.less';
-import { LibroWidgets } from '../base/libro-widgets.js';
-import { LirboContextKey } from '@difizen/libro-core';
 
 export const HBoxWidgetComponent = forwardRef<HTMLDivElement>(
   function HBoxWidgetComponent() {
@@ -41,14 +41,14 @@ export class HBoxWidget extends WidgetView {
   override libroWidgets: LibroWidgets;
   constructor(
     @inject(ViewOption) props: IWidgetViewProps,
-    @inject(LirboContextKey) lirboContextKey: LirboContextKey,
+    @inject(LibroContextKey) libroContextKey: LibroContextKey,
     @inject(LibroWidgets) libroWidgets: LibroWidgets,
   ) {
-    super(props, lirboContextKey);
+    super(props, libroContextKey);
     this.box_style = props.attributes.bar_style;
     this.layout = props.attributes.layout;
     this.children = props.attributes.children;
-    this.lirboContextKey = lirboContextKey;
+    this.libroContextKey = libroContextKey;
     this.libroWidgets = libroWidgets;
   }
 
