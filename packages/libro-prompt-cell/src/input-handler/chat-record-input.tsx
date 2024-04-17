@@ -1,5 +1,5 @@
 import { EditFilled } from '@ant-design/icons';
-import { LirboContextKey } from '@difizen/libro-core';
+import { LibroContextKey } from '@difizen/libro-core';
 import { useInject } from '@difizen/mana-app';
 import { Select, Tag } from 'antd';
 import classNames from 'classnames';
@@ -25,7 +25,7 @@ export const ChatRecordInput: FC<ChatRecordInputProps> = (
   const selectRef = useRef<BaseSelectRef>(null);
   const [selecting, setSelecting] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const contextKey = useInject(LirboContextKey);
+  const contextKey = useInject(LibroContextKey);
 
   useEffect(() => {
     if (selecting) {

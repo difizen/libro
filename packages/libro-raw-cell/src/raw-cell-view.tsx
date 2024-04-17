@@ -3,7 +3,7 @@
 import type { CodeEditorViewOptions, CodeEditorView } from '@difizen/libro-code-editor';
 import { CodeEditorManager } from '@difizen/libro-code-editor';
 import type { CellViewOptions } from '@difizen/libro-core';
-import { CellService, LibroEditorCellView, LirboContextKey } from '@difizen/libro-core';
+import { CellService, LibroEditorCellView, LibroContextKey } from '@difizen/libro-core';
 import { getOrigin, prop, useInject, watch } from '@difizen/mana-app';
 import {
   view,
@@ -43,7 +43,7 @@ const CodeEditorViewComponent = React.forwardRef<HTMLDivElement>(
 @transient()
 @view('raw-cell-view')
 export class LibroRawCellView extends LibroEditorCellView {
-  @inject(LirboContextKey) protected readonly lirboContextKey: LirboContextKey;
+  @inject(LibroContextKey) protected readonly libroContextKey: LibroContextKey;
   declare model: LibroRawCellModel;
   override view = CodeEditorViewComponent;
 
@@ -126,7 +126,7 @@ export class LibroRawCellView extends LibroEditorCellView {
       this.editorView.editorStatus === 'ready' &&
       this.parent.model.active?.id === this.id &&
       !this.parent.model.commandMode &&
-      this.lirboContextKey.commandModeEnabled === true && // 排除弹窗等情况
+      this.libroContextKey.commandModeEnabled === true && // 排除弹窗等情况
       this.parent.model.readOnly === false
     ) {
       this.editorView?.editor.setOption('styleActiveLine', true);

@@ -1,4 +1,4 @@
-import { LirboContextKey } from '@difizen/libro-core';
+import { LibroContextKey } from '@difizen/libro-core';
 import type { KernelMessage } from '@difizen/libro-kernel';
 import {
   useInject,
@@ -70,9 +70,9 @@ export class InstancesProgressWidget extends WidgetView {
   modalProgressItemKey = '';
   constructor(
     @inject(ViewOption) props: IWidgetViewProps,
-    @inject(LirboContextKey) lirboContextKey: LirboContextKey,
+    @inject(LibroContextKey) libroContextKey: LibroContextKey,
   ) {
-    super(props, lirboContextKey);
+    super(props, libroContextKey);
     this.prefix = props.attributes.prefix;
     this.suffix = props.attributes.suffix;
   }

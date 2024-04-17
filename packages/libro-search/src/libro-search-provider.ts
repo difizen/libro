@@ -4,7 +4,7 @@ import {
   EditorCellView,
   LibroView,
   VirtualizedManagerHelper,
-  LirboContextKey,
+  LibroContextKey,
 } from '@difizen/libro-core';
 import { inject, prop, transient, equals } from '@difizen/mana-app';
 import { Deferred, DisposableCollection } from '@difizen/mana-app';
@@ -40,7 +40,7 @@ export const LibroSearchProviderFactory = Symbol('LibroSearchProviderFactory');
  */
 @transient()
 export class LibroSearchProvider extends AbstractSearchProvider {
-  @inject(LirboContextKey) contextKey: LirboContextKey;
+  @inject(LibroContextKey) contextKey: LibroContextKey;
   @inject(LibroCellSearchProvider) libroCellSearchProvider: LibroCellSearchProvider;
   protected cellsChangeDeferred: Deferred<void> | undefined;
 

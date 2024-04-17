@@ -1,5 +1,5 @@
 import type { JSONValue } from '@difizen/libro-common';
-import { LirboContextKey } from '@difizen/libro-core';
+import { LibroContextKey } from '@difizen/libro-core';
 import type { KernelMessage } from '@difizen/libro-kernel';
 import { inject, transient, ViewOption, view, BaseView } from '@difizen/mana-app';
 import type { ViewComponent } from '@difizen/mana-app';
@@ -26,27 +26,27 @@ export const LibroWidgetComponent = forwardRef<HTMLDivElement>(
 @view('libro-widget-view')
 export class WidgetView extends BaseView implements IWidgetView {
   override view: ViewComponent = LibroWidgetComponent;
-  lirboContextKey: LirboContextKey;
+  libroContextKey: LibroContextKey;
   disableCommandMode = true;
   constructor(
     @inject(ViewOption) props: IWidgetViewProps,
-    @inject(LirboContextKey) lirboContextKey: LirboContextKey,
+    @inject(LibroContextKey) libroContextKey: LibroContextKey,
   ) {
     super();
     this.initialize(props);
-    this.lirboContextKey = lirboContextKey;
+    this.libroContextKey = libroContextKey;
   }
 
   override onViewMount() {
     if (this.container && this.container.current && this.disableCommandMode) {
       this.container.current.addEventListener('focusin', () => {
-        this.lirboContextKey.disableCommandMode();
+        this.libroContextKey.disableCommandMode();
       });
       this.container.current.addEventListener('blur', (e) => {
         if (this.container?.current?.contains(e.relatedTarget as Node)) {
-          this.lirboContextKey.disableCommandMode();
+          this.libroContextKey.disableCommandMode();
         } else {
-          this.lirboContextKey.enableCommandMode();
+          this.libroContextKey.enableCommandMode();
         }
       });
     }

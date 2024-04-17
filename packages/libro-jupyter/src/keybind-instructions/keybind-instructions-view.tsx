@@ -1,4 +1,4 @@
-import { LirboContextKey } from '@difizen/libro-core';
+import { LibroContextKey } from '@difizen/libro-core';
 import { inject, singleton } from '@difizen/mana-app';
 import { getOrigin, prop, useInject } from '@difizen/mana-app';
 import type { ModalItem, ModalItemProps } from '@difizen/mana-app';
@@ -49,7 +49,7 @@ const getSearchResult = (
 
 @singleton()
 export class KeybindInstrutionsService implements Disposable {
-  @inject(LirboContextKey) contextKey: LirboContextKey;
+  @inject(LibroContextKey) contextKey: LibroContextKey;
   isKeybindInstructionsMask = false;
   @prop() searchCommandModeData: DataType[] = [];
   @prop() searchEditModeData: DataType[] = [];
