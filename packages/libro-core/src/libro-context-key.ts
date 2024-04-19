@@ -78,3 +78,7 @@ export class LibroContextKey {
     }
   };
 }
+/**
+ * @deprecated use LibroContextKey instead.
+ */
+export const LirboContextKey = LibroContextKey;
