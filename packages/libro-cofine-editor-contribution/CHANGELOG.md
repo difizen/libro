@@ -1,5 +1,11 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.32
+
+### Patch Changes
+
+- 2d90b29: fix(core): add deprecated
+
 ## 0.1.31
 
 ### Patch Changes
