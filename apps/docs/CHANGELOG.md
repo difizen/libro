@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.1.32
+
+### Patch Changes
+
+- 2d90b29: fix(core): add deprecated
+- Updated dependencies [2d90b29]
+  - @difizen/libro-core@0.1.32
+  - @difizen/libro-jupyter@0.1.32
+  - @difizen/libro-lab@0.1.32
+  - @difizen/libro-terminal@0.1.32
+
 ## 0.1.31
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @difizen/libro-code-editor
 
+## 0.1.32
+
+### Patch Changes
+
+- 2d90b29: fix(core): add deprecated
+- Updated dependencies [2d90b29]
+  - @difizen/libro-common@0.1.32
+
 ## 0.1.31
 
 ### Patch Changes
