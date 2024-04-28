@@ -140,9 +140,10 @@ export class LibroWidgets implements IWidgets {
 
   registerWidgetView(model_id: string, model: Promise<WidgetView>): void {
     model
-      .then((WidgetView) => {
-        this.models.set(model_id, WidgetView);
-        this.widgetEmitter.fire({ WidgetViewName: WidgetView.model_name });
+      .then((model) => {
+        this.models.set(model_id, model);
+        this.models.set(model.toModelKey(), model);
+        this.widgetEmitter.fire({ WidgetViewName: model.model_name });
         return;
       })
       .catch(() => {
@@ -174,7 +175,11 @@ export class LibroWidgets implements IWidgets {
     }
     options.model_id = model_id;
     const provider = this.findProvider(attributes);
-    const WidgetView = provider.factory({ attributes: attributes, options: options });
+    const WidgetView = provider.factory({
+      attributes: attributes,
+      options: options,
+      widgetsId: this.id,
+    });
     this.registerWidgetView(model_id, WidgetView);
     return WidgetView;
   }
@@ -204,4 +209,15 @@ export class LibroWidgets implements IWidgets {
    */
   id: string;
   readonly commTargetName = 'jupyter.widget';
+
+  /**
+   * Serialize the model.  See the deserialization function at the top of this file
+   * and the kernel-side serializer/deserializer.
+   */
+  toJSON(): string {
+    return JSON.stringify({
+      kc_id: this.kernelConnection.id,
+      id: this.id,
+    });
+  }
 }

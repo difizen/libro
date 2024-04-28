@@ -33,6 +33,10 @@ export class LibroWidgetManager implements ApplicationContribution {
     return newWidgets;
   };
 
+  getWidgets(id: string) {
+    return this.widgets.get(id);
+  }
+
   /**
    * Dictionary of model ids and model instance promises
    */

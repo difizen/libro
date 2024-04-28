@@ -41,7 +41,7 @@ export const WidgetRender: React.FC<{ model: BaseOutputView }> = (props: {
   }
   return (
     <div className="libro-widget-render-container">
-      <div className="libro-widget-render" />
+      <div className="libro-widget-render empty" />
     </div>
   );
 };

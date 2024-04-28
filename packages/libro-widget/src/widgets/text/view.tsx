@@ -11,14 +11,12 @@ import {
 import { Input } from 'antd';
 import { forwardRef } from 'react';
 
-import type { IWidgetViewProps } from '../base/protocal.js';
-import { WidgetView } from '../base/widget-view.js';
+import type { IWidgetViewProps } from '../../base/protocal.js';
+import { WidgetView } from '../../base/widget-view.js';
 
-import './index.less';
-
-export const LibroTextWidgetComponent = forwardRef<HTMLDivElement>(
-  function LibroTextWidgetComponent(_props, ref) {
-    const widgetView = useInject<LibroTextWidget>(ViewInstance);
+export const TextWidgetComponent = forwardRef<HTMLDivElement>(
+  function TextWidgetComponent(_props, ref) {
+    const widgetView = useInject<TextWidget>(ViewInstance);
     if (widgetView.isCommClosed) {
       return null;
     }
@@ -55,8 +53,8 @@ export const LibroTextWidgetComponent = forwardRef<HTMLDivElement>(
 );
 @transient()
 @view('libro-widget-text-view')
-export class LibroTextWidget extends WidgetView {
-  override view = LibroTextWidgetComponent;
+export class TextWidget extends WidgetView {
+  override view = TextWidgetComponent;
   bar_style: string;
   description: string;
   description_tooltip: null;

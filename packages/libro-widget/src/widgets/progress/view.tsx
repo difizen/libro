@@ -11,10 +11,9 @@ import {
 } from '@difizen/mana-app';
 import { forwardRef } from 'react';
 
-import type { IWidgetViewProps } from '../base/protocal.js';
-import { WidgetView } from '../base/widget-view.js';
-import { ProgressBar } from '../components/index.js';
-import './index.less';
+import type { IWidgetViewProps } from '../../base/protocal.js';
+import { WidgetView } from '../../base/widget-view.js';
+import { ProgressBar } from '../../components/index.js';
 
 export const LibroProgressWidgetComponent = forwardRef<HTMLDivElement>(
   function LibroProgressWidgetComponent() {
