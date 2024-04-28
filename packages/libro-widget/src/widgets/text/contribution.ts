@@ -1,9 +1,9 @@
 import { ViewManager, inject, singleton } from '@difizen/mana-app';
 
-import type { IWidgetViewProps } from '../base/protocal.js';
-import { WidgetViewContribution } from '../base/protocal.js';
+import type { IWidgetViewProps } from '../../base/protocal.js';
+import { WidgetViewContribution } from '../../base/protocal.js';
 
-import { LibroTextWidget } from './text-widget-view.js';
+import { TextWidget } from './view.js';
 
 @singleton({ contrib: WidgetViewContribution })
 export class TextModelContribution implements WidgetViewContribution {
@@ -15,6 +15,6 @@ export class TextModelContribution implements WidgetViewContribution {
     return 1;
   };
   factory(props: IWidgetViewProps) {
-    return this.viewManager.getOrCreateView(LibroTextWidget, props);
+    return this.viewManager.getOrCreateView(TextWidget, props);
   }
 }

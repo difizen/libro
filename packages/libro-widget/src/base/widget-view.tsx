@@ -1,7 +1,7 @@
 import type { JSONValue } from '@difizen/libro-common';
 import { LibroContextKey } from '@difizen/libro-core';
 import type { KernelMessage } from '@difizen/libro-kernel';
-import { inject, transient, ViewOption, view, BaseView } from '@difizen/mana-app';
+import { inject, transient, ViewOption, view, BaseView, prop } from '@difizen/mana-app';
 import type { ViewComponent } from '@difizen/mana-app';
 import { forwardRef } from 'react';
 
@@ -15,6 +15,7 @@ import type {
   ICallbacks,
 } from './protocal.js';
 import { assign } from './utils.js';
+import { LibroWidgetManager } from './widget-manager.js';
 
 export const LibroWidgetComponent = forwardRef<HTMLDivElement>(
   function LibroWidgetComponent() {
@@ -27,6 +28,9 @@ export const LibroWidgetComponent = forwardRef<HTMLDivElement>(
 export class WidgetView extends BaseView implements IWidgetView {
   override view: ViewComponent = LibroWidgetComponent;
   libroContextKey: LibroContextKey;
+  widgetsId: string;
+  @inject(LibroWidgetManager) libroWidgetManager: LibroWidgetManager;
+
   disableCommandMode = true;
   constructor(
     @inject(ViewOption) props: IWidgetViewProps,
@@ -38,6 +42,8 @@ export class WidgetView extends BaseView implements IWidgetView {
   }
 
   override onViewMount() {
+    this.widgets = this.libroWidgetManager.getWidgets(this.widgetsId)!;
+
     if (this.container && this.container.current && this.disableCommandMode) {
       this.container.current.addEventListener('focusin', () => {
         this.libroContextKey.disableCommandMode();
@@ -53,16 +59,17 @@ export class WidgetView extends BaseView implements IWidgetView {
   }
 
   initialize(props: IWidgetViewProps): void {
-    this.model_module = props.attributes._model_module;
-    this.model_name = props.attributes._model_name;
-    this.model_module_version = props.attributes._model_module_version;
-    this.view_module = props.attributes._view_module;
-    this.view_name = props.attributes._view_name;
-    this.view_module_version = props.attributes._view_module_version;
-    this.view_count = props.attributes._view_count;
+    this.widgetsId = props.widgetsId;
+    const attributes = props.attributes;
+    this.model_module = attributes._model_module;
+    this.model_name = attributes._model_name;
+    this.model_module_version = attributes._model_module_version;
+    this.view_module = attributes._view_module;
+    this.view_name = attributes._view_name;
+    this.view_module_version = attributes._view_module_version;
+    this.view_count = attributes._view_count;
 
     // Attributes should be initialized here, since user initialization may depend on it
-    // this.libroWidgets = props.options.libroWidgets;
     const comm = props.options.comm;
     if (comm) {
       // Remember comm associated with the model.
@@ -77,6 +84,15 @@ export class WidgetView extends BaseView implements IWidgetView {
     this.model_id = props.options.model_id;
 
     this.state_change = Promise.resolve();
+
+    this.trySetValue(attributes, 'tabbable');
+    this.trySetValue(attributes, 'tooltip');
+  }
+
+  protected trySetValue(attributes: any, propKey: keyof this) {
+    if (propKey in attributes && attributes[propKey] !== undefined) {
+      this[propKey] = attributes[propKey];
+    }
   }
 
   /**
@@ -112,6 +128,10 @@ export class WidgetView extends BaseView implements IWidgetView {
    * and the kernel-side serializer/deserializer.
    */
   toJSON(): string {
+    return this.toModelKey();
+  }
+
+  toModelKey(): string {
     return `IPY_MODEL_${this.model_id}`;
   }
 
@@ -129,7 +149,7 @@ export class WidgetView extends BaseView implements IWidgetView {
   };
 
   comm: IClassicComm;
-  libroWidgets: IWidgets;
+  @prop() widgets?: IWidgets;
   model_id: string;
   state_change: Promise<any>;
   name: string;
@@ -143,4 +163,7 @@ export class WidgetView extends BaseView implements IWidgetView {
   view_name: string | null;
   view_module_version: string;
   view_count: number | null;
+
+  @prop() tabbable: boolean | null = null;
+  @prop() tooltip: string | null = null;
 }

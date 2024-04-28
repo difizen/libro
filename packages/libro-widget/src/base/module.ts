@@ -1,7 +1,10 @@
 import { LibroKernelManageModule } from '@difizen/libro-kernel';
 import { ManaModule } from '@difizen/mana-app';
 
-import { Comm } from './base/comm.js';
+import { Comm } from './comm.js';
+import { LibroWidgetManager } from './widget-manager.js';
+import { DefaultWidgetViewContribution } from './widget-view-contribution.js';
+
 import {
   WidgetsOption,
   LibroWidgetCommFactory,
@@ -10,19 +13,9 @@ import {
   LibroWidgetsFactory,
   WidgetView,
   WidgetViewContribution,
-} from './base/index.js';
-import { LibroWidgetManager } from './base/widget-manager.js';
-import { DefaultWidgetViewContribution } from './base/widget-view-contribution.js';
-import { HBoxModelContribution } from './widgets/hbox-widget-view-contribution.js';
-import { HBoxWidget } from './widgets/hbox-widget-view.js';
-import { ProgressWidget } from './widgets/index.js';
-import { InstancesProgressWidgetViewContribution } from './widgets/instances-progress-widget-view-contribution.js';
-import { InstancesProgressWidget } from './widgets/instances-progress-widget-view.js';
-import { ProgressWidgetViewContribution } from './widgets/progress-widget-view-contribution.js';
-import { TextModelContribution } from './widgets/text-widget-view-contribution.js';
-import { LibroTextWidget } from './widgets/text-widget-view.js';
+} from './index.js';
 
-export const WidgetModule = ManaModule.create()
+export const BaseWidgetModule = ManaModule.create()
   .contribution(WidgetViewContribution)
   .register(
     Comm,
@@ -55,14 +48,6 @@ export const WidgetModule = ManaModule.create()
     },
     LibroWidgetManager,
     WidgetView,
-    ProgressWidget,
     DefaultWidgetViewContribution,
-    ProgressWidgetViewContribution,
-    InstancesProgressWidgetViewContribution,
-    InstancesProgressWidget,
-    HBoxModelContribution,
-    HBoxWidget,
-    LibroTextWidget,
-    TextModelContribution,
   )
   .dependOn(LibroKernelManageModule);

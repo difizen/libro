@@ -12,6 +12,7 @@ export interface IWidgetViewOptions {
 export interface IWidgetViewProps {
   attributes: any;
   options: IWidgetViewOptions;
+  widgetsId: string;
 }
 
 /**

@@ -1,9 +1,9 @@
 import { ViewManager, inject, singleton } from '@difizen/mana-app';
 
-import type { IWidgetViewProps } from '../base/protocal.js';
-import { WidgetViewContribution } from '../base/protocal.js';
+import type { IWidgetViewProps } from '../../base/protocal.js';
+import { WidgetViewContribution } from '../../base/protocal.js';
 
-import { InstancesProgressWidget } from './instances-progress-widget-view.js';
+import { InstancesProgressWidget } from './view.js';
 
 @singleton({ contrib: WidgetViewContribution })
 export class InstancesProgressWidgetViewContribution implements WidgetViewContribution {

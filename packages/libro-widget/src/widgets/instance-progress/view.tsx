@@ -15,10 +15,9 @@ import type {
   InstanceRecord,
   InstancesRecords,
   ProgressItem,
-} from '../base/protocal.js';
-import type { IWidgetViewProps } from '../base/protocal.js';
-import { WidgetView } from '../base/widget-view.js';
-import './index.less';
+} from '../../base/protocal.js';
+import type { IWidgetViewProps } from '../../base/protocal.js';
+import { WidgetView } from '../../base/widget-view.js';
 
 export interface ProgressOverviewProps {
   progressMap: Record<string, ProgressItem>;
