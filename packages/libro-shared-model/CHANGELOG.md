@@ -1,5 +1,13 @@
 # @difizen/libro-shared-model
 
+## 0.1.33
+
+### Patch Changes
+
+- 4811299: fix dark theme style
+- Updated dependencies [4811299]
+  - @difizen/libro-common@0.1.33
+
 ## 0.1.32
 
 ### Patch Changes
