@@ -343,7 +343,7 @@ export class LibroColorRegistry implements ColorContribution {
       },
       {
         id: 'libro.editor.gutter.number.color',
-        defaults: { dark: '#A8EABF', light: '#A4AECB' },
+        defaults: { dark: '#A8AEBF', light: '#A4AECB' },
         description: '',
       },
       {
