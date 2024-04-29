@@ -1,5 +1,11 @@
 # @difizen/libro-l10n
 
+## 0.1.33
+
+### Patch Changes
+
+- 4811299: fix dark theme style
+
 ## 0.1.32
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.1.33
+
+### Patch Changes
+
+- 4811299: fix dark theme style
+- Updated dependencies [4811299]
+  - @difizen/libro-jupyter@0.1.33
+  - @difizen/libro-core@0.1.33
+  - @difizen/libro-lab@0.1.33
+  - @difizen/libro-terminal@0.1.33
+
 ## 0.1.32
 
 ### Patch Changes
