@@ -56,13 +56,15 @@
 .libro-view-top {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 44px;
   // background-color: var(--mana-color-bg-elevated);
   border-bottom: 1px solid var(--mana-libro-toptoolbar-border-color);
 
   .libro-header-left {
-    width: 265px;
+    width: 240px;
+    flex-shrink: 0;
 
     .mana-toolbar {
       justify-content: left;
@@ -71,13 +73,12 @@
 
   .libro-header-center {
     .mana-toolbar {
-      justify-content: center;
+      justify-content: flex-start;
     }
   }
 
   .libro-header-center,
   .libro-header-right {
-    flex: 1;
     overflow: hidden;
 
     .mana-toolbar {
@@ -122,6 +123,7 @@
 
   .libro-header-right {
     color: unset;
+    flex: 0 0 auto;
   }
 
   .libro-keybind-instructions-icon {
