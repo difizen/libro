@@ -3,9 +3,10 @@ import {
   ToolbarInstance,
   getOrigin,
   CommandRegistry,
+  ThemeService,
 } from '@difizen/mana-app';
 import type { Toolbar } from '@difizen/mana-app';
-import { Select } from 'antd';
+import { ConfigProvider, Select, theme } from 'antd';
 import { memo } from 'react';
 
 import type { CellMeta } from '../cell/index.js';
@@ -28,13 +29,21 @@ export const ToolItemSelectInner: React.FC = () => {
   const data = toolbar.currentArgs as LibroToolbarArags;
   const command = useInject(CommandRegistry);
   const curCell = data?.[0];
+  const themeService = useInject(ThemeService);
 
   const handleChange = (value: string) => {
     const args = getOrigin(data) || [];
     command.executeCommand(NotebookCommands['ChangeCellTo'].id, ...args, value);
   };
   return (
-    <>
+    <ConfigProvider
+      theme={{
+        algorithm:
+          themeService.getCurrentTheme().type === 'dark'
+            ? theme.darkAlgorithm
+            : theme.defaultAlgorithm,
+      }}
+    >
       <Select
         value={curCell?.model?.type}
         size={'small'}
@@ -51,7 +60,7 @@ export const ToolItemSelectInner: React.FC = () => {
           );
         })}
       </Select>
-    </>
+    </ConfigProvider>
   );
 };
 

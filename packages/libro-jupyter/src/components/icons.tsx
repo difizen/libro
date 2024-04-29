@@ -100,7 +100,7 @@ export const Location: React.FC = () => (
       <g
         id="2.0-kernel-启动前"
         transform="translate(-738.000000, -80.000000)"
-        fill="#7B7B7B"
+        fill="currentColor"
         // fillRule="nonzero"
       >
         <g id="编组-24" transform="translate(637.000000, 80.000000)">

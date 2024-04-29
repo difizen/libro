@@ -1,10 +1,10 @@
 import { LibroContextKey } from '@difizen/libro-core';
-import { inject, singleton } from '@difizen/mana-app';
+import { inject, singleton, ThemeService } from '@difizen/mana-app';
 import { getOrigin, prop, useInject } from '@difizen/mana-app';
 import type { ModalItem, ModalItemProps } from '@difizen/mana-app';
 import type { Disposable } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import { Input, Drawer, Table, Segmented } from 'antd';
+import { Input, Drawer, Table, Segmented, ConfigProvider, theme } from 'antd';
 import { forwardRef, useCallback, useState } from 'react';
 
 import type { DataType } from './keybind-instructions-items.js';
@@ -132,6 +132,7 @@ export const KeybindInstrutionsComponent = forwardRef<
   const keybindInstrutionsService = useInject<KeybindInstrutionsService>(
     KeybindInstrutionsService,
   );
+  const themeService = useInject(ThemeService);
   const libroKeybindItems = useInject(LibroKeybindItems);
   const handleClose = useCallback(() => {
     close();
@@ -166,70 +167,79 @@ export const KeybindInstrutionsComponent = forwardRef<
   );
 
   return (
-    <div className="libro-keybind-instructions-command" ref={ref}>
-      <Drawer
-        title={
-          <Segmented
-            value={segment}
-            onChange={(value) => setSegment(value as Segment)}
-            options={[
-              { label: l10n.t('快捷键'), value: 'keybind' },
-              { label: 'Magic 命令', value: 'magic' },
-            ]}
-          />
-        }
-        placement="right"
-        onClose={handleClose}
-        width="360px"
-        open={visible}
-        mask={true}
-        className="libro-keybind-instructions-drawer"
-        maskClosable={true}
-      >
-        {segment === 'magic' && (
-          <div className="libro-magic-table">
-            <Table
-              size="small"
-              columns={magicColumns}
-              dataSource={magics}
-              pagination={false}
-              rowKey="key"
+    <ConfigProvider
+      theme={{
+        algorithm:
+          themeService.getCurrentTheme().type === 'dark'
+            ? theme.darkAlgorithm
+            : theme.defaultAlgorithm,
+      }}
+    >
+      <div className="libro-keybind-instructions-command" ref={ref}>
+        <Drawer
+          title={
+            <Segmented
+              value={segment}
+              onChange={(value) => setSegment(value as Segment)}
+              options={[
+                { label: l10n.t('快捷键'), value: 'keybind' },
+                { label: 'Magic 命令', value: 'magic' },
+              ]}
             />
-          </div>
-        )}
-        {segment === 'keybind' && (
-          <>
-            <div className="libro-keybind-instructions-command-search">
-              <Search
-                placeholder={l10n.t('搜索功能关键字')}
-                allowClear
-                bordered={false}
-                size="middle"
-                onSearch={handleSearch}
+          }
+          placement="right"
+          onClose={handleClose}
+          width="360px"
+          open={visible}
+          mask={true}
+          className="libro-keybind-instructions-drawer"
+          maskClosable={true}
+        >
+          {segment === 'magic' && (
+            <div className="libro-magic-table">
+              <Table
+                size="small"
+                columns={magicColumns}
+                dataSource={magics}
+                pagination={false}
+                rowKey="key"
               />
             </div>
-            <div className="libro-keybind-instructions-table">
-              <div className="libro-command-mode-keybind-instructions-table">
-                <Table
-                  rowKey="key"
-                  columns={libroKeybindItems.commandModeActionColumns}
-                  dataSource={commandModeDataSource}
-                  pagination={false}
+          )}
+          {segment === 'keybind' && (
+            <>
+              <div className="libro-keybind-instructions-command-search">
+                <Search
+                  placeholder={l10n.t('搜索功能关键字')}
+                  allowClear
+                  bordered={false}
+                  size="middle"
+                  onSearch={handleSearch}
                 />
               </div>
-              <div className="libro-edit-mode-keybind-instructions-table">
-                <Table
-                  rowKey="key"
-                  columns={libroKeybindItems.editModeActionColumns}
-                  dataSource={editModeDataSource}
-                  pagination={false}
-                />
+              <div className="libro-keybind-instructions-table">
+                <div className="libro-command-mode-keybind-instructions-table">
+                  <Table
+                    rowKey="key"
+                    columns={libroKeybindItems.commandModeActionColumns}
+                    dataSource={commandModeDataSource}
+                    pagination={false}
+                  />
+                </div>
+                <div className="libro-edit-mode-keybind-instructions-table">
+                  <Table
+                    rowKey="key"
+                    columns={libroKeybindItems.editModeActionColumns}
+                    dataSource={editModeDataSource}
+                    pagination={false}
+                  />
+                </div>
               </div>
-            </div>
-          </>
-        )}
-      </Drawer>
-    </div>
+            </>
+          )}
+        </Drawer>
+      </div>
+    </ConfigProvider>
   );
 });
 
