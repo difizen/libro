@@ -1,5 +1,4 @@
 import { LibroContextKey } from '@difizen/libro-core';
-import type { KernelMessage } from '@difizen/libro-kernel';
 import type { IWidgetViewProps, IWidgets } from '@difizen/libro-widget';
 import { WidgetView } from '@difizen/libro-widget';
 import {
@@ -13,6 +12,9 @@ import {
   ViewRender,
 } from '@difizen/mana-app';
 import { forwardRef } from 'react';
+
+import type { WidgetState } from '../protocol.js';
+import { defaultWidgetState } from '../protocol.js';
 
 import './index.less';
 
@@ -48,7 +50,7 @@ export const LibroWidgetBoxComponent = forwardRef<HTMLDivElement>(
 
     return (
       <div className={`libro-widget-box ${widget.getCls()}`} ref={ref}>
-        {widget.children.map((modelId) => (
+        {widget.state.children.map((modelId) => (
           <WidgetRender key={modelId} widgets={widget.widgets} modelId={modelId} />
         ))}
       </div>
@@ -56,39 +58,34 @@ export const LibroWidgetBoxComponent = forwardRef<HTMLDivElement>(
   },
 );
 
+interface BoxState extends WidgetState {
+  children: string[];
+  box_style?: string;
+}
+
 @transient()
 @view('libro-widget-box-view')
 export class VBoxWidget extends WidgetView {
   override view = LibroWidgetBoxComponent;
 
-  @prop() children: string[] = [];
-  @prop() box_style?: string;
+  @prop()
+  override state: BoxState = {
+    ...defaultWidgetState,
+    children: [],
+  };
 
   constructor(
     @inject(ViewOption) props: IWidgetViewProps,
     @inject(LibroContextKey) libroContextKey: LibroContextKey,
   ) {
     super(props, libroContextKey);
+    this.initialize(props);
   }
 
-  override initialize(props: IWidgetViewProps): void {
-    super.initialize(props);
+  protected initialize(props: IWidgetViewProps): void {
     const attributes = props.attributes;
     this.trySetValue(attributes, 'children');
     this.trySetValue(attributes, 'box_style');
-  }
-
-  override handleCommMsg(msg: KernelMessage.ICommMsgMsg): Promise<void> {
-    const data = msg.content.data as any;
-    const method = data.method;
-    switch (method) {
-      case 'update':
-      case 'echo_update':
-        if (data.state.children) {
-          this.children = data.state.children;
-        }
-    }
-    return Promise.resolve();
   }
 
   getCls = () => {

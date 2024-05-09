@@ -69,7 +69,6 @@ export interface WidgetsOption {
 }
 
 export interface IWidgetView {
-  initialize: (props: IWidgetViewProps) => void;
   toJSON: () => string;
   set_state: (state: Dict<unknown>) => void;
   handleCommMsg: (msg: KernelMessage.ICommMsgMsg) => Promise<void>;
