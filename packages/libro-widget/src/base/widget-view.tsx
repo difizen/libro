@@ -1,4 +1,4 @@
-import type { JSONValue } from '@difizen/libro-common';
+import type { JSONObject, JSONValue } from '@difizen/libro-common';
 import { LibroContextKey } from '@difizen/libro-core';
 import type { KernelMessage } from '@difizen/libro-kernel';
 import { inject, transient, ViewOption, view, BaseView, prop } from '@difizen/mana-app';
@@ -7,14 +7,12 @@ import { forwardRef } from 'react';
 
 import type { IWidgetViewProps } from './protocal.js';
 import type {
-  BufferJSON,
   Dict,
   IWidgets,
   IWidgetView,
   IClassicComm,
   ICallbacks,
 } from './protocal.js';
-import { assign } from './utils.js';
 import { LibroWidgetManager } from './widget-manager.js';
 
 export const LibroWidgetComponent = forwardRef<HTMLDivElement>(
@@ -31,34 +29,15 @@ export class WidgetView extends BaseView implements IWidgetView {
   widgetsId: string;
   @inject(LibroWidgetManager) libroWidgetManager: LibroWidgetManager;
 
+  @prop()
+  state: JSONObject = {};
+
   disableCommandMode = true;
   constructor(
     @inject(ViewOption) props: IWidgetViewProps,
     @inject(LibroContextKey) libroContextKey: LibroContextKey,
   ) {
     super();
-    this.initialize(props);
-    this.libroContextKey = libroContextKey;
-  }
-
-  override onViewMount() {
-    this.widgets = this.libroWidgetManager.getWidgets(this.widgetsId)!;
-
-    if (this.container && this.container.current && this.disableCommandMode) {
-      this.container.current.addEventListener('focusin', () => {
-        this.libroContextKey.disableCommandMode();
-      });
-      this.container.current.addEventListener('blur', (e) => {
-        if (this.container?.current?.contains(e.relatedTarget as Node)) {
-          this.libroContextKey.disableCommandMode();
-        } else {
-          this.libroContextKey.enableCommandMode();
-        }
-      });
-    }
-  }
-
-  initialize(props: IWidgetViewProps): void {
     this.widgetsId = props.widgetsId;
     const attributes = props.attributes;
     this.model_module = attributes._model_module;
@@ -87,11 +66,29 @@ export class WidgetView extends BaseView implements IWidgetView {
 
     this.trySetValue(attributes, 'tabbable');
     this.trySetValue(attributes, 'tooltip');
+    this.libroContextKey = libroContextKey;
   }
 
-  protected trySetValue(attributes: any, propKey: keyof this) {
+  override onViewMount() {
+    this.widgets = this.libroWidgetManager.getWidgets(this.widgetsId)!;
+
+    if (this.container && this.container.current && this.disableCommandMode) {
+      this.container.current.addEventListener('focusin', () => {
+        this.libroContextKey.disableCommandMode();
+      });
+      this.container.current.addEventListener('blur', (e) => {
+        if (this.container?.current?.contains(e.relatedTarget as Node)) {
+          this.libroContextKey.disableCommandMode();
+        } else {
+          this.libroContextKey.enableCommandMode();
+        }
+      });
+    }
+  }
+
+  protected trySetValue(attributes: any, propKey: string) {
     if (propKey in attributes && attributes[propKey] !== undefined) {
-      this[propKey] = attributes[propKey];
+      this.state[propKey] = attributes[propKey];
     }
   }
 
@@ -104,9 +101,7 @@ export class WidgetView extends BaseView implements IWidgetView {
     switch (method) {
       case 'update':
       case 'echo_update':
-        // eslint-disable-next-line no-case-declarations
-        const state: Dict<BufferJSON> = data.state;
-        this.set_state(state);
+        this.set_state(data.state);
     }
     return Promise.resolve();
   }
@@ -119,8 +114,10 @@ export class WidgetView extends BaseView implements IWidgetView {
    *
    * This function is meant for internal use only. Values set here will not be propagated on a sync.
    */
-  set_state(state: Dict<unknown>): void {
-    assign(this, state);
+  set_state(state: Dict<any>): void {
+    for (const key in state) {
+      this.state[key] = state[key];
+    }
   }
 
   /**
@@ -144,8 +141,9 @@ export class WidgetView extends BaseView implements IWidgetView {
     buffers?: ArrayBuffer[] | ArrayBufferView[],
   ) => {
     if (this.comm !== undefined) {
-      this.comm.send(data, callbacks, {}, buffers);
+      return this.comm.send(data, callbacks, {}, buffers);
     }
+    return undefined;
   };
 
   comm: IClassicComm;
@@ -163,7 +161,4 @@ export class WidgetView extends BaseView implements IWidgetView {
   view_name: string | null;
   view_module_version: string;
   view_count: number | null;
-
-  @prop() tabbable: boolean | null = null;
-  @prop() tooltip: string | null = null;
 }
