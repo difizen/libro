@@ -26,6 +26,10 @@ export class LibroOutputView extends BaseView implements BaseOutputView {
 
   @prop()
   raw: IOutput;
+
+  @prop()
+  allowClear = true;
+
   @prop()
   data: JSONObject;
   @prop()
@@ -45,7 +49,7 @@ export class LibroOutputView extends BaseView implements BaseOutputView {
   render: FC<{ output: BaseOutputView }> = LibroOutputModelRender;
 
   override dispose() {
-    //
+    super.dispose();
   }
   toJSON() {
     return this.raw;

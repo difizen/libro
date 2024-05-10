@@ -1,6 +1,7 @@
+import type { IWidgetViewProps } from '@difizen/libro-jupyter';
+import { WidgetViewContribution } from '@difizen/libro-jupyter';
 import { ViewManager, inject, singleton } from '@difizen/mana-app';
-import type { IWidgetViewProps } from '@difizen/libro-widget';
-import { WidgetViewContribution } from '@difizen/libro-widget';
+
 import { SliderWidget } from './view.js';
 
 @singleton({ contrib: WidgetViewContribution })

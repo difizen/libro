@@ -1,4 +1,3 @@
-export * from './components/index.js';
-export * from './base/index.js';
-export * from './widgets/index.js';
 export * from './module.js';
+export * from './slider/index.js';
+export * from './text/index.js';

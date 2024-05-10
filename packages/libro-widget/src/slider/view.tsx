@@ -1,7 +1,9 @@
 import type { JSONObject } from '@difizen/libro-common';
 import { LibroContextKey } from '@difizen/libro-core';
-import type { IWidgetViewProps } from '@difizen/libro-widget';
-import { WidgetView } from '@difizen/libro-widget';
+import type { IWidgetViewProps } from '@difizen/libro-jupyter';
+import type { OrientableState, WidgetState } from '@difizen/libro-jupyter';
+import { WidgetView } from '@difizen/libro-jupyter';
+import { defaultWidgetState } from '@difizen/libro-jupyter';
 import {
   view,
   transient,
@@ -14,8 +16,6 @@ import {
 import { Slider } from 'antd';
 import { forwardRef } from 'react';
 
-import type { OrientableState, WidgetState } from '../protocol.js';
-import { defaultWidgetState } from '../protocol.js';
 import './index.less';
 
 export const LibroWidgetIntSliderComponent = forwardRef<HTMLDivElement>(
@@ -78,34 +78,8 @@ export class SliderWidget extends WidgetView {
     const attributes = props.attributes;
     this.state.max = attributes.max;
     this.state.min = attributes.min;
-    this.trySetValue(attributes, 'behavior');
-    this.trySetValue(attributes, 'continuous_update');
-    this.trySetValue(attributes, 'description');
-    this.trySetValue(attributes, 'description_allow_html');
-    this.trySetValue(attributes, 'disabled');
-    this.trySetValue(attributes, 'layout');
-    this.trySetValue(attributes, 'max');
-    this.trySetValue(attributes, 'min');
-    this.trySetValue(attributes, 'orientation');
-    this.trySetValue(attributes, 'readout');
-    this.trySetValue(attributes, 'readout_format');
-    this.trySetValue(attributes, 'step');
-    this.trySetValue(attributes, 'style');
-    this.trySetValue(attributes, 'value');
+    this.setState(attributes);
   }
-
-  // override handleCommMsg(msg: KernelMessage.ICommMsgMsg): Promise<void> {
-  //   const data = msg.content.data as any;
-  //   const method = data.method;
-  //   switch (method) {
-  //     case 'update':
-  //     case 'echo_update':
-  //       if (data.state.value) {
-  //         this.value = data.state.value;
-  //       }
-  //   }
-  //   return Promise.resolve();
-  // }
 
   handleChange = (value: number) => {
     const data = {

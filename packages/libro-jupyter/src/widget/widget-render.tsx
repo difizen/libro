@@ -1,17 +1,21 @@
-import type { BaseOutputView } from '@difizen/libro-core';
+import type { BaseOutputView, LibroOutputView } from '@difizen/libro-core';
 import { RenderMimeRegistry } from '@difizen/libro-rendermime';
 import type { IRenderMimeRegistry } from '@difizen/libro-rendermime';
-import { LibroWidgetManager } from '@difizen/libro-widget';
-import { getOrigin, useInject, ViewRender } from '@difizen/mana-app';
+import { getOrigin, useInject, ViewInstance, ViewRender } from '@difizen/mana-app';
 import React from 'react';
-import './index.less';
 
+import './index.less';
 import { LibroJupyterModel } from '../libro-jupyter-model.js';
+
+import { LibroWidgetManager } from './widget-manager.js';
 
 export const WidgetRender: React.FC<{ model: BaseOutputView }> = (props: {
   model: BaseOutputView;
 }) => {
   const { model } = props;
+
+  // The widget will be rendered in the output through the MIME mechanism, obtaining the output context.
+  const output = useInject<LibroOutputView>(ViewInstance);
 
   const widgetManager = useInject(LibroWidgetManager);
   const defaultRenderMime = useInject<IRenderMimeRegistry>(RenderMimeRegistry);
@@ -27,6 +31,7 @@ export const WidgetRender: React.FC<{ model: BaseOutputView }> = (props: {
     const model_id = JSON.parse(JSON.stringify(model.data[mimeType])).model_id;
     if (model_id) {
       const widgetView = widgets.getModel(model_id);
+      widgetView.setCell(getOrigin(output.cell));
       if (widgetView.isCommClosed) {
         return null;
       }

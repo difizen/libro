@@ -48,6 +48,7 @@
     "@difizen/libro-common": "^0.1.33",
     "@difizen/libro-kernel": "^0.1.33",
     "@difizen/libro-rendermime": "^0.1.33",
+    "@difizen/libro-jupyter": "^0.1.33",
     "@difizen/mana-app": "latest"
   },
   "peerDependencies": {

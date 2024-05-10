@@ -35,7 +35,15 @@ const LibroOutputAreaRender = forwardRef<HTMLDivElement>(
     useEffect(() => {
       outputArea.onUpdateEmitter.fire();
     }, [outputArea.onUpdateEmitter, outputArea.outputs]);
-
+    const childrenCannotClear = [];
+    const children = [];
+    for (const output of outputArea.outputs) {
+      if (output.allowClear === false) {
+        childrenCannotClear.push(output);
+      } else {
+        children.push(output);
+      }
+    }
     return (
       <div
         className="libro-output-area"
@@ -43,7 +51,10 @@ const LibroOutputAreaRender = forwardRef<HTMLDivElement>(
         //设置最小高度，用于优化长文本输出再次执行时的页面的滚动控制
         // style={{ minHeight: `${executing ? outputArea.lastOutputContainerHeight + 'px' : 'unset'}` }}
       >
-        {outputArea.outputs.map((output) => {
+        {childrenCannotClear.map((output) => {
+          return <ViewRender view={output} key={output.id} />;
+        })}
+        {children.map((output) => {
           return <ViewRender view={output} key={output.id} />;
         })}
       </div>
@@ -103,10 +114,10 @@ export class LibroOutputArea extends BaseView implements BaseOutputArea {
     });
   }
   add = async (output: IOutput): Promise<number> => {
-    // if (this.clearNext) {
-    //   this.clear();
-    //   this.clearNext = false;
-    // }
+    if (this.clearNext) {
+      this.clear();
+      this.clearNext = false;
+    }
     // Consolidate outputs if they are stream outputs of the same kind.
     if (
       isStream(output) &&
@@ -141,13 +152,28 @@ export class LibroOutputArea extends BaseView implements BaseOutputArea {
     } else {
       this.lastStream = '';
     }
-    return this.outputs.push(await outputModel);
+    const model = await outputModel;
+    model.onDisposed(() => {
+      this.remove(model);
+    });
+    return this.outputs.push(model);
   };
+
+  protected remove(model: BaseOutputView) {
+    let outputs = [...this.outputs];
+    outputs = outputs.filter((item) => item !== model);
+    this.outputs = outputs;
+  }
+
   set = async (index: number, output: IOutput) => {
     const outputModel = this.doCreateOutput(output);
     const current = this.outputs[index];
     current.dispose();
-    this.outputs[index] = await outputModel;
+    const model = await outputModel;
+    model.onDisposed(() => {
+      this.remove(model);
+    });
+    this.outputs[index] = model;
   };
   clear(wait?: boolean | undefined) {
     this.lastStream = '';
@@ -158,7 +184,6 @@ export class LibroOutputArea extends BaseView implements BaseOutputArea {
     this.outputs.forEach((output) => {
       output.dispose();
     });
-    this.outputs = [];
   }
   fromJSON = async (values: IOutput[]) => {
     if (!values) {

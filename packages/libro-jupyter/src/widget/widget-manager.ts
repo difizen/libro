@@ -4,8 +4,8 @@ import { KernelConnection, LibroKernelManager } from '@difizen/libro-kernel';
 import { inject, prop, singleton, ApplicationContribution } from '@difizen/mana-app';
 
 import type { LibroWidgets } from './libro-widgets.js';
-import { LibroWidgetsFactory } from './protocal.js';
-import type { WidgetsOption } from './protocal.js';
+import { LibroWidgetsFactory } from './protocol.js';
+import type { WidgetsOption } from './protocol.js';
 
 @singleton({ contrib: ApplicationContribution })
 export class LibroWidgetManager implements ApplicationContribution {

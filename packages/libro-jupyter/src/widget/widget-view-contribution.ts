@@ -1,7 +1,7 @@
 import { ViewManager, inject, singleton } from '@difizen/mana-app';
 
-import type { IWidgetViewProps } from './protocal.js';
-import { WidgetViewContribution } from './protocal.js';
+import type { IWidgetViewProps } from './protocol.js';
+import { WidgetViewContribution } from './protocol.js';
 import { WidgetView } from './widget-view.js';
 
 @singleton({ contrib: WidgetViewContribution })

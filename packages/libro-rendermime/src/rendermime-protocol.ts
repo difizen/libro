@@ -6,7 +6,7 @@ import { Syringe } from '@difizen/mana-app';
 export const DefaultRenderMimeRegistry = Symbol('RenderMimeRegistry');
 export const IRenderMimeRegistryOptions = Symbol('IRenderMimeRegistryOptions');
 export const RenderMimeContribution = Syringe.defineToken('RenderMimeTypeContribution');
-export interface RenderMimeContribution {
+export interface RenderMimeContribution extends IRendererFactory {
   canHandle: (model: BaseOutputView) => number;
   safe: boolean;
   renderType: string;
@@ -17,6 +17,7 @@ export interface RenderMimeContribution {
  * The interface for a renderer factory.
  */
 export interface IRendererFactory {
+  allowClear?: boolean;
   /**
    * Whether the factory is a "safe" factory.
    *
@@ -198,7 +199,7 @@ export interface IRenderMimeRegistry {
     mimeType: string,
     model: BaseOutputView, // model: BaseOutputModel,
     // host: HTMLElement,
-  ) => React.FC<{ model: BaseOutputView }>;
+  ) => IRendererFactory;
   // /**
   //  * Create a new mime model.  This is a convenience method.
   //  *

@@ -1,10 +1,10 @@
 import type { BaseOutputView } from '@difizen/libro-core';
 import { RenderMimeContribution } from '@difizen/libro-rendermime';
-import { LibroWidgetManager } from '@difizen/libro-widget';
 import { inject, singleton } from '@difizen/mana-app';
 
 import { LibroJupyterModel } from '../libro-jupyter-model.js';
 
+import { LibroWidgetManager } from './widget-manager.js';
 import { WidgetRender } from './widget-render.js';
 
 @singleton({ contrib: RenderMimeContribution })
@@ -31,5 +31,6 @@ export class LibroWidgetMimeContribution implements RenderMimeContribution {
   renderType = 'widgetRenderer';
   safe = true;
   mimeTypes = ['application/vnd.jupyter.widget-view+json'];
+  allowClear = false;
   render = WidgetRender;
 }

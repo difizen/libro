@@ -1,6 +1,7 @@
-import type { IWidgetViewProps } from '@difizen/libro-widget';
-import { WidgetViewContribution } from '@difizen/libro-widget';
 import { ViewManager, inject, singleton } from '@difizen/mana-app';
+
+import type { IWidgetViewProps } from '../protocol.js';
+import { WidgetViewContribution } from '../protocol.js';
 
 import { VBoxWidget } from './view.js';
 

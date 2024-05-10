@@ -1,6 +1,7 @@
 import { FileView, LibroJupyterModule } from '@difizen/libro-jupyter';
 import { LibroPromptCellModule } from '@difizen/libro-prompt-cell';
 import { TerminalModule } from '@difizen/libro-terminal';
+import { CommonWidgetsModule } from '@difizen/libro-widget';
 import {
   ManaModule,
   createSlotPreference,
@@ -98,6 +99,7 @@ export const LibroLabModule = ManaModule.create()
   )
   .dependOn(
     LibroJupyterModule,
+    CommonWidgetsModule,
     LibroLabLayoutModule,
     LibroLabHeaderMenuModule,
     LibroLabTocModule,

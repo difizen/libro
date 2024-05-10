@@ -184,17 +184,16 @@ export class RenderMimeRegistry implements IRenderMimeRegistry {
     mimeType: string,
     model: BaseOutputView, // model: BaseOutputModel,
     // host: HTMLElement,
-  ): React.FC<{ model: BaseOutputView }> {
+  ): IRendererFactory {
     const renderMimes = this.getSortedRenderMimes(model);
     for (const renderMime of renderMimes) {
       for (const mt of renderMime.mimeTypes) {
         if (mimeType === mt) {
-          const OutputRender = renderMime.render;
           this.renderMimeEmitter.fire({
             renderType: renderMime.renderType,
             mimeType,
           });
-          return OutputRender;
+          return renderMime;
         }
       }
     }
@@ -203,13 +202,13 @@ export class RenderMimeRegistry implements IRenderMimeRegistry {
     if (!(mimeType in this._factories)) {
       throw new Error(`No factory for mime type: '${mimeType}'`);
     }
-    const OutputRender = this._factories[mimeType].render;
+    const renderMime = this._factories[mimeType];
     this.renderMimeEmitter.fire({
       renderType: this._factories[mimeType].renderType,
       mimeType,
     });
     // Invoke the best factory for the given mime type.
-    return OutputRender;
+    return renderMime;
   }
 
   /**

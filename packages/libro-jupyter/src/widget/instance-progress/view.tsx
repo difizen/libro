@@ -11,13 +11,9 @@ import {
 } from '@difizen/mana-app';
 import { forwardRef } from 'react';
 
-import type {
-  InstanceRecord,
-  InstancesRecords,
-  ProgressItem,
-} from '../../base/protocal.js';
-import type { IWidgetViewProps } from '../../base/protocal.js';
-import { WidgetView } from '../../base/widget-view.js';
+import type { IWidgetViewProps } from '../protocol.js';
+import type { InstanceRecord, InstancesRecords, ProgressItem } from '../protocol.js';
+import { WidgetView } from '../widget-view.js';
 
 export interface ProgressOverviewProps {
   progressMap: Record<string, ProgressItem>;

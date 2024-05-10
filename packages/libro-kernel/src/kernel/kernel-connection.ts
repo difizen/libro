@@ -1,6 +1,7 @@
 import type { JSONObject } from '@difizen/libro-common';
 import { deepCopy, URL } from '@difizen/libro-common';
-import type { Disposable, Event as ManaEvent } from '@difizen/mana-app';
+import type { Event as ManaEvent } from '@difizen/mana-app';
+import { Disposable } from '@difizen/mana-app';
 import { prop } from '@difizen/mana-app';
 import { Deferred, Emitter } from '@difizen/mana-app';
 import { inject, transient } from '@difizen/mana-app';
@@ -1070,11 +1071,12 @@ export class KernelConnection implements IKernelConnection {
   registerMessageHook(
     msgId: string,
     hook: (msg: KernelMessage.IIOPubMessage) => boolean | PromiseLike<boolean>,
-  ): void {
+  ): Disposable {
     const future = this._futures?.get(msgId);
     if (future) {
-      future.registerMessageHook(hook);
+      return future.registerMessageHook(hook);
     }
+    return Disposable.NONE;
   }
 
   /**
@@ -1324,7 +1326,6 @@ export class KernelConnection implements IKernelConnection {
     }
     const onMsg = comm.onMsg;
     if (onMsg) {
-      // tslint:disable-next-line:await-promise
       await onMsg(msg);
     }
   }
