@@ -55,6 +55,7 @@
     "@difizen/libro-toc": "^0.1.33",
     "@difizen/libro-cofine-editor-core": "^0.1.33",
     "@difizen/libro-language-client": "^0.1.33",
+    "@difizen/libro-widget": "^0.1.31",
     "@difizen/mana-app": "latest",
     "@difizen/mana-common": "latest",
     "@difizen/mana-react": "latest",

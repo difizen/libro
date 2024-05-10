@@ -1,4 +1,4 @@
-import type { BufferJSON, Dict } from './protocal.js';
+import type { BufferJSON, Dict } from './protocol.js';
 
 /**
  * Takes an object 'state' and fills in buffer[i] at 'path' buffer_paths[i]

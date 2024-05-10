@@ -11,12 +11,12 @@ import type {
   IWidgetViewOptions,
   IClassicComm,
   WidgetCommOption,
-} from './protocal.js';
+} from './protocol.js';
 import {
   LibroWidgetCommFactory,
   WidgetsOption,
   WidgetViewContribution,
-} from './protocal.js';
+} from './protocol.js';
 import { put_buffers, reject } from './utils.js';
 import { PROTOCOL_VERSION } from './version.js';
 import type { WidgetView } from './widget-view.js';

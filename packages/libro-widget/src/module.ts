@@ -1,9 +1,15 @@
+import { WidgetModule } from '@difizen/libro-jupyter';
 import { ManaModule } from '@difizen/mana-app';
 
-import { BaseWidgetModule } from './base/index.js';
-import { CommonWidgetsModule } from './widgets/index.js';
+import { SilderWidgetContribution, SliderWidget } from './slider/index.js';
+import { TextModelContribution, TextWidget } from './text/index.js';
 
-export const WidgetModule = ManaModule.create().dependOn(
-  BaseWidgetModule,
-  CommonWidgetsModule,
-);
+export const CommonWidgetsModule = ManaModule.create()
+  .register(
+    SliderWidget,
+    SilderWidgetContribution,
+
+    TextWidget,
+    TextModelContribution,
+  )
+  .dependOn(WidgetModule);

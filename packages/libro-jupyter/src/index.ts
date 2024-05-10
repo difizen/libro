@@ -32,3 +32,4 @@ export * from './toolbar/index.js';
 export * from './file/index.js';
 export * from './libro-jupyter-view.js';
 export * from './config/index.js';
+export * from './widget/index.js';

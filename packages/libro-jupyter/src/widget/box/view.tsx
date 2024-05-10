@@ -1,6 +1,5 @@
+import type { CellView } from '@difizen/libro-core';
 import { LibroContextKey } from '@difizen/libro-core';
-import type { IWidgetViewProps, IWidgets } from '@difizen/libro-widget';
-import { WidgetView } from '@difizen/libro-widget';
 import {
   view,
   transient,
@@ -10,16 +9,22 @@ import {
   inject,
   ViewOption,
   ViewRender,
+  getOrigin,
 } from '@difizen/mana-app';
 import { forwardRef } from 'react';
 
-import type { WidgetState } from '../protocol.js';
+import type { IWidgets, IWidgetViewProps, WidgetState } from '../protocol.js';
 import { defaultWidgetState } from '../protocol.js';
+import { WidgetView } from '../widget-view.js';
 
 import './index.less';
 
-const WidgetRender = (props: { widgets: IWidgets | undefined; modelId: string }) => {
-  const { widgets, modelId } = props;
+const WidgetRender = (props: {
+  cell?: CellView;
+  widgets: IWidgets | undefined;
+  modelId: string;
+}) => {
+  const { widgets, modelId, cell } = props;
   if (!widgets) {
     return null;
   }
@@ -31,6 +36,9 @@ const WidgetRender = (props: { widgets: IWidgets | undefined; modelId: string })
   }
   if (!widgetView) {
     return null;
+  }
+  if (cell) {
+    widgetView.setCell(getOrigin(cell));
   }
   if (widgetView.isCommClosed) {
     return null;
@@ -51,7 +59,12 @@ export const LibroWidgetBoxComponent = forwardRef<HTMLDivElement>(
     return (
       <div className={`libro-widget-box ${widget.getCls()}`} ref={ref}>
         {widget.state.children.map((modelId) => (
-          <WidgetRender key={modelId} widgets={widget.widgets} modelId={modelId} />
+          <WidgetRender
+            key={modelId}
+            cell={widget.cell}
+            widgets={widget.widgets}
+            modelId={modelId}
+          />
         ))}
       </div>
     );
@@ -84,8 +97,7 @@ export class VBoxWidget extends WidgetView {
 
   protected initialize(props: IWidgetViewProps): void {
     const attributes = props.attributes;
-    this.trySetValue(attributes, 'children');
-    this.trySetValue(attributes, 'box_style');
+    this.setState(attributes);
   }
 
   getCls = () => {

@@ -11,11 +11,11 @@ import {
 } from '@difizen/mana-app';
 import { forwardRef } from 'react';
 
-import type { IWidgetViewProps } from '../../base/protocal.js';
-import { WidgetView } from '../../base/widget-view.js';
-import { ProgressBar } from '../../components/index.js';
-import type { WidgetState } from '../protocol.js';
+import type { IWidgetViewProps, WidgetState } from '../protocol.js';
 import { defaultWidgetState } from '../protocol.js';
+import { WidgetView } from '../widget-view.js';
+
+import { ProgressBar } from './progressBar.js';
 
 export const LibroProgressWidgetComponent = forwardRef<HTMLDivElement>(
   function LibroProgressWidgetComponent() {
@@ -65,15 +65,6 @@ export class ProgressWidget extends WidgetView {
     const attributes = props.attributes;
     this.state.max = attributes.max;
     this.state.min = attributes.min;
-    this.trySetValue(attributes, 'bar_style');
-    this.trySetValue(attributes, 'description');
-    this.trySetValue(attributes, 'description_allow_html');
-    this.trySetValue(attributes, 'disabled');
-    this.trySetValue(attributes, 'layout');
-    this.trySetValue(attributes, 'max');
-    this.trySetValue(attributes, 'min');
-    this.trySetValue(attributes, 'orientation');
-    this.trySetValue(attributes, 'style');
-    this.trySetValue(attributes, 'value');
+    this.setState(attributes);
   }
 }

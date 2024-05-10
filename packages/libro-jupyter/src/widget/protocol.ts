@@ -70,7 +70,7 @@ export interface WidgetsOption {
 
 export interface IWidgetView {
   toJSON: () => string;
-  set_state: (state: Dict<unknown>) => void;
+  setState: (state: Dict<unknown>) => void;
   handleCommMsg: (msg: KernelMessage.ICommMsgMsg) => Promise<void>;
   model_id: string;
   name: string;
@@ -208,11 +208,48 @@ export interface IClassicComm {
    * Register a message handler
    * @param  callback, which is given a message
    */
-  on_msg(callback: (x: any) => void): void;
+  onMsg(callback: (x: any) => void): void;
 
   /**
    * Register a handler for when the comm is closed by the backend
    * @param  callback, which is given a message
    */
-  on_close(callback: (x: any) => void): void;
+  onClose(callback: (x: any) => void): void;
+}
+
+export interface WidgetState {
+  msg_id?: string;
+  behavior?: string;
+  continuous_update: boolean;
+  description: string;
+  description_allow_html: boolean;
+  disabled: boolean;
+  layout?: string;
+  readout: boolean;
+  readout_format: string;
+  style?: string;
+  [key: string]: any;
+}
+
+export const defaultWidgetState: WidgetState = {
+  continuous_update: false,
+  description_allow_html: false,
+  description: '',
+  disabled: false,
+  readout: true,
+  readout_format: 'd',
+};
+
+export interface FormattableState {
+  readout: boolean;
+  readout_format: string;
+}
+
+export const defaultFormattableState: FormattableState = {
+  readout: true,
+  readout_format: 'd',
+};
+
+export interface OrientableState {
+  orientation: 'horizontal' | 'vertical';
 }

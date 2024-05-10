@@ -1,4 +1,6 @@
 import { LibroContextKey } from '@difizen/libro-core';
+import type { IWidgetViewProps } from '@difizen/libro-jupyter';
+import { WidgetView } from '@difizen/libro-jupyter';
 import {
   view,
   ViewOption,
@@ -10,9 +12,6 @@ import {
 } from '@difizen/mana-app';
 import { Input } from 'antd';
 import { forwardRef } from 'react';
-
-import type { IWidgetViewProps } from '../../base/protocal.js';
-import { WidgetView } from '../../base/widget-view.js';
 
 export const TextWidgetComponent = forwardRef<HTMLDivElement>(
   function TextWidgetComponent(_props, ref) {

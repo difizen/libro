@@ -39,7 +39,16 @@ const JupyterCodeCellComponent = forwardRef<HTMLDivElement>(
 @transient()
 @view('jupyter-code-cell-view')
 export class JupyterCodeCellView extends LibroCodeCellView {
-  declare parent: LibroJupyterView;
+  protected declare _parent: LibroJupyterView;
+
+  override get parent() {
+    return this._parent;
+  }
+  override set parent(value: LibroJupyterView) {
+    this._parent = value;
+    this.parentDefer.resolve(this.parent);
+  }
+
   override view = JupyterCodeCellComponent;
   declare model: JupyterCodeCellModel;
 

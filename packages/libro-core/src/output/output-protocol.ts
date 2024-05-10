@@ -126,6 +126,11 @@ export interface BaseOutputView extends View {
    * Depending on the implementation of the mime model,
    */
   setData(options: ISetDataOptions): void;
+
+  /**
+   * undefined is considered allowed
+   */
+  allowClear?: boolean;
 }
 
 /**

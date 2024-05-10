@@ -1,7 +1,6 @@
+import type { IWidgetViewProps } from '@difizen/libro-jupyter';
+import { WidgetViewContribution } from '@difizen/libro-jupyter';
 import { ViewManager, inject, singleton } from '@difizen/mana-app';
-
-import type { IWidgetViewProps } from '../../base/protocal.js';
-import { WidgetViewContribution } from '../../base/protocal.js';
 
 import { TextWidget } from './view.js';
 

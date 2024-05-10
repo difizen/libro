@@ -2,8 +2,8 @@ import type { JSONObject } from '@difizen/libro-common';
 import type { IComm, IKernelConnection, IShellFuture } from '@difizen/libro-kernel';
 import { inject, transient } from '@difizen/mana-app';
 
-import type { ICallbacks, IClassicComm } from './protocal.js';
-import { WidgetCommOption } from './protocal.js';
+import type { ICallbacks, IClassicComm } from './protocol.js';
+import { WidgetCommOption } from './protocol.js';
 
 /**
  * Public constructor
@@ -90,7 +90,7 @@ export class Comm implements IClassicComm {
    * Register a message handler
    * @param  callback, which is given a message
    */
-  on_msg(callback: (x: any) => void): void {
+  onMsg(callback: (x: any) => void): void {
     this.jsServicesComm.onMsg = callback.bind(this);
   }
 
@@ -98,7 +98,7 @@ export class Comm implements IClassicComm {
    * Register a handler for when the comm is closed by the backend
    * @param  callback, which is given a message
    */
-  on_close(callback: (x: any) => void): void {
+  onClose(callback: (x: any) => void): void {
     this.jsServicesComm.onClose = callback.bind(this);
   }
 

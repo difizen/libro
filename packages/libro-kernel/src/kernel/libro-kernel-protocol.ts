@@ -739,7 +739,7 @@ export interface IKernelConnection extends ObservableDisposable {
   registerMessageHook: (
     msgId: string,
     hook: (msg: KernelMessage.IIOPubMessage) => boolean | PromiseLike<boolean>,
-  ) => void;
+  ) => Disposable;
 
   /**
    * Remove an IOPub message hook.

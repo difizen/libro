@@ -1,4 +1,5 @@
 import type { ViewComponent } from '@difizen/mana-app';
+import { Deferred } from '@difizen/mana-app';
 import { useInject, watch } from '@difizen/mana-app';
 import { BaseView, view, ViewInstance, ViewOption } from '@difizen/mana-app';
 import { inject } from '@difizen/mana-app';
@@ -36,7 +37,22 @@ export class LibroCellView extends BaseView implements CellView {
   model: CellModel;
   protected cellService: CellService;
   override view: ViewComponent = LibroCellComponent;
-  parent: NotebookView;
+
+  protected _parent: NotebookView;
+
+  get parent() {
+    return this._parent;
+  }
+  set parent(value: NotebookView) {
+    this._parent = value;
+    this.parentDefer.resolve(this.parent);
+  }
+
+  protected parentDefer = new Deferred<NotebookView>();
+
+  get parentReady() {
+    return this.parentDefer.promise;
+  }
 
   @prop()
   override className?: string | undefined = 'libro-cell-view-container';

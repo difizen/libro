@@ -1,7 +1,7 @@
 import { ViewManager, inject, singleton } from '@difizen/mana-app';
 
-import type { IWidgetViewProps } from '../../base/protocal.js';
-import { WidgetViewContribution } from '../../base/protocal.js';
+import type { IWidgetViewProps } from '../protocol.js';
+import { WidgetViewContribution } from '../protocol.js';
 
 import { InstancesProgressWidget } from './view.js';
 

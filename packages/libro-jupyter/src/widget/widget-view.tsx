@@ -1,18 +1,32 @@
-import type { JSONObject, JSONValue } from '@difizen/libro-common';
+import type { JSONObject, JSONValue, IOutput, OutputType } from '@difizen/libro-common';
+import type { CellView, LibroExecutableCellView } from '@difizen/libro-core';
+import { ExecutableCellView } from '@difizen/libro-core';
 import { LibroContextKey } from '@difizen/libro-core';
 import type { KernelMessage } from '@difizen/libro-kernel';
-import { inject, transient, ViewOption, view, BaseView, prop } from '@difizen/mana-app';
-import type { ViewComponent } from '@difizen/mana-app';
+import {
+  inject,
+  transient,
+  ViewOption,
+  view,
+  BaseView,
+  prop,
+  watch,
+} from '@difizen/mana-app';
+import type { ViewComponent, Disposable } from '@difizen/mana-app';
 import { forwardRef } from 'react';
 
-import type { IWidgetViewProps } from './protocal.js';
+import { LibroJupyterModel } from '../libro-jupyter-model.js';
+
+import { defaultWidgetState } from './protocol.js';
 import type {
   Dict,
   IWidgets,
   IWidgetView,
   IClassicComm,
   ICallbacks,
-} from './protocal.js';
+  IWidgetViewProps,
+  WidgetState,
+} from './protocol.js';
 import { LibroWidgetManager } from './widget-manager.js';
 
 export const LibroWidgetComponent = forwardRef<HTMLDivElement>(
@@ -27,12 +41,26 @@ export class WidgetView extends BaseView implements IWidgetView {
   override view: ViewComponent = LibroWidgetComponent;
   libroContextKey: LibroContextKey;
   widgetsId: string;
+  protected _msgHook: (msg: KernelMessage.IIOPubMessage) => boolean;
+
   @inject(LibroWidgetManager) libroWidgetManager: LibroWidgetManager;
 
   @prop()
-  state: JSONObject = {};
+  state: JSONObject & WidgetState = defaultWidgetState;
+
+  cell?: LibroExecutableCellView;
+
+  get outputs() {
+    if (this.cell) {
+      return this.cell.outputArea;
+    }
+    return undefined;
+  }
 
   disableCommandMode = true;
+
+  toDisposeOnMsgChanged?: Disposable;
+
   constructor(
     @inject(ViewOption) props: IWidgetViewProps,
     @inject(LibroContextKey) libroContextKey: LibroContextKey,
@@ -48,6 +76,11 @@ export class WidgetView extends BaseView implements IWidgetView {
     this.view_module_version = attributes._view_module_version;
     this.view_count = attributes._view_count;
 
+    this._msgHook = (msg: KernelMessage.IIOPubMessage): boolean => {
+      this.addFromMessage(msg);
+      return false;
+    };
+
     // Attributes should be initialized here, since user initialization may depend on it
     const comm = props.options.comm;
     if (comm) {
@@ -55,18 +88,82 @@ export class WidgetView extends BaseView implements IWidgetView {
       this.comm = comm;
 
       // Hook comm messages up to model.
-      comm.on_close(this.handleCommClosed.bind(this));
-      comm.on_msg(this.handleCommMsg.bind(this));
+      comm.onClose(this.handleCommClosed.bind(this));
+      comm.onMsg(this.handleCommMsg.bind(this));
     } else {
       this.isCommClosed = false;
     }
     this.model_id = props.options.model_id;
 
     this.state_change = Promise.resolve();
-
-    this.trySetValue(attributes, 'tabbable');
-    this.trySetValue(attributes, 'tooltip');
+    this.setState(attributes);
     this.libroContextKey = libroContextKey;
+  }
+
+  setCell(cell: CellView) {
+    if (ExecutableCellView.is(cell)) {
+      this.cell = cell as LibroExecutableCellView;
+      if (this.cell) {
+        this.cell.parentReady
+          .then(() => {
+            const notebookModel = this.cell?.parent.model;
+            if (notebookModel instanceof LibroJupyterModel) {
+              watch(notebookModel, 'kernelConnection', this.handleKernelChanged);
+            }
+            return;
+          })
+          .catch(console.error);
+      }
+    }
+  }
+
+  /**
+   * Register a new kernel
+   */
+  handleKernelChanged = (): void => {
+    this.setState({ msg_id: undefined });
+  };
+
+  /**
+   * Reset the message id.
+   */
+  resetMsgId(): void {
+    this.toDisposeOnMsgChanged?.dispose();
+    const notebookModel = this.cell?.parent?.model;
+
+    if (notebookModel instanceof LibroJupyterModel) {
+      const kernel = notebookModel.kernelConnection;
+      if (kernel && this.state['msg_id']) {
+        this.toDisposeOnMsgChanged = kernel.registerMessageHook(
+          this.state['msg_id'],
+          this._msgHook,
+        );
+      }
+    }
+  }
+
+  addFromMessage(msg: KernelMessage.IIOPubMessage) {
+    const msgType = msg.header.msg_type;
+    switch (msgType) {
+      case 'execute_result':
+      case 'display_data':
+      case 'stream':
+      case 'error': {
+        const model = msg.content as IOutput;
+        model.output_type = msgType as OutputType;
+        this.outputs?.add(model);
+        break;
+      }
+      case 'clear_output':
+        this.clearOutput((msg as KernelMessage.IClearOutputMsg).content.wait);
+        break;
+      default:
+        break;
+    }
+  }
+
+  clearOutput(wait = false): void {
+    this.outputs?.clear(wait);
   }
 
   override onViewMount() {
@@ -86,12 +183,6 @@ export class WidgetView extends BaseView implements IWidgetView {
     }
   }
 
-  protected trySetValue(attributes: any, propKey: string) {
-    if (propKey in attributes && attributes[propKey] !== undefined) {
-      this.state[propKey] = attributes[propKey];
-    }
-  }
-
   /**
    * Handle incoming comm msg.
    */
@@ -101,7 +192,7 @@ export class WidgetView extends BaseView implements IWidgetView {
     switch (method) {
       case 'update':
       case 'echo_update':
-        this.set_state(data.state);
+        this.setState(data.state);
     }
     return Promise.resolve();
   }
@@ -114,9 +205,13 @@ export class WidgetView extends BaseView implements IWidgetView {
    *
    * This function is meant for internal use only. Values set here will not be propagated on a sync.
    */
-  set_state(state: Dict<any>): void {
+  setState(state: Dict<any>): void {
     for (const key in state) {
+      const oldMsgId = this.state['msg_id'];
       this.state[key] = state[key];
+      if (key === 'msg_id' && oldMsgId !== state['msg_id']) {
+        this.resetMsgId();
+      }
     }
   }
 

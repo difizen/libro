@@ -1,4 +1,4 @@
-import type { Disposable } from '@difizen/mana-app';
+import { Disposable } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
 
 import type {
@@ -280,11 +280,14 @@ export abstract class KernelFutureHandler<
    */
   registerMessageHook(
     hook: (msg: KernelMessage.IIOPubMessage) => boolean | PromiseLike<boolean>,
-  ): void {
+  ): Disposable {
     if (this.disposed) {
       throw new Error('Kernel future is disposed');
     }
     this._hooks.add(hook);
+    return Disposable.create(() => {
+      this.removeMessageHook(hook);
+    });
   }
 
   /**
