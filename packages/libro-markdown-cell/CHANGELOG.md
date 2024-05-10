@@ -1,5 +1,18 @@
 # @difizen/libro-markdown
 
+## 0.1.34
+
+### Patch Changes
+
+- 4c0f10e: Enhance widgets underlying capabilities
+- 6c4fcbe: Support widget interactive!
+- Updated dependencies [4c0f10e]
+- Updated dependencies [6c4fcbe]
+  - @difizen/libro-code-editor@0.1.34
+  - @difizen/libro-markdown@0.1.34
+  - @difizen/libro-common@0.1.34
+  - @difizen/libro-core@0.1.34
+
 ## 0.1.33
 
 ### Patch Changes

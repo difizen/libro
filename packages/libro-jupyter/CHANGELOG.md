@@ -1,5 +1,30 @@
 # @difizen/libro-jupyter
 
+## 0.1.34
+
+### Patch Changes
+
+- 4c0f10e: Enhance widgets underlying capabilities
+- 6c4fcbe: Support widget interactive!
+- Updated dependencies [4c0f10e]
+- Updated dependencies [6c4fcbe]
+  - @difizen/libro-search-code-cell@0.1.34
+  - @difizen/libro-language-client@0.1.34
+  - @difizen/libro-cofine-editor@0.1.34
+  - @difizen/libro-markdown-cell@0.1.34
+  - @difizen/libro-code-editor@0.1.34
+  - @difizen/libro-codemirror@0.1.34
+  - @difizen/libro-rendermime@0.1.34
+  - @difizen/libro-code-cell@0.1.34
+  - @difizen/libro-raw-cell@0.1.34
+  - @difizen/libro-common@0.1.34
+  - @difizen/libro-kernel@0.1.34
+  - @difizen/libro-output@0.1.34
+  - @difizen/libro-search@0.1.34
+  - @difizen/libro-core@0.1.34
+  - @difizen/libro-l10n@0.1.34
+  - @difizen/libro-lsp@0.1.34
+
 ## 0.1.33
 
 ### Patch Changes
