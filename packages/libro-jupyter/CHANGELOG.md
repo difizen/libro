@@ -1,5 +1,28 @@
 # @difizen/libro-jupyter
 
+## 0.1.35
+
+### Patch Changes
+
+- 5ed93cc: fix dark theme about search view
+- Updated dependencies [5ed93cc]
+  - @difizen/libro-search@0.1.35
+  - @difizen/libro-code-cell@0.1.35
+  - @difizen/libro-code-editor@0.1.35
+  - @difizen/libro-codemirror@0.1.35
+  - @difizen/libro-cofine-editor@0.1.35
+  - @difizen/libro-common@0.1.35
+  - @difizen/libro-core@0.1.35
+  - @difizen/libro-kernel@0.1.35
+  - @difizen/libro-l10n@0.1.35
+  - @difizen/libro-language-client@0.1.35
+  - @difizen/libro-lsp@0.1.35
+  - @difizen/libro-markdown-cell@0.1.35
+  - @difizen/libro-output@0.1.35
+  - @difizen/libro-raw-cell@0.1.35
+  - @difizen/libro-rendermime@0.1.35
+  - @difizen/libro-search-code-cell@0.1.35
+
 ## 0.1.34
 
 ### Patch Changes

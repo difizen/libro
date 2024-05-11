@@ -1,5 +1,11 @@
 # @difizen/libro-common
 
+## 0.1.35
+
+### Patch Changes
+
+- 5ed93cc: fix dark theme about search view
+
 ## 0.1.34
 
 ### Patch Changes

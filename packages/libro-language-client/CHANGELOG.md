@@ -1,5 +1,17 @@
 # libro-langauge-client
 
+## 0.1.35
+
+### Patch Changes
+
+- 5ed93cc: fix dark theme about search view
+- Updated dependencies [5ed93cc]
+  - @difizen/libro-code-editor@0.1.35
+  - @difizen/libro-common@0.1.35
+  - @difizen/libro-core@0.1.35
+  - @difizen/libro-kernel@0.1.35
+  - @difizen/libro-lsp@0.1.35
+
 ## 0.1.34
 
 ### Patch Changes

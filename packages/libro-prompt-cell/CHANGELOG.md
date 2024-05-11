@@ -1,5 +1,18 @@
 # @difizen/libro-prompt-cell
 
+## 0.1.35
+
+### Patch Changes
+
+- 5ed93cc: fix dark theme about search view
+- Updated dependencies [5ed93cc]
+  - @difizen/libro-code-editor@0.1.35
+  - @difizen/libro-codemirror@0.1.35
+  - @difizen/libro-common@0.1.35
+  - @difizen/libro-core@0.1.35
+  - @difizen/libro-jupyter@0.1.35
+  - @difizen/libro-rendermime@0.1.35
+
 ## 0.1.34
 
 ### Patch Changes
