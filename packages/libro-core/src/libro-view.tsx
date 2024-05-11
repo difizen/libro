@@ -595,7 +595,7 @@ export class LibroView extends BaseView implements NotebookView {
       }),
     )
       .then((resultList) => {
-        return resultList.every((item) => !!item);
+        return resultList.filter((item) => item !== undefined).every((item) => !!item);
       })
       .catch((reason: any) => {
         if (reason.message.startsWith('KernelReplyNotOK')) {
