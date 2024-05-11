@@ -8,11 +8,11 @@ import {
 } from '@ant-design/icons';
 import type { LibroView } from '@difizen/libro-core';
 import { LibroContextKey } from '@difizen/libro-core';
-import { prop, useInject, useObserve, watch } from '@difizen/mana-app';
+import { prop, ThemeService, useInject, useObserve, watch } from '@difizen/mana-app';
 import { BaseView, view, ViewInstance } from '@difizen/mana-app';
 import { inject, transient } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import { Button, Checkbox, Input, Tag } from 'antd';
+import { Button, Checkbox, ConfigProvider, Input, Tag, theme } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import type { InputRef } from 'antd/es/input';
 import classnames from 'classnames';
@@ -63,6 +63,7 @@ export const SearchIndexMemo = memo(SearchIndex);
 export const SearchContent = () => {
   const instance = useInject<LibroSearchView>(ViewInstance);
   const findInputRef = useRef<InputRef>(null);
+  const themeService = useInject(ThemeService);
   useEffect(() => {
     if (findInputRef.current) {
       findInputRef.current.focus();
@@ -79,123 +80,132 @@ export const SearchContent = () => {
   }, [instance]);
 
   return (
-    <div
-      className="libro-search-content"
-      style={{ height: `${instance.contentHeight}px` }}
+    <ConfigProvider
+      theme={{
+        algorithm:
+          themeService.getCurrentTheme().type === 'dark'
+            ? theme.darkAlgorithm
+            : theme.defaultAlgorithm,
+      }}
     >
-      <ReplaceToggle />
-      <table className="libro-search-input-area">
-        <tr className="libro-search-row">
-          <td className="libro-search-input">
-            <Input
-              ref={findInputRef}
-              value={instance.findStr}
-              onChange={instance.handleFindChange}
-              size="small"
-              placeholder="搜索"
-              onFocus={() => {
-                instance.hasFocus = true;
-              }}
-              onBlur={() => {
-                instance.hasFocus = false;
-              }}
-              suffix={
-                <span className="libro-search-input-suffix">
-                  <IconFont
-                    className={classnames({
-                      'libro-search-input-suffix-active': instance.caseSensitive,
-                    })}
-                    onClick={instance.toggleCaseSensitive}
-                    type="icon-Aa"
-                    title="Match Case"
-                  />
-
-                  <IconFont
-                    className={classnames({
-                      'libro-search-input-suffix-active': instance.useRegex,
-                    })}
-                    onClick={instance.toggleUseRegex}
-                    type="icon-zhengzeshi"
-                    title="Use Regular Expression"
-                  />
-                </span>
-              }
-            />
-          </td>
-          <td className="libro-search-action">
-            <SearchIndexMemo />
-            <div>
-              <Button
-                title="Previous Match"
-                onClick={instance.previous}
-                icon={<ArrowUpOutlined />}
-                size="small"
-              />
-              <Button
-                title="Next Match"
-                onClick={instance.next}
-                icon={<ArrowDownOutlined />}
-                size="small"
-              />
-              <Button
-                onClick={instance.toggleSetting}
-                icon={<EllipsisOutlined />}
-                size="small"
-              />
-              <Button
-                onClick={() => instance.hide()}
-                icon={<CloseOutlined />}
-                size="small"
-              />
-            </div>
-          </td>
-        </tr>
-        {instance.replaceVisible && (
+      <div
+        className="libro-search-content"
+        style={{ height: `${instance.contentHeight}px` }}
+      >
+        <ReplaceToggle />
+        <table className="libro-search-input-area">
           <tr className="libro-search-row">
             <td className="libro-search-input">
               <Input
-                value={instance.replaceStr}
-                onChange={instance.handleReplaceChange}
+                ref={findInputRef}
+                value={instance.findStr}
+                onChange={instance.handleFindChange}
                 size="small"
-                placeholder="替换"
+                placeholder="搜索"
+                onFocus={() => {
+                  instance.hasFocus = true;
+                }}
+                onBlur={() => {
+                  instance.hasFocus = false;
+                }}
+                suffix={
+                  <span className="libro-search-input-suffix">
+                    <IconFont
+                      className={classnames({
+                        'libro-search-input-suffix-active': instance.caseSensitive,
+                      })}
+                      onClick={instance.toggleCaseSensitive}
+                      type="icon-Aa"
+                      title="Match Case"
+                    />
+
+                    <IconFont
+                      className={classnames({
+                        'libro-search-input-suffix-active': instance.useRegex,
+                      })}
+                      onClick={instance.toggleUseRegex}
+                      type="icon-zhengzeshi"
+                      title="Use Regular Expression"
+                    />
+                  </span>
+                }
               />
             </td>
             <td className="libro-search-action">
+              <SearchIndexMemo />
               <div>
                 <Button
-                  onClick={instance.replace}
-                  icon={<IconFont type="icon-zifuchuantihuan_2" />}
+                  title="Previous Match"
+                  onClick={instance.previous}
+                  icon={<ArrowUpOutlined />}
                   size="small"
-                  title="Replace"
                 />
-
                 <Button
-                  onClick={instance.replaceAll}
-                  icon={<IconFont type="icon-tihuantupian" />}
+                  title="Next Match"
+                  onClick={instance.next}
+                  icon={<ArrowDownOutlined />}
                   size="small"
-                  title="Replace All"
+                />
+                <Button
+                  onClick={instance.toggleSetting}
+                  icon={<EllipsisOutlined />}
+                  size="small"
+                />
+                <Button
+                  onClick={() => instance.hide()}
+                  icon={<CloseOutlined />}
+                  size="small"
                 />
               </div>
             </td>
           </tr>
-        )}
+          {instance.replaceVisible && (
+            <tr className="libro-search-row">
+              <td className="libro-search-input">
+                <Input
+                  value={instance.replaceStr}
+                  onChange={instance.handleReplaceChange}
+                  size="small"
+                  placeholder="替换"
+                />
+              </td>
+              <td className="libro-search-action">
+                <div>
+                  <Button
+                    onClick={instance.replace}
+                    icon={<IconFont type="icon-zifuchuantihuan_2" />}
+                    size="small"
+                    title="Replace"
+                  />
 
-        {instance.settingVisible && (
-          <div className="libro-search-row">
-            <Checkbox
-              checked={instance.searchProvider?.searchCellOutput}
-              onChange={instance.searchCellOutputChange}
-              disabled={instance.replaceVisible}
-            >
-              {l10n.t('在 output 中查找')}
-            </Checkbox>
-            {instance.replaceVisible && (
-              <Tag color="warning">{l10n.t('替换功能不能在 output 生效')}</Tag>
-            )}
-          </div>
-        )}
-      </table>
-    </div>
+                  <Button
+                    onClick={instance.replaceAll}
+                    icon={<IconFont type="icon-tihuantupian" />}
+                    size="small"
+                    title="Replace All"
+                  />
+                </div>
+              </td>
+            </tr>
+          )}
+
+          {instance.settingVisible && (
+            <div className="libro-search-row">
+              <Checkbox
+                checked={instance.searchProvider?.searchCellOutput}
+                onChange={instance.searchCellOutputChange}
+                disabled={instance.replaceVisible}
+              >
+                {l10n.t('在 output 中查找')}
+              </Checkbox>
+              {instance.replaceVisible && (
+                <Tag color="warning">{l10n.t('替换功能不能在 output 生效')}</Tag>
+              )}
+            </div>
+          )}
+        </table>
+      </div>
+    </ConfigProvider>
   );
 };
 // TODO: 更改图标
