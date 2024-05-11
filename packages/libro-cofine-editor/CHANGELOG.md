@@ -1,5 +1,18 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.1.35
+
+### Patch Changes
+
+- 5ed93cc: fix dark theme about search view
+- Updated dependencies [5ed93cc]
+  - @difizen/libro-code-editor@0.1.35
+  - @difizen/libro-cofine-editor-core@0.1.35
+  - @difizen/libro-cofine-textmate@0.1.35
+  - @difizen/libro-common@0.1.35
+  - @difizen/libro-core@0.1.35
+  - @difizen/libro-lsp@0.1.35
+
 ## 0.1.34
 
 ### Patch Changes

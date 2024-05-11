@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.1.35
+
+### Patch Changes
+
+- 5ed93cc: fix dark theme about search view
+- Updated dependencies [5ed93cc]
+  - @difizen/libro-core@0.1.35
+  - @difizen/libro-jupyter@0.1.35
+  - @difizen/libro-lab@0.1.35
+  - @difizen/libro-terminal@0.1.35
+
 ## 0.1.34
 
 ### Patch Changes
