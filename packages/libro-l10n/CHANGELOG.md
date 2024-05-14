@@ -1,5 +1,11 @@
 # @difizen/libro-l10n
 
+## 0.1.36
+
+### Patch Changes
+
+- 830d767: fix(search): hide searchview when searchVisible is false
+
 ## 0.1.35
 
 ### Patch Changes
