@@ -1,5 +1,15 @@
 # @difizen/libro-search
 
+## 0.1.36
+
+### Patch Changes
+
+- 830d767: fix(search): hide searchview when searchVisible is false
+- Updated dependencies [830d767]
+  - @difizen/libro-code-editor@0.1.36
+  - @difizen/libro-common@0.1.36
+  - @difizen/libro-core@0.1.36
+
 ## 0.1.35
 
 ### Patch Changes

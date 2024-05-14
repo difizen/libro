@@ -1,5 +1,21 @@
 # @difizen/libro-lab
 
+## 0.1.36
+
+### Patch Changes
+
+- 830d767: fix(search): hide searchview when searchVisible is false
+- Updated dependencies [830d767]
+  - @difizen/libro-cofine-editor-core@0.1.36
+  - @difizen/libro-core@0.1.36
+  - @difizen/libro-jupyter@0.1.36
+  - @difizen/libro-kernel@0.1.36
+  - @difizen/libro-language-client@0.1.36
+  - @difizen/libro-prompt-cell@0.1.36
+  - @difizen/libro-terminal@0.1.36
+  - @difizen/libro-toc@0.1.36
+  - @difizen/libro-widget@0.1.36
+
 ## 0.1.35
 
 ### Patch Changes
