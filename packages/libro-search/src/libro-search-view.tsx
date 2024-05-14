@@ -288,7 +288,7 @@ export class LibroSearchView extends BaseView {
         this.libro.model.onCommandModeChanged((mode) => {
           if (mode) {
             setTimeout(() => {
-              if (this.hasFocus === false) {
+              if (this.hasFocus === false && this.searchVisible) {
                 this.hide(false);
               }
             }, 0);
