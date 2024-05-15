@@ -31,7 +31,7 @@ export interface IContentsModel extends IContentsRequestOptions {
    * #### Notes
    *  Equivalent to the last part of the `path` field.
    */
-  readonly name: string;
+  name: string;
 
   /**
    * The full file path.
@@ -39,27 +39,27 @@ export interface IContentsModel extends IContentsRequestOptions {
    * #### Notes
    * It will *not* start with `/`, and it will be `/`-delimited.
    */
-  readonly path: string;
+  path: string;
 
   /**
    * The type of file.
    */
-  readonly type: ContentType;
+  type: ContentType;
 
   /**
    * Whether the requester has permission to edit the file.
    */
-  readonly writable: boolean;
+  writable: boolean;
 
   /**
    * File creation timestamp.
    */
-  readonly created: string;
+  created: string;
 
   /**
    * Last modified timestamp.
    */
-  readonly last_modified: string;
+  last_modified: string;
 
   /**
    * Specify the mime-type of file contents.
@@ -67,17 +67,17 @@ export interface IContentsModel extends IContentsRequestOptions {
    * #### Notes
    * Only non-`null` when `content` is present and `type` is `"file"`.
    */
-  readonly mimetype?: string;
+  mimetype?: string;
 
   /**
    * The optional file content.
    */
-  readonly content: any;
+  content: any;
 
   /**
    * The chunk of the file upload.
    */
-  readonly chunk?: number;
+  chunk?: number;
 
   /**
    * The format of the file `content`.
@@ -85,12 +85,12 @@ export interface IContentsModel extends IContentsRequestOptions {
    * #### Notes
    * Only relevant for type: 'file'
    */
-  readonly format?: ContentsFileFormat;
+  format?: ContentsFileFormat;
 
   /**
    * The size of then file in bytes.
    */
-  readonly size?: number;
+  size?: number;
 
   /**
    * The indices of the matched characters in the name.
