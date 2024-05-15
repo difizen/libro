@@ -1,5 +1,16 @@
 # @difizen/libro-codemirror
 
+## 0.1.37
+
+### Patch Changes
+
+- fe63f0e: fix(kernel): update interface about IContentsModel
+- Updated dependencies [fe63f0e]
+  - @difizen/libro-code-editor@0.1.37
+  - @difizen/libro-common@0.1.37
+  - @difizen/libro-lsp@0.1.37
+  - @difizen/libro-rendermime@0.1.37
+
 ## 0.1.36
 
 ### Patch Changes
