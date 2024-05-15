@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.1.37
+
+### Patch Changes
+
+- fe63f0e: fix(kernel): update interface about IContentsModel
+
 ## 0.1.36
 
 ### Patch Changes
