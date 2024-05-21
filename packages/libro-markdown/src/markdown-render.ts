@@ -1,9 +1,11 @@
 import { postConstruct, singleton } from '@difizen/mana-app';
+import latexPlugin from '@traptitech/markdown-it-katex';
 import MarkdownIt from 'markdown-it';
 
 import { libroAnchor, linkInsideHeader, slugify } from './anchor.js';
 import type { MarkdownRenderOption } from './markdown-protocol.js';
 import { MarkdownParser } from './markdown-protocol.js';
+import 'katex/dist/katex.min.css';
 
 @singleton({ token: MarkdownParser })
 export class MarkdownRender implements MarkdownParser {
@@ -23,6 +25,7 @@ export class MarkdownRender implements MarkdownParser {
       permalink: this.enablePermalink ? linkInsideHeader : false,
       slugify: this.slugify,
     });
+    this.mkt.use(latexPlugin);
   }
 
   render(markdownText: string, options?: MarkdownRenderOption): string {
