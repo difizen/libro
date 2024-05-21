@@ -47,7 +47,9 @@
   },
   "dependencies": {
     "@difizen/mana-app": "latest",
+    "@traptitech/markdown-it-katex": "^3.6.0",
     "@types/markdown-it": "^12.2.3",
+    "katex": "^0.16.10",
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.5"
   }
