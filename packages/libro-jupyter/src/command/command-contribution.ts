@@ -1,3 +1,4 @@
+import type { LibroModel } from '@difizen/libro-core';
 import {
   KernelCommands,
   LibroCommandRegister,
@@ -40,8 +41,7 @@ export class LibroJupyterCommandContribution implements CommandContribution {
             return false;
           }
           return (
-            !libro?.model.quickEditMode &&
-            !libro?.model.readOnly &&
+            (libro?.model as LibroModel).executable &&
             path === LibroToolbarArea.HeaderLeft
           );
         },
@@ -72,8 +72,7 @@ export class LibroJupyterCommandContribution implements CommandContribution {
           }
           if (
             path !== LibroToolbarArea.HeaderCenter ||
-            libro.model.quickEditMode ||
-            libro.model.readOnly
+            !(libro?.model as LibroModel).executable
           ) {
             return false;
           }
@@ -108,8 +107,7 @@ export class LibroJupyterCommandContribution implements CommandContribution {
             return false;
           }
           return (
-            !libro?.model.quickEditMode &&
-            !libro?.model.readOnly &&
+            (libro?.model as LibroModel).executable &&
             path === LibroToolbarArea.CellRight
           );
         },
@@ -142,13 +140,16 @@ export class LibroJupyterCommandContribution implements CommandContribution {
             return false;
           }
           return (
-            !libro?.model.quickEditMode &&
-            path === LibroToolbarArea.HeaderCenter &&
-            !libro.model.readOnly
+            (libro?.model as LibroJupyterModel).executable &&
+            path === LibroToolbarArea.HeaderCenter
           );
         },
         isEnabled: (cell, libro) => {
-          if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
+          if (
+            !libro ||
+            !(libro instanceof LibroView) ||
+            !(libro?.model as LibroJupyterModel).executable
+          ) {
             return false;
           }
           return (

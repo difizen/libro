@@ -85,16 +85,26 @@ export interface BaseNotebookModel {
   active?: CellView | undefined;
   activeIndex: number;
   dndAreaNullEnable: boolean;
-  /**
-   * The read-only state of the model.
-   */
-  readOnly: boolean;
 
   /**
-   * The quick edit mode the model.
+   * Controlling whether the cell input is editable
    */
-  quickEditMode: boolean;
+  inputEditable: boolean;
 
+  outputEditable: boolean;
+
+  /**
+   * Controlling whether the cells list is editable
+   */
+  cellsEditable: boolean;
+  /**
+   * Controlling whether the cells can execute
+   */
+  runnable: boolean;
+  /**
+   * Controlling whether the notebook can save
+   */
+  savable: boolean;
   /**
    * The command mode of the model.
    */

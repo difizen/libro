@@ -22,7 +22,7 @@ export class LibroJupyterContentContribution implements ContentContribution {
       jupyterModel.filePath = currentFileContents.path;
       jupyterModel.lastModified = jupyterModel.currentFileContents.last_modified;
 
-      if (!jupyterModel.quickEditMode && !jupyterModel.readOnly) {
+      if (jupyterModel.executable) {
         jupyterModel.startKernelConnection();
       }
 

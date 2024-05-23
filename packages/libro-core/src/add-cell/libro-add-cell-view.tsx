@@ -66,7 +66,7 @@ export const LibroAddCell: React.FC = () => {
 export const LibroWrappedAddCell = forwardRef(function LibroWrappedAddCell() {
   const instance = useInject<LibroAddCellView>(ViewInstance);
   return (
-    <DisplayWrapComponent mode={instance.parent?.model.readOnly}>
+    <DisplayWrapComponent mode={!instance.parent?.model.cellsEditable}>
       <LibroAddCell />
     </DisplayWrapComponent>
   );

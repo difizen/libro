@@ -138,7 +138,7 @@ export class LibroSearchProvider extends AbstractSearchProvider {
    * the replace option.
    */
   get isReadOnly(): boolean {
-    return this.view?.model?.readOnly ?? false;
+    return this.view?.model?.inputEditable ?? false;
   }
 
   /**

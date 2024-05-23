@@ -234,14 +234,23 @@ export const LibroRender = forwardRef<HTMLDivElement>(function LibroRender(props
         const dndDom = ref?.current?.getElementsByClassName(
           'libro-dnd-cells-container',
         )[0];
-        if (!dndDom?.contains(e.relatedTarget) && instance.model.readOnly) {
+        if (
+          !dndDom?.contains(e.relatedTarget) &&
+          (!instance.model.inputEditable ||
+            !instance.model.outputEditable ||
+            !instance.model.cellsEditable)
+        ) {
           instance.selectCell(undefined);
         }
       } else {
         instance.enterCommandMode(false);
         libroService.focus = undefined;
         instance.onBlurEmitter.fire('');
-        if (instance.model.readOnly) {
+        if (
+          !instance.model.inputEditable ||
+          !instance.model.outputEditable ||
+          !instance.model.cellsEditable
+        ) {
           instance.selectCell(undefined);
         }
       }

@@ -94,9 +94,28 @@ export class LibroModel implements NotebookModel, DndListModel {
   lastClipboardInteraction?: string;
 
   clipboard?: CellView | CellView[];
+  @prop()
+  inputEditable = true;
 
   @prop()
-  quickEditMode = false;
+  outputEditable = true;
+
+  @prop()
+  cellsEditable = true;
+
+  get executable() {
+    return this.outputEditable && this.runnable;
+  }
+
+  set executable(value: boolean) {
+    this.runnable = value;
+  }
+
+  @prop()
+  savable = true;
+
+  @prop()
+  runnable = true;
 
   @prop()
   commandMode = true;
@@ -109,9 +128,6 @@ export class LibroModel implements NotebookModel, DndListModel {
 
   @prop()
   dirty = false;
-
-  @prop()
-  readOnly = false;
 
   @prop()
   cells: CellView[] = [];
@@ -236,7 +252,7 @@ export class LibroModel implements NotebookModel, DndListModel {
         currpos += delta.retain;
       }
     });
-    if (this.readOnly && !this.isInitialized) {
+    if (!this.inputEditable && !this.isInitialized) {
       this.selectCell(undefined);
       return;
     }
