@@ -10,7 +10,7 @@ export const MarkdownPreview: FC<{ instance: MarkdownCellView }> = ({ instance }
 
   const enterEdit: React.MouseEventHandler<HTMLDivElement> = useCallback(
     (e) => {
-      if (instance.parent.model.readOnly) {
+      if (!instance.parent.model.inputEditable) {
         return;
       }
       e.preventDefault();

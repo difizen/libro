@@ -47,7 +47,7 @@ export class LibroPromptCellCommandContribution
           libro.invertCell(cell, 'prompt');
         },
         isEnabled: (cell, libro) => {
-          if (!libro || !(libro instanceof LibroView) || libro.model.readOnly) {
+          if (!libro || !(libro instanceof LibroView) || !libro.model.cellsEditable) {
             return false;
           }
           return true;

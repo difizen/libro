@@ -259,7 +259,7 @@ export const DndCellContainer: React.FC<DndContentProps> = ({ cell, index }) => 
     },
   });
   const opacity = isDrag ? 0.4 : 1;
-  if (!instance.model.readOnly) {
+  if (instance.model.cellsEditable) {
     drop(ref);
   }
   if (isDrag) {

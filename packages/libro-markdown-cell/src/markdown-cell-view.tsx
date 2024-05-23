@@ -97,7 +97,7 @@ export class MarkdownCellView extends LibroEditorCellView implements CellCollaps
 
   get isEdit() {
     return (
-      this.editorView?.view && this.cellmodel.isEdit && !this.parent.model.readOnly
+      this.editorView?.view && this.cellmodel.isEdit && this.parent.model.inputEditable
     );
   }
 
@@ -125,8 +125,8 @@ export class MarkdownCellView extends LibroEditorCellView implements CellCollaps
     if (this.cellmodel.isEdit) {
       this.createEditor();
     }
-    watch(this.parent.model, 'readOnly', () => {
-      if (this.parent.model.readOnly === true) {
+    watch(this.parent.model, 'inputEditable', () => {
+      if (!this.parent.model.inputEditable) {
         this.cellmodel.isEdit = false;
       }
     });

@@ -80,8 +80,8 @@ export class LibroRawCellView extends LibroEditorCellView {
       editorHostId: this.parent.id + this.id,
       model: this.model,
       config: {
-        readOnly: this.parent.model.readOnly,
-        editable: !this.parent.model.readOnly,
+        readOnly: !this.parent.model.inputEditable,
+        editable: this.parent.model.inputEditable,
         lineNumbers: false,
         foldGutter: false,
         lineWrap: 'on',
@@ -102,8 +102,8 @@ export class LibroRawCellView extends LibroEditorCellView {
   }
 
   protected async afterEditorReady() {
-    watch(this.parent.model, 'readOnly', () => {
-      this.editorView?.editor.setOption('readOnly', this.parent.model.readOnly);
+    watch(this.parent.model, 'inputEditable', () => {
+      this.editorView?.editor.setOption('readOnly', !this.parent.model.inputEditable);
     });
   }
 
@@ -127,7 +127,7 @@ export class LibroRawCellView extends LibroEditorCellView {
       this.parent.model.active?.id === this.id &&
       !this.parent.model.commandMode &&
       this.libroContextKey.commandModeEnabled === true && // 排除弹窗等情况
-      this.parent.model.readOnly === false
+      this.parent.model.inputEditable
     ) {
       this.editorView?.editor.setOption('styleActiveLine', true);
       this.editorView?.editor.setOption('highlightActiveLineGutter', true);

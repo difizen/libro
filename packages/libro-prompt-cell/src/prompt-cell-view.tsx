@@ -355,8 +355,8 @@ export class LibroPromptCellView extends LibroExecutableCellView {
       editorHostId: this.parent.id + this.id,
       model: this.model,
       config: {
-        readOnly: this.parent.model.readOnly,
-        editable: !this.parent.model.readOnly,
+        readOnly: !this.parent.model.inputEditable,
+        editable: this.parent.model.inputEditable,
       },
     };
     return option;
@@ -381,10 +381,10 @@ export class LibroPromptCellView extends LibroExecutableCellView {
   }
 
   protected async afterEditorReady() {
-    watch(this.parent.model, 'readOnly', () => {
+    watch(this.parent.model, 'inputEditable', () => {
       this.editorView?.editor?.setOption(
         'readOnly',
-        getOrigin(this.parent.model.readOnly),
+        getOrigin(!this.parent.model.inputEditable),
       );
     });
     this.editorView?.onModalChange((val) => (this.hasModal = val));
@@ -411,7 +411,7 @@ export class LibroPromptCellView extends LibroExecutableCellView {
       this.parent.model.active?.id === this.id &&
       !this.parent.model.commandMode &&
       this.libroContextKey.commandModeEnabled === true && // 排除弹窗等情况
-      this.parent.model.readOnly === false
+      this.parent.model.inputEditable
     ) {
       this.editorView?.editor.setOption('styleActiveLine', true);
       this.editorView?.editor.setOption('highlightActiveLineGutter', true);

@@ -407,7 +407,7 @@ export const DndCellItemContainer = memo(function DndCellItemContainer(
             e.stopPropagation();
           }}
         >
-          {isActive && !isDrag && instance.model.readOnly !== true && (
+          {isActive && !isDrag && instance.model.cellsEditable && (
             <ToolbarRender
               data={rightToolbarArgs}
               tooltip={{ placement: LibroToolbarArea.CellRight }}
