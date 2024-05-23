@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.2.0
+
+### Minor Changes
+
+- 9322774: feat: add inputEditable、cellsEditable、executable、savable and so on
+
 ## 0.1.37
 
 ### Patch Changes
