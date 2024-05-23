@@ -1,5 +1,20 @@
 # @difizen/libro-widget
 
+## 0.2.0
+
+### Minor Changes
+
+- 9322774: feat: add inputEditable、cellsEditable、executable、savable and so on
+
+### Patch Changes
+
+- Updated dependencies [9322774]
+  - @difizen/libro-jupyter@0.2.0
+  - @difizen/libro-core@0.2.0
+  - @difizen/libro-common@0.2.0
+  - @difizen/libro-kernel@0.2.0
+  - @difizen/libro-rendermime@0.2.0
+
 ## 0.1.37
 
 ### Patch Changes
