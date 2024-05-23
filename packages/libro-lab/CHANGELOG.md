@@ -1,5 +1,21 @@
 # @difizen/libro-lab
 
+## 0.2.1
+
+### Patch Changes
+
+- 672105a: release 0.2.1
+- Updated dependencies [672105a]
+  - @difizen/libro-cofine-editor-core@0.2.1
+  - @difizen/libro-core@0.2.1
+  - @difizen/libro-jupyter@0.2.1
+  - @difizen/libro-kernel@0.2.1
+  - @difizen/libro-language-client@0.2.1
+  - @difizen/libro-prompt-cell@0.2.1
+  - @difizen/libro-terminal@0.2.1
+  - @difizen/libro-toc@0.2.1
+  - @difizen/libro-widget@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
