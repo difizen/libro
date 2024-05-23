@@ -1,5 +1,16 @@
 # @difizen/libro-code-editor
 
+## 0.2.1
+
+### Patch Changes
+
+- 672105a: release 0.2.1
+- Updated dependencies [672105a]
+  - @difizen/libro-code-editor@0.2.1
+  - @difizen/libro-common@0.2.1
+  - @difizen/libro-core@0.2.1
+  - @difizen/libro-kernel@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

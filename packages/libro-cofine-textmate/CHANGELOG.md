@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.1
+
+### Patch Changes
+
+- 672105a: release 0.2.1
+- Updated dependencies [672105a]
+  - @difizen/libro-cofine-editor-core@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

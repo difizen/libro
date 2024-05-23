@@ -1,5 +1,11 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.1
+
+### Patch Changes
+
+- 672105a: release 0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
