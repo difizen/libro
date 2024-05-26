@@ -88,9 +88,7 @@ export const PromptOutputRender: React.FC<{
 
   const updateSelection = () => {
     const tmpSelection = document.getSelection()?.toString();
-    if (tmpSelection) {
-      setSelection(tmpSelection);
-    }
+    setSelection(tmpSelection || '');
   };
 
   return (
@@ -108,14 +106,16 @@ export const PromptOutputRender: React.FC<{
           <span onClick={insert} className="libro-prompt-output-btn">
             插入代码
           </span>
+          <span onClick={copy} className="libro-prompt-output-btn">
+            复制代码
+          </span>
         </>
       )}
-      <span onClick={copy} className="libro-prompt-output-btn">
-        复制代码
-      </span>
-      <span onClick={copySelection} className="libro-prompt-output-btn">
-        复制选中内容
-      </span>
+      {selection && (
+        <span onClick={copySelection} className="libro-prompt-output-btn">
+          复制选中内容
+        </span>
+      )}
     </div>
   );
 };
