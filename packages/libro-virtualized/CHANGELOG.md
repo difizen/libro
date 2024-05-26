@@ -1,5 +1,11 @@
 # @difizen/libro-code-editor
 
+## 0.2.2
+
+### Patch Changes
+
+- a2c76f2: feat(markdown): support for equation rendering
+
 ## 0.2.1
 
 ### Patch Changes

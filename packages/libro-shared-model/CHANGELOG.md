@@ -1,5 +1,13 @@
 # @difizen/libro-shared-model
 
+## 0.2.2
+
+### Patch Changes
+
+- a2c76f2: feat(markdown): support for equation rendering
+- Updated dependencies [a2c76f2]
+  - @difizen/libro-common@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes
