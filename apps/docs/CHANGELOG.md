@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.2.3
+
+### Patch Changes
+
+- c7d0816: Fix the display of adding cell operation area.
+- Updated dependencies [c7d0816]
+  - @difizen/libro-terminal@0.2.3
+  - @difizen/libro-jupyter@0.2.3
+  - @difizen/libro-core@0.2.3
+  - @difizen/libro-lab@0.2.3
+
 ## 0.2.2
 
 ### Patch Changes
