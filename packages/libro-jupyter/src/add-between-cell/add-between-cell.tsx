@@ -203,7 +203,7 @@ export const LibroWrappedBetweenCellContent: BetweenCellProvider = (props: {
   const { index, addCell } = props;
   const instance = useInject<LibroView>(ViewInstance);
   return (
-    <DisplayWrapComponent mode={instance.model.cellsEditable}>
+    <DisplayWrapComponent mode={!instance.model.cellsEditable}>
       <LibroCommonBetweenCellContent index={index} addCell={addCell} />
     </DisplayWrapComponent>
   );
