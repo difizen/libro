@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.2.3
+
+### Patch Changes
+
+- c7d0816: Fix the display of adding cell operation area.
+
 ## 0.2.2
 
 ### Patch Changes

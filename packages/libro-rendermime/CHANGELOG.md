@@ -1,5 +1,15 @@
 # @difizen/libro-rendermime
 
+## 0.2.3
+
+### Patch Changes
+
+- c7d0816: Fix the display of adding cell operation area.
+- Updated dependencies [c7d0816]
+  - @difizen/libro-markdown@0.2.3
+  - @difizen/libro-common@0.2.3
+  - @difizen/libro-core@0.2.3
+
 ## 0.2.2
 
 ### Patch Changes
