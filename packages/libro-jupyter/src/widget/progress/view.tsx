@@ -21,7 +21,7 @@ export const LibroProgressWidgetComponent = forwardRef<HTMLDivElement>(
   function LibroProgressWidgetComponent() {
     const widgetView = useInject<ProgressWidget>(ViewInstance);
     const percent =
-      widgetView.state.max && widgetView.state.min
+      widgetView.state.max !== undefined && widgetView.state.min !== undefined
         ? widgetView.state.value / ((widgetView.state.max - widgetView.state.min) / 100)
         : 0;
     if (widgetView.isCommClosed) {
