@@ -315,6 +315,8 @@ export class LibroView extends BaseView implements NotebookView {
   protected collapseService: CollapseService;
   isDragging = false;
 
+  clipboard: ClipboardType;
+
   @prop()
   collapserVisible = false;
 
@@ -772,12 +774,14 @@ export class LibroView extends BaseView implements NotebookView {
         cells: this.model.selections.map((selection) => selection.toJSONWithoutId()),
       };
       copy2clipboard(JSON.stringify(clipboard));
+      this.clipboard = clipboard;
     } else {
       const clipboard: ClipboardType = {
         action: 'copy',
         cells: [cell.toJSONWithoutId()],
       };
       copy2clipboard(JSON.stringify(clipboard));
+      this.clipboard = clipboard;
     }
   };
 
@@ -788,6 +792,7 @@ export class LibroView extends BaseView implements NotebookView {
         cells: this.model.selections.map((selection) => selection.toJSONWithoutId()),
       };
       copy2clipboard(JSON.stringify(clipboard));
+      this.clipboard = clipboard;
       for (const cutCell of this.model.selections) {
         this.deleteCell(cutCell);
       }
@@ -797,7 +802,7 @@ export class LibroView extends BaseView implements NotebookView {
         cells: [cell.toJSONWithoutId()],
       };
       copy2clipboard(JSON.stringify(clipboard));
-
+      this.clipboard = clipboard;
       this.deleteCell(cell);
     }
   };
@@ -807,7 +812,12 @@ export class LibroView extends BaseView implements NotebookView {
       return equals(item, cell);
     });
     try {
-      const pasteValue = JSON.parse(await readFromClipboard()) as ClipboardType;
+      let pasteValue: ClipboardType;
+      if (this.clipboard) {
+        pasteValue = this.clipboard;
+      } else {
+        pasteValue = JSON.parse(await readFromClipboard()) as ClipboardType;
+      }
       if (pasteValue.action === 'copy' || pasteValue.action === 'cut') {
         this.insertCells(
           pasteValue.cells.map((item) => {
@@ -825,37 +835,31 @@ export class LibroView extends BaseView implements NotebookView {
     }
   };
 
-  pasteCellAbove = (cell: CellView) => {
-    let pasteIndex = this.model.getCells().findIndex((item) => {
+  pasteCellAbove = async (cell: CellView) => {
+    const pasteIndex = this.model.getCells().findIndex((item) => {
       return equals(item, cell);
     });
-    const pasteCells = getOrigin(this.model.clipboard);
-    if (!this.model.lastClipboardInteraction || !pasteCells) {
-      return;
-    }
-    if (this.model.lastClipboardInteraction === 'copy') {
-      if (Array.isArray(pasteCells)) {
-        for (const pasteCell of pasteCells) {
-          const cellOptions = pasteCell.toJSONWithoutId();
-          this.addCell({ id: v4(), cell: cellOptions }, pasteIndex);
-          pasteIndex++;
-        }
+    try {
+      let pasteValue: ClipboardType;
+      if (this.clipboard) {
+        pasteValue = this.clipboard;
       } else {
-        const cellOptions = pasteCells.toJSONWithoutId();
-        this.addCell({ id: v4(), cell: cellOptions }, pasteIndex);
+        pasteValue = JSON.parse(await readFromClipboard()) as ClipboardType;
       }
-    } else {
-      if (Array.isArray(pasteCells)) {
-        for (const pasteCell of pasteCells) {
-          this.model.addCell(pasteCell, pasteIndex);
-          this.model.deletedCells.splice(this.model.deletedCells.indexOf(pasteCell), 1);
-          pasteIndex++;
-        }
-      } else {
-        this.model.addCell(pasteCells, pasteIndex);
-        this.model.deletedCells.splice(this.model.deletedCells.indexOf(pasteCells), 1);
+      if (pasteValue.action === 'copy' || pasteValue.action === 'cut') {
+        this.insertCells(
+          pasteValue.cells.map((item) => {
+            return {
+              id: v4(),
+              cell: item,
+            };
+          }),
+          pasteIndex,
+        );
+        return;
       }
-      this.model.lastClipboardInteraction = '';
+    } catch (e) {
+      console.error(e);
     }
   };
 
