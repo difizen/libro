@@ -1,5 +1,14 @@
 # @difizen/libro-kernel
 
+## 0.2.4
+
+### Patch Changes
+
+- aa3a941: 1.export KernelAndTerminalPanelView &2.copy cell fallback in single page
+- Updated dependencies [aa3a941]
+  - @difizen/libro-core@0.2.4
+  - @difizen/libro-common@0.2.4
+
 ## 0.2.3
 
 ### Patch Changes

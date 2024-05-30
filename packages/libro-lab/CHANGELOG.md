@@ -1,5 +1,21 @@
 # @difizen/libro-lab
 
+## 0.2.4
+
+### Patch Changes
+
+- aa3a941: 1.export KernelAndTerminalPanelView &2.copy cell fallback in single page
+- Updated dependencies [aa3a941]
+  - @difizen/libro-core@0.2.4
+  - @difizen/libro-cofine-editor-core@0.2.4
+  - @difizen/libro-jupyter@0.2.4
+  - @difizen/libro-kernel@0.2.4
+  - @difizen/libro-language-client@0.2.4
+  - @difizen/libro-prompt-cell@0.2.4
+  - @difizen/libro-terminal@0.2.4
+  - @difizen/libro-toc@0.2.4
+  - @difizen/libro-widget@0.2.4
+
 ## 0.2.3
 
 ### Patch Changes
