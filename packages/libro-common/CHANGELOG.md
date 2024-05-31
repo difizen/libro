@@ -1,5 +1,11 @@
 # @difizen/libro-common
 
+## 0.2.5
+
+### Patch Changes
+
+- 2543ab8: fix:export KernelAndTerminalPanelView
+
 ## 0.2.4
 
 ### Patch Changes
