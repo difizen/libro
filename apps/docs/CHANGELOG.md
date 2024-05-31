@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.2.5
+
+### Patch Changes
+
+- 2543ab8: fix:export KernelAndTerminalPanelView
+- Updated dependencies [2543ab8]
+  - @difizen/libro-lab@0.2.5
+  - @difizen/libro-core@0.2.5
+  - @difizen/libro-jupyter@0.2.5
+  - @difizen/libro-terminal@0.2.5
+
 ## 0.2.4
 
 ### Patch Changes

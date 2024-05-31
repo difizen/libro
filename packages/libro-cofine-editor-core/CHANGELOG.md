@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.5
+
+### Patch Changes
+
+- 2543ab8: fix:export KernelAndTerminalPanelView
+- Updated dependencies [2543ab8]
+  - @difizen/libro-cofine-editor-contribution@0.2.5
+
 ## 0.2.4
 
 ### Patch Changes
