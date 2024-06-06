@@ -28,6 +28,15 @@ import { TextmateRegistry } from './textmate-registry.js';
 import type { TokenizerOption } from './textmate-tokenizer.js';
 import { createTextmateTokenizer } from './textmate-tokenizer.js';
 
+function isDiffEditor(obj: any): obj is monaco.editor.IStandaloneDiffEditor {
+  return (
+    'getOriginalEditor' in obj &&
+    typeof obj.getOriginalEditor === 'function' &&
+    'getModifiedEditor' in obj &&
+    typeof obj.getModifiedEditor === 'function'
+  );
+}
+
 @singleton({ contrib: EditorHandlerContribution })
 export class MonacoTextmateService implements EditorHandlerContribution {
   protected readonly tokenizerOption: TokenizerOption = {
@@ -62,11 +71,20 @@ export class MonacoTextmateService implements EditorHandlerContribution {
       }),
     );
     // 激活语言必须在创建编辑器实例后
-    const lang = (editor as monaco.editor.IStandaloneCodeEditor)
-      .getModel()
-      ?.getLanguageId();
-    if (lang) {
-      this.doActivateLanguage(lang, toDispose);
+    if (isDiffEditor(editor)) {
+      const lang = (editor as monaco.editor.IStandaloneDiffEditor)
+        .getModel()
+        ?.modified?.getLanguageId();
+      if (lang) {
+        this.doActivateLanguage(lang, toDispose);
+      }
+    } else {
+      const lang = (editor as monaco.editor.IStandaloneCodeEditor)
+        .getModel()
+        ?.getLanguageId();
+      if (lang) {
+        this.doActivateLanguage(lang, toDispose);
+      }
     }
   }
   canHandle() {
