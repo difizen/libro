@@ -1,5 +1,13 @@
 # @difizen/libro-shared-model
 
+## 0.2.6
+
+### Patch Changes
+
+- 14aa1ba: fix: activate language for diff editor
+- Updated dependencies [14aa1ba]
+  - @difizen/libro-common@0.2.6
+
 ## 0.2.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @difizen/libro-code-editor
 
+## 0.2.6
+
+### Patch Changes
+
+- 14aa1ba: fix: activate language for diff editor
+
 ## 0.2.5
 
 ### Patch Changes
