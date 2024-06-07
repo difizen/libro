@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.2.6
+
+### Patch Changes
+
+- 14aa1ba: fix: activate language for diff editor
+- Updated dependencies [14aa1ba]
+  - @difizen/libro-core@0.2.6
+  - @difizen/libro-jupyter@0.2.6
+  - @difizen/libro-lab@0.2.6
+  - @difizen/libro-terminal@0.2.6
+
 ## 0.2.5
 
 ### Patch Changes
