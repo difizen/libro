@@ -1,5 +1,13 @@
 # @difizen/libro-shared-model
 
+## 0.2.8
+
+### Patch Changes
+
+- 6b49dd7: fix: dispose libroView is invalid
+- Updated dependencies [6b49dd7]
+  - @difizen/libro-common@0.2.8
+
 ## 0.2.7
 
 ### Patch Changes

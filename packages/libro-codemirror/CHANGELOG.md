@@ -1,5 +1,16 @@
 # @difizen/libro-codemirror
 
+## 0.2.8
+
+### Patch Changes
+
+- 6b49dd7: fix: dispose libroView is invalid
+- Updated dependencies [6b49dd7]
+  - @difizen/libro-code-editor@0.2.8
+  - @difizen/libro-common@0.2.8
+  - @difizen/libro-lsp@0.2.8
+  - @difizen/libro-rendermime@0.2.8
+
 ## 0.2.7
 
 ### Patch Changes

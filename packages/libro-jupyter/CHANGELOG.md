@@ -1,5 +1,28 @@
 # @difizen/libro-jupyter
 
+## 0.2.8
+
+### Patch Changes
+
+- 6b49dd7: fix: dispose libroView is invalid
+- Updated dependencies [6b49dd7]
+  - @difizen/libro-core@0.2.8
+  - @difizen/libro-code-cell@0.2.8
+  - @difizen/libro-code-editor@0.2.8
+  - @difizen/libro-codemirror@0.2.8
+  - @difizen/libro-cofine-editor@0.2.8
+  - @difizen/libro-common@0.2.8
+  - @difizen/libro-kernel@0.2.8
+  - @difizen/libro-l10n@0.2.8
+  - @difizen/libro-language-client@0.2.8
+  - @difizen/libro-lsp@0.2.8
+  - @difizen/libro-markdown-cell@0.2.8
+  - @difizen/libro-output@0.2.8
+  - @difizen/libro-raw-cell@0.2.8
+  - @difizen/libro-rendermime@0.2.8
+  - @difizen/libro-search@0.2.8
+  - @difizen/libro-search-code-cell@0.2.8
+
 ## 0.2.7
 
 ### Patch Changes
