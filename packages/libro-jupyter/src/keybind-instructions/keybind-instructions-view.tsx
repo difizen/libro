@@ -177,24 +177,23 @@ export const KeybindInstrutionsComponent = forwardRef<
     >
       <div className="libro-keybind-instructions-command" ref={ref}>
         <Drawer
-          title={
-            <Segmented
-              value={segment}
-              onChange={(value) => setSegment(value as Segment)}
-              options={[
-                { label: l10n.t('快捷键'), value: 'keybind' },
-                { label: 'Magic 命令', value: 'magic' },
-              ]}
-            />
-          }
+          title="快捷键"
           placement="right"
           onClose={handleClose}
-          width="360px"
+          width="330px"
           open={visible}
           mask={true}
           className="libro-keybind-instructions-drawer"
           maskClosable={true}
         >
+          <Segmented
+            value={segment}
+            onChange={(value) => setSegment(value as Segment)}
+            options={[
+              { label: l10n.t('快捷键'), value: 'keybind' },
+              { label: 'Magic 命令', value: 'magic' },
+            ]}
+          />
           {segment === 'magic' && (
             <div className="libro-magic-table">
               <Table

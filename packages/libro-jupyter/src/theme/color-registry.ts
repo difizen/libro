@@ -52,6 +52,26 @@ export class LibroJupyterColorContribution implements ColorContribution {
         description: '',
       },
       {
+        id: 'libro.drawer.segmented.select.color',
+        defaults: { dark: '#edeeef', light: '#000a1a' },
+        description: '',
+      },
+      {
+        id: 'libro.drawer.segmented.select.background.color',
+        defaults: { dark: '#ffffff14', light: '#ffffff' },
+        description: '',
+      },
+      {
+        id: 'libro.drawer.segmented.color',
+        defaults: { dark: '#bdc0c4', light: '#000a1a78' },
+        description: '',
+      },
+      {
+        id: 'libro.drawer.segmented.background.color',
+        defaults: { dark: '#ffffff0f', light: '#151b210f' },
+        description: '',
+      },
+      {
         id: 'libro.table.title.color',
         defaults: { dark: '#E3E4E6', light: Color.rgba(0, 10, 26, 0.89) },
         description: '',

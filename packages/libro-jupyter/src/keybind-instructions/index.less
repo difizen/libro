@@ -34,19 +34,41 @@
       0 0 48px 16px rgba(0, 0, 0, 3%) !important;
   }
   .@{ant-prefix}-segmented {
-    background-color: var(--mana-libro-filtered-background-color);
+    width: 282px;
+    margin-bottom: 12px;
+    background-color: var(--mana-libro-drawer-segmented-background-color);
   }
   .@{ant-prefix}-segmented:hover {
     background: var(--mana-libro-filtered-background-color) !important;
   }
-  .@{ant-prefix}-segmented-item-label {
-    color: var(--mana-libro-drawer-title-color);
+  .@{ant-prefix}-segmented-item {
+    width: 138px;
   }
+  .@{ant-prefix}-segmented-item-label {
+    font-size: 12px;
+    line-height: 24px;
+    min-height: 24px;
+    color: var(--mana-libro-drawer-segmented-color);
+  }
+
+  .@{ant-prefix}-segmented-item-selected {
+    background-color: var(--mana-libro-drawer-segmented-select-background-color);
+    .@{ant-prefix}-segmented-item-label {
+      font-size: 12px;
+      line-height: 24px;
+      min-height: 24px;
+      color: var(--mana-libro-drawer-segmented-select-color);
+    }
+  }
+
   .@{ant-prefix}-drawer-mask {
     opacity: 0;
   }
   .@{ant-prefix}-drawer-close {
     color: var(--mana-libro-drawer-close-color);
+  }
+  .@{ant-prefix}-drawer-body {
+    padding-top: 0;
   }
   .@{ant-prefix}-drawer-close:hover {
     color: var(--mana-libro-drawer-close-color);
@@ -73,7 +95,7 @@
 }
 
 .libro-keybind-instructions-table {
-  height: calc(100% - 48px) !important;
+  height: calc(100% - 92px) !important;
   margin-top: 16px;
   overflow-y: auto !important;
 }
