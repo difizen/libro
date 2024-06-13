@@ -1234,6 +1234,7 @@ export class LibroView extends BaseView implements NotebookView {
       this.toDispose.dispose();
     }
     this.disposed = true;
+    super.dispose();
   }
 
   enterCommandMode = (isInLibro: boolean) => {
