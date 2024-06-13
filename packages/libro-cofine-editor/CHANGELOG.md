@@ -1,5 +1,18 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.7
+
+### Patch Changes
+
+- c59f4f4: feat: improve keybind panel style
+- Updated dependencies [c59f4f4]
+  - @difizen/libro-cofine-textmate@0.2.7
+  - @difizen/libro-code-editor@0.2.7
+  - @difizen/libro-cofine-editor-core@0.2.7
+  - @difizen/libro-common@0.2.7
+  - @difizen/libro-core@0.2.7
+  - @difizen/libro-lsp@0.2.7
+
 ## 0.2.6
 
 ### Patch Changes
