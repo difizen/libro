@@ -1,5 +1,15 @@
 # @difizen/libro-codemirror-raw-cell
 
+## 0.2.10
+
+### Patch Changes
+
+- e0e9e72: fix: cut cell bug when multiple selection
+- Updated dependencies [e0e9e72]
+  - @difizen/libro-core@0.2.10
+  - @difizen/libro-code-editor@0.2.10
+  - @difizen/libro-common@0.2.10
+
 ## 0.2.9
 
 ### Patch Changes

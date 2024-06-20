@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.10
+
+### Patch Changes
+
+- e0e9e72: fix: cut cell bug when multiple selection
+- Updated dependencies [e0e9e72]
+  - @difizen/libro-cofine-editor-core@0.2.10
+
 ## 0.2.9
 
 ### Patch Changes
