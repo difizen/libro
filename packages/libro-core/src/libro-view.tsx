@@ -793,9 +793,7 @@ export class LibroView extends BaseView implements NotebookView {
       };
       copy2clipboard(JSON.stringify(clipboard));
       this.clipboard = clipboard;
-      for (const cutCell of this.model.selections) {
-        this.deleteCell(cutCell);
-      }
+      this.deleteCell(cell);
     } else {
       const clipboard: ClipboardType = {
         action: 'cut',
