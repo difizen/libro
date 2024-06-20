@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.2.10
+
+### Patch Changes
+
+- e0e9e72: fix: cut cell bug when multiple selection
+
 ## 0.2.9
 
 ### Patch Changes
