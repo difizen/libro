@@ -1,5 +1,11 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.9
+
+### Patch Changes
+
+- 3e534f0: fix: clear cell when libro model initialize
+
 ## 0.2.8
 
 ### Patch Changes

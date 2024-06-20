@@ -1,5 +1,17 @@
 # @difizen/libro-search-codemirror-cell
 
+## 0.2.9
+
+### Patch Changes
+
+- 3e534f0: fix: clear cell when libro model initialize
+- Updated dependencies [3e534f0]
+  - @difizen/libro-core@0.2.9
+  - @difizen/libro-code-cell@0.2.9
+  - @difizen/libro-code-editor@0.2.9
+  - @difizen/libro-common@0.2.9
+  - @difizen/libro-search@0.2.9
+
 ## 0.2.8
 
 ### Patch Changes

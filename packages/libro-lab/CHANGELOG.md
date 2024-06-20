@@ -1,5 +1,21 @@
 # @difizen/libro-lab
 
+## 0.2.9
+
+### Patch Changes
+
+- 3e534f0: fix: clear cell when libro model initialize
+- Updated dependencies [3e534f0]
+  - @difizen/libro-core@0.2.9
+  - @difizen/libro-cofine-editor-core@0.2.9
+  - @difizen/libro-jupyter@0.2.9
+  - @difizen/libro-kernel@0.2.9
+  - @difizen/libro-language-client@0.2.9
+  - @difizen/libro-prompt-cell@0.2.9
+  - @difizen/libro-terminal@0.2.9
+  - @difizen/libro-toc@0.2.9
+  - @difizen/libro-widget@0.2.9
+
 ## 0.2.8
 
 ### Patch Changes

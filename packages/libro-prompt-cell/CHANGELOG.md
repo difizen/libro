@@ -1,5 +1,18 @@
 # @difizen/libro-prompt-cell
 
+## 0.2.9
+
+### Patch Changes
+
+- 3e534f0: fix: clear cell when libro model initialize
+- Updated dependencies [3e534f0]
+  - @difizen/libro-core@0.2.9
+  - @difizen/libro-code-editor@0.2.9
+  - @difizen/libro-codemirror@0.2.9
+  - @difizen/libro-common@0.2.9
+  - @difizen/libro-jupyter@0.2.9
+  - @difizen/libro-rendermime@0.2.9
+
 ## 0.2.8
 
 ### Patch Changes
