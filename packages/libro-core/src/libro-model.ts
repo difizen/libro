@@ -339,6 +339,10 @@ export class LibroModel implements NotebookModel, DndListModel {
   }
 
   async initialize(): Promise<CellOptions[]> {
+    this.cells = [];
+    getOrigin(this.sharedModel).transact(() => {
+      this.sharedModel.deleteCellRange(0, this.sharedModel.cells.length);
+    });
     const content = await this.loadNotebookContent();
     this.metadata = content.metadata;
     if (this.metadata?.['customParams']) {
