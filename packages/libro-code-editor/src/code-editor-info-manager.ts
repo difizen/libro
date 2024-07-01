@@ -2,13 +2,13 @@ import { singleton } from '@difizen/mana-app';
 
 @singleton()
 export class CodeEditorInfoManager {
-  editorHostRefMap: Map<string, any>;
+  editorHostRefMap: Map<string, React.RefObject<HTMLDivElement>>;
 
   constructor() {
     this.editorHostRefMap = new Map();
   }
 
-  setEditorHostRef(id: string, ref: any) {
+  setEditorHostRef(id: string, ref: React.RefObject<HTMLDivElement>) {
     if (!this.editorHostRefMap) {
       this.editorHostRefMap = new Map();
     }

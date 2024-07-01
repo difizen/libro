@@ -50,7 +50,7 @@ const CellEditor: React.FC = () => {
   const virtualizedManager = virtualizedManagerHelper.getOrCreate(
     instance.parent.model,
   );
-  const editorRef = useRef(null);
+  const editorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (instance.editorView?.editor) {
@@ -220,7 +220,7 @@ export class LibroCodeCellView extends LibroExecutableCellView {
     this.createEditor();
   }
 
-  setEditorHost(ref: any) {
+  setEditorHost(ref: React.RefObject<HTMLDivElement>) {
     const editorHostId = this.parent.id + this.id;
     this.codeEditorManager.setEditorHostRef(editorHostId, ref);
   }
