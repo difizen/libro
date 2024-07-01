@@ -102,12 +102,6 @@ export const SearchContent = () => {
                 onChange={instance.handleFindChange}
                 size="small"
                 placeholder="搜索"
-                onFocus={() => {
-                  instance.hasFocus = true;
-                }}
-                onBlur={() => {
-                  instance.hasFocus = false;
-                }}
                 suffix={
                   <span className="libro-search-input-suffix">
                     <IconFont
@@ -334,10 +328,12 @@ export class LibroSearchView extends BaseView {
   };
 
   onFocus = () => {
+    this.hasFocus = true;
     this.contextKey.disableCommandMode();
   };
 
   onBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    this.hasFocus = false;
     if (this.libro?.container?.current?.contains(e.relatedTarget)) {
       this.contextKey.enableCommandMode();
     }
@@ -363,7 +359,7 @@ export class LibroSearchView extends BaseView {
   toggleReplace = () => {
     if (this.searchProvider) {
       this.searchProvider.replaceMode = !this.replaceVisible;
-      this.search();
+      this.search(false);
     }
   };
 

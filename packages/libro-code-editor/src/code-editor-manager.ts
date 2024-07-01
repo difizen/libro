@@ -18,7 +18,7 @@ export class CodeEditorManager {
   @inject(CodeEditorSettings) protected readonly codeEditorSettings: CodeEditorSettings;
   protected stateCache: Map<string, EditorState> = new Map();
 
-  setEditorHostRef(id: string, ref: any) {
+  setEditorHostRef(id: string, ref: React.RefObject<HTMLDivElement>) {
     this.codeEditorInfoManager.setEditorHostRef(id, ref);
   }
 

@@ -73,7 +73,7 @@ export class CodeEditorView extends BaseView {
 
   protected modalChangeEmitter = new Emitter();
 
-  protected editorHostRef: any;
+  protected editorHostRef: React.RefObject<HTMLDivElement> | null | undefined;
 
   get onModalChange() {
     return this.modalChangeEmitter.event;
@@ -123,7 +123,7 @@ export class CodeEditorView extends BaseView {
 
     this.editorHostRef = this.getEditorHost();
 
-    if (this.editorHostRef.current && this.options.factory) {
+    if (this.editorHostRef?.current && this.options.factory) {
       this.editor = this.options.factory(
         {
           ...this.options,
@@ -158,6 +158,10 @@ export class CodeEditorView extends BaseView {
 
       if (this.options.autoFocus) {
         this.editor.focus();
+      }
+
+      if (!this.editorHostRef.current) {
+        return;
       }
 
       this.editorHostRef.current.addEventListener('focus', this.onViewActive);
