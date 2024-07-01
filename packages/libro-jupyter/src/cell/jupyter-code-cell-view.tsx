@@ -77,6 +77,20 @@ export class JupyterCodeCellView extends LibroCodeCellView {
     };
   }
 
+  override onViewMount(): void {
+    super.onViewMount();
+    const kernelConnection = getOrigin(
+      (this.parent.model as LibroJupyterModel).kernelConnection,
+    );
+
+    // kernel重启后，清除执行状态，输出不变
+    kernelConnection?.statusChanged((e) => {
+      if (e === 'starting') {
+        this.model.clearExecution();
+      }
+    });
+  }
+
   tooltipProvider: TooltipProvider = async (option: TooltipProviderOption) => {
     const cellContent = this.model.value;
     const kernelConnection = getOrigin(
