@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.11
+
+### Patch Changes
+
+- c5977db: fix: search highlight next & remove onstart launch & support kernel recovery
+- Updated dependencies [c5977db]
+  - @difizen/libro-cofine-editor-contribution@0.2.11
+
 ## 0.2.10
 
 ### Patch Changes

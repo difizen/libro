@@ -1,5 +1,11 @@
 # @difizen/libro-code-editor
 
+## 0.2.11
+
+### Patch Changes
+
+- c5977db: fix: search highlight next & remove onstart launch & support kernel recovery
+
 ## 0.2.10
 
 ### Patch Changes
