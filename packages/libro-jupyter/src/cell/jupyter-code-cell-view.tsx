@@ -6,6 +6,7 @@ import type {
   TooltipProvider,
   TooltipProviderOption,
 } from '@difizen/libro-code-editor';
+import type { KernelMessage } from '@difizen/libro-kernel';
 import { KernelError } from '@difizen/libro-kernel';
 import { getCellURI } from '@difizen/libro-language-client';
 import { transient } from '@difizen/mana-app';
@@ -77,16 +78,20 @@ export class JupyterCodeCellView extends LibroCodeCellView {
     };
   }
 
-  override onViewMount(): void {
+  override async onViewMount(): Promise<void> {
     super.onViewMount();
-    const kernelConnection = getOrigin(
-      (this.parent.model as LibroJupyterModel).kernelConnection,
-    );
-
+    const kcReady = getOrigin((this.parent.model as LibroJupyterModel).kcReady);
+    const kernelConnection = await kcReady;
     // kernel重启后，清除执行状态，输出不变
     kernelConnection?.statusChanged((e) => {
-      if (e === 'starting') {
+      const terminateStatus: KernelMessage.Status[] = [
+        'autorestarting',
+        'starting',
+        'restarting',
+      ];
+      if (terminateStatus.includes(e)) {
         this.model.clearExecution();
+        this.model.executing = false;
       }
     });
   }
