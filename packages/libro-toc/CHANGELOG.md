@@ -1,5 +1,16 @@
 # @difizen/libro-toc
 
+## 0.2.13
+
+### Patch Changes
+
+- 24e1ff0: fix: notebook change listener regist duplicate
+- Updated dependencies [24e1ff0]
+  - @difizen/libro-core@0.2.13
+  - @difizen/libro-common@0.2.13
+  - @difizen/libro-markdown@0.2.13
+  - @difizen/libro-rendermime@0.2.13
+
 ## 0.2.12
 
 ### Patch Changes

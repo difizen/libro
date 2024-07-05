@@ -1,5 +1,28 @@
 # @difizen/libro-jupyter
 
+## 0.2.13
+
+### Patch Changes
+
+- 24e1ff0: fix: notebook change listener regist duplicate
+- Updated dependencies [24e1ff0]
+  - @difizen/libro-language-client@0.2.13
+  - @difizen/libro-code-editor@0.2.13
+  - @difizen/libro-core@0.2.13
+  - @difizen/libro-code-cell@0.2.13
+  - @difizen/libro-codemirror@0.2.13
+  - @difizen/libro-cofine-editor@0.2.13
+  - @difizen/libro-common@0.2.13
+  - @difizen/libro-kernel@0.2.13
+  - @difizen/libro-l10n@0.2.13
+  - @difizen/libro-lsp@0.2.13
+  - @difizen/libro-markdown-cell@0.2.13
+  - @difizen/libro-output@0.2.13
+  - @difizen/libro-raw-cell@0.2.13
+  - @difizen/libro-rendermime@0.2.13
+  - @difizen/libro-search@0.2.13
+  - @difizen/libro-search-code-cell@0.2.13
+
 ## 0.2.12
 
 ### Patch Changes
