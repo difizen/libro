@@ -109,7 +109,7 @@ const WordWrapColumn: ConfigurationNode<number> = {
 const LSPEnabled: ConfigurationNode<boolean> = {
   id: 'libro.user.codeeditor.lspenabled',
   description: l10n.t(
-    '开启语言服务后，编辑器能提供更多辅助编码能力，包括：自动提示、代码诊断、hover提示、格式化、代码跳转、重命名等等(需要使用带有lsp服务的容器， 详情请咨询 @沧浪)',
+    '开启语言服务后，编辑器能提供更多辅助编码能力，包括：自动提示、代码诊断、hover提示、格式化、代码跳转、重命名等等',
   ),
   title: l10n.t('开启语言服务'),
   type: 'checkbox',

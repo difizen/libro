@@ -151,22 +151,30 @@ export class LibroService implements NotebookService, Disposable {
       },
     );
     const notebookView = await notebookViewPromise;
+    if (!this.libroViewTracker.viewCache.has(notebookView.id)) {
+      this.watchNotebookView(notebookView);
+    }
     this.libroViewTracker.viewCache.set(notebookView.id, notebookView);
     this.onNotebookViewCreatedEmitter.fire(notebookView);
+
+    return notebookViewPromise;
+  }
+
+  protected watchNotebookView(view: NotebookView) {
     this.toDispose.push(
-      notebookView.onSave(() => {
-        this.onNotebookViewSavedEmitter.fire(notebookView);
+      view.onSave(() => {
+        this.onNotebookViewSavedEmitter.fire(view);
       }),
     );
     this.toDispose.push(
-      notebookView.model.onCellContentChanged((e) => {
+      view.model.onCellContentChanged((e) => {
         this.onNotebookCellChangedEmitter.fire(e);
       }),
     );
     this.toDispose.push(
-      notebookView.model.onCellViewChanged((e) => {
+      view.model.onCellViewChanged((e) => {
         const changes: NotebookViewChange = {
-          libroView: notebookView,
+          libroView: view,
           cellChanges: [],
           contentChanges: [],
         };
@@ -198,8 +206,6 @@ export class LibroService implements NotebookService, Disposable {
         this.onNotebookViewChangedEmitter.fire(changes);
       }),
     );
-
-    return notebookViewPromise;
   }
 
   setActive(view?: NotebookView): void {
