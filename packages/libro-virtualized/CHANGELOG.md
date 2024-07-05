@@ -1,5 +1,11 @@
 # @difizen/libro-code-editor
 
+## 0.2.12
+
+### Patch Changes
+
+- e076504: fix: support kernel recovery
+
 ## 0.2.11
 
 ### Patch Changes

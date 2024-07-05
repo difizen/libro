@@ -1,5 +1,16 @@
 # @difizen/libro-core
 
+## 0.2.12
+
+### Patch Changes
+
+- e076504: fix: support kernel recovery
+- Updated dependencies [e076504]
+  - @difizen/libro-code-editor@0.2.12
+  - @difizen/libro-common@0.2.12
+  - @difizen/libro-shared-model@0.2.12
+  - @difizen/libro-virtualized@0.2.12
+
 ## 0.2.11
 
 ### Patch Changes
