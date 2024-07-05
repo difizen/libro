@@ -1,5 +1,18 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.12
+
+### Patch Changes
+
+- e076504: fix: support kernel recovery
+- Updated dependencies [e076504]
+  - @difizen/libro-code-editor@0.2.12
+  - @difizen/libro-cofine-editor-core@0.2.12
+  - @difizen/libro-cofine-textmate@0.2.12
+  - @difizen/libro-common@0.2.12
+  - @difizen/libro-core@0.2.12
+  - @difizen/libro-lsp@0.2.12
+
 ## 0.2.11
 
 ### Patch Changes

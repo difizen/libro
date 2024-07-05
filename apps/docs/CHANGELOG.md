@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.2.12
+
+### Patch Changes
+
+- e076504: fix: support kernel recovery
+- Updated dependencies [e076504]
+  - @difizen/libro-jupyter@0.2.12
+  - @difizen/libro-core@0.2.12
+  - @difizen/libro-lab@0.2.12
+  - @difizen/libro-terminal@0.2.12
+
 ## 0.2.11
 
 ### Patch Changes
