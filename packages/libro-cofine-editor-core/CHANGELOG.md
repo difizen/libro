@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.13
+
+### Patch Changes
+
+- 24e1ff0: fix: notebook change listener regist duplicate
+- Updated dependencies [24e1ff0]
+  - @difizen/libro-cofine-editor-contribution@0.2.13
+
 ## 0.2.12
 
 ### Patch Changes

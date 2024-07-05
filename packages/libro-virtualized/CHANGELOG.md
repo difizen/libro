@@ -1,5 +1,11 @@
 # @difizen/libro-code-editor
 
+## 0.2.13
+
+### Patch Changes
+
+- 24e1ff0: fix: notebook change listener regist duplicate
+
 ## 0.2.12
 
 ### Patch Changes
