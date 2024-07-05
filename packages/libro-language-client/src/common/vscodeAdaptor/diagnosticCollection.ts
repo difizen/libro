@@ -223,7 +223,6 @@ export class LibroDiagnosticCollection implements DiagnosticCollection {
   updateModelMarkers(uri: Uri, markers: editor.IMarkerData[]): void {
     const model = monaco.editor.getModel(uri);
     if (model) {
-      monaco.editor.setModelMarkers(model, this.name, []);
       monaco.editor.setModelMarkers(model, this.name, markers);
     }
   }

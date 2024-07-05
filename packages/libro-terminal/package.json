@@ -49,7 +49,6 @@
     "@difizen/libro-kernel": "^0.2.12",
     "@ant-design/icons": "^5.1.0",
     "@difizen/mana-app": "latest",
-    "lodash.throttle": "^4.1.1",
     "uuid": "^9.0.0",
     "xterm-addon-search": "^0.13.0",
     "xterm": "~5.1.0",
@@ -63,7 +62,6 @@
     "react": ">=16"
   },
   "devDependencies": {
-    "@types/lodash.throttle": "^4.1.1",
     "@types/react": "^18.2.25",
     "@types/uuid": "^9.0.2"
   }
