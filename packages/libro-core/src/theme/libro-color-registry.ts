@@ -357,6 +357,16 @@ export class LibroColorRegistry implements ColorContribution {
         description: '',
       },
       {
+        id: 'libro.editor.search.match',
+        defaults: { dark: '#8c4717', light: '#ffb184' },
+        description: '',
+      },
+      {
+        id: 'libro.editor.search.currentmatch',
+        defaults: { dark: '#a87713', light: '#fbde28' },
+        description: '',
+      },
+      {
         id: 'libro.editor.indent.marker.bg.color',
         defaults: { dark: '#42444D', light: '#D6DBEB' },
         description: '',
@@ -366,7 +376,6 @@ export class LibroColorRegistry implements ColorContribution {
         defaults: { dark: '#788491', light: '#9f9f9f' },
         description: '',
       },
-
       {
         id: 'libro.cell.selected.bg.color',
         defaults: { dark: '#353638', light: '#F1FAFF' },
