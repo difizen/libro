@@ -93,6 +93,7 @@ export class LibroSessionManager {
 
     // Initialize internal data.
     this._ready = (async () => {
+      await this.serverManager.ready;
       await getOrigin(this._pollModels).start();
       await getOrigin(this._pollModels).tick;
       // if (this._kernelManager.isActive) {
