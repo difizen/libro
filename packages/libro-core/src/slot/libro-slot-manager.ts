@@ -30,6 +30,9 @@ export class LibroSlotManager {
         this.getSlotName(libro, item.slot),
         item.viewOpenOption,
       );
+      libro.onDisposed(() => {
+        extra.dispose();
+      });
     });
   }
 }
