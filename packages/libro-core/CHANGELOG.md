@@ -1,5 +1,16 @@
 # @difizen/libro-core
 
+## 0.2.14
+
+### Patch Changes
+
+- 95855f6: fix: top toolbar invalid when not editable but runnable
+- Updated dependencies [95855f6]
+  - @difizen/libro-code-editor@0.2.14
+  - @difizen/libro-common@0.2.14
+  - @difizen/libro-shared-model@0.2.14
+  - @difizen/libro-virtualized@0.2.14
+
 ## 0.2.13
 
 ### Patch Changes
