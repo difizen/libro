@@ -6,7 +6,6 @@ import {
   LibroToolbarArea,
   LibroView,
   NotebookCommands,
-  LibroCellView,
   ExecutableCellView,
 } from '@difizen/libro-core';
 import type { CommandRegistry } from '@difizen/mana-app';
@@ -63,20 +62,13 @@ export class LibroJupyterCommandContribution implements CommandContribution {
         },
         isVisible: (cell, libro, path) => {
           if (
-            !cell ||
             !libro ||
-            !(cell instanceof LibroCellView) ||
-            !(libro instanceof LibroView)
+            !(libro instanceof LibroView) ||
+            path !== LibroToolbarArea.HeaderCenter
           ) {
             return false;
           }
-          if (
-            path !== LibroToolbarArea.HeaderCenter ||
-            !(libro?.model as LibroModel).executable
-          ) {
-            return false;
-          }
-          return !!cell;
+          return (libro?.model as LibroModel).executable;
         },
         isEnabled: (cell, libro) => {
           if (!libro || !(libro instanceof LibroView)) {

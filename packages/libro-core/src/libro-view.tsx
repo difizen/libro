@@ -234,11 +234,13 @@ export const LibroRender = forwardRef<HTMLDivElement>(function LibroRender(props
         const dndDom = ref?.current?.getElementsByClassName(
           'libro-dnd-cells-container',
         )[0];
+
         if (
           !dndDom?.contains(e.relatedTarget) &&
           (!instance.model.inputEditable ||
             !instance.model.outputEditable ||
-            !instance.model.cellsEditable)
+            !instance.model.cellsEditable) &&
+          !instance.model.runnable
         ) {
           instance.selectCell(undefined);
         }
@@ -247,9 +249,10 @@ export const LibroRender = forwardRef<HTMLDivElement>(function LibroRender(props
         libroService.focus = undefined;
         instance.onBlurEmitter.fire('');
         if (
-          !instance.model.inputEditable ||
-          !instance.model.outputEditable ||
-          !instance.model.cellsEditable
+          (!instance.model.inputEditable ||
+            !instance.model.outputEditable ||
+            !instance.model.cellsEditable) &&
+          !instance.model.runnable
         ) {
           instance.selectCell(undefined);
         }
