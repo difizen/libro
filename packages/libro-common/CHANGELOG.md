@@ -1,5 +1,11 @@
 # @difizen/libro-common
 
+## 0.2.14
+
+### Patch Changes
+
+- 95855f6: fix: top toolbar invalid when not editable but runnable
+
 ## 0.2.13
 
 ### Patch Changes

@@ -1,5 +1,28 @@
 # @difizen/libro-jupyter
 
+## 0.2.14
+
+### Patch Changes
+
+- 95855f6: fix: top toolbar invalid when not editable but runnable
+- Updated dependencies [95855f6]
+  - @difizen/libro-core@0.2.14
+  - @difizen/libro-code-cell@0.2.14
+  - @difizen/libro-code-editor@0.2.14
+  - @difizen/libro-codemirror@0.2.14
+  - @difizen/libro-cofine-editor@0.2.14
+  - @difizen/libro-common@0.2.14
+  - @difizen/libro-kernel@0.2.14
+  - @difizen/libro-l10n@0.2.14
+  - @difizen/libro-language-client@0.2.14
+  - @difizen/libro-lsp@0.2.14
+  - @difizen/libro-markdown-cell@0.2.14
+  - @difizen/libro-output@0.2.14
+  - @difizen/libro-raw-cell@0.2.14
+  - @difizen/libro-rendermime@0.2.14
+  - @difizen/libro-search@0.2.14
+  - @difizen/libro-search-code-cell@0.2.14
+
 ## 0.2.13
 
 ### Patch Changes
