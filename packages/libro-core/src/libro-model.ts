@@ -252,7 +252,11 @@ export class LibroModel implements NotebookModel, DndListModel {
         currpos += delta.retain;
       }
     });
-    if (!this.inputEditable && !this.isInitialized) {
+    if (
+      (!this.inputEditable || !this.outputEditable || !this.cellsEditable) &&
+      !this.runnable &&
+      !this.isInitialized
+    ) {
       this.selectCell(undefined);
       return;
     }
