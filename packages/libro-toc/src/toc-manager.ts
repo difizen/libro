@@ -22,6 +22,9 @@ export class LibroTOCManager {
     }
     provider = this.libroTOCProviderFactory({ view });
     this.tocProviderMap.set(view, provider);
+    view.onDisposed(() => {
+      this.tocProviderMap.delete(view);
+    });
     return provider;
   }
 }
