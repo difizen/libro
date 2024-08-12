@@ -1,5 +1,17 @@
 # @difizen/libro-search-codemirror-cell
 
+## 0.2.15
+
+### Patch Changes
+
+- f0c8f4f: update search highlight color
+- Updated dependencies [f0c8f4f]
+  - @difizen/libro-core@0.2.15
+  - @difizen/libro-code-cell@0.2.15
+  - @difizen/libro-code-editor@0.2.15
+  - @difizen/libro-common@0.2.15
+  - @difizen/libro-search@0.2.15
+
 ## 0.2.14
 
 ### Patch Changes
