@@ -58,7 +58,10 @@ import {
 } from './toolbar/index.js';
 import { WidgetModule } from './widget/index.js';
 
-export const LibroJupyterModule = ManaModule.create()
+/**
+ *  去除editor和lsp依赖的jupyter module，在opensumi场景使用
+ */
+export const LibroJupyterNoEditorModule = ManaModule.create()
   .register(
     JupyterWorkspaceService,
     LibroJupyterFileService,
@@ -107,13 +110,17 @@ export const LibroJupyterModule = ManaModule.create()
     LibroSearchModule,
     SearchCodeCellModule,
     LibroAddCellModule,
-    LibroE2EditorModule,
-    CodeMirrorEditorModule,
+
     // custom module
     LibroBetweenCellModule,
     KeybindInstructionsModule,
     PlotlyModule,
     LibroJupyterFileModule,
-    LibroLanguageClientModule,
     WidgetModule,
   );
+
+export const LibroJupyterModule = ManaModule.create().dependOn(
+  LibroE2EditorModule,
+  CodeMirrorEditorModule,
+  LibroLanguageClientModule,
+);
