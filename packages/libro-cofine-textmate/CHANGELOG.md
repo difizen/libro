@@ -1,5 +1,13 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.15
+
+### Patch Changes
+
+- f0c8f4f: update search highlight color
+- Updated dependencies [f0c8f4f]
+  - @difizen/libro-cofine-editor-core@0.2.15
+
 ## 0.2.14
 
 ### Patch Changes

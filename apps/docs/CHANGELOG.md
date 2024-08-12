@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.2.15
+
+### Patch Changes
+
+- f0c8f4f: update search highlight color
+- Updated dependencies [f0c8f4f]
+  - @difizen/libro-jupyter@0.2.15
+  - @difizen/libro-core@0.2.15
+  - @difizen/libro-lab@0.2.15
+  - @difizen/libro-terminal@0.2.15
+
 ## 0.2.14
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.15
+
+### Patch Changes
+
+- f0c8f4f: update search highlight color
+
 ## 0.2.14
 
 ### Patch Changes
