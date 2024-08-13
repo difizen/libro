@@ -279,6 +279,7 @@ export const LibroRender = forwardRef<HTMLDivElement>(function LibroRender(props
 @view(notebookViewFactoryId)
 export class LibroView extends BaseView implements NotebookView {
   protected override toDispose = new DisposableCollection();
+  @prop()
   model: NotebookModel;
   headerRender: FC<any> = LibroViewHeader;
   loadingRender: FC<any> = () => (
