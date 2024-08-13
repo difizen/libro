@@ -56,10 +56,34 @@ export const LibroConfigAllowPreferredSession: ConfigurationNode<boolean> = {
   },
 };
 
+export const LibroConfigKernelUnreadyText: ConfigurationNode<string> = {
+  id: 'libro.jupyter.kernel.unready.text',
+  description: 'kernel unready text',
+  title: 'kernel 处于 unready 时左上角提示文案',
+  type: 'string',
+  defaultValue: 'Kernel 准备中...',
+  schema: {
+    type: 'string',
+  },
+};
+
+export const LibroConfigKernelUnreadyBtnText: ConfigurationNode<string> = {
+  id: 'libro.jupyter.kernel.unready.btn.text',
+  description: 'kernel unready btn text',
+  title: 'kernel 处于 unready 时执行按钮提示文案',
+  type: 'string',
+  defaultValue: 'kernel准备中，无法执行',
+  schema: {
+    type: 'string',
+  },
+};
+
 export const LibroJupyterConfiguration = {
   AutoSave: LibroConfigAutoSave,
   OpenSlot: LibroConfigOpenSlot,
   AllowUpload: LibroConfigAllowUpload,
   AllowPreferredSession: LibroConfigAllowPreferredSession,
   AllowDownload: LibroConfigAllowDownload,
+  KernelUnreadyText: LibroConfigKernelUnreadyText,
+  KernelUnreadyBtnText: LibroConfigKernelUnreadyBtnText,
 };

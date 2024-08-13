@@ -14,6 +14,8 @@ export class LibroJupyterSettingContribution implements ConfigurationContributio
       LibroJupyterConfiguration.AllowDownload,
       LibroJupyterConfiguration.AllowUpload,
       LibroJupyterConfiguration.AllowPreferredSession,
+      LibroJupyterConfiguration.KernelUnreadyBtnText,
+      LibroJupyterConfiguration.KernelUnreadyText,
     ];
   }
 }

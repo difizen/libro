@@ -7,12 +7,15 @@ import {
   getOrigin,
   CommandRegistry,
   ViewInstance,
+  ConfigurationService,
 } from '@difizen/mana-app';
 import type { Toolbar } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 import { Menu, Dropdown, Tooltip } from 'antd';
 import type { MenuProps } from 'antd';
+import { useEffect, useState } from 'react';
 
+import { LibroJupyterConfiguration } from '../index.js';
 import type { LibroJupyterModel } from '../libro-jupyter-model.js';
 
 export const RunSelector: React.FC = () => {
@@ -22,11 +25,27 @@ export const RunSelector: React.FC = () => {
   const data = toolbar.currentArgs as LibroToolbarArags;
   const command = useInject(CommandRegistry);
   const curCell = data?.[0];
+  const configService = useInject<ConfigurationService>(ConfigurationService);
   const isRunVisible =
     ExecutableCellModel.is(curCell?.model) && !curCell?.model.executing ? true : false;
   const isKernelIdle = libroModel
     ? (libroModel as LibroJupyterModel).isKernelIdle
     : false;
+
+  const [kernelUnreadyBtnText, setKernelUnreadyBtnText] =
+    useState<string>('kernel准备中，无法执行');
+
+  useEffect(() => {
+    configService
+      .get(LibroJupyterConfiguration['KernelUnreadyBtnText'])
+      .then((value) => {
+        setKernelUnreadyBtnText(value);
+        return;
+      })
+      .catch(() => {
+        //
+      });
+  });
 
   const handleChange: MenuProps['onClick'] = (e) => {
     const args = getOrigin(data) || [];
@@ -102,7 +121,7 @@ export const RunSelector: React.FC = () => {
     <Tooltip
       overlayClassName="libro-tooltip-placement-bottom"
       placement="bottom"
-      title={l10n.t('kernel准备中，无法执行')}
+      title={l10n.t(kernelUnreadyBtnText)}
     >
       <PlayCircleOutlined />
     </Tooltip>
