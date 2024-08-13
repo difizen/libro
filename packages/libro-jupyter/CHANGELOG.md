@@ -1,5 +1,28 @@
 # @difizen/libro-jupyter
 
+## 0.2.17
+
+### Patch Changes
+
+- 106bc9a: feat: add config to allow preferred session & kernel unready text
+- Updated dependencies [106bc9a]
+  - @difizen/libro-core@0.2.17
+  - @difizen/libro-code-cell@0.2.17
+  - @difizen/libro-code-editor@0.2.17
+  - @difizen/libro-codemirror@0.2.17
+  - @difizen/libro-cofine-editor@0.2.17
+  - @difizen/libro-common@0.2.17
+  - @difizen/libro-kernel@0.2.17
+  - @difizen/libro-l10n@0.2.17
+  - @difizen/libro-language-client@0.2.17
+  - @difizen/libro-lsp@0.2.17
+  - @difizen/libro-markdown-cell@0.2.17
+  - @difizen/libro-output@0.2.17
+  - @difizen/libro-raw-cell@0.2.17
+  - @difizen/libro-rendermime@0.2.17
+  - @difizen/libro-search@0.2.17
+  - @difizen/libro-search-code-cell@0.2.17
+
 ## 0.2.16
 
 ### Patch Changes

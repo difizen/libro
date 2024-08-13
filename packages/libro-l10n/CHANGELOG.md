@@ -1,5 +1,11 @@
 # @difizen/libro-l10n
 
+## 0.2.17
+
+### Patch Changes
+
+- 106bc9a: feat: add config to allow preferred session & kernel unready text
+
 ## 0.2.16
 
 ### Patch Changes
