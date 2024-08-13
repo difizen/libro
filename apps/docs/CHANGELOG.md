@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.2.16
+
+### Patch Changes
+
+- 5fc6eb9: fix: add missing kernelspec dep
+- Updated dependencies [5fc6eb9]
+  - @difizen/libro-core@0.2.16
+  - @difizen/libro-jupyter@0.2.16
+  - @difizen/libro-lab@0.2.16
+  - @difizen/libro-terminal@0.2.16
+
 ## 0.2.15
 
 ### Patch Changes

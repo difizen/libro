@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.2.16
+
+### Patch Changes
+
+- 5fc6eb9: fix: add missing kernelspec dep
+
 ## 0.2.15
 
 ### Patch Changes

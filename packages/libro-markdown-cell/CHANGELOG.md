@@ -1,5 +1,16 @@
 # @difizen/libro-markdown
 
+## 0.2.16
+
+### Patch Changes
+
+- 5fc6eb9: fix: add missing kernelspec dep
+- Updated dependencies [5fc6eb9]
+  - @difizen/libro-code-editor@0.2.16
+  - @difizen/libro-common@0.2.16
+  - @difizen/libro-core@0.2.16
+  - @difizen/libro-markdown@0.2.16
+
 ## 0.2.15
 
 ### Patch Changes
