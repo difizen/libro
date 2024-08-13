@@ -146,7 +146,7 @@ export const KernelStatusSelector: React.FC = () => {
     const showBadge =
       (libroModel.kernelConnection && !libroModel.kernelConnection.isDisposed) ||
       text === 'connecting';
-    const isKernelBusy = text === 'unknown' || text === 'busy';
+    const isKernelBusy = text === 'busy';
 
     return (
       <div className="libro-kernel-and-container-status">
