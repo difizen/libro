@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.2.18
+
+### Patch Changes
+
+- 472a4a8: fix: fix error denpendencies
+- Updated dependencies [472a4a8]
+  - @difizen/libro-jupyter@0.2.18
+  - @difizen/libro-core@0.2.18
+  - @difizen/libro-lab@0.2.18
+  - @difizen/libro-terminal@0.2.18
+
 ## 0.2.17
 
 ### Patch Changes
