@@ -1,5 +1,13 @@
 # @difizen/libro-shared-model
 
+## 0.2.18
+
+### Patch Changes
+
+- 472a4a8: fix: fix error denpendencies
+- Updated dependencies [472a4a8]
+  - @difizen/libro-common@0.2.18
+
 ## 0.2.17
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.2.18
+
+### Patch Changes
+
+- 472a4a8: fix: fix error denpendencies
+
 ## 0.2.17
 
 ### Patch Changes
