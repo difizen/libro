@@ -1,5 +1,16 @@
 # @difizen/libro-codemirror
 
+## 0.2.17
+
+### Patch Changes
+
+- 106bc9a: feat: add config to allow preferred session & kernel unready text
+- Updated dependencies [106bc9a]
+  - @difizen/libro-code-editor@0.2.17
+  - @difizen/libro-common@0.2.17
+  - @difizen/libro-lsp@0.2.17
+  - @difizen/libro-rendermime@0.2.17
+
 ## 0.2.16
 
 ### Patch Changes

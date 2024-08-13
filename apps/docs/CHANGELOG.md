@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.2.17
+
+### Patch Changes
+
+- 106bc9a: feat: add config to allow preferred session & kernel unready text
+- Updated dependencies [106bc9a]
+  - @difizen/libro-jupyter@0.2.17
+  - @difizen/libro-core@0.2.17
+  - @difizen/libro-lab@0.2.17
+  - @difizen/libro-terminal@0.2.17
+
 ## 0.2.16
 
 ### Patch Changes
