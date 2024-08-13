@@ -13,6 +13,7 @@ export class LibroJupyterSettingContribution implements ConfigurationContributio
       LibroJupyterConfiguration.OpenSlot,
       LibroJupyterConfiguration.AllowDownload,
       LibroJupyterConfiguration.AllowUpload,
+      LibroJupyterConfiguration.AllowPreferredSession,
     ];
   }
 }

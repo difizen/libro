@@ -45,9 +45,21 @@ export const LibroConfigAllowUpload: ConfigurationNode<boolean> = {
   },
 };
 
+export const LibroConfigAllowPreferredSession: ConfigurationNode<boolean> = {
+  id: 'libro.jupyter.allow.prefer.session',
+  description: 'kernel切换是否显示Use Kernel from Preferred Session',
+  title: '允许 Preferred session切换显示',
+  type: 'checkbox',
+  defaultValue: true,
+  schema: {
+    type: 'boolean',
+  },
+};
+
 export const LibroJupyterConfiguration = {
   AutoSave: LibroConfigAutoSave,
   OpenSlot: LibroConfigOpenSlot,
   AllowUpload: LibroConfigAllowUpload,
+  AllowPreferredSession: LibroConfigAllowPreferredSession,
   AllowDownload: LibroConfigAllowDownload,
 };

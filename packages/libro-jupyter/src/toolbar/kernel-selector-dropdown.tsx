@@ -1,10 +1,11 @@
 import { CaretDownOutlined } from '@ant-design/icons';
 import type { LibroView } from '@difizen/libro-core';
 import { LibroKernelConnectionManager, KernelSpecManager } from '@difizen/libro-kernel';
-import { useInject, ViewInstance } from '@difizen/mana-app';
+import { ConfigurationService, useInject, ViewInstance } from '@difizen/mana-app';
 import { Dropdown, Space } from 'antd';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
+import { LibroJupyterConfiguration } from '../config/index.js';
 import { LibroJupyterModel } from '../libro-jupyter-model.js';
 import './index.less';
 
@@ -54,8 +55,9 @@ function getKernelList(
 function getKernelListItems(
   preferredSessionKernelList: PreferredSessionKernelListElem[],
   otherKernelList: OtherKernelListElem[],
+  allowPreferredSession: boolean,
 ) {
-  return [
+  let array = [
     {
       key: 'StartPreferredKernel',
       type: 'group',
@@ -102,10 +104,30 @@ function getKernelListItems(
       label: 'Shut Down the Kernel',
     },
   ];
+  if (!allowPreferredSession) {
+    array = array.filter((item) => {
+      return item.key !== 'UseKernelFromPreferredSession';
+    });
+  }
+  return array;
 }
 
 export const KernelSelector: React.FC = () => {
   const libroView = useInject<LibroView>(ViewInstance);
+  const configService = useInject<ConfigurationService>(ConfigurationService);
+  const [allowPreferredSession, setAllowPreferredSession] = useState<boolean>(true);
+
+  useEffect(() => {
+    configService
+      .get(LibroJupyterConfiguration['AllowPreferredSession'])
+      .then((value) => {
+        setAllowPreferredSession(value);
+        return;
+      })
+      .catch(() => {
+        //
+      });
+  });
 
   const libroModel = libroView ? libroView.model : undefined;
 
@@ -195,7 +217,11 @@ export const KernelSelector: React.FC = () => {
     <Dropdown
       overlayClassName="libro-kernel-dropdown"
       menu={{
-        items: getKernelListItems(preferredSessionKernelList, otherKernelList),
+        items: getKernelListItems(
+          preferredSessionKernelList,
+          otherKernelList,
+          allowPreferredSession,
+        ),
         onClick: ({ key }) => handleChange(key),
       }}
       trigger={['click']}
