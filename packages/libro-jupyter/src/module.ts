@@ -122,5 +122,6 @@ export const LibroJupyterNoEditorModule = ManaModule.create()
 export const LibroJupyterModule = ManaModule.create().dependOn(
   LibroE2EditorModule,
   CodeMirrorEditorModule,
+  LibroJupyterNoEditorModule,
   LibroLanguageClientModule,
 );
