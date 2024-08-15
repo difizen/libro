@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.2.20
+
+### Patch Changes
+
+- b1ede64: fix: fix server launch in different scenarios
+- Updated dependencies [b1ede64]
+  - @difizen/libro-jupyter@0.2.20
+  - @difizen/libro-core@0.2.20
+  - @difizen/libro-lab@0.2.20
+  - @difizen/libro-terminal@0.2.20
+
 ## 0.2.19
 
 ### Patch Changes
