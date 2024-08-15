@@ -1,5 +1,16 @@
 # @difizen/libro-toc
 
+## 0.2.19
+
+### Patch Changes
+
+- e0b6cf1: fix(jupyter): fix the condition when execution btn show tip
+- Updated dependencies [e0b6cf1]
+  - @difizen/libro-common@0.2.19
+  - @difizen/libro-core@0.2.19
+  - @difizen/libro-markdown@0.2.19
+  - @difizen/libro-rendermime@0.2.19
+
 ## 0.2.18
 
 ### Patch Changes
