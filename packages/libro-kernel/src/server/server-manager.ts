@@ -22,7 +22,7 @@ export class ServerManager {
   @prop()
   kernelspec?: ISpecModels;
 
-  protected defer: Deferred<ISpecModels> = new Deferred<ISpecModels>();
+  protected defer: Deferred<ISpecModels>;
 
   get ready() {
     return this.defer.promise;
@@ -35,8 +35,13 @@ export class ServerManager {
   }
 
   async launch() {
+    const oldDefer = this.defer;
+    this.defer = new Deferred<ISpecModels>();
     this.doLaunch()
       .then((r) => {
+        if (oldDefer) {
+          oldDefer.resolve(r);
+        }
         this.defer.resolve(r);
         return;
       })
