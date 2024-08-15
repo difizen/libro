@@ -1,5 +1,11 @@
 # @difizen/libro-l10n
 
+## 0.2.19
+
+### Patch Changes
+
+- e0b6cf1: fix(jupyter): fix the condition when execution btn show tip
+
 ## 0.2.18
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @difizen/libro-docs
 
+## 0.2.19
+
+### Patch Changes
+
+- e0b6cf1: fix(jupyter): fix the condition when execution btn show tip
+- Updated dependencies [e0b6cf1]
+  - @difizen/libro-jupyter@0.2.19
+  - @difizen/libro-core@0.2.19
+  - @difizen/libro-lab@0.2.19
+  - @difizen/libro-terminal@0.2.19
+
 ## 0.2.18
 
 ### Patch Changes
