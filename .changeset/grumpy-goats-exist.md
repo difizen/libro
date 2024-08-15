@@ -30,4 +30,4 @@
 '@difizen/libro-widget': patch
 ---
 
-fix(kernel): fix server ready defer when use launch repeatly
+fix: fix server launch in different scenarios
