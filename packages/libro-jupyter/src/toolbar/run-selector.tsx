@@ -15,22 +15,25 @@ import { Menu, Dropdown, Tooltip } from 'antd';
 import type { MenuProps } from 'antd';
 import { useEffect, useState } from 'react';
 
-import { LibroJupyterConfiguration } from '../index.js';
+import { LibroJupyterConfiguration, ServerManager } from '../index.js';
 import type { LibroJupyterModel } from '../libro-jupyter-model.js';
+import { kernelPrepared } from '../utils/index.js';
 
 export const RunSelector: React.FC = () => {
   const libroView = useInject<LibroView>(ViewInstance);
   const libroModel = libroView ? libroView.model : undefined;
   const toolbar = useInject<Toolbar>(ToolbarInstance);
+  const libroServerManager = useInject(ServerManager);
   const data = toolbar.currentArgs as LibroToolbarArags;
   const command = useInject(CommandRegistry);
   const curCell = data?.[0];
   const configService = useInject<ConfigurationService>(ConfigurationService);
   const isRunVisible =
     ExecutableCellModel.is(curCell?.model) && !curCell?.model.executing ? true : false;
-  const isKernelIdle = libroModel
-    ? (libroModel as LibroJupyterModel).isKernelIdle
-    : false;
+  const isKernelPrepared = kernelPrepared(
+    libroServerManager,
+    libroModel as LibroJupyterModel,
+  );
 
   const [kernelUnreadyBtnText, setKernelUnreadyBtnText] =
     useState<string>('kernel准备中，无法执行');
@@ -109,7 +112,7 @@ export const RunSelector: React.FC = () => {
     />
   );
 
-  if (isKernelIdle) {
+  if (isKernelPrepared) {
     return (
       <Dropdown overlay={menu} placement="bottomLeft">
         <PlayCircleOutlined />

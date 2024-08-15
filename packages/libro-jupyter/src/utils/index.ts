@@ -1,8 +1,18 @@
 import type { CellModel } from '@difizen/libro-core';
+import type { ServerManager } from '@difizen/libro-kernel';
+import { l10n } from '@difizen/mana-l10n';
 import { duration } from 'moment';
 
-import type { LibroJupyterModel } from '../libro-jupyter-model.js';
-import type { ExecutedWithKernelCellModel } from '../libro-jupyter-protocol.js';
+import { LibroJupyterModel } from '../libro-jupyter-model.js';
+import type {
+  ExecutedWithKernelCellModel,
+  ServerStatus,
+} from '../libro-jupyter-protocol.js';
+import {
+  jupyterServiceStatus,
+  kernelStatus,
+  statusToColor,
+} from '../libro-jupyter-protocol.js';
 
 export const EXECUTE_INPUT = 'to_execute'; // 用户点击执行按钮的时间
 export const EXECUTE_REPLY_START = 'shell.execute_reply.started'; // Kernel 开始执行任务时间在 metadata 中的 key
@@ -63,3 +73,48 @@ export function isKernelIdle(libroModel?: LibroJupyterModel): boolean {
     libroModel.kernelConnection.status === 'idle'
   );
 }
+
+export const getServiceStatusInfo = (
+  serverManager: ServerManager | undefined,
+  libroModel: LibroJupyterModel | undefined,
+): ServerStatus => {
+  if (!serverManager || serverManager.launching) {
+    return jupyterServiceStatus['loading'];
+  }
+
+  if (
+    !libroModel ||
+    !(libroModel instanceof LibroJupyterModel) ||
+    libroModel.kernelConnecting === true ||
+    libroModel.kernelConnecting === undefined
+  ) {
+    return kernelStatus['connecting'];
+  }
+
+  if (!libroModel.kernelConnection) {
+    return {
+      color: statusToColor.blocking,
+      text: 'no kernel',
+      category: 'Kernel',
+      text_zh: l10n.t('无内核'),
+    };
+  }
+
+  return kernelStatus[libroModel.kernelConnection.status];
+};
+
+// 判断服务未启动、kernel正在连接 -> return false
+export const kernelPrepared = (
+  libroServerManager: ServerManager,
+  libroModel: LibroJupyterModel | undefined,
+) => {
+  const libroExecuteStatus: ServerStatus = getServiceStatusInfo(
+    libroServerManager,
+    libroModel,
+  );
+  return !(
+    libroExecuteStatus.category === 'Service' ||
+    (libroExecuteStatus.category === 'Kernel' &&
+      libroExecuteStatus.text === 'connecting')
+  );
+};

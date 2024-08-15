@@ -1,6 +1,7 @@
 import { PlayCircleOutlined } from '@ant-design/icons';
 import type { LibroSideToolbarMenuItemType, LibroView } from '@difizen/libro-core';
 import { NotebookCommands, LibroSideToolbarMenu } from '@difizen/libro-core';
+import { ServerManager } from '@difizen/libro-kernel';
 import { ConfigurationService, useInject, ViewInstance } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 import { Popover, Tooltip } from 'antd';
@@ -8,6 +9,7 @@ import { useEffect, useState } from 'react';
 
 import { LibroJupyterConfiguration } from '../index.js';
 import type { LibroJupyterModel } from '../libro-jupyter-model.js';
+import { kernelPrepared } from '../utils/index.js';
 
 const items: LibroSideToolbarMenuItemType[] = [
   {
@@ -49,11 +51,13 @@ const items: LibroSideToolbarMenuItemType[] = [
 
 export const SideToolbarRunSelector: React.FC = () => {
   const libroView = useInject<LibroView>(ViewInstance);
+  const libroServerManager = useInject(ServerManager);
   const configService = useInject<ConfigurationService>(ConfigurationService);
   const libroModel = libroView ? libroView.model : undefined;
-  const isKernelIdle = libroModel
-    ? (libroModel as LibroJupyterModel).isKernelIdle
-    : false;
+  const isKernelPrepared = kernelPrepared(
+    libroServerManager,
+    libroModel as LibroJupyterModel,
+  );
 
   const [kernelUnreadyBtnText, setKernelUnreadyBtnText] =
     useState<string>('kernel准备中，无法执行');
@@ -70,7 +74,7 @@ export const SideToolbarRunSelector: React.FC = () => {
       });
   });
 
-  if (isKernelIdle) {
+  if (isKernelPrepared) {
     return (
       <Popover
         placement="leftTop"
