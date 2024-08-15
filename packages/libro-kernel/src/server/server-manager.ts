@@ -22,7 +22,7 @@ export class ServerManager {
   @prop()
   kernelspec?: ISpecModels;
 
-  protected defer: Deferred<ISpecModels>;
+  protected defer: Deferred<ISpecModels> = new Deferred<ISpecModels>();
 
   get ready() {
     return this.defer.promise;
@@ -34,34 +34,43 @@ export class ServerManager {
     this.kernelSpecRestAPI = kernelSpecRestAPI;
   }
 
+  loading = false;
+
   async launch() {
-    const oldDefer = this.defer;
-    this.defer = new Deferred<ISpecModels>();
+    let current = this.defer;
+
+    // 启动中
+    if (this.loading) {
+      return current.promise;
+    }
+
+    // 启动过
+    if (this.loaded) {
+      this.loaded = false;
+      current = new Deferred<ISpecModels>();
+      this.defer = current;
+    }
+
+    // 首次启动
+    this.loading = true;
     this.doLaunch()
       .then((r) => {
-        if (oldDefer) {
-          oldDefer.resolve(r);
-        }
-        this.defer.resolve(r);
-        return;
+        this.loading = false;
+        this.loaded = true;
+        return current.resolve(r);
       })
-      .catch(() => {
-        //
-      });
-
-    return this.defer.promise;
+      .catch(console.error);
+    return current.promise;
   }
 
   protected async doLaunch(): Promise<ISpecModels> {
     const kernelspec = await this.doGetServerStatus();
     this.launching = true;
-    this.loaded = false;
     if (!kernelspec) {
       await timeout(1000);
       return await this.doLaunch();
     }
     this.launching = false;
-    this.loaded = true;
     this.kernelspec = kernelspec;
     return kernelspec;
   }
