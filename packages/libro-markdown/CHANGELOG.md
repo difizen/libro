@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.2.20
+
+### Patch Changes
+
+- b1ede64: fix: fix server launch in different scenarios
+
 ## 0.2.19
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @difizen/libro-codemirror-raw-cell
 
+## 0.2.20
+
+### Patch Changes
+
+- b1ede64: fix: fix server launch in different scenarios
+- Updated dependencies [b1ede64]
+  - @difizen/libro-code-editor@0.2.20
+  - @difizen/libro-common@0.2.20
+  - @difizen/libro-core@0.2.20
+
 ## 0.2.19
 
 ### Patch Changes
