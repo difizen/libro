@@ -18,6 +18,7 @@ import { ImageViewerModule } from './image-viewer/index.js';
 // import { KernelManagerView } from './kernel-manager/index.js';
 import { LibroKernelAndTerminalPanelModule } from './kernel-and-terminal-panel/module.js';
 import { LibroLabApp } from './lab-app.js';
+import { LabColorContribution } from './lab-color-registry.js';
 import { ContentBottomTabView } from './layout/content-bottom-tab-view.js';
 import {
   LibroLabLayoutModule,
@@ -38,6 +39,7 @@ export const LibroLabModule = ManaModule.create()
     GithubLinkView,
     LabConfigAppContribution,
     LibroLabSideTabView,
+    LabColorContribution,
     createViewPreference({
       view: GithubLinkView,
       slot: HeaderArea.right,
