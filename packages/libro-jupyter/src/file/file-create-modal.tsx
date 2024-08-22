@@ -1,7 +1,8 @@
 import type { ModalItemProps, ModalItem } from '@difizen/mana-app';
+import { ThemeService } from '@difizen/mana-app';
 import { CommandRegistry } from '@difizen/mana-app';
 import { URI, useInject, ViewManager } from '@difizen/mana-app';
-import { Col, Form, message, Row, Input, Modal } from 'antd';
+import { Col, Form, message, Row, Input, Modal, ConfigProvider, theme } from 'antd';
 import type { InputRef } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import './index.less';
@@ -33,6 +34,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
   const [fileType, setFileType] = useState<FileType>(data?.fileType);
   const [fileView, setFileView] = useState<FileView>();
   const inputRef = useRef<InputRef>(null);
+  const themeService = useInject(ThemeService);
   const [form] = Form.useForm();
 
   const onFinish = async (values: { fileName: string }) => {
@@ -83,106 +85,115 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
     inputRef.current?.focus();
   });
   return (
-    <Modal
-      title="新建文件"
-      open={visible}
-      onCancel={close}
-      width={788}
-      cancelText="取消"
-      okText="确定"
-      onOk={() => {
-        form.submit();
+    <ConfigProvider
+      theme={{
+        algorithm:
+          themeService.getCurrentTheme().type === 'dark'
+            ? theme.darkAlgorithm
+            : theme.defaultAlgorithm,
       }}
-      keyboard={true}
-      wrapClassName="libro-create-file-modal"
     >
-      <div className="libro-create-file-path-container">
-        <div className="libro-create-file-des">创建位置：</div>
-        <span className="libro-create-file-path">{data?.path}</span>
-      </div>
-      <div className="libro-create-file-des">文件类型：</div>
-      <Row>
-        <Col
-          className="gutter-row"
-          style={{ paddingLeft: 'unset', paddingRight: '16px' }}
-        >
-          <div
-            className={`libro-create-file-type ${
-              fileType === '.ipynb' ? 'active' : ''
-            }`}
-            onClick={() => {
-              setFileType('.ipynb');
-              inputRef.current?.focus();
-            }}
-          >
-            <NotebookIcon />
-            <span className="libro-create-file-type-text">Notebook</span>
-          </div>
-        </Col>
-        <Col
-          className="gutter-row"
-          style={{ paddingLeft: 'unset', paddingRight: '16px' }}
-        >
-          <div
-            className={`libro-create-file-type ${fileType === '.py' ? 'active' : ''}`}
-            onClick={() => {
-              setFileType('.py');
-              inputRef.current?.focus();
-            }}
-          >
-            <PythonIcon />
-            <span className="libro-create-file-type-text">Python</span>
-          </div>
-        </Col>
-        <Col
-          className="gutter-row"
-          style={{ paddingLeft: 'unset', paddingRight: '16px' }}
-        >
-          <div
-            className={`libro-create-file-type ${fileType === '.json' ? 'active' : ''}`}
-            onClick={() => {
-              setFileType('.json');
-              inputRef.current?.focus();
-            }}
-          >
-            <JSONIcon />
-            <span className="libro-create-file-type-text">JSON</span>
-          </div>
-        </Col>
-        <Col
-          className="gutter-row"
-          style={{ paddingLeft: 'unset', paddingRight: '16px' }}
-        >
-          <div
-            className={`libro-create-file-type ${
-              fileType === undefined ? 'active' : ''
-            }`}
-            onClick={() => {
-              setFileType(undefined);
-              inputRef.current?.focus();
-            }}
-          >
-            <MoreIcon />
-            <span className="libro-create-file-type-text">其他</span>
-          </div>
-        </Col>
-      </Row>
-      <Form
-        layout="vertical"
-        autoComplete="off"
-        form={form}
-        onFinish={onFinish}
-        className="libro-create-file-form"
+      <Modal
+        title="新建文件"
+        open={visible}
+        onCancel={close}
+        width={788}
+        cancelText="取消"
+        okText="确定"
+        onOk={() => {
+          form.submit();
+        }}
+        keyboard={true}
+        wrapClassName="libro-create-file-modal"
       >
-        <Form.Item
-          name="fileName"
-          label="文件名称"
-          rules={[{ required: true, validator: validateFileName }]}
+        <div className="libro-create-file-path-container">
+          <div className="libro-create-file-des">创建位置：</div>
+          <span className="libro-create-file-path">{data?.path}</span>
+        </div>
+        <div className="libro-create-file-des">文件类型：</div>
+        <Row>
+          <Col
+            className="gutter-row"
+            style={{ paddingLeft: 'unset', paddingRight: '16px' }}
+          >
+            <div
+              className={`libro-create-file-type ${
+                fileType === '.ipynb' ? 'active' : ''
+              }`}
+              onClick={() => {
+                setFileType('.ipynb');
+                inputRef.current?.focus();
+              }}
+            >
+              <NotebookIcon />
+              <span className="libro-create-file-type-text">Notebook</span>
+            </div>
+          </Col>
+          <Col
+            className="gutter-row"
+            style={{ paddingLeft: 'unset', paddingRight: '16px' }}
+          >
+            <div
+              className={`libro-create-file-type ${fileType === '.py' ? 'active' : ''}`}
+              onClick={() => {
+                setFileType('.py');
+                inputRef.current?.focus();
+              }}
+            >
+              <PythonIcon />
+              <span className="libro-create-file-type-text">Python</span>
+            </div>
+          </Col>
+          <Col
+            className="gutter-row"
+            style={{ paddingLeft: 'unset', paddingRight: '16px' }}
+          >
+            <div
+              className={`libro-create-file-type ${fileType === '.json' ? 'active' : ''}`}
+              onClick={() => {
+                setFileType('.json');
+                inputRef.current?.focus();
+              }}
+            >
+              <JSONIcon />
+              <span className="libro-create-file-type-text">JSON</span>
+            </div>
+          </Col>
+          <Col
+            className="gutter-row"
+            style={{ paddingLeft: 'unset', paddingRight: '16px' }}
+          >
+            <div
+              className={`libro-create-file-type ${
+                fileType === undefined ? 'active' : ''
+              }`}
+              onClick={() => {
+                setFileType(undefined);
+                inputRef.current?.focus();
+              }}
+            >
+              <MoreIcon />
+              <span className="libro-create-file-type-text">其他</span>
+            </div>
+          </Col>
+        </Row>
+        <Form
+          layout="vertical"
+          autoComplete="off"
+          form={form}
+          onFinish={onFinish}
+          className="libro-create-file-form"
         >
-          <Input addonAfter={fileType || ''} ref={inputRef} />
-        </Form.Item>
-      </Form>
-    </Modal>
+          <Form.Item
+            name="fileName"
+            label="文件名称"
+            rules={[{ required: true, validator: validateFileName }]}
+          >
+            <Input addonAfter={fileType || ''} ref={inputRef} />
+          </Form.Item>
+        </Form>
+      </Modal>
+    </ConfigProvider>
   );
 };
 

@@ -6,11 +6,13 @@ import {
   CommandRegistry,
   inject,
   singleton,
+  ThemeService,
   useInject,
   view,
   ViewInstance,
   ViewManager,
 } from '@difizen/mana-app';
+import { ConfigProvider, theme } from 'antd';
 import { useEffect, useState } from 'react';
 
 import { KernelAndTerminal } from '../common/index.js';
@@ -29,6 +31,7 @@ import './index.less';
 const PanelRender: React.FC = () => {
   const instance = useInject<KernelAndTerminalPanelView>(ViewInstance);
   const openedTabView = instance.getAllOpenedTabView();
+  const themeService = useInject<ThemeService>(ThemeService);
 
   const {
     libroKernelManager,
@@ -131,46 +134,55 @@ const PanelRender: React.FC = () => {
   }, [terminalManager.runningModels]);
 
   return (
-    <div className="kernel-and-terminal-panel">
-      <LibroCollapse
-        type={LibroPanelCollapseItemType.PAGE}
-        items={openedTabView.children.map((item) => {
-          return {
-            id: item.id + '',
-            name: item.title.label as string,
-          };
-        })}
-        tabView={openedTabView}
-        shutdownAll={async () => {
-          // dispose会影响原始数组，这里使用解构赋值copy一份数组。
-          for (const item of [...openedTabView.children]) {
-            if (item.title.closable) {
-              item.dispose();
+    <ConfigProvider
+      theme={{
+        algorithm:
+          themeService.getCurrentTheme().type === 'dark'
+            ? theme.darkAlgorithm
+            : theme.defaultAlgorithm,
+      }}
+    >
+      <div className="kernel-and-terminal-panel">
+        <LibroCollapse
+          type={LibroPanelCollapseItemType.PAGE}
+          items={openedTabView.children.map((item) => {
+            return {
+              id: item.id + '',
+              name: item.title.label as string,
+            };
+          })}
+          tabView={openedTabView}
+          shutdownAll={async () => {
+            // dispose会影响原始数组，这里使用解构赋值copy一份数组。
+            for (const item of [...openedTabView.children]) {
+              if (item.title.closable) {
+                item.dispose();
+              }
             }
+          }}
+        />
+        <LibroCollapse
+          type={LibroPanelCollapseItemType.KERNEL}
+          items={kernelItems}
+          shutdownAll={async () => {
+            await libroKernelManager.shutdownAll();
+            await libroSessionManager.refreshRunning();
+          }}
+        />
+        <LibroCollapse
+          type={LibroPanelCollapseItemType.TERMINAL}
+          items={terminalItems}
+          shutdownAll={async () => await terminalManager.shutdownAll()}
+        />
+        <LibroCollapse
+          type={LibroPanelCollapseItemType.LSP}
+          items={lspItems}
+          shutdownAll={async () =>
+            await libroLanguageClientManager.closeAllLanguageClient()
           }
-        }}
-      />
-      <LibroCollapse
-        type={LibroPanelCollapseItemType.KERNEL}
-        items={kernelItems}
-        shutdownAll={async () => {
-          await libroKernelManager.shutdownAll();
-          await libroSessionManager.refreshRunning();
-        }}
-      />
-      <LibroCollapse
-        type={LibroPanelCollapseItemType.TERMINAL}
-        items={terminalItems}
-        shutdownAll={async () => await terminalManager.shutdownAll()}
-      />
-      <LibroCollapse
-        type={LibroPanelCollapseItemType.LSP}
-        items={lspItems}
-        shutdownAll={async () =>
-          await libroLanguageClientManager.closeAllLanguageClient()
-        }
-      />
-    </div>
+        />
+      </div>
+    </ConfigProvider>
   );
 };
 
