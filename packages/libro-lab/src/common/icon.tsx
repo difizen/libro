@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CodeFilled } from '@ant-design/icons';
 import './index.less';
 
 export interface IProps {
@@ -510,47 +511,7 @@ export function runningKernel() {
 }
 
 export function runningTerminal() {
-  return (
-    <svg
-      width="12px"
-      height="12px"
-      viewBox="0 0 12 12"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-    >
-      <title>bxs-terminal</title>
-      <g
-        id="kernel管理面板"
-        stroke="none"
-        strokeWidth="1"
-        fill="none"
-        fillRule="evenodd"
-        opacity="0.45"
-      >
-        <g
-          id="2.0展开"
-          transform="translate(-52.000000, -332.000000)"
-          fill="#000000"
-          fillRule="nonzero"
-        >
-          <g id="编组-2" transform="translate(0.000000, 56.000000)">
-            <g id="编组-11" transform="translate(40.000000, 0.000000)">
-              <g id="编组-16备份-4" transform="translate(12.000000, 272.000000)">
-                <g id="bxs-terminal" transform="translate(0.000000, 4.000000)">
-                  <rect id="矩形" opacity="0" x="0" y="0" width="12" height="12"></rect>
-                  <path
-                    d="M9.99999609,2.00000391 L1.99999609,2.00000391 C1.73478642,2.00000391 1.48043049,2.10535585 1.29289231,2.29289184 C1.10535413,2.48042782 0.999996094,2.73478252 0.999996094,3.00000391 L0.999996094,9.00000391 C0.999996094,9.26521748 1.10535413,9.51957218 1.29289231,9.70710816 C1.48043049,9.89464415 1.73478642,10.0000039 1.99999609,10.0000039 L9.99999609,10.0000039 C10.2652136,10.0000039 10.5195695,9.89464415 10.7071077,9.70710816 C10.8946459,9.51957218 10.9999961,9.26521748 10.9999961,9.00000391 L10.9999961,3.00000391 C10.9999961,2.73478252 10.8946459,2.48042782 10.7071077,2.29289184 C10.5195695,2.10535585 10.2652136,2.00000391 9.99999609,2.00000391 Z M3.207,7.85349609 L2.49998438,7.14650391 L3.64648828,6 L2.49998438,4.85349609 L3.20698828,4.14650391 L5.06049609,6 L3.207,7.85349609 Z M9.5,7.99999609 L6,7.99999609 L6,6.99999609 L9.5,6.99999609 L9.5,7.99999609 L9.5,7.99999609 Z"
-                    id="形状"
-                  ></path>
-                </g>
-              </g>
-            </g>
-          </g>
-        </g>
-      </g>
-    </svg>
-  );
+  return <CodeFilled />;
 }
 
 export function existedLSP() {

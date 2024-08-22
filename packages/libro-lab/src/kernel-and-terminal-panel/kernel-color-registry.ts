@@ -3,23 +3,20 @@ import { Color, ColorContribution } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
 
 @singleton({ contrib: ColorContribution })
-export class LabColorContribution implements ColorContribution {
+export class KernelPanelColorContribution implements ColorContribution {
   registerColors(colors: ColorRegistry): void {
     // common
     colors.register(
       // #region antd variable
       {
-        id: 'libro.lab.welcome.background.color',
-        defaults: { dark: '#1f2022', light: '#FFFFFF' },
+        id: 'libro.lab.kernel.panel.collapse.header.label',
+        defaults: { dark: '#F8F8FB', light: Color.rgba(0, 10, 26, 0.68) },
         description: '',
       },
       {
-        id: 'libro.lab.welcome.h1.color',
-        defaults: {
-          dark: '#edeeef',
-          light: '#000A1A',
-        },
-        description: 'welcome',
+        id: 'libro.lab.kernel.panel.collapse.item.text',
+        defaults: { dark: '#E3E4E6', light: Color.rgba(0, 10, 26, 0.65) },
+        description: '',
       },
       {
         id: 'libro.lab.server.info.title.text',
@@ -81,38 +78,6 @@ export class LabColorContribution implements ColorContribution {
           light: Color.rgba(0, 10, 26, 0.04),
         },
         description: 'welcome',
-      },
-      {
-        id: 'libro.lab.footer.text',
-        defaults: {
-          dark: '#E3E4E6',
-          light: '#000a1aad',
-        },
-        description: '',
-      },
-      {
-        id: 'libro.lab.footer.background',
-        defaults: {
-          dark: '#161b21',
-          light: '#fcfcfc',
-        },
-        description: '',
-      },
-      {
-        id: 'libro.lab.content.tab.nav',
-        defaults: {
-          dark: '#252526',
-          light: '#f8f8fb',
-        },
-        description: '',
-      },
-      {
-        id: 'libro.lab.content.tab.active.background',
-        defaults: {
-          dark: '#161b21',
-          light: '#ffffff',
-        },
-        description: '',
       },
     );
   }

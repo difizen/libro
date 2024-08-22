@@ -1,6 +1,6 @@
-import { useInject, ViewManager } from '@difizen/mana-app';
+import { ThemeService, useInject, ViewManager } from '@difizen/mana-app';
 import type { ModalItem, ModalItemProps, URI } from '@difizen/mana-app';
-import { Form, message, Input, Modal } from 'antd';
+import { Form, message, Input, Modal, theme, ConfigProvider } from 'antd';
 import type { InputRef } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 
@@ -23,6 +23,7 @@ export const FileRenameModalComponent: React.FC<ModalItemProps<ModalItemType>> =
   const inputRef = useRef<InputRef>(null);
   const [form] = Form.useForm();
   const [fileView, setFileView] = useState<FileView>();
+  const themeService = useInject(ThemeService);
   useEffect(() => {
     viewManager
       .getOrCreateView(FileView)
@@ -62,39 +63,48 @@ export const FileRenameModalComponent: React.FC<ModalItemProps<ModalItemType>> =
   };
 
   return (
-    <Modal
-      title="文件重命名"
-      open={visible}
-      onCancel={close}
-      onOk={() => {
-        form.submit();
+    <ConfigProvider
+      theme={{
+        algorithm:
+          themeService.getCurrentTheme().type === 'dark'
+            ? theme.darkAlgorithm
+            : theme.defaultAlgorithm,
       }}
-      wrapClassName="libro-rename-file-modal"
     >
-      <Form
-        layout="vertical"
-        autoComplete="off"
-        form={form}
-        onFinish={onFinish}
-        className="libro-rename-file-form"
+      <Modal
+        title="文件重命名"
+        open={visible}
+        onCancel={close}
+        onOk={() => {
+          form.submit();
+        }}
+        wrapClassName="libro-rename-file-modal"
       >
-        <Form.Item
-          name="rename"
-          label="文件/文件夹名称"
-          rules={[{ required: true, validator: validateRename }]}
-          initialValue={data?.fileName}
+        <Form
+          layout="vertical"
+          autoComplete="off"
+          form={form}
+          onFinish={onFinish}
+          className="libro-rename-file-form"
         >
-          <Input
-            ref={inputRef}
-            onKeyDown={async (e) => {
-              if (e.keyCode === 13) {
-                form.submit();
-              }
-            }}
-          />
-        </Form.Item>
-      </Form>
-    </Modal>
+          <Form.Item
+            name="rename"
+            label="文件/文件夹名称"
+            rules={[{ required: true, validator: validateRename }]}
+            initialValue={data?.fileName}
+          >
+            <Input
+              ref={inputRef}
+              onKeyDown={async (e) => {
+                if (e.keyCode === 13) {
+                  form.submit();
+                }
+              }}
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
+    </ConfigProvider>
   );
 };
 

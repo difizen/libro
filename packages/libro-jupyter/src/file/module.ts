@@ -1,5 +1,6 @@
 import { FileTreeModule, ManaModule } from '@difizen/mana-app';
 
+import { FileColorContribution } from './file-color-registry.js';
 import { FileCommandContribution } from './file-command.js';
 import { FileCreateModalContribution } from './file-create-modal-contribution.js';
 import { FileCreateDirModalContribution } from './file-createdir-modal-contribution.js';
@@ -14,6 +15,7 @@ import { LibroJupyterOpenHandler } from './open-handler-contribution.js';
 export const LibroJupyterFileModule = ManaModule.create()
   .register(
     JupyterFileService,
+    FileColorContribution,
     FileView,
     FileNameAlias,
     FileTreeLabelProvider,

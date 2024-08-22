@@ -1,8 +1,9 @@
 import type { ModalItem, ModalItemProps } from '@difizen/mana-app';
+import { ThemeService } from '@difizen/mana-app';
 import { URI } from '@difizen/mana-app';
 import { ViewManager } from '@difizen/mana-app';
 import { useInject } from '@difizen/mana-app';
-import { Form, message, Input, Modal } from 'antd';
+import { Form, message, Input, Modal, ConfigProvider, theme } from 'antd';
 import type { InputRef } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 
@@ -19,6 +20,7 @@ export const FileCreateDirModalComponent: React.FC<
 > = ({ visible, close, data }: ModalItemProps<FileDirCreateModalItemType>) => {
   const fileService = useInject(JupyterFileService);
   const viewManager = useInject(ViewManager);
+  const themeService = useInject(ThemeService);
   const inputRef = useRef<InputRef>(null);
   const [fileView, setFileView] = useState<FileView>();
   const [form] = Form.useForm();
@@ -61,44 +63,53 @@ export const FileCreateDirModalComponent: React.FC<
     inputRef.current?.focus();
   });
   return (
-    <Modal
-      title="新建文件夹"
-      open={visible}
-      onCancel={close}
-      cancelText="取消"
-      okText="确定"
-      onOk={() => {
-        form.submit();
+    <ConfigProvider
+      theme={{
+        algorithm:
+          themeService.getCurrentTheme().type === 'dark'
+            ? theme.darkAlgorithm
+            : theme.defaultAlgorithm,
       }}
-      keyboard={true}
-      wrapClassName="libro-create-dir-modal"
-      width={524}
     >
-      <div className="libro-create-file-des">创建位置：</div>
-      <span className="libro-create-file-path">{data?.path}</span>
-      <Form
-        layout="vertical"
-        autoComplete="off"
-        form={form}
-        onFinish={onFinish}
-        className="libro-create-dir-file-form"
+      <Modal
+        title="新建文件夹"
+        open={visible}
+        onCancel={close}
+        cancelText="取消"
+        okText="确定"
+        onOk={() => {
+          form.submit();
+        }}
+        keyboard={true}
+        wrapClassName="libro-create-dir-modal"
+        width={524}
       >
-        <Form.Item
-          name="dirName"
-          label="文件夹名称"
-          rules={[{ required: true, validator: validateDirName }]}
+        <div className="libro-create-file-des">创建位置：</div>
+        <span className="libro-create-file-path">{data?.path}</span>
+        <Form
+          layout="vertical"
+          autoComplete="off"
+          form={form}
+          onFinish={onFinish}
+          className="libro-create-dir-file-form"
         >
-          <Input
-            ref={inputRef}
-            onKeyDown={async (e) => {
-              if (e.keyCode === 13) {
-                form.submit();
-              }
-            }}
-          />
-        </Form.Item>
-      </Form>
-    </Modal>
+          <Form.Item
+            name="dirName"
+            label="文件夹名称"
+            rules={[{ required: true, validator: validateDirName }]}
+          >
+            <Input
+              ref={inputRef}
+              onKeyDown={async (e) => {
+                if (e.keyCode === 13) {
+                  form.submit();
+                }
+              }}
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
+    </ConfigProvider>
   );
 };
 
