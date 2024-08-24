@@ -37,19 +37,15 @@
         }
 
         .mana-tabs-tab-btn:hover {
-          background-color: #000a1a1f;
-
           .mana-tab-icon {
-            color: #00000059;
+            color: var(--mana-ant-color-icon);
           }
         }
 
         .mana-tabs-tab-active {
           .mana-tabs-tab-btn {
-            background-color: #000a1a1f;
-
             .mana-tab-icon {
-              color: #000a1a7f;
+              color: var(--mana-ant-color-icon-hover);
             }
           }
         }
@@ -84,11 +80,7 @@
   overflow: auto;
 }
 
-.default-folder-icon,
-.default-file-icon {
-  color: #00000072;
-}
-
-.mana-tree-node-segment-grow {
-  color: #000000a5;
+/* stylelint-disable selector-no-vendor-prefix */
+a:-webkit-any-link {
+  color: unset;
 }
