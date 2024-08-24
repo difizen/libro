@@ -5,7 +5,7 @@ export default defineConfig({
     hd: { rules: [] },
     name: 'libro',
     link: '/',
-    logo: './libro.svg',
+    logo: '/libro.svg',
     nav: [
       { title: '介绍', link: '/introduction' },
       { title: '教程', link: '/tutorial' },
@@ -71,7 +71,7 @@ export default defineConfig({
     ],
     gitRepo: { owner: 'difizen', name: 'libro' },
   },
-  favicons: ['./libro.svg'],
+  favicons: ['/libro.svg'],
   plugins: ['@difizen/umi-plugin-mana', './dumi-plugin-alias'],
   mana: {
     decorator: true,

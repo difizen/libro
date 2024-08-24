@@ -53,7 +53,13 @@ export function TocIcon(props: IProps) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <title>source</title>
-      <g id="代码片段" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+      <g
+        id="代码片段"
+        stroke="none"
+        strokeWidth="1"
+        fill="currentColor"
+        fillRule="evenodd"
+      >
         <g
           id="1.4编辑状态备份"
           transform="translate(-14.000000, -215.000000)"
@@ -89,7 +95,7 @@ export function Loadding(props: IProps) {
         <g
           id="1.1容器加载中-关闭提示"
           transform="translate(-1362.000000, -879.000000)"
-          fill="#1890FF"
+          fill="currentColor"
         >
           <g id="编组-20" transform="translate(0.000000, 872.000000)">
             <g id="编组-3" transform="translate(1302.000000, 5.000000)">
@@ -197,11 +203,17 @@ export function PreferenceIcon(props: IProps) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <title>政策</title>
-      <g id="整体框架部分" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+      <g
+        id="整体框架部分"
+        stroke="none"
+        strokeWidth="1"
+        fill="currentColor"
+        fillRule="evenodd"
+      >
         <g
           id="1.2容器加载完成"
           transform="translate(-330.000000, -970.000000)"
-          fill="#333333"
+          fill="currentColor"
           fillRule="nonzero"
         >
           <g id="编组-19" transform="translate(318.000000, 485.000000)">
@@ -235,11 +247,17 @@ export function KeybindIcon(props: IProps) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <title>键盘</title>
-      <g id="整体框架部分" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+      <g
+        id="整体框架部分"
+        stroke="none"
+        strokeWidth="1"
+        fill="currentColor"
+        fillRule="evenodd"
+      >
         <g
           id="1.2容器加载完成"
           transform="translate(-446.000000, -970.000000)"
-          fill="#333333"
+          fill="currentColor"
           fillRule="nonzero"
         >
           <g id="编组-19" transform="translate(318.000000, 485.000000)">
@@ -278,11 +296,17 @@ export function SuccIcon(props: IProps) {
       className="libro-lab-success"
     >
       <title>编组 12</title>
-      <g id="整体框架部分" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+      <g
+        id="整体框架部分"
+        stroke="none"
+        strokeWidth="1"
+        fill="currentColor"
+        fillRule="evenodd"
+      >
         <g
           id="1.2容器加载完成"
           transform="translate(-1392.000000, -1073.000000)"
-          fill="#52C41A"
+          fill="currentColor"
         >
           <g id="编组-26" transform="translate(24.000000, 1070.000000)">
             <g id="编组-3" transform="translate(1252.000000, 0.000000)">
@@ -316,14 +340,13 @@ export function KernelAndTerminal() {
         id="代码片段"
         stroke="none"
         strokeWidth="1"
-        fill="none"
+        fill="currentColor"
         fillRule="evenodd"
-        fillOpacity="0.35"
       >
         <g
           id="1.1搜索"
           transform="translate(-12.000000, -142.000000)"
-          fill="#000000"
+          fill="currentColor"
           fillRule="nonzero"
         >
           <g id="编组-2" transform="translate(0.000000, 56.000000)">
