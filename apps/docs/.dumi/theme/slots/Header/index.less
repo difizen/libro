@@ -1,0 +1,112 @@
+@import (reference) '../../styles/variables.less';
+
+a {
+  text-decoration: inherit;
+}
+
+.difizen-dumi-header {
+  .ant-menu-overflow {
+    background-color: transparent;
+    width: 100%;
+
+    .ant-menu-overflow-item {
+      display: flex;
+      align-items: center;
+      height: 60px;
+    }
+  }
+
+  &-left {
+    height: 100%;
+    padding-right: 32px;
+  }
+
+  &-logo {
+    height: 100%;
+
+    a {
+      font-weight: 700;
+      font-size: 24px;
+      align-items: center;
+      display: inline-flex;
+      margin-right: 32px;
+      height: 100%;
+      color: #000;
+
+      @{dark-selector} & {
+        color: #fff;
+      }
+    }
+
+    &-img {
+      height: 32px;
+      margin-right: 16px;
+    }
+  }
+
+  &-right {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    .ant-btn,
+    .ant-btn-text {
+      color: #000;
+
+      &:hover {
+        color: #69b1ff;
+      }
+
+      @{dark-selector} & {
+        color: #fff;
+
+        &:hover {
+          color: #69b1ff;
+        }
+      }
+    }
+
+    &-github-logo {
+      width: 24px;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+
+    &-github {
+      &-btn {
+        .ant-btn-icon {
+          font-size: 20px;
+        }
+
+        color: inherit;
+
+        &-hint {
+          padding: 2px 5px;
+          border-radius: 4px;
+          margin-right: 5px;
+          background-image: linear-gradient(119deg, #5b7eaf 0%, #294d81 100%);
+          color: #fff;
+          font-size: 12px;
+        }
+
+        &:hover {
+          color: #69b1ff;
+        }
+      }
+
+      &-star {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 2px 5px;
+        border-radius: 4px;
+        background-color: #edf4ff;
+        box-shadow: 0 1px 3px 0 #5b7eaf;
+
+        @{dark-selector} & {
+          box-shadow: 0 1px 3px 0 #ccdbf4;
+        }
+      }
+    }
+  }
+}
