@@ -1,4 +1,3 @@
-import type { ColorDefinition } from '@difizen/mana-app';
 import { ColorRegistry, ThemeService } from '@difizen/mana-app';
 import { inject, singleton } from '@difizen/mana-app';
 import type { ITheme } from 'xterm';
@@ -7,7 +6,10 @@ import type { ITheme } from 'xterm';
  * It should be aligned with https://github.com/microsoft/vscode/blob/0dfa355b3ad185a6289ba28a99c141ab9e72d2be/src/vs/workbench/contrib/terminal/common/terminalColorRegistry.ts#L40
  */
 export const terminalAnsiColorMap: {
-  [key: string]: { index: number; defaults: ColorDefinition['defaults'] };
+  [key: string]: {
+    index: number;
+    defaults: { light: any; dark: any; [key: string]: any };
+  };
 } = {
   'terminal.ansiBlack': {
     index: 0,
