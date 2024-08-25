@@ -20,7 +20,7 @@
   },
   "packageManager": "pnpm@8.4.0",
   "dependencies": {
-    "@ant-design/icons": "^5.1.0",
+    "@ant-design/icons": "^5.4.0",
     "@difizen/libro-core": "^0.2.20",
     "@difizen/libro-jupyter": "^0.2.20",
     "@difizen/libro-lab": "^0.2.20",
