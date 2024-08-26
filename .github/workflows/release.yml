@@ -41,7 +41,7 @@ jobs:
     uses: difizen/actions/.github/workflows/release-publish.yml@main
 
     with:
-      node-version: '18'
+      node-version: '20'
       python-version: '3.8'
 
     permissions:
