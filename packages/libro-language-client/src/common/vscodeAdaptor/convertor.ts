@@ -1,8 +1,7 @@
+import { getCellURI } from '@difizen/libro-common';
 import type { CellView, LibroView } from '@difizen/libro-core';
 import { ExecutableNotebookModel } from '@difizen/libro-kernel';
 import type { NotebookCell, NotebookDocument, NotebookRange } from 'vscode';
-
-import { NotebookDocumentSyncFeature } from '../notebook.js';
 
 import { unsupported } from './util.js';
 import { EndOfLine, NotebookCellKind, Uri } from './vscodeAdaptor.js';
@@ -43,10 +42,7 @@ export const l2c = {
       kind:
         cell.model.type === 'code' ? NotebookCellKind.Code : NotebookCellKind.Markup,
       document: {
-        uri: Uri.parse(filePath).with({
-          scheme: NotebookDocumentSyncFeature.CellScheme,
-          query: `cellid=${cell.model.id}`,
-        }),
+        uri: Uri.parse(getCellURI(filePath, cell.model.id).toString()),
         fileName: filePath,
         isUntitled: false,
         languageId: 'python',

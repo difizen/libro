@@ -1,3 +1,5 @@
+import { URI } from '@difizen/mana-app';
+
 import type { PartialJSONObject } from '../json.js';
 
 import type {
@@ -213,3 +215,12 @@ export type ICell = IRawCell | IMarkdownCell | ICodeCell | IUnrecognizedCell;
  * A union metadata type.
  */
 export type ICellMetadata = IBaseCellMetadata | IRawCellMetadata | ICodeCellMetadata;
+
+export const LibroCellURIScheme = 'vscode-notebook-cell';
+
+export const getCellURI = (notebookId: string, cellId: string): URI => {
+  let uri = new URI(notebookId);
+  uri = URI.withScheme(uri, LibroCellURIScheme);
+  uri = URI.withQuery(uri, `cellid=${cellId}`);
+  return uri;
+};

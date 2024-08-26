@@ -1,3 +1,4 @@
+import { getCellURI } from '@difizen/libro-common';
 import {
   EditorCellView,
   ILibroWorkspaceService,
@@ -12,7 +13,7 @@ import { CloseAction, ErrorAction } from './common/api.js';
 import { LSPEnv } from './common/vscodeAdaptor/lspEnv.js';
 import { workspace } from './common/vscodeAdaptor/vscodeAdaptor.js';
 import { LibroLanguageClientManager } from './libro-language-client-manager.js';
-import { getCellURI, toEditorRange, toMonacoPosition } from './util.js';
+import { toEditorRange, toMonacoPosition } from './util.js';
 
 @singleton({ contrib: [ApplicationContribution] })
 export class LibroLanguageClientContribution implements ApplicationContribution {
@@ -92,7 +93,7 @@ export class LibroLanguageClientContribution implements ApplicationContribution 
         const cell = libroView.model.cells.find((item) => {
           return (
             ExecutableNotebookModel.is(libroView.model) &&
-            getCellURI(libroView.model, item.model).toString() ===
+            getCellURI(libroView.model.filePath, item.model.id).toString() ===
               decodeURIComponent(resource.toString())
           );
         });
