@@ -5,13 +5,14 @@ import {
   inject,
   prop,
   singleton,
+  ThemeService,
   useInject,
   view,
   ViewInstance,
   ViewManager,
   ViewRender,
 } from '@difizen/mana-app';
-import { Empty } from 'antd';
+import { ConfigProvider, Empty, theme } from 'antd';
 
 import { TocIcon } from '../common/index.js';
 import { LayoutService } from '../layout/layout-service.js';
@@ -21,18 +22,28 @@ import './index.less';
 
 const TocViewRender: React.FC = () => {
   const tocPanelView = useInject<TocPanelView>(ViewInstance);
+  const themeService = useInject<ThemeService>(ThemeService);
   return (
-    <div className="libro-lab-toc-panel">
-      {tocPanelView.libroTocView ? (
-        <ViewRender view={tocPanelView.libroTocView}></ViewRender>
-      ) : (
-        <Empty
-          image={Empty.PRESENTED_IMAGE_SIMPLE}
-          description="该文件格式暂不支持大纲"
-          className="libro-lab-toc-empty"
-        />
-      )}
-    </div>
+    <ConfigProvider
+      theme={{
+        algorithm:
+          themeService.getCurrentTheme().type === 'dark'
+            ? theme.darkAlgorithm
+            : theme.defaultAlgorithm,
+      }}
+    >
+      <div className="libro-lab-toc-panel">
+        {tocPanelView.libroTocView ? (
+          <ViewRender view={tocPanelView.libroTocView}></ViewRender>
+        ) : (
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description="该文件格式暂不支持大纲"
+            className="libro-lab-toc-empty"
+          />
+        )}
+      </div>
+    </ConfigProvider>
   );
 };
 
