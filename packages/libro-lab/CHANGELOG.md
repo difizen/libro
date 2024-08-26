@@ -1,5 +1,22 @@
 # @difizen/libro-lab
 
+## 0.2.22
+
+### Patch Changes
+
+- [#176](https://github.com/difizen/libro/pull/176) [`5d4099c`](https://github.com/difizen/libro/commit/5d4099c518a5c4498830cefa61257521d5488aee) Thanks [@BroKun](https://github.com/BroKun)! - Using github changelog
+
+- Updated dependencies [[`5d4099c`](https://github.com/difizen/libro/commit/5d4099c518a5c4498830cefa61257521d5488aee)]:
+  - @difizen/libro-cofine-editor-core@0.2.22
+  - @difizen/libro-language-client@0.2.22
+  - @difizen/libro-prompt-cell@0.2.22
+  - @difizen/libro-terminal@0.2.22
+  - @difizen/libro-jupyter@0.2.22
+  - @difizen/libro-kernel@0.2.22
+  - @difizen/libro-widget@0.2.22
+  - @difizen/libro-core@0.2.22
+  - @difizen/libro-toc@0.2.22
+
 ## 0.2.21
 
 ### Patch Changes
