@@ -155,12 +155,18 @@ export class LibroService implements NotebookService, Disposable {
       this.watchNotebookView(notebookView);
     }
     this.libroViewTracker.viewCache.set(notebookView.id, notebookView);
-    this.onNotebookViewCreatedEmitter.fire(notebookView);
 
     return notebookViewPromise;
   }
 
   protected watchNotebookView(view: NotebookView) {
+    view.initialized
+      .then(() => {
+        return this.onNotebookViewCreatedEmitter.fire(view);
+      })
+      .catch(() => {
+        //
+      });
     this.toDispose.push(
       view.onSave(() => {
         this.onNotebookViewSavedEmitter.fire(view);

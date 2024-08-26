@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
 
+import { LibroCellURIScheme } from '@difizen/libro-common';
 import * as proto from '@difizen/vscode-languageserver-protocol';
 import type {
   StaticRegistrationOptions,
@@ -23,8 +24,6 @@ import type {
   DocumentSelector,
   NotebookDocumentChangeEvent,
 } from 'vscode';
-
-import { LibroCellURIScheme } from '../constants.js';
 
 import type * as _c2p from './codeConverter.js';
 import type {

@@ -1,20 +1,5 @@
 import type { IPosition, IRange } from '@difizen/libro-code-editor';
-import type { CellModel } from '@difizen/libro-core';
-import type { ExecutableNotebookModel } from '@difizen/libro-kernel';
-import { URI } from '@difizen/mana-app';
 import type * as monaco from '@difizen/monaco-editor-core';
-
-import { LibroCellURIScheme } from './constants.js';
-
-export const getCellURI = (
-  libroModel: ExecutableNotebookModel,
-  cellModel: CellModel,
-): URI => {
-  let uri = new URI(libroModel.filePath);
-  uri = URI.withScheme(uri, LibroCellURIScheme);
-  uri = URI.withQuery(uri, `cellid=${cellModel.id}`);
-  return uri;
-};
 
 export const toEditorRange = (range: monaco.IRange): IRange => {
   return {
