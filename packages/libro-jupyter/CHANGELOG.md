@@ -1,5 +1,28 @@
 # @difizen/libro-jupyter
 
+## 0.2.21
+
+### Patch Changes
+
+- fb585c4: fix: update cell uri scheme
+- Updated dependencies [fb585c4]
+  - @difizen/libro-language-client@0.2.21
+  - @difizen/libro-common@0.2.21
+  - @difizen/libro-core@0.2.21
+  - @difizen/libro-code-cell@0.2.21
+  - @difizen/libro-code-editor@0.2.21
+  - @difizen/libro-codemirror@0.2.21
+  - @difizen/libro-cofine-editor@0.2.21
+  - @difizen/libro-kernel@0.2.21
+  - @difizen/libro-l10n@0.2.21
+  - @difizen/libro-lsp@0.2.21
+  - @difizen/libro-markdown-cell@0.2.21
+  - @difizen/libro-output@0.2.21
+  - @difizen/libro-raw-cell@0.2.21
+  - @difizen/libro-rendermime@0.2.21
+  - @difizen/libro-search@0.2.21
+  - @difizen/libro-search-code-cell@0.2.21
+
 ## 0.2.20
 
 ### Patch Changes

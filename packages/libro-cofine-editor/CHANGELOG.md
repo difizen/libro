@@ -1,5 +1,18 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.21
+
+### Patch Changes
+
+- fb585c4: fix: update cell uri scheme
+- Updated dependencies [fb585c4]
+  - @difizen/libro-common@0.2.21
+  - @difizen/libro-core@0.2.21
+  - @difizen/libro-code-editor@0.2.21
+  - @difizen/libro-cofine-editor-core@0.2.21
+  - @difizen/libro-cofine-textmate@0.2.21
+  - @difizen/libro-lsp@0.2.21
+
 ## 0.2.20
 
 ### Patch Changes

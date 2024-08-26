@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.2.21
+
+### Patch Changes
+
+- fb585c4: fix: update cell uri scheme
+
 ## 0.2.20
 
 ### Patch Changes

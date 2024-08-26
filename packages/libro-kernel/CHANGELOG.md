@@ -1,5 +1,14 @@
 # @difizen/libro-kernel
 
+## 0.2.21
+
+### Patch Changes
+
+- fb585c4: fix: update cell uri scheme
+- Updated dependencies [fb585c4]
+  - @difizen/libro-common@0.2.21
+  - @difizen/libro-core@0.2.21
+
 ## 0.2.20
 
 ### Patch Changes
