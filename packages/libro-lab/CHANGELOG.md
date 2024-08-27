@@ -1,5 +1,22 @@
 # @difizen/libro-lab
 
+## 0.2.23
+
+### Patch Changes
+
+- [#179](https://github.com/difizen/libro/pull/179) [`e9e5691`](https://github.com/difizen/libro/commit/e9e5691e2f1e6f93830648706e978361d25ca231) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix(lab): improve dark mode styles
+
+- Updated dependencies [[`e9e5691`](https://github.com/difizen/libro/commit/e9e5691e2f1e6f93830648706e978361d25ca231)]:
+  - @difizen/libro-cofine-editor-core@0.2.23
+  - @difizen/libro-core@0.2.23
+  - @difizen/libro-jupyter@0.2.23
+  - @difizen/libro-kernel@0.2.23
+  - @difizen/libro-language-client@0.2.23
+  - @difizen/libro-prompt-cell@0.2.23
+  - @difizen/libro-terminal@0.2.23
+  - @difizen/libro-toc@0.2.23
+  - @difizen/libro-widget@0.2.23
+
 ## 0.2.22
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.23
+
+### Patch Changes
+
+- [#179](https://github.com/difizen/libro/pull/179) [`e9e5691`](https://github.com/difizen/libro/commit/e9e5691e2f1e6f93830648706e978361d25ca231) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix(lab): improve dark mode styles
+
 ## 0.2.22
 
 ### Patch Changes
