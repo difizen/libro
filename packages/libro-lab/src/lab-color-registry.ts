@@ -35,7 +35,7 @@ export class LabColorContribution implements ColorContribution {
         description: 'welcome',
       },
       {
-        id: 'libro.lab.welcome.h3.text',
+        id: 'libro.lab.welcome.h3.color',
         defaults: {
           dark: '#EDEEEF',
           light: Color.rgba(0, 10, 26, 0.89),
@@ -111,6 +111,38 @@ export class LabColorContribution implements ColorContribution {
         defaults: {
           dark: '#161b21',
           light: '#ffffff',
+        },
+        description: '',
+      },
+      {
+        id: 'libro.lab.left.tab.background',
+        defaults: {
+          dark: '#161b21',
+          light: '#f0f2f51f',
+        },
+        description: '',
+      },
+      {
+        id: 'libro.lab.left.tab.active.bnt.background',
+        defaults: {
+          dark: '#ffffff1a',
+          light: '#000a1a1f',
+        },
+        description: '',
+      },
+      {
+        id: 'libro.lab.left.tab.active.bnt.color',
+        defaults: {
+          dark: Color.rgba(255, 255, 255, 0.85),
+          light: '#000a1a7f',
+        },
+        description: '',
+      },
+      {
+        id: 'libro.lab.left.tab.bnt.color',
+        defaults: {
+          dark: Color.rgba(255, 255, 255, 0.45),
+          light: '#000a1a7f',
         },
         description: '',
       },

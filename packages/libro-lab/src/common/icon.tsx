@@ -306,7 +306,7 @@ export function SuccIcon(props: IProps) {
         <g
           id="1.2容器加载完成"
           transform="translate(-1392.000000, -1073.000000)"
-          fill="currentColor"
+          fill="#52C41A"
         >
           <g id="编组-26" transform="translate(24.000000, 1070.000000)">
             <g id="编组-3" transform="translate(1252.000000, 0.000000)">
