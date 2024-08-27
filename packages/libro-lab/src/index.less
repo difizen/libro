@@ -15,8 +15,9 @@ a:-webkit-any-link {
   .mana-side-tab-view {
     .mana-tabs-left {
       .mana-tabs-nav {
-        background-color: var(--mana-ant-color-bg-elevated);
+        background-color: var(--mana-libro-lab-left-tab-background);
         min-width: 40px;
+        border-right: unset;
 
         .mana-tabs-ink-bar {
           display: none;
@@ -48,14 +49,16 @@ a:-webkit-any-link {
 
         .mana-tabs-tab-btn:hover {
           .mana-tab-icon {
-            color: var(--mana-ant-color-icon);
+            color: var(--mana--libro-lab-left-tab-bnt-color);
           }
         }
 
         .mana-tabs-tab-active {
           .mana-tabs-tab-btn {
+            background-color: var(--mana-libro-lab-left-tab-active-bnt-background);
+
             .mana-tab-icon {
-              color: var(--mana-ant-color-icon-hover);
+              color: var(--mana--libro-lab-left-tab-bnt-color);
             }
           }
         }
