@@ -118,7 +118,7 @@ export class LabColorContribution implements ColorContribution {
         id: 'libro.lab.left.tab.background',
         defaults: {
           dark: '#161b21',
-          light: '#f0f2f51f',
+          light: '#fcfcfc',
         },
         description: '',
       },
