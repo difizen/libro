@@ -1,5 +1,16 @@
 # @difizen/libro-codemirror-code-cell
 
+## 0.2.24
+
+### Patch Changes
+
+- [#181](https://github.com/difizen/libro/pull/181) [`25ad10c`](https://github.com/difizen/libro/commit/25ad10c83956477a1459b312724b679b2a9abb8b) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix: improve styles
+
+- Updated dependencies [[`25ad10c`](https://github.com/difizen/libro/commit/25ad10c83956477a1459b312724b679b2a9abb8b)]:
+  - @difizen/libro-code-editor@0.2.24
+  - @difizen/libro-common@0.2.24
+  - @difizen/libro-core@0.2.24
+
 ## 0.2.23
 
 ### Patch Changes
