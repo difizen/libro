@@ -56,11 +56,13 @@ export const PromptOutputRender: React.FC<{
       },
       insertIndex + 1,
     );
-    await commandRegistry.executeCommand(
-      NotebookCommands['RunCell'].id,
-      libro.model.cells[insertIndex + 1],
-      libro,
-    );
+    setTimeout(() => {
+      commandRegistry.executeCommand(
+        NotebookCommands['RunCell'].id,
+        libro.model.cells[insertIndex + 1],
+        libro,
+      );
+    });
   };
   const insert = async () => {
     const libro = model.cell.parent;
