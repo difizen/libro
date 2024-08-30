@@ -1,5 +1,17 @@
 # @difizen/libro-docs
 
+## 0.2.25
+
+### Patch Changes
+
+- [#183](https://github.com/difizen/libro/pull/183) [`aff9059`](https://github.com/difizen/libro/commit/aff9059952035bd0cdbc265913df0889dfa68dc2) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix(prompt): fix insertAndRun for prompt cell
+
+- Updated dependencies [[`aff9059`](https://github.com/difizen/libro/commit/aff9059952035bd0cdbc265913df0889dfa68dc2)]:
+  - @difizen/libro-lab@0.2.25
+  - @difizen/libro-core@0.2.25
+  - @difizen/libro-jupyter@0.2.25
+  - @difizen/libro-terminal@0.2.25
+
 ## 0.2.24
 
 ### Patch Changes

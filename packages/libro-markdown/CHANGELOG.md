@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.2.25
+
+### Patch Changes
+
+- [#183](https://github.com/difizen/libro/pull/183) [`aff9059`](https://github.com/difizen/libro/commit/aff9059952035bd0cdbc265913df0889dfa68dc2) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix(prompt): fix insertAndRun for prompt cell
+
 ## 0.2.24
 
 ### Patch Changes
