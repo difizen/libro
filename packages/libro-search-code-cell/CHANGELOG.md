@@ -1,5 +1,18 @@
 # @difizen/libro-search-codemirror-cell
 
+## 0.2.25
+
+### Patch Changes
+
+- [#183](https://github.com/difizen/libro/pull/183) [`aff9059`](https://github.com/difizen/libro/commit/aff9059952035bd0cdbc265913df0889dfa68dc2) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix(prompt): fix insertAndRun for prompt cell
+
+- Updated dependencies [[`aff9059`](https://github.com/difizen/libro/commit/aff9059952035bd0cdbc265913df0889dfa68dc2)]:
+  - @difizen/libro-code-cell@0.2.25
+  - @difizen/libro-code-editor@0.2.25
+  - @difizen/libro-common@0.2.25
+  - @difizen/libro-core@0.2.25
+  - @difizen/libro-search@0.2.25
+
 ## 0.2.24
 
 ### Patch Changes
