@@ -80,7 +80,7 @@ const Header: React.FC = () => {
           <Navbar />
           <div className="dumi-default-header-right-aside">
             <SearchBar />
-            {themeConfig.prefersColor.switch && (
+            {/* {themeConfig.prefersColor.switch && (
               <Button
                 type="text"
                 onClick={() => {
@@ -89,7 +89,7 @@ const Header: React.FC = () => {
                 }}
                 icon={prefersColor === 'light' ? <SunOutlined /> : <MoonOutlined />}
               ></Button>
-            )}
+            )} */}
             {socialIcons.map((item) => (
               <SocialIcon icon={item.icon} link={item.link} key={item.link} />
             ))}
@@ -97,7 +97,7 @@ const Header: React.FC = () => {
               type="link"
               target="_blank"
               rel="noreferrer"
-              href="https://github.com/difizen/mana"
+              href="https://github.com/difizen/libro"
               className="difizen-dumi-header-right-github-btn"
               icon={<GithubOutlined />}
             >

@@ -7,8 +7,8 @@ export default defineConfig({
     link: '/',
     logo: '/libro.svg',
     nav: [
-      { title: '介绍', link: '/introduction' },
-      { title: '教程', link: '/tutorial' },
+      { title: '快速开始', link: '/quickstart' },
+      { title: '文档', link: '/docs' },
       { title: '示例', link: '/examples' },
     ],
     banner: {
@@ -26,7 +26,7 @@ export default defineConfig({
       ],
     },
     footer: `Open-source MIT Licensed | Copyright © 2023-present`,
-    prefersColor: { default: 'light' },
+    // prefersColor: { default: 'light' },
     links: [
       {
         title: '相关资源',

@@ -14,7 +14,7 @@ const HomeLayout: React.FC = () => {
   const { themeConfig } = useSiteData();
 
   return (
-    <div>
+    <div className="difizen-home-layout">
       <Helmet>
         <title>{themeConfig.name}</title>
       </Helmet>
