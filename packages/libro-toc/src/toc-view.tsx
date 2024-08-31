@@ -206,7 +206,7 @@ export class TOCView extends BaseView implements DisplayView {
   }
 
   isHeadingCollapsed(heading: IHeading) {
-    return heading.id ? this.headingCollapseState.get(heading.id) ?? false : false;
+    return heading.id ? (this.headingCollapseState.get(heading.id) ?? false) : false;
   }
 
   protected hasChildren(current: IHeading, index: number, list: IHeading[]) {

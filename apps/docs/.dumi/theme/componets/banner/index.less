@@ -1,10 +1,8 @@
 /* stylelint-disable color-function-notation */
+
 .difizen-dumi-banner {
   position: relative;
   width: 100%;
-  height: 548px;
-  background-color: #fff;
-  background-image: url('https://mdn.alipayobjects.com/huamei_usjdcg/afts/img/A*D4cjRIorZ9oAAAAAAAAAAAAADo6HAQ/original');
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 548px;
@@ -154,4 +152,119 @@
       transition: opacity 0.2s;
     }
   }
+}
+@keyframes rotate-animation {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.content-animate {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 105px;
+  right: 105px;
+  background-image: url('./background.28e19b19.png');
+  pointer-events: none;
+}
+
+.circle-first {
+  position: absolute;
+  height: 590px;
+  width: 760px;
+  top: 256px;
+  left: 280px;
+  animation: rotate-animation 10s linear 1s 5 alternate;
+  animation: rotate-animation 10s linear infinite;
+}
+
+.circle-first-one {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 480px;
+  height: 480px;
+  background: linear-gradient(to right, #ffde16, #02ffce);
+  filter: blur(50px);
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.circle-first-two {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 480px;
+  height: 480px;
+  background: linear-gradient(to right, #0266ff, #167aff);
+  filter: blur(50px);
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.circle-second {
+  position: absolute;
+  top: 132px;
+  left: 233px;
+  width: 100px;
+  height: 100px;
+  background-color: #1677ff;
+  opacity: 0.2;
+  filter: blur(50px);
+  border-radius: 50%;
+}
+
+.circle-third {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  background-color: #1677ff;
+  opacity: 0.2;
+  filter: blur(50px);
+  border-radius: 50%;
+}
+
+.start-btn {
+  height: 40px;
+  width: 140px;
+  padding: 4px;
+  background: linear-gradient(135deg, rgb(98, 83, 225), rgb(4, 190, 254));
+  border: unset;
+}
+
+.start-btn:hover {
+  background: linear-gradient(135deg, rgb(98, 83, 225), rgb(4, 190, 254)) !important;
+}
+
+.install-btn {
+  width: 140px;
+  margin-left: 40px;
+}
+
+.feature-title,
+.feature-title-libro {
+  font-size: 48px;
+  color: #27272e;
+  font-weight: 600;
+  text-align: center;
+}
+
+.feature-title-libro {
+  margin-top: 28px;
+}
+
+.user-item {
+  height: 60px;
+  width: 220px;
+}
+
+.user-item-container {
+  margin-top: 20px;
 }
