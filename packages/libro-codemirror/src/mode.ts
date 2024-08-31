@@ -186,7 +186,7 @@ export function findByFileName(name: string): ISpec | null {
 export function findBest(mode: string | ISpec, fallback = true): ISpec | null {
   const modename = typeof mode === 'string' ? mode : mode.name;
   const mimetype = typeof mode !== 'string' ? mode.mime : modename;
-  const ext = typeof mode !== 'string' ? mode.extensions ?? [] : [];
+  const ext = typeof mode !== 'string' ? (mode.extensions ?? []) : [];
 
   return (
     (modename ? findByName(modename) : null) ??

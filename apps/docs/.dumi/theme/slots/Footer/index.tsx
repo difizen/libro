@@ -1,4 +1,4 @@
-import { useSiteData } from 'dumi';
+import { useSiteData, Link } from 'dumi';
 import React from 'react';
 import './index.less';
 
@@ -17,9 +17,14 @@ const Footer: React.FC = () => {
   return (
     <div className="difizen-dumi-footer">
       <div className="difizen-dumi-footer-content">
-        {/* <div className="difizen-dumi-footer-text-group">
-          {themeConfig['linksTitle']}
-        </div> */}
+        <div className="difizen-dumi-footer-logo">
+          {themeConfig.logo && (
+            <Link to={themeConfig['link']}>
+              <img className="difizen-dumi-header-logo-img" src={themeConfig.logo} />
+              <span>{themeConfig.name}</span>
+            </Link>
+          )}
+        </div>
         {(themeConfig['links'] || []).map((datum: DatumType) => (
           <div className="difizen-dumi-footer-text-group" key={datum.title}>
             <div className="difizen-dumi-footer-title">{datum.title}</div>
@@ -32,8 +37,6 @@ const Footer: React.FC = () => {
             ))}
           </div>
         ))}
-
-        <div className="difizen-dumi-footer-text-group"></div>
         <div className="difizen-dumi-footer-text-group">
           <div className="difizen-dumi-footer-title">联系我们</div>
           {qrcodes.map((item: { name: string; qrcode: string }) => (

@@ -8,6 +8,7 @@ import { DumiPreset } from '../modules/module.js';
 import Footer from '../slots/Footer/index.js';
 import Header from '../slots/Header/index.js';
 import './DocLayout.less';
+import '../tailwind.out.css';
 
 const HomeLayout: React.FC = () => {
   const { themeConfig } = useSiteData();
