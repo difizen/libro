@@ -7,6 +7,7 @@ export default defineConfig({
     link: '/',
     logo: '/libro.svg',
     nav: [
+      { title: '介绍', link: '/introduction' },
       { title: '快速开始', link: '/quickstart' },
       { title: '文档', link: '/docs' },
       { title: '示例', link: '/examples' },
