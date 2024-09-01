@@ -9,6 +9,7 @@ export default defineConfig({
     nav: [
       { title: '介绍', link: '/introduction' },
       { title: '快速开始', link: '/quickstart' },
+      { title: '使用文档', link: '/manual' },
       { title: '文档', link: '/docs' },
       { title: '示例', link: '/examples' },
     ],
