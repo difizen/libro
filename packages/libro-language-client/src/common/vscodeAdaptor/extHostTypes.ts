@@ -4288,6 +4288,7 @@ export class TestRunRequest implements vscode.TestRunRequest {
     public readonly profile: vscode.TestRunProfile | undefined = undefined,
     public readonly continuous = false,
   ) {}
+  preserveFocus: boolean;
 }
 
 export class TestMessage implements vscode.TestMessage {
