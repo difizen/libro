@@ -3,6 +3,7 @@ import type { LibroView } from '@difizen/libro-core';
 import { LibroKernelConnectionManager, KernelSpecManager } from '@difizen/libro-kernel';
 import { ConfigurationService, useInject, ViewInstance } from '@difizen/mana-app';
 import { Dropdown, Space } from 'antd';
+import type { MenuProps } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
 
 import { LibroJupyterConfiguration } from '../config/index.js';
@@ -57,7 +58,7 @@ function getKernelListItems(
   otherKernelList: OtherKernelListElem[],
   allowPreferredSession: boolean,
 ) {
-  let array = [
+  const array: MenuProps['items'] = [
     {
       key: 'StartPreferredKernel',
       type: 'group',
@@ -104,9 +105,17 @@ function getKernelListItems(
       label: 'Shut Down the Kernel',
     },
   ];
-  if (!allowPreferredSession) {
-    array = array.filter((item) => {
-      return item.key !== 'UseKernelFromPreferredSession';
+  if (allowPreferredSession) {
+    array.splice(2, 0, {
+      key: 'UseKernelFromPreferredSession',
+      type: 'group',
+      label: 'Use Kernel from Preferred Session',
+      children: preferredSessionKernelList.map((item) => {
+        return {
+          key: item.fileName,
+          label: item.fileName,
+        };
+      }),
     });
   }
   return array;
