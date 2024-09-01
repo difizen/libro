@@ -19,5 +19,5 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: ['16']
+        node-version: ['18']
         python-version: ['3.8']
