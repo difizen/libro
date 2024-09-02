@@ -37,6 +37,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-namespace': 'off',
+    // '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-explicit-any': ['warn', { ignoreRestArgs: true }],
     '@typescript-eslint/no-shadow': [
       'warn',

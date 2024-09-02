@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-parameter-properties */
 /* eslint-disable @typescript-eslint/parameter-properties */
 // Copyright (c) Jupyter Development Team.
