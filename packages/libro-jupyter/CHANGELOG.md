@@ -1,5 +1,29 @@
 # @difizen/libro-jupyter
 
+## 0.2.26
+
+### Patch Changes
+
+- [#186](https://github.com/difizen/libro/pull/186) [`ef7b630`](https://github.com/difizen/libro/commit/ef7b630b12337c5f012a65d1460136a3f40b5ab3) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - feat: add libro website&markdown config about link target to blank&imporove style
+
+- Updated dependencies [[`ef7b630`](https://github.com/difizen/libro/commit/ef7b630b12337c5f012a65d1460136a3f40b5ab3)]:
+  - @difizen/libro-language-client@0.2.26
+  - @difizen/libro-codemirror@0.2.26
+  - @difizen/libro-lsp@0.2.26
+  - @difizen/libro-code-cell@0.2.26
+  - @difizen/libro-code-editor@0.2.26
+  - @difizen/libro-cofine-editor@0.2.26
+  - @difizen/libro-common@0.2.26
+  - @difizen/libro-core@0.2.26
+  - @difizen/libro-kernel@0.2.26
+  - @difizen/libro-l10n@0.2.26
+  - @difizen/libro-markdown-cell@0.2.26
+  - @difizen/libro-output@0.2.26
+  - @difizen/libro-raw-cell@0.2.26
+  - @difizen/libro-rendermime@0.2.26
+  - @difizen/libro-search@0.2.26
+  - @difizen/libro-search-code-cell@0.2.26
+
 ## 0.2.25
 
 ### Patch Changes

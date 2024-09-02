@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-terminal",
-  "version": "0.2.25",
+  "version": "0.2.26",
   "description": "",
   "keywords": [
     "libro"
@@ -44,9 +44,9 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-core": "^0.2.25",
-    "@difizen/libro-common": "^0.2.25",
-    "@difizen/libro-kernel": "^0.2.25",
+    "@difizen/libro-core": "^0.2.26",
+    "@difizen/libro-common": "^0.2.26",
+    "@difizen/libro-kernel": "^0.2.26",
     "@ant-design/icons": "^5.1.0",
     "@difizen/mana-app": "latest",
     "uuid": "^9.0.0",

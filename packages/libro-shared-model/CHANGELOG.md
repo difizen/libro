@@ -1,5 +1,14 @@
 # @difizen/libro-shared-model
 
+## 0.2.26
+
+### Patch Changes
+
+- [#186](https://github.com/difizen/libro/pull/186) [`ef7b630`](https://github.com/difizen/libro/commit/ef7b630b12337c5f012a65d1460136a3f40b5ab3) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - feat: add libro website&markdown config about link target to blank&imporove style
+
+- Updated dependencies [[`ef7b630`](https://github.com/difizen/libro/commit/ef7b630b12337c5f012a65d1460136a3f40b5ab3)]:
+  - @difizen/libro-common@0.2.26
+
 ## 0.2.25
 
 ### Patch Changes
