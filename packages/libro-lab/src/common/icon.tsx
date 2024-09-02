@@ -95,7 +95,7 @@ export function Loadding(props: IProps) {
         <g
           id="1.1容器加载中-关闭提示"
           transform="translate(-1362.000000, -879.000000)"
-          fill="currentColor"
+          fill="#1890FF"
         >
           <g id="编组-20" transform="translate(0.000000, 872.000000)">
             <g id="编组-3" transform="translate(1302.000000, 5.000000)">

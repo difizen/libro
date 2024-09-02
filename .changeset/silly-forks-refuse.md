@@ -30,4 +30,4 @@
 '@difizen/libro-widget': patch
 ---
 
-feat: add libro website&markdown config about link target to blank
+feat: add libro website&markdown config about link target to blank&imporove style
