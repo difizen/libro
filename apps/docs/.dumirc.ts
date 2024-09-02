@@ -111,5 +111,7 @@ export default defineConfig({
       ws: true,
     },
   },
-  analytics: {},
+  analytics: {
+    baidu: process.env.BAIDU_ANALYTICS,
+  },
 });
