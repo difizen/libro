@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { markdown } from '@codemirror/lang-markdown';
 import type { LanguageSupport } from '@codemirror/language';
 import { LanguageDescription } from '@codemirror/language';

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ArrowDown, ArrowRight } from '@difizen/libro-core';
 import type { DisplayView, LibroView } from '@difizen/libro-core';
 import { ConfigurationService } from '@difizen/mana-app';
