@@ -23,7 +23,7 @@
     "ci:check": "nx run-many -t lint:prettier -t lint:eslint -t lint:stylelint  -t typecheck:tsc -t coverage:jest",
     "ci:publish": "changeset publish && nx run-many --nx-bail -t publish",
     "docs": "nx run @difizen/libro-docs:start",
-    "docs:build": "nx run @difizen/mana-docs:build",
+    "docs:build": "nx run @difizen/libro-docs:build",
     "changeset": "changeset",
     "clean": "git clean -fX .",
     "tsc": "nx run-many  -t typecheck:tsc"
