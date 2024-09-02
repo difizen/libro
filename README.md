@@ -22,7 +22,9 @@
 - [后续计划](#后续计划)
 - [更多](#更多)
   - [官网](#贡献代码)
+  - [提交issue](#提交issue)
   - [贡献代码](#贡献代码)
+  - [贡献者](#贡献者)
   - [联系我们](#联系我们)
 
 ---
@@ -81,18 +83,26 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 ### 官网
 
-请访问 https://libro.difizen.net/
+💡 请访问 https://libro.difizen.net/
 
-### 通过github issue提交疑问
+### 提交issue
 
 😊 我们建议您使用[github issue](https://github.com/difizen/magent/issues) 提交您的疑问, 我们通常会在2日内回复。
 
 ### 贡献代码
 
-😊 请查阅 [CONTRIBUTING.md](./CONTRIBUTING.md)
+🤝 请查阅 [CONTRIBUTING.md](./CONTRIBUTING.md)
+
+### 贡献者
+
+💪 感谢所有的贡献者
+
+<a href="https://github.com/difizen/libro/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=difizen/libro" alt="List of Contributors"/>
+</a>
 
 ### 联系我们
 
-😊 加入我们的钉钉答疑群与我们联系。
+🤗 加入我们的钉钉答疑群与我们联系。
 
 <img src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*oNhKSblcJfIAAAAAAAAAAAAADvyTAQ/original" width="30%">
