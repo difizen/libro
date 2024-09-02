@@ -1,6 +1,5 @@
 import type { IApi } from 'dumi';
 
-// GA
 export default (api: IApi) => {
   const GA_KEY = process.env.GA_KEY;
   if (!api.userConfig.analytics && !GA_KEY) {
@@ -15,9 +14,19 @@ export default (api: IApi) => {
       },
     },
   });
-
   const { analytics = {} } = api.userConfig;
   const { baidu = false, ga = GA_KEY } = analytics || {};
+
+  const baiduTpl = (code: string) => {
+    return `
+    (function() {
+      var hm = document.createElement('script');
+      hm.src = 'https://hm.baidu.com/hm.js?${code}';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  `;
+  };
 
   const gaTpl = (code: string) => {
     return `
@@ -68,18 +77,27 @@ export default (api: IApi) => {
   }
 
   if (api.env !== 'development') {
-    if (ga.startsWith('G')) {
+    if (baidu) {
       api.addHTMLHeadScripts(() => [
         {
-          content: gtagTpl(ga),
+          content: baiduTpl(baidu),
         },
       ]);
-    } else {
-      api.addHTMLScripts(() => [
-        {
-          content: gaTpl(ga),
-        },
-      ]);
+    }
+    if (ga) {
+      if (ga.startsWith('G')) {
+        api.addHTMLHeadScripts(() => [
+          {
+            content: gtagTpl(ga),
+          },
+        ]);
+      } else {
+        api.addHTMLScripts(() => [
+          {
+            content: gaTpl(ga),
+          },
+        ]);
+      }
     }
   }
 };

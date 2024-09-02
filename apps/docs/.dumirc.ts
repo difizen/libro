@@ -1,18 +1,21 @@
 import { defineConfig } from 'dumi';
-
+const LIBRO_DEPLOY_ENV = process.env.LIBRO_DEPLOY_ENV;
+const nav = [
+  { title: '介绍', link: '/introduction' },
+  { title: '快速开始', link: '/quickstart' },
+  { title: '使用文档', link: '/manual' },
+  { title: '集成文档', link: '/integration' },
+];
+if (LIBRO_DEPLOY_ENV !== 'vercel') {
+  nav.push({ title: '示例', link: '/examples' });
+}
 export default defineConfig({
   themeConfig: {
     hd: { rules: [] },
     name: 'libro',
     link: '/',
     logo: '/libro.svg',
-    nav: [
-      { title: '介绍', link: '/introduction' },
-      { title: '快速开始', link: '/quickstart' },
-      { title: '使用文档', link: '/manual' },
-      { title: '集成文档', link: '/integration' },
-      // { title: '示例', link: '/examples' },
-    ],
+    nav: nav,
     banner: {
       title: 'libro',
       desc: '不只是 notebook',
@@ -74,7 +77,12 @@ export default defineConfig({
     gitRepo: { owner: 'difizen', name: 'libro' },
   },
   favicons: ['/libro.svg'],
-  plugins: ['@difizen/umi-plugin-mana', './dumi-plugin-alias', './dumi-plugin-ga'],
+  plugins: [
+    '@difizen/umi-plugin-mana',
+    './dumi-plugin-alias',
+    './dumi-plugin-analytics',
+    './dumi-plugin-deploy',
+  ],
   mana: {
     decorator: true,
     nodenext: true,
