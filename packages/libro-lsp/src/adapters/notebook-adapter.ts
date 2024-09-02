@@ -87,7 +87,7 @@ export class NotebookAdapter extends WidgetLSPAdapter<LibroView> {
     } else {
       mimeType = languageMetadata.mimetype;
     }
-    return Array.isArray(mimeType) ? mimeType[0] ?? 'text/plain' : mimeType;
+    return Array.isArray(mimeType) ? (mimeType[0] ?? 'text/plain') : mimeType;
   }
 
   /**
