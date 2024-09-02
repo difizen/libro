@@ -19,7 +19,7 @@ export const HeroSection: FC = () => {
             <div className="circle-third"></div>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-primary mb-6 drop-shadow-md">
-            Libro
+            libro
           </h1>
           <p className="text-xl sm:text-2xl text-muted-foreground mb-8">
             灵活定制、轻松集成的 Notebook 产品方案
