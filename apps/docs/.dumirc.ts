@@ -74,7 +74,7 @@ export default defineConfig({
     gitRepo: { owner: 'difizen', name: 'libro' },
   },
   favicons: ['/libro.svg'],
-  plugins: ['@difizen/umi-plugin-mana', './dumi-plugin-alias'],
+  plugins: ['@difizen/umi-plugin-mana', './dumi-plugin-alias', './dumi-plugin-ga'],
   mana: {
     decorator: true,
     nodenext: true,
