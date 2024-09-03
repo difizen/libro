@@ -87,7 +87,7 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 ### 提交issue
 
-😊 我们建议您使用[github issue](https://github.com/difizen/magent/issues) 提交您的疑问, 我们通常会在2日内回复。
+😊 我们建议您使用[github issue](https://github.com/difizen/libro/issues) 提交您的疑问, 我们通常会在2日内回复。
 
 ### 贡献代码
 
