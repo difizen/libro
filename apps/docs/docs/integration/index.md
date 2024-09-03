@@ -18,12 +18,8 @@ Libro 提供了前端和服务侧的定制接入能力，本文将手把手教�
 安装 libro , mana 相关的依赖包，可按照需要安装。
 
 ```bash
-pnpm add @difizen/mana-app
 pnpm add @difizen/libro-lab
-pnpm add @difizen/mana-core
-pnpm add @difizen/mana-common
-pnpm add @difizen/mana-observable
-pnpm add @difizen/mana-syringe
+pnpm add @difizen/mana-app
 
 pnpm add @difizen/umi-plugin-mana -D
 ```
@@ -65,16 +61,13 @@ export default defineConfig({
 1. 连接 Notebook 服务：这里您可以通过安装 libro-server ，也可以使用 jupyter 的能力，例如 jupyter server 或者 jupyter lab。启动服务，获得对应的服务链接，并可以按照下述方式在前端侧更新服务链接。
 
 ```typescript
-import { ServerConnection, ServerManager } from '@difizen/libro-jupyter';
-import { ConfigurationService } from '@difizen/mana-app';
-import { ApplicationContribution } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
+import { ServerConnection, ServerManager } from '@difizen/libro-lab';
+import { ApplicationContribution, inject, singleton } from '@difizen/mana-app';
 
 @singleton({ contrib: ApplicationContribution })
 export class LibroApp implements ApplicationContribution {
   @inject(ServerConnection) serverConnection: ServerConnection;
   @inject(ServerManager) serverManager: ServerManager;
-  @inject(ConfigurationService) configurationService: ConfigurationService;
 
   async onStart() {
     this.serverConnection.updateSettings({
@@ -92,21 +85,23 @@ export class LibroApp implements ApplicationContribution {
 import { LibroLabModule } from '@difizen/libro-lab';
 import { ManaAppPreset, ManaComponents, ManaModule } from '@difizen/mana-app';
 import { LibroApp } from './app.js';
-import './index.less';
 
 const BaseModule = ManaModule.create().register(LibroApp);
 
-const LibroLab = (): JSX.Element => {
-    return (
-        <ManaComponents.Application
-        key={'libro-lab'}
+const App = (): JSX.Element => {
+  return (
+    <div className="libro-workbench-app">
+      <ManaComponents.Application
+        key="libro-lab"
         asChild={true}
         modules={[ManaAppPreset, LibroLabModule, BaseModule]}
-        />
-    );
+      />
+    </div>
+  );
 };
 
-export default LibroLab;
+export default App;
+
 ```
 
 ### 集成 Notebook 编辑器
