@@ -2,7 +2,7 @@
 import { CodeFilled } from '@ant-design/icons';
 import './index.less';
 
-export interface IProps {
+interface IProps {
   className?: string;
   width?: string;
   height?: string;

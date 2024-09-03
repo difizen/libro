@@ -1,4 +1,4 @@
-export interface IProps {
+interface IProps {
   className?: string;
   width?: string;
   height?: string;
