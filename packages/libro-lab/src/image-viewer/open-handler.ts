@@ -22,7 +22,7 @@ export class ImageViewerOpenHandler extends NavigatableViewOpenHandler<Navigatab
   canHandle(uri: URI, _options?: ViewOpenHandlerOptions) {
     if (uri.scheme === 'file') {
       const ext = uri.path.ext;
-      if (imageExtToTypes.has(ext)) {
+      if (imageExtToTypes.has(ext.toLowerCase())) {
         return 100;
       }
     }
