@@ -1,5 +1,14 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.27
+
+### Patch Changes
+
+- [#194](https://github.com/difizen/libro/pull/194) [`77de639`](https://github.com/difizen/libro/commit/77de639b6324e6721282b77943a91371ffd73b7f) Thanks [@BroKun](https://github.com/BroKun)! - Image preview compatible extension case.
+
+- Updated dependencies [[`77de639`](https://github.com/difizen/libro/commit/77de639b6324e6721282b77943a91371ffd73b7f)]:
+  - @difizen/libro-cofine-editor-core@0.2.27
+
 ## 0.2.26
 
 ### Patch Changes

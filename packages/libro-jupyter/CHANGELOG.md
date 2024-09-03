@@ -1,5 +1,29 @@
 # @difizen/libro-jupyter
 
+## 0.2.27
+
+### Patch Changes
+
+- [#194](https://github.com/difizen/libro/pull/194) [`77de639`](https://github.com/difizen/libro/commit/77de639b6324e6721282b77943a91371ffd73b7f) Thanks [@BroKun](https://github.com/BroKun)! - Image preview compatible extension case.
+
+- Updated dependencies [[`77de639`](https://github.com/difizen/libro/commit/77de639b6324e6721282b77943a91371ffd73b7f)]:
+  - @difizen/libro-search-code-cell@0.2.27
+  - @difizen/libro-language-client@0.2.27
+  - @difizen/libro-cofine-editor@0.2.27
+  - @difizen/libro-markdown-cell@0.2.27
+  - @difizen/libro-code-editor@0.2.27
+  - @difizen/libro-codemirror@0.2.27
+  - @difizen/libro-rendermime@0.2.27
+  - @difizen/libro-code-cell@0.2.27
+  - @difizen/libro-raw-cell@0.2.27
+  - @difizen/libro-common@0.2.27
+  - @difizen/libro-kernel@0.2.27
+  - @difizen/libro-output@0.2.27
+  - @difizen/libro-search@0.2.27
+  - @difizen/libro-core@0.2.27
+  - @difizen/libro-l10n@0.2.27
+  - @difizen/libro-lsp@0.2.27
+
 ## 0.2.26
 
 ### Patch Changes

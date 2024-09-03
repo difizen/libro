@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-core",
-  "version": "0.2.26",
+  "version": "0.2.27",
   "description": "",
   "keywords": [
     "libro",
@@ -47,10 +47,10 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.0",
-    "@difizen/libro-code-editor": "^0.2.26",
-    "@difizen/libro-common": "^0.2.26",
-    "@difizen/libro-shared-model": "^0.2.26",
-    "@difizen/libro-virtualized": "^0.2.26",
+    "@difizen/libro-code-editor": "^0.2.27",
+    "@difizen/libro-common": "^0.2.27",
+    "@difizen/libro-shared-model": "^0.2.27",
+    "@difizen/libro-virtualized": "^0.2.27",
     "@difizen/mana-app": "latest",
     "@difizen/mana-l10n": "latest",
     "@difizen/mana-react": "latest",
