@@ -1,5 +1,11 @@
 # @difizen/libro-l10n
 
+## 0.2.28
+
+### Patch Changes
+
+- [#198](https://github.com/difizen/libro/pull/198) [`6fa76cc`](https://github.com/difizen/libro/commit/6fa76cc160dbd83249311b08cedb3ff9728c7356) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix(lab): refactor export
+
 ## 0.2.27
 
 ### Patch Changes
