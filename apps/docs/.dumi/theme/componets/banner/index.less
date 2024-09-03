@@ -12,7 +12,6 @@
   }
 
   @media only screen and (max-width: 768px) {
-    height: 636px;
     background-size: auto 636px;
   }
 
@@ -261,7 +260,8 @@
   margin-top: 28px;
 }
 
-.user-item {    display: flex;
+.user-item {    
+  display: flex;
   align-items: center;
   font-size: 32px;
   justify-content: center;
@@ -275,6 +275,7 @@
     height: 60px;
     object-fit: contain;
     margin-right: 12px;
+    width: 258px;
 
     &-sm {
       height: 45px;
@@ -283,8 +284,11 @@
 }
 
 .user-container {
+  display: flex;
+  justify-content: center;
   margin-top: 20px;
   row-gap: 10px;
   margin-left: -62px;
   margin-right: -62px;
 }
+

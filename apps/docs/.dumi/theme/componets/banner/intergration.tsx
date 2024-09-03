@@ -39,9 +39,8 @@ export const IntergractionSection: FC = () => {
           <a className="user-item" href="https://opensumi.com" target="_blank" rel="noreferrer">
             <img
               className="user-item-img user-item-img-sm"
-              src="https://img.alicdn.com/imgextra/i2/O1CN01dqjQei1tpbj9z9VPH_!!6000000005951-55-tps-87-78.svg"
+              src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*7HyaQIPL1KYAAAAAAAAAAAAADvyTAQ/original"
             ></img>
-            OpenSumi
           </a>
         </Col>
       </Row>
