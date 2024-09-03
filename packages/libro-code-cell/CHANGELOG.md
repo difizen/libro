@@ -1,5 +1,16 @@
 # @difizen/libro-codemirror-code-cell
 
+## 0.2.28
+
+### Patch Changes
+
+- [#198](https://github.com/difizen/libro/pull/198) [`6fa76cc`](https://github.com/difizen/libro/commit/6fa76cc160dbd83249311b08cedb3ff9728c7356) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix(lab): refactor export
+
+- Updated dependencies [[`6fa76cc`](https://github.com/difizen/libro/commit/6fa76cc160dbd83249311b08cedb3ff9728c7356)]:
+  - @difizen/libro-code-editor@0.2.28
+  - @difizen/libro-common@0.2.28
+  - @difizen/libro-core@0.2.28
+
 ## 0.2.27
 
 ### Patch Changes
