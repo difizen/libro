@@ -218,9 +218,37 @@ export type ICellMetadata = IBaseCellMetadata | IRawCellMetadata | ICodeCellMeta
 
 export const LibroCellURIScheme = 'vscode-notebook-cell';
 
-export const getCellURI = (notebookId: string, cellId: string): URI => {
-  let uri = new URI(notebookId);
-  uri = URI.withScheme(uri, LibroCellURIScheme);
-  uri = URI.withQuery(uri, `cellid=${cellId}`);
-  return uri;
-};
+export namespace CellUri {
+  /**
+   * 兼容 VSCode
+   */
+  export const NotebookScheme = 'vscode-notebook';
+
+  /**
+   * 兼容 VSCode
+   */
+  export const CellScheme = 'vscode-notebook-cell';
+
+  export const from = (notebookId: string, cellId: string): URI => {
+    let uri = new URI(notebookId);
+    uri = URI.withScheme(uri, LibroCellURIScheme);
+    uri = URI.withQuery(uri, URI.stringifyQuery({ cellId }));
+    return uri;
+  };
+
+  export const is = (uri: URI): boolean => {
+    return uri.scheme === CellUri.CellScheme;
+  };
+
+  export const parse = (
+    uri: URI,
+  ): { notebookId: string; cellId: string } | undefined => {
+    if (!CellUri.is(uri)) {
+      return;
+    }
+    return {
+      notebookId: uri.path.toString(),
+      cellId: uri.getParsedQuery()['cellId'],
+    };
+  };
+}

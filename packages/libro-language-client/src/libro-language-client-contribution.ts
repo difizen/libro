@@ -1,4 +1,4 @@
-import { getCellURI } from '@difizen/libro-common';
+import { CellUri } from '@difizen/libro-common';
 import {
   EditorCellView,
   ILibroWorkspaceService,
@@ -93,7 +93,7 @@ export class LibroLanguageClientContribution implements ApplicationContribution 
         const cell = libroView.model.cells.find((item) => {
           return (
             ExecutableNotebookModel.is(libroView.model) &&
-            getCellURI(libroView.model.filePath, item.model.id).toString() ===
+            CellUri.from(libroView.model.filePath, item.model.id).toString() ===
               decodeURIComponent(resource.toString())
           );
         });

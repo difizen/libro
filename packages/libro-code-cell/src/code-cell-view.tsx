@@ -4,6 +4,7 @@
 import type { CodeEditorViewOptions, CodeEditorView } from '@difizen/libro-code-editor';
 import { CodeEditorManager } from '@difizen/libro-code-editor';
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
+import { CellUri } from '@difizen/libro-common';
 import { isOutput } from '@difizen/libro-common';
 import type {
   IOutputAreaOption,
@@ -227,7 +228,7 @@ export class LibroCodeCellView extends LibroExecutableCellView {
 
   protected getEditorOption(): CodeEditorViewOptions {
     const option: CodeEditorViewOptions = {
-      uuid: `${this.parent.model.id}-${this.model.id}`,
+      uuid: CellUri.from(this.parent.model.id, this.model.id).toString(),
       editorHostId: this.parent.id + this.id,
       model: this.model,
       config: {

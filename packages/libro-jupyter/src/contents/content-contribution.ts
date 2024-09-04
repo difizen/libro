@@ -20,6 +20,7 @@ export class LibroJupyterContentContribution implements ContentContribution {
       currentFileContents.content.nbformat_minor = 5;
       jupyterModel.currentFileContents = currentFileContents;
       jupyterModel.filePath = currentFileContents.path;
+      jupyterModel.id = currentFileContents.path; // use file path as id, will be passed to editor and lsp
       jupyterModel.lastModified = jupyterModel.currentFileContents.last_modified;
 
       if (jupyterModel.executable) {
