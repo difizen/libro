@@ -20,7 +20,7 @@ pip install libro
 
 在终端中输入命令：`libro`
 
-执行命令之后，终端将会显示一系列 notebook 的服务器信息，同时浏览器将会自动启动 Libro。浏览器地址栏中默认地将会显示：http://localhost:8888/libro。其中，“localhost”指的是本机，“8888”则是端口号。
+执行命令之后，终端将会显示一系列 notebook 的服务器信息，同时浏览器将会自动启动 Libro。浏览器地址栏中默认地将会显示：`http://localhost:8888/libro`。其中，“localhost”指的是本机，“8888”则是端口号。
 
 - 注意：
 

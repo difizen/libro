@@ -10,6 +10,8 @@
 - 提供内核级别的扩展能力，所有层次的内容均允许二次开发定制。
 - 定义大模型工作流，内置大模型交互和辅助开发能力。
 
+如果你也喜欢这个项目，欢迎为我们点亮 🌟🌟🌟
+
 ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u40VR6qi_E0AAAAAAAAAAAAADvyTAQ/original)
 
 ---

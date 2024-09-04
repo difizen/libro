@@ -34,12 +34,12 @@ libro 构建了一套开放的自定义 UI 和执行内核能力，所有层次�
 
 它支持定制多种表现形态，支持 SQL 、Prompt 等不同形态的 cell，支持仅作为文档编辑器使用，也可作为报告形态，方便随时做演示 Demo。
 
-同时，强大的内核定制能力使得 libro 支持原生 jupyter 执行能力的同时，也可方便的定制面向 SQL 执行的 ODPS 环境、面向隐私计算场景的多节点调试执行环境等。
+强大的内核定制能力使得 libro 支持原生 jupyter 执行能力的同时，也可方便的定制面向 SQL 执行的 ODPS 环境、面向隐私计算场景的多节点调试执行环境等。
 <img src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*CjlbSLqtETMAAAAAAAAAAAAADvyTAQ/original" width="1000px"/>
 
 ## 功能丰富
 
-libro 提供完整 notebook 能力的同时内置了许多丰富的功能特性，例如支持智能助手 AI 对话功能；面向Python 提供更优异的代码提示、补全、格式化、定义跳转等功能；支持 cell 级别的代码版本 Diff 能力；支持轻应用形态，结合交互控件动态生成报告等。
+libro 提供完整 notebook 能力，并且内置了许多丰富的功能特性，例如支持智能助手 AI 对话功能；面向 Python 提供更优异的代码提示、补全、格式化、定义跳转等功能；支持 cell 级别的代码版本 Diff 能力；支持轻应用形态，结合交互控件动态生成报告等。
 
 <img src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*8V40Spc4brsAAAAAAAAAAAAADvyTAQ/original" width="1000px"/>
 
@@ -60,6 +60,8 @@ libro 采用分层建设：
 
 libro 将继续发挥自身灵活定制、轻松集成的特点，为 notebook 类产品探索更多的使用场景。我们会不断增加对不同运行时的支持，引入交互体验更好的控件，让 libro 成为体验最好的 notebook 产品。
 
-libro 将不断与大模型结合的应用场景，通过大模型让用户拥有更加智能的编程体验，让 libro 编程像写文档一样容易。同时也让 libro 在大模型应用的研发体系内，发挥自身交互丰富的特点，成为研发大模型能力的用力助手。
+libro 将不断探索与大模型结合的应用场景，通过大模型让用户拥有更加智能的编程体验，让 libro 编程像写文档一样容易。同时也让 libro 在大模型应用的研发体系内，发挥自身交互丰富的特点，成为研发大模型能力的用力助手。
 
-我们欢迎不同场景的开发者，跟我们一起建设 libro 项目，再次附上 libro 开源项目链接：https://github.com/difizen/libro
+我们欢迎不同场景的开发者，跟我们一起建设 libro 项目，再次附上 libro 开源项目链接，如果你也喜欢这个项目，欢迎在 GitHub 上为我们点亮 🌟🌟🌟
+
+https://github.com/difizen/libro
