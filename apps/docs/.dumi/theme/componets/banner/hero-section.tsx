@@ -24,11 +24,9 @@ export const HeroSection: FC = () => {
           <p className="text-xl sm:text-2xl text-muted-foreground mb-8">
             灵活定制、轻松集成的 Notebook 产品方案
           </p>
-          <Link to={'/quickstart'}>
-            <Button type="primary" size="large" className="start-btn">
-              Start now
-            </Button>
-          </Link>
+          <Button type="primary" size="large" className="start-btn" href="http://libro-lab.difizen.net/libro?" target="_blank">
+            Start now
+          </Button>
           <Button size="large" className="install-btn">
             pip install libro
           </Button>
