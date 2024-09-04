@@ -1,5 +1,14 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.29
+
+### Patch Changes
+
+- [#201](https://github.com/difizen/libro/pull/201) [`b91cd75`](https://github.com/difizen/libro/commit/b91cd7588ba4adcb3ca83f241fe42471b30cdc26) Thanks [@zhanba](https://github.com/zhanba)! - fix: update cell editor uri
+
+- Updated dependencies [[`b91cd75`](https://github.com/difizen/libro/commit/b91cd7588ba4adcb3ca83f241fe42471b30cdc26)]:
+  - @difizen/libro-cofine-editor-core@0.2.29
+
 ## 0.2.28
 
 ### Patch Changes
