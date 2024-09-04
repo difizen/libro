@@ -1,8 +1,9 @@
 // import { BGShapeCircle } from "@/components/bg-shape-circle";
 import { Button } from 'antd';
-import { Link } from 'dumi';
 import type { FC } from 'react';
 import React from 'react';
+
+import { copy2clipboard } from '../../utils/utils';
 
 export const HeroSection: FC = () => {
   return (
@@ -27,7 +28,7 @@ export const HeroSection: FC = () => {
           <Button type="primary" size="large" className="start-btn" href="http://libro-lab.difizen.net/libro?" target="_blank">
             Start now
           </Button>
-          <Button size="large" className="install-btn">
+          <Button size="large" className="install-btn" onClick={()=>copy2clipboard("pip install libro")}>
             pip install libro
           </Button>
         </div>
