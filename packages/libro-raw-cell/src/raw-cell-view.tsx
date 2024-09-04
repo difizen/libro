@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/parameter-properties */
 import type { CodeEditorViewOptions, CodeEditorView } from '@difizen/libro-code-editor';
 import { CodeEditorManager } from '@difizen/libro-code-editor';
+import { CellUri } from '@difizen/libro-common';
 import type { CellViewOptions } from '@difizen/libro-core';
 import { CellService, LibroEditorCellView, LibroContextKey } from '@difizen/libro-core';
 import { getOrigin, prop, useInject, watch } from '@difizen/mana-app';
@@ -76,7 +77,7 @@ export class LibroRawCellView extends LibroEditorCellView {
 
   protected getEditorOption(): CodeEditorViewOptions {
     const option: CodeEditorViewOptions = {
-      uuid: `${this.parent.model.id}-${this.model.id}`,
+      uuid: CellUri.from(this.parent.model.id, this.model.id).toString(),
       editorHostId: this.parent.id + this.id,
       model: this.model,
       config: {

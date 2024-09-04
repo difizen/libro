@@ -26,7 +26,7 @@ import {
   ConfigurationService,
   useConfigurationValue,
 } from '@difizen/mana-app';
-import { BackTop, Button, Spin } from 'antd';
+import { FloatButton, Button, Spin } from 'antd';
 import type { FC, ForwardRefExoticComponent, RefAttributes } from 'react';
 import { forwardRef, memo, useCallback, useEffect, useRef } from 'react';
 import { v4 } from 'uuid';
@@ -173,11 +173,11 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
             slotView={LibroSlotView}
           />
         </div>
-        <BackTop target={() => libroViewContentRef.current || document}>
+        <FloatButton.BackTop target={() => libroViewContentRef.current || document}>
           <div className="libro-totop-button">
             <Button shape="circle" icon={<ToTopOutlined />} />
           </div>
-        </BackTop>
+        </FloatButton.BackTop>
         <Slot
           name={libroSlotManager.getSlotName(instance, 'content')}
           slotView={LibroSlotView}

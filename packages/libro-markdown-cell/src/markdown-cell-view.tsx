@@ -4,6 +4,7 @@ import type {
   CodeEditorView,
 } from '@difizen/libro-code-editor';
 import { CodeEditorManager } from '@difizen/libro-code-editor';
+import { CellUri } from '@difizen/libro-common';
 import type { CellCollapsible, CellViewOptions } from '@difizen/libro-core';
 import { CellService, EditorStatus, LibroEditorCellView } from '@difizen/libro-core';
 import { MarkdownParser } from '@difizen/libro-markdown';
@@ -144,7 +145,7 @@ export class MarkdownCellView extends LibroEditorCellView implements CellCollaps
 
   protected getEditorOption(): CodeEditorViewOptions {
     const option: CodeEditorViewOptions = {
-      uuid: `${this.parent.model.id}-${this.model.id}`,
+      uuid: CellUri.from(this.parent.model.id, this.model.id).toString(),
       model: this.model,
       config: {
         lineNumbers: false,

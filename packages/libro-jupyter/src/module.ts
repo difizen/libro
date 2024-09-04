@@ -63,7 +63,6 @@ import { WidgetModule } from './widget/index.js';
  */
 export const LibroJupyterNoEditorModule = ManaModule.create()
   .register(
-    JupyterWorkspaceService,
     LibroJupyterFileService,
     LibroJupyterCommandContribution,
     LibroJupyterKeybindingContribution,
@@ -119,9 +118,11 @@ export const LibroJupyterNoEditorModule = ManaModule.create()
     WidgetModule,
   );
 
-export const LibroJupyterModule = ManaModule.create().dependOn(
-  LibroE2EditorModule,
-  CodeMirrorEditorModule,
-  LibroJupyterNoEditorModule,
-  LibroLanguageClientModule,
-);
+export const LibroJupyterModule = ManaModule.create()
+  .register(JupyterWorkspaceService)
+  .dependOn(
+    LibroE2EditorModule,
+    CodeMirrorEditorModule,
+    LibroJupyterNoEditorModule,
+    LibroLanguageClientModule,
+  );

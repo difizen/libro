@@ -1,4 +1,4 @@
-import { getCellURI } from '@difizen/libro-common';
+import { CellUri } from '@difizen/libro-common';
 import type { CellView, LibroView } from '@difizen/libro-core';
 import { ExecutableNotebookModel } from '@difizen/libro-kernel';
 import type { NotebookCell, NotebookDocument, NotebookRange } from 'vscode';
@@ -42,7 +42,7 @@ export const l2c = {
       kind:
         cell.model.type === 'code' ? NotebookCellKind.Code : NotebookCellKind.Markup,
       document: {
-        uri: Uri.parse(getCellURI(filePath, cell.model.id).toString()),
+        uri: Uri.parse(CellUri.from(filePath, cell.model.id).toString()),
         fileName: filePath,
         isUntitled: false,
         languageId: 'python',
