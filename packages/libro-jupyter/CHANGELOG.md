@@ -1,5 +1,29 @@
 # @difizen/libro-jupyter
 
+## 0.2.30
+
+### Patch Changes
+
+- [#204](https://github.com/difizen/libro/pull/204) [`f1bc4b7`](https://github.com/difizen/libro/commit/f1bc4b746255654c43ab98755067b161142c2b96) Thanks [@zhanba](https://github.com/zhanba)! - chore: update language metadata registry
+
+- Updated dependencies [[`f1bc4b7`](https://github.com/difizen/libro/commit/f1bc4b746255654c43ab98755067b161142c2b96)]:
+  - @difizen/libro-cofine-editor@0.2.30
+  - @difizen/libro-markdown-cell@0.2.30
+  - @difizen/libro-code-editor@0.2.30
+  - @difizen/libro-code-cell@0.2.30
+  - @difizen/libro-raw-cell@0.2.30
+  - @difizen/libro-codemirror@0.2.30
+  - @difizen/libro-common@0.2.30
+  - @difizen/libro-core@0.2.30
+  - @difizen/libro-kernel@0.2.30
+  - @difizen/libro-l10n@0.2.30
+  - @difizen/libro-language-client@0.2.30
+  - @difizen/libro-lsp@0.2.30
+  - @difizen/libro-output@0.2.30
+  - @difizen/libro-rendermime@0.2.30
+  - @difizen/libro-search@0.2.30
+  - @difizen/libro-search-code-cell@0.2.30
+
 ## 0.2.29
 
 ### Patch Changes
