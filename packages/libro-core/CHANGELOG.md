@@ -1,5 +1,17 @@
 # @difizen/libro-core
 
+## 0.2.30
+
+### Patch Changes
+
+- [#204](https://github.com/difizen/libro/pull/204) [`f1bc4b7`](https://github.com/difizen/libro/commit/f1bc4b746255654c43ab98755067b161142c2b96) Thanks [@zhanba](https://github.com/zhanba)! - chore: update language metadata registry
+
+- Updated dependencies [[`f1bc4b7`](https://github.com/difizen/libro/commit/f1bc4b746255654c43ab98755067b161142c2b96)]:
+  - @difizen/libro-code-editor@0.2.30
+  - @difizen/libro-common@0.2.30
+  - @difizen/libro-shared-model@0.2.30
+  - @difizen/libro-virtualized@0.2.30
+
 ## 0.2.29
 
 ### Patch Changes
