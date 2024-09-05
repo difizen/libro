@@ -14,7 +14,7 @@ import type {
   SearchMatch,
   TooltipProvider,
 } from '@difizen/libro-code-editor';
-import { defaultConfig } from '@difizen/libro-code-editor';
+import { defaultConfig, LanguageSpecRegistry } from '@difizen/libro-code-editor';
 import type { E2Editor } from '@difizen/libro-cofine-editor-core';
 import { EditorProvider, MonacoEnvironment } from '@difizen/libro-cofine-editor-core';
 import { MIME } from '@difizen/libro-common';
@@ -35,7 +35,6 @@ import 'resize-observer-polyfill';
 import * as monaco from '@difizen/monaco-editor-core';
 import { v4 } from 'uuid';
 
-import { LanguageSpecRegistry } from './language-specs.js';
 import { PlaceholderContentWidget } from './placeholder.js';
 import type { MonacoEditorOptions, MonacoEditorType, MonacoMatch } from './types.js';
 import { MonacoRange, MonacoUri } from './types.js';
@@ -508,12 +507,9 @@ export class LibroE2Editor implements IEditor {
     }
     const editorConfig: LibroE2EditorConfig = {
       ...config,
-      ...this.languageSpec.editorConfig,
     };
     this._config = editorConfig;
-    // await this.languageSpec.loadModule()
     await MonacoEnvironment.init();
-    await this.languageSpec?.beforeEditorInit?.();
     const editorPorvider =
       MonacoEnvironment.container.get<EditorProvider>(EditorProvider);
 
@@ -560,18 +556,11 @@ export class LibroE2Editor implements IEditor {
     this.updateEditorSize();
     this.inspectResize();
     this.handleCommand(this.commandRegistry);
-    await this.languageSpec?.afterEditorInit?.(this);
     this.placeholder = new PlaceholderContentWidget(
       config.placeholder,
       this.monacoEditor!,
     );
     this.editorReadyDeferred.resolve();
-
-    // console.log(
-    //   'editor._themeService.getColorTheme()',
-    //   this.monacoEditor._themeService,
-    //   this.monacoEditor._themeService.getColorTheme(),
-    // );
   }
 
   protected inspectResize() {

@@ -1,9 +1,11 @@
 import type { CodeEditorFactory, EditorStateFactory } from '@difizen/libro-code-editor';
-import { CodeEditorContribution } from '@difizen/libro-code-editor';
+import {
+  CodeEditorContribution,
+  LanguageSpecRegistry,
+} from '@difizen/libro-code-editor';
 import { MIME } from '@difizen/libro-common';
 import { inject, singleton } from '@difizen/mana-app';
 
-import { LanguageSpecRegistry } from './language-specs.js';
 import {
   e2StateFactory,
   libroE2DefaultConfig,

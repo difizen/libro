@@ -1,3 +1,5 @@
+import type { LanguageSpecRegistry } from '@difizen/libro-code-editor';
+import { LanguageSpecContribution } from '@difizen/libro-code-editor';
 import type { CellMeta, CellModel, CellOptions } from '@difizen/libro-core';
 import { CellModelContribution, CellViewContribution } from '@difizen/libro-core';
 import { inject, singleton } from '@difizen/mana-app';
@@ -5,9 +7,11 @@ import { inject, singleton } from '@difizen/mana-app';
 import { RawCellModelFactory } from './raw-cell-protocol.js';
 import { LibroRawCellView } from './raw-cell-view.js';
 
-@singleton({ contrib: [CellModelContribution, CellViewContribution] })
+@singleton({
+  contrib: [CellModelContribution, CellViewContribution, LanguageSpecContribution],
+})
 export class RawCellContribution
-  implements CellModelContribution, CellViewContribution
+  implements CellModelContribution, CellViewContribution, LanguageSpecContribution
 {
   @inject(RawCellModelFactory) libroCellModelFactory: RawCellModelFactory;
 
@@ -27,4 +31,13 @@ export class RawCellContribution
   }
 
   view = LibroRawCellView;
+
+  registerLanguageSpec = (register: LanguageSpecRegistry) => {
+    register.registerLanguageSpec({
+      name: 'Plain Text',
+      language: 'plaintext',
+      ext: ['.txt'],
+      mime: 'text/plain',
+    });
+  };
 }

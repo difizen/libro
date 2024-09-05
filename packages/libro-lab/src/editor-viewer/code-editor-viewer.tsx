@@ -119,7 +119,6 @@ export class CodeEditorViewer extends BaseView implements NavigatableView, Savea
     }
 
     await MonacoEnvironment.init();
-    await this.languageSpec?.beforeEditorInit?.();
     const editorPorvider =
       MonacoEnvironment.container.get<EditorProvider>(EditorProvider);
 
