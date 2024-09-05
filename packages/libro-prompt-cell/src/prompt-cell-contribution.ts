@@ -1,3 +1,5 @@
+import type { LanguageSpecRegistry } from '@difizen/libro-code-editor';
+import { LanguageSpecContribution } from '@difizen/libro-code-editor';
 import type { CellModel } from '@difizen/libro-core';
 import type { CellMeta, CellOptions } from '@difizen/libro-core';
 import { CellViewContribution, CellModelContribution } from '@difizen/libro-core';
@@ -7,9 +9,11 @@ import { singleton } from '@difizen/mana-app';
 import { LibroPromptCellModelFactory } from './prompt-cell-protocol.js';
 import { LibroPromptCellView } from './prompt-cell-view.js';
 
-@singleton({ contrib: [CellModelContribution, CellViewContribution] })
+@singleton({
+  contrib: [CellModelContribution, CellViewContribution, LanguageSpecContribution],
+})
 export class PromptCellContribution
-  implements CellModelContribution, CellViewContribution
+  implements CellModelContribution, CellViewContribution, LanguageSpecContribution
 {
   @inject(LibroPromptCellModelFactory)
   libroCellModelFactory: LibroPromptCellModelFactory;
@@ -31,4 +35,13 @@ export class PromptCellContribution
   }
 
   view = LibroPromptCellView;
+
+  registerLanguageSpec = (register: LanguageSpecRegistry) => {
+    register.registerLanguageSpec({
+      name: 'Prompt',
+      language: 'prompt',
+      mime: 'application/vnd.libro.prompt+json',
+      ext: [],
+    });
+  };
 }

@@ -7,6 +7,7 @@ import { CodeEditorContribution } from './code-editor-protocol.js';
 import { CodeEditorSettings } from './code-editor-settings.js';
 import { CodeEditorStateManager } from './code-editor-state-manager.js';
 import { CodeEditorView } from './code-editor-view.js';
+import { LanguageSpecContribution, LanguageSpecRegistry } from './language-specs.js';
 
 export const CodeEditorModule = ManaModule.create()
   .register(
@@ -16,5 +17,6 @@ export const CodeEditorModule = ManaModule.create()
     Model,
     CodeEditorSettings,
     CodeEditorStateManager,
+    LanguageSpecRegistry,
   )
-  .contribution(CodeEditorContribution);
+  .contribution(CodeEditorContribution, LanguageSpecContribution);

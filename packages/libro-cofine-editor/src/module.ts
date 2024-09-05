@@ -4,11 +4,6 @@ import { ManaModule } from '@difizen/mana-app';
 
 import { LibroE2EditorContribution } from './editor-contribution.js';
 import {
-  LanguageSpecContribution,
-  LanguageSpecRegistry,
-  LibroLanguageSpecs,
-} from './language-specs.js';
-import {
   LibroE2Editor,
   LibroE2EditorFactory,
   LibroE2EditorOptions,
@@ -21,8 +16,7 @@ export const LibroE2EditorModule = ManaModule.create()
   .register(
     LibroE2EditorContribution,
     LibroE2Editor,
-    LanguageSpecRegistry,
-    LibroLanguageSpecs,
+
     LibroSQLRequestAPI,
     {
       token: LibroE2EditorFactory,
@@ -36,7 +30,6 @@ export const LibroE2EditorModule = ManaModule.create()
       },
     },
   )
-  .contribution(LanguageSpecContribution)
   .dependOn(CodeEditorModule)
   .preload(async (ctx) => {
     await loadE2(ctx.container);

@@ -1,3 +1,5 @@
+import type { LanguageSpecRegistry } from '@difizen/libro-code-editor';
+import { LanguageSpecContribution } from '@difizen/libro-code-editor';
 import { CellModelContribution, CellViewContribution } from '@difizen/libro-core';
 import type { CellMeta, CellModel, CellOptions } from '@difizen/libro-core';
 import { inject, singleton } from '@difizen/mana-app';
@@ -5,9 +7,11 @@ import { inject, singleton } from '@difizen/mana-app';
 import { CodeCellModelFactory } from './code-cell-protocol.js';
 import { LibroCodeCellView } from './code-cell-view.js';
 
-@singleton({ contrib: [CellModelContribution, CellViewContribution] })
+@singleton({
+  contrib: [CellModelContribution, CellViewContribution, LanguageSpecContribution],
+})
 export class CodeEditorCellContribution
-  implements CellModelContribution, CellViewContribution
+  implements CellModelContribution, CellViewContribution, LanguageSpecContribution
 {
   @inject(CodeCellModelFactory) libroCellModelFactory: CodeCellModelFactory;
 
@@ -29,4 +33,13 @@ export class CodeEditorCellContribution
   }
 
   view = LibroCodeCellView;
+
+  registerLanguageSpec = (register: LanguageSpecRegistry) => {
+    register.registerLanguageSpec({
+      name: 'Python',
+      language: 'python',
+      ext: ['.py'],
+      mime: 'text/x-python',
+    });
+  };
 }

@@ -5,3 +5,4 @@ export * from './code-editor-settings.js';
 export * from './code-editor-view.js';
 export * from './mimetype.js';
 export * from './module.js';
+export * from './language-specs.js';
