@@ -49,3 +49,56 @@ jobs:
 
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  # 新增的 release-notes Job
+  release-notes:
+    needs: [publish]
+    if: |
+      needs.publish.result == 'success'
+    name: Generate Release Notes
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up git
+        run: |
+          git fetch --prune --unshallow
+          git fetch --tags
+
+      - name: Get latest tag
+        id: get_tag
+        run: |
+          # 获取最新的符合 @difizen/libro-xxx@ 格式的 tag
+          LATEST_TAG=$(git describe --tags --abbrev=0)
+
+          # 输出最新的 tag
+          echo "Latest tag: $LATEST_TAG"
+
+          # 提取版本号（移除最后一个 '@' 之前的部分）
+          VERSION=${LATEST_TAG##*@}
+
+          # 输出提取的版本号
+          echo "Extracted version: $VERSION"
+
+          # 将版本号设置为输出变量供后续步骤使用
+          echo "::set-output name=latest_version::$VERSION"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_tag.outputs.latest_version }} # 使用最近的 tag 作为 tag 名
+          release_name: Release ${{ steps.get_tag.outputs.latest_version }} # 使用最近的 tag 作为 release 名
+          body: |
+            ## Changes
+            $(npx changeset status --snapshot)  # 使用 changeset 文案生成 Release Notes
+          draft: false # 直接发布而非草稿
