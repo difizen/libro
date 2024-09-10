@@ -91,6 +91,24 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Extract Changeset Content
+        id: extract_changesets
+        run: |
+          COMMIT_CONTENT="" 
+          for file in .changeset/*.md; do
+            echo "Processing $file"
+            CONTENT=$(awk '/^---$/{p++} p==2' "$file")
+            COMMIT_CONTENT+="$CONTENT"$'\n'
+          done
+          echo "::set-output name=release_notes::$COMMIT_CONTENT"
+
+      - name: Generate Snapshot
+        id: generate_snapshot
+        run: |
+          # 获取 changeset 的快照
+          SNAPSHOT=$(npx changeset status --snapshot)
+          echo "::set-output name=snapshot::$SNAPSHOT"
+
       - name: Generate GitHub Release
         uses: actions/create-release@v1
         env:
@@ -99,6 +117,9 @@ jobs:
           tag_name: ${{ steps.get_tag.outputs.latest_version }} # 使用最近的 tag 作为 tag 名
           release_name: Release ${{ steps.get_tag.outputs.latest_version }} # 使用最近的 tag 作为 release 名
           body: |
-            ## Changes
-            $(npx changeset status --snapshot)  # 使用 changeset 文案生成 Release Notes
+            ## Changes:
+            ${{ steps.extract_changesets.outputs.release_notes }}
+
+            ## Packages affected:
+            ${{ steps.generate_snapshot.outputs.snapshot }}
           draft: false # 直接发布而非草稿
