@@ -1,5 +1,17 @@
 # @difizen/libro-docs
 
+## 0.2.31
+
+### Patch Changes
+
+- [#208](https://github.com/difizen/libro/pull/208) [`cb837a5`](https://github.com/difizen/libro/commit/cb837a59d2aa5c3a683fba566e834b68994462b8) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix: modify some command execution condition & fix plotly.js error
+
+- Updated dependencies [[`cb837a5`](https://github.com/difizen/libro/commit/cb837a59d2aa5c3a683fba566e834b68994462b8)]:
+  - @difizen/libro-jupyter@0.2.31
+  - @difizen/libro-core@0.2.31
+  - @difizen/libro-lab@0.2.31
+  - @difizen/libro-terminal@0.2.31
+
 ## 0.2.30
 
 ### Patch Changes
