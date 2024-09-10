@@ -1,5 +1,14 @@
 # @difizen/libro-codemirror-markdown-cell
 
+## 0.2.31
+
+### Patch Changes
+
+- [#208](https://github.com/difizen/libro/pull/208) [`a1aec77`](https://github.com/difizen/libro/commit/a1aec7720a8ee18a56e766c6da67947a21ecaedb) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - test releaser note
+
+- Updated dependencies [[`a1aec77`](https://github.com/difizen/libro/commit/a1aec7720a8ee18a56e766c6da67947a21ecaedb)]:
+  - @difizen/libro-cofine-editor-contribution@0.2.31
+
 ## 0.2.30
 
 ### Patch Changes
