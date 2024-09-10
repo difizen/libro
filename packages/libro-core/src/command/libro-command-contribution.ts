@@ -55,12 +55,7 @@ export class LibroCommandContribution implements CommandContribution {
     );
     this.libroCommand.registerLibroCommand(command, NotebookCommands['SelectAll'], {
       execute: (cell, libro) => {
-        if (
-          !cell ||
-          !libro ||
-          !(cell instanceof LibroCellView) ||
-          !(libro instanceof LibroView)
-        ) {
+        if (!libro || !(libro instanceof LibroView)) {
           return;
         }
         libro.selectAllCell();
@@ -501,12 +496,7 @@ export class LibroCommandContribution implements CommandContribution {
       NotebookCommands['ClearAllCellOutput'],
       {
         execute: async (cell, libro) => {
-          if (
-            !cell ||
-            !libro ||
-            !(cell instanceof LibroCellView) ||
-            !(libro instanceof LibroView)
-          ) {
+          if (!libro || !(libro instanceof LibroView)) {
             return;
           }
           libro.clearAllOutputs();
@@ -784,12 +774,7 @@ export class LibroCommandContribution implements CommandContribution {
       NotebookCommands['HideAllCellCode'],
       {
         execute: async (cell, libro) => {
-          if (
-            !cell ||
-            !libro ||
-            !(cell instanceof LibroCellView) ||
-            !(libro instanceof LibroView)
-          ) {
+          if (!libro || !(libro instanceof LibroView)) {
             return;
           }
           libro.hideAllCellCode();
@@ -801,12 +786,7 @@ export class LibroCommandContribution implements CommandContribution {
       NotebookCommands['HideAllCellOutput'],
       {
         execute: async (cell, libro) => {
-          if (
-            !cell ||
-            !libro ||
-            !(cell instanceof LibroCellView) ||
-            !(libro instanceof LibroView)
-          ) {
+          if (!libro || !(libro instanceof LibroView)) {
             return;
           }
           libro.hideAllOutputs();
@@ -852,12 +832,7 @@ export class LibroCommandContribution implements CommandContribution {
       NotebookCommands['ShowAllCellOutputs'],
       {
         execute: async (cell, libro) => {
-          if (
-            !cell ||
-            !libro ||
-            !(cell instanceof LibroCellView) ||
-            !(libro instanceof LibroView)
-          ) {
+          if (!libro || !(libro instanceof LibroView)) {
             return;
           }
           libro.showAllCellOutputs();
@@ -882,12 +857,7 @@ export class LibroCommandContribution implements CommandContribution {
       NotebookCommands['ShowAllCellCode'],
       {
         execute: async (cell, libro) => {
-          if (
-            !cell ||
-            !libro ||
-            !(cell instanceof LibroCellView) ||
-            !(libro instanceof LibroView)
-          ) {
+          if (!libro || !(libro instanceof LibroView)) {
             return;
           }
           libro.showAllCellCode();
@@ -899,12 +869,7 @@ export class LibroCommandContribution implements CommandContribution {
       NotebookCommands['ExtendMarkedCellsAbove'],
       {
         execute: async (cell, libro) => {
-          if (
-            !cell ||
-            !libro ||
-            !(cell instanceof LibroCellView) ||
-            !(libro instanceof LibroView)
-          ) {
+          if (!libro || !(libro instanceof LibroView)) {
             return;
           }
           libro.extendSelectionAbove();
@@ -916,12 +881,7 @@ export class LibroCommandContribution implements CommandContribution {
       NotebookCommands['ExtendMarkedCellsTop'],
       {
         execute: async (cell, libro) => {
-          if (
-            !cell ||
-            !libro ||
-            !(cell instanceof LibroCellView) ||
-            !(libro instanceof LibroView)
-          ) {
+          if (!libro || !(libro instanceof LibroView)) {
             return;
           }
           libro.extendSelectionToTop();
@@ -933,12 +893,7 @@ export class LibroCommandContribution implements CommandContribution {
       NotebookCommands['ExtendMarkedCellsBelow'],
       {
         execute: async (cell, libro) => {
-          if (
-            !cell ||
-            !libro ||
-            !(cell instanceof LibroCellView) ||
-            !(libro instanceof LibroView)
-          ) {
+          if (!libro || !(libro instanceof LibroView)) {
             return;
           }
           libro.extendSelectionBelow();
@@ -950,12 +905,7 @@ export class LibroCommandContribution implements CommandContribution {
       NotebookCommands['ExtendMarkedCellsBottom'],
       {
         execute: async (cell, libro) => {
-          if (
-            !cell ||
-            !libro ||
-            !(cell instanceof LibroCellView) ||
-            !(libro instanceof LibroView)
-          ) {
+          if (!libro || !(libro instanceof LibroView)) {
             return;
           }
           libro.extendSelectionToBottom();
@@ -1075,12 +1025,7 @@ export class LibroCommandContribution implements CommandContribution {
       NotebookCommands['EnableOrDisableAllOutputScrolling'],
       {
         execute: (cell: CellView | undefined, libro: NotebookView | undefined) => {
-          if (
-            !cell ||
-            !libro ||
-            !(cell instanceof LibroCellView) ||
-            !(libro instanceof LibroView)
-          ) {
+          if (!libro || !(libro instanceof LibroView)) {
             return;
           }
           if (libro.outputsScroll) {
