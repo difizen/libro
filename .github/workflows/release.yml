@@ -3,7 +3,7 @@ name: 'Release'
 
 on:
   push:
-    branches: ['main']
+    branches: ['ximo_dev']
 
 jobs:
   changesets:
@@ -32,20 +32,29 @@ jobs:
       contents: read
       actions: read
 
-  publish:
-    needs: [ci]
-    if: |
-      needs.ci.result == 'success'
-
-    name: Publish
-    uses: difizen/actions/.github/workflows/release-publish.yml@main
-
-    with:
-      node-version: '20'
-      python-version: '3.8'
+    # 新增的 release-notes Job
+  release-notes:
+    name: Generate Release Notes
+    runs-on: ubuntu-latest
 
     permissions:
       contents: write
 
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.sha }} # 自动生成的 tag
+          release_name: Release ${{ github.sha }} # 自动生成的 Release 名称
+          body: |
+            ## Changes
+            $(npx changeset status --snapshot)  # 使用 changeset 文案生成 Release Notes
+          draft: false # 直接发布而非草稿
