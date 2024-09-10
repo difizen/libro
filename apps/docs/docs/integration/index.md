@@ -18,7 +18,8 @@ Libro 提供了前端和服务侧的定制接入能力，本文将手把手教�
 安装 libro , mana 相关的依赖包，可按照需要安装。
 
 ```bash
-pnpm add @difizen/libro-lab
+pnpm add @difizen/libro-lab //集成 lab 研发环境时安装
+pnpm add @difizen/libro-jupyter //集成 libro 编辑器时安装
 pnpm add @difizen/mana-app
 
 pnpm add @difizen/umi-plugin-mana -D
@@ -79,14 +80,26 @@ export class LibroApp implements ApplicationContribution {
 }
 ```
 
-2. 通过下述方式实现关于 LibroLab 的 React 组件，其中，需要把上面实现的用于连接 Notebook 服务的 LibroApp 注册进 ManaModule 中。
+2. 创建并注册 ManaModule。
 
 ```typescript
+import { ManaModule } from '@difizen/mana-app';
+import { LibroApp } from './app';
 import { LibroLabModule } from '@difizen/libro-lab';
-import { ManaAppPreset, ManaComponents, ManaModule } from '@difizen/mana-app';
-import { LibroApp } from './app.js';
 
-const BaseModule = ManaModule.create().register(LibroApp);
+export const LabModule = ManaModule.create()
+  .register(LibroApp)
+  .dependOn(LibroLabModule);
+```
+
+3. 通过下述方式实现关于 LibroLab 的 React 组件，其中 ManaComponents.Application 为 mana 应用的react 形式的组件，所有的 mana 模块都注册在该上下文中。
+
+```typescript
+import React from 'react';
+import { ManaAppPreset, ManaComponents } from '@difizen/mana-app';
+import { LabModule } from '@/modules/libro-lab/module';
+import './index.less'
+
 
 const App = (): JSX.Element => {
   return (
@@ -94,7 +107,7 @@ const App = (): JSX.Element => {
       <ManaComponents.Application
         key="libro-lab"
         asChild={true}
-        modules={[ManaAppPreset, LibroLabModule, BaseModule]}
+        modules={[ManaAppPreset, LabModule]}
       />
     </div>
   );
@@ -106,50 +119,151 @@ export default App;
 
 ### 集成 Notebook 编辑器
 
+<img
+    src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*QG4GRKex6VUAAAAAAAAAAAAADvyTAQ/original"
+    width="1000"
+/>
+
 1. 编写 Libro 编辑器的 React 组件，核心是通过 LibroService 创建 LibroView 实例，并通过 ViewRender 渲染构建出的 LibroView 实例。
 
-```typescript
-import { LibroService, LibroView } from '@difizen/libro-jupyter';
-import { ViewRender, useInject } from '@difizen/mana-app';
+```jsx
+import { DocumentCommands, LibroService, LibroView } from '@difizen/libro-jupyter';
+import { CommandRegistry, ViewRender, useInject } from '@difizen/mana-app';
+import React from 'react';
 import { useEffect, useState } from 'react';
-export const LibroEditor: React.FC<LibroEditorProps> = (props, ref)=>{
-    const libroService = useInject(LibroService);
-    const [libroView,setLibroView] = useState<LibroView|undefined>();
 
-    useEffect(() => {
-        libroService.getOrCreateView({
-        //每个 libro 编辑器标识，用于区分每次打开编辑器里面的内容都不一样
-        }).then((libro)=>{
-            if(!libro) return;
-            setLibroView(libro);
-            libro.model.onChanged(() => {
-                doAutoSave();
-            });
-        })
-        return ()=>{
-            window.clearTimeout(handle);
-        }
-    }, []);
+export const LibroEditor: React.FC = ()=>{
+  const libroService = useInject<LibroService>(LibroService);
+  const [libroView,setLibroView] = useState<LibroView|undefined>();
+  const [handle,setHandle] = useState<number|undefined>();
+  const commandRegistry = useInject(CommandRegistry);
 
-    return (
-        <div className='libro-editor-container'>
-        {libroView && <ViewRender view={libroView}/>}
-        </div>
+  const save = () => {
+    //通过命令进行保存
+    commandRegistry.executeCommand(
+      DocumentCommands['Save'].id,
+      undefined,
+      libroView,
+      undefined,
+      { reason: 'autoSave' },
     );
+  };
+
+  const doAutoSave = () =>{
+    //设置自动保存逻辑
+    const handle = window.setTimeout(() => {
+      save();
+      if (libroView) {
+        libroView.model.dirty = false;
+      }
+    },1000);
+    setHandle(handle)
+  }
+
+  useEffect(() => {
+    libroService.getOrCreateView({
+      //这里可以给每个 libro 编辑器增加标识，用于区分每次打开编辑器里面的内容都不一样
+    }).then((libro)=>{
+      if(!libro) return;
+      setLibroView(libro);
+      libro.model.onChanged(() => {
+        doAutoSave();
+      });
+    })
+
+    return ()=>{
+      window.clearTimeout(handle);
+    }
+  }, []);
+
+  return (
+    <div className='libro-editor-container'>
+      {libroView && <ViewRender view={libroView}/>}
+    </div>
+  );
 }
 ```
 
-2. 消费 Libro 编辑器的 React 组件，在使用 LibroEditor 的最外层包上 ManaComponents.Application ，使得多个 LibroView 的实例可以共享上下文。
+2. 设置编辑器数据源，详情参考：todo
 
 ```typescript
-import { LibroEditor } from './LibroEditor'
-export const App: React.FC = () => {
-    return (
-        <ManaComponents.Application
-            modules={[ManaAppPreset, LibroJupyterModule]}
-            renderChildren >
-            <LibroEditor xxx = {xxx}>
-        </ManaComponents.Application>
-    )
+import type {
+  IContentsModel,
+  INotebookContent,
+  LibroJupyterModel,
+  NotebookOption,
+} from '@difizen/libro-jupyter';
+import { ContentContribution } from '@difizen/libro-jupyter';
+import { singleton } from '@difizen/mana-app';
+
+@singleton({ contrib: ContentContribution })
+export class LibroEditorContentContribution implements ContentContribution {
+  canHandle = () => {
+    return 10;
+  };
+
+  async loadContent(options: NotebookOption, model: LibroJupyterModel) {
+    let notebookContent: INotebookContent = require('./libro-demo.json');
+    let currentFileContents: IContentsModel = {
+      name: 'libro-demo.ipynb',
+      path: '/libro-demo.ipynb',
+      type: 'notebook',
+      writable: true,
+      created: 'libro',
+      last_modified: 'libro',
+      content: notebookContent,
+    };
+    currentFileContents.content.nbformat_minor = 5;
+    model.currentFileContents = currentFileContents;
+    model.filePath = currentFileContents.path;
+    model.lastModified = model.currentFileContents.last_modified;
+    if (model.executable) {
+      model.startKernelConnection();
+    }
+    return notebookContent;
+  }
 }
+```
+
+3. 创建并注册 mana module。
+
+```typescript
+import { ManaModule } from '@difizen/mana-app';
+import { LibroApp } from './app';
+import { LibroJupyterModule } from '@difizen/libro-lab';
+import { LibroEditorContentContribution } from './libro-content-contribution';
+
+export const LibroEditorModule = ManaModule.create()
+  .register(LibroApp, LibroEditorContentContribution)
+  .dependOn(LibroJupyterModule);
+```
+
+4. 消费 Libro 编辑器的 React 组件，在使用 LibroEditor 的最外层包上 ManaComponents.Application ，使得多个 LibroView 的实例可以共享上下文。
+
+注意：由于此时 ManaComponents.Application中包裹了 LibroEditor组件，需要单独增加 renderChildren用于渲染。
+
+```jsx
+import React from 'react';
+import { ManaAppPreset, ManaComponents } from '@difizen/mana-app';
+import './index.less'
+import { LibroEditorModule } from '@/modules/libro-editor/module';
+import { LibroEditor } from './libro-editor';
+
+
+const App = (): JSX.Element => {
+  return (
+    <div className="libro-editor-demo">
+      <ManaComponents.Application
+        key="libro-editor"
+        modules={[ManaAppPreset, LibroEditorModule]}
+        renderChildren
+        asChild={true}
+        >
+        <LibroEditor/>
+      </ManaComponents.Application>
+    </div>
+  );
+};
+
+export default App;
 ```
