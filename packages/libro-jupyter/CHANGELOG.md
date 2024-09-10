@@ -1,5 +1,29 @@
 # @difizen/libro-jupyter
 
+## 0.2.31
+
+### Patch Changes
+
+- [#208](https://github.com/difizen/libro/pull/208) [`60d9088`](https://github.com/difizen/libro/commit/60d908892c7aa6af35b46a38cb509d33f1e8a642) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - test releaser note
+
+- Updated dependencies [[`60d9088`](https://github.com/difizen/libro/commit/60d908892c7aa6af35b46a38cb509d33f1e8a642)]:
+  - @difizen/libro-core@0.2.31
+  - @difizen/libro-code-cell@0.2.31
+  - @difizen/libro-code-editor@0.2.31
+  - @difizen/libro-codemirror@0.2.31
+  - @difizen/libro-cofine-editor@0.2.31
+  - @difizen/libro-common@0.2.31
+  - @difizen/libro-kernel@0.2.31
+  - @difizen/libro-l10n@0.2.31
+  - @difizen/libro-language-client@0.2.31
+  - @difizen/libro-lsp@0.2.31
+  - @difizen/libro-markdown-cell@0.2.31
+  - @difizen/libro-output@0.2.31
+  - @difizen/libro-raw-cell@0.2.31
+  - @difizen/libro-rendermime@0.2.31
+  - @difizen/libro-search@0.2.31
+  - @difizen/libro-search-code-cell@0.2.31
+
 ## 0.2.30
 
 ### Patch Changes
