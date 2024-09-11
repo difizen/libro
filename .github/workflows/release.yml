@@ -88,10 +88,24 @@ jobs:
           # 将版本号设置为输出变量供后续步骤使用
           echo "::set-output name=latest_version::$VERSION"
 
+      - name: Check if tag exists
+        id: check_tag
+        run: |
+          TAG_EXISTS=$(git tag -l "${{ steps.get_tag.outputs.latest_version }}")
+          if [ -z "$TAG_EXISTS" ]; then
+            echo "Tag does not exist"
+            echo "::set-output name=tag_exists::false"
+          else
+            echo "Tag already exists"
+            echo "::set-output name=tag_exists::true"
+          fi
+
       - name: Install dependencies
+        if: steps.check_tag.outputs.tag_exists == 'false'
         run: npm install
 
       - name: Extract Changeset Content
+        if: steps.check_tag.outputs.tag_exists == 'false'
         id: extract_changesets
         run: |
           COMMIT_CONTENT="" 
@@ -103,6 +117,7 @@ jobs:
           echo "::set-output name=release_notes::$COMMIT_CONTENT"
 
       - name: Generate Snapshot
+        if: steps.check_tag.outputs.tag_exists == 'false'
         id: generate_snapshot
         run: |
           # 获取 changeset 的快照
@@ -110,6 +125,7 @@ jobs:
           echo "::set-output name=snapshot::$SNAPSHOT"
 
       - name: Generate GitHub Release
+        if: steps.check_tag.outputs.tag_exists == 'false'
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
