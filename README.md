@@ -1,7 +1,6 @@
 # <img src="https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*i_UvSZTIo44AAAAAAAAAAAAADjOxAQ/original" width="30"> libro
 
 [![Code: CI](https://github.com/difizen/libro/actions/workflows/ci.yml/badge.svg)](https://github.com/difizen/libro/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/difizen/libro/graph/badge.svg?token=8LWLNZK78Z)](https://codecov.io/gh/difizen/libro)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ⚡ 灵活定制、轻松集成的 Notebook 产品方案⚡
