@@ -9,8 +9,8 @@ order: 1
 
 ## 如何使用命令？
 
-1. 获取命令服务：在 React 组件中你可以使用 useInject 来获取到命令服务；在 mana 模块类中，您可以使用 @inject(CommandRegistry) commandRegistry: CommandRegistry获取到命令服务.
-2. 执行命令：commandRegistry.executeCommand 是命令执行的核心方法。它接受以下几个参数：
+1. 获取命令服务：在 React 组件中你可以使用`useInject`来获取到命令服务；在 mana 模块类中，您可以使用`@inject(CommandRegistry) commandRegistry: CommandRegistry`获取到命令服务.
+2. 执行命令：`commandRegistry.executeCommand`是命令执行的核心方法。它接受以下几个参数：
 
 - commandId: 命令的唯一标识符，指明要执行的具体命令。
 - args: 可选参数，用于传递给命令的执行函数。
@@ -185,10 +185,10 @@ export const LibroDemoCommand = {
 - isVisible: 判断命令是否可见。如果返回 false，命令不会显示在菜单或工具栏等 UI 中。
   关于 isEnabled、isVisible 的更多内容详情请看：xxx
 
-2. 注册命令。libro 使用依赖注入机制来管理命令的注册，因此你需要创建一个命令扩展类，并在这个类中注册命令。命令扩展类实现了 CommandContribution 接口，这个接口提供了 registerCommands 方法，专门用于注册命令。此外，提供了 LibroCommandRegister 和 CommandRegistry两种方式注册命令。
+2. 注册命令。libro 使用依赖注入机制来管理命令的注册，因此你需要创建一个命令扩展类，并在这个类中注册命令。命令扩展类实现了 `CommandContribution` 接口，这个接口提供了 `registerCommands` 方法，专门用于注册命令。此外，提供了 `LibroCommandRegister` 和 `CommandRegistry`两种方式注册命令。
 
-- LibroCommandRegister：使用该种方式意味着，当前命令的参数依次是：CellView 实例、LibroView 实例、position（关于该参数的解释详情请看：xxx） ,即使在命令执行时没有传递参数，在命令的handler 中也能拿到当前上下的文对应的 CellView 实例、LibroView 实例。
-- CommandRegistry：通过该种方式注册则是在命令的handler 中只能拿到命令执行时传递的参数。
+- `LibroCommandRegister`：使用该种方式意味着，当前命令的参数依次是：`CellView`实例、`LibroView` 实例、position（关于该参数的解释详情请看：xxx） ,即使在命令执行时没有传递参数，在命令的 handler 中也能拿到当前上下的文对应的 `CellView` 实例、`LibroView` 实例。
+- `CommandRegistry`：通过该种方式注册则是在命令的 handler 中只能拿到命令执行时传递的参数。
 
 3. 把新增的命令扩展类注册进 mana module 中。
 

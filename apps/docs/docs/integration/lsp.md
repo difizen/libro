@@ -1,6 +1,6 @@
 ---
 title: 编辑器接入 LSP
-order: 3
+order: 10
 ---
 
 # 编辑器接入 LSP
