@@ -1,5 +1,5 @@
 ---
-title: 常见集成场景
+title: 自定义命令
 order: 1
 ---
 
@@ -95,7 +95,7 @@ export const LibroEditor: React.FC = ()=>{
 }
 ```
 
-### mana 模块类中使用
+### Class 中使用
 
 #### 示例
 
