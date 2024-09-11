@@ -66,7 +66,7 @@
     "@difizen/mana-l10n": "latest",
     "classnames": "^2.3.2",
     "moment": "^2.29.4",
-    "plotly.js": "2.35.0"
+    "plotly.js": "^2.35.0"
   },
   "peerDependencies": {
     "antd": "^5.8.6",
