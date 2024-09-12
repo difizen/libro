@@ -51,6 +51,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/no-is-mounted': 'off',
 
     // no sloppiness
     'no-console': ['error', { allow: ['error', 'warn', 'info'] }],
