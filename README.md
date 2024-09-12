@@ -2,12 +2,15 @@
 
 [![Code: CI](https://github.com/difizen/libro/actions/workflows/ci.yml/badge.svg)](https://github.com/difizen/libro/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![download-image](https://img.shields.io/npm/dm/@difizen/libro-core.svg)](https://www.npmjs.com/package/@difizen/libro-core)
 
-⚡ 灵活定制、轻松集成的 Notebook 产品方案⚡
+⚡ libro：灵活定制、轻松集成的 Notebook 产品方案⚡
 
 - 提供完整的 Notebook 能力和丰富的周边功能，基于现有组合快速上手。
 - 提供内核级别的扩展能力，所有层次的内容均允许二次开发定制。
 - 定义大模型工作流，内置大模型交互和辅助开发能力。
+
+💡 官网：https://libro.difizen.net/
 
 如果你也喜欢这个项目，欢迎为我们点亮 🌟🌟🌟
 
@@ -22,7 +25,6 @@
 - [架构](#架构)
 - [后续计划](#后续计划)
 - [更多](#更多)
-  - [官网](#贡献代码)
   - [提交issue](#提交issue)
   - [贡献代码](#贡献代码)
   - [贡献者](#贡献者)
@@ -81,10 +83,6 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 - 版本 Diff 接入
 
 ## 更多
-
-### 官网
-
-💡 请访问 https://libro.difizen.net/
 
 ### 提交issue
 

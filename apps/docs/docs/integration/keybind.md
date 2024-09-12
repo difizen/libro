@@ -13,15 +13,6 @@ order: 3
 
 ### 支持的修饰键
 
-不同操作系统下可用的修饰键如下：
-| 位置变量标识 | 具体位置 |
-| :---------------------------- | :-------------- |
-| LibroToolbarArea.HeaderLeft | 顶部左侧工具栏 |
-| LibroToolbarArea.HeaderCenter | 顶部中间工具栏 |
-| LibroToolbarArea.HeaderRight | 顶部右侧工具栏 |
-| LibroToolbarArea.CellTop | cell 顶部工具栏 |
-| LibroToolbarArea.CellRight | cell 右侧工具栏 |
-
 | 平台    | 修饰键                     |
 | :------ | :------------------------- |
 | macOS   | Ctrl+, Shift+, Alt+, Cmd+  |
