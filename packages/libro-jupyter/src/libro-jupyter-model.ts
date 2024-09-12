@@ -1,3 +1,4 @@
+import type { INotebookContent } from '@difizen/libro-common';
 import type { VirtualizedManager } from '@difizen/libro-core';
 import { LibroModel, VirtualizedManagerHelper } from '@difizen/libro-core';
 import {
@@ -145,6 +146,15 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
 
   async deleteCheckpoint(checkpointID: string) {
     await this.contentsManager.deleteCheckpoint(this.filePath, checkpointID);
+  }
+
+  override loadNotebookContent(): Promise<INotebookContent> {
+    const content = super.loadNotebookContent();
+    this.id = this.currentFileContents.path; // use file path as id, will be passed to editor and lsp
+    if (this.executable && !this.kernelConnecting) {
+      this.startKernelConnection();
+    }
+    return content;
   }
 
   startKernelConnection() {
