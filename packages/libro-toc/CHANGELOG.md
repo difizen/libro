@@ -1,5 +1,17 @@
 # @difizen/libro-toc
 
+## 0.2.33
+
+### Patch Changes
+
+- [#220](https://github.com/difizen/libro/pull/220) [`b71e2bb`](https://github.com/difizen/libro/commit/b71e2bb0c7dc52075758540d836524869e2b17c4) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix(jupyter): load content error
+
+- Updated dependencies [[`b71e2bb`](https://github.com/difizen/libro/commit/b71e2bb0c7dc52075758540d836524869e2b17c4)]:
+  - @difizen/libro-common@0.2.33
+  - @difizen/libro-core@0.2.33
+  - @difizen/libro-markdown@0.2.33
+  - @difizen/libro-rendermime@0.2.33
+
 ## 0.2.32
 
 ### Patch Changes
