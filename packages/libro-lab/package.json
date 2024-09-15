@@ -51,6 +51,7 @@
     "@difizen/libro-jupyter": "^0.2.33",
     "@difizen/libro-kernel": "^0.2.33",
     "@difizen/libro-prompt-cell": "^0.2.33",
+    "@difizen/libro-sql-cell": "^0.2.33",
     "@difizen/libro-terminal": "^0.2.33",
     "@difizen/libro-toc": "^0.2.33",
     "@difizen/libro-cofine-editor-core": "^0.2.33",

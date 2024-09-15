@@ -1,5 +1,6 @@
 import { FileView, LibroJupyterModule } from '@difizen/libro-jupyter';
 import { LibroPromptCellModule } from '@difizen/libro-prompt-cell';
+import { LibroSqlCellModule } from '@difizen/libro-sql-cell';
 import { TerminalModule } from '@difizen/libro-terminal';
 import { CommonWidgetsModule } from '@difizen/libro-widget';
 import {
@@ -107,6 +108,7 @@ export const LibroLabModule = ManaModule.create()
     LibroLabTocModule,
     LibroKernelAndTerminalPanelModule,
     LibroPromptCellModule,
+    LibroSqlCellModule,
     TerminalModule,
     ImageViewerModule,
     CodeEditorViewerModule,

@@ -1,0 +1,117 @@
+// The prefix to use on all css classes from ant.
+@ant-prefix: ant;
+
+.libro-sql-cell-header {
+  height: 36px;
+  border-bottom: 1px solid var(--mana-libro-code-border-color);
+  display: flex;
+
+  span {
+    cursor: pointer;
+  }
+}
+
+.libro-sql-source {
+  width: 132px;
+  border-right: 1px solid var(--mana-libro-cell-border-color);
+}
+
+.libro-sql-input-warning-text,
+.libro-sql-variable-name-input {
+  display: block !important;
+}
+
+.libro-sql-variable-name-input {
+  width: 120px !important;
+  height: 32px;
+  border: 1px solid #d6d8da !important;
+  border-radius: 6px !important;
+  box-shadow: unset !important;
+  &.@{ant-prefix}-input-status-warning {
+    border-color: #faad14 !important;
+  }
+}
+
+.libro-sql-source-title,
+.libro-sql-variable-name-title {
+  padding-left: 16px;
+  color: var(--mana-libro-cell-header-title);
+  font-weight: 400;
+  font-size: 14px;
+  font-family: SFProText;
+  line-height: 36px;
+  letter-spacing: 0;
+}
+
+.libro-sql-source-content,
+.libro-sql-variable-content {
+  padding-left: 3px;
+  color: var(--mana-libro-cell-header-content);
+  font-weight: 400;
+  font-size: 14px;
+  font-family: SFProText;
+  line-height: 36px;
+  letter-spacing: 0;
+}
+
+.libro-sql-variable-name {
+  margin-left: 8px;
+
+  svg {
+    margin-left: 4px;
+  }
+}
+
+.libro-sql-input-save,
+.libro-sql-input-cancel {
+  width: 28px;
+  height: 20px;
+  color: #1890ff;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.libro-sql-input-save {
+  margin-left: 8px;
+}
+
+.libro-sql-edit-icon {
+  color: #bdc0c4 !important;
+
+  &:hover {
+    color: #1590ff !important;
+  }
+}
+
+.libro-sql-popover-container {
+  padding-top: 10px !important;
+  .@{ant-prefix}-popover-inner {
+    border-radius: 8px;
+  }
+  .@{ant-prefix}-popover-inner-content {
+    height: 100% !important;
+    text-align: right;
+  }
+
+  .@{ant-prefix}-popover-content {
+    transform: translateX(-18px) !important;
+  }
+}
+
+.libro-sql-input-warning-text {
+  width: 112px;
+  height: 20px;
+  margin-top: 4px;
+  color: #faad14;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.libro-sql-input-button {
+  margin-top: 12px;
+}
+
+.libro-sql-variable-name-popover {
+  vertical-align: middle;
+}
