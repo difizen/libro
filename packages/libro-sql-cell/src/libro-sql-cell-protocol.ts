@@ -8,3 +8,12 @@ export const LibroSqlCellModelFactory = Symbol('LibroSqlCellModelFactory');
 export interface VisAnalysis {
   addAnalysisCell: (cellView: CellView, dfName?: string) => void;
 }
+
+export interface DatabaseConfig {
+  db_type: string;
+  username: string;
+  password: string;
+  host: string;
+  port: number;
+  database: string;
+}

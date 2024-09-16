@@ -1,4 +1,4 @@
-import { EditFilled, LinkOutlined } from '@ant-design/icons';
+import { EditFilled, DatabaseOutlined } from '@ant-design/icons';
 import type { CodeEditorViewOptions, CodeEditorView } from '@difizen/libro-code-editor';
 import { CodeEditorManager } from '@difizen/libro-code-editor';
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
@@ -8,9 +8,8 @@ import type {
   ExecutionMeta,
   IOutputAreaOption,
   LibroCell,
+  KernelMessage,
 } from '@difizen/libro-jupyter';
-import { KernelError } from '@difizen/libro-jupyter';
-import { LibroJupyterModel } from '@difizen/libro-jupyter';
 import {
   CellService,
   EditorStatus,
@@ -18,8 +17,10 @@ import {
   LibroExecutableCellView,
   LibroViewTracker,
   VirtualizedManagerHelper,
+  KernelError,
+  LibroJupyterModel,
+  LibroOutputArea,
 } from '@difizen/libro-jupyter';
-import { LibroOutputArea } from '@difizen/libro-jupyter';
 import type { ViewSize } from '@difizen/mana-app';
 import {
   Deferred,
@@ -38,13 +39,14 @@ import {
   watch,
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import type { MenuProps } from 'antd';
-import { Dropdown, Input, Popover, Tooltip } from 'antd';
+import { Input, Popover } from 'antd';
 import React from 'react';
-import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import './index.less';
 import { LibroSqlCellModel } from './libro-sql-cell-model.js';
+import type { DatabaseConfig } from './libro-sql-cell-protocol.js';
+import { SqlScript } from './libro-sql-cell-script.js';
 import { getDfVariableName } from './libro-sql-utils.js';
 
 function countLines(inputString: string) {
@@ -157,51 +159,30 @@ const LibroSqlVariableNameInput: React.FC<LibroSqlVariableProps> = ({
 };
 
 export const LibroSqlCell = React.forwardRef<HTMLDivElement>(
-  function MaxPropmtEditorViewComponent(props, ref) {
+  function SqlEditorViewComponent(props, ref) {
     const [isVariableNameEdit, setIsVariableNameEdit] = useState(false);
     const instance = useInject<LibroSqlCellView>(ViewInstance);
     const contextKey = useInject(LibroContextKey);
-    const [, setTmpShowTourStorage] = useState(
-      !localStorage.getItem('libro-tmp-show-tour') &&
-        !localStorage.getItem('libro-first-tmps-show-tour'),
-    );
-
-    localStorage.setItem('libro-first-tmps-show-tour', 'true');
-
-    const items: MenuProps['items'] = [
-      {
-        key: 'Dataframe',
-        label: <span>Dataframe</span>,
-        disabled:
-          !instance.parent.model.cellsEditable || !instance.parent.model.inputEditable,
-      },
-      {
-        key: 'TmpTable',
-        label: <span>ODPS Dataframe</span>,
-        disabled:
-          !instance.parent.model.cellsEditable || !instance.parent.model.inputEditable,
-      },
-    ];
 
     const handCancelEdit = () => {
       contextKey.enableCommandMode();
       setIsVariableNameEdit(false);
     };
 
-    useEffect(() => {
-      if (!localStorage.getItem('libro-tmp-show-tour')) {
-        setTimeout(() => {
-          setTmpShowTourStorage(false);
-        }, 5000);
-      }
-    }, []);
-
     return (
       <div tabIndex={10} ref={ref} className={instance.className}>
         <div className="libro-sql-cell-header">
           <div className="libro-sql-source">
-            <span className="libro-sql-source-title">Source: </span>
-            <span className="libro-sql-source-content">ODPS</span>
+            <span className="libro-sql-source-title">
+              <DatabaseOutlined />
+            </span>
+            <span className="libro-sql-source-content">
+              {instance.databaseConfig
+                ? instance.databaseConfig.db_type +
+                  ': ' +
+                  instance.databaseConfig.database
+                : '暂未配置数据库'}
+            </span>
           </div>
           <div className="libro-sql-variable-name">
             <span className="libro-sql-variable-name-title">Name: </span>
@@ -260,6 +241,9 @@ export class LibroSqlCellView extends LibroExecutableCellView {
   editorView?: CodeEditorView;
 
   @prop()
+  databaseConfig?: DatabaseConfig;
+
+  @prop()
   override editorStatus: EditorStatus = EditorStatus.NOTLOADED;
 
   @prop()
@@ -267,6 +251,8 @@ export class LibroSqlCellView extends LibroExecutableCellView {
 
   @prop()
   override noEditorAreaHeight = 0;
+
+  @inject(SqlScript) sqlScript: SqlScript;
 
   protected editorViewReadyDeferred: Deferred<void> = new Deferred<void>();
 
@@ -452,6 +438,7 @@ export class LibroSqlCellView extends LibroExecutableCellView {
   override focus = (toEdit: boolean) => {
     if (toEdit) {
       this.focusEditor();
+      this.getDatabaseConfig();
     } else {
       if (this.container?.current?.parentElement?.contains(document.activeElement)) {
         return;
@@ -538,6 +525,70 @@ export class LibroSqlCellView extends LibroExecutableCellView {
       throw reason;
     }
   }
+
+  fetch = async (
+    content: KernelMessage.IExecuteRequestMsg['content'],
+    ioCallback: (msg: KernelMessage.IIOPubMessage) => any,
+  ) => {
+    const model = this.parent?.model as LibroJupyterModel;
+    await model.kcReady;
+    const connection = model.kernelConnection!;
+    const future = connection.requestExecute(content);
+    future.onIOPub = (msg) => {
+      ioCallback(msg);
+    };
+    return future.done as Promise<KernelMessage.IExecuteReplyMsg>;
+  };
+
+  handleQueryResponse = (
+    response: KernelMessage.IIOPubMessage,
+    cb: (result: string) => void,
+  ) => {
+    const msgType = response.header.msg_type;
+    switch (msgType) {
+      case 'execute_result':
+      case 'display_data': {
+        const payload = response as KernelMessage.IExecuteResultMsg;
+        let content: string = payload.content.data['text/plain'] as string;
+        if (content.slice(0, 1) === "'" || content.slice(0, 1) === '"') {
+          content = content.slice(1, -1);
+          content = content.replace(/\\"/g, '"').replace(/\\'/g, "'");
+        }
+
+        cb(content);
+        break;
+      }
+      case 'stream': {
+        const payloadDisplay = response as KernelMessage.IStreamMsg;
+        let contentStream: string = payloadDisplay.content.text as string;
+        if (contentStream.slice(0, 1) === "'" || contentStream.slice(0, 1) === '"') {
+          contentStream = contentStream.slice(1, -1);
+          contentStream = contentStream.replace(/\\"/g, '"').replace(/\\'/g, "'");
+        }
+        cb(contentStream);
+        break;
+      }
+      default:
+        break;
+    }
+  };
+
+  getDatabaseConfig = async () => {
+    return this.fetch(
+      {
+        code: this.sqlScript.getDbConfig,
+        store_history: false,
+      },
+      (msg) =>
+        this.handleQueryResponse(msg, (result) => {
+          try {
+            this.databaseConfig = JSON.parse(result);
+          } catch (e) {
+            this.databaseConfig = undefined;
+          }
+        }),
+    );
+  };
 
   override shouldEnterEditorMode(e: React.FocusEvent<HTMLElement>) {
     return getOrigin(this.editorView)?.editor?.host?.contains(e.target as HTMLElement)

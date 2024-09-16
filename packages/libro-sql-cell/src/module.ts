@@ -8,6 +8,7 @@ import { LibroSQLCellColorRegistry } from './libro-sql-cell-color-registry.js';
 import { SqlCellContribution } from './libro-sql-cell-contribution.js';
 import { LibroSqlCellModel } from './libro-sql-cell-model.js';
 import { LibroSqlCellModelFactory } from './libro-sql-cell-protocol.js';
+import { SqlScript } from './libro-sql-cell-script.js';
 import { LibroSqlCellView } from './libro-sql-cell-view.js';
 
 export const LibroSqlCellModule = ManaModule.create()
@@ -18,6 +19,7 @@ export const LibroSqlCellModule = ManaModule.create()
     LibroSQLCellColorRegistry,
     FormatterSqlMagicContribution,
     FormatterStringTransSqlContribution,
+    SqlScript,
     {
       token: LibroSqlCellModelFactory,
       useFactory: (ctx) => {
