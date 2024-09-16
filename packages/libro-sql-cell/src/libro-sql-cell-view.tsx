@@ -263,6 +263,8 @@ export class LibroSqlCellView extends LibroExecutableCellView {
   override renderEditor = () => {
     if (this.editorView) {
       return <ViewRender view={this.editorView} />;
+    } else {
+      return null;
     }
   };
 
