@@ -584,7 +584,11 @@ export class LibroView extends BaseView implements NotebookView {
 
   executeCellRun(cell: CellView) {
     this.runCellEmitter.fire(cell);
-    return cell.run();
+    if (ExecutableCellView.is(cell)) {
+      return cell.run();
+    } else {
+      return undefined;
+    }
   }
 
   runCells = async (cells: CellView[]) => {
@@ -594,10 +598,7 @@ export class LibroView extends BaseView implements NotebookView {
 
     return Promise.all(
       cells.map((cell) => {
-        if (ExecutableCellModel.is(cell.model)) {
-          return this.executeCellRun(cell);
-        }
-        return undefined;
+        return this.executeCellRun(cell);
       }),
     )
       .then((resultList) => {

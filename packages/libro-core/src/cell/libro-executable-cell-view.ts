@@ -11,6 +11,7 @@ import { EditorCellView, LibroEditorCellView } from './libro-edit-cell-view.js';
 import { ExecutableCellModel } from './libro-executable-cell-model.js';
 
 interface ExecutableCellView extends EditorCellView {
+  run: () => Promise<boolean>;
   clearExecution: () => void;
 
   outputArea: BaseOutputArea;
@@ -27,7 +28,8 @@ export const ExecutableCellView = {
       'outputArea' in arg &&
       typeof (arg as any).outputArea === 'object' &&
       'clearExecution' in arg &&
-      typeof (arg as any).clearExecution === 'function'
+      typeof (arg as any).clearExecution === 'function' &&
+      typeof (arg as any).run === 'function'
     );
   },
 };

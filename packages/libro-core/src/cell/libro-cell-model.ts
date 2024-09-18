@@ -96,10 +96,6 @@ export class LibroCellModel extends Model implements CellModel {
     return { ...this._decodeObject, value: this.value };
   }
 
-  async run() {
-    return true;
-  }
-
   toJSON(): Omit<ICell, 'outputs'> {
     return {
       id: this.id,
