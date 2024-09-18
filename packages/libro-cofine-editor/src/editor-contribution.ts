@@ -3,7 +3,6 @@ import {
   CodeEditorContribution,
   LanguageSpecRegistry,
 } from '@difizen/libro-code-editor';
-import { MIME } from '@difizen/libro-common';
 import { inject, singleton } from '@difizen/mana-app';
 
 import {
@@ -34,11 +33,7 @@ export class LibroE2EditorContribution implements CodeEditorContribution {
     });
   };
 
-  canHandle(mime: string): number {
-    const mimes = [MIME.odpssql, MIME.python, MIME.prompt] as string[];
-    if (mimes.includes(mime)) {
-      return 50 + 1;
-    }
-    return 0;
+  canHandle(): number {
+    return 50;
   }
 }
