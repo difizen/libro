@@ -48,7 +48,6 @@
     "@difizen/libro-code-editor": "^0.2.33",
     "@difizen/libro-jupyter": "^0.2.33",
     "@difizen/libro-rendermime": "^0.2.33",
-    "@difizen/libro-codemirror": "^0.2.33",
     "@difizen/libro-common": "^0.2.33",
     "@difizen/libro-core": "^0.2.33",
     "@ant-design/icons": "^5.1.0",
