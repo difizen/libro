@@ -1,5 +1,5 @@
 import type { JSONObject, JSONValue, IOutput, OutputType } from '@difizen/libro-common';
-import type { CellView, LibroExecutableCellView } from '@difizen/libro-core';
+import type { CellView, LibroEditableExecutableCellView } from '@difizen/libro-core';
 import { ExecutableCellView } from '@difizen/libro-core';
 import { LibroContextKey } from '@difizen/libro-core';
 import type { KernelMessage } from '@difizen/libro-kernel';
@@ -48,7 +48,7 @@ export class WidgetView extends BaseView implements IWidgetView {
   @prop()
   state: JSONObject & WidgetState = defaultWidgetState;
 
-  cell?: LibroExecutableCellView;
+  cell?: LibroEditableExecutableCellView;
 
   get outputs() {
     if (this.cell) {
@@ -102,7 +102,7 @@ export class WidgetView extends BaseView implements IWidgetView {
 
   setCell(cell: CellView) {
     if (ExecutableCellView.is(cell)) {
-      this.cell = cell as LibroExecutableCellView;
+      this.cell = cell as LibroEditableExecutableCellView;
       if (this.cell) {
         this.cell.parentReady
           .then(() => {

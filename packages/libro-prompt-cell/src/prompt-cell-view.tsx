@@ -7,7 +7,7 @@ import type {
   CellViewOptions,
 } from '@difizen/libro-core';
 import { LibroOutputArea } from '@difizen/libro-core';
-import { CellService, LibroExecutableCellView } from '@difizen/libro-core';
+import { CellService, LibroEditableExecutableCellView } from '@difizen/libro-core';
 import type { ExecutionMeta, KernelMessage } from '@difizen/libro-jupyter';
 import { KernelError, LibroJupyterModel } from '@difizen/libro-jupyter';
 import {
@@ -202,7 +202,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
 
 @transient()
 @view('prompt-editor-cell-view')
-export class LibroPromptCellView extends LibroExecutableCellView {
+export class LibroPromptCellView extends LibroEditableExecutableCellView {
   override view = PropmtEditorViewComponent;
 
   declare model: LibroPromptCellModel;

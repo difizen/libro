@@ -38,7 +38,7 @@ export const ExecutableCellView = {
  * 带有编辑器、执行、output相关能力的cell view，例如python、sql
  * model 必须为 ExecutableCellModel
  */
-export abstract class LibroExecutableCellView
+export abstract class LibroEditableExecutableCellView
   extends LibroEditorCellView
   implements ExecutableCellView
 {
@@ -79,3 +79,8 @@ export abstract class LibroExecutableCellView
     );
   }
 }
+
+/**
+ * @deprecated use LibroEditableExecutableCellView instead.
+ */
+export const LibroExecutableCellView = LibroEditableExecutableCellView;

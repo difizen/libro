@@ -1,14 +1,14 @@
 import type { CellView } from '@difizen/libro-core';
-import { LibroExecutableCellView, LibroOutputArea } from '@difizen/libro-core';
+import { LibroEditableExecutableCellView, LibroOutputArea } from '@difizen/libro-core';
 import { useObserve } from '@difizen/mana-app';
 
 import { isWaitingExecute } from '../utils/index.js';
 
 export function CellInputBottomBlank({ cell }: { cell: CellView }) {
-  const observableCell = useObserve(cell) as LibroExecutableCellView;
+  const observableCell = useObserve(cell) as LibroEditableExecutableCellView;
 
   if (
-    !(cell instanceof LibroExecutableCellView) ||
+    !(cell instanceof LibroEditableExecutableCellView) ||
     !(observableCell.outputArea instanceof LibroOutputArea)
   ) {
     return null;
