@@ -250,8 +250,6 @@ export interface CellView extends View {
   blur: () => void;
   focus: (isEdit: boolean) => void;
 
-  run: () => Promise<boolean>;
-
   shouldEnterEditorMode: (e: React.FocusEvent<HTMLElement>) => boolean;
 
   hasCellHidden: () => boolean;
