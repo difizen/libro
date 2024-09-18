@@ -9,4 +9,5 @@ export const MIME = {
   python: 'text/x-python',
   prompt: 'application/vnd.libro.prompt+json',
   odpssql: 'application/vnd.libro.sql+json',
+  codemirror: 'application/vnd.libro.codemirror+json',
 } as const;
