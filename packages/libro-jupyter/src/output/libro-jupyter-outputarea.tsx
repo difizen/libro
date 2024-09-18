@@ -1,6 +1,6 @@
 import type * as nbformat from '@difizen/libro-common';
 import type {
-  LibroExecutableCellView,
+  LibroEditableExecutableCellView,
   ExecutableCellModel,
   IOutputAreaOption,
 } from '@difizen/libro-core';
@@ -20,7 +20,7 @@ import { inject, transient, view, ViewOption } from '@difizen/mana-app';
 @transient()
 @view('libro-output-area')
 export class LibroJupyterOutputArea extends LibroOutputArea {
-  declare cell: LibroExecutableCellView;
+  declare cell: LibroEditableExecutableCellView;
   protected displayIdMap = new Map<string, number[]>();
 
   constructor(@inject(ViewOption) option: IOutputAreaOption) {

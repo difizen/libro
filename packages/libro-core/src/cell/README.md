@@ -6,7 +6,7 @@
 
 - LibroCellView
   - LibroEditorCellView: 带有文本编辑器相关能力
-    - LibroExecutableCellView: 带有执行、输出能力
+    - LibroEditableExecutableCellView: 带有执行、输出能力
       - LibroCodeCellView
         - AIStudioLibroCodeCellView
       - LibroSqlCellView

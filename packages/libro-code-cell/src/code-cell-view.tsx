@@ -14,7 +14,7 @@ import type {
 import {
   CellService,
   EditorStatus,
-  LibroExecutableCellView,
+  LibroEditableExecutableCellView,
   LibroOutputArea,
   VirtualizedManagerHelper,
 } from '@difizen/libro-core';
@@ -99,7 +99,7 @@ const CodeEditorViewComponent = forwardRef<HTMLDivElement>(
 
 @transient()
 @view('code-editor-cell-view')
-export class LibroCodeCellView extends LibroExecutableCellView {
+export class LibroCodeCellView extends LibroEditableExecutableCellView {
   override view = CodeEditorViewComponent;
 
   viewManager: ViewManager;

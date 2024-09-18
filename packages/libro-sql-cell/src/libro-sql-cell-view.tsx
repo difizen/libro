@@ -13,7 +13,7 @@ import {
   CellService,
   EditorStatus,
   LibroContextKey,
-  LibroExecutableCellView,
+  LibroEditableExecutableCellView,
   LibroViewTracker,
   VirtualizedManagerHelper,
   KernelError,
@@ -222,7 +222,7 @@ export const LibroSqlCell = React.forwardRef<HTMLDivElement>(
 
 @transient()
 @view('libro-sql-cell-view')
-export class LibroSqlCellView extends LibroExecutableCellView {
+export class LibroSqlCellView extends LibroEditableExecutableCellView {
   override view = LibroSqlCell;
   declare model: LibroSqlCellModel;
   libroViewTracker: LibroViewTracker;
