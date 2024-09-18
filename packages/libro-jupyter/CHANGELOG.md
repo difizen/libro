@@ -1,5 +1,29 @@
 # @difizen/libro-jupyter
 
+## 0.2.34
+
+### Patch Changes
+
+- [#222](https://github.com/difizen/libro/pull/222) [`cd81655`](https://github.com/difizen/libro/commit/cd81655ee46e9b00aab187d87b66c9c297a63d92) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - 1. add sql cell & 2.refactor(core): move run from CellView to ExecutableCellView
+
+- Updated dependencies [[`cd81655`](https://github.com/difizen/libro/commit/cd81655ee46e9b00aab187d87b66c9c297a63d92)]:
+  - @difizen/libro-core@0.2.34
+  - @difizen/libro-l10n@0.2.34
+  - @difizen/libro-code-cell@0.2.34
+  - @difizen/libro-code-editor@0.2.34
+  - @difizen/libro-codemirror@0.2.34
+  - @difizen/libro-cofine-editor@0.2.34
+  - @difizen/libro-common@0.2.34
+  - @difizen/libro-kernel@0.2.34
+  - @difizen/libro-language-client@0.2.34
+  - @difizen/libro-lsp@0.2.34
+  - @difizen/libro-markdown-cell@0.2.34
+  - @difizen/libro-output@0.2.34
+  - @difizen/libro-raw-cell@0.2.34
+  - @difizen/libro-rendermime@0.2.34
+  - @difizen/libro-search@0.2.34
+  - @difizen/libro-search-code-cell@0.2.34
+
 ## 0.2.33
 
 ### Patch Changes
