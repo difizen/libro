@@ -1,11 +1,5 @@
-import { CodeEditorManager } from '@difizen/libro-code-editor';
-import type {
-  CodeEditorViewOptions,
-  IRange,
-  CodeEditorView,
-} from '@difizen/libro-code-editor';
+import type { IRange } from '@difizen/libro-code-editor';
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
-import { CellUri } from '@difizen/libro-common';
 import { isOutput } from '@difizen/libro-common';
 import type {
   IOutputAreaOption,
@@ -13,13 +7,7 @@ import type {
   CellViewOptions,
 } from '@difizen/libro-core';
 import { LibroOutputArea } from '@difizen/libro-core';
-import {
-  CellService,
-  LibroExecutableCellView,
-  LibroViewTracker,
-  EditorStatus,
-  LibroContextKey,
-} from '@difizen/libro-core';
+import { CellService, LibroExecutableCellView } from '@difizen/libro-core';
 import type { ExecutionMeta, KernelMessage } from '@difizen/libro-jupyter';
 import { KernelError, LibroJupyterModel } from '@difizen/libro-jupyter';
 import {
@@ -215,7 +203,6 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
 @transient()
 @view('prompt-editor-cell-view')
 export class LibroPromptCellView extends LibroExecutableCellView {
-  @inject(LibroContextKey) protected libroContextKey: LibroContextKey;
   override view = PropmtEditorViewComponent;
 
   declare model: LibroPromptCellModel;
@@ -275,15 +262,9 @@ export class LibroPromptCellView extends LibroExecutableCellView {
 
   viewManager: ViewManager;
 
-  @inject(CodeEditorManager) codeEditorManager: CodeEditorManager;
   @inject(PromptScript) promptScript: PromptScript;
 
   outputs: IOutput[];
-
-  libroViewTracker: LibroViewTracker;
-
-  @prop()
-  editorView?: CodeEditorView;
 
   protected outputAreaDeferred = new Deferred<LibroOutputArea>();
   get outputAreaReady() {
@@ -294,7 +275,6 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     @inject(ViewOption) options: CellViewOptions,
     @inject(CellService) cellService: CellService,
     @inject(ViewManager) viewManager: ViewManager,
-    @inject(LibroViewTracker) libroViewTracker: LibroViewTracker,
   ) {
     super(options, cellService);
     this.options = options;
@@ -302,7 +282,6 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     this.className = this.className + ' prompt';
 
     this.outputs = options.cell?.outputs as IOutput[];
-    this.libroViewTracker = libroViewTracker;
 
     // 创建outputArea
     this.viewManager
@@ -342,55 +321,6 @@ export class LibroPromptCellView extends LibroExecutableCellView {
     } as ICodeCell;
   }
 
-  override onViewMount() {
-    this.createEditor();
-    //选中cell时才focus
-    if (this.parent.model.active?.id === this.id) {
-      this.focus(!this.parent.model.commandMode);
-    }
-  }
-
-  protected getEditorOption(): CodeEditorViewOptions {
-    const option: CodeEditorViewOptions = {
-      uuid: CellUri.from(this.parent.model.id, this.model.id).toString(),
-      editorHostId: this.parent.id + this.id,
-      model: this.model,
-      config: {
-        readOnly: !this.parent.model.inputEditable,
-        editable: this.parent.model.inputEditable,
-      },
-    };
-    return option;
-  }
-
-  async createEditor() {
-    const option = this.getEditorOption();
-
-    this.editorStatus = EditorStatus.LOADING;
-
-    // 防止虚拟滚动中编辑器被频繁创建
-    if (this.editorView) {
-      this.editorStatus = EditorStatus.LOADED;
-      return;
-    }
-    const editorView = await this.codeEditorManager.getOrCreateEditorView(option);
-
-    this.editorView = editorView;
-    this.editorStatus = EditorStatus.LOADED;
-
-    await this.afterEditorReady();
-  }
-
-  protected async afterEditorReady() {
-    watch(this.parent.model, 'inputEditable', () => {
-      this.editorView?.editor?.setOption(
-        'readOnly',
-        getOrigin(!this.parent.model.inputEditable),
-      );
-    });
-    this.editorView?.onModalChange((val) => (this.hasModal = val));
-  }
-
   override shouldEnterEditorMode(e: React.FocusEvent<HTMLElement>) {
     return getOrigin(this.editorView)?.editor?.host?.contains(
       e.target as HTMLElement,
@@ -402,33 +332,6 @@ export class LibroPromptCellView extends LibroExecutableCellView {
   override blur = () => {
     this.editorView?.editor?.setOption('styleActiveLine', false);
     this.editorView?.editor?.setOption('highlightActiveLineGutter', false);
-  };
-
-  protected focusEditor() {
-    //选中cell、编辑模式、非只读时才focus
-    if (
-      this.editorView?.editor &&
-      this.editorView.editorStatus === 'ready' &&
-      this.parent.model.active?.id === this.id &&
-      !this.parent.model.commandMode &&
-      this.libroContextKey.commandModeEnabled === true && // 排除弹窗等情况
-      this.parent.model.inputEditable
-    ) {
-      this.editorView?.editor.setOption('styleActiveLine', true);
-      this.editorView?.editor.setOption('highlightActiveLineGutter', true);
-      this.editorView?.editor.focus();
-    }
-  }
-
-  override focus = (toEdit: boolean) => {
-    if (toEdit) {
-      this.focusEditor();
-    } else {
-      if (this.container?.current?.parentElement?.contains(document.activeElement)) {
-        return;
-      }
-      this.container?.current?.parentElement?.focus();
-    }
   };
 
   override clearExecution = () => {

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-parameter-properties */
 /* eslint-disable @typescript-eslint/parameter-properties */
-import type { CodeEditorViewOptions, CodeEditorView } from '@difizen/libro-code-editor';
+import type { CodeEditorViewOptions } from '@difizen/libro-code-editor';
 import { CodeEditorManager } from '@difizen/libro-code-editor';
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
 import { CellUri } from '@difizen/libro-common';
@@ -17,11 +17,8 @@ import {
   LibroExecutableCellView,
   LibroOutputArea,
   VirtualizedManagerHelper,
-  LibroContextKey,
 } from '@difizen/libro-core';
 import type { ViewSize } from '@difizen/mana-app';
-import { Disposable } from '@difizen/mana-app';
-import { DisposableCollection } from '@difizen/mana-app';
 import {
   getOrigin,
   inject,
@@ -103,20 +100,13 @@ const CodeEditorViewComponent = forwardRef<HTMLDivElement>(
 @transient()
 @view('code-editor-cell-view')
 export class LibroCodeCellView extends LibroExecutableCellView {
-  protected toDisposeOnEditor = new DisposableCollection();
-  @inject(LibroContextKey) protected readonly libroContextKey: LibroContextKey;
   override view = CodeEditorViewComponent;
 
   viewManager: ViewManager;
 
-  codeEditorManager: CodeEditorManager;
-
   declare model: LibroCodeCellModel;
 
   outputs: IOutput[];
-
-  @prop()
-  editorView?: CodeEditorView;
 
   @prop()
   editorAreaHeight = 0;
@@ -226,7 +216,7 @@ export class LibroCodeCellView extends LibroExecutableCellView {
     this.codeEditorManager.setEditorHostRef(editorHostId, ref);
   }
 
-  protected getEditorOption(): CodeEditorViewOptions {
+  protected override getEditorOption(): CodeEditorViewOptions {
     const option: CodeEditorViewOptions = {
       uuid: CellUri.from(this.parent.model.id, this.model.id).toString(),
       editorHostId: this.parent.id + this.id,
@@ -239,90 +229,6 @@ export class LibroCodeCellView extends LibroExecutableCellView {
     };
     return option;
   }
-
-  protected async createEditor() {
-    const option = this.getEditorOption();
-
-    this.editorStatus = EditorStatus.LOADING;
-
-    // 防止虚拟滚动中编辑器被频繁创建
-    if (this.editorView) {
-      this.editorStatus = EditorStatus.LOADED;
-      return;
-    }
-
-    const editorView = await this.codeEditorManager.getOrCreateEditorView(option);
-
-    this.editorView = editorView;
-    this.editorStatus = EditorStatus.LOADED;
-
-    editorView.onEditorStatusChange((e) => {
-      if (e.status === 'ready') {
-        this.editor = this.editorView!.editor;
-        this.afterEditorReady();
-      } else if (e.status === 'disposed') {
-        this.toDisposeOnEditor.dispose();
-      }
-    });
-  }
-
-  protected async afterEditorReady() {
-    this.focusEditor();
-    this.toDisposeOnEditor.push(
-      watch(this.parent.model, 'inputEditable', () => {
-        this.editorView?.editor?.setOption(
-          'readOnly',
-          getOrigin(!this.parent.model.inputEditable),
-        );
-      }),
-    );
-    this.toDisposeOnEditor.push(
-      this.editorView?.onModalChange((val) => (this.hasModal = val)) ?? Disposable.NONE,
-    );
-    this.toDisposeOnEditor.push(
-      this.editor?.onModelContentChanged?.((e) => {
-        this.parent.model.onCellContentChange({ cell: this, changes: e });
-      }) ?? Disposable.NONE,
-    );
-  }
-
-  protected focusEditor() {
-    //选中cell、编辑模式、非只读时才focus
-    if (
-      this.editorView?.editor &&
-      this.editorView.editorStatus === 'ready' &&
-      this.parent.model.active?.id === this.id &&
-      !this.parent.model.commandMode &&
-      this.libroContextKey.commandModeEnabled === true && // 排除弹窗等情况
-      this.parent.model.inputEditable
-    ) {
-      this.editorView?.editor.setOption('styleActiveLine', true);
-      this.editorView?.editor.setOption('highlightActiveLineGutter', true);
-      this.editorView?.editor.focus();
-    }
-  }
-
-  override shouldEnterEditorMode(e: React.FocusEvent<HTMLElement>) {
-    return getOrigin(this.editorView)?.editor?.host?.contains(e.target as HTMLElement)
-      ? true
-      : false;
-  }
-
-  override blur = () => {
-    this.editorView?.editor?.setOption('styleActiveLine', false);
-    this.editorView?.editor?.setOption('highlightActiveLineGutter', false);
-  };
-
-  override focus = (toEdit: boolean) => {
-    if (toEdit) {
-      this.focusEditor();
-    } else {
-      if (this.container?.current?.parentElement?.contains(document.activeElement)) {
-        return;
-      }
-      this.container?.current?.parentElement?.focus();
-    }
-  };
 
   override clearExecution = () => {
     this.model.clearExecution();

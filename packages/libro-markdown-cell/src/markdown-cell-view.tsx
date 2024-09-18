@@ -1,8 +1,4 @@
-import type {
-  CodeEditorViewOptions,
-  IEditor,
-  CodeEditorView,
-} from '@difizen/libro-code-editor';
+import type { CodeEditorViewOptions, IEditor } from '@difizen/libro-code-editor';
 import { CodeEditorManager } from '@difizen/libro-code-editor';
 import { CellUri } from '@difizen/libro-common';
 import type { CellCollapsible, CellViewOptions } from '@difizen/libro-core';
@@ -74,11 +70,6 @@ export class MarkdownCellView extends LibroEditorCellView implements CellCollaps
 
   viewManager: ViewManager;
 
-  codeEditorManager: CodeEditorManager;
-
-  @prop()
-  editorView?: CodeEditorView;
-
   @prop()
   editorAreaHeight = 0;
 
@@ -143,7 +134,7 @@ export class MarkdownCellView extends LibroEditorCellView implements CellCollaps
     return this.editorAreaHeight;
   }
 
-  protected getEditorOption(): CodeEditorViewOptions {
+  protected override getEditorOption(): CodeEditorViewOptions {
     const option: CodeEditorViewOptions = {
       uuid: CellUri.from(this.parent.model.id, this.model.id).toString(),
       model: this.model,
@@ -159,34 +150,6 @@ export class MarkdownCellView extends LibroEditorCellView implements CellCollaps
     return option;
   }
 
-  async createEditor() {
-    const option = this.getEditorOption();
-
-    this.editorStatus = EditorStatus.LOADING;
-
-    // 防止虚拟滚动中编辑器被频繁创建
-    if (this.editorView) {
-      this.editorStatus = EditorStatus.LOADED;
-      return;
-    }
-
-    const editorView = await this.codeEditorManager.getOrCreateEditorView(option);
-
-    this.editorView = editorView;
-
-    this.editorStatus = EditorStatus.LOADED;
-
-    editorView.onEditorStatusChange((e) => {
-      if (e.status === 'ready') {
-        this.afterEditorReady();
-      }
-    });
-  }
-
-  protected async afterEditorReady() {
-    getOrigin(this.editorView)?.editor.focus();
-  }
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   override shouldEnterEditorMode(e: React.FocusEvent<HTMLElement>) {
     if (!this.cellmodel.isEdit) {
@@ -195,7 +158,7 @@ export class MarkdownCellView extends LibroEditorCellView implements CellCollaps
     return true;
   }
 
-  override focus(toEdit: boolean) {
+  override focus = (toEdit: boolean) => {
     if (toEdit) {
       this.cellmodel.isEdit = true;
     } else {
@@ -204,19 +167,9 @@ export class MarkdownCellView extends LibroEditorCellView implements CellCollaps
       }
       this.container?.current?.parentElement?.focus();
     }
-  }
+  };
 
-  override blur() {
+  override blur = () => {
     this.cellmodel.isEdit = false;
-  }
-
-  override redo(): void {
-    // this.editor?.trigger('', 'redo', '');
-    // this.editor?.focus();
-  }
-
-  override undo(): void {
-    // this.editor?.trigger('undo', 'undo', {});
-    // this.editor?.focus();
-  }
+  };
 }
