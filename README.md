@@ -22,6 +22,9 @@
 
 - [快速开始](#快速开始)
 - [快速集成](#快速集成)
+- [新特性](#新特性)
+  - [prompt cell](#prompt-cell)
+  - [sql cell](#sql-cell)
 - [架构](#架构)
 - [后续计划](#后续计划)
 - [更多](#更多)
@@ -70,6 +73,22 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 - Application： mana 上下文容器，建议放在应用的外层，多个 libro 示例可以共享上下文。
 - LibroComponent：libro 视图组件，可以将 libro 视图嵌入到任意位置。
+
+## 新特性
+
+### Prompt Cell
+
+- 增强直接与大模型交互的能力，支持文本对话，多模态表达等。
+- 增强对于常见输出类型的交互能力，如在输出代码时给出复制、运行等操作能力。
+
+  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*i33lTJzPBrwAAAAAAAAAAAAADvyTAQ/original)
+
+### Sql Cell
+
+- 支持与 sql 的执行交互能力。
+- 连接 sql 数据库即可在 notebook 中写 sql 代码。
+
+  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u4bWT7pHcGMAAAAAAAAAAAAADvyTAQ/original)
 
 ## 架构
 
