@@ -57,6 +57,7 @@ export class LibroCellService implements CellService, ApplicationContribution {
         metas.push(item.cellMeta);
       }
     });
+    metas.sort((a, b) => a.order.localeCompare(b.order));
     this.cellsMeta = metas;
   }
 

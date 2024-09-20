@@ -36,29 +36,20 @@ export const LibroAddCell: React.FC = () => {
   };
   return (
     <div className="libro-add-cell-container default-add-cell-container">
-      {instance
-        .getCellList()
-        .sort((a, b) => {
-          if (a.order < b.order) {
-            return -1;
-          } else {
-            return 1;
-          }
-        })
-        .map((item: AddType) => {
-          return (
-            <Button
-              className="libro-add-cell-container-item "
-              key={item.name}
-              onClick={() => {
-                addCell(item.type);
-              }}
-              icon={<PlusOutlined className="libro-add-cell-icon" />}
-            >
-              {item.name}
-            </Button>
-          );
-        })}
+      {instance.getCellList().map((item: AddType) => {
+        return (
+          <Button
+            className="libro-add-cell-container-item "
+            key={item.name}
+            onClick={() => {
+              addCell(item.type);
+            }}
+            icon={<PlusOutlined className="libro-add-cell-icon" />}
+          >
+            {item.name}
+          </Button>
+        );
+      })}
     </div>
   );
 };
