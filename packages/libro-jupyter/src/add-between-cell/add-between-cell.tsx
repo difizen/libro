@@ -89,7 +89,6 @@ export const LibroCommonBetweenCellContent: BetweenCellProvider = forwardRef(
 
     const items: MenuProps['items'] = cellsMeta
       .filter((item) => item.type !== 'raw')
-      .sort((a, b) => a.order.localeCompare(b.order))
       .map((item) => {
         return {
           label: item.name,
