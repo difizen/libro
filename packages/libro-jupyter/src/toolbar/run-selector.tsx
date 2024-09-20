@@ -72,7 +72,7 @@ export const RunSelector: React.FC = () => {
           key: 'runCell',
           label: (
             <>
-              <span className="libro-run-menu-label">{l10n.t('运行当前Cell')}</span>
+              <span className="libro-run-menu-label">{l10n.t('运行当前 Cell')}</span>
               <span className="libro-run-menu-keybind">Cmd + Enter</span>
             </>
           ),
@@ -92,7 +92,9 @@ export const RunSelector: React.FC = () => {
           key: 'runAllAbove',
           label: (
             <>
-              <span className="libro-run-menu-label">{l10n.t('运行之前所有cell')}</span>
+              <span className="libro-run-menu-label">
+                {l10n.t('运行之前所有 Cell')}
+              </span>
               <span className="libro-run-menu-keybind">Cmd + F8</span>
             </>
           ),
@@ -102,7 +104,7 @@ export const RunSelector: React.FC = () => {
           label: (
             <>
               <span className="libro-run-menu-label">
-                {l10n.t('运行当前及之后cell')}
+                {l10n.t('运行当前及之后 Cell')}
               </span>
               <span className="libro-run-menu-keybind">Cmd + F10</span>
             </>
