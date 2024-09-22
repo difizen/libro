@@ -1,4 +1,4 @@
-import { singleton } from '@difizen/mana-app';
+import { isMacintosh, singleton } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 import { Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
@@ -42,7 +42,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('保存文件'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>S</Tag>
         </>
       ),
@@ -52,7 +52,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('运行选中cell'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Enter</Tag>
         </>
       ),
@@ -72,7 +72,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('运行并新增cell'),
       keybind: (
         <>
-          <Tag>Alt</Tag>
+          <Tag>{isMacintosh ? 'Option' : 'Alt'}</Tag>
           <Tag>Enter</Tag>
         </>
       ),
@@ -82,7 +82,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('隐藏Code'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>&apos;</Tag>
         </>
       ),
@@ -92,7 +92,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('隐藏Output'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>O</Tag>
         </>
       ),
@@ -102,7 +102,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('切分cell'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Shift</Tag>
           <Tag>-</Tag>
         </>
@@ -113,7 +113,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('选中当前所在行'),
       keybind: (
         <>
-          <Tag>Command</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>L</Tag>{' '}
         </>
       ),
@@ -123,7 +123,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('全选'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>A</Tag>
         </>
       ),
@@ -133,7 +133,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('光标移至行首'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Left</Tag>
         </>
       ),
@@ -143,7 +143,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('光标移至行尾'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Right</Tag>
         </>
       ),
@@ -153,7 +153,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('光标移至文档首'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Up</Tag>
         </>
       ),
@@ -163,7 +163,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('光标移至文档尾'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Down</Tag>
         </>
       ),
@@ -173,7 +173,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('向上移动当前所在行'),
       keybind: (
         <>
-          <Tag>Alt</Tag>
+          <Tag>{isMacintosh ? 'Option' : 'Alt'}</Tag>
           <Tag>Up</Tag>
         </>
       ),
@@ -183,7 +183,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('向下移动当前所在行'),
       keybind: (
         <>
-          <Tag>Alt</Tag>
+          <Tag>{isMacintosh ? 'Option' : 'Alt'}</Tag>
           <Tag>Down</Tag>
         </>
       ),
@@ -194,7 +194,7 @@ export class LibroKeybindItems {
       keybind: (
         <>
           <Tag>Shift</Tag>
-          <Tag>Alt</Tag>
+          <Tag>{isMacintosh ? 'Option' : 'Alt'}</Tag>
           <Tag>Up</Tag>
         </>
       ),
@@ -205,7 +205,7 @@ export class LibroKeybindItems {
       keybind: (
         <>
           <Tag>Shift</Tag>
-          <Tag>Alt</Tag>
+          <Tag>{isMacintosh ? 'Option' : 'Alt'}</Tag>
           <Tag>Down</Tag>
         </>
       ),
@@ -215,7 +215,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('删除光标至行首内容'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Backspace</Tag>
         </>
       ),
@@ -225,7 +225,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('删除光标至行尾内容'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Delete</Tag>
         </>
       ),
@@ -235,7 +235,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('撤销'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Z</Tag>
         </>
       ),
@@ -245,7 +245,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('恢复'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Shift</Tag>
           <Tag>Z</Tag>
         </>
@@ -256,7 +256,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('撤销选中'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>U</Tag>{' '}
         </>
       ),
@@ -266,7 +266,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('恢复选中'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Shift</Tag>
           <Tag>U</Tag>
         </>
@@ -280,7 +280,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('保存文件'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>S</Tag>
         </>
       ),
@@ -290,7 +290,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('运行选中cell'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Enter</Tag>
         </>
       ),
@@ -310,7 +310,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('运行并新增cell'),
       keybind: (
         <>
-          <Tag>Alt</Tag>
+          <Tag>{isMacintosh ? 'Option' : 'Alt'}</Tag>
           <Tag>Enter</Tag>
         </>
       ),
@@ -329,7 +329,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('隐藏Code'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>&apos;</Tag>
         </>
       ),
@@ -339,7 +339,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('隐藏Output'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>O</Tag>
         </>
       ),
@@ -412,7 +412,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('上移cell'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Shift</Tag>
           <Tag>Up</Tag>
         </>
@@ -423,7 +423,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('下移cell'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Shift</Tag>
           <Tag>Down</Tag>
         </>
@@ -444,7 +444,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('向下合并cell'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Shift</Tag>
           <Tag>M</Tag>
         </>
@@ -455,7 +455,7 @@ export class LibroKeybindItems {
       actionDescription: l10n.t('向上合并cell'),
       keybind: (
         <>
-          <Tag>Cmd</Tag>
+          <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
           <Tag>Backspace</Tag>
         </>
       ),

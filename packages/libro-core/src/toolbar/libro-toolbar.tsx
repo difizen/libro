@@ -1,4 +1,5 @@
 import type { ToolbarRegistry } from '@difizen/mana-app';
+import { isMacintosh } from '@difizen/mana-app';
 import {
   inject,
   ModalService,
@@ -48,7 +49,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
       tooltip: (
         <div className="libro-tooltip">
           <span className="libro-tooltip-text">{l10n.t('保存')}</span>
-          <span className="libro-tooltip-keybind">Cmd + S</span>
+          <span className="libro-tooltip-keybind">{`${isMacintosh ? 'Cmd' : 'Ctrl'} + S`}</span>
         </div>
       ),
 
@@ -100,7 +101,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
       tooltip: (
         <div className="libro-side-tooltip">
           <span className="libro-tooltip-text">{l10n.t('格式化代码')}</span>
-          <span className="libro-tooltip-keybind">Shift+Option+F</span>
+          <span className="libro-tooltip-keybind">{`Shift+${isMacintosh ? 'Option' : 'Alt'}+F`}</span>
         </div>
       ),
 
