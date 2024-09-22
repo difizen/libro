@@ -41,6 +41,7 @@ import {
 } from '../material-from-designer.js';
 import { hasErrorOutput } from '../output/index.js';
 
+import { CellOutputBottomBlankProvider } from './cell-protocol.js';
 import {
   CellExecutionTimeProvider,
   CellInputBottonBlankProvider,
@@ -50,10 +51,6 @@ import {
 const CellInputContent = memo(function CellInputContent(props: { cell: CellView }) {
   const { cell } = props;
   const observableCell = useObserve(cell);
-
-  const CellExecutionTime = useInject<CellExecutionTimeProvider>(
-    CellExecutionTimeProvider,
-  );
   const CellInputBottonBlank = useInject<CellInputBottonBlankProvider>(
     CellInputBottonBlankProvider,
   );
@@ -71,7 +68,6 @@ const CellInputContent = memo(function CellInputContent(props: { cell: CellView 
   }
   return (
     <div className="libro-cell-input-content">
-      <CellExecutionTime cell={cell} />
       <ViewRender view={observableCell} />
       <CellInputBottonBlank cell={cell} />
     </div>
@@ -129,6 +125,12 @@ export const CellOutputContent: React.FC<{ cell: CellView }> = memo(
     const CellOutputVisulization = useInject<CellOutputVisulizationProvider>(
       CellOutputVisulizationProvider,
     );
+    const CellOutputBottomBlank = useInject<CellOutputBottomBlankProvider>(
+      CellOutputBottomBlankProvider,
+    );
+    const CellExecutionTime = useInject<CellExecutionTimeProvider>(
+      CellExecutionTimeProvider,
+    );
 
     if (!ExecutableCellView.is(cell) || !ExecutableCellView.is(observableCell)) {
       return null;
@@ -152,8 +154,10 @@ export const CellOutputContent: React.FC<{ cell: CellView }> = memo(
       <div
         className={`libro-cell-output-content ${hasOutputsScrolled ? 'scrolled' : ''} `}
       >
+        <CellExecutionTime cell={cell} />
         <CellOutputVisulization cell={cell} />
-        <ViewRender view={cell.outputArea} />
+        {observableCell.outputArea.length > 0 && <ViewRender view={cell.outputArea} />}
+        <CellOutputBottomBlank cell={cell} />
       </div>
     );
   },
@@ -167,6 +171,12 @@ export const LibroCellExecutionTime: CellExecutionTimeProvider = forwardRef(
 
 export const LibroCellInputBottonBlank: CellInputBottonBlankProvider = forwardRef(
   function LibroCellInputBottonBlank() {
+    return null;
+  },
+);
+
+export const LibroCellOutputBottomBlank: CellOutputBottomBlankProvider = forwardRef(
+  function LibroCellOutputBottomBlank() {
     return null;
   },
 );
@@ -225,14 +235,7 @@ const CellOutput: React.FC<{ cell: CellView }> = forwardRef(function CellOutput(
   //   };
   // }, [outputRef.current, cell, isExecutingRef]);
 
-  if (!ExecutableCellView.is(cell)) {
-    return null;
-  }
-  if (
-    !isCellView(cell) ||
-    !ExecutableCellModel.is(cell.model) ||
-    !cell.outputArea?.length
-  ) {
+  if (!ExecutableCellView.is(cell) || !ExecutableCellModel.is(cell.model)) {
     return null;
   }
   const handleCellOutputCollapser = () => {
