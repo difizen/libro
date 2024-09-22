@@ -35,7 +35,8 @@ import {
   ViewRender,
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import { Input, Popover } from 'antd';
+import type { InputRef } from 'antd';
+import { Input } from 'antd';
 import React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -94,6 +95,8 @@ const LibroSqlVariableNameInput: React.FC<LibroSqlVariableProps> = ({
   handCancel,
 }: LibroSqlVariableProps) => {
   const cellView = useInject<LibroSqlCellView>(ViewInstance);
+  const contextKey = useInject<LibroContextKey>(LibroContextKey);
+  const inputRef = useRef<InputRef>(null);
   const [resultVariableAvailable, setVariableNameAvailable] = useState(true);
   const [resultVariable, setVariableName] = useState(cellView.model.resultVariable);
   const handleValueChange = useCallback(
@@ -114,6 +117,14 @@ const LibroSqlVariableNameInput: React.FC<LibroSqlVariableProps> = ({
     [cellView.parent.model.cells],
   );
 
+  useEffect(() => {
+    if (inputRef.current !== null) {
+      inputRef.current.focus({
+        cursor: 'end',
+      });
+    }
+  });
+
   const handValueSave = useCallback(() => {
     cellView.model.resultVariable = getDfVariableName(
       cellView.parent.model.cells.filter(
@@ -133,6 +144,11 @@ const LibroSqlVariableNameInput: React.FC<LibroSqlVariableProps> = ({
         status={`${resultVariableAvailable ? '' : 'warning'}`}
         className="libro-sql-variable-name-input"
         onChange={handleValueChange}
+        onBlur={handValueSave}
+        onFocus={() => {
+          contextKey.disableCommandMode();
+        }}
+        ref={inputRef}
         defaultValue={cellView.model.resultVariable}
       />
 
@@ -141,28 +157,19 @@ const LibroSqlVariableNameInput: React.FC<LibroSqlVariableProps> = ({
           {l10n.t('当前变量名已存在')}
         </span>
       )}
-
-      <div className="libro-sql-input-button">
-        <span onClick={handCancel} className="libro-sql-input-cancel">
-          {l10n.t('取消')}
-        </span>
-        <span onClick={handValueSave} className="libro-sql-input-save">
-          {l10n.t('保存')}
-        </span>
-      </div>
     </>
   );
 };
 
 export const LibroSqlCell = React.forwardRef<HTMLDivElement>(
   function SqlEditorViewComponent(props, ref) {
-    const [isVariableNameEdit, setIsVariableNameEdit] = useState(false);
     const instance = useInject<LibroSqlCellView>(ViewInstance);
     const contextKey = useInject(LibroContextKey);
+    const [edit, setEdit] = useState(false);
 
     const handCancelEdit = () => {
       contextKey.enableCommandMode();
-      setIsVariableNameEdit(false);
+      setEdit(false);
     };
 
     return (
@@ -182,36 +189,26 @@ export const LibroSqlCell = React.forwardRef<HTMLDivElement>(
           </div>
           <div className="libro-sql-variable-name">
             <span className="libro-sql-variable-name-title">Name: </span>
-            <span className="libro-sql-variable-content">
-              {instance.model.resultVariable}
-            </span>
-            <div
-              className="libro-sql-variable-name-popover"
-              style={{ display: 'inline-block' }}
-            >
-              <Popover
-                content={<LibroSqlVariableNameInput handCancel={handCancelEdit} />}
-                placement="bottomLeft"
-                open={instance.parent.model.inputEditable ? isVariableNameEdit : false}
-                onOpenChange={(visible) => {
-                  if (visible) {
-                    contextKey.disableCommandMode();
-                  } else {
-                    contextKey.enableCommandMode();
-                  }
-                  setIsVariableNameEdit(visible);
+            {edit ? (
+              <LibroSqlVariableNameInput handCancel={handCancelEdit} />
+            ) : (
+              <span
+                className="libro-sql-variable-content"
+                onDoubleClick={() => {
+                  setEdit(true);
                 }}
-                getPopupContainer={() => {
-                  return instance.container?.current?.getElementsByClassName(
-                    'libro-sql-variable-name',
-                  )[0] as HTMLElement;
-                }}
-                trigger="click"
-                overlayClassName="libro-sql-popover-container"
               >
-                <EditFilled className="libro-sql-edit-icon" />
-              </Popover>
-            </div>
+                {instance.model.resultVariable}
+              </span>
+            )}
+            {!edit && (
+              <EditFilled
+                className="libro-sql-edit-icon"
+                onClick={() => {
+                  setEdit(true);
+                }}
+              />
+            )}
           </div>
         </div>
         <CellEditor />

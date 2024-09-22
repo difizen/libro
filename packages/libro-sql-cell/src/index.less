@@ -16,14 +16,10 @@
   border-right: 1px solid var(--mana-libro-cell-border-color);
 }
 
-.libro-sql-input-warning-text,
-.libro-sql-variable-name-input {
-  display: block !important;
-}
-
 .libro-sql-variable-name-input {
   width: 120px !important;
   height: 32px;
+  margin-left: 6px;
   border: 1px solid #d6d8da !important;
   border-radius: 6px !important;
   box-shadow: unset !important;
@@ -53,8 +49,14 @@
   letter-spacing: 0;
 }
 
+.libro-sql-variable-content {
+  padding-left: 18px;
+}
+
 .libro-sql-variable-name {
+  display: flex;
   margin-left: 8px;
+  align-items: center;
 
   svg {
     margin-left: 4px;
@@ -99,8 +101,8 @@
 }
 
 .libro-sql-input-warning-text {
-  width: 112px;
-  height: 20px;
+  display: flex;
+  align-items: center;
   margin-top: 4px;
   color: #faad14;
   font-weight: 400;
