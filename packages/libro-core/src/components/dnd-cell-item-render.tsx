@@ -262,7 +262,7 @@ const CellOutput: React.FC<{ cell: CellView }> = forwardRef(function CellOutput(
           ref={outputCollapserRef}
           onClick={handleCellOutputCollapser}
         />
-        {outputScrollBtnVisiable && (
+        {outputScrollBtnVisiable && cell.outputArea.length > 0 && (
           <div className="libro-cell-output-scroll">
             <Tooltip
               title={`${
