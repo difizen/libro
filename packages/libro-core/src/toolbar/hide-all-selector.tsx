@@ -78,12 +78,12 @@ export const HideAllSelectInner: React.FC = () => {
       items={[
         {
           key: 'hideAllInputs',
-          label: l10n.t('隐藏全部Code'),
+          label: l10n.t('隐藏全部 Code'),
           disabled: !isCodeVisiable,
         },
         {
           key: 'hideAllOutputs',
-          label: l10n.t('隐藏全部Output'),
+          label: l10n.t('隐藏全部 Output'),
           disabled: !isOutputVisible,
         },
         {
@@ -93,12 +93,12 @@ export const HideAllSelectInner: React.FC = () => {
         },
         {
           key: 'showAllInputs',
-          label: l10n.t('显示全部Code'),
+          label: l10n.t('显示全部 Code'),
           disabled: !isCodeHidden,
         },
         {
           key: 'showAllOutputs',
-          label: l10n.t('显示全部Output'),
+          label: l10n.t('显示全部 Output'),
           disabled: !isOutputHidden,
         },
         {

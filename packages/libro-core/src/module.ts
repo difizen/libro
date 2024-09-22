@@ -14,10 +14,12 @@ import {
   BetweenCellProvider,
   CellExecutionTimeProvider,
   CellInputBottonBlankProvider,
+  CellOutputBottomBlankProvider,
   CellOutputVisulizationProvider,
   LibroBetweenCellContent,
   LibroCellExecutionTime,
   LibroCellInputBottonBlank,
+  LibroCellOutputBottomBlank,
   LibroCellVisualization,
 } from './components/index.js';
 import { LibroContentModule } from './content/index.js';
@@ -92,6 +94,10 @@ export const LibroModule = ManaModule.create()
     {
       token: CellInputBottonBlankProvider,
       useValue: LibroCellInputBottonBlank,
+    },
+    {
+      token: CellOutputBottomBlankProvider,
+      useValue: LibroCellOutputBottomBlank,
     },
     {
       token: CellOutputVisulizationProvider,

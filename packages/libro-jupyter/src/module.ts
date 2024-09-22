@@ -7,7 +7,7 @@ import { CodeMirrorEditorModule } from '@difizen/libro-codemirror';
 import { LibroE2EditorModule } from '@difizen/libro-cofine-editor';
 import {
   CellExecutionTimeProvider,
-  CellInputBottonBlankProvider,
+  CellOutputBottomBlankProvider,
   LibroAddCellModule,
   LibroKeybindRegistry,
   LibroModel,
@@ -33,7 +33,8 @@ import {
   LibroJupyterCommandContribution,
   LibroJupyterKeybindingContribution,
 } from './command/index.js';
-import { CellExecutionTip, CellInputBottomBlank } from './components/index.js';
+import { CellOutputBottomBlank } from './components/cell-output-bottom-blank.js';
+import { CellExecutionTip } from './components/index.js';
 import {
   ConfigAppContribution,
   LibroJupyterSettingContribution,
@@ -82,8 +83,8 @@ export const LibroJupyterNoEditorModule = ManaModule.create()
       useValue: CellExecutionTip,
     },
     {
-      token: CellInputBottonBlankProvider,
-      useValue: CellInputBottomBlank,
+      token: CellOutputBottomBlankProvider,
+      useValue: CellOutputBottomBlank,
     },
     {
       token: KernelStatusAndSelectorProvider,
