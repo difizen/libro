@@ -1,4 +1,5 @@
 import type { Toolbar } from '@difizen/mana-app';
+import { isMacintosh } from '@difizen/mana-app';
 import {
   CommandRegistry,
   getOrigin,
@@ -23,7 +24,9 @@ const codeItems: LibroSideToolbarMenuItemType[] = [
     label: (
       <>
         <span className="libro-menu-item-label">{l10n.t('隐藏 Code')}</span>
-        <span className="libro-menu-item-keybind">Cmd + &apos;</span>
+        <span className="libro-menu-item-keybind">
+          {`${isMacintosh ? 'Cmd' : 'Ctrl'} + `}&apos;
+        </span>
       </>
     ),
   },
@@ -32,7 +35,9 @@ const codeItems: LibroSideToolbarMenuItemType[] = [
     label: (
       <>
         <span className="libro-menu-item-label">{l10n.t('显示 Code')}</span>
-        <span className="libro-menu-item-keybind">Cmd + &apos;</span>
+        <span className="libro-menu-item-keybind">
+          {`${isMacintosh ? 'Cmd' : 'Ctrl'} + `}&apos;
+        </span>
       </>
     ),
   },
@@ -44,7 +49,7 @@ const outputItems: LibroSideToolbarMenuItemType[] = [
     label: (
       <>
         <span className="libro-menu-item-label">{l10n.t('隐藏 Output')}</span>
-        <span className="libro-menu-item-keybind">Cmd + O</span>
+        <span className="libro-menu-item-keybind">{`${isMacintosh ? 'Cmd' : 'Ctrl'} + O`}</span>
       </>
     ),
   },
@@ -53,7 +58,7 @@ const outputItems: LibroSideToolbarMenuItemType[] = [
     label: (
       <>
         <span className="libro-menu-item-label">{l10n.t('显示 Output')}</span>
-        <span className="libro-menu-item-keybind">Cmd + O</span>
+        <span className="libro-menu-item-keybind">{`${isMacintosh ? 'Cmd' : 'Ctrl'} + O`}</span>
       </>
     ),
   },
