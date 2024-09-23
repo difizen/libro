@@ -107,7 +107,7 @@ export const LibroCommonBetweenCellContent: BetweenCellProvider = forwardRef(
       });
 
     return (
-      <div className="libro-add-between-cell">
+      <div className="libro-add-between-cell" tabIndex={0}>
         <Popover
           content={<Menu items={items} />}
           trigger="click"
@@ -116,20 +116,25 @@ export const LibroCommonBetweenCellContent: BetweenCellProvider = forwardRef(
           overlayClassName="libro-add-cell-menu"
           destroyTooltipOnHide
           open={menuVisible}
+          arrow={false}
         >
           <div
             tabIndex={10}
             className="libro-add-between-cell-anchor"
             style={{
               position: 'absolute',
-              top: position.top + 5,
-              left: position.left + 5,
+              top: position.top - 10,
+              left: position.left + 0,
               width: 1,
               height: 1,
               zIndex: 1000,
             }}
             ref={anchorRef}
             onBlur={(e) => {
+              if (e.relatedTarget?.classList.contains('libro-add-between-cell')) {
+                return;
+              }
+
               if (!anchorRef.current?.contains(e.relatedTarget)) {
                 setMenuVisible(false);
               }
@@ -158,7 +163,6 @@ export const LibroCommonBetweenCellContent: BetweenCellProvider = forwardRef(
             setGutterVisible(true);
             setMenuVisible(true);
 
-            // TODO: 位置不准确
             setPosition({ top: e.nativeEvent.offsetY, left: e.nativeEvent.offsetX });
             anchorRef.current?.focus();
           }}
