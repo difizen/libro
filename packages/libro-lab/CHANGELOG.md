@@ -1,5 +1,23 @@
 # @difizen/libro-lab
 
+## 0.2.35
+
+### Patch Changes
+
+- [#228](https://github.com/difizen/libro/pull/228) [`395c3ac`](https://github.com/difizen/libro/commit/395c3accb43aa480d7761e7dd1d4252cd22a647b) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - 1.fix: keybind hints adapt to different os & improve styles 2.refactor: improve cell UI structure on input&output blank &execution tip 3. refactor(sql): edit inline for variable edition
+
+- Updated dependencies [[`395c3ac`](https://github.com/difizen/libro/commit/395c3accb43aa480d7761e7dd1d4252cd22a647b)]:
+  - @difizen/libro-sql-cell@0.2.35
+  - @difizen/libro-jupyter@0.2.35
+  - @difizen/libro-core@0.2.35
+  - @difizen/libro-cofine-editor-core@0.2.35
+  - @difizen/libro-kernel@0.2.35
+  - @difizen/libro-language-client@0.2.35
+  - @difizen/libro-prompt-cell@0.2.35
+  - @difizen/libro-terminal@0.2.35
+  - @difizen/libro-toc@0.2.35
+  - @difizen/libro-widget@0.2.35
+
 ## 0.2.34
 
 ### Patch Changes

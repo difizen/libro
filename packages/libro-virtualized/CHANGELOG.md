@@ -1,5 +1,11 @@
 # @difizen/libro-code-editor
 
+## 0.2.35
+
+### Patch Changes
+
+- [#228](https://github.com/difizen/libro/pull/228) [`395c3ac`](https://github.com/difizen/libro/commit/395c3accb43aa480d7761e7dd1d4252cd22a647b) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - 1.fix: keybind hints adapt to different os & improve styles 2.refactor: improve cell UI structure on input&output blank &execution tip 3. refactor(sql): edit inline for variable edition
+
 ## 0.2.34
 
 ### Patch Changes
