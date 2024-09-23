@@ -1,63 +1,65 @@
 # <img src="https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*i_UvSZTIo44AAAAAAAAAAAAADjOxAQ/original" width="30"> libro
 
+Language version: [English](./README.md) | [中文](./README_zh.md)
+
 [![Code: CI](https://github.com/difizen/libro/actions/workflows/ci.yml/badge.svg)](https://github.com/difizen/libro/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![download-image](https://img.shields.io/npm/dm/@difizen/libro-core.svg)](https://www.npmjs.com/package/@difizen/libro-core)
 
-⚡ libro：灵活定制、轻松集成的 Notebook 产品方案⚡
+⚡ libro：A Notebook Product Solution with Flexible Customization and Easy Integration.⚡
 
-- 提供完整的 Notebook 能力和丰富的周边功能，基于现有组合快速上手。
-- 提供内核级别的扩展能力，所有层次的内容均允许二次开发定制。
-- 定义大模型工作流，内置大模型交互和辅助开发能力。
+- Provides comprehensive Notebook functionality with a rich set of auxiliary tools, allowing for quick adoption based on existing setups.
+- Supports kernel-level extensibility, enabling customization and further development at all layers.
+- Defines workflows for large models, with built-in capabilities for model interaction and AI-powered assistance.
 
-💡 官网：https://libro.difizen.net/
+💡 Homepage：https://libro.difizen.net/
 
-如果你也喜欢这个项目，欢迎为我们点亮 🌟🌟🌟
+If you like this project, feel free to give us a star! 🌟🌟🌟
 
 ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u40VR6qi_E0AAAAAAAAAAAAADvyTAQ/original)
 
 ---
 
-## 目录
+## Table of Contents
 
-- [快速开始](#快速开始)
-- [快速集成](#快速集成)
-- [新特性](#新特性)
+- [Quick Start](#Quick-Start)
+- [Quick Integration](#Quick-Integration)
+- [New Features](#New-Features)
   - [prompt cell](#prompt-cell)
   - [sql cell](#sql-cell)
-- [架构](#架构)
-- [后续计划](#后续计划)
-- [更多](#更多)
-  - [提交issue](#提交issue)
-  - [贡献代码](#贡献代码)
-  - [贡献者](#贡献者)
-  - [联系我们](#联系我们)
+- [Technical Architecture](#Technical-Architecture)
+- [Future Plans](#Future-Plans)
+- [More](#More)
+  - [Reporting Issues](#Reporting-Issues)
+  - [Contributing](#Contributing)
+  - [Contributors](#Contributors)
+  - [Contact Us](#Contact-Us)
 
 ---
 
-## 快速开始
+## Quick Start
 
-您需要安装 [libro-server](https://github.com/difizen/libro-server) 来体验完整的 libro 能力。
+You need to install [libro-server](https://github.com/difizen/libro-server) to fully explore the capabilities of libro.
 
-使用 pip:
+use pip:
 
 ```bash
 pip install libro
 ```
 
-详情请阅读[快速开始](./apps/docs/docs/quickstart/index.md)。
+For more details, please refer to [quick start](./apps/docs/docs/quickstart/index.md)。
 
-## 快速集成
+## Quick Integration
 
-libro 是完全模块化的，您可以自由选择 libro 提供的原生能力模块，也可以选择增加自定义模块来完成二次开发，模块化研发方案您可以通过 [mana](https://github.com/difizen/mana) 来了解。
+libro is fully modular, giving you the flexibility to choose from its native capability modules or add custom ones for extended development. To learn more about the modular development approach, check out [mana](https://github.com/difizen/mana).
 
-您可以根据自己的需求组装不同的模块，构建自己的 notebook 产品。例如仅因为编辑器相关的模块继承到 IDE 或其他研发环境中，或者引入更多模块来组成 lab 形态的产品。
+You can assemble different modules based on your needs to build your own notebook product. For example, you might integrate only the editor-related modules into an IDE or other development environments, or bring in more modules to create a lab-style solution.
 
-您至少需要安装 jupyter-server 来支持 libro 运行，此时您可以使用 jupyter notebook 的能力，如果需要使用更多 libro 定义的能力，您需要安装 libro-server。
+You need to install at least jupyter-server to run libro, which will give you access to the features of Jupyter Notebook. If you want to leverage the additional capabilities defined by libro, you'll need to install libro-server.
 
-详情请阅读[快速集成](./apps/docs/docs/integration/index.md)。
+For more details, please refer to [quick integration](./apps/docs/docs/integration/index.md)。
 
-### 组件化消费
+### Component-Based Consumption
 
 ```typescript
 import { ManaComponents } from '@difizen/mana-app';
@@ -71,56 +73,58 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 </ManaComponents.Application>
 ```
 
-- Application： mana 上下文容器，建议放在应用的外层，多个 libro 示例可以共享上下文。
-- LibroComponent：libro 视图组件，可以将 libro 视图嵌入到任意位置。
+- Application： The mana context container, which is recommended to be placed at the outer layer of the application, allowing multiple libro instances to share the context.
+- LibroComponent：The libro view component, which allows you to embed the libro view anywhere.
 
-## 新特性
+## New Features
 
 ### Prompt Cell
 
-- 增强直接与大模型交互的能力，支持文本对话，多模态表达等。
-- 增强对于常见输出类型的交互能力，如在输出代码时给出复制、运行等操作能力。
+- Enhances the ability to interact directly with large models, supporting text conversations, multimodal expressions, and more.
+- Improves interaction capabilities for common output types, such as providing options to copy or run code when outputting it.
 
-  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*i33lTJzPBrwAAAAAAAAAAAAADvyTAQ/original)
+  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*HKMaTZtNuEgAAAAAAAAAAAAADvyTAQ/original)
 
 ### Sql Cell
 
-- 支持与 sql 的执行交互能力。
-- 连接 sql 数据库即可在 notebook 中写 sql 代码。
+- Supports interaction capabilities for executing SQL commands.
+- Connect to SQL databases to write SQL code directly in the notebook.
 
   ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u4bWT7pHcGMAAAAAAAAAAAAADvyTAQ/original)
 
-## 架构
+## Technical Architecture
 
-![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*_3k6SK7AISwAAAAAAAAAAAAADvyTAQ/original)
+![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*9O3OTpz03tcAAAAAAAAAAAAADvyTAQ/original)
 
-## 后续计划
+## Future Plans
 
-- SQL Cell 接入
-- Copilot 面板接入
-- Libro 在浏览器端执行
-- 版本 Diff 接入
+- SQL Cell Integration
+- AI Capability Integration
+- Support for Prompt Notebook
+- Execution of libro in the Browser
 
-## 更多
+## More
 
-### 提交issue
+### Reporting Issues
 
-😊 我们建议您使用[github issue](https://github.com/difizen/libro/issues) 提交您的疑问, 我们通常会在2日内回复。
+😊 We recommend submitting your questions through [github issue](https://github.com/difizen/libro/issues), and we typically respond within two days.
 
-### 贡献代码
+### Contributing
 
-🤝 请查阅 [CONTRIBUTING.md](./CONTRIBUTING.md)
+🤝 Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-### 贡献者
+### Contributors
 
-💪 感谢所有的贡献者
+💪 Thanks to all contributors
 
 <a href="https://github.com/difizen/libro/graphs/contributors">
   <img src="https://contributors-img.web.app/image?repo=difizen/libro" alt="List of Contributors"/>
 </a>
 
-### 联系我们
+### Contact Us
 
-🤗 加入我们的钉钉答疑群与我们联系。
+💬 [Chat with us on Discord](https://discord.gg/pK8X3guD)
+
+🤗 [Join our DingTalk Q&A group](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
 
 <img src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*oNhKSblcJfIAAAAAAAAAAAAADvyTAQ/original" width="30%">
