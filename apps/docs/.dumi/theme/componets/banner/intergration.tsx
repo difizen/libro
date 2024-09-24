@@ -13,7 +13,7 @@ export const IntergractionSection: FC = () => {
             <img
                 className="user-item-img"
                 style={{ padding: '8px 10px' }}
-                src="https://mdn.alipayobjects.com/huamei_yof94z/afts/img/A*gf6pQ6rQ9BcAAAAAAAAAAAAADrbYAQ/original"
+                src="/secrete_flow.png"
               ></img>
           </a>
         </Col>
@@ -22,7 +22,7 @@ export const IntergractionSection: FC = () => {
             <img
               className="user-item-img"
               style={{ padding: '0 16px' }}
-              src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*9i21QahlJQsAAAAAAAAAAAAADvyTAQ/original"
+              src="/zhu_logo.png"
             ></img>
           </a>
         </Col>
@@ -31,7 +31,7 @@ export const IntergractionSection: FC = () => {
 
             <img
               className="user-item-img"
-              src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*6sSeQYF68WAAAAAAAAAAAAAADvyTAQ/original"
+              src="/cloudlab.png"
             ></img>
           </div>
         </Col>
@@ -39,7 +39,7 @@ export const IntergractionSection: FC = () => {
           <a className="user-item" href="https://opensumi.com" target="_blank" rel="noreferrer">
             <img
               className="user-item-img user-item-img-sm"
-              src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*7HyaQIPL1KYAAAAAAAAAAAAADvyTAQ/original"
+              src="/opensumi.png"
             ></img>
           </a>
         </Col>

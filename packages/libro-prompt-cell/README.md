@@ -1,6 +1,6 @@
 # libro-prompt-cell
 
-![image](https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*x0SxT5lDETYAAAAAAAAAAAAADjOxAQ/original)
+![image](../../apps/docs/public/prompt_em.jpeg)
 
 - [x] 内置 openai 交互能力
 - [x] 支持在 prompt 模版中使用上下文变量
