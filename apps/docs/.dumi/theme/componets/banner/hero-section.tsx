@@ -34,14 +34,14 @@ export const HeroSection: FC = () => {
         </div>
         <img
           alt="app screenshot"
-          src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u40VR6qi_E0AAAAAAAAAAAAADvyTAQ/original"
+          src="/libro.png"
           width={2432}
           height={1442}
           className="mt-8 rounded-md shadow-2xl border sm:mt-12 block dark:hidden border-none"
         />
         <img
           alt="app screenshot"
-          src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*ibAkSa7cRI8AAAAAAAAAAAAADvyTAQ/original"
+          src="/libro.png"
           width={2432}
           height={1442}
           className="mt-8 rounded-md shadow-2xl border sm:mt-12 hidden dark:block border-none"

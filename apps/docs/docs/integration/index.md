@@ -55,7 +55,7 @@ export default defineConfig({
 ### 集成 Lab 研发环境
 
 <img
-    src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u40VR6qi_E0AAAAAAAAAAAAADvyTAQ/original"
+    src="../../public/libro.png"
     width="1200"
 />
 
@@ -120,7 +120,7 @@ export default App;
 ### 集成 Notebook 编辑器
 
 <img
-    src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*QG4GRKex6VUAAAAAAAAAAAAADvyTAQ/original"
+    src="../../public/libro_editor.png"
     width="1000"
 />
 
