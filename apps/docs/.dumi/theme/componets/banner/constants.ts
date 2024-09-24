@@ -11,7 +11,7 @@ export const totalfeatures: FeatureProps[] = [
     description:
       'Build stunning landing pages in minutes with our intuitive drag-and-drop interface and pre-designed components.',
     imageUrl:
-      'https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*_ploSquV08YAAAAAAAAAAAAADvyTAQ/original',
+      '/zhu.png',
     isImageLeft: true,
   },
 ];
@@ -22,7 +22,7 @@ export const firstfeatures: FeatureProps[] = [
     description:
       'SecretNote 是专为隐语开发者打造的高级工具套件，支持多节点代码执行和文件管理，同时提供运行状态追踪功能，能较大程度提升开发者的效率和工作体验。',
     imageUrl:
-      'https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*_a49Ta0AfJQAAAAAAAAAAAAADvyTAQ/original',
+      '/scretenote.png',
     isImageLeft: true,
   },
   {
@@ -30,14 +30,14 @@ export const firstfeatures: FeatureProps[] = [
     description:
       '在量化分析师最舒适习惯的编码环境中，通过 Prompt Cell 丝滑引入大模型生态与定制智能体。',
     imageUrl:
-      'https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*oWZYQaZ6xTQAAAAAAAAAAAAADvyTAQ/original',
+      '/zhu.png',
     isImageLeft: false,
   },
   {
     title: '大数据 SQL 交互增强',
     description: '提供强大的内核定制能力，支持 ODPS SQL 等执行环境',
     imageUrl:
-      'https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*cfwDT5f45foAAAAAAAAAAAAADvyTAQ/original',
+      '/sql_ide.png',
     isImageLeft: true,
   },
 ];
@@ -47,21 +47,21 @@ export const secondfeatures: FeatureProps[] = [
     title: 'AI Copilot',
     description: '支持智能助手 AI 对话功能',
     imageUrl:
-      'https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*IlvZQ5Dau-YAAAAAAAAAAAAADvyTAQ/original',
+      '/copilot.png',
     isImageLeft: true,
   },
   {
     title: 'Notebook 即 App',
     description: '基于 Notebook 结合交互控件生成动态报告',
     imageUrl:
-      'https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*RBPVQb-DcRoAAAAAAAAAAAAADvyTAQ/original',
+      '/app.png',
     isImageLeft: false,
   },
   {
     title: '版本 Diff 能力',
     description: '支持 Cell 级别的版本 Diff 能力，方便更好的进行版本管理、CR。',
     imageUrl:
-      'https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*HgeISoCuoFsAAAAAAAAAAAAADvyTAQ/original',
+      '/diff.png',
     isImageLeft: true,
   },
   {
@@ -69,7 +69,7 @@ export const secondfeatures: FeatureProps[] = [
     description:
       'Libro 拥有卓越的编辑体验，尤其针对 Python 代码，提供更优异的代码补全、代码提示、代码格式化和定义跳转等功能。',
     imageUrl:
-      'https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*Tj9SQ4Zn61IAAAAAAAAAAAAADvyTAQ/original',
+      '/tip.png',
     isImageLeft: false,
   },
 ];

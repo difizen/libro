@@ -21,7 +21,6 @@ const Footer: React.FC = () => {
               {themeConfig.logo && (
                 <Link to={themeConfig['link']}>
                   <img className="difizen-dumi-header-logo-img" src={themeConfig.logo} />
-                  <span>{themeConfig.name}</span>
                 </Link>
               )}
             </div>

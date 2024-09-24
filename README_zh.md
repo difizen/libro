@@ -1,4 +1,4 @@
-# <img src="https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*i_UvSZTIo44AAAAAAAAAAAAADjOxAQ/original" width="30"> libro
+# <div style='display: flex'><img src="./apps/docs/public/logo.svg" width="30" style='margin-right: 6px'><span> libro</span></div>
 
 语言版本: [English](./README.md) | [中文](./README_zh.md)
 
@@ -16,7 +16,7 @@
 
 如果你也喜欢这个项目，欢迎为我们点亮 🌟🌟🌟
 
-![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u40VR6qi_E0AAAAAAAAAAAAADvyTAQ/original)
+![image](./apps/docs/public/libro.png)
 
 ---
 
@@ -83,18 +83,18 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 - 增强直接与大模型交互的能力，支持文本对话，多模态表达等。
 - 增强对于常见输出类型的交互能力，如在输出代码时给出复制、运行等操作能力。
 
-  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*TX99T4HA5-cAAAAAAAAAAAAADvyTAQ/original)
+  ![image](./apps/docs/public/prompt_cell_zh.png)
 
 ### Sql Cell
 
 - 支持与 sql 的执行交互能力。
 - 连接 sql 数据库即可在 notebook 中写 sql 代码。
 
-  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u4bWT7pHcGMAAAAAAAAAAAAADvyTAQ/original)
+  ![image](./apps/docs/public/sql_cell.png)
 
 ## 架构
 
-![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*8trZSrPu19sAAAAAAAAAAAAADvyTAQ/original)
+![image](./apps/docs/public/technical%20_architecture_zh.png)
 
 ## 后续计划
 
@@ -127,4 +127,4 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 🤗 [加入钉钉答疑群](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
 
-<img src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*oNhKSblcJfIAAAAAAAAAAAAADvyTAQ/original" width="30%">
+<img src="./apps/docs/public/dingding.jpg" width="30%">
