@@ -1,4 +1,4 @@
-# <img src="https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*i_UvSZTIo44AAAAAAAAAAAAADjOxAQ/original" width="30"> libro
+# <div style='display: flex'><img src="./apps/docs/public/libro.svg" width="30" style='margin-right: 6px'><span> libro</span></div>
 
 Language version: [English](./README.md) | [中文](./README_zh.md)
 
@@ -16,7 +16,7 @@ Language version: [English](./README.md) | [中文](./README_zh.md)
 
 If you like this project, feel free to give us a star! 🌟🌟🌟
 
-![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u40VR6qi_E0AAAAAAAAAAAAADvyTAQ/original)
+![image](./apps/docs/public/libro.png)
 
 ---
 
@@ -83,18 +83,18 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 - Enhances the ability to interact directly with large models, supporting text conversations, multimodal expressions, and more.
 - Improves interaction capabilities for common output types, such as providing options to copy or run code when outputting it.
 
-  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u8jsRJTDhiwAAAAAAAAAAAAADvyTAQ/original)
+  ![image](./apps/docs/public/prompt_cell.png)
 
 ### Sql Cell
 
 - Supports interaction capabilities for executing SQL commands.
 - Connect to SQL databases to write SQL code directly in the notebook.
 
-  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u4bWT7pHcGMAAAAAAAAAAAAADvyTAQ/original)
+  ![image](./apps/docs/public/sql_cell.png)
 
 ## Technical Architecture
 
-![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*9O3OTpz03tcAAAAAAAAAAAAADvyTAQ/original)
+![image](./apps/docs/public/technical%20_architecture.png)
 
 ## Future Plans
 
@@ -127,4 +127,4 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 🤗 [Join our DingTalk Q&A group](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
 
-<img src="https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*oNhKSblcJfIAAAAAAAAAAAAADvyTAQ/original" width="30%">
+<img src="./apps/docs/public/dingding.jpg" width="30%">

@@ -9,6 +9,8 @@ import {
 } from '@difizen/mana-app';
 import { BaseView, transient, view } from '@difizen/mana-app';
 import React from 'react';
+
+import { Empty } from './empty-icon.js';
 import './index.less';
 
 import type { EditorOption } from './protocol.js';
@@ -17,11 +19,7 @@ import { LibroDefaultViewerFactory } from './protocol.js';
 const DefaultViewerComponent: React.FC = () => {
   return (
     <div className="libro-lab-default-viewer">
-      <img
-        src="https://mdn.alipayobjects.com/huamei_xt20ge/afts/img/A*BcWvQL6qB0cAAAAAAAAAAAAADiuUAQ/original"
-        width={322}
-        height={228}
-      ></img>
+      <Empty></Empty>
       <div className="libro-lab-default-viewer-text">当前文件类型暂不支持查看</div>
     </div>
   );

@@ -14,7 +14,7 @@ export default defineConfig({
     hd: { rules: [] },
     name: 'libro',
     link: '/',
-    logo: '/libro.svg',
+    logo: '/logo.png',
     nav: nav,
     banner: {
       title: 'libro',
@@ -76,9 +76,7 @@ export default defineConfig({
     ],
     gitRepo: { owner: 'difizen', name: 'libro' },
   },
-  favicons: [
-    'https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*1hb8TrGGnrMAAAAAAAAAAAAADvyTAQ/original',
-  ],
+  favicons: ['/libro.svg'],
   title: 'libro',
   metas: [
     { name: 'description', content: '灵活定制、轻松集成的 Notebook 产品方案' },
@@ -89,8 +87,7 @@ export default defineConfig({
     },
     {
       property: 'og:image',
-      content:
-        'https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*1hb8TrGGnrMAAAAAAAAAAAAADvyTAQ/original',
+      content: '/libro.svg',
     },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: 'libro' },
@@ -100,8 +97,7 @@ export default defineConfig({
     },
     {
       name: 'twitter:image',
-      content:
-        'https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*1hb8TrGGnrMAAAAAAAAAAAAADvyTAQ/original',
+      content: '/libro.svg',
     },
   ],
   plugins: ['@difizen/umi-plugin-mana', './dumi-plugin-alias', './dumi-plugin-deploy'],
