@@ -83,7 +83,7 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 - 增强直接与大模型交互的能力，支持文本对话，多模态表达等。
 - 增强对于常见输出类型的交互能力，如在输出代码时给出复制、运行等操作能力。
 
-  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*0N2pSra828QAAAAAAAAAAAAADvyTAQ/original)
+  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*TX99T4HA5-cAAAAAAAAAAAAADvyTAQ/original)
 
 ### Sql Cell
 

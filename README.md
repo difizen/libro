@@ -83,7 +83,7 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 - Enhances the ability to interact directly with large models, supporting text conversations, multimodal expressions, and more.
 - Improves interaction capabilities for common output types, such as providing options to copy or run code when outputting it.
 
-  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*HKMaTZtNuEgAAAAAAAAAAAAADvyTAQ/original)
+  ![image](https://mdn.alipayobjects.com/huamei_zabatk/afts/img/A*u8jsRJTDhiwAAAAAAAAAAAAADvyTAQ/original)
 
 ### Sql Cell
 
