@@ -1,4 +1,5 @@
 import { FileView, LibroJupyterModule } from '@difizen/libro-jupyter';
+import { langBundles } from '@difizen/libro-l10n';
 import { LibroPromptCellModule } from '@difizen/libro-prompt-cell';
 import { LibroSqlCellModule } from '@difizen/libro-sql-cell';
 import { TerminalModule } from '@difizen/libro-terminal';
@@ -10,6 +11,7 @@ import {
   createViewPreference,
   HeaderArea,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 
 import { LibroLabHeaderMenuModule } from './command/module.js';
 import { LabConfigAppContribution } from './config/config-contribution.js';
@@ -20,6 +22,7 @@ import { ImageViewerModule } from './image-viewer/index.js';
 import { LibroKernelAndTerminalPanelModule } from './kernel-and-terminal-panel/module.js';
 import { LibroLabApp } from './lab-app.js';
 import { LabColorContribution } from './lab-color-registry.js';
+import { LangSwitcherView } from './lang-switcher/index.js';
 import { ContentBottomTabView } from './layout/content-bottom-tab-view.js';
 import {
   LibroLabLayoutModule,
@@ -34,6 +37,9 @@ import { EntryPointView } from './welcome/entry-point-view.js';
 import { WelcomeView } from './welcome/index.js';
 
 export const LibroLabModule = ManaModule.create()
+  .preload(() => {
+    return Promise.resolve(l10n.loadLangBundles(langBundles));
+  })
   .register(
     LibroLabApp,
     LibroLabLayoutView,
@@ -41,11 +47,20 @@ export const LibroLabModule = ManaModule.create()
     LabConfigAppContribution,
     LibroLabSideTabView,
     LabColorContribution,
+    LangSwitcherView,
     createViewPreference({
       view: GithubLinkView,
       slot: HeaderArea.right,
       openOptions: {
         order: 'github',
+      },
+      autoCreate: true,
+    }),
+    createViewPreference({
+      view: LangSwitcherView,
+      slot: HeaderArea.right,
+      openOptions: {
+        order: 'lang',
       },
       autoCreate: true,
     }),
