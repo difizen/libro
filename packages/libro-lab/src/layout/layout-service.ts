@@ -36,6 +36,9 @@ export class LayoutService {
   serverSatus: StatusType = 'loading';
 
   @prop()
+  refreshKey: string;
+
+  @prop()
   visibilityMap: VisibilityMap = {
     [LibroLabLayoutSlots.header]: true,
     [LibroLabLayoutSlots.container]: true,
@@ -46,6 +49,10 @@ export class LayoutService {
     [LibroLabLayoutSlots.contentBottom]: false,
     [LibroLabLayoutSlots.alert]: true,
   };
+
+  refresh() {
+    this.refreshKey = new Date().getTime().toString();
+  }
 
   isAreaVisible(slot: LibroLabLayoutSlotsType): boolean {
     return this.visibilityMap[slot];

@@ -998,7 +998,9 @@ export class LibroE2Editor implements IEditor {
     if (this.disposed) {
       return;
     }
-    this.placeholder.dispose();
+    if (this.placeholder?.dispose) {
+      this.placeholder.dispose();
+    }
     this.disposeResizeObserver();
     this.toDispose.dispose();
     this._isDisposed = true;
