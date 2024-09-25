@@ -15,7 +15,7 @@ export const LibroLabLayoutComponent = forwardRef(function LibroLabLayoutCompone
   const layoutService = useInject(LayoutService);
 
   return (
-    <div className="libro-lab-layout">
+    <div className="libro-lab-layout" key={layoutService.refreshKey}>
       <BoxPanel direction="top-to-bottom">
         {layoutService.isAreaVisible(LibroLabLayoutSlots.header) && (
           <BoxPanel.Pane className="libro-lab-layout-header">
