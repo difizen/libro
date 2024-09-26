@@ -11,7 +11,7 @@ import {
   createViewPreference,
   HeaderArea,
 } from '@difizen/mana-app';
-import { l10n, L10nLang } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/mana-l10n';
 
 import { LibroLabHeaderMenuModule } from './command/module.js';
 import { LabConfigAppContribution } from './config/config-contribution.js';
@@ -39,7 +39,6 @@ import { WelcomeView } from './welcome/index.js';
 export const LibroLabModule = ManaModule.create()
   .preload(() => {
     l10n.loadLangBundles(langBundles);
-    l10n.changeLang(L10nLang.enUS);
 
     return Promise.resolve();
   })
