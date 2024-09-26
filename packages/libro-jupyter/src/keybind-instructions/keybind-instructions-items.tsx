@@ -49,7 +49,7 @@ export class LibroKeybindItems {
     },
     {
       key: '2',
-      actionDescription: l10n.t('运行选中cell'),
+      actionDescription: l10n.t('运行选中 Cell'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
@@ -59,7 +59,7 @@ export class LibroKeybindItems {
     },
     {
       key: '3',
-      actionDescription: l10n.t('运行并选择下一个cell'),
+      actionDescription: l10n.t('运行并选择下一个 Cell'),
       keybind: (
         <>
           <Tag>Shift</Tag>
@@ -69,7 +69,7 @@ export class LibroKeybindItems {
     },
     {
       key: '4',
-      actionDescription: l10n.t('运行并新增cell'),
+      actionDescription: l10n.t('运行并新增 Cell'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Option' : 'Alt'}</Tag>
@@ -79,7 +79,7 @@ export class LibroKeybindItems {
     },
     {
       key: '5',
-      actionDescription: l10n.t('隐藏Code'),
+      actionDescription: l10n.t('隐藏 Code'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
@@ -89,7 +89,7 @@ export class LibroKeybindItems {
     },
     {
       key: '6',
-      actionDescription: l10n.t('隐藏Output'),
+      actionDescription: l10n.t('隐藏 Output'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
@@ -99,7 +99,7 @@ export class LibroKeybindItems {
     },
     {
       key: '7',
-      actionDescription: l10n.t('切分cell'),
+      actionDescription: l10n.t('切分 Cell'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
@@ -287,7 +287,7 @@ export class LibroKeybindItems {
     },
     {
       key: '2',
-      actionDescription: l10n.t('运行选中cell'),
+      actionDescription: l10n.t('运行选中 Cell'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
@@ -297,7 +297,7 @@ export class LibroKeybindItems {
     },
     {
       key: '3',
-      actionDescription: l10n.t('运行并选择下一个cell'),
+      actionDescription: l10n.t('运行并选择下一个 Cell'),
       keybind: (
         <>
           <Tag>Shift</Tag>
@@ -307,7 +307,7 @@ export class LibroKeybindItems {
     },
     {
       key: '4',
-      actionDescription: l10n.t('运行并新增cell'),
+      actionDescription: l10n.t('运行并新增 Cell'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Option' : 'Alt'}</Tag>
@@ -317,7 +317,7 @@ export class LibroKeybindItems {
     },
     {
       key: '5',
-      actionDescription: l10n.t('选中上个cell'),
+      actionDescription: l10n.t('选中上个 Cell'),
       keybind: (
         <>
           <Tag>Up</Tag>/<Tag>K</Tag>
@@ -326,7 +326,7 @@ export class LibroKeybindItems {
     },
     {
       key: '6',
-      actionDescription: l10n.t('隐藏Code'),
+      actionDescription: l10n.t('隐藏 Code'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
@@ -336,7 +336,7 @@ export class LibroKeybindItems {
     },
     {
       key: '7',
-      actionDescription: l10n.t('隐藏Output'),
+      actionDescription: l10n.t('隐藏 Output'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
@@ -346,7 +346,7 @@ export class LibroKeybindItems {
     },
     {
       key: '8',
-      actionDescription: l10n.t('选中下个cell'),
+      actionDescription: l10n.t('选中下个 Cell'),
       keybind: (
         <>
           <Tag>Down</Tag>/<Tag>J</Tag>
@@ -355,7 +355,7 @@ export class LibroKeybindItems {
     },
     {
       key: '9',
-      actionDescription: l10n.t('向上新增cell'),
+      actionDescription: l10n.t('向上新增 Cell'),
       keybind: (
         <>
           <Tag>A</Tag>
@@ -364,7 +364,7 @@ export class LibroKeybindItems {
     },
     {
       key: '10',
-      actionDescription: l10n.t('向下新增cell'),
+      actionDescription: l10n.t('向下新增 Cell'),
       keybind: (
         <>
           <Tag>B</Tag>
@@ -373,7 +373,7 @@ export class LibroKeybindItems {
     },
     {
       key: '11',
-      actionDescription: l10n.t('删除选中cell'),
+      actionDescription: l10n.t('删除选中 Cell'),
       keybind: (
         <>
           <Tag>D D</Tag>
@@ -382,7 +382,7 @@ export class LibroKeybindItems {
     },
     {
       key: '12',
-      actionDescription: l10n.t('复制cell'),
+      actionDescription: l10n.t('复制 Cell'),
       keybind: (
         <>
           <Tag>C</Tag>
@@ -391,7 +391,7 @@ export class LibroKeybindItems {
     },
     {
       key: '13',
-      actionDescription: l10n.t('剪切cell'),
+      actionDescription: l10n.t('剪切 Cell'),
       keybind: (
         <>
           <Tag>X</Tag>
@@ -400,7 +400,7 @@ export class LibroKeybindItems {
     },
     {
       key: '14',
-      actionDescription: l10n.t('粘贴cell'),
+      actionDescription: l10n.t('粘贴 Cell'),
       keybind: (
         <>
           <Tag>V</Tag>
@@ -409,7 +409,7 @@ export class LibroKeybindItems {
     },
     {
       key: '15',
-      actionDescription: l10n.t('上移cell'),
+      actionDescription: l10n.t('上移 Cell'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
@@ -420,7 +420,7 @@ export class LibroKeybindItems {
     },
     {
       key: '16',
-      actionDescription: l10n.t('下移cell'),
+      actionDescription: l10n.t('下移 Cell'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
@@ -431,7 +431,7 @@ export class LibroKeybindItems {
     },
     {
       key: '17',
-      actionDescription: l10n.t('合并选中cell'),
+      actionDescription: l10n.t('合并选中 Cell'),
       keybind: (
         <>
           <Tag>Shift</Tag>
@@ -441,7 +441,7 @@ export class LibroKeybindItems {
     },
     {
       key: '18',
-      actionDescription: l10n.t('向下合并cell'),
+      actionDescription: l10n.t('向下合并 Cell'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
@@ -452,7 +452,7 @@ export class LibroKeybindItems {
     },
     {
       key: '19',
-      actionDescription: l10n.t('向上合并cell'),
+      actionDescription: l10n.t('向上合并 Cell'),
       keybind: (
         <>
           <Tag>{isMacintosh ? 'Cmd' : 'Ctrl'}</Tag>
@@ -481,7 +481,7 @@ export class LibroKeybindItems {
     },
     {
       key: '22',
-      actionDescription: l10n.t('转为Code Cell'),
+      actionDescription: l10n.t('转为 Code Cell'),
       keybind: (
         <>
           <Tag>Y</Tag>
@@ -490,7 +490,7 @@ export class LibroKeybindItems {
     },
     {
       key: '23',
-      actionDescription: l10n.t('转为Markdown Cell'),
+      actionDescription: l10n.t('转为 Markdown Cell'),
       keybind: (
         <>
           <Tag>M</Tag>
@@ -553,7 +553,7 @@ export class LibroKeybindItems {
     },
     {
       key: '30',
-      actionDescription: l10n.t('向上多选Cell'),
+      actionDescription: l10n.t('向上多选 Cell'),
       keybind: (
         <>
           <Tag>Shift</Tag>
@@ -564,7 +564,7 @@ export class LibroKeybindItems {
     },
     {
       key: '31',
-      actionDescription: l10n.t('向下多选Cell'),
+      actionDescription: l10n.t('向下多选 Cell'),
       keybind: (
         <>
           <Tag>Shift</Tag>
@@ -585,7 +585,7 @@ export class LibroKeybindItems {
     },
     {
       key: '33',
-      actionDescription: l10n.t('选中当前及之后cell'),
+      actionDescription: l10n.t('选中当前及之后 Cell'),
       keybind: (
         <>
           <Tag>Shift</Tag>

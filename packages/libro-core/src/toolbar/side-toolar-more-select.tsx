@@ -18,88 +18,87 @@ import { MoreOutlined } from '../material-from-designer.js';
 
 import type { LibroToolbarArags } from './libro-toolbar-protocol.js';
 
-const codeItems: LibroSideToolbarMenuItemType[] = [
-  {
-    id: NotebookCommands['HideCellCode'].id,
-    label: (
-      <>
-        <span className="libro-menu-item-label">{l10n.t('隐藏 Code')}</span>
-        <span className="libro-menu-item-keybind">
-          {`${isMacintosh ? 'Cmd' : 'Ctrl'} + `}&apos;
-        </span>
-      </>
-    ),
-  },
-  {
-    id: NotebookCommands['ShowCellCode'].id,
-    label: (
-      <>
-        <span className="libro-menu-item-label">{l10n.t('显示 Code')}</span>
-        <span className="libro-menu-item-keybind">
-          {`${isMacintosh ? 'Cmd' : 'Ctrl'} + `}&apos;
-        </span>
-      </>
-    ),
-  },
-];
-
-const outputItems: LibroSideToolbarMenuItemType[] = [
-  {
-    id: NotebookCommands['HideCellOutputs'].id,
-    label: (
-      <>
-        <span className="libro-menu-item-label">{l10n.t('隐藏 Output')}</span>
-        <span className="libro-menu-item-keybind">{`${isMacintosh ? 'Cmd' : 'Ctrl'} + O`}</span>
-      </>
-    ),
-  },
-  {
-    id: NotebookCommands['ShowCellOutputs'].id,
-    label: (
-      <>
-        <span className="libro-menu-item-label">{l10n.t('显示 Output')}</span>
-        <span className="libro-menu-item-keybind">{`${isMacintosh ? 'Cmd' : 'Ctrl'} + O`}</span>
-      </>
-    ),
-  },
-];
-
-const moreItems: LibroSideToolbarMenuItemType[] = [
-  {
-    id: NotebookCommands['CopyCell'].id,
-    label: (
-      <>
-        <span className="libro-menu-item-label">{l10n.t('复制')}</span>
-        <span className="libro-menu-item-keybind">C</span>
-      </>
-    ),
-  },
-  {
-    id: NotebookCommands['CutCell'].id,
-    label: (
-      <>
-        <span className="libro-menu-item-label">{l10n.t('剪切')}</span>
-        <span className="libro-menu-item-keybind">X</span>
-      </>
-    ),
-  },
-  {
-    id: NotebookCommands['PasteCellBelow'].id,
-    label: (
-      <>
-        <span className="libro-menu-item-label">{l10n.t('粘贴')}</span>
-        <span className="libro-menu-item-keybind">V</span>
-      </>
-    ),
-  },
-];
-
 export const LibroSideToolbarMoreMenu: React.FC = () => {
   const command = useInject(CommandRegistry);
   const toolbar = useInject<Toolbar>(ToolbarInstance);
   const data = toolbar.currentArgs as LibroToolbarArags;
   const args = getOrigin(data) || [];
   const cell = useObserve(args[0]);
+  const codeItems: LibroSideToolbarMenuItemType[] = [
+    {
+      id: NotebookCommands['HideCellCode'].id,
+      label: (
+        <>
+          <span className="libro-menu-item-label">{l10n.t('隐藏 Code')}</span>
+          <span className="libro-menu-item-keybind">
+            {`${isMacintosh ? 'Cmd' : 'Ctrl'} + `}&apos;
+          </span>
+        </>
+      ),
+    },
+    {
+      id: NotebookCommands['ShowCellCode'].id,
+      label: (
+        <>
+          <span className="libro-menu-item-label">{l10n.t('显示 Code')}</span>
+          <span className="libro-menu-item-keybind">
+            {`${isMacintosh ? 'Cmd' : 'Ctrl'} + `}&apos;
+          </span>
+        </>
+      ),
+    },
+  ];
+
+  const outputItems: LibroSideToolbarMenuItemType[] = [
+    {
+      id: NotebookCommands['HideCellOutputs'].id,
+      label: (
+        <>
+          <span className="libro-menu-item-label">{l10n.t('隐藏 Output')}</span>
+          <span className="libro-menu-item-keybind">{`${isMacintosh ? 'Cmd' : 'Ctrl'} + O`}</span>
+        </>
+      ),
+    },
+    {
+      id: NotebookCommands['ShowCellOutputs'].id,
+      label: (
+        <>
+          <span className="libro-menu-item-label">{l10n.t('显示 Output')}</span>
+          <span className="libro-menu-item-keybind">{`${isMacintosh ? 'Cmd' : 'Ctrl'} + O`}</span>
+        </>
+      ),
+    },
+  ];
+
+  const moreItems: LibroSideToolbarMenuItemType[] = [
+    {
+      id: NotebookCommands['CopyCell'].id,
+      label: (
+        <>
+          <span className="libro-menu-item-label">{l10n.t('复制')}</span>
+          <span className="libro-menu-item-keybind">C</span>
+        </>
+      ),
+    },
+    {
+      id: NotebookCommands['CutCell'].id,
+      label: (
+        <>
+          <span className="libro-menu-item-label">{l10n.t('剪切')}</span>
+          <span className="libro-menu-item-keybind">X</span>
+        </>
+      ),
+    },
+    {
+      id: NotebookCommands['PasteCellBelow'].id,
+      label: (
+        <>
+          <span className="libro-menu-item-label">{l10n.t('粘贴')}</span>
+          <span className="libro-menu-item-keybind">V</span>
+        </>
+      ),
+    },
+  ];
   if (!cell) {
     return null;
   }

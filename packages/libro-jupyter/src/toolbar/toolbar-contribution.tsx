@@ -54,7 +54,7 @@ export class LibroJupyterToolbarContribution implements ToolbarContribution {
       order: 'b',
       tooltip: () => (
         <div className="libro-tooltip">
-          <span className="libro-tooltip-text">{l10n.t('定位正在执行的Cell')}</span>
+          <span className="libro-tooltip-text">{l10n.t('定位正在运行的 Cell')}</span>
         </div>
       ),
     });

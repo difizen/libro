@@ -365,16 +365,16 @@ export const NotebookCommands: Record<
   },
   RestartAndRunToSelected: {
     id: 'notebook:restart-and-run-to-selected',
-    label: l10n.t('Restart and Run up to Selected Cell…'),
+    label: l10n.t('Restart and Run up to Selected Cell'),
   },
   RestartClearOutput: {
     id: 'notebook:restart-clear-output',
-    label: l10n.t('Restart and Clear Outputs of All Cells…'),
+    label: l10n.t('Restart and Clear Outputs of All Cells'),
     icon: Reload,
   },
   RestartRunAll: {
     id: 'notebook:restart-run-all',
-    label: l10n.t('Restart and Run All Cells…'),
+    label: l10n.t('Restart and Run All Cells'),
   },
   RunAllAbove: {
     id: 'notebook:run-all-above',
