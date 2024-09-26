@@ -16,6 +16,7 @@ import {
   ViewManager,
 } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Col, Row } from 'antd';
 import { forwardRef, useEffect, useState } from 'react';
 
@@ -43,8 +44,10 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
 
   return (
     <div className="libro-lab-entry-point">
-      <div className="libro-lab-entry-point-title">请选择你要创建的文件类型：</div>
-      <div className="libro-lab-entry-point-item-title">文件</div>
+      <div className="libro-lab-entry-point-title">
+        {l10n.t('请选择你要创建的文件类型：')}
+      </div>
+      <div className="libro-lab-entry-point-item-title">{l10n.t('文件')}</div>
       <Row>
         <Col
           className="gutter-row"
@@ -110,11 +113,11 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
             }}
           >
             <MoreIcon />
-            <span className="libro-lab-entry-point-item-text">其他</span>
+            <span className="libro-lab-entry-point-item-text">{l10n.t('其他')}</span>
           </div>
         </Col>
       </Row>
-      <div className="libro-lab-entry-point-item-title">其他</div>
+      <div className="libro-lab-entry-point-item-title">{l10n.t('其他')}</div>
       <Row>
         <Col
           className="gutter-row"
@@ -132,40 +135,40 @@ export const EntryPointComponent = forwardRef(function EntryPointComponent() {
         </Col>
       </Row>
       {/* <div className="libro-lab-entry-point-item-title">最近使用</div>
-      <Row>
-        <Col
-          className="gutter-row"
-          style={{ paddingLeft: 'unset', paddingRight: '24px' }}
-        >
-          <div className="libro-lab-entry-point-item-recent">
-            <span className="libro-lab-entry-point-item-recent-icon">📋 </span>
-            <span className="libro-lab-entry-point-item-recent-text">
-              这是一个文件名
-            </span>
-          </div>
-        </Col>
-      </Row> */}
+        <Row>
+         <Col
+           className="gutter-row"
+           style={{ paddingLeft: 'unset', paddingRight: '24px' }}
+         >
+           <div className="libro-lab-entry-point-item-recent">
+             <span className="libro-lab-entry-point-item-recent-icon">📋 </span>
+             <span className="libro-lab-entry-point-item-recent-text">
+               这是一个文件名
+             </span>
+           </div>
+         </Col>
+        </Row> */}
       {/* <div className="libro-lab-entry-point-item-title">系统设置</div>
-      <Row>
-        <Col
-          className="gutter-row"
-          style={{ paddingLeft: 'unset', paddingRight: '24px' }}
-        >
-          <div className="libro-lab-entry-point-item-config">
-            <PreferenceIcon></PreferenceIcon>
-            <span className="libro-lab-entry-point-item-config-text">偏好设置</span>
-          </div>
-        </Col>
-        <Col
-          className="gutter-row"
-          style={{ paddingLeft: 'unset', paddingRight: '24px' }}
-        >
-          <div className="libro-lab-entry-point-item-config">
-            <KeybindIcon></KeybindIcon>
-            <span className="libro-lab-entry-point-item-config-text">快捷键设置</span>
-          </div>
-        </Col>
-      </Row> */}
+        <Row>
+         <Col
+           className="gutter-row"
+           style={{ paddingLeft: 'unset', paddingRight: '24px' }}
+         >
+           <div className="libro-lab-entry-point-item-config">
+             <PreferenceIcon></PreferenceIcon>
+             <span className="libro-lab-entry-point-item-config-text">偏好设置</span>
+           </div>
+         </Col>
+         <Col
+           className="gutter-row"
+           style={{ paddingLeft: 'unset', paddingRight: '24px' }}
+         >
+           <div className="libro-lab-entry-point-item-config">
+             <KeybindIcon></KeybindIcon>
+             <span className="libro-lab-entry-point-item-config-text">快捷键设置</span>
+           </div>
+         </Col>
+        </Row> */}
     </div>
   );
 });

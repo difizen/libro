@@ -1,4 +1,5 @@
 import { EditorView } from '@codemirror/view';
+import { l10n } from '@difizen/mana-l10n';
 
 export const enum Info {
   Margin = 30,
@@ -97,16 +98,16 @@ export const baseTheme = EditorView.baseTheme({
     '&:after': { content: "'○'" },
   },
   '.cm-completionIcon-interface': {
-    '&:after': { content: "'◌'" },
+    '&:after': { content: l10n.t("'◌'") },
   },
   '.cm-completionIcon-variable': {
-    '&:after': { content: "'𝑥'" },
+    '&:after': { content: l10n.t("'𝑥'") },
   },
   '.cm-completionIcon-constant': {
-    '&:after': { content: "'𝐶'" },
+    '&:after': { content: l10n.t("'𝐶'") },
   },
   '.cm-completionIcon-type': {
-    '&:after': { content: "'𝑡'" },
+    '&:after': { content: l10n.t("'𝑡'") },
   },
   '.cm-completionIcon-enum': {
     '&:after': { content: "'∪'" },
@@ -118,7 +119,7 @@ export const baseTheme = EditorView.baseTheme({
     '&:after': { content: "'🔑\uFE0E'" }, // Disable emoji rendering
   },
   '.cm-completionIcon-namespace': {
-    '&:after': { content: "'▢'" },
+    '&:after': { content: l10n.t("'▢'") },
   },
   '.cm-completionIcon-text': {
     '&:after': { content: "'abc'", fontSize: '50%', verticalAlign: 'middle' },

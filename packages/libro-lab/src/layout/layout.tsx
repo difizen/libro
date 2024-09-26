@@ -1,5 +1,6 @@
 import { inject, singleton, Slot, useInject, view } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { BoxPanel } from '@difizen/mana-react';
 import { Alert } from 'antd';
 import { forwardRef } from 'react';
@@ -24,7 +25,7 @@ export const LibroLabLayoutComponent = forwardRef(function LibroLabLayoutCompone
         )}
         {layoutService.isAreaVisible(LibroLabLayoutSlots.alert) && (
           <Alert
-            message="服务启动中，请稍后，待服务启动完成后即可编辑文件。"
+            message={l10n.t('服务启动中，请稍后，待服务启动完成后即可编辑文件。')}
             type="info"
             banner
             closable

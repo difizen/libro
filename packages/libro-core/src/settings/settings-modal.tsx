@@ -1,6 +1,7 @@
 import type { ModalItem, ModalItemProps } from '@difizen/mana-app';
 import { ConfigurationRegistry } from '@difizen/mana-app';
 import { useInject, ViewManager, ViewRender } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Modal } from 'antd';
 import { useEffect, useState } from 'react';
 
@@ -33,7 +34,7 @@ export function SettingsModalComponent({ visible, close }: ModalItemProps<void>)
 
   return (
     <Modal
-      title="设置"
+      title={l10n.t('设置')}
       open={visible}
       onOk={() => close()}
       onCancel={() => close()}

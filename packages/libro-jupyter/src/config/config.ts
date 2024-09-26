@@ -4,7 +4,7 @@ import { l10n } from '@difizen/mana-l10n';
 export const LibroConfigAutoSave: ConfigurationNode<boolean> = {
   id: 'libro.autosave',
   description: l10n.t('是否自动保存修改'),
-  title: '自动保存',
+  title: l10n.t('自动保存'),
   type: 'checkbox',
   defaultValue: false,
   schema: {
@@ -14,8 +14,8 @@ export const LibroConfigAutoSave: ConfigurationNode<boolean> = {
 
 export const LibroConfigOpenSlot: ConfigurationNode<string> = {
   id: 'libro.jupyter.open.slot',
-  description: '文件默认打开位置',
-  title: '文件默认打开位置',
+  description: l10n.t('文件默认打开位置'),
+  title: l10n.t('文件默认打开位置'),
   type: 'input',
   defaultValue: 'main',
   schema: {
@@ -25,8 +25,8 @@ export const LibroConfigOpenSlot: ConfigurationNode<string> = {
 
 export const LibroConfigAllowDownload: ConfigurationNode<boolean> = {
   id: 'libro.jupyter.allow.download',
-  description: '是否允许下载',
-  title: '允许下载',
+  description: l10n.t('是否允许下载'),
+  title: l10n.t('允许下载'),
   type: 'checkbox',
   defaultValue: true,
   schema: {
@@ -36,8 +36,8 @@ export const LibroConfigAllowDownload: ConfigurationNode<boolean> = {
 
 export const LibroConfigAllowUpload: ConfigurationNode<boolean> = {
   id: 'libro.jupyter.allow.upload',
-  description: '是否允许上传',
-  title: '允许上传',
+  description: l10n.t('是否允许上传'),
+  title: l10n.t('允许上传'),
   type: 'checkbox',
   defaultValue: true,
   schema: {
@@ -47,8 +47,8 @@ export const LibroConfigAllowUpload: ConfigurationNode<boolean> = {
 
 export const LibroConfigAllowPreferredSession: ConfigurationNode<boolean> = {
   id: 'libro.jupyter.allow.prefer.session',
-  description: 'kernel切换是否显示Use Kernel from Preferred Session',
-  title: '允许 Preferred session切换显示',
+  description: l10n.t('kernel切换是否显示Use Kernel from Preferred Session'),
+  title: l10n.t('允许 Preferred session切换显示'),
   type: 'checkbox',
   defaultValue: true,
   schema: {
@@ -59,9 +59,9 @@ export const LibroConfigAllowPreferredSession: ConfigurationNode<boolean> = {
 export const LibroConfigKernelUnreadyText: ConfigurationNode<string> = {
   id: 'libro.jupyter.kernel.unready.text',
   description: 'kernel unready text',
-  title: 'kernel 处于 unready 时左上角提示文案',
+  title: l10n.t('kernel 处于 unready 时左上角提示文案'),
   type: 'string',
-  defaultValue: 'Kernel 准备中...',
+  defaultValue: l10n.t('Kernel 准备中...'),
   schema: {
     type: 'string',
   },
@@ -70,9 +70,9 @@ export const LibroConfigKernelUnreadyText: ConfigurationNode<string> = {
 export const LibroConfigKernelUnreadyBtnText: ConfigurationNode<string> = {
   id: 'libro.jupyter.kernel.unready.btn.text',
   description: 'kernel unready btn text',
-  title: 'kernel 处于 unready 时执行按钮提示文案',
+  title: l10n.t('kernel 处于 unready 时执行按钮提示文案'),
   type: 'string',
-  defaultValue: 'kernel准备中，无法执行',
+  defaultValue: l10n.t('kernel准备中，无法执行'),
   schema: {
     type: 'string',
   },

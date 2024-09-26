@@ -2,6 +2,7 @@ import type { ModalItemProps, ModalItem } from '@difizen/mana-app';
 import { ThemeService } from '@difizen/mana-app';
 import { CommandRegistry } from '@difizen/mana-app';
 import { URI, useInject, ViewManager } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Col, Form, message, Row, Input, Modal, ConfigProvider, theme } from 'antd';
 import type { InputRef } from 'antd';
 import { useEffect, useRef, useState } from 'react';
@@ -56,18 +57,18 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
       }
       // message.success('新建文件成功');
     } catch {
-      message.error('新建文件失败');
+      message.error(l10n.t('新建文件失败'));
     }
   };
 
   const validateFileName = async (rule: any, value: string, callback: any) => {
     if (!value || !value.length) {
-      throw new Error('请输入文件名');
+      throw new Error(l10n.t('请输入文件名'));
     } else {
       const targetURI = new URI(data?.path + value + (fileType || ''));
       const fileRes = await fileService.resolve(targetURI);
       if (fileRes.isFile) {
-        throw new Error('文件名称已存在，请重新输入');
+        throw new Error(l10n.t('文件名称已存在，请重新输入'));
       }
     }
   };
@@ -94,12 +95,12 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
       }}
     >
       <Modal
-        title="新建文件"
+        title={l10n.t('新建文件')}
         open={visible}
         onCancel={close}
         width={788}
-        cancelText="取消"
-        okText="确定"
+        cancelText={l10n.t('取消')}
+        okText={l10n.t('确定')}
         onOk={() => {
           form.submit();
         }}
@@ -107,10 +108,10 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
         wrapClassName="libro-create-file-modal"
       >
         <div className="libro-create-file-path-container">
-          <div className="libro-create-file-des">创建位置：</div>
+          <div className="libro-create-file-des">{l10n.t('创建位置：')}</div>
           <span className="libro-create-file-path">{data?.path}</span>
         </div>
-        <div className="libro-create-file-des">文件类型：</div>
+        <div className="libro-create-file-des">{l10n.t('文件类型：')}</div>
         <Row>
           <Col
             className="gutter-row"
@@ -149,7 +150,9 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
             style={{ paddingLeft: 'unset', paddingRight: '16px' }}
           >
             <div
-              className={`libro-create-file-type ${fileType === '.json' ? 'active' : ''}`}
+              className={`libro-create-file-type ${
+                fileType === '.json' ? 'active' : ''
+              }`}
               onClick={() => {
                 setFileType('.json');
                 inputRef.current?.focus();
@@ -173,7 +176,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
               }}
             >
               <MoreIcon />
-              <span className="libro-create-file-type-text">其他</span>
+              <span className="libro-create-file-type-text">{l10n.t('其他')}</span>
             </div>
           </Col>
         </Row>
@@ -186,7 +189,7 @@ export const FileCreateModalComponent: React.FC<ModalItemProps<ModalItemType>> =
         >
           <Form.Item
             name="fileName"
-            label="文件名称"
+            label={l10n.t('文件名称')}
             rules={[{ required: true, validator: validateFileName }]}
           >
             <Input addonAfter={fileType || ''} ref={inputRef} />

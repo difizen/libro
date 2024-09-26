@@ -12,6 +12,7 @@ import {
   ViewManager,
   ViewRender,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { ConfigProvider, Empty, theme } from 'antd';
 
 import { TocIcon } from '../common/index.js';
@@ -38,7 +39,7 @@ const TocViewRender: React.FC = () => {
         ) : (
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
-            description="该文件格式暂不支持大纲"
+            description={l10n.t('该文件格式暂不支持大纲')}
             className="libro-lab-toc-empty"
           />
         )}
@@ -59,7 +60,7 @@ export class TocPanelView extends BaseView {
   constructor() {
     super();
     this.title.icon = <TocIcon />;
-    this.title.label = '大纲';
+    this.title.label = l10n.t('大纲');
   }
 
   override onViewMount(): void {

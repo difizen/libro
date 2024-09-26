@@ -1,12 +1,12 @@
 import { CaretDownOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { ViewContext } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Empty, message, Popconfirm } from 'antd';
 import React, { useState } from 'react';
 
 import type { SaveableTabView } from '../../index.js';
 
 import { LibroCollapseContent } from './collapse-content.js';
-
 import './index.less';
 import { LibroKernelCollapseContent } from './kernel-collapse-content.js';
 import { OpenedTabs } from './page-collapse-content.js';
@@ -45,7 +45,7 @@ const getCollapseContentView = (
     return (
       <Empty
         image={Empty.PRESENTED_IMAGE_SIMPLE}
-        description="暂无内容"
+        description={l10n.t('暂无内容')}
         className="kernel-and-terminal-panel-empty"
       />
     );
@@ -66,6 +66,7 @@ const getCollapseContentView = (
           items={items as LibroPanelCollapseKernelItem[]}
         />
       );
+
     case LibroPanelCollapseItemType.TERMINAL:
     case LibroPanelCollapseItemType.LSP:
       return <LibroCollapseContent type={type} items={items!} />;
@@ -75,13 +76,13 @@ const getCollapseContentView = (
 const getCollapseHeaderLabel = (type: LibroPanelCollapseItemType) => {
   switch (type) {
     case LibroPanelCollapseItemType.PAGE:
-      return '已开启的标签页';
+      return l10n.t('已开启的标签页');
     case LibroPanelCollapseItemType.KERNEL:
-      return '运行的内核';
+      return l10n.t('运行的内核');
     case LibroPanelCollapseItemType.TERMINAL:
-      return '运行的终端';
+      return l10n.t('运行的终端');
     case LibroPanelCollapseItemType.LSP:
-      return '语言服务';
+      return l10n.t('语言服务');
   }
 };
 
@@ -105,9 +106,9 @@ export const LibroCollapse: React.FC<Props> = (props: Props) => {
         </div>
         <div className="libro-panel-collapse-header-closeAll">
           <Popconfirm
-            title="你确定要关闭全部吗？"
-            okText="确定"
-            cancelText="取消"
+            title={l10n.t('你确定要关闭全部吗？')}
+            okText={l10n.t('确定')}
+            cancelText={l10n.t('取消')}
             onConfirm={() => {
               if (props.shutdownAll) {
                 props.shutdownAll().catch((e) => {
@@ -117,7 +118,7 @@ export const LibroCollapse: React.FC<Props> = (props: Props) => {
               }
             }}
           >
-            关闭全部
+            {l10n.t('关闭全部')}
           </Popconfirm>
         </div>
       </div>

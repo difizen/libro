@@ -11,6 +11,7 @@ import type {
 } from '@difizen/mana-app';
 import { Emitter } from '@difizen/mana-app';
 import { FileService, URI, inject, singleton } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { message } from 'antd';
 
 import { FileNameAlias } from './file-name-alias.js';
@@ -195,7 +196,7 @@ export class JupyterFileService extends FileService {
   async newFile(fileName: string, target: URI): Promise<FileStatWithMetadata> {
     const targetFileUri = new URI(pathUtil.join(target.path.toString(), fileName));
     if ((await this.resolve(targetFileUri)).isFile) {
-      message.error('文件名重复');
+      message.error(l10n.t('文件名重复'));
       return this.resolve(target);
     }
     const fileNameArr = fileName.split('.');
@@ -211,7 +212,7 @@ export class JupyterFileService extends FileService {
   async newFileDir(dirName: string, target: URI): Promise<FileStatWithMetadata> {
     const targetFileUri = new URI(pathUtil.join(target.path.toString(), dirName));
     if ((await this.resolve(targetFileUri)).isDirectory) {
-      message.error('文件夹重复');
+      message.error(l10n.t('文件夹重复'));
       return this.resolve(target);
     }
     const res = await this.contentsManager.newUntitled({

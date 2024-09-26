@@ -20,6 +20,7 @@ import {
   ToolbarContribution,
   URI,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { message, Modal } from 'antd';
 
 import { FileCreateModal } from './file-create-modal.js';
@@ -33,55 +34,55 @@ import './index.less';
 export const FileCommands = {
   OPEN_FILE: {
     id: 'fileTree.command.openfile',
-    label: '打开',
+    label: l10n.t('打开'),
   },
   COPY: {
     id: 'fileTree.command.copy',
-    label: '复制',
+    label: l10n.t('复制'),
   },
   PASTE: {
     id: 'fileTree.command.paste',
-    label: '粘贴',
+    label: l10n.t('粘贴'),
   },
   CUT: {
     id: 'fileTree.command.cut',
-    label: '剪切',
+    label: l10n.t('剪切'),
   },
   RENAME: {
     id: 'fileTree.command.rename',
-    label: '重命名',
+    label: l10n.t('重命名'),
   },
   COPY_PATH: {
     id: 'fileTree.command.copyPath',
-    label: '复制路径',
+    label: l10n.t('复制路径'),
   },
   COPY_RELATIVE_PATH: {
     id: 'fileTree.command.copyRelativePath',
-    label: '复制相对路径',
+    label: l10n.t('复制相对路径'),
   },
   CREATE_FILE: {
     id: 'fileTree.command.createfile',
-    label: '新建文件',
+    label: l10n.t('新建文件'),
   },
   CREATE_DIR: {
     id: 'fileTree.command.createdir',
-    label: '新建文件夹',
+    label: l10n.t('新建文件夹'),
   },
   REFRESH: {
     id: 'fileTree.command.refresh',
-    label: '刷新',
+    label: l10n.t('刷新'),
   },
   REMOVE: {
     id: 'fileTree.command.remove',
-    label: '删除',
+    label: l10n.t('删除'),
   },
   DOWNLOAD: {
     id: 'fileTree.command.download',
-    label: '下载',
+    label: l10n.t('下载'),
   },
   UPLOAD: {
     id: 'fileTree.command.upload',
-    label: '上传',
+    label: l10n.t('上传'),
   },
 };
 export const FileTreeContextMenuPath: MenuPath = ['file-tree-context-menu'];
@@ -213,7 +214,7 @@ export class FileCommandContribution
               });
           }
         } catch {
-          message.error('文件打开失败');
+          message.error(l10n.t('文件打开失败'));
         }
       },
       isVisible: (node) => {
@@ -226,17 +227,20 @@ export class FileCommandContribution
           const filePath = node.uri.path.toString();
           Modal.confirm({
             width: 424,
-            title: '确认要删除这个文件/文件夹吗？',
-            content: `请确认是否删除文件 ${filePath} ，删除后将不可恢复，请谨慎操作。`,
+            title: l10n.t('确认要删除这个文件/文件夹吗？'),
+            content: l10n.t(
+              '请确认是否删除文件 {filePath} ，删除后将不可恢复，请谨慎操作。',
+              { filePath: filePath },
+            ),
             wrapClassName: 'libro-remove-file-modal',
-            cancelText: '取消',
-            okText: '确定',
+            cancelText: l10n.t('取消'),
+            okText: l10n.t('确定'),
             onOk: async () => {
               try {
                 await this.fileService.delete(node.uri);
                 this.fileService.fileRemoveEmitter.fire(node.uri.path.toString());
               } catch {
-                message.error('删除文件失败!');
+                message.error(l10n.t('删除文件失败!'));
               }
               this.fileView.model.refresh();
             },
@@ -281,7 +285,7 @@ export class FileCommandContribution
           this.fileView.model.refresh();
           return;
         } catch {
-          message.error('粘贴失败!');
+          message.error(l10n.t('粘贴失败!'));
         }
       },
       isVisible: () => {
@@ -422,7 +426,7 @@ export class FileCommandContribution
       id: FileCommands.REFRESH.id,
       command: FileCommands.REFRESH.id,
       icon: <ReloadOutlined />,
-      tooltip: '刷新',
+      tooltip: l10n.t('刷新'),
     });
   }
 }

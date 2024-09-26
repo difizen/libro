@@ -1,31 +1,31 @@
 import { BaseView, inject, singleton, useInject, view } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import * as React from 'react';
-import { Loadding, SuccIcon } from '../../common/icon.js';
 
+import { Loadding, SuccIcon } from '../../common/icon.js';
 import { LayoutService } from '../layout-service.js';
 import { LibroLabLayoutSlots } from '../protocol.js';
 import type { StatusItem, StatusType } from '../protocol.js';
 import './index.less';
-
-const Status: Record<StatusType, StatusItem> = {
-  loading: {
-    label: '启动中',
-    icon: <Loadding />,
-  },
-  success: {
-    label: '启动成功',
-    icon: <SuccIcon />,
-  },
-};
 
 const StatusFooterComponent = React.forwardRef(function CurrentFileFooterComponent(
   _props,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const layoutService = useInject(LayoutService);
+  const Status: Record<StatusType, StatusItem> = {
+    loading: {
+      label: l10n.t('启动中'),
+      icon: <Loadding />,
+    },
+    success: {
+      label: l10n.t('启动成功'),
+      icon: <SuccIcon />,
+    },
+  };
   return (
     <div className="libro-lab-status-footer" ref={ref}>
-      <span>服务状态：</span>
+      <span>{l10n.t('服务状态：')}</span>
       {Status[layoutService.serverSatus].icon}
       {Status[layoutService.serverSatus].label}
     </div>

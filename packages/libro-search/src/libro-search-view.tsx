@@ -53,7 +53,7 @@ export const SearchIndex: React.FC = () => {
     <div className="libro-search-index">
       {instance.matchesCount !== undefined
         ? `${currentMatchIndex ?? '-'}/${matchesCount ?? ' -'}`
-        : '无结果'}
+        : l10n.t('无结果')}
     </div>
   );
 };
@@ -101,7 +101,7 @@ export const SearchContent = () => {
                 value={instance.findStr}
                 onChange={instance.handleFindChange}
                 size="small"
-                placeholder="搜索"
+                placeholder={l10n.t('搜索')}
                 suffix={
                   <span className="libro-search-input-suffix">
                     <IconFont
@@ -134,17 +134,20 @@ export const SearchContent = () => {
                   icon={<ArrowUpOutlined />}
                   size="small"
                 />
+
                 <Button
                   title="Next Match"
                   onClick={instance.next}
                   icon={<ArrowDownOutlined />}
                   size="small"
                 />
+
                 <Button
                   onClick={instance.toggleSetting}
                   icon={<EllipsisOutlined />}
                   size="small"
                 />
+
                 <Button
                   onClick={() => instance.hide()}
                   icon={<CloseOutlined />}
@@ -160,7 +163,7 @@ export const SearchContent = () => {
                   value={instance.replaceStr}
                   onChange={instance.handleReplaceChange}
                   size="small"
-                  placeholder="替换"
+                  placeholder={l10n.t('替换')}
                 />
               </td>
               <td className="libro-search-action">
