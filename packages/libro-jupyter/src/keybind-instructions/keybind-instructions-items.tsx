@@ -13,7 +13,7 @@ export interface DataType {
 export class LibroKeybindItems {
   commandModeActionColumns: ColumnsType<DataType> = [
     {
-      title: l10n.t('命令态操作'),
+      title: () => l10n.t('命令态操作'),
       dataIndex: 'actionDescription',
       width: '125px',
     },
@@ -575,7 +575,7 @@ export class LibroKeybindItems {
     },
     {
       key: '32',
-      actionDescription: l10n.t('选中当前及之前cell'),
+      actionDescription: l10n.t('选中当前及之前 Cell'),
       keybind: (
         <>
           <Tag>Shift</Tag>

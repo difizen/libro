@@ -6,6 +6,7 @@ import {
   view,
   ViewInstance,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import * as React from 'react';
 
 import { LayoutService } from '../layout-service.js';
@@ -20,7 +21,7 @@ const CurrentFileFooterComponent = React.forwardRef(function CurrentFileFooterCo
 
   return (
     <div className="libro-lab-current-file-footer" ref={ref}>
-      <span>{`当前文件：${
+      <span>{`${l10n.t('当前文件：')}${
         currentFileFooterView.navigatableView?.title.label || ''
       }`}</span>
     </div>

@@ -9,6 +9,7 @@ import {
   ViewInstance,
   ViewRender,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Tooltip } from 'antd';
 import classnames from 'classnames';
 import type { FC } from 'react';
@@ -267,8 +268,8 @@ const CellOutput: React.FC<{ cell: CellView }> = forwardRef(function CellOutput(
             <Tooltip
               title={`${
                 cell.model.hasOutputsScrolled
-                  ? '取消固定 Output 高度'
-                  : '固定 Output 高度'
+                  ? l10n.t('取消固定 Output 高度')
+                  : l10n.t('固定 Output 高度')
               }`}
             >
               <div

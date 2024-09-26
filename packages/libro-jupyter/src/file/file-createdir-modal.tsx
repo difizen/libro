@@ -3,6 +3,7 @@ import { ThemeService } from '@difizen/mana-app';
 import { URI } from '@difizen/mana-app';
 import { ViewManager } from '@difizen/mana-app';
 import { useInject } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Form, message, Input, Modal, ConfigProvider, theme } from 'antd';
 import type { InputRef } from 'antd';
 import { useEffect, useRef, useState } from 'react';
@@ -34,18 +35,18 @@ export const FileCreateDirModalComponent: React.FC<
         fileView.model.refresh();
       }
     } catch {
-      message.error('新建文件夹失败');
+      message.error(l10n.t('新建文件夹失败'));
     }
   };
 
   const validateDirName = async (rule: any, value: string, callback: any) => {
     if (!value || !value.length) {
-      throw new Error('请输入文件夹名');
+      throw new Error(l10n.t('请输入文件夹名'));
     } else {
       const targetURI = new URI(data?.path + value);
       const fileRes = await fileService.resolve(targetURI);
       if (fileRes.isDirectory) {
-        throw new Error('文件夹名称已存在，请重新输入');
+        throw new Error(l10n.t('文件夹名称已存在，请重新输入'));
       }
     }
   };
@@ -72,11 +73,11 @@ export const FileCreateDirModalComponent: React.FC<
       }}
     >
       <Modal
-        title="新建文件夹"
+        title={l10n.t('新建文件夹')}
         open={visible}
         onCancel={close}
-        cancelText="取消"
-        okText="确定"
+        cancelText={l10n.t('取消')}
+        okText={l10n.t('确定')}
         onOk={() => {
           form.submit();
         }}
@@ -84,7 +85,7 @@ export const FileCreateDirModalComponent: React.FC<
         wrapClassName="libro-create-dir-modal"
         width={524}
       >
-        <div className="libro-create-file-des">创建位置：</div>
+        <div className="libro-create-file-des">{l10n.t('创建位置：')}</div>
         <span className="libro-create-file-path">{data?.path}</span>
         <Form
           layout="vertical"
@@ -95,7 +96,7 @@ export const FileCreateDirModalComponent: React.FC<
         >
           <Form.Item
             name="dirName"
-            label="文件夹名称"
+            label={l10n.t('文件夹名称')}
             rules={[{ required: true, validator: validateDirName }]}
           >
             <Input

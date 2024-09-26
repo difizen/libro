@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { CodeFilled } from '@ant-design/icons';
+import { l10n } from '@difizen/mana-l10n'; /* eslint-disable @typescript-eslint/no-unused-vars */
 import './index.less';
 
 interface IProps {
@@ -90,7 +90,7 @@ export function Loadding(props: IProps) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       className="libro-lab-loadding"
     >
-      <title>形状结合</title>
+      <title>{l10n.t('形状结合')}</title>
       <g id="整体框架部分" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g
           id="1.1容器加载中-关闭提示"
@@ -121,7 +121,7 @@ export function TerminalIcon(props: IProps) {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <title>编组</title>
+      <title>{l10n.t('编组')}</title>
       <g id="整体框架部分" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g
           id="1.2容器加载完成"
@@ -202,7 +202,7 @@ export function PreferenceIcon(props: IProps) {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <title>政策</title>
+      <title>{l10n.t('政策')}</title>
       <g
         id="整体框架部分"
         stroke="none"
@@ -246,7 +246,7 @@ export function KeybindIcon(props: IProps) {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <title>键盘</title>
+      <title>{l10n.t('键盘')}</title>
       <g
         id="整体框架部分"
         stroke="none"
@@ -295,7 +295,7 @@ export function SuccIcon(props: IProps) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       className="libro-lab-success"
     >
-      <title>编组 12</title>
+      <title>{l10n.t('编组 12')}</title>
       <g
         id="整体框架部分"
         stroke="none"
@@ -381,7 +381,7 @@ export function openedPage() {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <title>广告主流水@2x</title>
+      <title>{l10n.t('广告主流水@2x')}</title>
       <g
         id="kernel管理面板"
         stroke="none"

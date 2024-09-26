@@ -9,6 +9,7 @@ import {
   ViewRender,
 } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { forwardRef } from 'react';
 
 import { LayoutService } from '../layout/layout-service.js';
@@ -23,9 +24,13 @@ export const WelcomeComponent = forwardRef(function WelcomeComponent() {
   const serverConnection = useInject(ServerConnection);
   return (
     <div className="libro-lab-welcome-page">
-      <div className="libro-lab-welcome-page-title">欢迎使用 Notebook 工作台 🎉🎉</div>
+      <div className="libro-lab-welcome-page-title">
+        {l10n.t('欢迎使用 Libro Lab🎉🎉')}
+      </div>
       <div className="libro-lab-welcome-page-server-info">
-        <div className="libro-lab-welcome-page-server-info-title">服务连接信息</div>
+        <div className="libro-lab-welcome-page-server-info-title">
+          {l10n.t('服务连接信息')}
+        </div>
         <div className="libro-lab-welcome-page-server-info-item">
           BaseURL: {`${serverConnection.settings.baseUrl}`}
         </div>
@@ -49,7 +54,7 @@ export class WelcomeView extends BaseView {
   constructor(@inject(ViewManager) viewManager: ViewManager) {
     super();
     this.title.icon = '🙌 ';
-    this.title.label = '欢迎使用';
+    this.title.label = l10n.t('欢迎使用');
     this.title.closable = false;
     this.viewManager = viewManager;
     this.viewManager

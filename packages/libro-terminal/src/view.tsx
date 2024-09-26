@@ -14,6 +14,7 @@ import {
   useInject,
   view,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { forwardRef } from 'react';
 import type { FontWeight, ITerminalOptions } from 'xterm';
 import { Terminal } from 'xterm';
@@ -289,7 +290,7 @@ export class LibroTerminalView extends BaseStatefulView {
         }
         break;
       case 'disconnect':
-        this.term.write('\r\n\r\n[Finished… Term Session]\r\n');
+        this.term.write(l10n.t('[Finished… Term Session]'));
         break;
       default:
         break;
@@ -445,6 +446,7 @@ export class LibroTerminalView extends BaseStatefulView {
         this.container.current.offsetHeight,
         this.container.current.offsetWidth,
       ];
+
       if (!this.isDisposed && this.connection) {
         this.connection.send({ type: 'set_size', content });
       }

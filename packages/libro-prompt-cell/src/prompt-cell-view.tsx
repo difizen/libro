@@ -24,6 +24,7 @@ import {
   watch,
 } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Select, Tag } from 'antd';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
@@ -127,7 +128,7 @@ export const CellEditor = React.memo(CellEditorRaw);
 const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
   function MaxPropmtEditorViewComponent(props, ref) {
     const instance = useInject<LibroPromptCellView>(ViewInstance);
-    const [selectedModel, setSelectedModel] = useState<string>('暂无内置模型');
+    const [selectedModel, setSelectedModel] = useState<string>(l10n.t('暂无内置模型'));
     useEffect(() => {
       // TODO: Data initialization should not depend on view initialization, which causes limitations in usage scenarios and multiple renderings.
       instance.model.variableName = instance.model.decodeObject.variableName;

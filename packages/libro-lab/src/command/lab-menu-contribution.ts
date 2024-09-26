@@ -18,6 +18,7 @@ import {
   singleton,
   ViewManager,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 
 import { LibroLabLayoutSlots } from '../layout/index.js';
 import { LayoutService } from '../layout/layout-service.js';
@@ -51,12 +52,12 @@ export class LabMenu
   }
 
   registerMenus(menu: MenuRegistry) {
-    menu.registerSubmenu(LabMenus.FILE, { label: '文件' });
-    menu.registerSubmenu(LabMenus.EDIT, { label: '编辑' });
-    menu.registerSubmenu(LabMenus.VIEW, { label: '视图' });
-    menu.registerSubmenu(LabMenus.RUN, { label: '运行' });
-    menu.registerSubmenu(LabMenus.TERMINAL, { label: '终端' });
-    menu.registerSubmenu(LabMenus.HELP, { label: '帮助' });
+    menu.registerSubmenu(LabMenus.FILE, { label: l10n.t('文件') });
+    menu.registerSubmenu(LabMenus.EDIT, { label: l10n.t('编辑') });
+    menu.registerSubmenu(LabMenus.VIEW, { label: l10n.t('视图') });
+    menu.registerSubmenu(LabMenus.RUN, { label: l10n.t('运行') });
+    menu.registerSubmenu(LabMenus.TERMINAL, { label: l10n.t('终端') });
+    menu.registerSubmenu(LabMenus.HELP, { label: l10n.t('帮助') });
     menu.registerMenuAction(LabMenus.TERMINAL, {
       id: TerminalCommands['OpenTerminal'].id,
       command: TerminalCommands['OpenTerminal'].id,

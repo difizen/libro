@@ -8,11 +8,11 @@ import {
   ViewOption,
 } from '@difizen/mana-app';
 import { BaseView, transient, view } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import React from 'react';
 
-import { Empty } from './empty-icon.js';
 import './index.less';
-
+import { Empty } from './empty-icon.js';
 import type { EditorOption } from './protocol.js';
 import { LibroDefaultViewerFactory } from './protocol.js';
 
@@ -20,7 +20,9 @@ const DefaultViewerComponent: React.FC = () => {
   return (
     <div className="libro-lab-default-viewer">
       <Empty></Empty>
-      <div className="libro-lab-default-viewer-text">当前文件类型暂不支持查看</div>
+      <div className="libro-lab-default-viewer-text">
+        {l10n.t('当前文件类型暂不支持查看')}
+      </div>
     </div>
   );
 };

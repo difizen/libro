@@ -6,7 +6,6 @@ import { l10n } from '@difizen/mana-l10n';
 import { Badge } from 'antd';
 
 import type { LibroJupyterModel } from '../libro-jupyter-model.js';
-
 import './index.less';
 import { kernelStatus } from '../libro-jupyter-protocol.js';
 import { getServiceStatusInfo } from '../utils/index.js';
@@ -31,7 +30,7 @@ export const KernelStatusSelector: React.FC = () => {
     return (
       <div className="libro-kernel-and-container-status">
         <div className="libro-kernel-status-and-selector">
-          <span className="kernel">kernel：</span>
+          <span className="kernel">{l10n.t('kernel：')}</span>
           <KernelSelector />
           {showBadge &&
             (isKernelBusy ? (
