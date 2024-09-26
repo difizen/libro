@@ -60,7 +60,7 @@ export class TocPanelView extends BaseView {
   constructor() {
     super();
     this.title.icon = <TocIcon />;
-    this.title.label = l10n.t('大纲');
+    this.title.label = () => <div>{l10n.t('大纲')}</div>;
   }
 
   override onViewMount(): void {

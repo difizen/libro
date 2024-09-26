@@ -54,7 +54,7 @@ export class WelcomeView extends BaseView {
   constructor(@inject(ViewManager) viewManager: ViewManager) {
     super();
     this.title.icon = '🙌 ';
-    this.title.label = l10n.t('欢迎使用');
+    this.title.label = () => <div>{l10n.t('欢迎使用')}</div>;
     this.title.closable = false;
     this.viewManager = viewManager;
     this.viewManager
