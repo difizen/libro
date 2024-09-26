@@ -23,7 +23,7 @@ export class MenuBarView extends BaseView {
   constructor() {
     super();
     this.title.icon = MacCommandOutlined;
-    this.title.label = l10n.t('菜单');
+    this.title.label = () => <div>{l10n.t('菜单')}</div>;
     this.id = 'menu-bar';
   }
 }

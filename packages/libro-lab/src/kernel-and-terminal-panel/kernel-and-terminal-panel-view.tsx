@@ -215,7 +215,7 @@ export class KernelAndTerminalPanelView extends BaseView {
   ) {
     super();
     this.title.icon = <KernelAndTerminal />;
-    this.title.label = l10n.t('运行的终端和内核');
+    this.title.label = () => <div>{l10n.t('运行的终端和内核')}</div>;
 
     this.libroKernelManager = libroKernelManager;
     this.libroSessionManager = libroSessionManager;

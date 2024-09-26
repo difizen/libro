@@ -52,12 +52,14 @@ export class LabMenu
   }
 
   registerMenus(menu: MenuRegistry) {
-    menu.registerSubmenu(LabMenus.FILE, { label: l10n.t('文件') });
-    menu.registerSubmenu(LabMenus.EDIT, { label: l10n.t('编辑') });
-    menu.registerSubmenu(LabMenus.VIEW, { label: l10n.t('视图') });
-    menu.registerSubmenu(LabMenus.RUN, { label: l10n.t('运行') });
-    menu.registerSubmenu(LabMenus.TERMINAL, { label: l10n.t('终端') });
-    menu.registerSubmenu(LabMenus.HELP, { label: l10n.t('帮助') });
+    menu.registerSubmenu(LabMenus.FILE, { label: () => <div>{l10n.t('文件')}</div> });
+    menu.registerSubmenu(LabMenus.EDIT, { label: () => <div>{l10n.t('编辑')}</div> });
+    menu.registerSubmenu(LabMenus.VIEW, { label: () => <div>{l10n.t('视图')}</div> });
+    menu.registerSubmenu(LabMenus.RUN, { label: () => <div>{l10n.t('运行')}</div> });
+    menu.registerSubmenu(LabMenus.TERMINAL, {
+      label: () => <div>{l10n.t('终端')}</div>,
+    });
+    menu.registerSubmenu(LabMenus.HELP, { label: () => <div>{l10n.t('帮助')}</div> });
     menu.registerMenuAction(LabMenus.TERMINAL, {
       id: TerminalCommands['OpenTerminal'].id,
       command: TerminalCommands['OpenTerminal'].id,

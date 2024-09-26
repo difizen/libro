@@ -18,6 +18,6 @@ export class KernelManagerView extends BaseView {
   constructor() {
     super();
     this.title.icon = <CodeFilled />;
-    this.title.label = l10n.t('Kernel 管理');
+    this.title.label = () => <div>{l10n.t('Kernel 管理')}</div>;
   }
 }
