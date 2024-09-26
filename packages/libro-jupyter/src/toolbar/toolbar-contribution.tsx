@@ -52,7 +52,7 @@ export class LibroJupyterToolbarContribution implements ToolbarContribution {
       command: NotebookCommands['SelectLastRunCell'].id,
       group: ['group2'],
       order: 'b',
-      tooltip: (
+      tooltip: () => (
         <div className="libro-tooltip">
           <span className="libro-tooltip-text">{l10n.t('定位正在执行的Cell')}</span>
         </div>
