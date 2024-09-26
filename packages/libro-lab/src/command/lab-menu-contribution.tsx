@@ -61,67 +61,72 @@ export class LabMenu
     menu.registerMenuAction(LabMenus.TERMINAL, {
       id: TerminalCommands['OpenTerminal'].id,
       command: TerminalCommands['OpenTerminal'].id,
-      label: TerminalCommands['OpenTerminal'].label,
+      label: () => (
+        <div>
+          {TerminalCommands['OpenTerminal'].label &&
+            l10n.t(TerminalCommands['OpenTerminal'].label)}
+        </div>
+      ),
     });
     menu.registerMenuAction(LabMenus.HELP, {
       id: LabCommands.About.id,
       command: LabCommands.About.id,
-      label: LabCommands.About.label,
+      label: () => <div>{l10n.t(LabCommands.About.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.FILE, {
       id: LabCommands.Save.id,
       command: LabCommands.Save.id,
-      label: LabCommands.Save.label,
+      label: () => <div>{l10n.t(LabCommands.Save.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.FILE, {
       id: LabCommands.CreateFile.id,
       command: LabCommands.CreateFile.id,
-      label: LabCommands.CreateFile.label,
+      label: () => <div>{l10n.t(LabCommands.CreateFile.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.UndoCellAction.id,
       command: LabCommands.UndoCellAction.id,
-      label: LabCommands.UndoCellAction.label,
+      label: () => <div>{l10n.t(LabCommands.UndoCellAction.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.RedoCellAction.id,
       command: LabCommands.RedoCellAction.id,
-      label: LabCommands.RedoCellAction.label,
+      label: () => <div>{l10n.t(LabCommands.RedoCellAction.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.CutCell.id,
       command: LabCommands.CutCell.id,
-      label: LabCommands.CutCell.label,
+      label: () => <div>{l10n.t(LabCommands.CutCell.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.CopyCell.id,
       command: LabCommands.CopyCell.id,
-      label: LabCommands.CopyCell.label,
+      label: () => <div>{l10n.t(LabCommands.CopyCell.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.PasteCellBelow.id,
       command: LabCommands.PasteCellBelow.id,
-      label: LabCommands.PasteCellBelow.label,
+      label: () => <div>{l10n.t(LabCommands.PasteCellBelow.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.PasteCellAbove.id,
       command: LabCommands.PasteCellAbove.id,
-      label: LabCommands.PasteCellAbove.label,
+      label: () => <div>{l10n.t(LabCommands.PasteCellAbove.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.PasteAndReplaceCell.id,
       command: LabCommands.PasteAndReplaceCell.id,
-      label: LabCommands.PasteAndReplaceCell.label,
+      label: () => <div>{l10n.t(LabCommands.PasteAndReplaceCell.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.DeleteCell.id,
       command: LabCommands.DeleteCell.id,
-      label: LabCommands.DeleteCell.label,
+      label: () => <div>{l10n.t(LabCommands.DeleteCell.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.SelectAll.id,
       command: LabCommands.SelectAll.id,
-      label: LabCommands.SelectAll.label,
+      label: () => <div>{l10n.t(LabCommands.SelectAll.label)}</div>,
     });
     // menu.registerMenuAction(HeaderMenus.EDIT, {
     //   id: LabCommands.DeselectAll.id,
@@ -131,102 +136,102 @@ export class LabMenu
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.MoveCellUp.id,
       command: LabCommands.MoveCellUp.id,
-      label: LabCommands.MoveCellUp.label,
+      label: () => <div>{l10n.t(LabCommands.MoveCellUp.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.MoveCellDown.id,
       command: LabCommands.MoveCellDown.id,
-      label: LabCommands.MoveCellDown.label,
+      label: () => <div>{l10n.t(LabCommands.MoveCellDown.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.SplitCellAntCursor.id,
       command: LabCommands.SplitCellAntCursor.id,
-      label: LabCommands.SplitCellAntCursor.label,
+      label: () => <div>{l10n.t(LabCommands.SplitCellAntCursor.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.MergeCells.id,
       command: LabCommands.MergeCells.id,
-      label: LabCommands.MergeCells.label,
+      label: () => <div>{l10n.t(LabCommands.MergeCells.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.MergeCellAbove.id,
       command: LabCommands.MergeCellAbove.id,
-      label: LabCommands.MergeCellAbove.label,
+      label: () => <div>{l10n.t(LabCommands.MergeCellAbove.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.MergeCellBelow.id,
       command: LabCommands.MergeCellBelow.id,
-      label: LabCommands.MergeCellBelow.label,
+      label: () => <div>{l10n.t(LabCommands.MergeCellBelow.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.ClearCellOutput.id,
       command: LabCommands.ClearCellOutput.id,
-      label: LabCommands.ClearCellOutput.label,
+      label: () => <div>{l10n.t(LabCommands.ClearCellOutput.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.EDIT, {
       id: LabCommands.ClearAllCellOutput.id,
       command: LabCommands.ClearAllCellOutput.id,
-      label: LabCommands.ClearAllCellOutput.label,
+      label: () => <div>{l10n.t(LabCommands.ClearAllCellOutput.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.VIEW, {
       id: LabCommands.HideOrShowCellCode.id,
       command: LabCommands.HideOrShowCellCode.id,
-      label: LabCommands.HideOrShowCellCode.label,
+      label: () => <div>{l10n.t(LabCommands.HideOrShowCellCode.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.VIEW, {
       id: LabCommands.HideOrShowOutputs.id,
       command: LabCommands.HideOrShowOutputs.id,
-      label: LabCommands.HideOrShowOutputs.label,
+      label: () => <div>{l10n.t(LabCommands.HideOrShowOutputs.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.VIEW, {
       id: LabCommands.EnableOutputScrolling.id,
       command: LabCommands.EnableOutputScrolling.id,
-      label: LabCommands.EnableOutputScrolling.label,
+      label: () => <div>{l10n.t(LabCommands.EnableOutputScrolling.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.VIEW, {
       id: LabCommands.DisableOutputScrolling.id,
       command: LabCommands.DisableOutputScrolling.id,
-      label: LabCommands.DisableOutputScrolling.label,
+      label: () => <div>{l10n.t(LabCommands.DisableOutputScrolling.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.RUN, {
       id: LabCommands.RunCell.id,
       command: LabCommands.RunCell.id,
-      label: LabCommands.RunCell.label,
+      label: () => <div>{l10n.t(LabCommands.RunCell.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.RUN, {
       id: LabCommands.RunAllAbove.id,
       command: LabCommands.RunAllAbove.id,
-      label: LabCommands.RunAllAbove.label,
+      label: () => <div>{l10n.t(LabCommands.RunAllAbove.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.RUN, {
       id: LabCommands.RunAllBelow.id,
       command: LabCommands.RunAllBelow.id,
-      label: LabCommands.RunAllBelow.label,
+      label: () => <div>{l10n.t(LabCommands.RunAllBelow.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.RUN, {
       id: LabCommands.RunAllCells.id,
       command: LabCommands.RunAllCells.id,
-      label: LabCommands.RunAllCells.label,
+      label: () => <div>{l10n.t(LabCommands.RunAllCells.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.RUN, {
       id: LabCommands.RunCellAndSelectNext.id,
       command: LabCommands.RunCellAndSelectNext.id,
-      label: LabCommands.RunCellAndSelectNext.label,
+      label: () => <div>{l10n.t(LabCommands.RunCellAndSelectNext.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.RUN, {
       id: LabCommands.RunCellAndInsertBelow.id,
       command: LabCommands.RunCellAndInsertBelow.id,
-      label: LabCommands.RunCellAndInsertBelow.label,
+      label: () => <div>{l10n.t(LabCommands.RunCellAndInsertBelow.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.RUN, {
       id: LabCommands.RestartRunAll.id,
       command: LabCommands.RestartRunAll.id,
-      label: LabCommands.RestartRunAll.label,
+      label: () => <div>{l10n.t(LabCommands.RestartRunAll.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.RUN, {
       id: LabCommands.RestartAndRunToSelected.id,
       command: LabCommands.RestartAndRunToSelected.id,
-      label: LabCommands.RestartAndRunToSelected.label,
+      label: () => <div>{l10n.t(LabCommands.RestartAndRunToSelected.label)}</div>,
     });
   }
   registerCommands(commands: CommandRegistry) {

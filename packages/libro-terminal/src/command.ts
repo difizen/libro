@@ -13,12 +13,12 @@ import { LibroTerminalView } from './view.js';
 export const TerminalCommands: Record<string, Command & { keybind?: string }> = {
   OpenTerminal: {
     id: 'libro-terminal-open',
-    label: l10n.t('新建终端'),
+    label: '新建终端',
     keybind: 'ctrl+`',
   },
   CloseTerminal: {
     id: 'libro-terminal-close',
-    label: l10n.t('关闭终端'),
+    label: '关闭终端',
   },
 };
 
