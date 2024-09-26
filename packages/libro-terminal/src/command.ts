@@ -4,7 +4,6 @@ import { SlotViewManager } from '@difizen/mana-app';
 import { inject, ViewManager } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
 import { CommandContribution } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
 
 import { terminalDefaultSlot } from './configuration.js';
 import { TerminalManager } from './manager.js';
