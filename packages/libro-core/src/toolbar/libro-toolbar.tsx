@@ -46,7 +46,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
       id: DocumentCommands['Save'].id,
       command: DocumentCommands['Save'].id,
       icon: SaveIcon,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-tooltip">
           <span className="libro-tooltip-text">{l10n.t('保存')}</span>
           <span className="libro-tooltip-keybind">{`${isMacintosh ? 'Cmd' : 'Ctrl'} + S`}</span>
@@ -59,7 +59,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
     registry.registerItem({
       id: NotebookCommands['Interrupt'].id,
       command: NotebookCommands['Interrupt'].id,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-tooltip">
           <span className="libro-tooltip-text">{l10n.t('中断')}</span>
         </div>
@@ -72,7 +72,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
     registry.registerItem({
       id: NotebookCommands['CloseAndShutdown'].id,
       command: NotebookCommands['CloseAndShutdown'].id,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-tooltip">
           <span className="libro-tooltip-text">{l10n.t('关闭内核')}</span>
         </div>
@@ -85,7 +85,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
     registry.registerItem({
       id: NotebookCommands['RestartClearOutput'].id,
       command: NotebookCommands['RestartClearOutput'].id,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-tooltip">
           <span className="libro-tooltip-text">{l10n.t('重启并清空输出')}</span>
         </div>
@@ -98,7 +98,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
     registry.registerItem({
       id: DocumentCommands['FormatCell'].id,
       command: DocumentCommands['FormatCell'].id,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-side-tooltip">
           <span className="libro-tooltip-text">{l10n.t('格式化代码')}</span>
           <span className="libro-tooltip-keybind">{`Shift+${isMacintosh ? 'Option' : 'Alt'}+F`}</span>
@@ -111,7 +111,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
     registry.registerItem({
       id: NotebookCommands['MoveCellUp'].id,
       command: NotebookCommands['MoveCellUp'].id,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-side-tooltip">
           <span className="libro-tooltip-text">{l10n.t('上移')}</span>
           <span className="libro-tooltip-keybind">Up</span>
@@ -124,7 +124,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
     registry.registerItem({
       id: NotebookCommands['MoveCellDown'].id,
       command: NotebookCommands['MoveCellDown'].id,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-side-tooltip">
           <span className="libro-tooltip-text">{l10n.t('下移')}</span>
           <span className="libro-tooltip-keybind">Down</span>
@@ -137,7 +137,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
     registry.registerItem({
       id: NotebookCommands['InsertCellBelow'].id,
       command: NotebookCommands['InsertCellBelow'].id,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-side-tooltip">
           <span className="libro-tooltip-text">{l10n.t('增加')}</span>
           <span className="libro-tooltip-keybind">B</span>
@@ -150,7 +150,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
     registry.registerItem({
       id: NotebookCommands['DeleteCell'].id,
       command: NotebookCommands['DeleteCell'].id,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-side-tooltip">
           <span className="libro-tooltip-text">{l10n.t('删除')}</span>
           <span className="libro-tooltip-keybind">D D</span>
@@ -163,7 +163,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
     registry.registerItem({
       id: NotebookCommands['UndoCellAction'].id,
       command: NotebookCommands['UndoCellAction'].id,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-tooltip">
           <span className="libro-tooltip-text">{l10n.t('撤销')}</span>
           <span className="libro-tooltip-keybind">Z</span>
@@ -176,7 +176,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
     registry.registerItem({
       id: NotebookCommands['RedoCellAction'].id,
       command: NotebookCommands['RedoCellAction'].id,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-tooltip">
           <span className="libro-tooltip-text">{l10n.t('重做')}</span>
           <span className="libro-tooltip-keybind">Shift + Z</span>
@@ -204,7 +204,7 @@ export class LibroToolbarContribution implements ToolbarContribution {
     registry.registerItem({
       id: NotebookCommands['ClearAllCellOutput'].id,
       command: NotebookCommands['ClearAllCellOutput'].id,
-      tooltip: (
+      tooltip: () => (
         <div className="libro-tooltip">
           <span className="libro-tooltip-text">{l10n.t('清空输出')}</span>
         </div>
