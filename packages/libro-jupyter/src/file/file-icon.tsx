@@ -1,5 +1,3 @@
-import { l10n } from '@difizen/mana-l10n';
-
 interface IProps {
   className?: string;
   width?: string;
