@@ -8,7 +8,6 @@ import type {
 import { ExecutableCellModel } from '@difizen/libro-core';
 import type { IContentsModel } from '@difizen/libro-kernel';
 import type { Event as ManaEvent, Emitter } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
 
 export interface ExecutionMeta extends PartialJSONObject {
   'shell.execute_reply.started': string; // Kernel 开始执行任务时间在 metadata 中的 key
