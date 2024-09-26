@@ -64,7 +64,7 @@ export class FileView extends FileTreeView {
       labelProvider,
       decoratorService,
     );
-    this.title.label = l10n.t('文件导航');
+    this.title.label = () => <div>{l10n.t('文件导航')}</div>;
     this.title.icon = <FolderFilled />;
     this.toDispose.push(this.model.onOpenNode(this.openNode));
   }
