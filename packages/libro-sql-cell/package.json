@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-sql-cell",
-  "version": "0.2.35",
+  "version": "0.2.36",
   "description": "",
   "keywords": [
     "libro",
@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@difizen/libro-code-editor": "^0.2.35",
-    "@difizen/libro-jupyter": "^0.2.35",
+    "@difizen/libro-jupyter": "^0.2.36",
     "@difizen/libro-rendermime": "^0.2.35",
     "@difizen/libro-common": "^0.2.35",
     "@ant-design/icons": "^5.1.0",
