@@ -22,6 +22,7 @@ import {
   inject,
   singleton,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Modal } from 'antd';
 import React from 'react';
 
@@ -63,7 +64,7 @@ export class FileView extends FileTreeView {
       labelProvider,
       decoratorService,
     );
-    this.title.label = '文件导航';
+    this.title.label = l10n.t('文件导航');
     this.title.icon = <FolderFilled />;
     this.toDispose.push(this.model.onOpenNode(this.openNode));
   }
@@ -173,9 +174,11 @@ export class FileView extends FileTreeView {
         }
       } else {
         confirm({
-          title: '文件大小警告',
+          title: l10n.t('文件大小警告'),
           icon: <ExclamationCircleFilled />,
-          content: '您正尝试打开大于 10 MB 的文件，这可能会影响当前页面/服务的性能。',
+          content: l10n.t(
+            '您正尝试打开大于 10 MB 的文件，这可能会影响当前页面/服务的性能。',
+          ),
           onOk: async () => {
             const opener = (await this.openService.getOpener(
               treeNode.uri,

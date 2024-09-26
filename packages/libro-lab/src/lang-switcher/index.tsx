@@ -7,9 +7,10 @@ import { forwardRef } from 'react';
 import { LayoutService } from '../layout/layout-service.js';
 
 const langList = [
-  { value: L10nLang.zhCN, label: '中文' },
+  { value: L10nLang.zhCN, label: l10n.t('中文') },
   { value: L10nLang.enUS, label: 'En' },
 ];
+
 export const LangSwitcherComponent = forwardRef(function GithubLinkComponent() {
   const layoutService = useInject(LayoutService);
 

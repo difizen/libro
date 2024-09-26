@@ -1,6 +1,7 @@
 import { EditFilled } from '@ant-design/icons';
 import { LibroContextKey } from '@difizen/libro-core';
 import { useInject } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Select, Tag } from 'antd';
 import classNames from 'classnames';
 import type { BaseSelectRef } from 'rc-select';
@@ -62,7 +63,7 @@ export const ChatRecordInput: FC<ChatRecordInputProps> = (
           size="small"
           mode="tags"
           style={{ width: '100%' }}
-          placeholder="选择或输入聊天标识"
+          placeholder={l10n.t('选择或输入聊天标识')}
           onSelect={handleSelectChange}
           onChange={handleSelectChange}
           showSearch={false}

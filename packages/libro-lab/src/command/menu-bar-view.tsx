@@ -7,6 +7,7 @@ import {
   singleton,
   view,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { forwardRef } from 'react';
 
 export const ManaMenubarComponent = forwardRef(function GithubLinkComponent() {
@@ -22,7 +23,7 @@ export class MenuBarView extends BaseView {
   constructor() {
     super();
     this.title.icon = MacCommandOutlined;
-    this.title.label = '菜单';
+    this.title.label = l10n.t('菜单');
     this.id = 'menu-bar';
   }
 }

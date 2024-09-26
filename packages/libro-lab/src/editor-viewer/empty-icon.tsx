@@ -7,7 +7,6 @@ export const Empty: React.FC = () => (
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
   >
-    <title>Result结果/Z#/插画/成功备份11</title>
     <defs>
       <radialGradient
         cx="52.114839%"

@@ -7,13 +7,14 @@ import {
   singleton,
   ToolbarContribution,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 
 import { KernelAndTerminalPanelView } from './kernel-and-terminal-panel-view.js';
 
 export const PanelCommand = {
   REFRESH: {
     id: 'panel.command.refresh',
-    label: '刷新',
+    label: l10n.t('刷新'),
   },
 };
 
@@ -50,7 +51,7 @@ export class PanelCommandContribution
       id: PanelCommand.REFRESH.id,
       command: PanelCommand.REFRESH.id,
       icon: <ReloadOutlined />,
-      tooltip: '刷新',
+      tooltip: l10n.t('刷新'),
     });
   }
 }
