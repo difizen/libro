@@ -346,7 +346,7 @@
   "中文": "Chinese",
   "启动中": "Starting",
   "启动成功": "Startup success",
-  "服务状态：": "Service Status",
+  "服务状态：": "Service Status：",
   "服务启动中，请稍后，待服务启动完成后即可编辑文件。": "The service is being started, please edit the file later after the service is started.",
   "该文件格式暂不支持大纲": "The file format does not support the outline.",
   "大纲": "Outline",

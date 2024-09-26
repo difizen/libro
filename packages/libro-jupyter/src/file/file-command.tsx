@@ -34,55 +34,55 @@ import './index.less';
 export const FileCommands = {
   OPEN_FILE: {
     id: 'fileTree.command.openfile',
-    label: l10n.t('打开'),
+    label: '打开',
   },
   COPY: {
     id: 'fileTree.command.copy',
-    label: l10n.t('复制'),
+    label: '复制',
   },
   PASTE: {
     id: 'fileTree.command.paste',
-    label: l10n.t('粘贴'),
+    label: '粘贴',
   },
   CUT: {
     id: 'fileTree.command.cut',
-    label: l10n.t('剪切'),
+    label: '剪切',
   },
   RENAME: {
     id: 'fileTree.command.rename',
-    label: l10n.t('重命名'),
+    label: '重命名',
   },
   COPY_PATH: {
     id: 'fileTree.command.copyPath',
-    label: l10n.t('复制路径'),
+    label: '复制路径',
   },
   COPY_RELATIVE_PATH: {
     id: 'fileTree.command.copyRelativePath',
-    label: l10n.t('复制相对路径'),
+    label: '复制相对路径',
   },
   CREATE_FILE: {
     id: 'fileTree.command.createfile',
-    label: l10n.t('新建文件'),
+    label: '新建文件',
   },
   CREATE_DIR: {
     id: 'fileTree.command.createdir',
-    label: l10n.t('新建文件夹'),
+    label: '新建文件夹',
   },
   REFRESH: {
     id: 'fileTree.command.refresh',
-    label: l10n.t('刷新'),
+    label: '刷新',
   },
   REMOVE: {
     id: 'fileTree.command.remove',
-    label: l10n.t('删除'),
+    label: '删除',
   },
   DOWNLOAD: {
     id: 'fileTree.command.download',
-    label: l10n.t('下载'),
+    label: '下载',
   },
   UPLOAD: {
     id: 'fileTree.command.upload',
-    label: l10n.t('上传'),
+    label: '上传',
   },
 };
 export const FileTreeContextMenuPath: MenuPath = ['file-tree-context-menu'];
@@ -134,61 +134,73 @@ export class FileCommandContribution
     menu.registerMenuAction(FileTreeContextMenuGroups['new'], {
       id: FileCommands.CREATE_FILE.id,
       command: FileCommands.CREATE_FILE.id,
+      label: () => <div>{l10n.t(FileCommands.CREATE_FILE.label)}</div>,
       order: 'a',
     });
     menu.registerMenuAction(FileTreeContextMenuGroups['new'], {
       id: FileCommands.CREATE_DIR.id,
       command: FileCommands.CREATE_DIR.id,
+      label: () => <div>{l10n.t(FileCommands.CREATE_DIR.label)}</div>,
       order: 'a',
     });
     menu.registerMenuAction(FileTreeContextMenuGroups['new'], {
       id: FileCommands.OPEN_FILE.id,
       command: FileCommands.OPEN_FILE.id,
+      label: () => <div>{l10n.t(FileCommands.OPEN_FILE.label)}</div>,
       order: 'a',
     });
     menu.registerMenuAction(FileTreeContextMenuGroups['operator'], {
       id: FileCommands.COPY.id,
       command: FileCommands.COPY.id,
+      label: () => <div>{l10n.t(FileCommands.COPY.label)}</div>,
       order: 'b',
     });
     menu.registerMenuAction(FileTreeContextMenuGroups['operator'], {
       id: FileCommands.PASTE.id,
       command: FileCommands.PASTE.id,
+      label: () => <div>{l10n.t(FileCommands.PASTE.label)}</div>,
       order: 'c',
     });
     menu.registerMenuAction(FileTreeContextMenuGroups['operator'], {
       id: FileCommands.CUT.id,
       command: FileCommands.CUT.id,
+      label: () => <div>{l10n.t(FileCommands.CUT.label)}</div>,
       order: 'd',
     });
     menu.registerMenuAction(FileTreeContextMenuGroups['change'], {
       command: FileCommands.REMOVE.id,
       order: 'd',
       ...FileCommands.REMOVE,
+      label: () => <div>{l10n.t(FileCommands.REMOVE.label)}</div>,
     });
     menu.registerMenuAction(FileTreeContextMenuGroups['change'], {
       id: FileCommands.RENAME.id,
       command: FileCommands.RENAME.id,
+      label: () => <div>{l10n.t(FileCommands.RENAME.label)}</div>,
       order: 'e',
     });
     menu.registerMenuAction(FileTreeContextMenuGroups['extra'], {
       id: FileCommands.COPY_PATH.id,
       command: FileCommands.COPY_PATH.id,
+      label: () => <div>{l10n.t(FileCommands.COPY_PATH.label)}</div>,
       order: 'f',
     });
     menu.registerMenuAction(FileTreeContextMenuGroups['extra'], {
       id: FileCommands.COPY_RELATIVE_PATH.id,
       command: FileCommands.COPY_RELATIVE_PATH.id,
+      label: () => <div>{l10n.t(FileCommands.COPY_RELATIVE_PATH.label)}</div>,
       order: 'g',
     });
     menu.registerMenuAction(FileTreeContextMenuGroups['extra'], {
       id: FileCommands.DOWNLOAD.id,
       command: FileCommands.DOWNLOAD.id,
+      label: () => <div>{l10n.t(FileCommands.DOWNLOAD.label)}</div>,
       order: 'h',
     });
     menu.registerMenuAction(FileTreeContextMenuGroups['extra'], {
       id: FileCommands.UPLOAD.id,
       command: FileCommands.UPLOAD.id,
+      label: () => <div>{l10n.t(FileCommands.UPLOAD.label)}</div>,
       order: 'i',
     });
   }
