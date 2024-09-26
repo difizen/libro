@@ -38,14 +38,14 @@ export const KernelStatusSelector: React.FC = () => {
                 className="libro-kernel-badge"
                 key="libro-kernel-badge"
                 color={kernelStatus['busy'].color}
-                text={kernelStatus['busy'].text_zh}
+                text={l10n.t(kernelStatus['busy'].text_zh)}
               />
             ) : (
               <Badge
                 className="libro-kernel-badge"
                 key="libro-kernel-badge"
                 color={color}
-                text={text_zh}
+                text={l10n.t(text_zh)}
               />
             ))}
         </div>

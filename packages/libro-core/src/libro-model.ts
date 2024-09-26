@@ -493,7 +493,7 @@ export class LibroModel implements NotebookModel, DndListModel {
       getOrigin(this.sharedModel).deleteCell(position);
       getOrigin(this.sharedModel).insertCells(position, cellData);
     });
-    //切分cell操作结束后进入编辑态
+    //切分 Cell操作结束后进入编辑态
     this.enterEditMode();
   };
 
