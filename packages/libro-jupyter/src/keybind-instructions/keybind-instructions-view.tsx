@@ -110,17 +110,17 @@ export const KeybindInstrutionsComponent = forwardRef<
     {
       key: '1',
       value: '%timeit',
-      description: `${l10n.t('测试单行语句的执行时间')}`,
+      description: `${l10n.t('测试单行语句的运行时间')}`,
     },
     {
       key: '2',
       value: '%%timeit',
-      description: l10n.t('测试整个块中代码的执行时间'),
+      description: l10n.t('测试整个块中代码的运行时间'),
     },
     {
       key: '3',
       value: '%run',
-      description: l10n.t('调用外部python脚本'),
+      description: l10n.t('调用外部 python 脚本'),
     },
     {
       key: '4',

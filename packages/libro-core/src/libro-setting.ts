@@ -89,8 +89,8 @@ export const RightContentFixed: ConfigurationNode<boolean> = {
 
 export const OutputScrollBtnVisiable: ConfigurationNode<boolean> = {
   id: 'libro.cell.output.scroll.button.visiable',
-  description: l10n.t('cell输出区域高度固定按钮是否显示'),
-  title: l10n.t('cell输出区域高度固定按钮是否显示'),
+  description: l10n.t('Cell 输出区域高度固定按钮是否显示'),
+  title: l10n.t('Cell 输出区域高度固定按钮是否显示'),
   type: 'checkbox',
   defaultValue: true,
   schema: {

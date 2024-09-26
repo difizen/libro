@@ -188,8 +188,8 @@ export class LibroSearchProvider extends AbstractSearchProvider {
         supportReplace: false,
       },
       selectedCells: {
-        title: l10n.t('仅在选中 cell 中查找'),
-        description: l10n.t('仅在选中 cell 中查找'),
+        title: l10n.t('仅在选中 Cell 中查找'),
+        description: l10n.t('仅在选中 Cell 中查找'),
         default: false,
         supportReplace: true,
       },

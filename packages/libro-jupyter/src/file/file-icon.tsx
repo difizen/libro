@@ -190,7 +190,6 @@ export function MoreIcon(prop: IProps) {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <title>{l10n.t('库存查询')}</title>
       <g id="整体框架部分" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g
           id="1.2容器加载完成"

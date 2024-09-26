@@ -193,10 +193,10 @@ export const SearchContent = () => {
                 onChange={instance.searchCellOutputChange}
                 disabled={instance.replaceVisible}
               >
-                {l10n.t('在 output 中查找')}
+                {l10n.t('在 Output 中查找')}
               </Checkbox>
               {instance.replaceVisible && (
-                <Tag color="warning">{l10n.t('替换功能不能在 output 生效')}</Tag>
+                <Tag color="warning">{l10n.t('替换功能不能在 Output 生效')}</Tag>
               )}
             </div>
           )}

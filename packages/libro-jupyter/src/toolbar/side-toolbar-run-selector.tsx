@@ -32,7 +32,7 @@ export const SideToolbarRunSelector: React.FC = () => {
       id: NotebookCommands['RunAllAbove'].id,
       label: (
         <>
-          <span className="libro-menu-item-label">{l10n.t('运行上方所有 Cell')}</span>
+          <span className="libro-menu-item-label">{l10n.t('运行之前所有 Cell')}</span>
           <span className="libro-menu-item-keybind">Cmd + F8</span>
         </>
       ),
@@ -43,9 +43,7 @@ export const SideToolbarRunSelector: React.FC = () => {
       id: NotebookCommands['RunAllBelow'].id,
       label: (
         <>
-          <span className="libro-menu-item-label">
-            {l10n.t('运行当前及下方所有 Cell')}
-          </span>
+          <span className="libro-menu-item-label">{l10n.t('运行当前及之后 Cell')}</span>
           <span className="libro-menu-item-keybind">Cmd + F10</span>
         </>
       ),
@@ -59,7 +57,7 @@ export const SideToolbarRunSelector: React.FC = () => {
   );
 
   const [kernelUnreadyBtnText, setKernelUnreadyBtnText] = useState<string>(
-    l10n.t('kernel准备中，无法执行'),
+    l10n.t('kernel准备中，无法运行'),
   );
 
   useEffect(() => {

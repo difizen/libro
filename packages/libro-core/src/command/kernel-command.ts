@@ -25,7 +25,7 @@ export const KernelCommands: Record<string, Command & { keybind?: string }> = {
   },
   RestartKernel: {
     id: 'notebook:restart-kernel',
-    label: l10n.t('Restart Kernel…'),
+    label: l10n.t('Restart Kernel'),
   },
   ShutdownKernel: {
     id: 'notebook:shutdown-kernel',
