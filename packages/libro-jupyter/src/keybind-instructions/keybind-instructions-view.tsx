@@ -62,67 +62,6 @@ export class KeybindInstrutionsService implements Disposable {
 
 type Segment = 'keybind' | 'magic';
 
-const magicColumns = [
-  {
-    title: '关键字',
-    dataIndex: 'value',
-    key: 'value',
-  },
-  {
-    title: '含义',
-    dataIndex: 'description',
-    key: 'description',
-  },
-];
-
-const magics = [
-  {
-    key: '1',
-    value: '%timeit',
-    description: '测试单行语句的执行时间',
-  },
-  {
-    key: '2',
-    value: '%%timeit',
-    description: '测试整个块中代码的执行时间',
-  },
-  {
-    key: '3',
-    value: '%run',
-    description: '调用外部python脚本',
-  },
-  {
-    key: '4',
-    value: '%pwd',
-    description: '查看当前工作目录',
-  },
-  {
-    key: '5',
-    value: '%ls',
-    description: '查看目录文件列表',
-  },
-  {
-    key: '6',
-    value: '%reset',
-    description: '清除全部变量',
-  },
-  {
-    key: '7',
-    value: '%who',
-    description: '查看所有全局变量的名称，若给定类型参数，只返回该类型的变量列表',
-  },
-  {
-    key: '8',
-    value: '%whos',
-    description: '显示所有的全局变量名称、类型、值/信息',
-  },
-  {
-    key: '9',
-    value: '%env',
-    description: '列出全部环境变量',
-  },
-];
-
 export const KeybindInstrutionsComponent = forwardRef<
   HTMLDivElement,
   ModalItemProps<void>
@@ -154,6 +93,69 @@ export const KeybindInstrutionsComponent = forwardRef<
     );
   };
 
+  const magicColumns = [
+    {
+      title: l10n.t('关键字'),
+      dataIndex: 'value',
+      key: 'value',
+    },
+    {
+      title: l10n.t('含义'),
+      dataIndex: 'description',
+      key: 'description',
+    },
+  ];
+
+  const magics = [
+    {
+      key: '1',
+      value: '%timeit',
+      description: `${l10n.t('测试单行语句的执行时间')}`,
+    },
+    {
+      key: '2',
+      value: '%%timeit',
+      description: l10n.t('测试整个块中代码的执行时间'),
+    },
+    {
+      key: '3',
+      value: '%run',
+      description: l10n.t('调用外部python脚本'),
+    },
+    {
+      key: '4',
+      value: '%pwd',
+      description: l10n.t('查看当前工作目录'),
+    },
+    {
+      key: '5',
+      value: '%ls',
+      description: l10n.t('查看目录文件列表'),
+    },
+    {
+      key: '6',
+      value: '%reset',
+      description: l10n.t('清除全部变量'),
+    },
+    {
+      key: '7',
+      value: '%who',
+      description: l10n.t(
+        '查看所有全局变量的名称，若给定类型参数，只返回该类型的变量列表',
+      ),
+    },
+    {
+      key: '8',
+      value: '%whos',
+      description: l10n.t('显示所有的全局变量名称、类型、值/信息'),
+    },
+    {
+      key: '9',
+      value: '%env',
+      description: l10n.t('列出全部环境变量'),
+    },
+  ];
+
   const commandModeDataSource = getOrigin(
     keybindInstrutionsService.searchCommandModeData.length > 0
       ? keybindInstrutionsService.searchCommandModeData
@@ -177,7 +179,7 @@ export const KeybindInstrutionsComponent = forwardRef<
     >
       <div className="libro-keybind-instructions-command" ref={ref}>
         <Drawer
-          title="快捷键"
+          title={l10n.t('快捷键')}
           placement="right"
           onClose={handleClose}
           width="330px"
@@ -191,9 +193,10 @@ export const KeybindInstrutionsComponent = forwardRef<
             onChange={(value) => setSegment(value as Segment)}
             options={[
               { label: l10n.t('快捷键'), value: 'keybind' },
-              { label: 'Magic 命令', value: 'magic' },
+              { label: l10n.t('Magic 命令'), value: 'magic' },
             ]}
           />
+
           {segment === 'magic' && (
             <div className="libro-magic-table">
               <Table

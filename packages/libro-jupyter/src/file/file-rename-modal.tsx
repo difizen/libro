@@ -1,5 +1,6 @@
 import { ThemeService, useInject, ViewManager } from '@difizen/mana-app';
 import type { ModalItem, ModalItemProps, URI } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Form, message, Input, Modal, theme, ConfigProvider } from 'antd';
 import type { InputRef } from 'antd';
 import { useEffect, useRef, useState } from 'react';
@@ -48,16 +49,16 @@ export const FileRenameModalComponent: React.FC<ModalItemProps<ModalItemType>> =
         }
       }
     } catch {
-      message.error('重命名文件/文件夹失败');
+      message.error(l10n.t('重命名文件/文件夹失败'));
     }
   };
 
   const validateRename = async (rule: any, value: string, callback: any) => {
     if (!value || !value.length) {
-      throw new Error('请输入文件夹名');
+      throw new Error(l10n.t('请输入文件夹名'));
     } else {
       if (value === data?.fileName) {
-        throw new Error('文件/文件夹名称已存在，请重新输入');
+        throw new Error(l10n.t('文件/文件夹名称已存在，请重新输入'));
       }
     }
   };
@@ -72,7 +73,7 @@ export const FileRenameModalComponent: React.FC<ModalItemProps<ModalItemType>> =
       }}
     >
       <Modal
-        title="文件重命名"
+        title={l10n.t('文件重命名')}
         open={visible}
         onCancel={close}
         onOk={() => {
@@ -89,7 +90,7 @@ export const FileRenameModalComponent: React.FC<ModalItemProps<ModalItemType>> =
         >
           <Form.Item
             name="rename"
-            label="文件/文件夹名称"
+            label={l10n.t('文件/文件夹名称')}
             rules={[{ required: true, validator: validateRename }]}
             initialValue={data?.fileName}
           >

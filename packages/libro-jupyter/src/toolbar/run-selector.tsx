@@ -35,8 +35,9 @@ export const RunSelector: React.FC = () => {
     libroModel as LibroJupyterModel,
   );
 
-  const [kernelUnreadyBtnText, setKernelUnreadyBtnText] =
-    useState<string>('kernel准备中，无法执行');
+  const [kernelUnreadyBtnText, setKernelUnreadyBtnText] = useState<string>(
+    l10n.t('kernel准备中，无法执行'),
+  );
 
   useEffect(() => {
     configService

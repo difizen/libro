@@ -12,6 +12,7 @@ import {
   ViewInstance,
   ViewManager,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect, useState } from 'react';
 
@@ -161,6 +162,7 @@ const PanelRender: React.FC = () => {
             }
           }}
         />
+
         <LibroCollapse
           type={LibroPanelCollapseItemType.KERNEL}
           items={kernelItems}
@@ -169,11 +171,13 @@ const PanelRender: React.FC = () => {
             await libroSessionManager.refreshRunning();
           }}
         />
+
         <LibroCollapse
           type={LibroPanelCollapseItemType.TERMINAL}
           items={terminalItems}
           shutdownAll={async () => await terminalManager.shutdownAll()}
         />
+
         <LibroCollapse
           type={LibroPanelCollapseItemType.LSP}
           items={lspItems}
@@ -211,7 +215,7 @@ export class KernelAndTerminalPanelView extends BaseView {
   ) {
     super();
     this.title.icon = <KernelAndTerminal />;
-    this.title.label = '运行的终端和内核';
+    this.title.label = l10n.t('运行的终端和内核');
 
     this.libroKernelManager = libroKernelManager;
     this.libroSessionManager = libroSessionManager;

@@ -184,7 +184,7 @@ export const LibroSqlCell = React.forwardRef<HTMLDivElement>(
                 ? instance.databaseConfig.db_type +
                   ': ' +
                   instance.databaseConfig.database
-                : '暂未配置数据库'}
+                : l10n.t('暂未配置数据库')}
             </span>
           </div>
           <div className="libro-sql-variable-name">

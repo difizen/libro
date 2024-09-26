@@ -4,6 +4,7 @@ import { SlotViewManager } from '@difizen/mana-app';
 import { inject, ViewManager } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
 import { CommandContribution } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 
 import { terminalDefaultSlot } from './configuration.js';
 import { TerminalManager } from './manager.js';
@@ -12,12 +13,12 @@ import { LibroTerminalView } from './view.js';
 export const TerminalCommands: Record<string, Command & { keybind?: string }> = {
   OpenTerminal: {
     id: 'libro-terminal-open',
-    label: '新建终端',
+    label: l10n.t('新建终端'),
     keybind: 'ctrl+`',
   },
   CloseTerminal: {
     id: 'libro-terminal-close',
-    label: '关闭终端',
+    label: l10n.t('关闭终端'),
   },
 };
 

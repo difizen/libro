@@ -8,6 +8,7 @@ import { concatMultilineString } from '@difizen/libro-common';
 import type { BaseOutputView } from '@difizen/libro-jupyter';
 import { NotebookCommands } from '@difizen/libro-jupyter';
 import { CommandRegistry, useInject } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import React, { useState } from 'react';
 import { v4 } from 'uuid';
 
@@ -103,19 +104,19 @@ export const PromptOutputRender: React.FC<{
       {sourceArr.length > 0 && (
         <>
           <span onClick={insertAndRun} className="libro-prompt-output-btn">
-            插入并运行
+            {l10n.t('插入并运行')}
           </span>
           <span onClick={insert} className="libro-prompt-output-btn">
-            插入代码
+            {l10n.t('插入代码')}
           </span>
           <span onClick={copy} className="libro-prompt-output-btn">
-            复制代码
+            {l10n.t('复制代码')}
           </span>
         </>
       )}
       {selection && (
         <span onClick={copySelection} className="libro-prompt-output-btn">
-          复制选中内容
+          {l10n.t('复制选中内容')}
         </span>
       )}
     </div>

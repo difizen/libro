@@ -1,3 +1,4 @@
+import { l10n } from '@difizen/mana-l10n';
 import { message } from 'antd';
 
 function copyFallback(string: string) {
@@ -11,9 +12,9 @@ function copyFallback(string: string) {
   document.addEventListener('copy', handler, true);
   const successful = document.execCommand('copy');
   if (successful) {
-    message.success('复制成功');
+    message.success(l10n.t('复制成功'));
   } else {
-    message.warning('复制失败');
+    message.warning(l10n.t('复制失败'));
   }
 }
 
@@ -29,11 +30,11 @@ export const copy2clipboard = (string: string) => {
           window.navigator.clipboard
             .writeText(string)
             .then(() => {
-              message.success('复制成功');
+              message.success(l10n.t('复制成功'));
               return;
             })
             .catch((err) => {
-              message.warning('复制失败');
+              message.warning(l10n.t('复制失败'));
               console.error('Could not copy text: ', err);
             });
         } else {

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-parameter-properties */
 /* eslint-disable @typescript-eslint/parameter-properties */
 import type { CodeEditorViewOptions } from '@difizen/libro-code-editor';
@@ -33,6 +32,7 @@ import {
   watch,
   Deferred,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n'; /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, memo, forwardRef } from 'react';
 
 import type { LibroCodeCellModel } from './code-cell-model.js';
@@ -224,7 +224,7 @@ export class LibroCodeCellView extends LibroEditableExecutableCellView {
       config: {
         readOnly: !this.parent.model.inputEditable,
         editable: this.parent.model.inputEditable,
-        placeholder: '请输入代码',
+        placeholder: l10n.t('请输入代码'),
       },
     };
     return option;
