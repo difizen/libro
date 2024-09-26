@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-search",
-  "version": "0.2.35",
+  "version": "0.2.36",
   "description": "",
   "keywords": [
     "libro",
@@ -50,7 +50,7 @@
     "@difizen/mana-l10n": "latest",
     "@ant-design/icons": "^5.1.0",
     "@difizen/libro-common": "^0.2.35",
-    "@difizen/libro-core": "^0.2.35",
+    "@difizen/libro-core": "^0.2.36",
     "@difizen/libro-code-editor": "^0.2.35",
     "@types/lodash.debounce": "^4.0.7",
     "classnames": "^2.3.2",
