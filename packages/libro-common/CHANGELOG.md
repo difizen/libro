@@ -1,5 +1,11 @@
 # @difizen/libro-common
 
+## 0.2.37
+
+### Patch Changes
+
+- [#238](https://github.com/difizen/libro/pull/238) [`363ea46`](https://github.com/difizen/libro/commit/363ea469abb0d3ed59a8e3cda8045e457a6846d4) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - feat: add bilingual support
+
 ## 0.2.35
 
 ### Patch Changes
