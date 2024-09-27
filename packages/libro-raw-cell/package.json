@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-raw-cell",
-  "version": "0.2.35",
+  "version": "0.2.37",
   "description": "",
   "keywords": [
     "libro",
@@ -45,8 +45,8 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-code-editor": "^0.2.35",
-    "@difizen/libro-common": "^0.2.35",
+    "@difizen/libro-code-editor": "^0.2.37",
+    "@difizen/libro-common": "^0.2.37",
     "@difizen/libro-core": "^0.2.35",
     "@difizen/mana-app": "latest"
   },
