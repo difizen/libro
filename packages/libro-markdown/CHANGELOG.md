@@ -1,5 +1,11 @@
 # @difizen/libro-markdown
 
+## 0.2.38
+
+### Patch Changes
+
+- [#240](https://github.com/difizen/libro/pull/240) [`8fb120a`](https://github.com/difizen/libro/commit/8fb120a856efbd90e8ff302a3ccc0b33ec65e9b5) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - sync all packages's version
+
 ## 0.2.36
 
 ### Patch Changes
