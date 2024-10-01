@@ -3,7 +3,7 @@
   "在 Output 中查找": "Find in output",
   "替换功能不能在 Output 生效": "The replacement function cannot take effect in output.",
   "仅在选中 Cell 中查找": "Only find in the selected cell",
-  "当前文件：": "Current file: ",
+  "当前文件：": "Current file： ",
   "当前变量名已存在": "The current variable name already exists.",
   "是否显示libro顶部工具栏": "Whether to show the top toolbar of libro",
   "顶部工具栏": "Top toolbar",
