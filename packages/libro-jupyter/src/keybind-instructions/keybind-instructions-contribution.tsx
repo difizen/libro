@@ -37,7 +37,7 @@ export class KeybindInstructionsContribution
       icon: KeybindInstructionsIcon,
       command: KeybindInstructionsCommand.id,
       order: 'l',
-      tooltip: l10n.t('查看快捷键'),
+      tooltip: () => <div>{l10n.t('查看快捷键')}</div>,
     });
   }
 
