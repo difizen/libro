@@ -1,5 +1,11 @@
 # @difizen/libro-code-editor
 
+## 0.2.39
+
+### Patch Changes
+
+- [#242](https://github.com/difizen/libro/pull/242) [`1c3623a`](https://github.com/difizen/libro/commit/1c3623ac68a24000060469c7b1c6370183e4475a) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix: fix some bilingual text error
+
 ## 0.2.38
 
 ### Patch Changes
