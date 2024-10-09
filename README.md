@@ -27,20 +27,8 @@ Language: English | [简体中文](./README_zh.md)
 
 ---
 
-## Table of Contents
-
-- [Quick Start](#Quick-Start)
-- [Quick Integration](#Quick-Integration)
-- [New Features](#New-Features)
-  - [prompt cell](#prompt-cell)
-  - [sql cell](#sql-cell)
-- [Technical Architecture](#Technical-Architecture)
-- [Future Plans](#Future-Plans)
-- [More](#More)
-  - [Reporting Issues](#Reporting-Issues)
-  - [Contributing](#Contributing)
-  - [Contributors](#Contributors)
-  - [Contact Us](#Contact-Us)
+<!-- START doctoc -->
+<!-- END doctoc -->
 
 ---
 
