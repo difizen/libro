@@ -1,20 +1,27 @@
-# <div style='display: flex'><img src="./apps/docs/public/logo.svg" width="30" style='margin-right: 6px'><span> libro</span></div>
+语言: 中文 | [English](./README.md)
 
-语言版本: [English](./README.md) | [中文](./README_zh.md)
+<p align="center"><img src="./apps/docs/public/libro-text.svg" width="80" /></p>
+<p align="center"><strong>libro：灵活定制、轻松集成的 Notebook 产品方案</strong></p>
 
-[![Code: CI](https://github.com/difizen/libro/actions/workflows/ci.yml/badge.svg)](https://github.com/difizen/libro/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![download-image](https://img.shields.io/npm/dm/@difizen/libro-core.svg)](https://www.npmjs.com/package/@difizen/libro-core)
+<p align="center">
+<a href="https://github.com/difizen/libro/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/difizen/libro/ci.yml?branch=main&style=for-the-badge&logo=github" alt="Code: CI" style="max-width: 100%;"></a>
+<a href="/LICENSE"><img src="https://img.shields.io/github/license/difizen/libro?style=for-the-badge" alt="MIT License"></a>
+<a href="https://www.npmjs.com/package/@difizen/libro-core"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@difizen/libro-core?logo=npm&style=for-the-badge"></a>
+<a href="https://github.com/difizen/libro/pulls"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=for-the-badge"></a>
+<a href="https://libro.difizen.net"><img alt="website" src="https://img.shields.io/static/v1?label=&labelColor=505050&message=Homepage&color=0076D6&style=for-the-badge&logo=google-chrome&logoColor=f5f5f5"></a>
+</p>
 
-⚡ libro：灵活定制、轻松集成的 Notebook 产品方案⚡
+## 特性
 
 - 提供完整的 Notebook 能力和丰富的周边功能，基于现有组合快速上手。
 - 提供内核级别的扩展能力，所有层次的内容均允许二次开发定制。
 - 定义大模型工作流，内置大模型交互和辅助开发能力。
 
-💡 官网：https://libro.difizen.net/
-
-如果你也喜欢这个项目，欢迎为我们点亮 🌟🌟🌟
+<p>　</p>
+<p align="center">
+🌟🌟🌟 如果你也喜欢这个项目，欢迎为我们点亮 🌟🌟🌟
+</p>
+<p>　</p>
 
 ![image](./apps/docs/public/libro.png)
 
