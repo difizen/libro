@@ -123,7 +123,7 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 ### 联系我们
 
-💬 [加入 Discord](https://discord.gg/pK8X3guD)
+💬 [加入 Discord](https://discord.gg/RbZ9aEKK)
 
 🤗 [加入钉钉答疑群](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
 

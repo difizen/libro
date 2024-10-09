@@ -16,7 +16,7 @@ Language version: [English](./README.md) | [中文](./README_zh.md)
 
 If you like this project, feel free to give us a star! 🌟🌟🌟
 
-![image](./apps/docs/public/libro.png)
+![image](./apps/docs/public/libro_en.png)
 
 ---
 
@@ -123,7 +123,7 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 ### Contact Us
 
-💬 [Chat with us on Discord](https://discord.gg/pK8X3guD)
+💬 [Chat with us on Discord](https://discord.gg/RbZ9aEKK)
 
 🤗 [Join our DingTalk Q&A group](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
 
