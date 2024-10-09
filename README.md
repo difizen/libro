@@ -12,6 +12,7 @@ Language: English | [简体中文](./README_zh.md)
 </p>
 
 ## Features
+
 - Provides comprehensive Notebook functionality with a rich set of auxiliary tools, allowing for quick adoption based on existing setups.
 - Supports kernel-level extensibility, enabling customization and further development at all layers.
 - Defines workflows for large models, with built-in capabilities for model interaction and AI-powered assistance.
