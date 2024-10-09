@@ -46,7 +46,7 @@ For more details, please refer to [quick start](./apps/docs/docs/quickstart/inde
 
 ## Quick Integration
 
-libro is fully modular, giving you the flexibility to choose from its native capability modules or add custom ones for extended development. To learn more about the modular development approach, check out [mana](https://github.com/difizen/mana).
+Libro is fully modular, giving you the flexibility to choose from its native capability modules or add custom ones for extended development. To learn more about the modular development approach, check out [mana](https://github.com/difizen/mana).
 
 You can assemble different modules based on your needs to build your own notebook product. For example, you might integrate only the editor-related modules into an IDE or other development environments, or bring in more modules to create a lab-style solution.
 
