@@ -1,6 +1,6 @@
 Language: English | [简体中文](./README_zh.md)
 
-<p align="center"><img src="./apps/docs/public/libro-text.svg" width="60" /></p>
+<p align="center"><img src="./apps/docs/public/libro-text.svg" width="80" /></p>
 <p align="center"><strong>A Notebook Product Solution with Flexible Customization and Easy Integration</strong></p>
 
 <p align="center">
