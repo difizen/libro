@@ -3,16 +3,33 @@ on:
   push:
     branches:
       - main
-      - ximo_dev
     paths:
-      - 'README.md' # 只有 README.md 发生变化时触发name: TOC Generator
+      - README.md
+      - README_zh.md
 jobs:
   generateTOC:
     name: TOC Generator
     runs-on: ubuntu-latest
     steps:
-      - uses: technote-space/toc-generator@v4
+      # - uses: technote-space/toc-generator@v4
+      #   with:
+      #     CREATE_PR: true
+      #     GITHUB_TOKEN: ${{ secrets.LIBRO_TOKEN }}
+      #     PR_TITLE: 'chore(docs): update TOC of readme'
+
+      - name: Generate TOC for README.md
+        uses: technote-space/toc-generator@v4
         with:
+          TARGET_PATHS: README.md
+          TOC_TITLE: '## Table of Contents'
+          GITHUB_TOKEN: ${{ secrets.LIBRO_TOKEN }}
+          PR_TITLE: 'chore(docs): update TOC of readme'
+
+      - name: Generate TOC for README_zh.md
+        uses: technote-space/toc-generator@v4
+        with:
+          TARGET_PATHS: README_zh.md
+          TOC_TITLE: '## 目录'
           CREATE_PR: true
           GITHUB_TOKEN: ${{ secrets.LIBRO_TOKEN }}
           PR_TITLE: 'chore(docs): update TOC of readme'
