@@ -1,20 +1,26 @@
-# <div style='display: flex'><img src="./apps/docs/public/libro.svg" width="30" style='margin-right: 6px'><span> libro</span></div>
+Language: English | [简体中文](./README_zh.md)
 
-Language version: [English](./README.md) | [中文](./README_zh.md)
+<p align="center"><img src="./apps/docs/public/libro-text.svg" width="60" /></p>
+<p align="center"><strong>A Notebook Product Solution with Flexible Customization and Easy Integration</strong></p>
 
-[![Code: CI](https://github.com/difizen/libro/actions/workflows/ci.yml/badge.svg)](https://github.com/difizen/libro/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![download-image](https://img.shields.io/npm/dm/@difizen/libro-core.svg)](https://www.npmjs.com/package/@difizen/libro-core)
+<p align="center">
+<a href="https://github.com/difizen/libro/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/difizen/libro/ci.yml?branch=main&style=for-the-badge&logo=github" alt="Code: CI" style="max-width: 100%;"></a>
+<a href="/LICENSE"><img src="https://img.shields.io/github/license/difizen/libro?style=for-the-badge" alt="MIT License"></a>
+<a href="https://www.npmjs.com/package/@difizen/libro-core"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@difizen/libro-core?logo=npm&style=for-the-badge"></a>
+<a href="https://github.com/difizen/libro/pulls"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=for-the-badge"></a>
+<a href="https://libro.difizen.net"><img alt="website" src="https://img.shields.io/static/v1?label=&labelColor=505050&message=Homepage&color=0076D6&style=for-the-badge&logo=google-chrome&logoColor=f5f5f5"></a>
+</p>
 
-⚡ libro：A Notebook Product Solution with Flexible Customization and Easy Integration.⚡
-
+## Features
 - Provides comprehensive Notebook functionality with a rich set of auxiliary tools, allowing for quick adoption based on existing setups.
 - Supports kernel-level extensibility, enabling customization and further development at all layers.
 - Defines workflows for large models, with built-in capabilities for model interaction and AI-powered assistance.
 
-💡 Homepage：https://libro.difizen.net/
-
-If you like this project, feel free to give us a star! 🌟🌟🌟
+<p>　</p>
+<p align="center">
+🌟🌟🌟 If you like this project, feel free to give us a star! 🌟🌟🌟
+</p>
+<p>　</p>
 
 ![image](./apps/docs/public/libro_en.png)
 
