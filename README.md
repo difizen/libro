@@ -27,8 +27,25 @@ Language: English | [简体中文](./README_zh.md)
 
 ---
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Quick Integration](#quick-integration)
+  - [Component-Based Consumption](#component-based-consumption)
+- [New Features](#new-features)
+  - [Prompt Cell](#prompt-cell)
+  - [Sql Cell](#sql-cell)
+- [Technical Architecture](#technical-architecture)
+- [Future Plans](#future-plans)
+- [More](#more)
+  - [Reporting Issues](#reporting-issues)
+  - [Contributing](#contributing)
+  - [Contributors](#contributors)
+  - [Contact Us](#contact-us)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ---
 
