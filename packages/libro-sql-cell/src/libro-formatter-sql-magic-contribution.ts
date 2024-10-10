@@ -9,6 +9,7 @@ import { singleton } from '@difizen/mana-app';
 
 export interface SqlDecodedFormatter extends DefaultDecodedFormatter {
   result_variable?: string;
+  db_id?: string;
 }
 
 @singleton({ contrib: FormatterContribution })
@@ -22,7 +23,7 @@ export class FormatterSqlMagicContribution
     return libroFormatter === this.formatter ? 100 : 1;
   };
   encode = (source: SqlDecodedFormatter) => {
-    const sqlEncodedValue = `%%sql \n{"result_variable":"${source.result_variable}", "sql_script":"${source.value}"}`;
+    const sqlEncodedValue = `%%sql \n{"result_variable":"${source.result_variable}", "db_id":"${source.db_id}","sql_script":"${source.value}"}`;
     return {
       source: sqlEncodedValue,
       metadata: {
@@ -36,10 +37,12 @@ export class FormatterSqlMagicContribution
       const run = value.split('%%sql \n')[1];
       const runValue = JSON.parse(run);
       const result_variable: string = runValue.result_variable;
+      const db_id: string = runValue.db_id;
       const codeValue: string = runValue.sql_script;
       return {
         result_variable,
         value: codeValue,
+        db_id,
       };
     }
     return {
@@ -48,6 +51,6 @@ export class FormatterSqlMagicContribution
   };
 
   validate = (source: SqlDecodedFormatter): source is SqlDecodedFormatter => {
-    return 'result_variable' in source && 'sql_script' in source;
+    return 'result_variable' in source && 'sql_script' in source && 'db_id' in source;
   };
 }

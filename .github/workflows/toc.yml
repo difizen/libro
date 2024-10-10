@@ -24,6 +24,7 @@ jobs:
           TOC_TITLE: '## Table of Contents'
           GITHUB_TOKEN: ${{ secrets.LIBRO_TOKEN }}
           PR_TITLE: 'chore(docs): update TOC of readme'
+          COMMIT_MESSAGE: 'chore(docs): update TOC of readme'
 
       - name: Generate TOC for README_zh.md
         uses: technote-space/toc-generator@v4
@@ -33,3 +34,4 @@ jobs:
           CREATE_PR: true
           GITHUB_TOKEN: ${{ secrets.LIBRO_TOKEN }}
           PR_TITLE: 'chore(docs): update TOC of readme'
+          COMMIT_MESSAGE: 'chore(docs): update TOC of readme'
