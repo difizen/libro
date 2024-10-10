@@ -19,6 +19,8 @@ export class LibroSqlCellModel extends LibroCellModel implements ExecutableCellM
   @prop()
   resultVariable: string | undefined;
   @prop()
+  dbId: string | undefined;
+  @prop()
   executeCount: ExecutionCount;
   @prop()
   executing: boolean;
@@ -82,6 +84,7 @@ export class LibroSqlCellModel extends LibroCellModel implements ExecutableCellM
   override set decodeObject(data: SqlDecodedFormatter) {
     this.value = data.value;
     this.resultVariable = data.result_variable;
+    this.dbId = data.db_id;
     this._decodeObject = data;
   }
 
@@ -90,6 +93,7 @@ export class LibroSqlCellModel extends LibroCellModel implements ExecutableCellM
       ...this._decodeObject,
       value: this.value,
       result_variable: this.resultVariable || this._decodeObject.result_variable,
+      db_id: this.dbId || this._decodeObject.db_id,
     };
   }
 
