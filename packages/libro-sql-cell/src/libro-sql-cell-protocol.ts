@@ -11,6 +11,7 @@ export interface VisAnalysis {
 
 export interface DatabaseConfig {
   db_type: string;
+  id: string;
   username: string;
   password: string;
   host: string;
