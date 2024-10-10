@@ -36,6 +36,7 @@ import {
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 import type { InputRef } from 'antd';
+import { Select } from 'antd';
 import { Input } from 'antd';
 import React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -166,10 +167,25 @@ export const LibroSqlCell = React.forwardRef<HTMLDivElement>(
     const instance = useInject<LibroSqlCellView>(ViewInstance);
     const contextKey = useInject(LibroContextKey);
     const [edit, setEdit] = useState(false);
+    const [selectedDb, setSelectedDb] = useState<string>(
+      instance.model.dbId || l10n.t('暂无内置数据库'),
+    );
 
     const handCancelEdit = () => {
       contextKey.enableCommandMode();
       setEdit(false);
+    };
+
+    useEffect(() => {
+      instance.getDatabaseConfig();
+    }, [instance]);
+
+    const handleChange = (value: string) => {
+      instance.handleDbChange(value);
+      if (instance.parent.model.onChange) {
+        instance.parent.model.onChange();
+      }
+      setSelectedDb(value);
     };
 
     return (
@@ -179,13 +195,21 @@ export const LibroSqlCell = React.forwardRef<HTMLDivElement>(
             <span className="libro-sql-source-title">
               <DatabaseOutlined />
             </span>
-            <span className="libro-sql-source-content">
-              {instance.databaseConfig
-                ? instance.databaseConfig.db_type +
-                  ': ' +
-                  instance.databaseConfig.database
-                : l10n.t('暂未配置数据库')}
-            </span>
+            <Select
+              value={selectedDb}
+              style={{ minWidth: 160 }}
+              onChange={handleChange}
+              options={instance.databases.map((db) => {
+                return {
+                  value: db.id,
+                  label: db.db_type + ': ' + db.database,
+                };
+              })}
+              bordered={false}
+              onFocus={async () => {
+                await instance.getDatabaseConfig();
+              }}
+            />
           </div>
           <div className="libro-sql-variable-name">
             <span className="libro-sql-variable-name-title">Name: </span>
@@ -227,7 +251,7 @@ export class LibroSqlCellView extends LibroEditableExecutableCellView {
   outputs: IOutput[];
 
   @prop()
-  databaseConfig?: DatabaseConfig;
+  databases: DatabaseConfig[] = [];
 
   @prop()
   override editorStatus: EditorStatus = EditorStatus.NOTLOADED;
@@ -345,6 +369,10 @@ export class LibroSqlCellView extends LibroEditableExecutableCellView {
       this.editorAreaHeight = size.height + 36;
     }
   };
+
+  handleDbChange(value: string) {
+    this.model.dbId = value;
+  }
 
   override toJSON(): LibroCell {
     const meta = super.toJSON();
@@ -497,9 +525,9 @@ export class LibroSqlCellView extends LibroEditableExecutableCellView {
       (msg) =>
         this.handleQueryResponse(msg, (result) => {
           try {
-            this.databaseConfig = JSON.parse(result);
-          } catch (e) {
-            this.databaseConfig = undefined;
+            this.databases = JSON.parse(result);
+          } catch {
+            //
           }
         }),
     );
