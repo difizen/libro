@@ -22,3 +22,6 @@ pnpm-lock.yaml
 **/*/keyboard/layouts/**
 tinyColor.less
 .changeset
+README.md
+README_zh.md
+
