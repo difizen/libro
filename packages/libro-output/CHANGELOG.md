@@ -1,5 +1,16 @@
 # @difizen/libro-output
 
+## 0.2.40
+
+### Patch Changes
+
+- [#250](https://github.com/difizen/libro/pull/250) [`072db00`](https://github.com/difizen/libro/commit/072db00ae8db8ea0fc11439c9221104afb107391) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - feat(sql): support select db
+
+- Updated dependencies [[`072db00`](https://github.com/difizen/libro/commit/072db00ae8db8ea0fc11439c9221104afb107391)]:
+  - @difizen/libro-common@0.2.40
+  - @difizen/libro-core@0.2.40
+  - @difizen/libro-rendermime@0.2.40
+
 ## 0.2.39
 
 ### Patch Changes
