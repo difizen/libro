@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/** @format */
+
 import { concatMultilineString } from '@difizen/libro-common';
 import { FormatterContribution } from '@difizen/libro-jupyter';
 import type {
@@ -23,7 +24,12 @@ export class FormatterSqlMagicContribution
     return libroFormatter === this.formatter ? 100 : 1;
   };
   encode = (source: SqlDecodedFormatter) => {
-    const sqlEncodedValue = `%%sql \n{"result_variable":"${source.result_variable}", "db_id":"${source.db_id}","sql_script":"${source.value}"}`;
+    const sqlJson = {
+      result_variable: source.result_variable,
+      db_id: source.db_id,
+      sql_script: source.value,
+    };
+    const sqlEncodedValue = `%%sql \n${JSON.stringify(sqlJson)}`;
     return {
       source: sqlEncodedValue,
       metadata: {
@@ -35,15 +41,19 @@ export class FormatterSqlMagicContribution
     const value = concatMultilineString(formatterValue.source);
     if (value.startsWith('%%sql \n')) {
       const run = value.split('%%sql \n')[1];
-      const runValue = JSON.parse(run);
-      const result_variable: string = runValue.result_variable;
-      const db_id: string = runValue.db_id;
-      const codeValue: string = runValue.sql_script;
-      return {
-        result_variable,
-        value: codeValue,
-        db_id,
-      };
+      try {
+        const runValue = JSON.parse(run);
+        const result_variable: string = runValue.result_variable;
+        const db_id: string = runValue.db_id;
+        const codeValue: string = runValue.sql_script;
+        return {
+          result_variable,
+          value: codeValue,
+          db_id,
+        };
+      } catch (e) {
+        console.warn('🚀 ~ e:', e);
+      }
     }
     return {
       value: '',
