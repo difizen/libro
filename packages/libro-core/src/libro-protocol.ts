@@ -207,6 +207,8 @@ export interface BaseNotebookModel {
    */
   onChange?: () => void;
 
+  onRestart?: Event<void>;
+
   onSourceChange?: (cells: CellView[]) => void;
 
   onCellContentChange: (changes: ICellContentChange) => void;

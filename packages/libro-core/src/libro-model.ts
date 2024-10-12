@@ -67,6 +67,11 @@ export class LibroModel implements NotebookModel, DndListModel {
     return this.onSourceChangedEmitter.event;
   }
 
+  protected onRestartEmitter: Emitter<void> = new Emitter();
+  get onRestart() {
+    return this.onRestartEmitter.event;
+  }
+
   protected onCellContentChangedEmitter: Emitter<ICellContentChange> = new Emitter();
   get onCellContentChanged() {
     return this.onCellContentChangedEmitter.event;
@@ -438,6 +443,10 @@ export class LibroModel implements NotebookModel, DndListModel {
   addCell = (cell: CellView, position?: number, mode?: string) => {
     this.insertCells([cell], position, mode);
   };
+
+  async restart() {
+    this.onRestartEmitter.fire();
+  }
 
   insertCells = (cells: CellView[], position?: number, mode?: string) => {
     // 非初始化阶段才需要自动滚动

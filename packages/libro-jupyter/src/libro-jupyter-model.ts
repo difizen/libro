@@ -216,7 +216,7 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
     this.kernelConnection = undefined;
   }
 
-  async restart() {
+  override async restart() {
     if (!this.kernelConnection || this.kernelConnection.isDisposed) {
       this.startKernelConnection();
       getOrigin(this.kcReady)
@@ -232,6 +232,7 @@ export class LibroJupyterModel extends LibroModel implements ExecutableNotebookM
     }
 
     this.kernelConnection.restart();
+    super.restart();
   }
 
   async reconnect() {
