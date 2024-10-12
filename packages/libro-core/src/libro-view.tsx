@@ -305,6 +305,11 @@ export class LibroView extends BaseView implements NotebookView {
     return this.onBlurEmitter.event;
   }
 
+  onRestartEmitter: Emitter = new Emitter();
+  get onRestart() {
+    return this.onRestartEmitter.event;
+  }
+
   @inject(CellService) cellService: CellService;
   @inject(LibroService) libroService: LibroService;
   @inject(LibroSlotManager) libroSlotManager: LibroSlotManager;
