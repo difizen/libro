@@ -178,6 +178,9 @@ export const LibroSqlCell = React.forwardRef<HTMLDivElement>(
 
     useEffect(() => {
       instance.getDatabaseConfig();
+      if (instance.model.dbId) {
+        setSelectedDb(instance.model.dbId);
+      }
     }, [instance]);
 
     const handleChange = (value: string) => {
