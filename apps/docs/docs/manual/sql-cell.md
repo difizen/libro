@@ -23,7 +23,7 @@ libro 支持使用 SQL Cell 来简化数据库交互，通过在 libro 中结合
 
 ### 准备工作
 
-1. 配置数据库的连接信息，在 `~/.libro/libro_config.yaml` 中添加数据库的连接配置。
+1. 配置数据库的连接信息，在 `~/.libro/libro_config.yaml` 中添加数据库的连接配置,并且启用 libro-sql 扩展。
 
 ```yaml
 db:
@@ -33,6 +33,8 @@ db:
     host: '127.0.0.1'
     port: 5432
     database: libro
+jpserver_extensions:
+  libro_sql: True
 ```
 
 > <span style="font-style: normal;">💡 **Tip**: 如果没有上述 libro 的配置文件可通过在终端中运行命令 `libro config generate` 生成.</span>
