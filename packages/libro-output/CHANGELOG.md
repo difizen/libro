@@ -1,5 +1,17 @@
 # @difizen/libro-output
 
+## 0.2.41
+
+### Patch Changes
+
+- [#254](https://github.com/difizen/libro/pull/254) [`813f5d4`](https://github.com/difizen/libro/commit/813f5d4db92ba67b527ba9b61be0990f8a1db47e) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - 1.fix: sql cell source formatter error when line break
+  2.fix: execute sdk script when restart kernel
+  3.update reame and manual
+- Updated dependencies [[`813f5d4`](https://github.com/difizen/libro/commit/813f5d4db92ba67b527ba9b61be0990f8a1db47e)]:
+  - @difizen/libro-common@0.2.41
+  - @difizen/libro-core@0.2.41
+  - @difizen/libro-rendermime@0.2.41
+
 ## 0.2.40
 
 ### Patch Changes
