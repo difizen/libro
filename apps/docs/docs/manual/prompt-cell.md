@@ -8,7 +8,9 @@ order: 2
 Prompt Cell 是一种特殊的 notebook cell，通过这个 cell，用户只需要输入自然语言指令，就可以调用大模型进行推理，得到所需的输出结果。它的出现减少了编写复杂代码的需求，并且可以灵活地融入现有的工作流中，尤其是在需要频繁与 AI 进行交互的场景中。
 目前 libro 的 Prompt Cell：
 
-- 内置了 chatgpt、gpt4、dalle-3 模型，您可以基于 libro-ai 扩展自己的模型～
+- 内置了 chatgpt、gpt4、dalle-3 模型，您还可以通过以下方式扩展自己的模型～
+  - 基于 langchain 定义 llm、agent 等可对话对象的变量，他们可以直接用在 Prompt cell 中。
+  - 基于 libro-ai 扩展自己的模型。
 - 支持选择聊天标识，使得选择该聊天标识的 Prompt Cell 都在一个聊天上下文中.
 - 支持 Prompt Cell 保存为一个变量，该变量即为 langchain 的 AIMessage.
 
@@ -59,8 +61,12 @@ jpserver_extensions:
 
 ### 步骤 3: 基于 Langchain 消息提出应对 CO2 排放的建议
 
-此外，我们也可以配合着 langchain 一起使用，例如，基于前面保存的 co2_predict变量，生成应对气候变化的行动建议
+1. 此外，我们也可以配合着 langchain 一起使用，例如，基于前面保存的 co2_predict变量，生成应对气候变化的行动建议。
 
 <img src="../../public/co2_predict_va.png" alt="alt text" width="1000" >
 
 <img src="../../public/co2_predict_langchain.png" alt="alt text" width="1000" >
+
+2. 同时，您可以看到，此时新增一个 Prompt Cell，此时模型选项中，包含对应的 langchain 变量对象 chat_prompt、llm、summary_chain。
+
+<img src="../../public/langchain_var.png" alt="alt text" width="1000" >
