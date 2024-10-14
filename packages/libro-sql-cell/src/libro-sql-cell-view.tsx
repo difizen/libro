@@ -177,10 +177,20 @@ export const LibroSqlCell = React.forwardRef<HTMLDivElement>(
     };
 
     useEffect(() => {
-      instance.getDatabaseConfig();
-      if (instance.model.dbId) {
-        setSelectedDb(instance.model.dbId);
-      }
+      instance
+        .getDatabaseConfig()
+        .then(() => {
+          if (instance.model.dbId) {
+            setSelectedDb(instance.model.dbId);
+          } else {
+            instance.handleDbChange(instance.databases[0].id);
+            setSelectedDb(instance.databases[0].id);
+          }
+          return;
+        })
+        .catch(() => {
+          //
+        });
     }, [instance]);
 
     const handleChange = (value: string) => {
