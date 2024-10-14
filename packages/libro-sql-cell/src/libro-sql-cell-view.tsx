@@ -355,11 +355,18 @@ export class LibroSqlCellView extends LibroEditableExecutableCellView {
           ) as LibroSqlCellView[],
       );
     }
-    if (this.parent.model.onRestart) {
-      this.parent.model.onRestart(() => {
-        this.getDatabaseConfig();
+    this.parentReady
+      .then(() => {
+        if (this.parent.model.onRestart) {
+          this.parent.model.onRestart(() => {
+            this.getDatabaseConfig();
+          });
+        }
+        return;
+      })
+      .catch(() => {
+        //
       });
-    }
   }
 
   override onViewMount = async () => {
