@@ -5,6 +5,7 @@ const nav = [
   { title: '快速开始', link: '/quickstart' },
   { title: '使用文档', link: '/manual' },
   { title: '集成文档', link: '/integration' },
+  { title: '产品新动向', link: '/updates' },
 ];
 if (LIBRO_DEPLOY_ENV !== 'vercel') {
   nav.push({ title: '示例', link: '/examples' });
