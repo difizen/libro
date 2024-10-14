@@ -304,12 +304,19 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
         //
       });
 
-    if (this.parent.model.onRestart) {
-      this.parent.model.onRestart(() => {
-        this.updateChatObjects();
-        this.updateChatRecords();
+    this.parentReady
+      .then(() => {
+        if (this.parent.model.onRestart) {
+          this.parent.model.onRestart(() => {
+            this.updateChatObjects();
+            this.updateChatRecords();
+          });
+        }
+        return;
+      })
+      .catch(() => {
+        //
       });
-    }
   }
 
   override outputWatch() {
