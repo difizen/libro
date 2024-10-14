@@ -94,15 +94,20 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 - 增强直接与大模型交互的能力，支持文本对话，多模态表达等。
 - 增强对于常见输出类型的交互能力，如在输出代码时给出复制、运行等操作能力。
+- 内置了 OpenAI 系列模型，您还可以通过以下方式扩展模型～
+  - 基于 langchain 定义 llm、agent 等可对话对象的变量，他们可以直接用在 Prompt cell 中。
+  - 基于 libro-ai 扩展自己的模型。
+- 支持选择聊天标识，使得选择该聊天标识的 Prompt Cell 都在一个聊天上下文中。
+- 支持 Prompt Cell 保存为一个变量，该变量即为 langchain 的 AIMessage。
 
-  ![image](./apps/docs/public/prompt_cell_zh.png)
+  ![image](./apps/docs/public/prompt_cell_zh.gif)
 
 ### Sql Cell
 
 - 支持与 sql 的执行交互能力。
 - 连接 sql 数据库即可在 notebook 中写 sql 代码。
 
-  ![image](./apps/docs/public/sql_cell.png)
+  ![image](./apps/docs/public/sql_cell_zh.gif)
 
 ## 架构
 

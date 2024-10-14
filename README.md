@@ -94,15 +94,18 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 - Enhances the ability to interact directly with large models, supporting text conversations, multimodal expressions, and more.
 - Improves interaction capabilities for common output types, such as providing options to copy or run code when outputting it.
+- Built-in OpenAI models are available, and you can also extend models in the following ways:
+  - Define variables for LLMs, agents, and other dialogue objects based on Langchain, which can be directly used in Prompt Cells.
+  - Extend your own models based on libro-ai.
 
-  ![image](./apps/docs/public/prompt_cell.png)
+  ![image](./apps/docs/public/prompt_cell.gif)
 
 ### Sql Cell
 
 - Supports interaction capabilities for executing SQL commands.
 - Connect to SQL databases to write SQL code directly in the notebook.
 
-  ![image](./apps/docs/public/sql_cell.png)
+  ![image](./apps/docs/public/sql_cell.gif)
 
 ## Technical Architecture
 
