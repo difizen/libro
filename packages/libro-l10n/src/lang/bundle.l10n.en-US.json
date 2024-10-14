@@ -37,6 +37,7 @@
   "隐藏全部 Output": "Hide all Output",
   "全部隐藏": "Hide all",
   "全部显示": "Show all",
+  "暂无内置数据库": "No built-in database for now",
   "Restart and Run up to Selected Cell": "Restart and Run up to Selected Cell",
   "Restart and Clear Outputs of All Cells": "Restart and Clear Outputs of All Cells",
   "Restart and Run All Cells": "Restart and Run All Cells",
