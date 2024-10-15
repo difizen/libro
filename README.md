@@ -58,6 +58,8 @@ use pip:
 ```bash
 pip install libro
 ```
+> [!NOTE]
+> The Python version used is 3.10-3.12. Higher versions of Python may encounter issues with unsupported dependencies.
 
 For more details, please refer to [quick start](./apps/docs/docs/quickstart/index.md)。
 
@@ -113,7 +115,6 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 ## Future Plans
 
-- SQL Cell Integration
 - AI Capability Integration
 - Support for Prompt Notebook
 - Execution of libro in the Browser
