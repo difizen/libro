@@ -59,6 +59,9 @@
 pip install libro
 ```
 
+> [!NOTE]
+> 使用的 Python 版本为 3.10-3.12，过高的 Python 版本可能存在依赖包不支持的问题。
+
 详情请阅读[快速开始](./apps/docs/docs/quickstart/index.md)。
 
 ## 快速集成
@@ -115,8 +118,7 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 
 ## 后续计划
 
-- SQL Cell 接入
-- Copilot 面板接入
+- AI 特性接入
 - Libro 在浏览器端执行
 - 版本 Diff 接入
 
