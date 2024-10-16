@@ -100,12 +100,17 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
   - Define variables for LLMs, agents, and other dialogue objects based on Langchain, which can be directly used in Prompt Cells.
   - Extend your own models based on libro-ai.
 
+For more details, please refer to [prompt cell manual](./apps/docs/docs/manual/prompt-cell.md)。
+
   ![image](./apps/docs/public/prompt_cell.gif)
+
 
 ### Sql Cell
 
 - Supports interaction capabilities for executing SQL commands.
 - Connect to SQL databases to write SQL code directly in the notebook.
+
+For more details, please refer to [sql cell manual](./apps/docs/docs/manual/sql-cell.md)。
 
   ![image](./apps/docs/public/sql_cell.gif)
 
