@@ -37,9 +37,28 @@ jpserver_extensions:
   libro_sql: True
 ```
 
-> <span style="font-style: normal;">💡 **Tip**: 如果没有上述 libro 的配置文件可通过在终端中运行命令 `libro config generate` 生成.</span>
+> <span style="font-style: normal;">💡 **Tip**: 如果没有上述 libro 的配置文件可通过在终端中运行命令 `libro config generate` 生成.<br/>
+> 此外，mysql、sqlite 的配置示例如下:
+>
+> ```yaml
+> - db_type: mysql
+>   username: 'root'
+>   password: '12345678'
+>   host: '127.0.0.1'
+>   port: 3306
+>   database: sql_demo
+>
+> - db_type: sqlite
+>   username: ''
+>   password: ''
+>   host: ''
+>   port: 0
+>   database: sql_demo.db #.db 文件相较于 libro 启动路径的位置
+> ```
+>
+> </span>
 
-2. 在终端中运行命令libro启动 libro
+2. 在终端中运行命令libro启动 libro，如果已经启动 libro ，则配置完成之后重启内核。
 
 ### 案例 1：分析不同产品的销量
 
