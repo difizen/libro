@@ -103,12 +103,16 @@ import { LibroJupyterModule } from "@difizen/libro-jupyter";
 - 支持选择聊天标识，使得选择该聊天标识的 Prompt Cell 都在一个聊天上下文中。
 - 支持 Prompt Cell 保存为一个变量，该变量即为 langchain 的 AIMessage。
 
+详情请阅读[prompt cell 指南](./apps/docs/docs/manual/prompt-cell.md)。
+
   ![image](./apps/docs/public/prompt_cell_zh.gif)
 
 ### Sql Cell
 
 - 支持与 sql 的执行交互能力。
 - 连接 sql 数据库即可在 notebook 中写 sql 代码。
+
+详情请阅读[sql cell 指南](./apps/docs/docs/manual/sql-cell.md)。
 
   ![image](./apps/docs/public/sql_cell_zh.gif)
 
