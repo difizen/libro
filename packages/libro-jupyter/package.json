@@ -13,6 +13,10 @@
       "typings": "./es/index.d.ts",
       "default": "./es/index.js"
     },
+    "./noeditor": {
+      "typings": "./es/index-noeditor.d.ts",
+      "default": "./es/index-noeditor.js"
+    },
     "./mock": {
       "typings": "./es/mock/index.d.ts",
       "default": "./es/mock/index.js"
