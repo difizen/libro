@@ -1,3 +1,4 @@
+import type { ICodeCell } from '@difizen/libro-common';
 import { watch } from '@difizen/mana-app';
 import { ViewOption } from '@difizen/mana-app';
 import { inject } from '@difizen/mana-app';
@@ -6,6 +7,7 @@ import type { CellModel } from '../libro-protocol.js';
 import type { CellViewOptions } from '../libro-protocol.js';
 import type { BaseOutputArea } from '../output/index.js';
 
+import type { LibroCell } from './libro-cell-protocol.js';
 import { CellService } from './libro-cell-protocol.js';
 import { EditorCellView, LibroEditorCellView } from './libro-edit-cell-view.js';
 import { ExecutableCellModel } from './libro-executable-cell-model.js';
@@ -77,6 +79,15 @@ export abstract class LibroEditableExecutableCellView
         this.parent.model.onChange?.();
       }),
     );
+  }
+
+  override toJSON(): LibroCell {
+    const meta = super.toJSON();
+    return {
+      ...meta,
+      source: meta.source ?? this.options.cell.source,
+      outputs: this.outputArea?.toJSON() ?? [],
+    } as ICodeCell;
   }
 }
 
