@@ -1,6 +1,7 @@
 import { PlayCircleOutlined } from '@ant-design/icons';
 import type { LibroToolbarArags, LibroView } from '@difizen/libro-core';
 import { NotebookCommands, ExecutableCellModel } from '@difizen/libro-core';
+import { ServerManager } from '@difizen/libro-kernel';
 import {
   useInject,
   ToolbarInstance,
@@ -15,7 +16,7 @@ import { Menu, Dropdown, Tooltip } from 'antd';
 import type { MenuProps } from 'antd';
 import { useEffect, useState } from 'react';
 
-import { LibroJupyterConfiguration, ServerManager } from '../index.js';
+import { LibroJupyterConfiguration } from '../config/config.js';
 import type { LibroJupyterModel } from '../libro-jupyter-model.js';
 import { kernelPrepared } from '../utils/index.js';
 
