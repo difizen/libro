@@ -137,7 +137,7 @@ export class LibroCellView extends BaseView implements CellView {
     super.dispose();
   }
   toJSON(): LibroCell {
-    const meta = { ...(this.model.toJSON() as LibroCell), outputs: [] };
+    const meta = { ...(this.model.toJSON() as LibroCell) };
     const modelContribution = this.cellService.findModelProvider(this.model.options);
     if (modelContribution?.cellMeta.nbformatType) {
       meta.metadata.libroCellType = modelContribution?.cellMeta.type;
