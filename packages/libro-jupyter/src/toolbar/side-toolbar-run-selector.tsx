@@ -7,7 +7,7 @@ import { l10n } from '@difizen/mana-l10n';
 import { Popover, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 
-import { LibroJupyterConfiguration } from '../index.js';
+import { LibroJupyterConfiguration } from '../config/index.js';
 import type { LibroJupyterModel } from '../libro-jupyter-model.js';
 import { kernelPrepared } from '../utils/index.js';
 
