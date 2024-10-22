@@ -1,3 +1,4 @@
+import { LibroAINativeModule } from '@difizen/libro-ai-native';
 import { FileView, LibroJupyterModule } from '@difizen/libro-jupyter';
 import { langBundles } from '@difizen/libro-l10n';
 import { LibroPromptCellModule } from '@difizen/libro-prompt-cell';
@@ -129,4 +130,5 @@ export const LibroLabModule = ManaModule.create()
     TerminalModule,
     ImageViewerModule,
     CodeEditorViewerModule,
+    LibroAINativeModule,
   );
