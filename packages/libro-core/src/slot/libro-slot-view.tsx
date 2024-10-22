@@ -1,3 +1,4 @@
+import type { View, ViewOpenOption, Disposable } from '@difizen/mana-app';
 import { DefaultSlotView, view, ViewRender, ViewInstance } from '@difizen/mana-app';
 import { transient } from '@difizen/mana-app';
 import { equals, prop, useInject } from '@difizen/mana-app';
@@ -45,4 +46,31 @@ export class LibroSlotView extends DefaultSlotView {
   @prop()
   override sort?: boolean = false;
   // sort?: boolean = true;
+
+  protected history: View[] = [];
+
+  override async addView(
+    viewInstance: View,
+    option?: ViewOpenOption,
+  ): Promise<Disposable> {
+    if (option?.reveal) {
+      this.history.push(viewInstance);
+    }
+    const toDispose = super.addView(viewInstance, option);
+    return toDispose;
+  }
+
+  revertActive() {
+    const index = this.history.findIndex((item) => item.id === this.active?.id);
+    if (index < 0) {
+      return;
+    }
+    this.history.splice(index, 1);
+    if (this.history.length > 0) {
+      const last = this.history[this.history.length - 1];
+      this.active = last;
+    } else {
+      this.active = undefined;
+    }
+  }
 }
