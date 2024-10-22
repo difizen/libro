@@ -1,13 +1,5 @@
-import { ErrorOutputModel } from '@difizen/libro-jupyter';
-import { ManaModule } from '@difizen/mana-app';
-
-import { AIErrorOutputModel } from './error-output-model.js';
-import { LibroAINativeColorRegistry } from './libro-ai-native-color-registry.js';
-
-export const LibroAINativeModule = ManaModule.create().register(
-  LibroAINativeColorRegistry,
-  {
-    token: ErrorOutputModel,
-    useClass: AIErrorOutputModel,
-  },
-);
+export * from './module.js';
+export * from './chat-slot-contribution.js';
+export * from './chat-view.js';
+export * from './error-output-model.js';
+export * from './libro-ai-native-color-registry.js';
