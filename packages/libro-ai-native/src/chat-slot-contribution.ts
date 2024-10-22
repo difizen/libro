@@ -2,8 +2,8 @@ import type {
   LibroView,
   LibroExtensionSlotFactory,
   LibroSlot,
-} from '@difizen/libro-core';
-import { LibroExtensionSlotContribution } from '@difizen/libro-core';
+} from '@difizen/libro-jupyter';
+import { LibroExtensionSlotContribution } from '@difizen/libro-jupyter';
 import { ViewManager } from '@difizen/mana-app';
 import { inject, singleton } from '@difizen/mana-app';
 
