@@ -1,25 +1,35 @@
-import { defaultSanitizer } from '@difizen/libro-common';
-import type { IError } from '@difizen/libro-common';
-import { ErrorOutputModel } from '@difizen/libro-jupyter';
-import { RenderMimeRegistry, renderText } from '@difizen/libro-rendermime';
-import type { IRenderMimeRegistry } from '@difizen/libro-rendermime';
-import { transient } from '@difizen/mana-app';
+import type { IError, IRenderMimeRegistry } from '@difizen/libro-jupyter';
+import {
+  ErrorOutputModel,
+  defaultSanitizer,
+  LibroSlotManager,
+  LibroSlotView,
+  RenderMimeRegistry,
+  renderText,
+} from '@difizen/libro-jupyter';
+import { prop, transient } from '@difizen/mana-app';
 import { getOrigin, useInject, view, ViewInstance } from '@difizen/mana-app';
 import { Button } from 'antd';
 import { forwardRef, createRef, useEffect } from 'react';
 import './index.less';
 
+import { LibroAIChatSlotContribution } from './chat-slot-contribution.js';
 import { AIIcon } from './icon.js';
 
 const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
   function ErrorOutputModelRender(_props, ref) {
-    const output = useInject<ErrorOutputModel>(ViewInstance);
+    const output = useInject<AIErrorOutputModel>(ViewInstance);
+    const chatSlotContribution = useInject<LibroAIChatSlotContribution>(
+      LibroAIChatSlotContribution,
+    );
+    const libroSlotManager = useInject<LibroSlotManager>(LibroSlotManager);
     const model = getOrigin(output);
     const source = getOrigin(output).raw as IError;
     const defaultRenderMime = useInject<IRenderMimeRegistry>(RenderMimeRegistry);
     const traceback = source.traceback.join('\n');
     const defaultRenderMimeType = defaultRenderMime.preferredMimeType(model);
     const streamRef = createRef<HTMLDivElement>();
+    const libro = output.cell.parent;
 
     useEffect(() => {
       renderText({
@@ -34,6 +44,30 @@ const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
       output.showErrorDetail = !output.showErrorDetail;
     };
 
+    const handleShowAIChat = async () => {
+      const chatView = chatSlotContribution.viewMap.get(output.cell.parent.id);
+      output.showChat = !output.showChat;
+      if (chatView) {
+        if (output.showChat) {
+          libroSlotManager.slotViewManager.addView(
+            chatView,
+            libroSlotManager.getSlotName(libro, chatSlotContribution.slot),
+            {
+              reveal: true,
+              order: 'a',
+            },
+          );
+        } else {
+          const slotview = libroSlotManager.slotViewManager.getSlotView(
+            libroSlotManager.getSlotName(output.cell.parent, 'right'),
+          );
+          if (slotview instanceof LibroSlotView) {
+            slotview.revertActive();
+          }
+        }
+      }
+    };
+
     return (
       <div ref={ref} className="libro-error-container">
         <div className="libro-text-render-container">
@@ -43,7 +77,11 @@ const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
               {': ' + source.evalue}
             </pre>
             <div className="libro-error-output-btn-container">
-              <Button className="libro-ai-native-fix-button" icon={<AIIcon />}>
+              <Button
+                className="libro-ai-native-fix-button"
+                icon={<AIIcon />}
+                onClick={handleShowAIChat}
+              >
                 Fix with AI
               </Button>
               <Button
@@ -72,4 +110,5 @@ const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
 @view('libro-error-output-model')
 export class AIErrorOutputModel extends ErrorOutputModel {
   override view = AIErrorOutputModelRender;
+  @prop() showChat = false;
 }
