@@ -22,13 +22,12 @@ export const LibroExtensionViewComponent = forwardRef(
         </div>
       );
     } else {
-      const activeView =
-        filteredChildren.find(
-          (item) => instance.active && equals(item, instance.active),
-        ) || filteredChildren[filteredChildren.length - 1];
+      const activeView = filteredChildren.find(
+        (item) => instance.active && equals(item, instance.active),
+      );
       return (
         <div className={'libro-slot-container'} ref={ref}>
-          <ViewRender view={activeView} />
+          {activeView && <ViewRender view={activeView} />}
           {instance.children.map(
             (item) => !isDisplayView(item) && <ViewRender view={item} key={item.id} />,
           )}
