@@ -1,11 +1,10 @@
 {
-  "name": "@difizen/libro-lab",
+  "name": "@difizen/libro-ai-native",
   "version": "0.2.41",
   "description": "",
   "keywords": [
     "libro",
-    "lab",
-    "notebook"
+    "ai-native"
   ],
   "repository": "git@github.com:difizen/libro.git",
   "license": "MIT",
@@ -46,26 +45,9 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.1.0",
-    "@difizen/libro-core": "^0.2.41",
     "@difizen/libro-jupyter": "^0.2.41",
-    "@difizen/libro-kernel": "^0.2.41",
-    "@difizen/libro-prompt-cell": "^0.2.41",
-    "@difizen/libro-sql-cell": "^0.2.41",
-    "@difizen/libro-terminal": "^0.2.41",
-    "@difizen/libro-toc": "^0.2.41",
-    "@difizen/libro-cofine-editor-core": "^0.2.41",
-    "@difizen/libro-language-client": "^0.2.41",
-    "@difizen/libro-widget": "^0.2.41",
-    "@difizen/libro-l10n": "^0.2.41",
-    "@difizen/libro-ai-native": "^0.2.41",
     "@difizen/mana-app": "latest",
-    "@difizen/mana-l10n": "latest",
-    "@difizen/mana-common": "latest",
-    "@difizen/mana-react": "latest",
-    "classnames": "^2.3.2",
-    "uuid": "^9.0.0",
-    "viewerjs": "^1.11.6"
+    "markdown-it": "^13.0.1"
   },
   "peerDependencies": {
     "antd": "^5.8.6",
@@ -73,6 +55,6 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.25",
-    "@types/uuid": "^9.0.2"
+    "@types/sanitize-html": "^2.6.2"
   }
 }
