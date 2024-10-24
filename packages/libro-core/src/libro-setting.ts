@@ -81,7 +81,7 @@ export const RightContentFixed: ConfigurationNode<boolean> = {
   description: l10n.t('libroview的右边栏是否相对固定'),
   title: l10n.t('右侧内容是否相对固定'),
   type: 'checkbox',
-  defaultValue: false,
+  defaultValue: true,
   schema: {
     type: 'boolean',
   },
