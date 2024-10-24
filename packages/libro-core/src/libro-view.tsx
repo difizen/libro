@@ -140,7 +140,7 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
       libroViewContentRef.current.style.cssText = 'display: block;';
       libroViewRightContentRef.current.style.cssText =
         'position: absolute;top:44px;right:20px';
-      libroViewLeftContentRef.current.style.cssText = 'padding-right: 80px;';
+      libroViewLeftContentRef.current.style.cssText = 'padding-right: 20px;';
     }
   }, [rightContentFixed]);
 
