@@ -61,6 +61,46 @@ export class LibroAINativeCommandContribution
         },
       },
     );
+    this.libroCommand.registerLibroCommand(command, AINativeCommands['CellChat'], {
+      execute: async (cell, libro) => {
+        if (!libro) {
+          return;
+        }
+        const chatView = this.libroAIChatSlotContribution.viewMap.get(libro.id);
+        const showChat = !this.libroAIChatSlotContribution.showChatMap.get(libro.id);
+        this.libroAIChatSlotContribution.showChatMap.set(libro.id, showChat);
+
+        this.libroAIChatSlotContribution.showChatMap;
+        if (chatView) {
+          if (showChat) {
+            this.libroSlotManager.slotViewManager.addView(
+              chatView,
+              this.libroSlotManager.getSlotName(
+                libro,
+                this.libroAIChatSlotContribution.slot,
+              ),
+              {
+                reveal: true,
+                order: 'a',
+              },
+            );
+          } else {
+            const slotview = this.libroSlotManager.slotViewManager.getSlotView(
+              this.libroSlotManager.getSlotName(libro, 'right'),
+            );
+            if (slotview instanceof LibroSlotView) {
+              slotview.revertActive();
+            }
+          }
+        }
+      },
+      isEnabled: (cell, libro) => {
+        if (!libro || !(libro instanceof LibroView)) {
+          return false;
+        }
+        return true;
+      },
+    });
     this.libroCommand.registerLibroCommand(command, AINativeCommands['Chat'], {
       execute: async (cell, libro) => {
         if (!libro) {
