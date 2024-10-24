@@ -47,6 +47,7 @@
   "dependencies": {
     "@difizen/libro-jupyter": "^0.2.41",
     "@difizen/mana-app": "latest",
+    "@difizen/magent-libro": "^0.1.27",
     "markdown-it": "^13.0.1"
   },
   "peerDependencies": {
