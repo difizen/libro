@@ -1,3 +1,5 @@
+@ant-prefix: ant;
+
 .libro-error-output-btn-container {
   display: flex;
 
@@ -21,5 +23,24 @@
       color: var(--mana-libro-ai-native-border) !important;
       border-color: var(--mana-libro-ai-native-border) !important;
     }
+  }
+}
+
+.libro-cell-right-toolbar {
+  .libro-ai-icon {
+    g {
+      fill: none !important;
+    }
+
+    .libro-ai-inner-icon {
+      fill: var(--mana-libro-ai-native-border) !important;
+    }
+  }
+}
+
+.libro-side-toolbar-ai-select-menu {
+  .@{ant-prefix}-popover-content {
+    width: 120px;
+    height: 70px;
   }
 }
