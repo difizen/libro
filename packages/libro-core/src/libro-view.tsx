@@ -69,6 +69,7 @@ import {
   RightContentFixed,
 } from './libro-setting.js';
 import { LibroSlotManager, LibroSlotView } from './slot/index.js';
+import { useSize } from './utils/index.js';
 import { VirtualizedManagerHelper } from './virtualized-manager-helper.js';
 import type { VirtualizedManager } from './virtualized-manager.js';
 import './index.less';
@@ -139,9 +140,21 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
       libroViewContentRef.current.style.cssText = 'display: block;';
       libroViewRightContentRef.current.style.cssText =
         'position: absolute;top:44px;right:20px';
-      libroViewLeftContentRef.current.style.cssText = 'padding-right: 80px;';
+      libroViewLeftContentRef.current.style.cssText = 'padding-right: 20px;';
     }
   }, [rightContentFixed]);
+
+  const rightSize = useSize(libroViewRightContentRef);
+  let leftContentStyles = {};
+  let rightContentStyles = {};
+  if (rightSize?.width && rightSize?.width > 0) {
+    leftContentStyles = {
+      width: `calc(100% - ${rightSize.width}px)`,
+    };
+    rightContentStyles = {
+      marginLeft: 0,
+    };
+  }
 
   return (
     <>
@@ -155,7 +168,11 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
         onScroll={handleScroll}
         ref={libroViewContentRef}
       >
-        <div className="libro-view-content-left" ref={libroViewLeftContentRef}>
+        <div
+          className="libro-view-content-left"
+          style={leftContentStyles}
+          ref={libroViewLeftContentRef}
+        >
           <DndContext>
             <CustomDragLayer />
             <DndList libroView={instance} ref={ref}>
@@ -166,7 +183,11 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
             </DndList>
           </DndContext>
         </div>
-        <div className="libro-view-content-right" ref={libroViewRightContentRef}>
+        <div
+          className="libro-view-content-right"
+          style={rightContentStyles}
+          ref={libroViewRightContentRef}
+        >
           {/* {tocVisible && instance.toc && <ViewRender view={instance.toc} />} */}
           <Slot
             name={libroSlotManager.getSlotName(instance, 'right')}
