@@ -134,6 +134,13 @@ export default defineConfig({
       secure: false,
       ws: true,
     },
+    '/libro/api': {
+      target: 'http://localhost:8888/',
+      changeOrigin: true,
+      secure: false,
+      pathRewrite: {},
+      ws: true,
+    },
   },
   analytics: {
     baidu: process.env.BAIDU_ANALYTICS,
