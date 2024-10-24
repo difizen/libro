@@ -5,9 +5,13 @@ export const AINativeCommands: Record<string, Command & { keybind?: string }> = 
     id: 'ai-native:explain',
     label: 'EXPLAIN',
   },
+  Chat: {
+    id: 'ai-native:chat',
+    label: 'Chat',
+  },
   CellChat: {
     id: 'ai-native:cell-chat',
-    label: 'Chat',
+    label: 'Cell Chat',
   },
   AISideToolbarSelect: {
     id: 'ai-native:side-toolbat-select',
