@@ -53,10 +53,34 @@
   }
 }
 
+.chat-header {
+  padding: 8px 16px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+
+  .chat-title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
 .chat-container {
   border: 1px solid var(--mana-libro-ai-native-border);
   box-shadow: rgba(203, 146, 197, 37%) 0 0 0 2px;
   border-radius: 6px;
   height: 100%;
   width: 460px;
+
+  .chat {
+    height: calc(100% - 40px);
+  }
+}
+
+.chat-switch {
+  margin-right: 6px;
+}
+
+.chat-close-icon {
+  cursor: pointer;
 }
