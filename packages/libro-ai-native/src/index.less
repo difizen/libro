@@ -10,19 +10,19 @@
     margin-right: 16px;
     padding: unset;
     background: var(--mana-color-bg-container);
-    border-color: var(--mana-libro-ai-native-border);
+    border-color: var(--mana-libro-ai-native-color);
 
     span {
       display: flex;
       font-family: ArialMT;
       font-size: 12px;
-      color: var(--mana-libro-ai-native-border);
+      color: var(--mana-libro-ai-native-color);
       line-height: 22px;
     }
 
     &:hover {
-      color: var(--mana-libro-ai-native-border) !important;
-      border-color: var(--mana-libro-ai-native-border) !important;
+      color: var(--mana-libro-ai-native-color) !important;
+      border-color: var(--mana-libro-ai-native-color) !important;
     }
   }
 }
@@ -34,7 +34,7 @@
     }
 
     .libro-ai-inner-icon {
-      fill: var(--mana-libro-ai-native-border) !important;
+      fill: var(--mana-libro-ai-native-color) !important;
     }
   }
 }
@@ -67,8 +67,8 @@
 }
 
 .chat-container {
-  border: 1px solid var(--mana-libro-ai-native-border);
-  box-shadow: rgba(203, 146, 197, 37%) 0 0 0 2px;
+  border: 1px solid var(--mana-libro-ai-native-color);
+  box-shadow: var(--mana-libro-ai-native-box-shadow) 0 0 0 2px;
   border-radius: 6px;
   height: 100%;
   width: 460px;
@@ -87,11 +87,11 @@
 }
 
 .chat-input-searchInput:focus-within {
-  border-color: var(--mana-libro-ai-native-border);
+  border-color: var(--mana-libro-ai-native-color);
 }
 
 .chat-input-sendButton {
-  background-color: var(--mana-libro-ai-native-border);
+  background-color: var(--mana-libro-ai-native-color);
 }
 
 .chat-right-toolbar {
@@ -99,10 +99,43 @@
   color: var(--mana-libro-tip-font-color);
 
   .@{ant-prefix}-switch.@{ant-prefix}-switch-checked {
-    background: var(--mana-libro-ai-native-border);
+    background: var(--mana-libro-ai-native-color);
 
     &:hover {
-      background: var(--mana-libro-ai-native-border);
+      background: var(--mana-libro-ai-native-color);
+    }
+  }
+}
+
+.ai-cell-chat {
+  .libro-dnd-cell {
+    &.active {
+      border: 1px solid var(--mana-libro-ai-native-color);
+      box-shadow: var(--mana-libro-ai-native-box-shadow) 0 0 0 2px;
+
+      .libro-cell-input-collapser,
+      .libro-cell-output-collapser,
+      .libro-cell-collapser {
+        background: var(--mana-libro-ai-native-color);
+        opacity: 1;
+      }
+
+      &.error {
+        border: 1px solid var(--mana-libro-ai-native-color) !important;
+        box-shadow: var(--mana-libro-ai-native-box-shadow) 0 0 0 2px;
+
+        .libro-cell-input-collapser,
+        .libro-cell-output-collapser,
+        .libro-cell-collapser {
+          background: var(--mana-libro-ai-native-color);
+          opacity: 1;
+        }
+      }
+    }
+
+    &.active.command-mode {
+      border: 1px solid var(--mana-libro-ai-native-color);
+      box-shadow: unset;
     }
   }
 }
