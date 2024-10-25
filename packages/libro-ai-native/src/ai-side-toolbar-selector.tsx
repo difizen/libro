@@ -1,9 +1,11 @@
 import type { LibroSideToolbarMenuItemType } from '@difizen/libro-jupyter';
 import { LibroSideToolbarMenu } from '@difizen/libro-jupyter';
+import { useInject } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 import { Popover } from 'antd';
 
 import { AINativeCommands } from './ai-native-command.js';
+import { LibroAINativeService } from './ai-native-service.js';
 import { AIIcon } from './icon.js';
 
 export const AIToolbarSelector: React.FC = () => {
@@ -27,12 +29,18 @@ export const AIToolbarSelector: React.FC = () => {
       group: 'ai',
     },
   ];
+  const libroAINativeService = useInject<LibroAINativeService>(LibroAINativeService);
+  const handleOpenChange = (newOpen: boolean) => {
+    libroAINativeService.showSideToolbar = newOpen;
+  };
 
   return (
     <Popover
       placement="leftTop"
       content={<LibroSideToolbarMenu items={items} />}
       trigger="hover"
+      open={libroAINativeService.showSideToolbar}
+      onOpenChange={handleOpenChange}
       overlayClassName="libro-popover-side-toolbar-menu libro-side-toolbar-ai-select-menu"
     >
       <div>
