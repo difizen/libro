@@ -36,6 +36,12 @@ export const ChatRender = () => {
               className="chat-close-icon"
               onClick={() => {
                 if (libroChatView.parent) {
+                  libroChatView.parent.model.libroViewClass =
+                    libroChatView.parent.model.libroViewClass.replace(
+                      'ai-cell-chat',
+                      '',
+                    );
+
                   libroAIChatSlotContribution.showChatMap.set(
                     libroChatView.parent.id,
                     false,
