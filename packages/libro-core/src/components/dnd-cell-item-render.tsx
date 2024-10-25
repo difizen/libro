@@ -42,7 +42,10 @@ import {
 } from '../material-from-designer.js';
 import { hasErrorOutput } from '../output/index.js';
 
-import { CellOutputBottomBlankProvider } from './cell-protocol.js';
+import {
+  CellOutputBottomBlankProvider,
+  CellOutputTopProvider,
+} from './cell-protocol.js';
 import {
   CellExecutionTimeProvider,
   CellInputBottonBlankProvider,
@@ -129,6 +132,7 @@ export const CellOutputContent: React.FC<{ cell: CellView }> = memo(
     const CellOutputBottomBlank = useInject<CellOutputBottomBlankProvider>(
       CellOutputBottomBlankProvider,
     );
+    const CellOutputTopBlank = useInject<CellOutputTopProvider>(CellOutputTopProvider);
     const CellExecutionTime = useInject<CellExecutionTimeProvider>(
       CellExecutionTimeProvider,
     );
@@ -156,6 +160,7 @@ export const CellOutputContent: React.FC<{ cell: CellView }> = memo(
         className={`libro-cell-output-content ${hasOutputsScrolled ? 'scrolled' : ''} `}
       >
         <CellExecutionTime cell={cell} />
+        <CellOutputTopBlank cell={cell} />
         <CellOutputVisulization cell={cell} />
         {observableCell.outputArea.length > 0 && <ViewRender view={cell.outputArea} />}
         <CellOutputBottomBlank cell={cell} />
@@ -178,6 +183,12 @@ export const LibroCellInputBottonBlank: CellInputBottonBlankProvider = forwardRe
 
 export const LibroCellOutputBottomBlank: CellOutputBottomBlankProvider = forwardRef(
   function LibroCellOutputBottomBlank() {
+    return null;
+  },
+);
+
+export const LibroCellTopBlank: CellOutputTopProvider = forwardRef(
+  function LibroCellTopBlank() {
     return null;
   },
 );
