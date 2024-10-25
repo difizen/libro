@@ -65,9 +65,10 @@ export class LibroAINativeCommandContribution
     );
     this.libroCommand.registerLibroCommand(command, AINativeCommands['CellChat'], {
       execute: async (cell, libro) => {
-        if (!libro) {
+        if (!libro || !cell) {
           return;
         }
+        libro.model.libroViewClass = 'ai-cell-chat';
         const chatView = this.libroAIChatSlotContribution.viewMap.get(libro.id);
         const showChat = !this.libroAIChatSlotContribution.showChatMap.get(libro.id);
         this.libroAIChatSlotContribution.showChatMap.set(libro.id, showChat);
