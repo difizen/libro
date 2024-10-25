@@ -14,7 +14,6 @@ import {
   ViewInstance,
   ViewRender,
 } from '@difizen/mana-app';
-import { Switch } from 'antd';
 import { useRef } from 'react';
 
 import { LibroAIChatSlotContribution } from './chat-slot-contribution.js';
@@ -30,31 +29,27 @@ export const ChatRender = () => {
     <div className="chat-container" ref={containRef}>
       <div className="chat-header">
         <div className="chat-title">Libro AI</div>
-        <div>
-          <Switch
-            checkedChildren="Focused Cell"
-            unCheckedChildren="General Chat"
-            defaultChecked={false}
-            size="small"
-            className="chat-switch"
-          />
-          <CloseOutlined
-            className="chat-close-icon"
-            onClick={() => {
-              if (libroChatView.parent) {
-                libroAIChatSlotContribution.showChatMap.set(
-                  libroChatView.parent.id,
-                  false,
-                );
-                const slotview = libroSlotManager.slotViewManager.getSlotView(
-                  libroSlotManager.getSlotName(libroChatView.parent, 'right'),
-                );
-                if (slotview instanceof LibroSlotView) {
-                  slotview.revertActive();
+        <div className="chat-right-toolbar">
+          <div className="chat-type">{libroChatView.chatType}</div>
+          <div>
+            <CloseOutlined
+              className="chat-close-icon"
+              onClick={() => {
+                if (libroChatView.parent) {
+                  libroAIChatSlotContribution.showChatMap.set(
+                    libroChatView.parent.id,
+                    false,
+                  );
+                  const slotview = libroSlotManager.slotViewManager.getSlotView(
+                    libroSlotManager.getSlotName(libroChatView.parent, 'right'),
+                  );
+                  if (slotview instanceof LibroSlotView) {
+                    slotview.revertActive();
+                  }
                 }
-              }
-            }}
-          />
+              }}
+            />
+          </div>
         </div>
       </div>
       <ViewRender view={libroChatView.generalChatView}></ViewRender>
@@ -71,6 +66,10 @@ export class LibroChatView extends BaseView implements DisplayView {
   override view = ChatRender;
 
   generalChatView: ChatView;
+
+  cellChatView: ChatView;
+
+  chatType = 'General Chat';
 
   @prop()
   isDisplay = true;
@@ -89,5 +88,9 @@ export class LibroChatView extends BaseView implements DisplayView {
       .catch(() => {
         //
       });
+  }
+
+  createGeneralChatView() {
+    return;
   }
 }
