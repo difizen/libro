@@ -10,6 +10,10 @@ export type CellInputBottonBlankProvider = FC<{ cell: CellView }>;
 
 export const CellInputBottonBlankProvider = Symbol('CellInputBottonBlankProvider');
 
+export type CellOutputTopProvider = FC<{ cell: CellView }>;
+
+export const CellOutputTopProvider = Symbol('CellOutputTopProvider');
+
 export type CellOutputBottomBlankProvider = FC<{ cell: CellView }>;
 
 export const CellOutputBottomBlankProvider = Symbol('CellOutputBottomBlankProvider');
