@@ -11,6 +11,7 @@ import { CommandContribution } from '@difizen/mana-app';
 import { singleton, ToolbarContribution } from '@difizen/mana-app';
 
 import { AINativeCommands } from './ai-native-command.js';
+import { LibroAINativeService } from './ai-native-service.js';
 import { AIToolbarSelector } from './ai-side-toolbar-selector.js';
 import { LibroAIChatSlotContribution } from './chat-slot-contribution.js';
 import { AIIcon } from './icon.js';
@@ -23,6 +24,7 @@ export class LibroAINativeCommandContribution
   @inject(LibroAIChatSlotContribution)
   libroAIChatSlotContribution: LibroAIChatSlotContribution;
   @inject(LibroSlotManager) libroSlotManager: LibroSlotManager;
+  @inject(LibroAINativeService) libroAINativeService: LibroAINativeService;
   registerToolbarItems(registry: ToolbarRegistry): void {
     registry.registerItem({
       id: AINativeCommands['AISideToolbarSelect'].id,
@@ -93,6 +95,7 @@ export class LibroAINativeCommandContribution
             }
           }
         }
+        this.libroAINativeService.showSideToolbar = false;
       },
       isEnabled: (cell, libro) => {
         if (!libro || !(libro instanceof LibroView)) {
@@ -133,6 +136,7 @@ export class LibroAINativeCommandContribution
             }
           }
         }
+        this.libroAINativeService.showSideToolbar = false;
       },
       isVisible: (cell, libro, path) => {
         if (!cell || !libro || !(libro instanceof LibroView)) {
