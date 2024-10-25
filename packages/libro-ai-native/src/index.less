@@ -13,6 +13,7 @@
     border-color: var(--mana-libro-ai-native-border);
 
     span {
+      display: flex;
       font-family: ArialMT;
       font-size: 12px;
       color: var(--mana-libro-ai-native-border);
@@ -77,7 +78,7 @@
   }
 }
 
-.chat-switch {
+.chat-type {
   margin-right: 6px;
 }
 
@@ -91,4 +92,17 @@
 
 .chat-input-sendButton {
   background-color: var(--mana-libro-ai-native-border);
+}
+
+.chat-right-toolbar {
+  display: flex;
+  color: var(--mana-libro-tip-font-color);
+
+  .@{ant-prefix}-switch.@{ant-prefix}-switch-checked {
+    background: var(--mana-libro-ai-native-border);
+
+    &:hover {
+      background: var(--mana-libro-ai-native-border);
+    }
+  }
 }
