@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { getOrigin, useInject, ViewInstance } from '@difizen/mana-app';
 import { useConfigurationValue } from '@difizen/mana-app';
+import { Button } from 'antd';
 import type { Identifier } from 'dnd-core';
 import React, {
   useCallback,
@@ -311,12 +312,14 @@ export const DndCellContainer: React.FC<DndContentProps> = ({ cell, index }) => 
       </div>
       {isCollapsible && cell.headingCollapsed && cell.collapsibleChildNumber > 0 && (
         <div className="libro-cell-collapsed-expander">
-          <button
+          <Button
             className="libro-cell-expand-button"
             onClick={() => instance.collapseCell(cell, false)}
+            icon={<PlusOutlined className="" />}
+            type="default"
           >
-            <PlusOutlined className="" /> {cell.collapsibleChildNumber} cell hidden
-          </button>
+            {cell.collapsibleChildNumber} cell hidden
+          </Button>
         </div>
       )}
     </div>
