@@ -247,6 +247,7 @@ export class WidgetView extends BaseView implements IWidgetView {
   state_change: Promise<any>;
   name: string;
   module: string;
+  @prop()
   isCommClosed = false;
 
   model_module: string;
