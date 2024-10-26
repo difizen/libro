@@ -411,6 +411,7 @@ export interface DndListModel {
 export interface DndContentProps {
   cell: CellView;
   index: number;
+  position: number;
 }
 
 export interface DndItemProps {
