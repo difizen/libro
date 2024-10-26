@@ -131,6 +131,7 @@ export const LibroCellsOutputRender: React.FC<{
 
   // 绘制所有的非编辑器区域
   const noEditorArea = useMemo(() => {
+    let position = -1;
     return (
       <div
         style={{
@@ -142,9 +143,20 @@ export const LibroCellsOutputRender: React.FC<{
         ref={noEditorAreaRef}
       >
         {cells
-          .filter((cell) => cell.collapsedHidden === false)
+          // .filter((cell) => cell.collapsedHidden === false)
           .map((cell, index) => {
-            return <DndCellRender cell={cell} key={cell.id} index={index} />;
+            position += 1;
+            if (cell.collapsedHidden) {
+              return null;
+            }
+            return (
+              <DndCellRender
+                cell={cell}
+                key={cell.id}
+                index={index}
+                position={position}
+              />
+            );
           })}
         {addCellButtons}
       </div>
