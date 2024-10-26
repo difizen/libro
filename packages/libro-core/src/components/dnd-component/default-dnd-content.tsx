@@ -31,7 +31,11 @@ export interface Dragparams {
   index: number;
 }
 
-export const DndCellContainer: React.FC<DndContentProps> = ({ cell, index }) => {
+export const DndCellContainer: React.FC<DndContentProps> = ({
+  cell,
+  index,
+  position,
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const instance = useInject<LibroView>(ViewInstance);
   const [multiSelectionWhenShiftClick] = useConfigurationValue(
@@ -286,7 +290,10 @@ export const DndCellContainer: React.FC<DndContentProps> = ({ cell, index }) => 
       ref={ref}
       id={cell.id}
     >
-      <BetweenCellContent index={index} addCell={cell.parent.addCellAbove} />
+      <BetweenCellContent
+        index={position || index}
+        addCell={cell.parent.addCellAbove}
+      />
       {isDragOver && <div className="libro-drag-hoverline" />}
       {isMouseOverDragArea && <HolderOutlined className="libro-handle-style" />}
       <div

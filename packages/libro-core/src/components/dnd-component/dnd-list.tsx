@@ -31,15 +31,29 @@ export const DndCellRender: FC<DndContentProps> = memo(function DndCellRender({
 });
 
 // 定义一个函数用于渲染非虚拟列表时的单元格
-const renderNonVirtualListCells = (cells: CellView[]) => (
-  <div style={{ height: '100%', overflow: 'visible' }}>
-    {cells
-      .filter((cell) => !cell.collapsedHidden)
-      .map((cell, index) => (
-        <DndCellRender cell={cell} key={cell.id} index={index} />
-      ))}
-  </div>
-);
+const renderNonVirtualListCells = (cells: CellView[]) => {
+  let position = -1;
+  return (
+    <div style={{ height: '100%', overflow: 'visible' }}>
+      {cells
+        // .filter((cell) => !cell.collapsedHidden)
+        .map((cell, index) => {
+          position += 1;
+          if (cell.collapsedHidden) {
+            return null;
+          }
+          return (
+            <DndCellRender
+              cell={cell}
+              key={cell.id}
+              index={index}
+              position={position}
+            />
+          );
+        })}
+    </div>
+  );
+};
 
 export const DndCellsRender = forwardRef<
   HTMLDivElement,
