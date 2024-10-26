@@ -467,6 +467,7 @@ export class LibroModel implements NotebookModel, DndListModel {
       this.cellViewCache.set(cell.model.id, cell);
       return cell.toJSON();
     });
+
     getOrigin(this.sharedModel).transact(() => {
       const insertIndex = position ?? this.sharedModel.cells.length;
       getOrigin(this.sharedModel).insertCells(insertIndex, cellData);
