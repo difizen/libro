@@ -31,6 +31,6 @@ export class LibroWidgetMimeContribution implements RenderMimeContribution {
   renderType = 'widgetRenderer';
   safe = true;
   mimeTypes = ['application/vnd.jupyter.widget-view+json'];
-  allowClear = false;
+  allowClear = true;
   render = WidgetRender;
 }
