@@ -1,5 +1,6 @@
 import { CellOutputTopProvider, ErrorOutputModel } from '@difizen/libro-jupyter';
-import { LibroChatModule } from '@difizen/magent-libro';
+import { ChatView } from '@difizen/magent-chat';
+import { LibroChatModule, LibroChatService } from '@difizen/magent-libro';
 import { ManaModule } from '@difizen/mana-app';
 
 import { LibroAINativeCommandContribution } from './ai-native-command-contribution.js';
@@ -10,6 +11,8 @@ import { LibroAIChatSlotContribution } from './chat-slot-contribution.js';
 import { LibroChatView } from './chat-view.js';
 import { AIErrorOutputModel } from './error-output-model.js';
 import { LibroAIChatMessageItemModel } from './libro-ai-msg-item-model.js';
+import { LibroAINativeChatService } from './libro-ai-native-chat-service.js';
+import { LibroAiNativeChatView } from './libro-ai-native-chat-view.js';
 import { LibroAINativeColorRegistry } from './libro-ai-native-color-registry.js';
 
 export const LibroAINativeModule = ManaModule.create()
@@ -24,6 +27,14 @@ export const LibroAINativeModule = ManaModule.create()
     {
       token: ErrorOutputModel,
       useClass: AIErrorOutputModel,
+    },
+    {
+      token: ChatView,
+      useClass: LibroAiNativeChatView,
+    },
+    {
+      token: LibroChatService,
+      useClass: LibroAINativeChatService,
     },
     {
       token: CellOutputTopProvider,
