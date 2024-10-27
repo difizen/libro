@@ -22,6 +22,7 @@ export class LibroAIChatSlotContribution implements LibroExtensionSlotContributi
       parentId: libro.id,
     });
     view.parent = libro;
+    view.chatView.libro = libro;
     this.viewMap.set(libro.id, view);
     this.showChatMap.set(libro.id, false);
     view.onDisposed(() => {
