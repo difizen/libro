@@ -1,8 +1,30 @@
-import type { CellOutputTopProvider } from '@difizen/libro-jupyter';
-import { forwardRef } from 'react';
+import type { CellView } from '@difizen/libro-jupyter';
+import { useInject, ViewManager, ViewRender } from '@difizen/mana-app';
+import { useEffect, useState } from 'react';
 
-export const LibroAINativeCellTopBlank: CellOutputTopProvider = forwardRef(
-  function LibroAINativeTopBlank() {
-    return <div>LibroAINativeTopBlank</div>;
-  },
-);
+import { LibroAINativeForCellView } from './ai-native-for-cell-view.js';
+
+export function LibroAINativeCellTopBlank({ cell }: { cell: CellView }) {
+  const viewManager = useInject<ViewManager>(ViewManager);
+
+  const [aiNativeForCellView, setAiNativeForCellView] =
+    useState<LibroAINativeForCellView>();
+
+  useEffect(() => {
+    viewManager
+      .getOrCreateView(LibroAINativeForCellView, { id: cell.id })
+      .then((view) => {
+        setAiNativeForCellView(view);
+        return;
+      })
+      .catch(() => {
+        //
+      });
+  }, [cell.id, viewManager]);
+
+  if (!aiNativeForCellView) {
+    return null;
+  }
+
+  return <ViewRender view={aiNativeForCellView}></ViewRender>;
+}
