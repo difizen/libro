@@ -139,3 +139,118 @@
     }
   }
 }
+
+.libro-ai-native-output-top {
+  padding: 18px 24px 0;
+
+  .chat-msg-md-message {
+    color: var(--mana-libro-llm-response-output-text-color);
+
+    code {
+      font-size: 13px;
+    }
+  }
+}
+
+.chat-msg-md-code-pre {
+  :global {
+    .md-code-pre {
+      margin: 0 !important;
+      padding: 1.5em !important;
+    }
+  }
+}
+
+.chat-msg-md-code-wrap {
+  border-radius: 4px;
+  position: relative;
+  margin: 12px 0;
+
+  pre {
+    overflow-x: auto;
+  }
+}
+
+.chat-msg-md-code-lang {
+  position: absolute;
+  top: 9px;
+  right: 28px;
+  color: #fff;
+  opacity: 0.8;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.chat-msg-md-code-copy {
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  top: 9px;
+  right: 4px;
+  color: #fff;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.chat-msg-md-code-code {
+  display: inline;
+}
+
+.libro-llm-syntax-highlighter {
+  code {
+    background-color: unset;
+    padding: unset;
+  }
+
+  padding: 12px;
+  background-color: var(--mana-libro-input-background) !important;
+  color: var(--mana-libro-llm-response-output-text-color);
+  font-family:
+    system-ui,
+    -apple-system,
+    blinkmacsystemfont,
+    'Segoe UI',
+    helvetica,
+    arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  font-size: 13px;
+
+  .token.comment {
+    color: var(--mana-libro-editor-comment-color);
+    font-style: italic;
+  }
+
+  .token.string {
+    color: var(--mana-libro-editor-string-color) !important;
+  }
+
+  .token.keyword {
+    color: var(--mana-libro-editor-keyword-color);
+  }
+
+  .token.function {
+    color: var(--mana-libro-editor-def-color);
+  }
+
+  .token.number {
+    color: var(--mana-libro-editor-number-color);
+  }
+
+  .token.operator {
+    color: var(--mana-libro-editor-operator-color);
+  }
+
+  .token.class-name {
+    color: var(--mana-libro-editor-class-color);
+  }
+
+  .token.constant {
+    color: var(--mana-libro-editor-class-color);
+  }
+}
