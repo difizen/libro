@@ -42,8 +42,9 @@ const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
     const handleFixWithAI = async () => {
       const libroAINativeForCellView = await viewManager.getOrCreateView(
         LibroAINativeForCellView,
-        { id: output.cell.id },
+        { id: output.cell.id, cell: getOrigin(output.cell) },
       );
+      libroAINativeForCellView.showAI = true;
 
       libroAINativeForCellView.chatStream({
         chat_key: 'LLM:debug-gpt4',

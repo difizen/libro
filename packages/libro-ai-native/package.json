@@ -52,8 +52,12 @@
     "@difizen/magent-libro": "^0.1.27",
     "@difizen/magent-chat": "^0.1.27",
     "@difizen/magent-core": "^0.1.27",
+    "copy-to-clipboard": "^3.3.3",
     "eventsource-parser": "^1.1.2",
-    "markdown-it": "^13.0.1"
+    "react-syntax-highlighter": "^15.5.0",
+    "markdown-it": "^13.0.1",
+    "remark-breaks": "^4.0.0",
+    "remark-gfm": "^4.0.0"
   },
   "peerDependencies": {
     "antd": "^5.8.6",
@@ -61,6 +65,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.25",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "@types/sanitize-html": "^2.6.2"
   }
 }
