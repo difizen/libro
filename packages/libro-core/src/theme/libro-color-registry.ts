@@ -309,6 +309,11 @@ export class LibroColorRegistry implements ColorContribution {
         description: '',
       },
       {
+        id: 'libro.editor.class.color',
+        defaults: { dark: '#6868f3', light: '#0000ff' },
+        description: '',
+      },
+      {
         id: 'libro.editor.def.color',
         defaults: { dark: '#187DFF', light: '#003CFF' },
         description: '',

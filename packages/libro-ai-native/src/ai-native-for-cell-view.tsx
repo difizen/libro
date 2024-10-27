@@ -6,22 +6,38 @@ import type { ToAutoFactory } from '@difizen/magent-core';
 import { Fetcher } from '@difizen/magent-core';
 import { toAutoFactory } from '@difizen/magent-core';
 import type { ViewComponent } from '@difizen/mana-app';
+import { ViewOption } from '@difizen/mana-app';
 import { prop } from '@difizen/mana-app';
 import { useObserve } from '@difizen/mana-app';
 import { useInject, ViewInstance } from '@difizen/mana-app';
 import { inject } from '@difizen/mana-app';
 import { BaseView, transient, view } from '@difizen/mana-app';
 import { EventSourceParserStream } from 'eventsource-parser/stream';
+import breaks from 'remark-breaks';
+import remarkGfm from 'remark-gfm';
 
+import { CodeBlockInCell } from './ai-native-code-block.js';
 import { LibroAIChatMessageItemModel } from './libro-ai-msg-item-model.js';
+import type { IAINativeForCellViewOption } from './protocol.js';
 import { stringToReadableStream } from './utils.js';
 
-export function LibroAINativeForCellRender({ cell }: { cell: CellView }) {
+export function LibroAINativeForCellRender() {
   const LLMRender = ChatComponents.Markdown;
 
   const instance = useInject<LibroAINativeForCellView>(ViewInstance);
   const msgItem = useObserve(instance.libroAIChatMessageItemModel);
-  return <LLMRender type="message">{msgItem?.content}</LLMRender>;
+  if (!instance.showAI) {
+    return null;
+  }
+  return (
+    <LLMRender
+      type="message"
+      components={{ code: CodeBlockInCell }}
+      remarkPlugins={[remarkGfm, breaks]}
+    >
+      {msgItem?.content}
+    </LLMRender>
+  );
 }
 
 @transient()
@@ -29,10 +45,18 @@ export function LibroAINativeForCellRender({ cell }: { cell: CellView }) {
 export class LibroAINativeForCellView extends BaseView {
   override view: ViewComponent = LibroAINativeForCellRender;
   @inject(Fetcher) fetcher: Fetcher;
+  cell: CellView;
   @inject(toAutoFactory(LibroAIChatMessageItemModel))
   libroAiChatMessageItemFactory: ToAutoFactory<typeof LibroAIChatMessageItemModel>;
   @prop()
   libroAIChatMessageItemModel?: LibroAIChatMessageItemModel;
+
+  @prop()
+  showAI = false;
+  constructor(@inject(ViewOption) options: IAINativeForCellViewOption) {
+    super();
+    this.cell = options.cell;
+  }
 
   chatStream = async (option: IChatMessage) => {
     const { chat_key, content } = option;
