@@ -51,15 +51,6 @@ export const CodeBlockInCell = (props: any) => {
           <Button color="primary" variant="text" onClick={() => replace(children)}>
             替换代码
           </Button>
-          <Button
-            color="default"
-            variant="text"
-            onClick={() => {
-              instance.showAI = false;
-            }}
-          >
-            取消
-          </Button>
         </div>
       </pre>
     );

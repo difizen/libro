@@ -12,6 +12,7 @@ import { useObserve } from '@difizen/mana-app';
 import { useInject, ViewInstance } from '@difizen/mana-app';
 import { inject } from '@difizen/mana-app';
 import { BaseView, transient, view } from '@difizen/mana-app';
+import { Button } from 'antd';
 import { EventSourceParserStream } from 'eventsource-parser/stream';
 import breaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
@@ -30,13 +31,24 @@ export function LibroAINativeForCellRender() {
     return null;
   }
   return (
-    <LLMRender
-      type="message"
-      components={{ code: CodeBlockInCell }}
-      remarkPlugins={[remarkGfm, breaks]}
-    >
-      {msgItem?.content}
-    </LLMRender>
+    <div className="libro-ai-native-for-cell-container">
+      <LLMRender
+        type="message"
+        components={{ code: CodeBlockInCell }}
+        remarkPlugins={[remarkGfm, breaks]}
+      >
+        {msgItem?.content}
+      </LLMRender>
+      <Button
+        color="default"
+        variant="filled"
+        onClick={() => {
+          instance.showAI = false;
+        }}
+      >
+        取消
+      </Button>
+    </div>
   );
 }
 

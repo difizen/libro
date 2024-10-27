@@ -3,14 +3,16 @@ import {
   LibroSlotManager,
   LibroSlotView,
   LibroToolbarArea,
+  LibroCellView,
   LibroView,
 } from '@difizen/libro-jupyter';
 import type { CommandRegistry, ToolbarRegistry } from '@difizen/mana-app';
-import { inject } from '@difizen/mana-app';
+import { inject, getOrigin } from '@difizen/mana-app';
 import { CommandContribution } from '@difizen/mana-app';
-import { singleton, ToolbarContribution } from '@difizen/mana-app';
+import { singleton, ToolbarContribution, ViewManager } from '@difizen/mana-app';
 
 import { AINativeCommands } from './ai-native-command.js';
+import { LibroAINativeForCellView } from './ai-native-for-cell-view.js';
 import { LibroAINativeService } from './ai-native-service.js';
 import { AIToolbarSelector } from './ai-side-toolbar-selector.js';
 import { LibroAIChatSlotContribution } from './chat-slot-contribution.js';
@@ -25,6 +27,8 @@ export class LibroAINativeCommandContribution
   libroAIChatSlotContribution: LibroAIChatSlotContribution;
   @inject(LibroSlotManager) libroSlotManager: LibroSlotManager;
   @inject(LibroAINativeService) libroAINativeService: LibroAINativeService;
+  @inject(ViewManager) viewManager: ViewManager;
+
   registerToolbarItems(registry: ToolbarRegistry): void {
     registry.registerItem({
       id: AINativeCommands['AISideToolbarSelect'].id,
@@ -153,7 +157,20 @@ export class LibroAINativeCommandContribution
       },
     });
     this.libroCommand.registerLibroCommand(command, AINativeCommands['Explain'], {
-      execute: async () => {
+      execute: async (cell) => {
+        if (!cell || !(cell instanceof LibroCellView)) {
+          return;
+        }
+        const libroAINativeForCellView = await this.viewManager.getOrCreateView(
+          LibroAINativeForCellView,
+          { id: cell.id, cell: getOrigin(cell) },
+        );
+        libroAINativeForCellView.showAI = true;
+
+        libroAINativeForCellView.chatStream({
+          chat_key: 'LLM:gpt4',
+          content: `帮忙解释一下这段代码：${cell.model.value}`,
+        });
         // this.libroService.active?.enterEditMode();
       },
       isEnabled: (cell, libro) => {
