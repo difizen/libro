@@ -1,7 +1,6 @@
 import { CloseOutlined } from '@ant-design/icons';
 import { LibroSlotManager, LibroSlotView } from '@difizen/libro-jupyter';
 import type { DisplayView, LibroView } from '@difizen/libro-jupyter';
-import { ChatView } from '@difizen/magent-chat';
 import type { ConfigurationService } from '@difizen/mana-app';
 import {
   BaseView,
@@ -17,6 +16,7 @@ import {
 import { useRef } from 'react';
 
 import { LibroAIChatSlotContribution } from './chat-slot-contribution.js';
+import { LibroAiNativeChatView } from './libro-ai-native-chat-view.js';
 
 export const ChatRender = () => {
   const containRef = useRef<HTMLDivElement>(null);
@@ -30,7 +30,9 @@ export const ChatRender = () => {
       <div className="chat-header">
         <div className="chat-title">Libro AI</div>
         <div className="chat-right-toolbar">
-          <div className="chat-type">{libroChatView.chatType}</div>
+          <div className="chat-type">
+            {libroChatView.chatView.isCellChat ? 'Focused Cell' : 'General Chat'}
+          </div>
           <div>
             <CloseOutlined
               className="chat-close-icon"
@@ -58,7 +60,9 @@ export const ChatRender = () => {
           </div>
         </div>
       </div>
-      <ViewRender view={libroChatView.generalChatView}></ViewRender>
+      {libroChatView.chatView && (
+        <ViewRender view={libroChatView.chatView}></ViewRender>
+      )}
     </div>
   );
 };
@@ -68,14 +72,12 @@ export const ChatRender = () => {
 export class LibroChatView extends BaseView implements DisplayView {
   parent: LibroView | undefined = undefined;
   protected configurationService: ConfigurationService;
+  @inject(ViewManager) viewManager: ViewManager;
 
   override view = ChatRender;
 
-  generalChatView: ChatView;
-
-  cellChatView: ChatView;
-
-  chatType = 'General Chat';
+  @prop()
+  chatView: LibroAiNativeChatView;
 
   @prop()
   isDisplay = true;
@@ -83,20 +85,16 @@ export class LibroChatView extends BaseView implements DisplayView {
   constructor(@inject(ViewManager) viewManager: ViewManager) {
     super();
     viewManager
-      .getOrCreateView(ChatView, {
+      .getOrCreateView(LibroAiNativeChatView, {
         id: this.id,
         chat_key: 'LLM:chatgpt',
       })
       .then((chatView) => {
-        this.generalChatView = chatView;
+        this.chatView = chatView;
         return;
       })
       .catch(() => {
         //
       });
-  }
-
-  createGeneralChatView() {
-    return;
   }
 }

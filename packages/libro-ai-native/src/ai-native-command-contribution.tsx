@@ -74,32 +74,26 @@ export class LibroAINativeCommandContribution
         }
         libro.model.libroViewClass = 'ai-cell-chat';
         const chatView = this.libroAIChatSlotContribution.viewMap.get(libro.id);
-        const showChat = !this.libroAIChatSlotContribution.showChatMap.get(libro.id);
-        this.libroAIChatSlotContribution.showChatMap.set(libro.id, showChat);
-
-        this.libroAIChatSlotContribution.showChatMap;
+        const showChat = this.libroAIChatSlotContribution.showChatMap.get(libro.id);
         if (chatView) {
+          chatView.chatView.isCellChat = true;
           if (showChat) {
-            this.libroSlotManager.slotViewManager.addView(
-              chatView,
-              this.libroSlotManager.getSlotName(
-                libro,
-                this.libroAIChatSlotContribution.slot,
-              ),
-              {
-                reveal: true,
-                order: 'a',
-              },
-            );
-          } else {
-            const slotview = this.libroSlotManager.slotViewManager.getSlotView(
-              this.libroSlotManager.getSlotName(libro, 'right'),
-            );
-            if (slotview instanceof LibroSlotView) {
-              slotview.revertActive();
-            }
+            return;
           }
+          this.libroAIChatSlotContribution.showChatMap.set(libro.id, !showChat);
+          this.libroSlotManager.slotViewManager.addView(
+            chatView,
+            this.libroSlotManager.getSlotName(
+              libro,
+              this.libroAIChatSlotContribution.slot,
+            ),
+            {
+              reveal: true,
+              order: 'a',
+            },
+          );
         }
+        //优化交互，用于控制点击按钮后菜单消失
         this.libroAINativeService.showSideToolbar = false;
       },
       isEnabled: (cell, libro) => {
@@ -115,12 +109,23 @@ export class LibroAINativeCommandContribution
           return;
         }
         const chatView = this.libroAIChatSlotContribution.viewMap.get(libro.id);
-        const showChat = !this.libroAIChatSlotContribution.showChatMap.get(libro.id);
-        this.libroAIChatSlotContribution.showChatMap.set(libro.id, showChat);
-
+        const showChat = this.libroAIChatSlotContribution.showChatMap.get(libro.id);
         this.libroAIChatSlotContribution.showChatMap;
         if (chatView) {
+          if (showChat && chatView.chatView.isCellChat) {
+            chatView.chatView.isCellChat = false;
+            return;
+          }
+          chatView.chatView.isCellChat = false;
+          this.libroAIChatSlotContribution.showChatMap.set(libro.id, !showChat);
           if (showChat) {
+            const slotview = this.libroSlotManager.slotViewManager.getSlotView(
+              this.libroSlotManager.getSlotName(libro, 'right'),
+            );
+            if (slotview instanceof LibroSlotView) {
+              slotview.revertActive();
+            }
+          } else {
             this.libroSlotManager.slotViewManager.addView(
               chatView,
               this.libroSlotManager.getSlotName(
@@ -132,13 +137,6 @@ export class LibroAINativeCommandContribution
                 order: 'a',
               },
             );
-          } else {
-            const slotview = this.libroSlotManager.slotViewManager.getSlotView(
-              this.libroSlotManager.getSlotName(libro, 'right'),
-            );
-            if (slotview instanceof LibroSlotView) {
-              slotview.revertActive();
-            }
           }
         }
         this.libroAINativeService.showSideToolbar = false;
