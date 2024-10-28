@@ -7,13 +7,13 @@ import { LibroExtensionSlotContribution } from '@difizen/libro-jupyter';
 import { ViewManager } from '@difizen/mana-app';
 import { inject, singleton } from '@difizen/mana-app';
 
+import { LibroAINativeService } from './ai-native-service.js';
 import { LibroChatView } from './chat-view.js';
 
 @singleton({ contrib: [LibroExtensionSlotContribution] })
 export class LibroAIChatSlotContribution implements LibroExtensionSlotContribution {
   @inject(ViewManager) viewManager: ViewManager;
-  viewMap: Map<string, LibroChatView> = new Map();
-  showChatMap: Map<string, boolean> = new Map();
+  @inject(LibroAINativeService) libroAINativeService: LibroAINativeService;
 
   public readonly slot: LibroSlot = 'right';
 
@@ -23,10 +23,10 @@ export class LibroAIChatSlotContribution implements LibroExtensionSlotContributi
     });
     view.parent = libro;
     view.chatView.libro = libro;
-    this.viewMap.set(libro.id, view);
-    this.showChatMap.set(libro.id, false);
+    this.libroAINativeService.chatViewMap.set(libro.id, view);
+    this.libroAINativeService.showChatMap.set(libro.id, false);
     view.onDisposed(() => {
-      this.viewMap.delete(libro.id);
+      this.libroAINativeService.chatViewMap.delete(libro.id);
     });
     return view;
   };

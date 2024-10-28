@@ -19,7 +19,7 @@ import {
 } from '@difizen/mana-app';
 import { useRef } from 'react';
 
-import { LibroAIChatSlotContribution } from './chat-slot-contribution.js';
+import { LibroAINativeService } from './ai-native-service.js';
 import { LibroAiNativeChatView } from './libro-ai-native-chat-view.js';
 
 export const ChatRender = () => {
@@ -27,10 +27,7 @@ export const ChatRender = () => {
   const libroChatView = useInject<LibroChatView>(ViewInstance);
   const libroSlotManager = useInject<LibroSlotManager>(LibroSlotManager);
   const libroContextKey = useInject<LibroContextKey>(LibroContextKey);
-
-  const libroAIChatSlotContribution = useInject<LibroAIChatSlotContribution>(
-    LibroAIChatSlotContribution,
-  );
+  const libroAINativeService = useInject<LibroAINativeService>(LibroAINativeService);
   return (
     <div
       className="chat-container"
@@ -59,10 +56,7 @@ export const ChatRender = () => {
                       '',
                     );
 
-                  libroAIChatSlotContribution.showChatMap.set(
-                    libroChatView.parent.id,
-                    false,
-                  );
+                  libroAINativeService.showChatMap.set(libroChatView.parent.id, false);
                   const slotview = libroSlotManager.slotViewManager.getSlotView(
                     libroSlotManager.getSlotName(libroChatView.parent, 'right'),
                   );
