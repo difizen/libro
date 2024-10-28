@@ -206,6 +206,16 @@
     &:hover {
       border-color: var(--mana-libro-ai-native-color) !important;
       color: var(--mana-libro-ai-native-color) !important;
+
+      &.error {
+        border-color: var(--mana-libro-error-color) !important;
+        color: var(--mana-libro-error-color) !important;
+      }
+    }
+
+    &.error {
+      border-color: var(--mana-libro-error-color);
+      color: var(--mana-libro-error-color);
     }
   }
 }
@@ -330,4 +340,8 @@
   .token.constant {
     color: var(--mana-libro-editor-class-color);
   }
+}
+
+.libro-ai-native-for-cell-error {
+  color: var(--mana-libro-error-color);
 }
