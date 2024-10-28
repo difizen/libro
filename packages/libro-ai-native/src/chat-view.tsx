@@ -21,6 +21,7 @@ import { useRef } from 'react';
 
 import { LibroAINativeService } from './ai-native-service.js';
 import { LibroAiNativeChatView } from './libro-ai-native-chat-view.js';
+import type { AiNativeChatViewOption } from './protocol.js';
 
 export const ChatRender = () => {
   const containRef = useRef<HTMLDivElement>(null);
@@ -43,18 +44,20 @@ export const ChatRender = () => {
         <div className="chat-title">Libro AI</div>
         <div className="chat-right-toolbar">
           <div className="chat-type">
-            {libroChatView.chatView.isCellChat ? 'Focused Cell' : 'General Chat'}
+            {libroChatView.chatView?.isCellChat ? 'Focused Cell' : 'General Chat'}
           </div>
           <div>
             <CloseOutlined
               className="chat-close-icon"
               onClick={() => {
                 if (libroChatView.parent) {
-                  libroChatView.parent.model.libroViewClass =
-                    libroChatView.parent.model.libroViewClass.replace(
-                      'ai-cell-chat',
-                      '',
-                    );
+                  if (libroChatView.chatView?.cell?.className) {
+                    libroChatView.chatView.cell.className =
+                      libroChatView.chatView.cell?.className.replace(
+                        'ai-cell-focus',
+                        '',
+                      );
+                  }
 
                   libroAINativeService.showChatMap.set(libroChatView.parent.id, false);
                   const slotview = libroSlotManager.slotViewManager.getSlotView(
@@ -91,14 +94,20 @@ export class LibroChatView extends BaseView implements DisplayView {
   @prop()
   isDisplay = true;
 
-  constructor(@inject(ViewManager) viewManager: ViewManager) {
-    super();
-    viewManager
-      .getOrCreateView(LibroAiNativeChatView, {
-        id: this.id,
-        chat_key: 'LLM:chatgpt',
-      })
+  setAINativeChatView(option: AiNativeChatViewOption) {
+    if (this.chatView?.cell) {
+      this.chatView.cell.className = this.chatView.cell.className?.replace(
+        'ai-cell-focus',
+        '',
+      );
+    }
+    this.viewManager
+      .getOrCreateView(LibroAiNativeChatView, option)
       .then((chatView) => {
+        chatView.libro = this.parent;
+        if (option.isCellChat) {
+          chatView.cell = option.cell;
+        }
         this.chatView = chatView;
         return;
       })
