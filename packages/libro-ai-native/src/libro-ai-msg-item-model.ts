@@ -20,7 +20,7 @@ export class LibroAIChatMessageItemModel {
   state: AnswerState;
 
   @prop()
-  protected _content: string;
+  protected _content = '';
   get content(): string {
     return this._content;
   }
