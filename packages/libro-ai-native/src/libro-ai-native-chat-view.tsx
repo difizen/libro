@@ -1,11 +1,12 @@
-import type { LibroView } from '@difizen/libro-jupyter';
+import type { CellView, LibroView } from '@difizen/libro-jupyter';
 import { ChatView } from '@difizen/magent-chat';
-import { prop, transient, view } from '@difizen/mana-app';
+import { inject, prop, transient, view, ViewOption } from '@difizen/mana-app';
 import breaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 
 import { CodeBlockInChat } from './ai-native-code-block.js';
 import './index.less';
+import type { AiNativeChatViewOption } from './protocol.js';
 import { ImageModal } from './utils.js';
 
 const viewId = 'magent-chat';
@@ -17,6 +18,14 @@ export class LibroAiNativeChatView extends ChatView {
   isCellChat = false;
 
   libro?: LibroView;
+
+  cell?: CellView;
+
+  constructor(@inject(ViewOption) option: AiNativeChatViewOption) {
+    super(option);
+    this.option = option;
+    this.isCellChat = option.isCellChat;
+  }
 
   override getMarkdownProps() {
     return {
@@ -32,7 +41,7 @@ export class LibroAiNativeChatView extends ChatView {
         ...this.option,
         sender: { type: 'HUMAN' },
         input: msgContent,
-        system_prompt: `有如下的代码作为对话的上下文：${this.libro?.activeCell?.model.value}`,
+        system_prompt: `有如下的代码作为对话的上下文：${this.cell?.model.value}`,
       };
     }
     return {

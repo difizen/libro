@@ -71,11 +71,16 @@ export class LibroAINativeCommandContribution
         if (!libro || !cell) {
           return;
         }
-        libro.model.libroViewClass = 'ai-cell-chat';
+        cell.className = cell.className + ' ai-cell-focus';
         const chatView = this.libroAINativeService.chatViewMap.get(libro.id);
         const showChat = this.libroAINativeService.showChatMap.get(libro.id);
         if (chatView) {
-          chatView.chatView.isCellChat = true;
+          chatView.setAINativeChatView({
+            id: cell.id,
+            chat_key: 'LLM:chatgpt',
+            isCellChat: true,
+            cell: cell,
+          });
           if (showChat) {
             return;
           }
@@ -112,10 +117,18 @@ export class LibroAINativeCommandContribution
         this.libroAINativeService.showChatMap;
         if (chatView) {
           if (showChat && chatView.chatView.isCellChat) {
-            chatView.chatView.isCellChat = false;
+            chatView.setAINativeChatView({
+              id: libro.id,
+              chat_key: 'LLM:chatgpt',
+              isCellChat: false,
+            });
             return;
           }
-          chatView.chatView.isCellChat = false;
+          chatView.setAINativeChatView({
+            id: libro.id,
+            chat_key: 'LLM:chatgpt',
+            isCellChat: false,
+          });
           this.libroAINativeService.showChatMap.set(libro.id, !showChat);
           if (showChat) {
             const slotview = this.libroSlotManager.slotViewManager.getSlotView(

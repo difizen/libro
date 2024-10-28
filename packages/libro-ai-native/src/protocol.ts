@@ -1,5 +1,5 @@
 import type { CellView } from '@difizen/libro-jupyter';
-import type { IChatMessageItem } from '@difizen/magent-chat';
+import type { ChatViewOption, IChatMessageItem } from '@difizen/magent-chat';
 
 export interface IAINativeForCellViewOption {
   cell: CellView;
@@ -8,4 +8,11 @@ export interface IAINativeForCellViewOption {
 
 export interface LibroAINativeChatMessageItemOption extends IChatMessageItem {
   chat_key: string;
+}
+
+export interface AiNativeChatViewOption extends ChatViewOption {
+  id: string;
+  chat_key: string;
+  isCellChat: boolean;
+  cell?: CellView;
 }
