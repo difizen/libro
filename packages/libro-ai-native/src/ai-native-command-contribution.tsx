@@ -169,8 +169,7 @@ export class LibroAINativeCommandContribution
             cell,
           );
         libroAINativeForCellView.showAI = true;
-
-        libro.model.libroViewClass = 'ai-cell-chat';
+        cell.className = cell.className + ' ai-cell-focus';
 
         libroAINativeForCellView.chatStream({
           chat_key: 'LLM:gpt4',
