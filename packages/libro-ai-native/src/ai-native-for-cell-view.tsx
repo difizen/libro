@@ -48,8 +48,10 @@ export function LibroAINativeForCellRender() {
         className="libro-ai-native-for-cell-cancel-btn"
         onClick={() => {
           instance.showAI = false;
-          instance.cell.parent.model.libroViewClass =
-            instance.cell.parent.model.libroViewClass.replace('ai-cell-chat', '');
+          instance.cell.className = instance.cell.className?.replace(
+            'ai-cell-focus',
+            '',
+          );
         }}
         icon={
           msgItem?.state === AnswerState.SUCCESS ? <CloseOutlined /> : <AILoadding />

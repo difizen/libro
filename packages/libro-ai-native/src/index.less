@@ -121,7 +121,7 @@
       }
 
       &.error {
-        border: 1px solid var(--mana-libro-ai-native-color) !important;
+        border: 1px solid var(--mana-libro-ai-native-color);
         box-shadow: var(--mana-libro-ai-native-box-shadow) 0 0 0 2px;
 
         .libro-cell-input-collapser,
@@ -137,6 +137,42 @@
       border: 1px solid var(--mana-libro-ai-native-color);
       box-shadow: unset;
     }
+  }
+}
+
+.libro-dnd-cell:has(.ai-cell-focus) {
+  &.active {
+    border: 1px solid var(--mana-libro-ai-native-color);
+    box-shadow: var(--mana-libro-ai-native-box-shadow) 0 0 0 2px;
+
+    .libro-cell-input-collapser,
+    .libro-cell-output-collapser,
+    .libro-cell-collapser {
+      background: var(--mana-libro-ai-native-color);
+      opacity: 1;
+    }
+
+    &.error {
+      border: 1px solid var(--mana-libro-ai-native-color);
+      box-shadow: var(--mana-libro-ai-native-box-shadow) 0 0 0 2px;
+    }
+  }
+
+  &.error {
+    border: 1px solid var(--mana-libro-ai-native-color);
+    box-shadow: var(--mana-libro-ai-native-box-shadow) 0 0 0 2px;
+
+    .libro-cell-input-collapser,
+    .libro-cell-output-collapser,
+    .libro-cell-collapser {
+      background: var(--mana-libro-ai-native-color);
+      opacity: 1;
+    }
+  }
+
+  &.active.command-mode {
+    border: 1px solid var(--mana-libro-ai-native-color);
+    box-shadow: unset;
   }
 }
 

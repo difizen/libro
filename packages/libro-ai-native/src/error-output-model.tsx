@@ -40,7 +40,7 @@ const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
     };
 
     const handleFixWithAI = async () => {
-      output.cell.parent.model.libroViewClass = 'ai-cell-chat';
+      output.cell.className = output.cell.className + ' ai-cell-focus';
 
       const libroAINativeForCellView =
         await libroAINativeService.getOrCreateLibroAINativeForCellView(
