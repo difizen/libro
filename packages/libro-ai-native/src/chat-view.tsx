@@ -1,5 +1,9 @@
 import { CloseOutlined } from '@ant-design/icons';
-import { LibroSlotManager, LibroSlotView } from '@difizen/libro-jupyter';
+import {
+  LibroContextKey,
+  LibroSlotManager,
+  LibroSlotView,
+} from '@difizen/libro-jupyter';
 import type { DisplayView, LibroView } from '@difizen/libro-jupyter';
 import type { ConfigurationService } from '@difizen/mana-app';
 import {
@@ -22,11 +26,22 @@ export const ChatRender = () => {
   const containRef = useRef<HTMLDivElement>(null);
   const libroChatView = useInject<LibroChatView>(ViewInstance);
   const libroSlotManager = useInject<LibroSlotManager>(LibroSlotManager);
+  const libroContextKey = useInject<LibroContextKey>(LibroContextKey);
+
   const libroAIChatSlotContribution = useInject<LibroAIChatSlotContribution>(
     LibroAIChatSlotContribution,
   );
   return (
-    <div className="chat-container" ref={containRef}>
+    <div
+      className="chat-container"
+      ref={containRef}
+      onFocus={() => {
+        libroContextKey.disableCommandMode();
+      }}
+      onBlur={() => {
+        libroContextKey.enableCommandMode();
+      }}
+    >
       <div className="chat-header">
         <div className="chat-title">Libro AI</div>
         <div className="chat-right-toolbar">
