@@ -1,5 +1,7 @@
+import { CloseOutlined } from '@ant-design/icons';
 import type { CellView } from '@difizen/libro-jupyter';
 import type { IChatMessage } from '@difizen/magent-chat';
+import { AnswerState } from '@difizen/magent-chat';
 import { ChatComponents } from '@difizen/magent-chat';
 import { ChatEvent } from '@difizen/magent-chat';
 import type { ToAutoFactory } from '@difizen/magent-core';
@@ -18,6 +20,7 @@ import breaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 
 import { CodeBlockInCell } from './ai-native-code-block.js';
+import { AILoadding } from './icon.js';
 import { LibroAIChatMessageItemModel } from './libro-ai-msg-item-model.js';
 import type { IAINativeForCellViewOption } from './protocol.js';
 import { stringToReadableStream } from './utils.js';
@@ -37,7 +40,7 @@ export function LibroAINativeForCellRender() {
         components={{ code: CodeBlockInCell }}
         remarkPlugins={[remarkGfm, breaks]}
       >
-        {msgItem?.content}
+        {msgItem?.content || ''}
       </LLMRender>
       <Button
         color="default"
@@ -48,6 +51,9 @@ export function LibroAINativeForCellRender() {
           instance.cell.parent.model.libroViewClass =
             instance.cell.parent.model.libroViewClass.replace('ai-cell-chat', '');
         }}
+        icon={
+          msgItem?.state === AnswerState.SUCCESS ? <CloseOutlined /> : <AILoadding />
+        }
       >
         取消
       </Button>
