@@ -7,12 +7,11 @@ import {
   LibroView,
 } from '@difizen/libro-jupyter';
 import type { CommandRegistry, ToolbarRegistry } from '@difizen/mana-app';
-import { inject, getOrigin } from '@difizen/mana-app';
+import { inject } from '@difizen/mana-app';
 import { CommandContribution } from '@difizen/mana-app';
 import { singleton, ToolbarContribution, ViewManager } from '@difizen/mana-app';
 
 import { AINativeCommands } from './ai-native-command.js';
-import { LibroAINativeForCellView } from './ai-native-for-cell-view.js';
 import { LibroAINativeService } from './ai-native-service.js';
 import { AIToolbarSelector } from './ai-side-toolbar-selector.js';
 import { LibroAIChatSlotContribution } from './chat-slot-contribution.js';
@@ -73,14 +72,14 @@ export class LibroAINativeCommandContribution
           return;
         }
         libro.model.libroViewClass = 'ai-cell-chat';
-        const chatView = this.libroAIChatSlotContribution.viewMap.get(libro.id);
-        const showChat = this.libroAIChatSlotContribution.showChatMap.get(libro.id);
+        const chatView = this.libroAINativeService.chatViewMap.get(libro.id);
+        const showChat = this.libroAINativeService.showChatMap.get(libro.id);
         if (chatView) {
           chatView.chatView.isCellChat = true;
           if (showChat) {
             return;
           }
-          this.libroAIChatSlotContribution.showChatMap.set(libro.id, !showChat);
+          this.libroAINativeService.showChatMap.set(libro.id, !showChat);
           this.libroSlotManager.slotViewManager.addView(
             chatView,
             this.libroSlotManager.getSlotName(
@@ -108,16 +107,16 @@ export class LibroAINativeCommandContribution
         if (!libro) {
           return;
         }
-        const chatView = this.libroAIChatSlotContribution.viewMap.get(libro.id);
-        const showChat = this.libroAIChatSlotContribution.showChatMap.get(libro.id);
-        this.libroAIChatSlotContribution.showChatMap;
+        const chatView = this.libroAINativeService.chatViewMap.get(libro.id);
+        const showChat = this.libroAINativeService.showChatMap.get(libro.id);
+        this.libroAINativeService.showChatMap;
         if (chatView) {
           if (showChat && chatView.chatView.isCellChat) {
             chatView.chatView.isCellChat = false;
             return;
           }
           chatView.chatView.isCellChat = false;
-          this.libroAIChatSlotContribution.showChatMap.set(libro.id, !showChat);
+          this.libroAINativeService.showChatMap.set(libro.id, !showChat);
           if (showChat) {
             const slotview = this.libroSlotManager.slotViewManager.getSlotView(
               this.libroSlotManager.getSlotName(libro, 'right'),
@@ -159,10 +158,11 @@ export class LibroAINativeCommandContribution
         if (!cell || !(cell instanceof LibroCellView)) {
           return;
         }
-        const libroAINativeForCellView = await this.viewManager.getOrCreateView(
-          LibroAINativeForCellView,
-          { id: cell.id, cell: getOrigin(cell) },
-        );
+        const libroAINativeForCellView =
+          await this.libroAINativeService.getOrCreateLibroAINativeForCellView(
+            cell.id,
+            cell,
+          );
         libroAINativeForCellView.showAI = true;
 
         libroAINativeForCellView.chatStream({

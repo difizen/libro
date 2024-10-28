@@ -42,6 +42,7 @@ export function LibroAINativeForCellRender() {
       <Button
         color="default"
         variant="filled"
+        className="libro-ai-native-for-cell-cancel-btn"
         onClick={() => {
           instance.showAI = false;
         }}
