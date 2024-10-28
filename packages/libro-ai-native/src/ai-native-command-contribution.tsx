@@ -104,7 +104,7 @@ export class LibroAINativeCommandContribution
     });
     this.libroCommand.registerLibroCommand(command, AINativeCommands['Chat'], {
       execute: async (cell, libro) => {
-        if (!libro) {
+        if (!libro || !(libro instanceof LibroView)) {
           return;
         }
         const chatView = this.libroAINativeService.chatViewMap.get(libro.id);
@@ -154,8 +154,13 @@ export class LibroAINativeCommandContribution
       },
     });
     this.libroCommand.registerLibroCommand(command, AINativeCommands['Explain'], {
-      execute: async (cell) => {
-        if (!cell || !(cell instanceof LibroCellView)) {
+      execute: async (cell, libro) => {
+        if (
+          !cell ||
+          !(cell instanceof LibroCellView) ||
+          !libro ||
+          !(libro instanceof LibroView)
+        ) {
           return;
         }
         const libroAINativeForCellView =
@@ -164,6 +169,8 @@ export class LibroAINativeCommandContribution
             cell,
           );
         libroAINativeForCellView.showAI = true;
+
+        libro.model.libroViewClass = 'ai-cell-chat';
 
         libroAINativeForCellView.chatStream({
           chat_key: 'LLM:gpt4',

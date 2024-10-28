@@ -41,10 +41,12 @@ export function LibroAINativeForCellRender() {
       </LLMRender>
       <Button
         color="default"
-        variant="filled"
+        variant="outlined"
         className="libro-ai-native-for-cell-cancel-btn"
         onClick={() => {
           instance.showAI = false;
+          instance.cell.parent.model.libroViewClass =
+            instance.cell.parent.model.libroViewClass.replace('ai-cell-chat', '');
         }}
       >
         取消
