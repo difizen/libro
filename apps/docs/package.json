@@ -5,7 +5,7 @@
   "license": "MIT",
   "description": "Document site for mana",
   "scripts": {
-    "start": "dumi dev",
+    "start": "UMI_DEV_SERVER_COMPRESS=none dumi dev",
     "build": "dumi build"
   },
   "type": "module",
