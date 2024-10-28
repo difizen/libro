@@ -33,19 +33,24 @@ export function LibroAINativeForCellRender() {
   if (!instance.showAI) {
     return null;
   }
+
   return (
     <div className="libro-ai-native-for-cell-container">
-      <LLMRender
-        type="message"
-        components={{ code: CodeBlockInCell }}
-        remarkPlugins={[remarkGfm, breaks]}
-      >
-        {msgItem?.content || ''}
-      </LLMRender>
+      {msgItem?.state === AnswerState.FAIL ? (
+        <div className="libro-ai-native-for-cell-error">请求报错～</div>
+      ) : (
+        <LLMRender
+          type="message"
+          components={{ code: CodeBlockInCell }}
+          remarkPlugins={[remarkGfm, breaks]}
+        >
+          {msgItem?.content || ''}
+        </LLMRender>
+      )}
       <Button
         color="default"
         variant="outlined"
-        className="libro-ai-native-for-cell-cancel-btn"
+        className={`libro-ai-native-for-cell-cancel-btn ${msgItem?.state === AnswerState.FAIL ? 'error' : ''}`}
         onClick={() => {
           instance.showAI = false;
           instance.cell.className = instance.cell.className?.replace(
@@ -54,7 +59,12 @@ export function LibroAINativeForCellRender() {
           );
         }}
         icon={
-          msgItem?.state === AnswerState.SUCCESS ? <CloseOutlined /> : <AILoadding />
+          msgItem?.state === AnswerState.SUCCESS ||
+          msgItem?.state === AnswerState.FAIL ? (
+            <CloseOutlined />
+          ) : (
+            <AILoadding />
+          )
         }
       >
         取消
@@ -116,19 +126,25 @@ export class LibroAINativeForCellView extends BaseView {
       });
       this.libroAIChatMessageItemModel = msgItem;
       let alreayDone = false;
-      while (!alreayDone) {
-        const { value, done } = await reader.read();
-        if (done) {
-          alreayDone = true;
-          msgItem.handleEventData({
-            type: 'done',
-          });
+      try {
+        while (!alreayDone) {
+          const { value, done } = await reader.read();
+          if (done) {
+            alreayDone = true;
+            msgItem.handleEventData({
+              type: 'done',
+            });
 
-          break;
+            break;
+          }
+          const data = JSON.parse(value.data);
+          const event = ChatEvent.format(value.event || 'chunk', data);
+          msgItem.handleEventData(event);
         }
-        const data = JSON.parse(value.data);
-        const event = ChatEvent.format(value.event || 'chunk', data);
-        msgItem.handleEventData(event);
+      } catch {
+        msgItem.handleEventData({
+          type: 'error',
+        });
       }
       return;
     }

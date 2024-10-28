@@ -64,5 +64,6 @@ export class LibroAIChatMessageItemModel {
 
   handleError(e: ChatEventError) {
     this.error = { message: e.message };
+    this.state = AnswerState.FAIL;
   }
 }

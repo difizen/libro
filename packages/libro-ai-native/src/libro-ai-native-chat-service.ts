@@ -71,19 +71,25 @@ export class LibroAINativeChatService extends LibroChatService {
         content: '',
       });
       let alreayDone = false;
-      while (!alreayDone) {
-        const { value, done } = await reader.read();
-        if (done) {
-          alreayDone = true;
-          eventCallback({
-            type: 'done',
-          });
+      try {
+        while (!alreayDone) {
+          const { value, done } = await reader.read();
+          if (done) {
+            alreayDone = true;
+            eventCallback({
+              type: 'done',
+            });
 
-          break;
+            break;
+          }
+          const data = JSON.parse(value.data);
+          const event = ChatEvent.format(value.event || 'chunk', data);
+          eventCallback(event);
         }
-        const data = JSON.parse(value.data);
-        const event = ChatEvent.format(value.event || 'chunk', data);
-        eventCallback(event);
+      } catch {
+        eventCallback({
+          type: 'error',
+        });
       }
       return;
     }
