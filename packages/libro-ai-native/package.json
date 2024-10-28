@@ -47,6 +47,7 @@
   "dependencies": {
     "@difizen/libro-jupyter": "^0.2.41",
     "@ant-design/icons": "^5.4.0",
+    "react-zoom-pan-pinch": "^3.6.1",
     "@difizen/mana-app": "latest",
     "@difizen/mana-l10n": "latest",
     "@difizen/magent-libro": "^0.1.27",
@@ -57,7 +58,8 @@
     "react-syntax-highlighter": "^15.5.0",
     "markdown-it": "^13.0.1",
     "remark-breaks": "^4.0.0",
-    "remark-gfm": "^4.0.0"
+    "remark-gfm": "^4.0.0",
+    "uuid": "^9.0.0"
   },
   "peerDependencies": {
     "antd": "^5.8.6",
@@ -66,6 +68,7 @@
   "devDependencies": {
     "@types/react": "^18.2.25",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "@types/sanitize-html": "^2.6.2"
+    "@types/sanitize-html": "^2.6.2",
+    "@types/uuid": "^9.0.2"
   }
 }
