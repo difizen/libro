@@ -140,11 +140,17 @@
   }
 }
 
+.libro-ai-native-debug-code-btn-container {
+  margin-top: 12px;
+}
+
 .libro-ai-native-output-top {
   padding: 18px 24px 0;
 
   .chat-msg-md-message {
     color: var(--mana-libro-llm-response-output-text-color);
+    width: calc(100% - 78px);
+    margin-right: 12px;
 
     code {
       font-size: 13px;
@@ -175,19 +181,19 @@
   position: absolute;
   top: 9px;
   right: 28px;
-  color: #fff;
+  color: var(--mana-libro-llm-response-output-text-color);
   opacity: 0.8;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 16px;
 }
 
 .chat-msg-md-code-copy {
-  font-size: 16px;
+  font-size: 13px;
   cursor: pointer;
   position: absolute;
   top: 9px;
   right: 4px;
-  color: #fff;
+  color: var(--mana-libro-llm-response-output-text-color);
   opacity: 0.8;
 
   &:hover {
@@ -201,6 +207,11 @@
 
 .libro-ai-native-for-cell-container {
   display: flex;
+  justify-content: space-between;
+}
+
+.libro-ai-native-for-cell-cancel-btn {
+  width: 78px;
 }
 
 .libro-llm-syntax-highlighter {

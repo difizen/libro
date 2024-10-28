@@ -48,7 +48,7 @@ export const CodeBlockInCell = (props: any) => {
           {typeof children === 'string' ? children.trim() : children}
         </SyntaxHighlighter>
         <div className="libro-ai-native-debug-code-btn-container">
-          <Button color="primary" variant="text" onClick={() => replace(children)}>
+          <Button color="primary" variant="filled" onClick={() => replace(children)}>
             替换代码
           </Button>
         </div>

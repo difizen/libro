@@ -6,25 +6,25 @@ import {
   RenderMimeRegistry,
   renderText,
 } from '@difizen/libro-jupyter';
-import { prop, transient, ViewManager } from '@difizen/mana-app';
+import { prop, transient } from '@difizen/mana-app';
 import { getOrigin, useInject, view, ViewInstance } from '@difizen/mana-app';
 import { Button } from 'antd';
 import { forwardRef, createRef, useEffect } from 'react';
-import './index.less';
 
-import { LibroAINativeForCellView } from './ai-native-for-cell-view.js';
+import './index.less';
+import { LibroAINativeService } from './ai-native-service.js';
 import { AIIcon } from './icon.js';
 
 const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
   function ErrorOutputModelRender(_props, ref) {
     const output = useInject<AIErrorOutputModel>(ViewInstance);
-    const viewManager = useInject<ViewManager>(ViewManager);
     const model = getOrigin(output);
     const source = getOrigin(output).raw as IError;
     const defaultRenderMime = useInject<IRenderMimeRegistry>(RenderMimeRegistry);
     const traceback = source.traceback.join('\n');
     const defaultRenderMimeType = defaultRenderMime.preferredMimeType(model);
     const streamRef = createRef<HTMLDivElement>();
+    const libroAINativeService = useInject<LibroAINativeService>(LibroAINativeService);
 
     useEffect(() => {
       renderText({
@@ -40,10 +40,11 @@ const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
     };
 
     const handleFixWithAI = async () => {
-      const libroAINativeForCellView = await viewManager.getOrCreateView(
-        LibroAINativeForCellView,
-        { id: output.cell.id, cell: getOrigin(output.cell) },
-      );
+      const libroAINativeForCellView =
+        await libroAINativeService.getOrCreateLibroAINativeForCellView(
+          output.cell.id,
+          getOrigin(output.cell),
+        );
       libroAINativeForCellView.showAI = true;
 
       libroAINativeForCellView.chatStream({
