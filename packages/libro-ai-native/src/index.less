@@ -142,10 +142,38 @@
 
 .libro-ai-native-debug-code-btn-container {
   margin-top: 12px;
+
+  .@{ant-prefix}-btn-variant-outlined {
+    height: 24px;
+    border-color: var(--mana-libro-ai-native-color);
+    color: var(--mana-libro-ai-native-color);
+    &.@{ant-prefix}-btn-color-primary {
+      box-shadow: unset;
+
+      &:hover {
+        border-color: var(--mana-libro-ai-native-color) !important;
+        color: var(--mana-libro-ai-native-color) !important;
+      }
+    }
+  }
+}
+
+.libro-ai-native-for-cell-cancel-btn {
+  width: 78px;
+
+  &.@{ant-prefix}-btn-variant-outlined {
+    border-color: var(--mana-libro-ai-native-color);
+    color: var(--mana-libro-ai-native-color);
+
+    &:hover {
+      border-color: var(--mana-libro-ai-native-color) !important;
+      color: var(--mana-libro-ai-native-color) !important;
+    }
+  }
 }
 
 .libro-ai-native-output-top {
-  padding: 18px 24px 0;
+  padding: 0 24px;
 
   .chat-msg-md-message {
     color: var(--mana-libro-llm-response-output-text-color);
@@ -208,10 +236,6 @@
 .libro-ai-native-for-cell-container {
   display: flex;
   justify-content: space-between;
-}
-
-.libro-ai-native-for-cell-cancel-btn {
-  width: 78px;
 }
 
 .libro-llm-syntax-highlighter {
