@@ -3,6 +3,7 @@ import { getOrigin, inject, prop, singleton, ViewManager } from '@difizen/mana-a
 
 import { LibroAINativeForCellView } from './ai-native-for-cell-view.js';
 import type { LibroChatView } from './chat-view.js';
+import type { LibroAiNativeChatView } from './libro-ai-native-chat-view.js';
 
 @singleton()
 export class LibroAINativeService {
@@ -11,11 +12,16 @@ export class LibroAINativeService {
 
   chatViewMap: Map<string, LibroChatView> = new Map();
 
+  //用于控制是否显示当前 libro 层级的 chat 面板
   showChatMap: Map<string, boolean> = new Map();
+
+  cellAIChatMap: Map<string, boolean> = new Map();
   @inject(ViewManager)
   viewManager: ViewManager;
 
   libroAINativeForCellViewMap: Map<string, LibroAINativeForCellView> = new Map();
+
+  libroAINativeChatViewMap: Map<string, LibroAiNativeChatView> = new Map();
 
   async getOrCreateLibroAINativeForCellView(id: string, cell: CellView) {
     let libroAINativeForCellView = this.libroAINativeForCellViewMap.get(id);

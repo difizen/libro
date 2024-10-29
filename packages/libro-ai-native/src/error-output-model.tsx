@@ -14,6 +14,7 @@ import { forwardRef, createRef, useEffect } from 'react';
 import './index.less';
 import { LibroAINativeService } from './ai-native-service.js';
 import { AIIcon } from './icon.js';
+import { addCellAIClassname } from './utils.js';
 
 const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
   function ErrorOutputModelRender(_props, ref) {
@@ -40,13 +41,12 @@ const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
     };
 
     const handleFixWithAI = async () => {
-      output.cell.className = output.cell.className + ' ai-cell-focus';
-
       const libroAINativeForCellView =
         await libroAINativeService.getOrCreateLibroAINativeForCellView(
           output.cell.id,
           getOrigin(output.cell),
         );
+      addCellAIClassname(output.cell);
       libroAINativeForCellView.showAI = true;
 
       libroAINativeForCellView.chatStream({
