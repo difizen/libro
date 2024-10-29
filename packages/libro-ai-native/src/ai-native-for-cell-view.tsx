@@ -20,15 +20,18 @@ import breaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 
 import { CodeBlockInCell } from './ai-native-code-block.js';
+import { LibroAINativeService } from './ai-native-service.js';
 import { AILoadding } from './icon.js';
 import { LibroAIChatMessageItemModel } from './libro-ai-msg-item-model.js';
 import type { IAINativeForCellViewOption } from './protocol.js';
-import { stringToReadableStream } from './utils.js';
+import { cancelCellAIClassname, stringToReadableStream } from './utils.js';
 
 export function LibroAINativeForCellRender() {
   const LLMRender = ChatComponents.Markdown;
 
   const instance = useInject<LibroAINativeForCellView>(ViewInstance);
+  const libroAINativeService = useInject<LibroAINativeService>(LibroAINativeService);
+
   const msgItem = useObserve(instance.libroAIChatMessageItemModel);
   if (!instance.showAI) {
     return null;
@@ -53,10 +56,9 @@ export function LibroAINativeForCellRender() {
         className={`libro-ai-native-for-cell-cancel-btn ${msgItem?.state === AnswerState.FAIL ? 'error' : ''}`}
         onClick={() => {
           instance.showAI = false;
-          instance.cell.className = instance.cell.className?.replace(
-            'ai-cell-focus',
-            '',
-          );
+          if (!libroAINativeService.cellAIChatMap.get(instance.cell.id)) {
+            cancelCellAIClassname(instance.cell);
+          }
         }}
         icon={
           msgItem?.state === AnswerState.SUCCESS ||

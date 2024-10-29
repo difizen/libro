@@ -1,3 +1,4 @@
+import type { CellView } from '@difizen/libro-jupyter';
 import { Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
@@ -18,6 +19,20 @@ export function stringToReadableStream(inputString: string) {
   });
 
   return readableStream;
+}
+
+export function addCellAIClassname(cell: CellView) {
+  if (cell.className?.includes('ai-cell-focus')) {
+    return;
+  } else {
+    cell.className = cell.className + ' ai-cell-focus';
+  }
+}
+
+export function cancelCellAIClassname(cell: CellView) {
+  if (cell.className?.includes(' ai-cell-focus')) {
+    cell.className = cell.className?.replace(' ai-cell-focus', '');
+  }
 }
 
 export function ImageModal({ src, alt }: any) {
