@@ -11,19 +11,19 @@ import { AIIcon } from './icon.js';
 export const AIToolbarSelector: React.FC = () => {
   const items: LibroSideToolbarMenuItemType[] = [
     {
-      id: AINativeCommands['CellChat'].id,
+      id: AINativeCommands['Explain'].id,
       label: (
         <>
-          <span className="libro-menu-item-label">{l10n.t('AI 对话')}</span>
+          <span className="libro-menu-item-label">{l10n.t('代码解释')}</span>
         </>
       ),
       group: 'ai',
     },
     {
-      id: AINativeCommands['Explain'].id,
+      id: AINativeCommands['Optimize'].id,
       label: (
         <>
-          <span className="libro-menu-item-label">{l10n.t('代码解释')}</span>
+          <span className="libro-menu-item-label">{l10n.t('代码优化')}</span>
         </>
       ),
       group: 'ai',

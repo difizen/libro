@@ -1,3 +1,4 @@
+import { CommentOutlined } from '@ant-design/icons';
 import {
   LibroCommandRegister,
   LibroSlotManager,
@@ -34,13 +35,19 @@ export class LibroAINativeCommandContribution
       command: AINativeCommands['AISideToolbarSelect'].id,
       icon: AIToolbarSelector,
       showLabelInline: true,
-      group: ['group2'],
-      order: 'a',
+      order: 'b',
     });
     registry.registerItem({
       id: AINativeCommands['Chat'].id,
       command: AINativeCommands['Chat'].id,
       icon: AIIcon,
+      order: 'a',
+    });
+
+    registry.registerItem({
+      id: AINativeCommands['CellChat'].id,
+      command: AINativeCommands['CellChat'].id,
+      icon: <CommentOutlined className="libro-ai-native-cell-chat-icon" />,
       order: 'a',
     });
   }
@@ -105,6 +112,12 @@ export class LibroAINativeCommandContribution
           return false;
         }
         return true;
+      },
+      isVisible: (cell, libro, path) => {
+        if (!cell || !libro || !(libro instanceof LibroView)) {
+          return false;
+        }
+        return path === LibroToolbarArea.CellRight;
       },
     });
     this.libroCommand.registerLibroCommand(command, AINativeCommands['Chat'], {
@@ -187,6 +200,38 @@ export class LibroAINativeCommandContribution
         libroAINativeForCellView.chatStream({
           chat_key: 'LLM:gpt4',
           content: `帮忙解释一下这段代码：${cell.model.value}`,
+        });
+        // this.libroService.active?.enterEditMode();
+      },
+      isEnabled: (cell, libro) => {
+        if (!libro || !(libro instanceof LibroView)) {
+          return false;
+        }
+        return true;
+      },
+    });
+
+    this.libroCommand.registerLibroCommand(command, AINativeCommands['Optimize'], {
+      execute: async (cell, libro) => {
+        if (
+          !cell ||
+          !(cell instanceof LibroCellView) ||
+          !libro ||
+          !(libro instanceof LibroView)
+        ) {
+          return;
+        }
+        const libroAINativeForCellView =
+          await this.libroAINativeService.getOrCreateLibroAINativeForCellView(
+            cell.id,
+            cell,
+          );
+        libroAINativeForCellView.showAI = true;
+        cell.className = cell.className + ' ai-cell-focus';
+
+        libroAINativeForCellView.chatStream({
+          chat_key: 'LLM:gpt4',
+          content: `帮忙优化一下这段代码：${cell.model.value}`,
         });
         // this.libroService.active?.enterEditMode();
       },
