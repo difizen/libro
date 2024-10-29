@@ -16,4 +16,8 @@ export const AINativeCommands: Record<string, Command & { keybind?: string }> = 
   AISideToolbarSelect: {
     id: 'ai-native:side-toolbat-select',
   },
+  Optimize: {
+    id: 'ai-native:optimize',
+    label: 'Optimize',
+  },
 };
