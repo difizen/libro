@@ -53,8 +53,6 @@
 }
 
 .libro-view-content-right {
-  height: calc(100% - 46px);
-
   .libro-slot-container {
     height: 100%;
   }
@@ -76,7 +74,8 @@
   border: 1px solid var(--mana-libro-ai-native-color);
   box-shadow: var(--mana-libro-ai-native-box-shadow) 0 0 0 2px;
   border-radius: 6px;
-  height: 100%;
+  margin: 16px 0;
+  height: calc(100% - 32px);
   width: 460px;
 
   .chat {
@@ -92,11 +91,21 @@
   cursor: pointer;
 }
 
+.chat-input-upload {
+  display: none;
+}
+
+.chat-input-iconBottom {
+  align-items: center;
+  justify-content: center;
+}
+
 .chat-input-searchInput:focus-within {
   border-color: var(--mana-libro-ai-native-color);
 }
 
 .chat-input-sendButton {
+  margin: unset;
   background-color: var(--mana-libro-ai-native-color);
 }
 
