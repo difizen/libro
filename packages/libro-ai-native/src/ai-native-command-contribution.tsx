@@ -17,6 +17,7 @@ import { LibroAINativeService } from './ai-native-service.js';
 import { AIToolbarSelector } from './ai-side-toolbar-selector.js';
 import { LibroAIChatSlotContribution } from './chat-slot-contribution.js';
 import { AIIcon } from './icon.js';
+import { addCellAIClassname } from './utils.js';
 
 @singleton({ contrib: [CommandContribution, ToolbarContribution] })
 export class LibroAINativeCommandContribution
@@ -51,6 +52,7 @@ export class LibroAINativeCommandContribution
       order: 'a',
     });
   }
+
   registerCommands(command: CommandRegistry): void {
     this.libroCommand.registerLibroCommand(
       command,
@@ -73,12 +75,13 @@ export class LibroAINativeCommandContribution
         },
       },
     );
+
     this.libroCommand.registerLibroCommand(command, AINativeCommands['CellChat'], {
       execute: async (cell, libro) => {
         if (!libro || !cell) {
           return;
         }
-        cell.className = cell.className + ' ai-cell-focus';
+        addCellAIClassname(cell);
         const chatView = this.libroAINativeService.chatViewMap.get(libro.id);
         const showChat = this.libroAINativeService.showChatMap.get(libro.id);
         if (chatView) {
@@ -92,6 +95,7 @@ export class LibroAINativeCommandContribution
             return;
           }
           this.libroAINativeService.showChatMap.set(libro.id, !showChat);
+          this.libroAINativeService.cellAIChatMap.set(cell.id, !showChat);
           this.libroSlotManager.slotViewManager.addView(
             chatView,
             this.libroSlotManager.getSlotName(
@@ -195,8 +199,7 @@ export class LibroAINativeCommandContribution
             cell,
           );
         libroAINativeForCellView.showAI = true;
-        cell.className = cell.className + ' ai-cell-focus';
-
+        addCellAIClassname(cell);
         libroAINativeForCellView.chatStream({
           chat_key: 'LLM:gpt4',
           content: `帮忙解释一下这段代码：${cell.model.value}`,
@@ -227,23 +230,11 @@ export class LibroAINativeCommandContribution
             cell,
           );
         libroAINativeForCellView.showAI = true;
-        cell.className = cell.className + ' ai-cell-focus';
-
+        addCellAIClassname(cell);
         libroAINativeForCellView.chatStream({
           chat_key: 'LLM:gpt4',
           content: `帮忙优化一下这段代码：${cell.model.value}`,
         });
-        // this.libroService.active?.enterEditMode();
-      },
-      isEnabled: (cell, libro) => {
-        if (!libro || !(libro instanceof LibroView)) {
-          return false;
-        }
-        return true;
-      },
-    });
-    this.libroCommand.registerLibroCommand(command, AINativeCommands['CellChat'], {
-      execute: async () => {
         // this.libroService.active?.enterEditMode();
       },
       isEnabled: (cell, libro) => {

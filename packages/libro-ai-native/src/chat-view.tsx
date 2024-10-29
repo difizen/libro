@@ -22,6 +22,7 @@ import { useRef } from 'react';
 import { LibroAINativeService } from './ai-native-service.js';
 import { LibroAiNativeChatView } from './libro-ai-native-chat-view.js';
 import type { AiNativeChatViewOption } from './protocol.js';
+import { cancelCellAIClassname } from './utils.js';
 
 export const ChatRender = () => {
   const containRef = useRef<HTMLDivElement>(null);
@@ -49,14 +50,21 @@ export const ChatRender = () => {
           <div>
             <CloseOutlined
               className="chat-close-icon"
-              onClick={() => {
+              onClick={async () => {
                 if (libroChatView.parent) {
-                  if (libroChatView.chatView?.cell?.className) {
-                    libroChatView.chatView.cell.className =
-                      libroChatView.chatView.cell?.className.replace(
-                        'ai-cell-focus',
-                        '',
+                  if (libroChatView.chatView?.cell) {
+                    const libroAINativeForCellView =
+                      await libroAINativeService.getOrCreateLibroAINativeForCellView(
+                        libroChatView.chatView.cell.id,
+                        libroChatView.chatView.cell,
                       );
+                    if (!libroAINativeForCellView.showAI) {
+                      cancelCellAIClassname(libroChatView.chatView.cell);
+                      libroAINativeService.cellAIChatMap.set(
+                        libroChatView.chatView.cell.id,
+                        false,
+                      );
+                    }
                   }
 
                   libroAINativeService.showChatMap.set(libroChatView.parent.id, false);
@@ -85,6 +93,7 @@ export class LibroChatView extends BaseView implements DisplayView {
   parent: LibroView | undefined = undefined;
   protected configurationService: ConfigurationService;
   @inject(ViewManager) viewManager: ViewManager;
+  @inject(LibroAINativeService) libroAINativeService: LibroAINativeService;
 
   override view = ChatRender;
 
@@ -94,19 +103,33 @@ export class LibroChatView extends BaseView implements DisplayView {
   @prop()
   isDisplay = true;
 
-  setAINativeChatView(option: AiNativeChatViewOption) {
+  async setAINativeChatView(option: AiNativeChatViewOption) {
     if (this.chatView?.cell) {
-      this.chatView.cell.className = this.chatView.cell.className?.replace(
-        'ai-cell-focus',
-        '',
-      );
+      if (this.chatView?.cell.id === option.cell?.id) {
+        return;
+      }
+      const libroAINativeForCellView =
+        await this.libroAINativeService.getOrCreateLibroAINativeForCellView(
+          this.chatView.cell.id,
+          this.chatView.cell,
+        );
+
+      if (
+        this.libroAINativeService.cellAIChatMap.get(this.chatView.cell.id) &&
+        !libroAINativeForCellView.showAI
+      ) {
+        cancelCellAIClassname(this.chatView.cell);
+        this.libroAINativeService.cellAIChatMap.set(this.chatView.cell.id, false);
+      }
     }
+
     this.viewManager
       .getOrCreateView(LibroAiNativeChatView, option)
       .then((chatView) => {
         chatView.libro = this.parent;
-        if (option.isCellChat) {
+        if (option.isCellChat && option.cell) {
           chatView.cell = option.cell;
+          this.libroAINativeService.cellAIChatMap.set(option.cell.id, true);
         }
         this.chatView = chatView;
         return;
