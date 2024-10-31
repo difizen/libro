@@ -12,9 +12,8 @@ export class LibroAINativeChatService extends LibroChatService {
   override chat = async (
     option: LibroAINativeChatMessageItemOption,
   ): Promise<IChatMessageItem[]> => {
-    const { chat_key, content, system_prompt } = option;
+    const { content, system_prompt } = option;
     const res = await this.fetcher.post<any>(`/libro/api/chat`, {
-      chat_key: chat_key,
       prompt: content,
       system_prompt,
     });
@@ -23,7 +22,7 @@ export class LibroAINativeChatService extends LibroChatService {
       if (res.data.output) {
         return [
           {
-            sender: { type: 'AI', id: chat_key },
+            sender: { type: 'AI', id: 'libro' },
             content: res.data.output,
           },
         ];
@@ -36,11 +35,10 @@ export class LibroAINativeChatService extends LibroChatService {
     messgeCallback: (event: IChatMessageItem) => void,
     eventCallback: (event: IChatEvent) => void,
   ) => {
-    const { chat_key, content, system_prompt } = option;
+    const { content, system_prompt } = option;
 
     const url = `/libro/api/chatstream`;
     const msg = {
-      chat_key: chat_key,
       prompt: content,
       system_prompt,
     };
@@ -67,7 +65,7 @@ export class LibroAINativeChatService extends LibroChatService {
       }
 
       messgeCallback({
-        sender: { type: 'AI', id: chat_key },
+        sender: { type: 'AI', id: 'libro' },
         content: '',
       });
       let alreayDone = false;
