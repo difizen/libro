@@ -14,6 +14,7 @@ import { useObserve } from '@difizen/mana-app';
 import { useInject, ViewInstance } from '@difizen/mana-app';
 import { inject } from '@difizen/mana-app';
 import { BaseView, transient, view } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Button } from 'antd';
 import { EventSourceParserStream } from 'eventsource-parser/stream';
 import breaks from 'remark-breaks';
@@ -40,7 +41,7 @@ export function LibroAINativeForCellRender() {
   return (
     <div className="libro-ai-native-for-cell-container">
       {msgItem?.state === AnswerState.FAIL ? (
-        <div className="libro-ai-native-for-cell-error">请求报错～</div>
+        <div className="libro-ai-native-for-cell-error">{l10n.t('请求报错～')}</div>
       ) : (
         <LLMRender
           type="message"
@@ -69,7 +70,7 @@ export function LibroAINativeForCellRender() {
           )
         }
       >
-        取消
+        {l10n.t('取消')}
       </Button>
     </div>
   );
@@ -94,12 +95,13 @@ export class LibroAINativeForCellView extends BaseView {
   }
 
   chatStream = async (option: IChatMessage) => {
-    const { chat_key, content } = option;
+    const { chat_key, content, language } = option;
 
     const url = `/libro/api/chatstream`;
     const msg = {
       chat_key: chat_key,
       prompt: content,
+      language: language,
     };
     const res = await this.fetcher.post<ReadableStream<Uint8Array>>(url, msg, {
       headers: {

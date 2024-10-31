@@ -11,6 +11,7 @@ import type { CommandRegistry, ToolbarRegistry } from '@difizen/mana-app';
 import { inject } from '@difizen/mana-app';
 import { CommandContribution } from '@difizen/mana-app';
 import { singleton, ToolbarContribution, ViewManager } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 
 import { AINativeCommands } from './ai-native-command.js';
 import { LibroAINativeService } from './ai-native-service.js';
@@ -198,7 +199,10 @@ export class LibroAINativeCommandContribution
         libroAINativeForCellView.showAI = true;
         addCellAIClassname(cell);
         libroAINativeForCellView.chatStream({
-          content: `帮忙解释一下这段代码：${cell.model.value}`,
+          content:
+            l10n.getLang() === 'en-US'
+              ? `Could you please explain this piece of code?：${cell.model.value}，Provide the reasons and the results of the optimization.`
+              : `帮忙优化一下这段代码：${cell.model.value}，给出原因以及优化结果`,
         });
         // this.libroService.active?.enterEditMode();
       },
@@ -228,7 +232,10 @@ export class LibroAINativeCommandContribution
         libroAINativeForCellView.showAI = true;
         addCellAIClassname(cell);
         libroAINativeForCellView.chatStream({
-          content: `帮忙优化一下这段代码：${cell.model.value}，给出原因以及优化结果`,
+          content:
+            l10n.getLang() === 'en-US'
+              ? `Please help optimize this piece of code: ${cell.model.value},provide reasons and the optimized result.`
+              : `帮忙优化一下这段代码：${cell.model.value}，给出原因以及优化结果`,
         });
         // this.libroService.active?.enterEditMode();
       },

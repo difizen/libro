@@ -8,6 +8,7 @@ import {
 } from '@difizen/libro-jupyter';
 import { prop, transient } from '@difizen/mana-app';
 import { getOrigin, useInject, view, ViewInstance } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Button } from 'antd';
 import { forwardRef, createRef, useEffect } from 'react';
 
@@ -52,6 +53,7 @@ const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
       libroAINativeForCellView.chatStream({
         chat_key: 'LLM:debug',
         content: `代码为:\n${output.cell.model.value}\n报错为:\n${concatMultilineString(source.traceback)}`,
+        language: l10n.getLang(),
       });
     };
 

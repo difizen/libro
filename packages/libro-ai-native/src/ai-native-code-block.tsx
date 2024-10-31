@@ -1,6 +1,7 @@
 import { CopyOutlined } from '@ant-design/icons';
 import { LibroCodeCellView } from '@difizen/libro-jupyter';
 import { useInject, ViewInstance } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Button, message } from 'antd';
 import copy from 'copy-to-clipboard';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -38,7 +39,7 @@ export const CodeBlockInCell = (props: any) => {
         <CopyOutlined
           onClick={() => {
             copy(children);
-            message.success('代码已复制');
+            message.success(l10n.t('代码已复制'));
           }}
           className={`chat-msg-md-code-copy`}
         />
@@ -51,7 +52,7 @@ export const CodeBlockInCell = (props: any) => {
         </SyntaxHighlighter>
         <div className="libro-ai-native-debug-code-btn-container">
           <Button color="primary" variant="outlined" onClick={() => replace(children)}>
-            替换代码
+            {l10n.t('替换代码')}
           </Button>
         </div>
       </pre>
@@ -106,7 +107,7 @@ export const CodeBlockInChat = (props: any) => {
         <CopyOutlined
           onClick={() => {
             copy(children);
-            message.success('代码已复制');
+            message.success(l10n.t('代码已复制'));
           }}
           className={`chat-msg-md-code-copy`}
         />
@@ -123,10 +124,10 @@ export const CodeBlockInChat = (props: any) => {
             variant="outlined"
             onClick={() => insertCell(children)}
           >
-            插入 Cell
+            {l10n.t('插入 Cell')}
           </Button>
           <Button color="primary" variant="outlined" onClick={() => replace(children)}>
-            替换 Cell
+            {l10n.t('替换 Cell')}
           </Button>
         </div>
       </pre>
