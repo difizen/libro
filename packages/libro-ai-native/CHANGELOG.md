@@ -1,5 +1,14 @@
 # @difizen/libro-output
 
+## 0.2.42
+
+### Patch Changes
+
+- [#262](https://github.com/difizen/libro/pull/262) [`dba4ba0`](https://github.com/difizen/libro/commit/dba4ba010c7af9ad2cec6ba42fd46a4f7fa58e31) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - feat: support ai-native ability
+
+- Updated dependencies [[`052d8ba`](https://github.com/difizen/libro/commit/052d8ba88b360ec568bd835aa27689cabc3f29e8), [`9796b35`](https://github.com/difizen/libro/commit/9796b35ddd51afb4154d1f7a68812879476ee112), [`28592e8`](https://github.com/difizen/libro/commit/28592e89593ff2114923ab126aae57243eba0d68), [`dba4ba0`](https://github.com/difizen/libro/commit/dba4ba010c7af9ad2cec6ba42fd46a4f7fa58e31)]:
+  - @difizen/libro-jupyter@0.2.42
+
 ## 0.2.41
 
 ### Patch Changes
