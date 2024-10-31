@@ -198,11 +198,12 @@ export class LibroAINativeCommandContribution
           );
         libroAINativeForCellView.showAI = true;
         addCellAIClassname(cell);
+        const code =
+          l10n.getLang() === 'en-US'
+            ? `Could you please explain this piece of code?：${cell.model.value}，Provide the reasons and the results of the optimization.`
+            : `帮忙优化一下这段代码：${cell.model.value}，给出原因以及优化结果`;
         libroAINativeForCellView.chatStream({
-          content:
-            l10n.getLang() === 'en-US'
-              ? `Could you please explain this piece of code?：${cell.model.value}，Provide the reasons and the results of the optimization.`
-              : `帮忙优化一下这段代码：${cell.model.value}，给出原因以及优化结果`,
+          content: code,
         });
         // this.libroService.active?.enterEditMode();
       },
@@ -230,12 +231,13 @@ export class LibroAINativeCommandContribution
             cell,
           );
         libroAINativeForCellView.showAI = true;
+        const code =
+          l10n.getLang() === 'en-US'
+            ? `Please help optimize this piece of code: ${cell.model.value},provide reasons and the optimized result.`
+            : `帮忙优化一下这段代码：${cell.model.value}，给出原因以及优化结果`;
         addCellAIClassname(cell);
         libroAINativeForCellView.chatStream({
-          content:
-            l10n.getLang() === 'en-US'
-              ? `Please help optimize this piece of code: ${cell.model.value},provide reasons and the optimized result.`
-              : `帮忙优化一下这段代码：${cell.model.value}，给出原因以及优化结果`,
+          content: code,
         });
         // this.libroService.active?.enterEditMode();
       },

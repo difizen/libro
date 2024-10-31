@@ -2,6 +2,7 @@ import type { IChatEvent, IChatMessageItem } from '@difizen/magent-chat';
 import { ChatEvent } from '@difizen/magent-chat';
 import { LibroChatService } from '@difizen/magent-libro';
 import { singleton } from '@difizen/mana-app';
+import type { ParsedEvent } from 'eventsource-parser/stream';
 import { EventSourceParserStream } from 'eventsource-parser/stream';
 
 import type { LibroAINativeChatMessageItemOption } from './protocol.js';
@@ -14,7 +15,7 @@ export class LibroAINativeChatService extends LibroChatService {
   ): Promise<IChatMessageItem[]> => {
     const { content, system_prompt } = option;
     const res = await this.fetcher.post<any>(`/libro/api/chat`, {
-      prompt: content,
+      prompt: encodeURIComponent(content),
       system_prompt,
     });
 
@@ -39,7 +40,7 @@ export class LibroAINativeChatService extends LibroChatService {
 
     const url = `/libro/api/chatstream`;
     const msg = {
-      prompt: content,
+      prompt: encodeURIComponent(content),
       system_prompt,
     };
     const res = await this.fetcher.post<ReadableStream<Uint8Array>>(url, msg, {
@@ -69,6 +70,7 @@ export class LibroAINativeChatService extends LibroChatService {
         content: '',
       });
       let alreayDone = false;
+      let error: ParsedEvent = { data: '', type: 'event' };
       try {
         while (!alreayDone) {
           const { value, done } = await reader.read();
@@ -80,13 +82,18 @@ export class LibroAINativeChatService extends LibroChatService {
 
             break;
           }
+          if (value) {
+            error = value;
+          }
           const data = JSON.parse(value.data);
           const event = ChatEvent.format(value.event || 'chunk', data);
           eventCallback(event);
         }
       } catch {
+        console.error('libro-ai-error:' + error.data);
         eventCallback({
           type: 'error',
+          message: error.data,
         });
       }
       return;

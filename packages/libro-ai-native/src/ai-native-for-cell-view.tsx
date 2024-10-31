@@ -16,6 +16,7 @@ import { inject } from '@difizen/mana-app';
 import { BaseView, transient, view } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 import { Button } from 'antd';
+import type { ParsedEvent } from 'eventsource-parser/stream';
 import { EventSourceParserStream } from 'eventsource-parser/stream';
 import breaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
@@ -100,7 +101,7 @@ export class LibroAINativeForCellView extends BaseView {
     const url = `/libro/api/chatstream`;
     const msg = {
       chat_key: chat_key,
-      prompt: content,
+      prompt: encodeURIComponent(content),
       language: language,
     };
     const res = await this.fetcher.post<ReadableStream<Uint8Array>>(url, msg, {
@@ -130,9 +131,13 @@ export class LibroAINativeForCellView extends BaseView {
       });
       this.libroAIChatMessageItemModel = msgItem;
       let alreayDone = false;
+      let error: ParsedEvent = { data: '', type: 'event' };
       try {
         while (!alreayDone) {
           const { value, done } = await reader.read();
+          if (value) {
+            error = value;
+          }
           if (done) {
             alreayDone = true;
             msgItem.handleEventData({
@@ -146,6 +151,7 @@ export class LibroAINativeForCellView extends BaseView {
           msgItem.handleEventData(event);
         }
       } catch {
+        console.error('libro-ai-error:' + error.data);
         msgItem.handleEventData({
           type: 'error',
         });
