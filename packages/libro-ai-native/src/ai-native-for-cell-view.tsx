@@ -123,7 +123,7 @@ export class LibroAINativeForCellView extends BaseView {
           .getReader();
       }
       const msgItem = this.libroAiChatMessageItemFactory({
-        sender: { type: 'AI', id: chat_key },
+        sender: { type: 'AI', id: 'libro' },
         content: '',
       });
       this.libroAIChatMessageItemModel = msgItem;
