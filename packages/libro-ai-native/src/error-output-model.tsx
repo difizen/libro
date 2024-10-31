@@ -50,7 +50,7 @@ const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
       libroAINativeForCellView.showAI = true;
 
       libroAINativeForCellView.chatStream({
-        chat_key: 'LLM:debug-gpt4',
+        chat_key: 'LLM:debug',
         content: `代码为:\n${output.cell.model.value}\n报错为:\n${concatMultilineString(source.traceback)}`,
       });
     };

@@ -7,12 +7,12 @@ export interface IAINativeForCellViewOption {
 }
 
 export interface LibroAINativeChatMessageItemOption extends IChatMessageItem {
-  chat_key: string;
+  chat_key?: string;
 }
 
 export interface AiNativeChatViewOption extends ChatViewOption {
   id: string;
-  chat_key: string;
+  chat_key?: string;
   isCellChat: boolean;
   cell?: CellView;
 }
