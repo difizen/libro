@@ -87,7 +87,6 @@ export class LibroAINativeCommandContribution
         if (chatView) {
           chatView.setAINativeChatView({
             id: cell.id,
-            chat_key: 'LLM:chatgpt',
             isCellChat: true,
             cell: cell,
           });
@@ -136,14 +135,12 @@ export class LibroAINativeCommandContribution
           if (showChat && chatView.chatView.isCellChat) {
             chatView.setAINativeChatView({
               id: libro.id,
-              chat_key: 'LLM:chatgpt',
               isCellChat: false,
             });
             return;
           }
           chatView.setAINativeChatView({
             id: libro.id,
-            chat_key: 'LLM:chatgpt',
             isCellChat: false,
           });
           this.libroAINativeService.showChatMap.set(libro.id, !showChat);
@@ -201,7 +198,6 @@ export class LibroAINativeCommandContribution
         libroAINativeForCellView.showAI = true;
         addCellAIClassname(cell);
         libroAINativeForCellView.chatStream({
-          chat_key: 'LLM:gpt4',
           content: `帮忙解释一下这段代码：${cell.model.value}`,
         });
         // this.libroService.active?.enterEditMode();
@@ -232,8 +228,7 @@ export class LibroAINativeCommandContribution
         libroAINativeForCellView.showAI = true;
         addCellAIClassname(cell);
         libroAINativeForCellView.chatStream({
-          chat_key: 'LLM:gpt4',
-          content: `帮忙优化一下这段代码：${cell.model.value}`,
+          content: `帮忙优化一下这段代码：${cell.model.value}，给出原因以及优化结果`,
         });
         // this.libroService.active?.enterEditMode();
       },
