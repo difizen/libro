@@ -49,10 +49,13 @@ const AIErrorOutputModelRender = forwardRef<HTMLDivElement>(
         );
       addCellAIClassname(output.cell);
       libroAINativeForCellView.showAI = true;
-
+      const code =
+        l10n.getLang() === 'en-US'
+          ? `Code is:\n${output.cell.model.value}\nError trackback is:\n${concatMultilineString(source.traceback)}`
+          : `代码为:\n${output.cell.model.value}\n报错为:\n${concatMultilineString(source.traceback)}`;
       libroAINativeForCellView.chatStream({
         chat_key: 'LLM:debug',
-        content: `代码为:\n${output.cell.model.value}\n报错为:\n${concatMultilineString(source.traceback)}`,
+        content: code,
         language: l10n.getLang(),
       });
     };
