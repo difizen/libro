@@ -586,16 +586,22 @@
   }
 }
 
-.libro-cell-output-content {
-  padding-top: 18px;
-  border-top: 1px solid var(--mana-libro-code-border-color);
+.libro-output-area {
+  padding-top: 12px;
+}
 
+.libro-cell-output-content {
   &.scrolled {
     .libro-output-area {
       max-height: 312px;
       overflow-y: auto;
     }
   }
+}
+
+.libro-cell-output-content:has(.libro-output-area),
+.libro-cell-output-content:has(.libro-cell-bottom-blank) {
+  border-top: 1px solid var(--mana-libro-code-border-color);
 }
 
 .libro-cell-output-scroll-button {
