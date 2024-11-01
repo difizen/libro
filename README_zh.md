@@ -33,8 +33,8 @@
 
 - [快速开始](#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
 - [快速集成](#%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90)
-  - [组件化消费](#%E7%BB%84%E4%BB%B6%E5%8C%96%E6%B6%88%E8%B4%B9)
 - [新特性](#%E6%96%B0%E7%89%B9%E6%80%A7)
+  - [AI 能力](#ai-%E8%83%BD%E5%8A%9B)
   - [Prompt Cell](#prompt-cell)
   - [Sql Cell](#sql-cell)
 - [架构](#%E6%9E%B6%E6%9E%84)
