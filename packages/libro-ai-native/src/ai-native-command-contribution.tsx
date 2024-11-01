@@ -200,8 +200,8 @@ export class LibroAINativeCommandContribution
         addCellAIClassname(cell);
         const code =
           l10n.getLang() === 'en-US'
-            ? `Could you please explain this piece of code?：${cell.model.value}，Provide the reasons and the results of the optimization.`
-            : `帮忙优化一下这段代码：${cell.model.value}，给出原因以及优化结果`;
+            ? `Could you please explain this piece of code?：${cell.model.value}`
+            : `帮忙解释一下这段代码：${cell.model.value}`;
         libroAINativeForCellView.chatStream({
           content: code,
         });
