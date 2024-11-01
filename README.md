@@ -51,8 +51,6 @@ Language: English | [简体中文](./README_zh.md)
 
 ## Quick Start
 
-You need to install [libro-server](https://github.com/difizen/libro-server) to fully explore the capabilities of libro.
-
 use pip:
 
 ```bash
@@ -69,28 +67,31 @@ Libro is fully modular, giving you the flexibility to choose from its native cap
 
 You can assemble different modules based on your needs to build your own notebook product. For example, you might integrate only the editor-related modules into an IDE or other development environments, or bring in more modules to create a lab-style solution.
 
-You need to install at least jupyter-server to run libro, which will give you access to the features of Jupyter Notebook. If you want to leverage the additional capabilities defined by libro, you'll need to install libro-server.
 
 For more details, please refer to [quick integration](./apps/docs/docs/integration/index.md)。
 
-### Component-Based Consumption
-
-```typescript
-import { ManaComponents } from '@difizen/mana-app';
-import { LibroJupyterModule } from "@difizen/libro-jupyter";
-
-<ManaComponents.Application
-  modules={[LibroJupyterModule]}
-  renderChildren
->
-  <LibroComponent options={{ id: 'identify' }} />
-</ManaComponents.Application>
-```
-
-- Application： The mana context container, which is recommended to be placed at the outer layer of the application, allowing multiple libro instances to share the context.
-- LibroComponent：The libro view component, which allows you to embed the libro view anywhere.
-
 ## New Features
+
+### AI Capability
+
+- Error Fixing
+
+![image](./apps/docs/public/error_debug.gif)
+
+- Chat
+  - Contextual Chat in Cells  
+  ![image](./apps/docs/public/cell_ai.gif)
+
+  - General AI Chat
+  ![image](./apps/docs/public/ai_chat.gif)
+
+- Code Explanation
+
+![image](./apps/docs/public/code_explain.gif)
+
+- Code Optimization
+
+![image](./apps/docs/public/code_optimize.gif)
 
 ### Prompt Cell
 

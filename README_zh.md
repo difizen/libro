@@ -51,8 +51,6 @@
 
 ## 快速开始
 
-您需要安装 [libro-server](https://github.com/difizen/libro-server) 来体验完整的 libro 能力。
-
 使用 pip:
 
 ```bash
@@ -74,24 +72,29 @@ libro 是完全模块化的，您可以自由选择 libro 提供的原生能力�
 
 详情请阅读[快速集成](./apps/docs/docs/integration/index.md)。
 
-### 组件化消费
-
-```typescript
-import { ManaComponents } from '@difizen/mana-app';
-import { LibroJupyterModule } from "@difizen/libro-jupyter";
-
-<ManaComponents.Application
-  modules={[LibroJupyterModule]}
-  renderChildren
->
-  <LibroComponent options={{ id: 'identify' }} />
-</ManaComponents.Application>
-```
-
-- Application： mana 上下文容器，建议放在应用的外层，多个 libro 示例可以共享上下文。
-- LibroComponent：libro 视图组件，可以将 libro 视图嵌入到任意位置。
 
 ## 新特性
+
+### AI 能力
+
+- 错误修复
+
+![image](./apps/docs/public/error_debug_zh.gif)
+
+- AI 对话
+  - 基于 Cell 上下文对话
+  ![image](./apps/docs/public/cell_ai_zh.gif)
+
+  - 通用对话
+  ![image](./apps/docs/public/ai_chat_zh.gif)
+
+- 代码解释
+
+![image](./apps/docs/public/code_explain_zh.gif)
+
+- 代码优化
+
+![image](./apps/docs/public/code_optimize_zh.gif)
 
 ### Prompt Cell
 
