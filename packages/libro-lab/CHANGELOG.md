@@ -1,5 +1,25 @@
 # @difizen/libro-lab
 
+## 0.2.43
+
+### Patch Changes
+
+- [#274](https://github.com/difizen/libro/pull/274) [`d61bc6b`](https://github.com/difizen/libro/commit/d61bc6b6af0b913bbc53814b03f792db0ab87f43) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix: improve styles and prompt cell script
+
+- Updated dependencies [[`d61bc6b`](https://github.com/difizen/libro/commit/d61bc6b6af0b913bbc53814b03f792db0ab87f43)]:
+  - @difizen/libro-prompt-cell@0.2.43
+  - @difizen/libro-ai-native@0.2.43
+  - @difizen/libro-jupyter@0.2.43
+  - @difizen/libro-core@0.2.43
+  - @difizen/libro-l10n@0.2.43
+  - @difizen/libro-cofine-editor-core@0.2.43
+  - @difizen/libro-kernel@0.2.43
+  - @difizen/libro-language-client@0.2.43
+  - @difizen/libro-sql-cell@0.2.43
+  - @difizen/libro-terminal@0.2.43
+  - @difizen/libro-toc@0.2.43
+  - @difizen/libro-widget@0.2.43
+
 ## 0.2.42
 
 ### Patch Changes

@@ -1,5 +1,29 @@
 # @difizen/libro-jupyter
 
+## 0.2.43
+
+### Patch Changes
+
+- [#274](https://github.com/difizen/libro/pull/274) [`d61bc6b`](https://github.com/difizen/libro/commit/d61bc6b6af0b913bbc53814b03f792db0ab87f43) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix: improve styles and prompt cell script
+
+- Updated dependencies [[`d61bc6b`](https://github.com/difizen/libro/commit/d61bc6b6af0b913bbc53814b03f792db0ab87f43)]:
+  - @difizen/libro-core@0.2.43
+  - @difizen/libro-l10n@0.2.43
+  - @difizen/libro-code-cell@0.2.43
+  - @difizen/libro-code-editor@0.2.43
+  - @difizen/libro-codemirror@0.2.43
+  - @difizen/libro-cofine-editor@0.2.43
+  - @difizen/libro-common@0.2.43
+  - @difizen/libro-kernel@0.2.43
+  - @difizen/libro-language-client@0.2.43
+  - @difizen/libro-lsp@0.2.43
+  - @difizen/libro-markdown-cell@0.2.43
+  - @difizen/libro-output@0.2.43
+  - @difizen/libro-raw-cell@0.2.43
+  - @difizen/libro-rendermime@0.2.43
+  - @difizen/libro-search@0.2.43
+  - @difizen/libro-search-code-cell@0.2.43
+
 ## 0.2.42
 
 ### Patch Changes
