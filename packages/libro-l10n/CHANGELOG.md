@@ -1,5 +1,11 @@
 # @difizen/libro-l10n
 
+## 0.2.43
+
+### Patch Changes
+
+- [#274](https://github.com/difizen/libro/pull/274) [`d61bc6b`](https://github.com/difizen/libro/commit/d61bc6b6af0b913bbc53814b03f792db0ab87f43) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix: improve styles and prompt cell script
+
 ## 0.2.42
 
 ### Patch Changes
