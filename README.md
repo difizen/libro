@@ -23,6 +23,7 @@ Language: English | [简体中文](./README_zh.md)
 </p>
 <p>　</p>
 
+
 ![image](./apps/docs/public/libro_en.png)
 
 ---
@@ -51,8 +52,6 @@ Language: English | [简体中文](./README_zh.md)
 
 ## Quick Start
 
-use pip:
-
 ```bash
 pip install libro
 ```
@@ -60,15 +59,6 @@ pip install libro
 > The Python version used is 3.10-3.12. Higher versions of Python may encounter issues with unsupported dependencies.
 
 For more details, please refer to [quick start](./apps/docs/docs/quickstart/index.md)。
-
-## Quick Integration
-
-Libro is fully modular, giving you the flexibility to choose from its native capability modules or add custom ones for extended development. To learn more about the modular development approach, check out [mana](https://github.com/difizen/mana).
-
-You can assemble different modules based on your needs to build your own notebook product. For example, you might integrate only the editor-related modules into an IDE or other development environments, or bring in more modules to create a lab-style solution.
-
-
-For more details, please refer to [quick integration](./apps/docs/docs/integration/index.md)。
 
 ## New Features
 
@@ -80,18 +70,18 @@ For more details, please refer to [quick integration](./apps/docs/docs/integrati
 
 - Chat
   - Contextual Chat in Cells  
-  ![image](./apps/docs/public/cell_ai.gif)
+  ![image](./apps/docs/public/cell_chat.gif)
 
   - General AI Chat
   ![image](./apps/docs/public/ai_chat.gif)
 
 - Code Explanation
 
-![image](./apps/docs/public/code_explain.gif)
+![image](./apps/docs/public/cell_explain.gif)
 
 - Code Optimization
 
-![image](./apps/docs/public/code_optimize.gif)
+![image](./apps/docs/public/cell_opitimization.gif)
 
 ### Prompt Cell
 
@@ -145,8 +135,6 @@ For more details, please refer to [sql cell manual](./apps/docs/docs/manual/sql-
 
 ### Contact Us
 
-💬 [Chat with us on Discord](https://discord.gg/RbZ9aEKK)
+💬 [Chat with us on Discord](https://discord.com/invite/B4V7AWy4)
 
 🤗 [Join our DingTalk Q&A group](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
-
-<img src="./apps/docs/public/dingding.jpg" width="30%">
