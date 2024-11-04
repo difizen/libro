@@ -1,5 +1,16 @@
 # @difizen/libro-codemirror-raw-cell
 
+## 0.2.44
+
+### Patch Changes
+
+- [#276](https://github.com/difizen/libro/pull/276) [`4c0e7ae`](https://github.com/difizen/libro/commit/4c0e7aea18d568f0124b82ff8b65c1beb16b2566) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix cursor in chat
+
+- Updated dependencies [[`4c0e7ae`](https://github.com/difizen/libro/commit/4c0e7aea18d568f0124b82ff8b65c1beb16b2566)]:
+  - @difizen/libro-code-editor@0.2.44
+  - @difizen/libro-common@0.2.44
+  - @difizen/libro-core@0.2.44
+
 ## 0.2.43
 
 ### Patch Changes
