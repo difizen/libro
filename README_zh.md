@@ -51,8 +51,6 @@
 
 ## 快速开始
 
-使用 pip:
-
 ```bash
 pip install libro
 ```
@@ -61,16 +59,6 @@ pip install libro
 > 使用的 Python 版本为 3.10-3.12，过高的 Python 版本可能存在依赖包不支持的问题。
 
 详情请阅读[快速开始](./apps/docs/docs/quickstart/index.md)。
-
-## 快速集成
-
-libro 是完全模块化的，您可以自由选择 libro 提供的原生能力模块，也可以选择增加自定义模块来完成二次开发，模块化研发方案您可以通过 [mana](https://github.com/difizen/mana) 来了解。
-
-您可以根据自己的需求组装不同的模块，构建自己的 notebook 产品。例如仅因为编辑器相关的模块继承到 IDE 或其他研发环境中，或者引入更多模块来组成 lab 形态的产品。
-
-您至少需要安装 jupyter-server 来支持 libro 运行，此时您可以使用 jupyter notebook 的能力，如果需要使用更多 libro 定义的能力，您需要安装 libro-server。
-
-详情请阅读[快速集成](./apps/docs/docs/integration/index.md)。
 
 
 ## 新特性
@@ -83,18 +71,18 @@ libro 是完全模块化的，您可以自由选择 libro 提供的原生能力�
 
 - AI 对话
   - 基于 Cell 上下文对话
-  ![image](./apps/docs/public/cell_ai_zh.gif)
+  ![image](./apps/docs/public/cell_chat_zh.gif)
 
   - 通用对话
   ![image](./apps/docs/public/ai_chat_zh.gif)
 
 - 代码解释
 
-![image](./apps/docs/public/code_explain_zh.gif)
+![image](./apps/docs/public/cell_explain_zh.gif)
 
 - 代码优化
 
-![image](./apps/docs/public/code_optimize_zh.gif)
+![image](./apps/docs/public/cell_opitimization_zh.gif)
 
 ### Prompt Cell
 
@@ -149,7 +137,7 @@ libro 是完全模块化的，您可以自由选择 libro 提供的原生能力�
 
 ### 联系我们
 
-💬 [加入 Discord](https://discord.gg/RbZ9aEKK)
+💬 [加入 Discord](https://discord.com/invite/B4V7AWy4)
 
 🤗 [加入钉钉答疑群](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
 

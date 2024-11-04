@@ -36,7 +36,7 @@ llm:
 
 从 Cell 右侧工具栏对话按钮唤起，你可以直接与 AI 进行互动，获得与当前代码相关的深入解答和优化建议，提升编程效率。
 
-<img src="../../public/cell_ai_zh.gif" alt="alt text" width="1000" >
+<img src="../../public/cell_chat_zh.gif" alt="alt text" width="1000" >
 
 ### 通用对话
 
@@ -52,4 +52,4 @@ llm:
 ### 代码优化
 
 从 Cell 右侧工具栏的魔法符号唤起，分析单元格（cell）中的代码，并提供优化建议。
-<img src="../../public/code_optimize_zh.gif" alt="alt text" width="1000" >
+<img src="../../public/cell_opitimization_zh.gif" alt="alt text" width="1000" >
