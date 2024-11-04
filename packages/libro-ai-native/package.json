@@ -47,7 +47,6 @@
   "dependencies": {
     "@difizen/libro-jupyter": "^0.2.43",
     "@ant-design/icons": "^5.4.0",
-    "react-zoom-pan-pinch": "^3.6.1",
     "@difizen/mana-app": "latest",
     "@difizen/mana-l10n": "latest",
     "@difizen/magent-libro": "^0.1.27",
