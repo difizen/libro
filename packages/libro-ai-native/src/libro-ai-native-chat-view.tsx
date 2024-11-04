@@ -1,5 +1,5 @@
 import type { CellView, LibroView } from '@difizen/libro-jupyter';
-import { ChatView } from '@difizen/magent-chat';
+import { ChatView, ChatComponents } from '@difizen/magent-chat';
 import { inject, prop, transient, view, ViewOption } from '@difizen/mana-app';
 import breaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
@@ -7,9 +7,10 @@ import remarkGfm from 'remark-gfm';
 import { CodeBlockInChat } from './ai-native-code-block.js';
 import './index.less';
 import type { AiNativeChatViewOption } from './protocol.js';
-import { ImageModal } from './utils.js';
 
 const viewId = 'magent-chat';
+
+const ImageModal = ChatComponents.ImageModal as ({ src, alt }: any) => JSX.Element;
 
 @transient()
 @view(viewId)
