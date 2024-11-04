@@ -1,5 +1,25 @@
 # @difizen/libro-lab
 
+## 0.2.44
+
+### Patch Changes
+
+- [#276](https://github.com/difizen/libro/pull/276) [`4c0e7ae`](https://github.com/difizen/libro/commit/4c0e7aea18d568f0124b82ff8b65c1beb16b2566) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix cursor in chat
+
+- Updated dependencies [[`4c0e7ae`](https://github.com/difizen/libro/commit/4c0e7aea18d568f0124b82ff8b65c1beb16b2566)]:
+  - @difizen/libro-ai-native@0.2.44
+  - @difizen/libro-cofine-editor-core@0.2.44
+  - @difizen/libro-core@0.2.44
+  - @difizen/libro-jupyter@0.2.44
+  - @difizen/libro-kernel@0.2.44
+  - @difizen/libro-l10n@0.2.44
+  - @difizen/libro-language-client@0.2.44
+  - @difizen/libro-prompt-cell@0.2.44
+  - @difizen/libro-sql-cell@0.2.44
+  - @difizen/libro-terminal@0.2.44
+  - @difizen/libro-toc@0.2.44
+  - @difizen/libro-widget@0.2.44
+
 ## 0.2.43
 
 ### Patch Changes
