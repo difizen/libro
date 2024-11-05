@@ -1,28 +1,27 @@
 ---
-title: prompt cell 指南
+title: Prompt Cell Guide
 order: 2
 ---
 
-## 什么是 Prompt Cell？
+## What is a Prompt Cell?
 
-Prompt Cell 是一种特殊的 notebook cell，通过这个 cell，用户只需要输入自然语言指令，就可以调用大模型进行推理，得到所需的输出结果。它的出现减少了编写复杂代码的需求，并且可以灵活地融入现有的工作流中，尤其是在需要频繁与 AI 进行交互的场景中。
-目前 libro 的 Prompt Cell：
+A Prompt Cell is a specialized notebook cell that allows users to input natural language instructions to invoke large models for inference and obtain desired output. It minimizes the need to write complex code and integrates flexibly into existing workflows, especially in scenarios requiring frequent AI interactions. Currently, libro’s Prompt Cell:
 
-- 内置了 chatgpt、gpt4、dalle-3 模型，您还可以通过以下方式扩展自己的模型～
-  - 基于 langchain 定义 llm、agent 等可对话对象的变量，他们可以直接用在 Prompt cell 中。
-  - 基于 libro-ai 扩展自己的模型。
-- 支持选择聊天标识，使得选择该聊天标识的 Prompt Cell 都在一个聊天上下文中.
-- 支持 Prompt Cell 保存为一个变量，该变量即为 langchain 的 AIMessage.
+- Comes with built-in models like ChatGPT, GPT-4, and DALL-E 3. You can also expand your own models by:
+  - Defining `llm`, `agent`, and other interactive variables based on LangChain, which can be directly used in a Prompt Cell.
+  - Extending your model using libro-ai.
+- Supports selecting a chat identifier, allowing all Prompt Cells with the same chat identifier to be within one chat context.
+- Allows saving a Prompt Cell as a variable, where the variable represents LangChain's `AIMessage`.
 
-接下来我们将展示一个实际案例，如何通过 Prompt Cell 和 Python 变量的结合连接模型、生成代码、保存分析结果，并将这些分析结果通过对话历史进行传递。
+Next, we’ll showcase a practical example that demonstrates how to connect models, generate code, save analysis results, and pass them through conversation history using Prompt Cells combined with Python variables.
 
-## 场景：全球 CO2 排放数据分析与未来预测
+## Scenario: Global CO2 Emissions Analysis and Future Prediction
 
-这个案例中，我们将通过 Prompt Cell，连接大模型执行对未来 20 年全球 CO2 排放的预测，同时生成相应的 Python 代码进行可视化分析。
+In this example, we’ll use a Prompt Cell to connect a large model for predicting global CO2 emissions over the next 20 years, while also generating Python code for visualization analysis.
 
-### 准备工作
+### Preparation
 
-1. 在 `~/.libro/libro_config.yaml` 配置大模型 key，并且启用 libro-ai 扩展。
+1. Configure your model keys and enable the libro-ai extension in `~/.libro/libro_config.yaml`.
 
 ```yaml
 llm:
@@ -31,42 +30,44 @@ jpserver_extensions:
   libro_ai: True
 ```
 
-2. 在终端中运行命令 `libro` 启动 libro
+2. Run the `libro` command in the terminal to start libro.
 
-### 步骤 1: 分析 CO2 排放趋势
+### Step 1: Analyze CO2 Emission Trends
 
-1. 定义时间范围以及数据集地址变量的 Python 变量，注意这些变量必须是字符串类型：
+1. Define Python variables for the time range and dataset URL, ensuring these variables are of string type:
 
-<img src="../../public/prompt_va.png" alt="alt text" width="1000" >
-2. 在 Prompt Cell 中通过自然语言输入连接模型进行加载数据集，可视化排放趋势的代码生成操作
-① 增加新的聊天标识，使得后续选择该聊天标识的 Prompt Cell 都在一个聊天上下文中.
-② 整个 Prompt Cell 消息保存为一个变量，该变量即为 langchain 的 AIMessage.
+<img src="../../public/prompt_va.png" alt="Variable Definition" width="1000">
 
-<img src="../../public/co2_trand.png" alt="alt text" width="1000" >
+2. Use natural language in the Prompt Cell to load the dataset and generate code for visualizing emission trends:
+   ① Add a new chat identifier, so that subsequent Prompt Cells with the same identifier are in one chat context.
+   ② Save the entire Prompt Cell message as a variable, which represents LangChain's `AIMessage`.
 
-<img src="../../public/co2_trend_va.png" alt="alt text" width="1000" >
-3. 点击 “插入并运行选项” 会自动新增一个内容对应为模型生成代码的 Python Cell，并且运行。
+<img src="../../public/co2_trand.png" alt="CO2 Trend Analysis" width="1000">
 
-<img src="../../public/co2_trend_code.png" alt="alt text" width="1000" >
+<img src="../../public/co2_trend_va.png" alt="CO2 Trend Variable" width="1000">
 
-### 步骤 2: 预测未来 CO2 排放量
+3. Clicking “Insert and Run” will automatically add a Python Cell with model-generated code, and execute it.
 
-1. 使用 Prompt Cell 生成预测未来 CO2 排放量的代码，并选择与前一个 Prompt Cell 同一个聊天标识，同时保存变量。
+<img src="../../public/co2_trend_code.png" alt="CO2 Trend Code" width="1000">
 
-<img src="../../public/co2_predict.png" alt="alt text" width="1000" >
+### Step 2: Predict Future CO2 Emissions
 
-2. 点击 “插入并运行选项” 会自动新增一个内容对应为模型生成代码的 Python Cell，并且运行。
+1. Use the Prompt Cell to generate code predicting future CO2 emissions. Select the same chat identifier as the previous Prompt Cell and save the variable.
 
-<img src="../../public/co2_predict_code.png" alt="alt text" width="1000" >
+<img src="../../public/co2_predict.png" alt="CO2 Prediction" width="1000">
 
-### 步骤 3: 基于 Langchain 消息提出应对 CO2 排放的建议
+2. Clicking “Insert and Run” will automatically add a Python Cell with model-generated code, and execute it.
 
-1. 此外，我们也可以配合着 langchain 一起使用，例如，基于前面保存的 co2_predict变量，生成应对气候变化的行动建议。
+<img src="../../public/co2_predict_code.png" alt="CO2 Prediction Code" width="1000">
 
-<img src="../../public/co2_predict_va.png" alt="alt text" width="1000" >
+### Step 3: Suggest Actions Based on LangChain Messages to Address CO2 Emissions
 
-<img src="../../public/co2_predict_langchain.png" alt="alt text" width="1000" >
+1. Additionally, you can use LangChain, such as generating actionable recommendations for climate change based on the previously saved `co2_predict` variable.
 
-2. 同时，您可以看到，此时新增一个 Prompt Cell，此时模型选项中，包含对应的 langchain 变量对象 chat_prompt、llm、summary_chain。
+<img src="../../public/co2_predict_va.png" alt="CO2 Prediction Variable" width="1000">
 
-<img src="../../public/langchain_var.png" alt="alt text" width="1000" >
+<img src="../../public/co2_predict_langchain.png" alt="CO2 Prediction with LangChain" width="1000">
+
+2. You’ll also see a new Prompt Cell with model options, including LangChain variable objects like `chat_prompt`, `llm`, and `summary_chain`.
+
+<img src="../../public/langchain_var.png" alt="LangChain Variables" width="1000">
