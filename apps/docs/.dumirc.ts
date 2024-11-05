@@ -16,21 +16,7 @@ export default defineConfig({
     name: 'libro',
     link: '/',
     logo: '/logo.png',
-    nav: nav,
-    banner: {
-      title: 'libro',
-      desc: '不只是 notebook',
-      botton: [
-        {
-          name: '了解更多',
-          link: '/introduction',
-        },
-        {
-          name: 'Github',
-          link: 'https://github.com/difizen/libro',
-        },
-      ],
-    },
+    // nav: nav,
     footer: `Open-source MIT Licensed | Copyright © 2023-present`,
     // prefersColor: { default: 'light' },
     links: [
@@ -69,37 +55,13 @@ export default defineConfig({
         ],
       },
     ],
-    qrcodes: [
-      {
-        name: '钉钉',
-        qrcode: 'ding-qrcode.png',
-      },
-    ],
     gitRepo: { owner: 'difizen', name: 'libro' },
   },
   favicons: ['/libro.svg'],
   title: 'libro',
-  metas: [
-    { name: 'description', content: '灵活定制、轻松集成的 Notebook 产品方案' },
-    { property: 'og:title', content: 'libro' },
-    {
-      property: 'og:description',
-      content: '灵活定制、轻松集成的 Notebook 产品方案。',
-    },
-    {
-      property: 'og:image',
-      content: '/libro.svg',
-    },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: 'libro' },
-    {
-      name: 'twitter:description',
-      content: '灵活定制、轻松集成的 Notebook 产品方案。',
-    },
-    {
-      name: 'twitter:image',
-      content: '/libro.svg',
-    },
+  locales: [
+    { id: 'en-US', name: 'EN' },
+    { id: 'zh-CN', name: '中文' },
   ],
   plugins: ['@difizen/umi-plugin-mana', './dumi-plugin-alias', './dumi-plugin-deploy'],
   mana: {

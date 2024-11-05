@@ -1,8 +1,9 @@
-import { GithubOutlined, MoonOutlined, SunOutlined } from '@ant-design/icons';
+import { GithubOutlined } from '@ant-design/icons';
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import { ThemeService, useInject } from '@difizen/mana-app';
+import { l10n, L10nLang } from '@difizen/mana-l10n';
 import { Button } from 'antd';
-import { useRouteMeta, Link, usePrefersColor, useSiteData } from 'dumi';
+import { useRouteMeta, Link, usePrefersColor, useSiteData, history} from 'dumi';
 import type { SocialTypes } from 'dumi/dist/client/theme-api/types.js';
 import HeaderExtra from 'dumi/theme/slots/HeaderExtra';
 import Navbar from 'dumi/theme/slots/Navbar';
@@ -29,6 +30,23 @@ const Header: React.FC = () => {
     gitRepo,
   } = themeConfig;
   const [, prefersColor = defaultColor, setPrefersColor] = usePrefersColor();
+
+  useEffect(() => {
+    const currentLang = l10n.getLang();
+    const urlPath = window.location.pathname;
+    const urlLang = urlPath.startsWith(`/${L10nLang.zhCN}`)
+      ? L10nLang.zhCN
+      : L10nLang.enUS;
+    if (currentLang !== urlLang) {
+      const newUrl =
+        currentLang === L10nLang.enUS
+          ? urlPath.replace(`/${urlLang}`, '')
+          : `/${currentLang}${urlPath}`;
+      history.push({
+        pathname: newUrl ? newUrl : '/',
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (prefersColor !== currentTheme.type) {
@@ -79,6 +97,31 @@ const Header: React.FC = () => {
           <Navbar />
           <div className="dumi-default-header-right-aside">
             <SearchBar />
+            <Button
+              type="text"
+              onClick={() => {
+                const urlPath = window.location.pathname;
+                const currentLang = l10n.getLang();
+                let baseUrlPath = urlPath.startsWith(`/${currentLang}`)
+                  ? urlPath.replace(`/${currentLang}`, '')
+                  : urlPath;
+                baseUrlPath = baseUrlPath ? baseUrlPath : '/';
+                const targetLang =
+                  currentLang === L10nLang.zhCN ? L10nLang.enUS : L10nLang.zhCN;
+
+                l10n.changeLang(targetLang);
+
+                history.push({
+                  pathname:
+                    targetLang === L10nLang.enUS
+                      ? baseUrlPath
+                      : `/${targetLang}${baseUrlPath}`,
+                });
+              }}
+            >
+              {l10n.getLang() === L10nLang.zhCN ? 'EN' : '中文'}
+            </Button>
+
             {/* {themeConfig.prefersColor.switch && (
               <Button
                 type="text"
