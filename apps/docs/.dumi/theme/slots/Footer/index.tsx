@@ -1,3 +1,4 @@
+import { l10n } from '@difizen/mana-l10n';
 import { useSiteData, Link } from 'dumi';
 import React from 'react';
 import './index.less';
@@ -12,7 +13,49 @@ type DatumType = {
 
 const Footer: React.FC = () => {
   const { themeConfig } = useSiteData();
-  const qrcodes = themeConfig.qrcodes;
+  const links = [
+    {
+      title: l10n.t('Related'),
+      itemList: [
+        {
+          name: 'Difizen',
+          link: 'https://github.com/difizen',
+        },
+        {
+          name: 'Difizen｜libro',
+          link: 'https://github.com/difizen/libro',
+        },
+        {
+          name: 'Difizen｜mana',
+          link: 'https://github.com/difizen/mana',
+        },
+        {
+          name: 'Difizen｜magent',
+          link: 'https://github.com/difizen/magent',
+        },
+      ],
+    },
+    {
+      title: l10n.t('Community'),
+      itemList: [
+        {
+          name:  l10n.t('feedback issues'),
+          link: 'https://github.com/difizen/libro/issues',
+        },
+        {
+          name:  l10n.t('release notes'),
+          link: 'https://github.com/difizen/libro/releases',
+        },
+      ],
+    },
+  ]
+
+  const qrcodes = [
+    {
+      name: l10n.t('DingTalk'),
+      qrcode: '/ding-qrcode.png',
+    },
+  ];
 
   return (
     <div className="difizen-dumi-footer">
@@ -24,7 +67,7 @@ const Footer: React.FC = () => {
                 </Link>
               )}
             </div>
-            {(themeConfig['links'] || []).map((datum: DatumType) => (
+            {links.map((datum: DatumType) => (
                   <div className="difizen-dumi-footer-text-group" key={datum.title}>
                     <div className="difizen-dumi-footer-title">{datum.title}</div>
                     {datum.itemList.map((item) => (
@@ -37,7 +80,7 @@ const Footer: React.FC = () => {
                   </div>
             ))}
             <div className="difizen-dumi-footer-text-group">
-              <div className="difizen-dumi-footer-contact">联系我们</div>
+              <div className="difizen-dumi-footer-contact">{l10n.t('Contact Us')}</div>
               {qrcodes.map((item: { name: string; qrcode: string }) => (
                 <div className="difizen-dumi-footer-image-group" key={item.name}>
                   <img className="difizen-dumi-footer-img" src={item.qrcode} />

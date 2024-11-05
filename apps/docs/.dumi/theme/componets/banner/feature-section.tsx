@@ -1,8 +1,6 @@
 import type { FC } from 'react';
 import React from 'react';
 
-import { Button } from '../ui/button';
-
 import type { FeatureProps } from './constants';
 
 const Feature: FC<FeatureProps> = ({ title, description, imageUrl, isImageLeft }) => (

@@ -1,4 +1,5 @@
 // import { BGShapeCircle } from "@/components/bg-shape-circle";
+import { l10n } from '@difizen/mana-l10n';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import React from 'react';
@@ -23,7 +24,7 @@ export const HeroSection: FC = () => {
             libro
           </h1>
           <p className="text-xl sm:text-2xl text-muted-foreground mb-8">
-            灵活定制、轻松集成的 Notebook 产品方案
+            {l10n.t('Flexible customization and easy integration of Notebook product solutions.')}
           </p>
           <Button type="primary" size="large" className="start-btn" href="http://libro-lab.difizen.net/libro?" target="_blank">
             Start now

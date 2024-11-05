@@ -1,8 +1,8 @@
 ---
 nav:
-  title: Introduction
+  title: 介绍
 
-title: Introduction
+title: 介绍
 order: 1
 ---
 

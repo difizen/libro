@@ -30,7 +30,7 @@ const DocLayout = () => {
 
   return (
     <ManaComponents.Application modules={[DumiPreset]} renderChildren>
-      {pathname === '/' ? (
+      {pathname === '/'||pathname === '/zh-CN'||pathname === '/zh-CN/' ? (
         <HomeLayout />
       ) : (
         <div className="difizen-dumi-layout">
