@@ -1,8 +1,9 @@
 ---
 nav:
-  title: Updates
+  order: 10
+  title: 更新
 
-title: Updates
+title: 更新
 order: 10
 ---
 

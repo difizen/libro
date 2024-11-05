@@ -1,3 +1,4 @@
+import { l10n } from '@difizen/mana-l10n';
 import { Row, Col } from 'antd';
 import React from 'react';
 import type { FC } from 'react';
@@ -6,7 +7,7 @@ import './index.less';
 export const IntergractionSection: FC = () => {
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
-      <p className="feature-title">谁在使用</p>
+      <p className="feature-title">{l10n.t('Who is using')}</p>
       <Row className="user-container">
         <Col sm={12} md={8} lg={6} >
           <a className="user-item" href="https://github.com/secretflow/secretnote" target="_blank" rel="noreferrer">
