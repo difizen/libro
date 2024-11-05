@@ -1,43 +1,45 @@
 ---
-title: Custom Toolbar
+title: 自定义工具栏
 order: 2
 ---
 
-# Toolbar
+# 工具栏
 
-The toolbar in Libro is an important part of the entire Libro UI interface, containing a series of buttons that help users quickly access commonly used features. By default, it is displayed at the top of the editor and to the right of the selected cell.
+libro 的工具栏（Toolbar）是整个 libro UI 界面中重要的一部分，它包含了一系列的按钮，帮助用户快速访问常用功能，目前在 libro 中默认显示在编辑器的顶部和选中 cell 的右侧。
+<img
+    src="../../public/toolbar.png"
+    width="800"
+/>
 
-<img src="../../public/toolbar.png" width="800" />
+### 如何往工具栏中注册自定义工具按钮？
 
-### How to Register Custom Toolbar Buttons?
+在 libro 中，每个模块都可以向工具注册表中添加工具按钮。最基础的工具按钮通常包含这几个部分：
 
-In Libro, each module can add tool buttons to the tool registration table. The basic components of a tool button typically include:
+- id: 工具按钮的唯一标识符。
+- command: 工具按钮绑定的命令 id。
+- tooltip: 可选，鼠标悬停在按钮上时显示的提示文本，用于向用户提供关于按钮功能的简要说明。
+- icon: 可选,按钮的图标显示。
+- order：可选，该属性决定了工具栏按钮的显示顺序。数值越小的按钮将显示在前面，越大的按钮显示在后面。如果不设置，libro 将按默认顺序显示按钮。
+- group：可选，工具栏中的按钮可以通过该属性进行分组，确保相关功能的按钮在视觉上靠近。
 
-- **id**: A unique identifier for the tool button.
-- **command**: The command ID that the tool button is bound to.
-- **tooltip**: Optional; the hint text displayed when the mouse hovers over the button, providing a brief description of the button's function.
-- **icon**: Optional; the icon displayed on the button.
-- **order**: Optional; this property determines the display order of the toolbar buttons. Buttons with smaller values will appear first, while larger values will appear later. If not set, Libro will display the buttons in the default order.
-- **group**: Optional; this property can group buttons in the toolbar to ensure that related function buttons are visually close together.
+其中，工具栏的按钮与命令紧密关联。每个按钮都会绑定到一个命令，用户点击工具栏按钮时，会触发绑定命令的执行。
 
-The toolbar buttons are closely linked with commands. Each button is bound to a command, and when the user clicks the toolbar button, it triggers the execution of the bound command.
+#### 注册工具栏按钮
 
-#### Registering Toolbar Buttons
+1. libro 使用依赖注入机制来管理工具栏按钮的注册，因此你需要创建一个工具栏按钮扩展类，并在这个类中注册工具栏按钮。工具栏扩展类实现了 ToolbarContribution 接口，这个接口提供了 registerToolbarItems 方法，专门用于注册工具栏按钮。
+2. 工具按钮继承来自命令的 icon、label 属性，以及 execute、isVisible、isEnabled 等逻辑控制函数，保证相同的命令在工具栏、菜单等多处可见时的统一，工具栏按钮也可以在注册时自定义 icon、label 等属性。
 
-1. Libro uses a dependency injection mechanism to manage the registration of toolbar buttons. Therefore, you need to create a toolbar button extension class and register the toolbar buttons within this class. The toolbar extension class implements the `ToolbarContribution` interface, which provides the `registerToolbarItems` method specifically for registering toolbar buttons.
-2. The tool buttons inherit properties from the command such as `icon`, `label`, as well as logic control functions like `execute`, `isVisible`, and `isEnabled`, ensuring consistency when the same command is visible in the toolbar, menu, and other places. The toolbar buttons can also customize properties like `icon`, `label`, etc., during registration.
+- 更具体的， 在 libro 中，工具栏按钮对应的命令采用 LibroCommandRegister 的方式注册，以保证 execute、isVisible、isEnabled 等逻辑控制函数中可以拿到 CellView 实例、LibroView 实例、path。工具栏按钮的位置选项如下，通过 isVisible 函数中的 path 参数控制位置显示。
 
-- More specifically, in Libro, the commands corresponding to the toolbar buttons are registered using `LibroCommandRegister` to ensure that the logic control functions like `execute`, `isVisible`, and `isEnabled` can access instances of `CellView`, `LibroView`, and `path`. The location options for toolbar buttons are as follows, controlled by the `path` parameter in the `isVisible` function.
+| 位置变量标识                  | 具体位置        |
+| :---------------------------- | :-------------- |
+| LibroToolbarArea.HeaderLeft   | 顶部左侧工具栏  |
+| LibroToolbarArea.HeaderCenter | 顶部中间工具栏  |
+| LibroToolbarArea.HeaderRight  | 顶部右侧工具栏  |
+| LibroToolbarArea.CellTop      | cell 顶部工具栏 |
+| LibroToolbarArea.CellRight    | cell 右侧工具栏 |
 
-| Location Variable Identifier  | Specific Location  |
-| :---------------------------- | :----------------- |
-| LibroToolbarArea.HeaderLeft   | Top left toolbar   |
-| LibroToolbarArea.HeaderCenter | Top center toolbar |
-| LibroToolbarArea.HeaderRight  | Top right toolbar  |
-| LibroToolbarArea.CellTop      | Cell top toolbar   |
-| LibroToolbarArea.CellRight    | Cell right toolbar |
-
-3. Register the newly added command extension class in the Mana module.
+3. 把新增的命令扩展类注册进 mana module 中。
 
 ```typescript
 import { ManaModule } from '@difizen/mana-app';
@@ -49,7 +51,7 @@ export const LibroToolbarDemoModule = ManaModule.create()
   .dependOn(LibroEditorModule);
 ```
 
-##### Example
+##### 示例
 
 ```typescript
 import { LibroCommandRegister, LibroToolbarArea } from '@difizen/libro-jupyter';
@@ -81,7 +83,7 @@ export class LibroDemoToolbarContribution
       LibroDemoToolbarCommand['demoToolbarCommand1'],
       {
         execute: async (cell, libro, path) => {
-          console.log('Toolbar button registered in the top center toolbar example');
+          console.log('工具栏按钮注册在顶部中间工具栏示例');
         },
         isEnabled: () => {
           return true;
@@ -96,9 +98,7 @@ export class LibroDemoToolbarContribution
       LibroDemoToolbarCommand['demoToolbarCommand2'],
       {
         execute: async (cell, libro, path) => {
-          console.log(
-            'Toolbar button registered in the top right toolbar and cell right toolbar example',
-          );
+          console.log('工具栏按钮注册在顶部右侧工具栏和 cell 右侧工具栏示例');
         },
         isEnabled: () => {
           return true;
@@ -116,9 +116,7 @@ export class LibroDemoToolbarContribution
       LibroDemoToolbarCommand['demoToolbarCommand3'],
       {
         execute: async (cell, libro, path) => {
-          console.log(
-            'Toolbar button registered in the top right toolbar and cell right toolbar, and grouped example',
-          );
+          console.log('工具栏按钮注册在顶部右侧工具栏和 cell 右侧工具栏,并且成组示例');
         },
         isEnabled: () => {
           return true;
@@ -135,9 +133,7 @@ export class LibroDemoToolbarContribution
       LibroDemoToolbarCommand['demoToolbarCommand4'],
       {
         execute: async (cell, libro, path) => {
-          console.log(
-            'Toolbar button registered in the top right toolbar and cell right toolbar, and grouped example',
-          );
+          console.log('工具栏按钮注册在顶部右侧工具栏和 cell 右侧工具栏，并且成组示例');
         },
         isEnabled: () => {
           return true;

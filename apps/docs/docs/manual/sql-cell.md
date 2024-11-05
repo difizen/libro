@@ -1,29 +1,29 @@
 ---
-title: sql cell 指南
+title: SQL Cell Guide
 order: 1
 ---
 
-# 概述
+# Overview
 
-libro 支持使用 SQL Cell 来简化数据库交互，通过在 libro 中结合 SQL 和 Python，你可以：
+Libro supports using SQL Cells to simplify database interactions. By combining SQL and Python in Libro, you can:
 
-- 直接查询数据库，快速获取数据，支持把结果保存为 dataframe。
-- 使用 Python 对查询结果进行进一步的处理和可视化。
-- 将 SQL 的强大查询能力与 Notebook 的动态性结合，提升开发效率。
+- Query databases directly to quickly retrieve data and save the results as a DataFrame.
+- Further process and visualize query results using Python.
+- Integrate SQL’s powerful querying capabilities with the dynamic nature of notebooks, improving development efficiency.
 
-下面我们通过一个完整的例子展示如何在 libro 中使用 SQL Cell 来操作数据库，并结合 Python 进行数据分析。
+The following example demonstrates how to use SQL Cells in Libro to interact with a database and analyze data using Python.
 
-## 📍场景：电子商务平台的销售数据分析
+## 📍 Scenario: Sales Data Analysis for an E-commerce Platform
 
-假设我们管理一个电子商务平台，并且希望通过分析销售数据来优化业务策略。数据库中包含多个表，比如 orders（订单表）、customers（客户表）、products（产品表）和 order_items（订单项表），记录了客户的订单和购买情况。我们将通过在 libro 中使用 SQL Cell 来解决以下几个常见问题：
+Imagine we manage an e-commerce platform and want to analyze sales data to optimize business strategies. The database includes multiple tables, such as `orders` (order table), `customers` (customer table), `products` (product table), and `order_items` (order item table), which record customer orders and purchase details. We’ll use SQL Cells in Libro to address several common questions:
 
-1. 分析不同产品的销量：统计每个产品的销售数量和收入。
-2. 分析客户购买行为：找出每个客户的购买总额和平均订单金额。
-3. 找出平台的最佳销售月份：通过时间维度分析平台的销售表现。
+1. Analyze product sales: Calculate the sales quantity and revenue for each product.
+2. Analyze customer purchasing behavior: Identify each customer’s total spend and average order value.
+3. Determine the best sales month for the platform: Analyze sales performance over time.
 
-### 准备工作
+### Preparation
 
-1. 配置数据库的连接信息，在 `~/.libro/libro_config.yaml` 中添加数据库的连接配置,并且启用 libro-sql 扩展。
+1. Configure the database connection details by adding them to the `~/.libro/libro_config.yaml` file and enable the `libro-sql` extension.
 
 ```yaml
 db:
@@ -37,8 +37,8 @@ jpserver_extensions:
   libro_sql: True
 ```
 
-> <span style="font-style: normal;">💡 **Tip**: 如果没有上述 libro 的配置文件可通过在终端中运行命令 `libro config generate` 生成.<br/>
-> 此外，mysql、sqlite 的配置示例如下:
+> 💡 **Tip**: If the configuration file doesn’t already exist, generate it by running the command `libro config generate` in the terminal.  
+> Additionally, here are configuration examples for MySQL and SQLite:
 >
 > ```yaml
 > - db_type: mysql
@@ -53,49 +53,47 @@ jpserver_extensions:
 >   password: ''
 >   host: ''
 >   port: 0
->   database: sql_demo.db #.db 文件相较于 libro 启动路径的位置
+>   database: sql_demo.db # relative to the libro startup path
 > ```
->
-> </span>
 
-2. 在终端中运行命令libro启动 libro，如果已经启动 libro ，则配置完成之后重启内核。
+2. Start Libro by running the command `libro` in the terminal. If Libro is already running, restart the kernel after configuring.
 
-### 案例 1：分析不同产品的销量
+### Example 1: Analyzing Product Sales
 
-1. 查询不同产品的销量
-   我们首先通过 SQL 查询来统计每个产品的销量和总收入。这个查询将返回每个产品的销售数量以及它所产生的总收入，同时把查询结果保存到 Pandas DataFrame 中。
+1. Query product sales  
+   We start by using SQL to calculate the sales quantity and total revenue for each product. This query returns the sales quantity and total revenue for each product, with the results saved in a Pandas DataFrame.
 
 <img src="../../public/df_sales.png" alt="alt text" width="600" >
 
-2. 可视化产品销售表现
-   我们可以使用 Python 的可视化工具（如 Matplotlib 或 Seaborn）对产品销量进行直观展示，通过这个直方图，我们可以快速了解哪些产品是平台上最畅销的。
+2. Visualize product sales performance  
+   We can visualize product sales using Python visualization tools such as Matplotlib or Seaborn. This histogram provides a quick overview of the platform’s best-selling products.
 
 <img src="../../public/vis_sales.png" alt="alt text" width="600" >
 
-### 案例 2：分析客户的购买行为
+### Example 2: Analyzing Customer Purchasing Behavior
 
-1. 统计每个客户的订单数量、总消费金额和平均订单金额
-   我们首先通过 SQL 查询来统计他们的总购买金额和平均订单金额。这个查询将返回每个客户的订单数量、总消费金额和平均订单金额。通过这些数据，我们可以了解哪些客户是平台的忠实用户，以及他们的消费习惯。
+1. Calculate the number of orders, total spend, and average order value for each customer  
+   Using SQL, we calculate each customer’s total spending and average order value. This query returns the number of orders, total spend, and average order value for each customer, allowing us to identify loyal customers and understand their purchasing habits.
 
 <img src="../../public/df_customers.png" alt="alt text" width="600" >
 
-2. 数据分析
-   通过 Python，可以进一步处理这些数据，找出不同客户的消费模式，例如哪些客户属于高价值客户。
+2. Data Analysis  
+   We can further analyze this data in Python to identify customer spending patterns, such as identifying high-value customers.
 
 <img src="../../public/high_value_customers.png" alt="alt text" width="600" >
 
-案例 3：找出最佳销售月份
+### Example 3: Identifying the Best Sales Month
 
-1. 查询每个月的总销售额
-   我们通过时间维度分析平台的最佳销售月份，这个查询会返回每个月的总销售额，并按降序排列，以便你了解哪几个月份的销售额最高。
+1. Query total sales by month  
+   We analyze the platform’s best sales month over time. This query returns the total monthly sales, sorted in descending order, allowing you to see which months had the highest sales.
 
 <img src="../../public/df_monthly_sales.png" alt="alt text" width="600" >
 
-2. 可视化每月销售额趋势
-   我们可以将每个月的销售数据可视化为折线图，通过这个折线图，可以轻松地看到不同月份的销售趋势，帮助调整库存和营销策略。
+2. Visualize monthly sales trends  
+   We can visualize the monthly sales data as a line chart. This line chart helps you easily see the monthly sales trend, providing insights to adjust inventory and marketing strategies.
 
 <img src="../../public/df_monthly_sales_revnue.png" alt="alt text" width="600" >
 
-# 最后
+# Conclusion
 
-通过这个电子商务平台的销售数据分析案例，我们展示了如何在 libro 中使用 SQL Cell 来解决实际问题，包括产品销量分析、客户行为分析以及销售趋势分析。你可以根据自己的需求扩展这些分析方法，在 libro 中结合 SQL 和 Python 的强大能力，进行个性化的数据分析。
+Through this sales data analysis case for an e-commerce platform, we demonstrated how to use SQL Cells in Libro to address real-world problems, including product sales analysis, customer behavior analysis, and sales trend analysis. You can extend these methods to suit your needs, leveraging the powerful combination of SQL and Python in Libro for personalized data analysis.
