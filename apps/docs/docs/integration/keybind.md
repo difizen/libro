@@ -1,57 +1,57 @@
 ---
-title: 自定义快捷键
+title: Custom Keyboard Shortcuts
 order: 3
 ---
 
-# 快捷键
+# Keyboard Shortcuts
 
-快捷键在开发者的工作流中非常重要，它们可以大大提高生产力。libro 作为一款交互式笔记本程序, 有着丰富的快捷键来帮助用户完成工作。本篇文章将给您介绍如何开发自定义的快捷键。
+Keyboard shortcuts are crucial in a developer's workflow, significantly enhancing productivity. As an interactive notebook application, libro offers a rich set of keyboard shortcuts to assist users in their tasks. This article will guide you on how to develop custom keyboard shortcuts.
 
-## 支持的快捷键
+## Supported Keyboard Shortcuts
 
-快捷键由修饰键和实际键位组成。以下在 libro 中自定义开发快捷键时所支持的修饰键和按键列表。
+Keyboard shortcuts consist of modifier keys and actual key presses. Below is a list of supported modifier keys and keys when developing custom keyboard shortcuts in libro.
 
-### 支持的修饰键
+### Supported Modifier Keys
 
-| 平台    | 修饰键                     |
-| :------ | :------------------------- |
-| macOS   | Ctrl+, Shift+, Alt+, Cmd+  |
-| Windows | Ctrl+, Shift+, Alt+, Win+  |
-| Linux   | Ctrl+, Shift+, Alt+, Meta+ |
+| Platform | Modifier Keys              |
+| :------- | :------------------------- |
+| macOS    | Ctrl+, Shift+, Alt+, Cmd+  |
+| Windows  | Ctrl+, Shift+, Alt+, Win+  |
+| Linux    | Ctrl+, Shift+, Alt+, Meta+ |
 
-### 支持的按键
+### Supported Keys
 
-除了修饰键之外，以下实际按键也被支持：
+In addition to modifier keys, the following actual keys are also supported:
 
-- 功能键：f1-f19
-- 字母键：a-z
-- 数字键：0-9
-- 符号键：` `, `-`, `=`, `[`, `]`, `\`, `;`, `'`, `,`, `.`, `/`
-- 方向键：left, up, right, down
-- 导航键：pageup, pagedown, end, home
-- 其他常用键：tab, enter, escape, space, backspace, delete
-- 其他功能键：pausebreak, capslock, insert
-- 数字键盘：numpad0-numpad9, numpad_multiply, numpad_add, numpad_separator, numpad_subtract, numpad_decimal, numpad_divide
+- Function keys: f1-f19
+- Letter keys: a-z
+- Number keys: 0-9
+- Symbol keys: ` `, `-`, `=`, `[`, `]`, `\`, `;`, `'`, `,`, `.`, `/`
+- Arrow keys: left, up, right, down
+- Navigation keys: pageup, pagedown, end, home
+- Other common keys: tab, enter, escape, space, backspace, delete
+- Other function keys: pausebreak, capslock, insert
+- Numeric keypad: numpad0-numpad9, numpad_multiply, numpad_add, numpad_separator, numpad_subtract, numpad_decimal, numpad_divide
 
-这些按键和修饰键可以组合在一起，用于创建自定义快捷键组合。
+These keys and modifier keys can be combined to create custom keyboard shortcut combinations.
 
-## 如何注册自定义快捷键
+## How to Register Custom Keyboard Shortcuts
 
-在 libro 中，快捷键是通过命令系统来实现的。每个快捷键都绑定到一个命令，按下快捷键时，对应的命令就会被执行。
+In libro, keyboard shortcuts are implemented through a command system. Each keyboard shortcut is bound to a command, which is executed when the shortcut is pressed.
 
-### 快捷键定义
+### Keyboard Shortcut Definition
 
-默认注册快捷键与注册命令关联, 最基础的有快捷键定义的命令包含这几个部分：
+The default registered keyboard shortcuts are associated with commands, with the basic components of a keyboard shortcut definition including:
 
-- id: 命令的唯一标识符。
-- keybind: 命令绑定的快捷键,提供如下几种方式：
-  - 单一按键：`keybind: 'd'`，单一按键触发生效。
-  - 组合按键：`keybind: 'ctrlcmd+shift+d'`，多个按键同时触发生效。
-  - 多组按键：`keybind: ['shift+q', 'shift+w']`，一个命令同时绑定多组按键，其中一组按键触发即可生效。
-  - 连续按键：`keybind: 'j j'`，按键连续间断触发时生效。
-- when: 当命令绑定了快捷键时，该字段用于判断命令快捷键生效的条件，如果命令定义中包含 when: 'commandMode'表示该命令的快捷键只在命令模式下生效，编辑模式下不生效；反之，如果命令定义中不包含该字段，则没有命令模式下生效的条件限制。这里的命令模式快捷键生效的条件设计主要考虑避免用户编辑时也触发快捷键。
+- **id**: A unique identifier for the command.
+- **keybind**: The keyboard shortcut bound to the command, provided in the following ways:
+  - Single key: `keybind: 'd'`, a single key activates the shortcut.
+  - Combination keys: `keybind: 'ctrlcmd+shift+d'`, multiple keys activate the shortcut simultaneously.
+  - Multiple sets of keys: `keybind: ['shift+q', 'shift+w']`, one command can be bound to multiple sets of keys, and activating any one set will trigger the command.
+  - Consecutive keys: `keybind: 'j j'`, keys must be pressed consecutively to activate.
+- **when**: When a command is bound to a keyboard shortcut, this field is used to determine the conditions under which the shortcut is active. If the command definition includes `when: 'commandMode'`, it means the shortcut only works in command mode and not in edit mode; conversely, if this field is not included, there are no conditions limiting the shortcut's activation in command mode. This design primarily considers preventing unintended activation of shortcuts during editing.
 
-#### 示例
+#### Example
 
 ```typescript
 export const LibroDemoKeybindCommand = {
@@ -75,11 +75,11 @@ export const LibroDemoKeybindCommand = {
 };
 ```
 
-### 快捷键注册实现
+### Keyboard Shortcut Registration Implementation
 
-1. 实现命令的 handler (execute、isEnabled)，用于控制快捷键对应的命令的行为。
-2. 注册快捷键。libro 使用依赖注入机制来管理快捷键的注册，因此你需要创建一个快捷键扩展类，并在这个类中注册快捷键。快捷键扩展类实现了 `KeybindingContribution` 接口，这个接口提供了`registerKeybindings`方法，专门用于注册快捷键。同时需要通过`LibroCommandRegister`中的`registerKeybinds`方法进行注册，以保证只有当焦点聚焦于当前的 libro 编辑器内以及命令模式的逻辑判断的生效。
-3. 把新增的快捷键扩展类注册进 mana module 中。
+1. Implement the command's handler (`execute`, `isEnabled`) to control the behavior of the command associated with the shortcut.
+2. Register the keyboard shortcut. libro uses a dependency injection mechanism to manage the registration of shortcuts, so you need to create a keyboard shortcut extension class and register the shortcuts within this class. The keyboard shortcut extension class implements the `KeybindingContribution` interface, which provides the `registerKeybindings` method specifically for registering shortcuts. You also need to use the `registerKeybinds` method from `LibroCommandRegister` to ensure that the shortcut is only active when the focus is on the current libro editor and under the logical condition of command mode.
+3. Register the newly added keyboard shortcut extension class in the mana module.
 
 ```typescript
 import { ManaModule } from '@difizen/mana-app';
@@ -91,7 +91,7 @@ export const LibroKeybindDemoModule = ManaModule.create()
   .dependOn(LibroEditorModule);
 ```
 
-#### 示例
+#### Example
 
 ```typescript
 import { LibroCommandRegister } from '@difizen/libro-jupyter';
@@ -121,7 +121,7 @@ export class LibroDemoKeybindingContribution
       LibroDemoKeybindCommand['demokeybindCommand1'],
       {
         execute: async () => {
-          console.log('快捷键demo示例1被触发执行');
+          console.log('Shortcut demo example 1 executed');
         },
       },
     );
@@ -130,7 +130,7 @@ export class LibroDemoKeybindingContribution
       LibroDemoKeybindCommand['demokeybindCommand2'],
       {
         execute: async () => {
-          console.log('快捷键demo示例2被触发执行');
+          console.log('Shortcut demo example 2 executed');
         },
       },
     );
@@ -139,7 +139,7 @@ export class LibroDemoKeybindingContribution
       LibroDemoKeybindCommand['demokeybindCommand3'],
       {
         execute: async () => {
-          console.log('快捷键demo示例3被触发执行');
+          console.log('Shortcut demo example 3 executed');
         },
       },
     );
@@ -148,7 +148,7 @@ export class LibroDemoKeybindingContribution
       LibroDemoKeybindCommand['demokeybindCommand4'],
       {
         execute: async () => {
-          console.log('快捷键demo示例4被触发执行');
+          console.log('Shortcut demo example 4 executed');
         },
       },
     );

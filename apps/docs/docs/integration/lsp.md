@@ -1,28 +1,25 @@
 ---
-title: 编辑器接入 LSP
+title: Integrating LSP with the Editor
 order: 10
 ---
 
-# 编辑器接入 LSP
+# Integrating LSP with the Editor
 
-Libro可以在多种环境运行，当使用Libro-server的模式来部署时，代码编辑器需要一些配置接入LSP来支持高级功能（代码补全、提示、校验、格式化等）。
+Libro can run in various environments, and when deploying in Libro-server mode, the code editor requires some configuration to integrate with LSP to support advanced features (such as code completion, suggestions, validation, formatting, etc.).
 
-## 编辑器基本架构
+## Basic Architecture of the Editor
 
 ![editor demo](./image-1.png)
 
-Libro 在编辑器层面提供了[IEditor](https://github.com/difizen/libro/blob/ea46403edaa99488a59b0f94554c22b7115b3d6f/packages/libro-code-editor/src/code-editor-protocol.ts#L207)抽象，来提供代码编辑能力。
-代码编辑(python\md\sql等)、全局搜索等场景会依赖`IEditor`接口。IEditor的具体实现有多种，包括code mirror 6、Cofine Editor等。
-Cofine Editor基于monaco editor实现，编辑器本身支持丰富的语言服务接口（如代码提示、代码跳转、格式化等）。我们提供了[LibroLanguageClient](https://github.com/difizen/libro/blob/ea46403edaa99488a59b0f94554c22b7115b3d6f/packages/libro-language-client/src/libro-language-client.ts#L29)来对接LSP server，获取语言服务信息。LSP server作为独立进程部署在服务端，由jupyter-lsp进行元数据管理。
+Libro provides an abstraction called [IEditor](https://github.com/difizen/libro/blob/ea46403edaa99488a59b0f94554c22b7115b3d6f/packages/libro-code-editor/src/code-editor-protocol.ts#L207) at the editor level to offer code editing capabilities. Scenarios such as code editing (Python, Markdown, SQL, etc.) and global search rely on the `IEditor` interface. There are several implementations of IEditor, including CodeMirror 6 and Cofine Editor. The Cofine Editor is based on the Monaco Editor and supports a rich set of language service interfaces (such as code suggestions, code navigation, formatting, etc.). We provide the [LibroLanguageClient](https://github.com/difizen/libro/blob/ea46403edaa99488a59b0f94554c22b7115b3d6f/packages/libro-language-client/src/libro-language-client.ts#L29) to interface with the LSP server and retrieve language service information. The LSP server runs as an independent process on the server side and is managed by Jupyter-LSP.
 
 ![alt text](./image.png)
 
-## LSP server 配置
+## LSP Server Configuration
 
-LSP server 需要支持LSP协议的Notebook部分的能力，才能在Libro正常工作。当前支持的server包括Ruff和Pylez（之前叫libro-analyzer）。
+The LSP server needs to support the capabilities of the Notebook section of the LSP protocol to function properly with Libro. Currently supported servers include Ruff and Pylez (previously known as libro-analyzer).
 
-Ruff LSP server运行在python环境，已在libro-server中自带。
-Pylez运行在nodejs环境，需要服务器安装npm和nodejs。使用 `npm install @difizen/libro-analyzer`安装依赖，并在Libro-server配置文件中提供以下配置项：
+The Ruff LSP server runs in a Python environment and is included with the libro-server. Pylez runs in a Node.js environment and requires the server to have npm and Node.js installed. Use `npm install @difizen/libro-analyzer` to install the dependency and provide the following configuration in the Libro-server configuration file:
 
 ```python
 c.LanguageServerManager.language_servers = {
@@ -40,7 +37,7 @@ c.LanguageServerManager.language_servers = {
         # if installed as a binary
         "argv": [
             "node",
-            "node_modules/@difizen/libro-analyzer/index.js", # 填写 Libro-analyzer 的实际安装地址
+            "node_modules/@difizen/libro-analyzer/index.js", # Provide the actual installation path of Libro-analyzer
             "--stdio",
         ],
         "languages": ["python"],

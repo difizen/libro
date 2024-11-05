@@ -1,298 +1,300 @@
 ---
-title: 基础指南
+title: Basic Guide
 order: 0
 ---
 
-# 概述
+# Overview
 
-Libro 编辑器增强了传统 Notebook 运行的状态监控以及各种交互操作，本文为您介绍 Libro 编辑器的基础界面功能，帮助您了解 Libro 编辑器的基本使用方法。
+The Libro Editor enhances the state monitoring of traditional Notebook operations and various interactive features. This article introduces the basic interface features of the Libro Editor, helping you understand its basic usage.
 
-## 产品界面介绍
+## Product Interface Introduction
 
-| 界面模块      | 说明                                                            |
-| ------------- | --------------------------------------------------------------- |
-| 上方工具栏    | 包含内核状态区、操作控制区、快捷键等。                          |
-| Cell 操作区   | 罗列针对每一个独立的 Cell 可执行的操作。                        |
-| Cell 编辑区   | 代码编辑窗口中的功能区域，如 Cell 衔接区、输出区、底部 Cell等。 |
-| Cell 功能介绍 | 介绍命令态和编辑态 Cell 的功能和快捷键操作。                    |
+| Interface Module          | Description                                                                                               |
+| ------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Top Toolbar               | Contains kernel status area, operation control area, keybinds, etc.                                       |
+| Cell Operation Area       | Lists executable operations for each individual Cell.                                                     |
+| Cell Editing Area         | Functional areas within the code editing window, such as Cell linking area, output area, and bottom Cell. |
+| Cell Feature Introduction | Introduces the functions and keybind operations of command mode and edit mode Cells.                      |
 
-### 上方工具栏
+### Top Toolbar
 
 <img src="../../public/top_toolbar.png" alt="alt text" width="800">
 
-| 序号 | 名称       | 描述                                                                 |
-| ---- | ---------- | -------------------------------------------------------------------- |
-| ①    | 内核状态区 | 展示当前服务的内核运行状态，包括正在连接、未知、忙碌、空闲四种状态。 |
-| ②    | 操作控制区 | 提供各种控制操作，如对代码执行、Cell 转换的操作等。                  |
-| ③    | 快捷键面板 | 查看 Libro 快捷键目录。                                              |
+| No. | Name                   | Description                                                                                                |
+| --- | ---------------------- | ---------------------------------------------------------------------------------------------------------- |
+| ①   | Kernel Status Area     | Displays the current status of the service kernel, including four states: connecting, unknown, busy, idle. |
+| ②   | Operation Control Area | Provides various control operations, such as executing code, converting Cells, etc.                        |
+| ③   | Keybind Panel          | View the directory of Libro keybinds.                                                                      |
 
-#### 内核状态区
+#### Kernel Status Area
 
-Libro Notebook 采用 Python3 作为基础内核，负责运行用户输入的代码单元（Cell），管理代码执行的状态。在 Libro 的内核状态区，您可以修改内核和查看内核状态。
+The Libro Notebook uses Python 3 as the base kernel, responsible for executing the user-input code Cells and managing the code execution status. In the Libro kernel status area, you can modify the kernel and view its status.
 
-● 内核编辑菜单
+- Kernel Edit Menu
 
 <img src="../../public/kernel_menu.png" alt="alt text" width="300">
 
-| 菜单选项                          | 描述                                               |
-| --------------------------------- | -------------------------------------------------- |
-| Start Preferred Kernel            | 启动设定或之前使用的首选内核。                     |
-| Use No Kernel                     | 选择此选项不会启动任何内核，用于不执行代码的场景。 |
-| Use Kernel from Preferred Session | 使用已开启会话中的内核配置，保持环境一致性。       |
+| Menu Option                       | Description                                                                                             |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Start Preferred Kernel            | Start the preferred kernel set or previously used.                                                      |
+| Use No Kernel                     | Selecting this option will not start any kernel, used for scenarios where code execution is not needed. |
+| Use Kernel from Preferred Session | Use kernel configuration from an active session to maintain environmental consistency.                  |
 
-说明：内核（Kernel）是一个执行计算的引擎，它能够运行编程代码并返回结果。
+Note: The kernel is an engine that executes computations, capable of running programming code and returning results.
 
-● 内核状态
-Libro 的内核状态分为正在连接、未知、忙碌、空闲。
+- Kernel Status  
+  The kernel status in Libro can be connecting, unknown, busy, or idle.
 
-<img src="../../public/connecting.webp" alt="alt text" width="80"> Libro Notebook 正在与内核建立连接，发生在启动内核或者内核失去响应后尝试连接的情况。
+<img src="../../public/connecting.webp" alt="alt text" width="80"> The Libro Notebook is connecting to the kernel, which occurs when starting the kernel or attempting to connect after the kernel becomes unresponsive.
 
-<img src="../../public/unknown.webp" alt="alt text" width="50"> 当前内核的状态不能确定，可能是由于通信问题或内部错误导致状态信息无法获取。
+<img src="../../public/unknown.webp" alt="alt text" width="50"> The current status of the kernel is uncertain, possibly due to communication issues or internal errors preventing status information retrieval.
 
-<img src="../../public/busy.webp" alt="alt text" width="50"> 当前内核正在执行代码处理任务，您提交的新代码或指令将等待当前任务完成后才会被执行。
+<img src="../../public/busy.webp" alt="alt text" width="50"> The current kernel is processing code execution tasks, and your newly submitted code or commands will wait until the current task is complete before execution.
 
-<img src="../../public/idle.webp" alt="alt text" width="50"> 表示内核当前没有执行任何任务，已经准备好接受新的命令和代码执行。
+<img src="../../public/idle.webp" alt="alt text" width="50"> Indicates that the kernel is currently not executing any tasks and is ready to accept new commands and code execution.
 
-#### 操作控制区
+#### Operation Control Area
 
-| 图标                                                                 | 描述                                                                     |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| <img src="../../public/save.png" alt="alt text" width="30">          | 保存当前 Notebook 中 Cell 内容的改动。                                   |
-| <img src="../../public/run.png" alt="alt text" width="36">           | 按照子菜单选项，执行选中范围的 Cell，如执行全部 Cell、执行当前 Cell 等。 |
-| <img src="../../public/loc.png" alt="alt text" width="36">           | 定位正在执行的 Cell。                                                    |
-| <img src="../../public/interrupt.png" alt="alt text" width="36">     | 中断正在执行的 Cell 代码。                                               |
-| <img src="../../public/restart.png" alt="alt text" width="36">       | 重启并清空所有 Cell 的输出。                                             |
-| <img src="../../public/undo.png" alt="alt text" width="36">          | 撤销上一步操作。                                                         |
-| <img src="../../public/redo.png" alt="alt text" width="36">          | 重做上一步被撤销的操作。                                                 |
-| <img src="../../public/output_scroll.png" alt="alt text" width="36"> | 固定 Output 展示高度。                                                   |
-| <img src="../../public/hide.png" alt="alt text" width="36">          | 根据子菜单选项，隐藏或显示代码和 Output。                                |
-| <img src="../../public/clear.png" alt="alt text" width="36">         | 清空选中 Cell 的输出。                                                   |
-| <img src="../../public/change_cell.png" alt="alt text" width="120">  | 更改 Cell 类型，如 Python、Markdown 等                                   |
+| Icon                                                                 | Description                                                                                                                     |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="../../public/save.png" alt="alt text" width="30">          | Save changes made to the Cell contents in the current Notebook.                                                                 |
+| <img src="../../public/run.png" alt="alt text" width="36">           | Execute the selected range of Cells according to submenu options, such as executing all Cells, executing the current Cell, etc. |
+| <img src="../../public/loc.png" alt="alt text" width="36">           | Locate the currently executing Cell.                                                                                            |
+| <img src="../../public/interrupt.png" alt="alt text" width="36">     | Interrupt the code of the currently executing Cell.                                                                             |
+| <img src="../../public/restart.png" alt="alt text" width="36">       | Restart and clear all Cell outputs.                                                                                             |
+| <img src="../../public/undo.png" alt="alt text" width="36">          | Undo the last action.                                                                                                           |
+| <img src="../../public/redo.png" alt="alt text" width="36">          | Redo the last undone action.                                                                                                    |
+| <img src="../../public/output_scroll.png" alt="alt text" width="36"> | Fix the height of the Output display.                                                                                           |
+| <img src="../../public/hide.png" alt="alt text" width="36">          | Hide or show code and Output based on submenu options.                                                                          |
+| <img src="../../public/clear.png" alt="alt text" width="36">         | Clear the output of the selected Cell.                                                                                          |
+| <img src="../../public/change_cell.png" alt="alt text" width="120">  | Change Cell types, such as Python, Markdown, etc.                                                                               |
 
-#### 分享和快捷键
+#### Sharing and Keybind
 
-| 图标                                                           | 区域图                                                                | 说明                                                   |
-| -------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------ |
-| <img src="../../public/keybind.png" alt="alt text" width="36"> | <img src="../../public/keybind_panel.png" alt="alt text" width="300"> | 展示命令态和编辑态 Libro 的快捷键操作，提供 Magic 命令 |
+| Icon                                                           | Area Diagram                                                          | Description                                                                                   |
+| -------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| <img src="../../public/keybind.png" alt="alt text" width="36"> | <img src="../../public/keybind_panel.png" alt="alt text" width="300"> | Display keybind operations for command mode and edit mode in Libro, providing Magic commands. |
 
-### Cell 操作栏
+### Cell Operation Bar
 
-Notebook 支持针对单元格便捷执行 Cell 操作。在 Cell 右侧的操作栏中，从上至下分别是运行、上移、下移、增加、删除、更多菜单。
+The Notebook supports convenient execution of Cell operations. In the operation bar to the right of each Cell, from top to bottom, there are options to run, move up, move down, add, delete, and access more menus.
 
-| 图标/按钮                                                     | 描述                                         |
-| ------------------------------------------------------------- | -------------------------------------------- |
-| <img src="../../public/run.png" alt="alt text" width="36">    | 运行当前选中的代码单元或重新运行代码单元。   |
-| <img src="../../public/up.png" alt="alt text" width="36">     | 将当前选中的代码单元上移一个位置。           |
-| <img src="../../public/down.png" alt="alt text" width="36">   | 将当前选中的代码单元下移一个位置。           |
-| <img src="../../public/add.png" alt="alt text" width="36">    | 在下方增加选中类型的单元格。                 |
-| <img src="../../public/delete.png" alt="alt text" width="36"> | 删除当前选中的代码单元。                     |
-| <img src="../../public/more.png" alt="alt text" width="36">   | 提供隐藏代码和输出、复制、剪切、粘贴的功能。 |
+| Icon/Button                                                   | Description                                                      |
+| ------------------------------------------------------------- | ---------------------------------------------------------------- |
+| <img src="../../public/run.png" alt="alt text" width="36">    | Run the currently selected code Cell or re-run the code Cell.    |
+| <img src="../../public/up.png" alt="alt text" width="36">     | Move the currently selected code Cell up one position.           |
+| <img src="../../public/down.png" alt="alt text" width="36">   | Move the currently selected code Cell down one position.         |
+| <img src="../../public/add.png" alt="alt text" width="36">    | Add a Cell of the selected type below.                           |
+| <img src="../../public/delete.png" alt="alt text" width="36"> | Delete the currently selected code Cell.                         |
+| <img src="../../public/more.png" alt="alt text" width="36">   | Provide functions to hide code and output, copy, cut, and paste. |
 
-### Cell 编辑区
+### Cell Editing Area
 
-在 Notebook 代码编辑窗口中，您可以添加多个 Cell 来组织您的项目。Cell 之间的区域为衔接区，Cell 执行完毕产生的输出窗格为输出区，最后一个 Cell 底部称为 Cell 底部区。
+In the Notebook's code editing window, you can add multiple Cells to organize your project. The area between Cells is called the linking area, and the output pane generated after executing a Cell is referred to as the output area. The bottom of the last Cell is called the bottom Cell area.
 
-#### Cell 衔接区
+#### Cell Linking Area
 
-您可以在该区域自由添加指定类型的单元格。
+You can freely add specified types of Cells in this area.
 
 <img src="../../public/cell_between.webp" alt="alt text" width="800">
 
 ![](../../public/cell_between_gif.gif)
 
-说明：如果您选中的 Cell 后无其他单元格，可以直接在底部通过指定按钮添加对应类型的单元格。详情请参见底部 Cell。
+Note: If you select a Cell without other Cells below it, you can directly add the corresponding type of Cell through the specified button at the bottom. For more details, refer to the bottom Cell section.
 
-#### Cell 输出区
+#### Cell Output Area
 
-支持在单元格下方查看执行此 Cell 后的运行时间和运行结果。
+You can view the execution time and results after executing this Cell below it.
 
 <img src="../../public/cell_output.webp" alt="alt text" width="800">
 
-注意：目前仅支持执行 Python Cell 和 Prompt Cell 并产生输出内容，其余均为说明性、展示性 Cell。
+Note: Currently, only Python Cells and Prompt Cells support output content, while others are for illustrative and display purposes.
 
-#### Cell 固定 Output 高度
+#### Fixed Output Height for Cells
 
-如果输出内容较长，您可以选择固定或取消输出窗口的高度，以获取最佳视图体验。
+If the output content is lengthy, you can choose to fix or unfix the height of the output window for an optimal viewing experience.
 
 <img src="../../public/cell_output_scroll_gif.gif" alt="alt text" width="800">
 
-#### 底部 Cell
+#### Bottom Cell
 
-实验文件中最后一个 Cell 的底部提供显式添加指定类型单元格的按钮。
+The bottom of the last Cell in the experiment file provides an explicit button to add a Cell of the specified type.
 
 <img src="../../public/cell_bottom.webp" alt="alt text" width="800">
 
-说明：同时，支持在 Cell 衔接区或 Cell 操作栏添加单元格，通过 Cell 控制区的类型转换来切换单元格类型。
+Note: Additionally, you can add Cells in the Cell linking area or the Cell operation bar, and switch Cell types through the Cell control area.
 
-## 交互操作介绍
+## Introduction to Interactive Operations
 
-支持在上方工具栏右侧，通过查看快捷键，查看或搜索产品内所有快捷键功能和 Notebook Magic 命令，以下为您介绍几种常用的操作：
+On the right side of the top toolbar, you can view keybinds to see or search for all keybind functions and Notebook Magic commands within the product. Here are a few common operations:
 
 <img src="../../public/keybind.webp" alt="alt text" width="800">
 <br/>
 
 <img src="../../public/keybind_panel_o.png" alt="alt text" width="300">
 
-### 命令态 | 编辑态
+### Command Mode | Edit Mode
 
-Notebook 将针对操作功能分为命令态和编辑态。
+The Notebook distinguishes between command mode and edit mode based on operation functions.
 
-● 在编辑态下单击代码编辑页面空白处或快捷键 Esc 进入命令态，当前选中的 Cell 边框为蓝色。
+- In edit mode, clicking in a blank area of the code editing page or using the Esc key enters command mode, where the border of the currently selected Cell is blue.
 
 <img src="../../public/command_mode.webp" alt="alt text" width="800">
 
-● 在命令态时通过快捷键 Enter 进入编辑态或直接单击 Cell 编辑框。当前选中的 Cell 边框为蓝色高亮显示。
+- In command mode, you can enter edit mode by using the Enter key or directly clicking the Cell editing box. The border of the currently selected Cell is highlighted in blue.
 
 <img src="../../public/edit_mode.webp" alt="alt text" width="800">
 
-注意：Markdown 类型的 Cell 由命令态进入编辑态需要双击鼠标左键。
+Note: For Markdown type Cells, double-clicking with the left mouse button is required to enter edit mode from command mode.
 
-### 命令态
+### Command Mode
 
-在命令态下，支持以下常见功能。
+In command mode, the following common functionalities are supported.
 
 <img src="../../public/command_operation.webp" alt="alt text" width="800">
 
-#### 多选 Cell
+#### Multi-select Cells
 
-被选中的 Cell 背景为蓝色阴影，支持选中多个单元格以进行批量操作，如批量执行（Ctrl/Command+Enter）和批量复制(C)、粘贴(V)等，您可以自由搭配使用。
+Selected Cells are highlighted in blue. You can select multiple Cells for batch operations, such as batch execution (Ctrl/Command+Enter) and batch copying (C), pasting (V), etc., allowing for flexible combinations.
 
-| 快捷键             | 效果                                                       |
-| ------------------ | ---------------------------------------------------------- |
-| Shift+Up/Shift+K   | 向上选中多个 Cell，单击 Up/K N 次，则向上选中 N 个 Cell。  |
-| Shift+Down/Shift+J | 向下选中多个 Cell，单击 Down/J N次，则向下选中 N 个 Cell。 |
+| Keybind            | Description                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| Shift+Up/Shift+K   | Select multiple Cells upwards; click Up/K N times to select N Cells upwards.       |
+| Shift+Down/Shift+J | Select multiple Cells downwards; click Down/J N times to select N Cells downwards. |
 
-说明：另外，您可以按住 shift，选中一个 Cell 并以此为基准，单击另一个目标 Cell 的左侧区域，即可向上或向下选中该范围内的所有 Cell。
+Here’s the translation of your text:
 
-#### 转换 Cell
+---
 
-在命令态下，选中单元格，通过快捷键可以实现 Markdown 到 Python 类型的互相转换。
+#### Converting Cells
 
-| 快捷键 | 效果                                                                     |
-| ------ | ------------------------------------------------------------------------ |
-| M      | 将 Cell 转换为 Markdown 类型，快捷键1/2/3/4/5/6分别支持标题1/2/3/4/5/6。 |
-| Y      | 将 Cell 转换为 Python 类型。                                             |
+In command mode, you can use keyboard keybinds to convert cells between Markdown and Python types.
 
-#### 合并 Cell
+| Keybind | Description                                                                                 |
+| ------- | ------------------------------------------------------------------------------------------- |
+| M       | Convert the cell to Markdown type; keybinds 1/2/3/4/5/6 correspond to headings 1/2/3/4/5/6. |
+| Y       | Convert the cell to Python type.                                                            |
 
-在命令态下，支持通过快捷键合并当前选中 Cell 和相邻上一个或下一个 Cell 的内容。
+#### Merging Cells
 
-| 快捷键               | 效果                    |
-| -------------------- | ----------------------- |
-| Ctrl/Command+Shift+M | 合并相邻的下一个 Cell。 |
+In command mode, you can merge the contents of the currently selected cell with the adjacent previous or next cell using keyboard keybinds.
 
-说明：支持多选 Cell，并通过shift + m 进行批量合并。
+| Keybind              | Description                        |
+| -------------------- | ---------------------------------- |
+| Ctrl/Command+Shift+M | Merge with the next adjacent cell. |
 
-#### 执行 Cell
+Note: Multiple cells can be selected, and you can perform bulk merges using Shift + M.
 
-在命令态下，您可以通过快捷键启动 Cell 执行，支持以下执行方式：
+#### Executing Cells
 
-| 快捷键             | 效果                                   |
-| ------------------ | -------------------------------------- |
-| Ctrl/Command+Enter | 执行当前 Cell。                        |
-| Shift+Enter        | 执行当前 Cell 并选中下一个单元格。     |
-| Alt/Opt+Enter      | 执行当前 Cell 并向下插入同类型单元格。 |
+In command mode, you can execute cells using the following keybinds:
 
-#### 拖拽 Cell
+| Keybind            | Description                                                                       |
+| ------------------ | --------------------------------------------------------------------------------- |
+| Ctrl/Command+Enter | Execute the currently selected cell.                                              |
+| Shift+Enter        | Execute the currently selected cell and select the next cell.                     |
+| Alt/Opt+Enter      | Execute the currently selected cell and insert a new cell of the same type below. |
+
+#### Dragging Cells
 
 <div style="display: flex; align-items: end">
-  <span>当您将鼠标移至 Cell 框左侧，出现样式</span>
-  <img src="../../public/drag.webp"  style="width: 30px; height: 30px; margin-right: 10px; margin-left: 10px;">
-    <span>时，可以对当前 Cell 进行拖拽。</span>
+  <span>When you move your mouse to the left side of the cell box, the following style appears:</span>
+  <img src="../../public/drag.webp" style="width: 30px; height: 30px; margin-right: 10px; margin-left: 10px;">
+  <span>You can then drag the current cell.</span>
 </div>
 
-- 拖拽单个 Cell（不区分命令态和编辑态）
-  当您将鼠标移至目标 Cell 框左侧，出现样式时，即可进行拖拽。
+- **Dragging a Single Cell** (regardless of command or edit mode)  
+  When you move your mouse to the left side of the target cell and the style appears, you can drag it.
 
 <img src="../../public/drag_area.webp" alt="alt text" width="800">
 <br/>
 <img src="../../public/drag_gif.gif" alt="alt text" width="800">
 
-说明：拖拽时，蓝色横条作为定位标记，表示拖拽至蓝色横条下方。
+Note: During dragging, the blue horizontal bar serves as a positioning marker, indicating where you are dragging to, below the blue bar.
 
-- 拖拽多个 Cell
-  在命令态下，多选 Cell 后，当您将鼠标移至 Cell 框左侧，出现样式时，可以同时拖拽多个 Cell。
+- **Dragging Multiple Cells**  
+  In command mode, after selecting multiple cells, when you move your mouse to the left side of the cell box and the style appears, you can drag multiple cells simultaneously.
 
-### 编辑态
+### Edit Mode
 
-在编辑态下，支持以下常见功能。
+In edit mode, the following common functionalities are supported.
 
 <img src="../../public/edit_operation.webp" alt="alt text" width="800">
 
-#### 切分 Cell
+#### Splitting Cells
 
-支持将一个单元格中的内容切分为不同的段，分别放入不同的单元格中。
+You can split the contents of a cell into different sections, placing them into separate cells.
 
 <table>
 <thead>
 <tr>
-<th>快捷键</th>
-<th>支持方式</th>
-<th >效果</th>
+<th>Keybind</th>
+<th>Support Method</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td rowspan="2">Ctrl/Command+Shift+-</td>
-<td>通过光标定位分割点</td>
-<td >光标前后的内容被分割开来，分别放入两个单元格中。</td>
+<td>Split at the cursor's position</td>
+<td>The contents before and after the cursor are split into two separate cells.</td>
 </tr>
 <tr>
-<td>选中内容的前后作为分割点</td>
-<td>选中内容的前后都作为分割点，原单元格内容被切分为三段，分别放入三个单元格。</td>
+<td>Use the selected content's boundaries as split points</td>
+<td>The boundaries around the selected content are used as split points, splitting the original cell's content into three segments, which are placed into three separate cells.</td>
 </tr>
 </tbody>
 </table>
 
-#### 光标移动
+#### Cursor Movement
 
-| 快捷键               | 功能                            |
-| -------------------- | ------------------------------- |
-| Ctrl/Command + Left  | 光标移至当前行的行首            |
-| Ctrl/Command + Right | 光标移至当前行的行尾            |
-| Ctrl/Command + Up    | 光标移至文件的开始处（文件首）  |
-| Ctrl/Command + Down  | 光标移至文件的结束处（文件尾）} |
+| Keybind              | Description                                       |
+| -------------------- | ------------------------------------------------- |
+| Ctrl/Command + Left  | Move the cursor to the start of the current line. |
+| Ctrl/Command + Right | Move the cursor to the end of the current line.   |
+| Ctrl/Command + Up    | Move the cursor to the start of the file.         |
+| Ctrl/Command + Down  | Move the cursor to the end of the file.           |
 
-### 左侧长条
+### Left Sidebar
 
-单击 Cell 左侧的长条支持隐藏与显示长条所对应的 Cell 区域部分。
+Clicking on the long bar to the left of the cell allows you to hide or show the corresponding cell area.
 
-#### 隐藏与显示 Cell 输入部分
+#### Hiding and Showing Cell Input Sections
 
 <img src="../../public/hide_input.gif" alt="alt text" width="800">
 
-#### 隐藏与显示 Cell 输出部分
+#### Hiding and Showing Cell Output Sections
 
 <img src="../../public/hide_output.gif" alt="alt text" width="800">
 
-## Cell 介绍
+## Introduction to Cells
 
 ### Python Cell
 
-Python Cell 是 Notebook 中编辑和调试 Python 代码的最小单元，主要包含以下使用功能：
+A Python cell is the smallest unit for editing and debugging Python code in the notebook, primarily featuring the following functionalities:
 
 <img src="../../public/python_cell.webp" alt="alt text" width="800">
 
-| 功能         | 说明                                                             |
-| ------------ | ---------------------------------------------------------------- |
-| 代码编写     | 提供用于编写源代码的编辑区域，支持语法高亮和自动代码补全等。     |
-| 单元调试     | 允许逐单元(cell)逐行调试代码，帮助识别代码中的逻辑错误和异常。   |
-| 输出调试窗格 | 显示代码执行的输出结果，包括打印的文本、图形、错误信息等。       |
-| 代码生成     | 根据用户输入自动生成代码片段，提高开发效率。                     |
-| 使用框架和库 | 内置丰富类库，支持导入和使用多种 Python 框架和库，扩展代码功能。 |
+| Function                       | Description                                                                                                                  |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| Code Writing                   | Provides an area for writing source code, supporting syntax highlighting and auto-completion.                                |
+| Cell Debugging                 | Allows line-by-line debugging of code within a cell, helping to identify logical errors and exceptions.                      |
+| Output Debugging Window        | Displays the output results of code execution, including printed text, graphics, error messages, etc.                        |
+| Code Generation                | Automatically generates code snippets based on user input to enhance development efficiency.                                 |
+| Using Frameworks and Libraries | Built-in rich libraries support the import and use of various Python frameworks and libraries, expanding code functionality. |
 
 ### Markdown Cell
 
 <img src="../../public/markdown_cell.webp" alt="alt text" width="800">
 
-| 功能       | 说明                                                       |
-| ---------- | ---------------------------------------------------------- |
-| 文本编辑   | 提供文本输入区域，用于编写 Markdown 格式的文本内容。       |
-| 格式化展示 | 在编辑完成后，支持渲染 Markdown 为格式化的 HTML 展示。     |
-| 插入元素   | 支持插入链接、图片、表格、列表等 Markdown 元素。           |
-| 文档结构化 | 使用 Markdown 语法创建有结构的文档，如标题、子标题、段落。 |
-| 代码块支持 | 支持插入代码块，并对不同编程语言进行语法高亮。             |
+| Function             | Description                                                                                         |
+| -------------------- | --------------------------------------------------------------------------------------------------- |
+| Text Editing         | Provides an input area for writing Markdown-formatted text.                                         |
+| Formatted Display    | Supports rendering Markdown into formatted HTML after editing.                                      |
+| Element Insertion    | Supports inserting links, images, tables, lists, and other Markdown elements.                       |
+| Document Structuring | Uses Markdown syntax to create structured documents, such as headings, subheadings, and paragraphs. |
+| Code Block Support   | Supports inserting code blocks with syntax highlighting for different programming languages.        |
 
-说明：此外，支持基于标题的 Markdown Cell 进行隐藏与现实，帮助您更好的组织与查看 Notebook
+Note: Additionally, support for hiding and revealing Markdown cells based on headings helps you better organize and view the notebook.
 
 <img src="../../public/markdown_hide.gif" alt="alt text" width="800">
