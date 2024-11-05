@@ -6,70 +6,70 @@ title: Introduction
 order: 1
 ---
 
-# 什么是 libro？
+# What is libro?
 
-libro 是一款致力于提供高度开放集成和定制能力的 notebook 产品方案。它提供超越原生 jupyter 的体验，集成强大的 AI 能力，支持内核级别的扩展，助力开发者轻松定制 notebook 产品，构建一流的 AI、数据科学研发方案。
+libro is a notebook product solution dedicated to offering highly open integration and customization capabilities. It provides an experience beyond native Jupyter, integrates powerful AI capabilities, supports kernel-level extensions, and helps developers easily customize notebook products to build top-notch AI and data science development solutions.
 
-🌟 GitHub 地址：
+🌟 GitHub Address:
 https://github.com/difizen/libro
 
-🌟 官网地址：
+🌟 Official Website:
 https://libro.difizen.net/
 
-# 为什么做 libro？
+# Why create libro?
 
-在 AI 和数据科学领域，notebook 已经成为研究人员和开发者日常工作的重要工具。我们团队服务于内部的 AI 平台，该平台也有超过一半的用户将 notebook 作为自己建模研发链路的一部分。
+In the AI and data science fields, notebooks have become an essential tool for researchers and developers in their daily work. Our team serves an internal AI platform, where more than half of the users utilize notebooks as part of their modeling and development workflow.
 
-大量用户使用 notebook 的同时也对 notebook 提出了更高的要求，类似于集成面向 SQL 的研发工具以提供数据处理和模型训练一体化的研发体验、大模型 Demo 演示、更好的进行版本管理和 CR 等。
+While many users are using notebooks, they also have higher expectations, such as integrating R&D tools for SQL to provide a unified data processing and model training experience, large model demo presentations, better version management, and code review (CR).
 
-在原来的 jupyter 体系上满足这些要求，会带来过高的兼容成本，导致我们很难持续的优化其产品体验，增加新的功能特性。于是，我们打造了自研的 notebook —— libro，希望它：
+Meeting these requirements on the existing Jupyter system would incur high compatibility costs, making it difficult for us to continuously optimize the product experience and add new features. Therefore, we developed our self-researched notebook — libro, hoping it will:
 
-- 提供内核级别的扩展能力
-- 支持不同形态，方便嵌入不同场景
-- 提供更好的交互编辑体验
-- 提供高质量的周边功能
+- Provide kernel-level extension capabilities
+- Support different forms, allowing easy embedding into various scenarios
+- Offer a better interactive editing experience
+- Provide high-quality peripheral functions
 
-我们把 libro 推向开源，希望通过开源的方式及时得到不同角度的反馈，帮助到更多使用和建设 notebook 产品的人，形成交流和合作，共同推进并完善 libro。
+We are launching libro as open source, hoping to receive feedback from different perspectives through open-source methods, helping more people who use and build notebook products, fostering communication and collaboration to jointly promote and improve libro.
 
-# libro 有哪些特性？
+# What features does libro have?
 
-libro 是一个开箱即用的产品解决方案，用户可以根据需求自由组合 libro 原生模块。它提供灵活的场景定制能力，并且内置了丰富的周边功能。
+libro is a turnkey product solution, allowing users to freely combine libro native modules based on their needs. It offers flexible scenario customization capabilities and is built-in with rich peripheral functions.
 <img src="../../public/libro_feature.png" width="1000px"/>
 
-## 方便定制
+## Easy Customization
 
-libro 构建了一套开放的自定义 UI 和执行内核能力，所有层次模块均可进行二次定制开发。
+libro has developed an open set of UI and execution kernel customizations, allowing all levels of modules to be redeveloped.
 
-它支持定制多种表现形态，支持 SQL 、Prompt 等不同形态的 cell，支持仅作为文档编辑器使用，也可作为报告形态，方便随时做演示 Demo。
+It supports customization of various forms, supports cells in different forms such as SQL and Prompt, can be used solely as a document editor, or in report form, making it convenient for demo presentations anytime.
 
-强大的内核定制能力使得 libro 支持原生 jupyter 执行能力的同时，也可方便的定制面向 SQL 执行的 ODPS 环境、面向隐私计算场景的多节点调试执行环境等。
+Powerful kernel customization capabilities enable libro to support native Jupyter execution capabilities while also facilitating customization for SQL execution environments like ODPS, multi-node debugging execution environments for privacy computing scenarios, etc.
 <img src="../../public/sql_prompt.png" width="1000px"/>
 
-## 功能丰富
+## Rich Features
 
-libro 提供完整 notebook 能力，并且内置了许多丰富的功能特性，例如支持智能助手 AI 对话功能；面向 Python 提供更优异的代码提示、补全、格式化、定义跳转等功能；支持 cell 级别的代码版本 Diff 能力；支持轻应用形态，结合交互控件动态生成报告等。
+libro provides complete notebook capabilities and is equipped with many rich feature sets, such as supporting intelligent assistant AI dialogue functions; offering better Python code suggestions, completion, formatting, and definition jump functions; supporting cell-level code version Diff capabilities; supporting lightweight application forms, combining interactive controls to dynamically generate reports, etc.
 
 <img src="../../public/copilot_tip.png" width="1000px"/>
 
 <img src="../../public/diff_app.png" width="1000px"/>
 
-# libro 的架构设计
+# The architecture design of libro
 
-libro 采用分层建设：
+libro adopts layered construction:
 
-- SDK 层：提供后端服务和语言服务，内置接入 AI 能力和参数化调用 notebook 的 SDK。
-- 框架层：由模块化可扩展前端框架 mana 提供，满足扩展性的同时提供快捷键、主题、菜单、命令、配置、工具栏等基础模块。
-- 执行层：由于不同的场景、jupyter 服务的不同版本、甚至非 jupyter 的自定义执行方式等均需要兼容，所以执行层更多的是定义行为规范，而非给出具体实现。
-- 视图层：视图层是灵活度最高、抽象最多的层次，其中提供了可扩展的 cell、可扩展的输出类型；内置了 jupyter 原生 cell、原生 output。
-- 外延层：基于 libro 的核心模块提供的高质量的周边功能。
+- SDK Layer: Provides backend services and language services, with built-in AI capabilities and parameterized notebook calling SDK.
+- Framework Layer: Provided by the modular and extensible front-end framework mana, meeting extensibility while providing basic modules such as shortcuts, themes, menus, commands, configuration, and toolbars.
+- Execution Layer: Since different scenarios, different versions of Jupyter services, and even non-Jupyter custom execution methods need to be compatible, the execution layer is more about defining behavior specifications rather than providing specific implementations.
+- View Layer: The view layer is the most flexible and abstract layer, offering extensible cells and output types; it is built-in with native Jupyter cells and native outputs.
+- Extension Layer: Provides high-quality peripheral functions based on the core modules of libro.
   <img src="../../public/technical _architecture_zh.png" width="1000px"/>
 
-# 面向未来
+# Facing the Future
 
-libro 将继续发挥自身灵活定制、轻松集成的特点，为 notebook 类产品探索更多的使用场景。我们会不断增加对不同运行时的支持，引入交互体验更好的控件，让 libro 成为体验最好的 notebook 产品。
+libro will continue to leverage its features of flexible customization and easy integration to explore more usage scenarios for notebook-like products. We will continuously increase support for different runtimes and introduce controls with better interactive experiences, making libro the best-experienced notebook product.
 
-libro 将不断探索与大模型结合的应用场景，通过大模型让用户拥有更加智能的编程体验，让 libro 编程像写文档一样容易。同时也让 libro 在大模型应用的研发体系内，发挥自身交互丰富的特点，成为研发大模型能力的用力助手。
+libro will continue to explore application scenarios combined with large models, allowing users to have a more intelligent programming experience with large models, making programming with libro as easy as writing documents. At the same time, libro will play its role in the rich interaction in the development system of large model applications, becoming a helpful assistant in developing large model capabilities.
 
-我们欢迎不同场景的开发者，跟我们一起建设 libro 项目，再次附上 libro 开源项目链接，如果你也喜欢这个项目，欢迎在 GitHub 上为我们点亮 🌟🌟🌟
+We welcome developers from different scenarios to join us in building the libro project. Here is the link to the libro open-source project again; if you also like this project, feel free to give us a star 🌟🌟🌟 on GitHub.
 
 https://github.com/difizen/libro
