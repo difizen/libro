@@ -1,29 +1,37 @@
-# 快速开始
+---
+nav:
+  title: QuickStart
 
-## 本地启动
+title: QuickStart
+order: 2
+---
 
-### 1. 安装
+# Quick Start
 
-安装 Libro Notebook 的前提是安装了 Python 环境(>3.8)。
+## Local Launch
 
-使用 pip 安装：
+### 1. Installation
+
+Before installing Libro Notebook, ensure you have a Python environment (>3.8) installed.
+
+Install using pip:
 
 ```bash
 pip install libro
 ```
 
-- 注意：
+- Note:
 
-1. 请确保自己的 python 版本大于 3.8.1。
+1. Please ensure your Python version is greater than 3.8.1.
 
-### 2. 运行
+### 2. Run
 
-在终端中输入命令：`libro`
+Enter the command in the terminal: `libro`
 
-执行命令之后，终端将会显示一系列 notebook 的服务器信息，同时浏览器将会自动启动 Libro。浏览器地址栏中默认地将会显示：`http://localhost:8888/libro`。其中，“localhost”指的是本机，“8888”则是端口号。
+After executing the command, the terminal will display a series of notebook server information, and the browser will automatically launch Libro. The browser's address bar will default to: `http://localhost:8888/libro`. Here, "localhost" refers to your own machine, and "8888" is the port number.
 
-- 注意：
+- Note:
 
-1. 之后在 Libro Notebook 的所有操作，都请保持终端不要关闭，因为一旦关闭终端，就会断开与本地服务器的链接，您将无法在 Libro Notebook 中进行其他操作。
+1. Keep the terminal open for all operations in Libro Notebook, as closing the terminal will disconnect the link to the local server, and you will not be able to perform other operations in Libro Notebook.
 
-2. 如果您想自定义端口号来启动 Libro，可以在终端中输入以下命令：`libro --port <port_number>`，其中，“<port_number>”是自定义端口号，直接以数字的形式写在命令当中。如：`libro --port 9999`，即在端口号为“9999”的服务器启动 Libro Notebook。
+2. If you want to customize the port number to launch Libro, you can enter the following command in the terminal: `libro --port <port_number>`, where "<port_number>" is your custom port number, written directly as a number in the command. For example: `libro --port 9999` to launch Libro Notebook on the server with port number "9999".
