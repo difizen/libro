@@ -300,6 +300,7 @@ lib
 .pnp.*
 
 .DS_Store
+.idea
 
 # dumi
 

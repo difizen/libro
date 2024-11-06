@@ -5,7 +5,6 @@ import type { FeatureProps} from './constants';
 import { FeatureSection } from './feature-section';
 import { HeroSection } from './hero-section';
 import './index.less';
-import { IntergractionSection } from './intergration';
 
 const Banner: React.FC = () => {
 
@@ -39,46 +38,38 @@ const Banner: React.FC = () => {
   const secondfeatures: FeatureProps[] = [
     {
       title: 'AI Copilot',
-      description: l10n.t('Support intelligent assistant AI dialogue functions.'),
+      description: l10n.t('AI programming assistant to help your notebook experience~'),
       imageUrl:
         '/copilot.png',
       isImageLeft: true,
     },
     {
       title: l10n.t('Notebook as an App'),
-      description: l10n.t('Generate dynamic reports based on Notebooks combined with interactive controls.'),
+      description: l10n.t('Generate data reports based on notebooks～'),
       imageUrl:
         '/app.png',
       isImageLeft: false,
     },
     {
-      title: l10n.t('Version Diff Capability'),
-      description: l10n.t('Support cell-level version diff capability for better version management and code review.'),
+      title: l10n.t('QuantExpert'),
+      description: l10n.t('Intelligent code generation for quantified scenarios~'),
       imageUrl:
         '/diff.png',
       isImageLeft: true,
-    },
-    {
-      title: l10n.t('Superior code suggestion capabilities'),
-      description:
-      l10n.t('Libro offers an exceptional editing experience, especially for Python code, providing superior code completion, code suggestions, code formatting, and go-to-definition features.'),
-      imageUrl:
-        '/tip.png',
-      isImageLeft: false,
-    },
+    }
   ];
   return (
     <div className="difizen-dumi-banner">
       <HeroSection></HeroSection>
-      <FeatureSection
-        features={firstfeatures}
-        title={l10n.t('Enterprise-level scenario customization capabilities')}
-      ></FeatureSection>
+      {/*<FeatureSection*/}
+      {/*  features={firstfeatures}*/}
+      {/*  title={l10n.t('Enterprise-level scenario customization capabilities')}*/}
+      {/*></FeatureSection>*/}
       <FeatureSection
         features={secondfeatures}
         title={l10n.t('Exciting features and capabilities')}
       ></FeatureSection>
-      <IntergractionSection></IntergractionSection>
+      {/*<IntergractionSection></IntergractionSection>*/}
     </div>
   );
 };
