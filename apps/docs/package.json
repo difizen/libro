@@ -37,5 +37,6 @@
     "react": "^18.2.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"
-  }
+  },
+  "repository": "git@github.com:difizen/libro.git"
 }
