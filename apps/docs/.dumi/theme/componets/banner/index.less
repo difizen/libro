@@ -7,10 +7,6 @@
   background-repeat: no-repeat;
   background-size: auto 548px;
 
-  @media only screen and (min-width: 1450px) {
-    background-size: 100% 100%;
-  }
-
   @media only screen and (max-width: 768px) {
     background-size: auto 636px;
   }
@@ -83,9 +79,9 @@
     width: 670px;
     opacity: 0;
 
-    @media only screen and (max-width: 920px) {
-      width: 100%;
-    }
+    //@media only screen and (max-width: 920px) {
+    //  width: 100%;
+    //}
 
     @media only screen and (max-width: 768px) {
       /* height: 90%; */
@@ -186,8 +182,8 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 480px;
-  height: 480px;
+  width: 100px;
+  height: 100px;
   background: linear-gradient(to right, #ffde16, #02ffce);
   filter: blur(50px);
   border-radius: 50%;
@@ -198,8 +194,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 480px;
-  height: 480px;
+  width: 100px;
+  height: 100px;
   background: linear-gradient(to right, #0266ff, #167aff);
   filter: blur(50px);
   border-radius: 50%;
@@ -210,8 +206,8 @@
   position: absolute;
   top: 132px;
   left: 233px;
-  width: 100px;
-  height: 100px;
+  width: 20px;
+  height: 20px;
   background-color: #1677ff;
   opacity: 0.2;
   filter: blur(50px);
@@ -222,8 +218,8 @@
   position: absolute;
   top: 100px;
   left: 0;
-  width: 200px;
-  height: 200px;
+  width: 50px;
+  height: 50px;
   background-color: #1677ff;
   opacity: 0.2;
   filter: blur(50px);
@@ -260,7 +256,7 @@
   margin-top: 28px;
 }
 
-.user-item {    
+.user-item {
   display: flex;
   align-items: center;
   font-size: 32px;
