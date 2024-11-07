@@ -9,26 +9,9 @@ export const HeroSection: FC = () => {
       <div
         className="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8 py-8 sm:py-24 lg:py-32 relative z-10">
         <div className="max-w-3xl">
-          <div className="content-animate">
-            <div className="circle-first">
-              <div className="circle-first-one" />
-              <div className="circle-first-two" />
-            </div>
-            <div className="circle-second"></div>
-            <div className="circle-third"></div>
-          </div>
-          {/*<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-primary mb-6 drop-shadow-md">*/}
-          {/*  libro*/}
-          {/*</h1>*/}
           <p className="text-xl sm:text-2xl text-muted-foreground mb-8">
             {l10n.t('Flexible customization and easy integration of Notebook product solutions.')}
           </p>
-          {/*<Button type="primary" size="large" className="start-btn" href="http://libro-lab.difizen.net/libro?" target="_blank">*/}
-          {/*  Start now*/}
-          {/*</Button>*/}
-          {/*<Button size="large" className="install-btn" onClick={()=>copy2clipboard("pip install libro")}>*/}
-          {/*  pip install libro*/}
-          {/*</Button>*/}
         </div>
         <img
           alt="app screenshot"
