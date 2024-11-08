@@ -78,7 +78,7 @@ const MobileHeader: React.FC = () => {
 
   return (
     <div
-      className="dumi-default-header difizen-dumi-header"
+      className="dumi-default-header difizen-dumi-mobile-header"
       data-static={Boolean(frontmatter.hero) || undefined}
       data-mobile-active={showMenu || undefined}
       onClick={() => setShowMenu(false)} style={{ paddingTop: '10px' }}

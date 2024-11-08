@@ -31,7 +31,7 @@ const MobileBanner: React.FC = () => {
     }
   ];
   return (
-    <div className="difizen-dumi-banner">
+    <div className="difizen-dumi-mobile-banner">
       <HeroSection></HeroSection>
       <FeatureSection
         features={secondfeatures}
