@@ -1,4 +1,5 @@
 import type { ModalItemProps, ModalItem } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Modal } from 'antd';
 import { useCallback } from 'react';
 
@@ -18,15 +19,17 @@ export function RestartClearOutputModalComponent({
 
   return (
     <Modal
-      title="Restart Kernel?"
+      title={l10n.t('清空输出并重启 Kernel？')}
       open={visible}
       onOk={handleRestart}
       onCancel={() => close()}
       width={'400px'}
       centered={true}
       className="libro-restart-kernel-modal"
+      okText={l10n.t('确定')}
+      cancelText={l10n.t('取消')}
     >
-      Do you want to restart the current kernel? All variables will be lost.
+      {l10n.t('确定清空输出并重启当前 Kernel 吗？所有变量都将丢失。')}
     </Modal>
   );
 }
