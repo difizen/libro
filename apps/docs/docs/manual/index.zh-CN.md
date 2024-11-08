@@ -47,7 +47,7 @@ Libro Notebook 采用 Python3 作为基础内核，负责运行用户输入的�
 
 <img src="../../public/connecting_zh.png" alt="alt text" width="80"> Libro Notebook 正在与内核建立连接，发生在启动内核或者内核失去响应后尝试连接的情况。
 
-<img src="../../public/unknown_zh.png" alt="alt text" width="50"> 当前内核的状态不能确定，可能是由于通信问题或内部错误导致状态信息无法获取。
+<img src="../../public/unknown_zh.png" alt="alt text" width="68"> 当前内核的状态不能确定，可能是由于通信问题或内部错误导致状态信息无法获取。
 
 <img src="../../public/busy_zh.png" alt="alt text" width="50"> 当前内核正在执行代码处理任务，您提交的新代码或指令将等待当前任务完成后才会被执行。
 
@@ -209,7 +209,8 @@ Notebook 将针对操作功能分为命令态和编辑态。
 说明：拖拽时，蓝色横条作为定位标记，表示拖拽至蓝色横条下方。
 
 - 拖拽多个 Cell
-  在命令态下，多选 Cell 后，当您将鼠标移至 Cell 框左侧，出现样式时，可以同时拖拽多个 Cell。
+
+在命令态下，多选 Cell 后，当您将鼠标移至 Cell 框左侧，出现样式时，可以同时拖拽多个 Cell。
 
 ### 编辑态
 

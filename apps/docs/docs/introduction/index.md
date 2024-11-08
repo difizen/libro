@@ -70,6 +70,6 @@ libro will continue to leverage its features of flexible customization and easy 
 
 libro will continue to explore application scenarios combined with large models, allowing users to have a more intelligent programming experience with large models, making programming with libro as easy as writing documents. At the same time, libro will play its role in the rich interaction in the development system of large model applications, becoming a helpful assistant in developing large model capabilities.
 
-We welcome developers from different scenarios to join us in building the libro project. Here is the link to the libro open-source project again; if you also like this project, feel free to give us a star 🌟🌟🌟 on GitHub.
+We welcome developers from different scenarios to join us in building the libro project. Here is the link to the libro open-source project again; if you also like this project, feel free to give us a star on GitHub 🌟🌟🌟.
 
 https://github.com/difizen/libro

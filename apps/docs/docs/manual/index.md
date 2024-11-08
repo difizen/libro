@@ -47,7 +47,7 @@ Note: The kernel is an engine that executes computations, capable of running pro
 
 <img src="../../public/connecting.png" alt="alt text" width="80"> The Libro Notebook is connecting to the kernel, which occurs when starting the kernel or attempting to connect after the kernel becomes unresponsive.
 
-<img src="../../public/unknown.png" alt="alt text" width="50"> The current status of the kernel is uncertain, possibly due to communication issues or internal errors preventing status information retrieval.
+<img src="../../public/unknown.png" alt="alt text" width="75"> The current status of the kernel is uncertain, possibly due to communication issues or internal errors preventing status information retrieval.
 
 <img src="../../public/busy.png" alt="alt text" width="50"> The current kernel is processing code execution tasks, and your newly submitted code or commands will wait until the current task is complete before execution.
 
@@ -159,8 +159,6 @@ Selected Cells are highlighted in blue. You can select multiple Cells for batch 
 | ------------------ | ---------------------------------------------------------------------------------- |
 | Shift+Up/Shift+K   | Select multiple Cells upwards; click Up/K N times to select N Cells upwards.       |
 | Shift+Down/Shift+J | Select multiple Cells downwards; click Down/J N times to select N Cells downwards. |
-
-Here’s the translation of your text:
 
 ---
 
