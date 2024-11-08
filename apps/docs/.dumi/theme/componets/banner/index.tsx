@@ -41,7 +41,7 @@ const Banner: React.FC = () => {
       title: 'AI Copilot',
       description: l10n.t('Support intelligent assistant AI dialogue functions.'),
       imageUrl:
-        '/copilot.png',
+        `${l10n.getLang()==='en-US'?'/ai_copilot.png':'/ai_copilot_zh.png'}`,
       isImageLeft: true,
     },
     {
