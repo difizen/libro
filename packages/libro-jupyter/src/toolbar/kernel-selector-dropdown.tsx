@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { LibroJupyterConfiguration } from '../config/index.js';
 import { LibroJupyterModel } from '../libro-jupyter-model.js';
 import './index.less';
+import { l10n } from '@difizen/mana-l10n';
 
 export interface PreferredSessionKernelListElem {
   name: string;
@@ -62,7 +63,7 @@ function getKernelListItems(
     {
       key: 'StartPreferredKernel',
       type: 'group',
-      label: 'Start Preferred Kernel',
+      label: l10n.t('启动首选的 Kernel'),
       children: otherKernelList.map((item) => {
         return {
           key: item.name,
@@ -73,24 +74,13 @@ function getKernelListItems(
     {
       key: 'UseNoKernel',
       type: 'group',
-      label: 'Use No Kernel',
+      label: l10n.t('不使用 Kernel'),
       children: [
         {
           key: 'No Kernel',
-          label: 'No Kernel',
+          label: l10n.t('无 Kernel'),
         },
       ],
-    },
-    {
-      key: 'UseKernelFromPreferredSession',
-      type: 'group',
-      label: 'Use Kernel from Preferred Session',
-      children: preferredSessionKernelList.map((item) => {
-        return {
-          key: item.fileName,
-          label: item.fileName,
-        };
-      }),
     },
     {
       key: 'divider1',
@@ -98,18 +88,18 @@ function getKernelListItems(
     },
     {
       key: 'RestartKernel',
-      label: 'Restart the Kernel',
+      label: l10n.t('重启 Kernel'),
     },
     {
       key: 'ShutDownKernel',
-      label: 'Shut Down the Kernel',
+      label: l10n.t('关闭 Kernel'),
     },
   ];
   if (allowPreferredSession) {
     array.splice(2, 0, {
       key: 'UseKernelFromPreferredSession',
       type: 'group',
-      label: 'Use Kernel from Preferred Session',
+      label: l10n.t('使用首选 Session 的 Kernel'),
       children: preferredSessionKernelList.map((item) => {
         return {
           key: item.fileName,
@@ -237,8 +227,9 @@ export const KernelSelector: React.FC = () => {
     >
       <Space>
         {(libroModel as LibroJupyterModel)?.kernelConnection?.isDisposed
-          ? 'no kernel'
-          : (libroModel as LibroJupyterModel)?.kernelConnection?.name || 'no kernel'}
+          ? l10n.t('无 Kernel')
+          : (libroModel as LibroJupyterModel)?.kernelConnection?.name ||
+            l10n.t('无 Kernel')}
         <CaretDownOutlined />
       </Space>
     </Dropdown>
