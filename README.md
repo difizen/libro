@@ -1,6 +1,6 @@
 Language: English | [简体中文](./README_zh.md)
 
-<p align="center"><img src="./apps/docs/public/libro-text.svg" width="80" /></p>
+<p align="center"><img src="./apps/docs/public/libro-text.svg" width="120" /></p>
 <p align="center"><strong>A Notebook Product Solution with Flexible Customization and Easy Integration</strong></p>
 
 <p align="center">
@@ -69,10 +69,12 @@ For more details, please refer to [quick start](./apps/docs/docs/quickstart/inde
 
 - Chat
   - Contextual Chat in Cells  
-  ![image](./apps/docs/public/cell_chat.gif)
+  
+![image](./apps/docs/public/cell_chat.gif)
 
   - General AI Chat
-  ![image](./apps/docs/public/ai_chat.gif)
+
+![image](./apps/docs/public/ai_chat.gif)
 
 - Code Explanation
 
@@ -92,7 +94,7 @@ For more details, please refer to [quick start](./apps/docs/docs/quickstart/inde
 
 For more details, please refer to [prompt cell manual](./apps/docs/docs/manual/prompt-cell.md)。
 
-  ![image](./apps/docs/public/prompt_cell.gif)
+![image](./apps/docs/public/prompt_cell.gif)
 
 
 ### Sql Cell
@@ -102,7 +104,7 @@ For more details, please refer to [prompt cell manual](./apps/docs/docs/manual/p
 
 For more details, please refer to [sql cell manual](./apps/docs/docs/manual/sql-cell.md)。
 
-  ![image](./apps/docs/public/sql_cell.gif)
+![image](./apps/docs/public/sql_cell.gif)
 
 ## Technical Architecture
 
