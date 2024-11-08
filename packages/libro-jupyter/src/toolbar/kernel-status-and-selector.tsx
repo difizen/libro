@@ -30,7 +30,7 @@ export const KernelStatusSelector: React.FC = () => {
     return (
       <div className="libro-kernel-and-container-status">
         <div className="libro-kernel-status-and-selector">
-          <span className="kernel">{l10n.t('kernel：')}</span>
+          <span className="kernel">{l10n.t('Kernel：')}</span>
           <KernelSelector />
           {showBadge &&
             (isKernelBusy ? (
