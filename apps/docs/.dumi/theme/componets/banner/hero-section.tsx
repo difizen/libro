@@ -35,14 +35,14 @@ export const HeroSection: FC = () => {
         </div>
         <img
           alt="app screenshot"
-          src="/libro.png"
+          src={`${l10n.getLang()==='en-US'?'/libro_en.png':'/libro.png'}`}
           width={2432}
           height={1442}
           className="mt-8 rounded-md shadow-2xl border sm:mt-12 block dark:hidden border-none"
         />
         <img
           alt="app screenshot"
-          src="/libro.png"
+          src={`${l10n.getLang()==='en-US'?'/libro_en.png':'/libro.png'}`}
           width={2432}
           height={1442}
           className="mt-8 rounded-md shadow-2xl border sm:mt-12 hidden dark:block border-none"
