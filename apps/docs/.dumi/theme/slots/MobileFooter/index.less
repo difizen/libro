@@ -1,0 +1,96 @@
+.difizen-dumi-footer {
+  padding: 0 48px;
+  margin: 0;
+  overflow: hidden;
+
+  @media only screen and (max-width: 1280px) {
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 40px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    padding-inline: 0;
+  }
+
+  &-content {
+    max-width: 800px;
+    padding: 50px 0 28px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+
+    &:last-child {
+      align-self: flex-end;
+    }
+  }
+
+  &-img {
+    max-width: 80px;
+  }
+
+  &-title {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  &-item {
+    font-size: 14px;
+    margin: 12px 0;
+
+    a {
+      display: inline-block;
+      height: 17px;
+      color: #8590a0;
+
+      @{dark-selector} & {
+        color: #bdc0c4;
+      }
+    }
+  }
+
+  &-image-text {
+    font-size: 14px;
+    line-height: 25px;
+    padding: 0 0 12px;
+    width: 240px;
+  }
+
+  &-image-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #8590a0;
+
+    @{dark-selector} & {
+      color: #bdc0c4;
+    }
+  }
+
+  &-extra {
+    padding: 12px;
+    font-size: 12px;
+    color: #8590a0;
+    border-top: 1px solid #eee;
+    text-align: center;
+
+    @{dark-selector} & {
+      color: #bdc0c4;
+      border-top: 1px solid #4f5866;
+    }
+  }
+}
+
+.difizen-dumi-footer-logo {
+  font-size: 20px;
+
+  a {
+    display: flex;
+  }
+}
+
+.difizen-dumi-footer-contact {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
