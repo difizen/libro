@@ -1,6 +1,6 @@
 语言: 中文 | [English](./README.md)
 
-<p align="center"><img src="./apps/docs/public/libro-text.svg" width="80" /></p>
+<p align="center"><img src="./apps/docs/public/libro-text.svg" width="120" /></p>
 <p align="center"><strong>libro：灵活定制、轻松集成的 Notebook 产品方案</strong></p>
 
 <p align="center">
@@ -70,10 +70,12 @@ pip install libro
 
 - AI 对话
   - 基于 Cell 上下文对话
-  ![image](./apps/docs/public/cell_chat_zh.gif)
+  
+![image](./apps/docs/public/cell_chat_zh.gif)
 
   - 通用对话
-  ![image](./apps/docs/public/ai_chat_zh.gif)
+
+![image](./apps/docs/public/ai_chat_zh.gif)
 
 - 代码解释
 
@@ -95,7 +97,7 @@ pip install libro
 
 详情请阅读[prompt cell 指南](./apps/docs/docs/manual/prompt-cell.md)。
 
-  ![image](./apps/docs/public/prompt_cell_zh.gif)
+![image](./apps/docs/public/prompt_cell_zh.gif)
 
 ### Sql Cell
 
@@ -104,7 +106,7 @@ pip install libro
 
 详情请阅读[sql cell 指南](./apps/docs/docs/manual/sql-cell.md)。
 
-  ![image](./apps/docs/public/sql_cell_zh.gif)
+![image](./apps/docs/public/sql_cell_zh.gif)
 
 ## 架构
 
