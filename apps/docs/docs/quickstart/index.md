@@ -34,4 +34,4 @@ After executing the command, the terminal will display a series of notebook serv
 
 1. Keep the terminal open for all operations in Libro Notebook, as closing the terminal will disconnect the link to the local server, and you will not be able to perform other operations in Libro Notebook.
 
-2. If you want to customize the port number to launch Libro, you can enter the following command in the terminal: `libro --port <port_number>`, where "<port_number>" is your custom port number, written directly as a number in the command. For example: `libro --port 9999` to launch Libro Notebook on the server with port number "9999".
+2. If you want to customize the port number to launch Libro, you can enter the following command in the terminal: `libro --port=<port_number>`, where "<port_number>" is your custom port number, written directly as a number in the command. For example: `libro --port=9999` to launch Libro Notebook on the server with port number "9999".
