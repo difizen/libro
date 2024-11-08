@@ -6,6 +6,7 @@ import {
   ExecutableCellModel,
 } from '@difizen/libro-core';
 import { useObserve } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import classnames from 'classnames';
 import moment from 'moment';
 import { useState } from 'react';
@@ -64,14 +65,14 @@ export function CellExecutionTip({ cell }: { cell: CellView }) {
         <div className="libro-cell-execution-tip-border" />
         <CheckCircleOutlined />
         <p>
-          {'The execution took in ' +
+          {l10n.t(
+            '执行耗时 {0}，结束于 {1}',
             formatTime(
               Number(new Date(executeFinishTime).getTime()) -
                 Number(new Date(executeStartTime).getTime()),
-            ) +
-            ', finished at ' +
-            moment(new Date(executeFinishTime).getTime()).format('hh:mm a') +
-            '.'}
+            ),
+            moment(new Date(executeFinishTime).getTime()).format('hh:mm a'),
+          )}
         </p>
       </div>
     );
@@ -89,9 +90,10 @@ export function CellExecutionTip({ cell }: { cell: CellView }) {
         <div className="libro-cell-execution-tip-border" />
         <LoadingOutlined style={{ color: 'rgba(24,144,255,1)' }} />
         <p>
-          {'It takes ' +
-            formatTime(Date.now() - Number(new Date(executeStartTime).getTime())) +
-            '.'}
+          {l10n.t(
+            '已过去 {0}',
+            formatTime(Date.now() - Number(new Date(executeStartTime).getTime())),
+          )}
         </p>
       </div>
     );
@@ -105,7 +107,7 @@ export function CellExecutionTip({ cell }: { cell: CellView }) {
       >
         <div className="libro-cell-execution-tip-border" />
         <InfoCircle />
-        <p>{'execution queued.'}</p>
+        <p>{l10n.t('待执行')}</p>
       </div>
     );
   }
