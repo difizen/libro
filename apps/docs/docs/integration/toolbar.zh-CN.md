@@ -7,7 +7,7 @@ order: 2
 
 libro 的工具栏（Toolbar）是整个 libro UI 界面中重要的一部分，它包含了一系列的按钮，帮助用户快速访问常用功能，目前在 libro 中默认显示在编辑器的顶部和选中 cell 的右侧。
 <img
-    src="../../public/toolbar.png"
+    src="../../public/toolbar_zh.png"
     width="800"
 />
 
