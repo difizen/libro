@@ -34,7 +34,7 @@ https://libro.difizen.net/
 # libro 有哪些特性？
 
 libro 是一个开箱即用的产品解决方案，用户可以根据需求自由组合 libro 原生模块。它提供灵活的场景定制能力，并且内置了丰富的周边功能。
-<img src="../../public/libro_feature.png" width="1000px"/>
+<img src="../../public/libro_feature_zh.png" width="1000px"/>
 
 ## 方便定制
 

@@ -6,10 +6,10 @@ title: Updates
 order: 10
 ---
 
-## 目录
+## Table of contents
 
 <ul>
 
-  <li><a href="./update20241101.md" style="color:#1677ff;">2024-11-01 更新</a></li>
-  <li><a href="./update20241014.md" style="color:#1677ff;">2024-10-14 更新</a></li>
+  <li><a href="./update20241101.md" style="color:#1677ff;">2024-11-01 Updates</a></li>
+  <li><a href="./update20241014.md" style="color:#1677ff;">2024-10-14 Updates</a></li>
 </ul>

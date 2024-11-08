@@ -45,13 +45,13 @@ Note: The kernel is an engine that executes computations, capable of running pro
 - Kernel Status  
   The kernel status in Libro can be connecting, unknown, busy, or idle.
 
-<img src="../../public/connecting.webp" alt="alt text" width="80"> The Libro Notebook is connecting to the kernel, which occurs when starting the kernel or attempting to connect after the kernel becomes unresponsive.
+<img src="../../public/connecting.png" alt="alt text" width="80"> The Libro Notebook is connecting to the kernel, which occurs when starting the kernel or attempting to connect after the kernel becomes unresponsive.
 
-<img src="../../public/unknown.webp" alt="alt text" width="50"> The current status of the kernel is uncertain, possibly due to communication issues or internal errors preventing status information retrieval.
+<img src="../../public/unknown.png" alt="alt text" width="50"> The current status of the kernel is uncertain, possibly due to communication issues or internal errors preventing status information retrieval.
 
-<img src="../../public/busy.webp" alt="alt text" width="50"> The current kernel is processing code execution tasks, and your newly submitted code or commands will wait until the current task is complete before execution.
+<img src="../../public/busy.png" alt="alt text" width="50"> The current kernel is processing code execution tasks, and your newly submitted code or commands will wait until the current task is complete before execution.
 
-<img src="../../public/idle.webp" alt="alt text" width="50"> Indicates that the kernel is currently not executing any tasks and is ready to accept new commands and code execution.
+<img src="../../public/idle.png" alt="alt text" width="50"> Indicates that the kernel is currently not executing any tasks and is ready to accept new commands and code execution.
 
 #### Operation Control Area
 
@@ -96,9 +96,7 @@ In the Notebook's code editing window, you can add multiple Cells to organize yo
 
 You can freely add specified types of Cells in this area.
 
-<img src="../../public/cell_between.webp" alt="alt text" width="800">
-
-![](../../public/cell_between_gif.gif)
+![](../../public/cell_between.gif)
 
 Note: If you select a Cell without other Cells below it, you can directly add the corresponding type of Cell through the specified button at the bottom. For more details, refer to the bottom Cell section.
 
@@ -106,7 +104,7 @@ Note: If you select a Cell without other Cells below it, you can directly add th
 
 You can view the execution time and results after executing this Cell below it.
 
-<img src="../../public/cell_output.webp" alt="alt text" width="800">
+<img src="../../public/cell_output.png" alt="alt text" width="800">
 
 Note: Currently, only Python Cells and Prompt Cells support output content, while others are for illustrative and display purposes.
 
@@ -114,13 +112,13 @@ Note: Currently, only Python Cells and Prompt Cells support output content, whil
 
 If the output content is lengthy, you can choose to fix or unfix the height of the output window for an optimal viewing experience.
 
-<img src="../../public/cell_output_scroll_gif.gif" alt="alt text" width="800">
+<img src="../../public/cell_output_scroll.gif" alt="alt text" width="800">
 
 #### Bottom Cell
 
 The bottom of the last Cell in the experiment file provides an explicit button to add a Cell of the specified type.
 
-<img src="../../public/cell_bottom.webp" alt="alt text" width="800">
+<img src="../../public/cell_bottom.png" alt="alt text" width="800">
 
 Note: Additionally, you can add Cells in the Cell linking area or the Cell operation bar, and switch Cell types through the Cell control area.
 
@@ -128,7 +126,7 @@ Note: Additionally, you can add Cells in the Cell linking area or the Cell opera
 
 On the right side of the top toolbar, you can view keybinds to see or search for all keybind functions and Notebook Magic commands within the product. Here are a few common operations:
 
-<img src="../../public/keybind.webp" alt="alt text" width="800">
+<img src="../../public/keybind.png" alt="alt text" width="800">
 <br/>
 
 <img src="../../public/keybind_panel_o.png" alt="alt text" width="300">
@@ -139,11 +137,11 @@ The Notebook distinguishes between command mode and edit mode based on operation
 
 - In edit mode, clicking in a blank area of the code editing page or using the Esc key enters command mode, where the border of the currently selected Cell is blue.
 
-<img src="../../public/command_mode.webp" alt="alt text" width="800">
+<img src="../../public/command_mode.png" alt="alt text" width="800">
 
 - In command mode, you can enter edit mode by using the Enter key or directly clicking the Cell editing box. The border of the currently selected Cell is highlighted in blue.
 
-<img src="../../public/edit_mode.webp" alt="alt text" width="800">
+<img src="../../public/edit_mode.png" alt="alt text" width="800">
 
 Note: For Markdown type Cells, double-clicking with the left mouse button is required to enter edit mode from command mode.
 
@@ -151,7 +149,7 @@ Note: For Markdown type Cells, double-clicking with the left mouse button is req
 
 In command mode, the following common functionalities are supported.
 
-<img src="../../public/command_operation.webp" alt="alt text" width="800">
+<img src="../../public/command_operation.png" alt="alt text" width="800">
 
 #### Multi-select Cells
 
@@ -206,9 +204,9 @@ In command mode, you can execute cells using the following keybinds:
 - **Dragging a Single Cell** (regardless of command or edit mode)  
   When you move your mouse to the left side of the target cell and the style appears, you can drag it.
 
-<img src="../../public/drag_area.webp" alt="alt text" width="800">
+<img src="../../public/drag_area.png" alt="alt text" width="800">
 <br/>
-<img src="../../public/drag_gif.gif" alt="alt text" width="800">
+<img src="../../public/drag.gif" alt="alt text" width="800">
 
 Note: During dragging, the blue horizontal bar serves as a positioning marker, indicating where you are dragging to, below the blue bar.
 
@@ -219,7 +217,7 @@ Note: During dragging, the blue horizontal bar serves as a positioning marker, i
 
 In edit mode, the following common functionalities are supported.
 
-<img src="../../public/edit_operation.webp" alt="alt text" width="800">
+<img src="../../public/edit_operation.png" alt="alt text" width="800">
 
 #### Splitting Cells
 
@@ -273,7 +271,7 @@ Clicking on the long bar to the left of the cell allows you to hide or show the 
 
 A Python cell is the smallest unit for editing and debugging Python code in the notebook, primarily featuring the following functionalities:
 
-<img src="../../public/python_cell.webp" alt="alt text" width="800">
+<img src="../../public/python_cell.png" alt="alt text" width="800">
 
 | Function                       | Description                                                                                                                  |
 | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -285,7 +283,7 @@ A Python cell is the smallest unit for editing and debugging Python code in the 
 
 ### Markdown Cell
 
-<img src="../../public/markdown_cell.webp" alt="alt text" width="800">
+<img src="../../public/markdown_cell.png" alt="alt text" width="800">
 
 | Function             | Description                                                                                         |
 | -------------------- | --------------------------------------------------------------------------------------------------- |
