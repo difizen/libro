@@ -120,7 +120,7 @@ export default App;
 ### 集成 Notebook 编辑器
 
 <img
-    src="../../public/libro_editor.png"
+    src="../../public/libro_editor_zh.png"
     width="1000"
 />
 

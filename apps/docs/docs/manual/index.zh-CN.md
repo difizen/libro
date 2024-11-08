@@ -18,7 +18,7 @@ Libro 编辑器增强了传统 Notebook 运行的状态监控以及各种交互�
 
 ### 上方工具栏
 
-<img src="../../public/top_toolbar.png" alt="alt text" width="800">
+<img src="../../public/top_toolbar_zh.png" alt="alt text" width="800">
 
 | 序号 | 名称       | 描述                                                                 |
 | ---- | ---------- | -------------------------------------------------------------------- |
@@ -32,7 +32,7 @@ Libro Notebook 采用 Python3 作为基础内核，负责运行用户输入的�
 
 - 内核编辑菜单
 
-<img src="../../public/kernel_menu.png" alt="alt text" width="300">
+<img src="../../public/kernel_menu_zh.png" alt="alt text" width="300">
 
 | 菜单选项                          | 描述                                               |
 | --------------------------------- | -------------------------------------------------- |
@@ -45,13 +45,13 @@ Libro Notebook 采用 Python3 作为基础内核，负责运行用户输入的�
 - 内核状态
   Libro 的内核状态分为正在连接、未知、忙碌、空闲。
 
-<img src="../../public/connecting.webp" alt="alt text" width="80"> Libro Notebook 正在与内核建立连接，发生在启动内核或者内核失去响应后尝试连接的情况。
+<img src="../../public/connecting_zh.png" alt="alt text" width="80"> Libro Notebook 正在与内核建立连接，发生在启动内核或者内核失去响应后尝试连接的情况。
 
-<img src="../../public/unknown.webp" alt="alt text" width="50"> 当前内核的状态不能确定，可能是由于通信问题或内部错误导致状态信息无法获取。
+<img src="../../public/unknown_zh.png" alt="alt text" width="50"> 当前内核的状态不能确定，可能是由于通信问题或内部错误导致状态信息无法获取。
 
-<img src="../../public/busy.webp" alt="alt text" width="50"> 当前内核正在执行代码处理任务，您提交的新代码或指令将等待当前任务完成后才会被执行。
+<img src="../../public/busy_zh.png" alt="alt text" width="50"> 当前内核正在执行代码处理任务，您提交的新代码或指令将等待当前任务完成后才会被执行。
 
-<img src="../../public/idle.webp" alt="alt text" width="50"> 表示内核当前没有执行任何任务，已经准备好接受新的命令和代码执行。
+<img src="../../public/idle_zh.png" alt="alt text" width="50"> 表示内核当前没有执行任何任务，已经准备好接受新的命令和代码执行。
 
 #### 操作控制区
 
@@ -71,9 +71,9 @@ Libro Notebook 采用 Python3 作为基础内核，负责运行用户输入的�
 
 #### 分享和快捷键
 
-| 图标                                                           | 区域图                                                                | 说明                                                   |
-| -------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------ |
-| <img src="../../public/keybind.png" alt="alt text" width="36"> | <img src="../../public/keybind_panel.png" alt="alt text" width="300"> | 展示命令态和编辑态 Libro 的快捷键操作，提供 Magic 命令 |
+| 图标                                                              | 区域图                                                                   | 说明                                                   |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------ |
+| <img src="../../public/keybind_zh.png" alt="alt text" width="36"> | <img src="../../public/keybind_panel_zh.png" alt="alt text" width="300"> | 展示命令态和编辑态 Libro 的快捷键操作，提供 Magic 命令 |
 
 ### Cell 操作栏
 
@@ -96,9 +96,7 @@ Notebook 支持针对单元格便捷执行 Cell 操作。在 Cell 右侧的操�
 
 您可以在该区域自由添加指定类型的单元格。
 
-<img src="../../public/cell_between.webp" alt="alt text" width="800">
-
-![](../../public/cell_between_gif.gif)
+![](../../public/cell_between_zh.gif)
 
 说明：如果您选中的 Cell 后无其他单元格，可以直接在底部通过指定按钮添加对应类型的单元格。详情请参见底部 Cell。
 
@@ -106,7 +104,7 @@ Notebook 支持针对单元格便捷执行 Cell 操作。在 Cell 右侧的操�
 
 支持在单元格下方查看执行此 Cell 后的运行时间和运行结果。
 
-<img src="../../public/cell_output.webp" alt="alt text" width="800">
+<img src="../../public/cell_output.png" alt="alt text" width="800">
 
 注意：目前仅支持执行 Python Cell 和 Prompt Cell 并产生输出内容，其余均为说明性、展示性 Cell。
 
@@ -114,13 +112,13 @@ Notebook 支持针对单元格便捷执行 Cell 操作。在 Cell 右侧的操�
 
 如果输出内容较长，您可以选择固定或取消输出窗口的高度，以获取最佳视图体验。
 
-<img src="../../public/cell_output_scroll_gif.gif" alt="alt text" width="800">
+<img src="../../public/cell_output_scroll_zh.gif" alt="alt text" width="800">
 
 #### 底部 Cell
 
 实验文件中最后一个 Cell 的底部提供显式添加指定类型单元格的按钮。
 
-<img src="../../public/cell_bottom.webp" alt="alt text" width="800">
+<img src="../../public/cell_bottom_zh.png" alt="alt text" width="800">
 
 说明：同时，支持在 Cell 衔接区或 Cell 操作栏添加单元格，通过 Cell 控制区的类型转换来切换单元格类型。
 
@@ -128,10 +126,10 @@ Notebook 支持针对单元格便捷执行 Cell 操作。在 Cell 右侧的操�
 
 支持在上方工具栏右侧，通过查看快捷键，查看或搜索产品内所有快捷键功能和 Notebook Magic 命令，以下为您介绍几种常用的操作：
 
-<img src="../../public/keybind.webp" alt="alt text" width="800">
+<img src="../../public/keybind_zh.png" alt="alt text" width="800">
 <br/>
 
-<img src="../../public/keybind_panel_o.png" alt="alt text" width="300">
+<img src="../../public/keybind_panel_o_zh.png" alt="alt text" width="300">
 
 ### 命令态 | 编辑态
 
@@ -139,11 +137,11 @@ Notebook 将针对操作功能分为命令态和编辑态。
 
 ● 在编辑态下单击代码编辑页面空白处或快捷键 Esc 进入命令态，当前选中的 Cell 边框为蓝色。
 
-<img src="../../public/command_mode.webp" alt="alt text" width="800">
+<img src="../../public/command_mode.png" alt="alt text" width="800">
 
 ● 在命令态时通过快捷键 Enter 进入编辑态或直接单击 Cell 编辑框。当前选中的 Cell 边框为蓝色高亮显示。
 
-<img src="../../public/edit_mode.webp" alt="alt text" width="800">
+<img src="../../public/edit_mode.png" alt="alt text" width="800">
 
 注意：Markdown 类型的 Cell 由命令态进入编辑态需要双击鼠标左键。
 
@@ -151,7 +149,7 @@ Notebook 将针对操作功能分为命令态和编辑态。
 
 在命令态下，支持以下常见功能。
 
-<img src="../../public/command_operation.webp" alt="alt text" width="800">
+<img src="../../public/command_operation_zh.png" alt="alt text" width="800">
 
 #### 多选 Cell
 
@@ -204,9 +202,9 @@ Notebook 将针对操作功能分为命令态和编辑态。
 - 拖拽单个 Cell（不区分命令态和编辑态）
   当您将鼠标移至目标 Cell 框左侧，出现样式时，即可进行拖拽。
 
-<img src="../../public/drag_area.webp" alt="alt text" width="800">
+<img src="../../public/drag_area.png" alt="alt text" width="800">
 <br/>
-<img src="../../public/drag_gif.gif" alt="alt text" width="800">
+<img src="../../public/drag_zh.gif" alt="alt text" width="800">
 
 说明：拖拽时，蓝色横条作为定位标记，表示拖拽至蓝色横条下方。
 
@@ -217,7 +215,7 @@ Notebook 将针对操作功能分为命令态和编辑态。
 
 在编辑态下，支持以下常见功能。
 
-<img src="../../public/edit_operation.webp" alt="alt text" width="800">
+<img src="../../public/edit_operation_zh.png" alt="alt text" width="800">
 
 #### 切分 Cell
 
@@ -246,12 +244,12 @@ Notebook 将针对操作功能分为命令态和编辑态。
 
 #### 光标移动
 
-| 快捷键               | 功能                            |
-| -------------------- | ------------------------------- |
-| Ctrl/Command + Left  | 光标移至当前行的行首            |
-| Ctrl/Command + Right | 光标移至当前行的行尾            |
-| Ctrl/Command + Up    | 光标移至文件的开始处（文件首）  |
-| Ctrl/Command + Down  | 光标移至文件的结束处（文件尾）} |
+| 快捷键               | 功能                           |
+| -------------------- | ------------------------------ |
+| Ctrl/Command + Left  | 光标移至当前行的行首           |
+| Ctrl/Command + Right | 光标移至当前行的行尾           |
+| Ctrl/Command + Up    | 光标移至文件的开始处（文件首） |
+| Ctrl/Command + Down  | 光标移至文件的结束处（文件尾） |
 
 ### 左侧长条
 
@@ -271,7 +269,7 @@ Notebook 将针对操作功能分为命令态和编辑态。
 
 Python Cell 是 Notebook 中编辑和调试 Python 代码的最小单元，主要包含以下使用功能：
 
-<img src="../../public/python_cell.webp" alt="alt text" width="800">
+<img src="../../public/python_cell_zh.png" alt="alt text" width="800">
 
 | 功能         | 说明                                                             |
 | ------------ | ---------------------------------------------------------------- |
@@ -283,7 +281,7 @@ Python Cell 是 Notebook 中编辑和调试 Python 代码的最小单元，主�
 
 ### Markdown Cell
 
-<img src="../../public/markdown_cell.webp" alt="alt text" width="800">
+<img src="../../public/markdown_cell_zh.png" alt="alt text" width="800">
 
 | 功能       | 说明                                                       |
 | ---------- | ---------------------------------------------------------- |

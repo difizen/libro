@@ -34,4 +34,4 @@ pip install libro
 
 1. 之后在 Libro Notebook 的所有操作，都请保持终端不要关闭，因为一旦关闭终端，就会断开与本地服务器的链接，您将无法在 Libro Notebook 中进行其他操作。
 
-2. 如果您想自定义端口号来启动 Libro，可以在终端中输入以下命令：`libro --port <port_number>`，其中，“<port_number>”是自定义端口号，直接以数字的形式写在命令当中。如：`libro --port 9999`，即在端口号为“9999”的服务器启动 Libro Notebook。
+2. 如果您想自定义端口号来启动 Libro，可以在终端中输入以下命令：`libro --port=<port_number>`，其中，“<port_number>”是自定义端口号，直接以数字的形式写在命令当中。如：`libro --port=9999`，即在端口号为“9999”的服务器启动 Libro Notebook。
