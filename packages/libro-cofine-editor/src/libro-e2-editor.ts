@@ -488,6 +488,7 @@ export class LibroE2Editor implements IEditor {
       hover: {
         enabled: true,
       },
+      contextmenu: false,
     };
   }
 
