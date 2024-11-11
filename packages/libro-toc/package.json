@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-toc",
-  "version": "0.2.44",
+  "version": "0.2.45",
   "description": "",
   "keywords": [
     "libro",
@@ -46,10 +46,10 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-common": "^0.2.44",
-    "@difizen/libro-core": "^0.2.44",
-    "@difizen/libro-markdown": "^0.2.44",
-    "@difizen/libro-rendermime": "^0.2.44",
+    "@difizen/libro-common": "^0.2.45",
+    "@difizen/libro-core": "^0.2.45",
+    "@difizen/libro-markdown": "^0.2.45",
+    "@difizen/libro-rendermime": "^0.2.45",
     "@difizen/mana-app": "latest",
     "@difizen/mana-l10n": "latest"
   },

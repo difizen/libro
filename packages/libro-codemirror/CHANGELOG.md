@@ -1,5 +1,17 @@
 # @difizen/libro-codemirror
 
+## 0.2.45
+
+### Patch Changes
+
+- [#297](https://github.com/difizen/libro/pull/297) [`caa80ee`](https://github.com/difizen/libro/commit/caa80eeefa907d15344e69a33c81c46af063b365) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - 1. support r and julia editor 2. configurable left-side panel supported 3. disable confine editor contextmenu
+
+- Updated dependencies [[`caa80ee`](https://github.com/difizen/libro/commit/caa80eeefa907d15344e69a33c81c46af063b365)]:
+  - @difizen/libro-code-editor@0.2.45
+  - @difizen/libro-common@0.2.45
+  - @difizen/libro-lsp@0.2.45
+  - @difizen/libro-rendermime@0.2.45
+
 ## 0.2.44
 
 ### Patch Changes
