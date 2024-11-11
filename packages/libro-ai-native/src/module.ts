@@ -1,8 +1,10 @@
+import { CodeEditorModule } from '@difizen/libro-code-editor';
 import { CellOutputTopProvider, ErrorOutputModel } from '@difizen/libro-jupyter';
 import { ChatView } from '@difizen/magent-chat';
 import { LibroChatModule, LibroChatService } from '@difizen/magent-libro';
 import { ManaModule } from '@difizen/mana-app';
 
+import { LibroAICompletionModule } from './ai-inline-completions/module.js';
 import { LibroAINativeCommandContribution } from './ai-native-command-contribution.js';
 import { LibroAINativeForCellView } from './ai-native-for-cell-view.js';
 import { LibroAINativeCellTopBlank } from './ai-native-output-top.js';
@@ -22,6 +24,7 @@ export const LibroAINativeModule = ManaModule.create()
     LibroAIChatSlotContribution,
     LibroAINativeCommandContribution,
     LibroAINativeService,
+
     LibroAIChatMessageItemModel,
     LibroAINativeForCellView,
     {
@@ -41,4 +44,4 @@ export const LibroAINativeModule = ManaModule.create()
       useValue: LibroAINativeCellTopBlank,
     },
   )
-  .dependOn(LibroChatModule);
+  .dependOn(LibroChatModule, CodeEditorModule, LibroAICompletionModule);
