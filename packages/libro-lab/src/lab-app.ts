@@ -17,11 +17,25 @@ import {
   singleton,
 } from '@difizen/mana-app';
 
+import { LibroLabConfiguration } from './config/index.js';
+import { KernelAndTerminalPanelView } from './kernel-and-terminal-panel/index.js';
 import { LibroLabLayoutSlots } from './layout/index.js';
 import { LayoutService } from './layout/layout-service.js';
+import { TocPanelView } from './toc/libro-toc-panel-view.js';
 
 const ShouldPreventStoreViewKey = 'mana-should-prevent-store-view';
 
+const leftPanelConfigs: Array<{
+  configKey: keyof typeof LibroLabConfiguration;
+  viewClass: any;
+}> = [
+  {
+    configKey: 'LibroLabKernelAndTerminalPanelEnabled',
+    viewClass: KernelAndTerminalPanelView,
+  },
+  { configKey: 'LibroLabTocPanelEnabled', viewClass: TocPanelView },
+  // 可以在此处添加更多配置项
+];
 @singleton({ contrib: ApplicationContribution })
 export class LibroLabApp implements ApplicationContribution {
   @inject(ServerConnection) serverConnection: ServerConnection;
@@ -42,6 +56,16 @@ export class LibroLabApp implements ApplicationContribution {
       terminalDefaultSlot,
       LibroLabLayoutSlots.contentBottom,
     );
+
+    for (const { configKey, viewClass } of leftPanelConfigs) {
+      const isEnabled = await this.configurationService.get(
+        LibroLabConfiguration[configKey],
+      );
+      if (isEnabled) {
+        const view = await this.viewManager.getOrCreateView(viewClass);
+        this.slotViewManager.addView(view, LibroLabLayoutSlots.navigator);
+      }
+    }
     this.serverManager.ready
       .then(() => {
         this.layoutService.setAreaVisible(LibroLabLayoutSlots.navigator, true);
