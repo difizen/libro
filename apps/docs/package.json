@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-docs",
-  "version": "0.2.44",
+  "version": "0.2.45",
   "private": true,
   "license": "MIT",
   "description": "Document site for mana",
@@ -22,10 +22,10 @@
   "packageManager": "pnpm@8.4.0",
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
-    "@difizen/libro-core": "^0.2.44",
-    "@difizen/libro-jupyter": "^0.2.44",
-    "@difizen/libro-lab": "^0.2.44",
-    "@difizen/libro-terminal": "^0.2.44",
+    "@difizen/libro-core": "^0.2.45",
+    "@difizen/libro-jupyter": "^0.2.45",
+    "@difizen/libro-lab": "^0.2.45",
+    "@difizen/libro-terminal": "^0.2.45",
     "@difizen/mana-app": "latest",
     "@difizen/mana-l10n": "^0.1.27",
     "@difizen/mana-react": "latest",
