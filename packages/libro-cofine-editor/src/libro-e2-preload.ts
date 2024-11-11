@@ -3,6 +3,7 @@ import type { Syringe } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
 
 import { JSONLanguageFeature } from './language/json/module.js';
+import { JuliaLanguageFeature } from './language/julia/module.js';
 import { PythonLanguageFeature } from './language/python/module.js';
 import { RLanguageFeature } from './language/r/module.js';
 import { SQLLanguageFeature } from './language/sql/module.js';
@@ -20,6 +21,7 @@ export const loadE2 = async (libroContainer: Syringe.Container) => {
     container.load(SQLLanguageFeature);
     container.load(JSONLanguageFeature);
     container.load(RLanguageFeature);
+    container.load(JuliaLanguageFeature);
     container.load(LibroE2ThemeModule);
   });
   await MonacoEnvironment.init();
