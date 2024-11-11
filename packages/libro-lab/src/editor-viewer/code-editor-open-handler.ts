@@ -14,7 +14,7 @@ export class CodeEditorViewerOpenHandler extends NavigatableViewOpenHandler<Code
   id = CodeEditorViewerFactory;
 
   canHandle(uri: URI, options?: ViewOpenHandlerOptions) {
-    if (uri.scheme === 'file' && textFileTypes.includes(uri.path.ext)) {
+    if (uri.scheme === 'file' && textFileTypes.includes(uri.path.ext.toLowerCase())) {
       return 100;
     }
     return Priority.IDLE;
