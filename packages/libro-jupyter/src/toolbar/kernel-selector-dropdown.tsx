@@ -2,6 +2,7 @@ import { CaretDownOutlined } from '@ant-design/icons';
 import type { LibroView } from '@difizen/libro-core';
 import { LibroKernelConnectionManager, KernelSpecManager } from '@difizen/libro-kernel';
 import { ConfigurationService, useInject, ViewInstance } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import { Dropdown, Space } from 'antd';
 import type { MenuProps } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
@@ -9,7 +10,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { LibroJupyterConfiguration } from '../config/index.js';
 import { LibroJupyterModel } from '../libro-jupyter-model.js';
 import './index.less';
-import { l10n } from '@difizen/mana-l10n';
 
 export interface PreferredSessionKernelListElem {
   name: string;
@@ -63,7 +63,7 @@ function getKernelListItems(
     {
       key: 'StartPreferredKernel',
       type: 'group',
-      label: l10n.t('启动首选的 Kernel'),
+      label: l10n.t('启动新的 Kernel'),
       children: otherKernelList.map((item) => {
         return {
           key: item.name,
@@ -99,7 +99,7 @@ function getKernelListItems(
     array.splice(2, 0, {
       key: 'UseKernelFromPreferredSession',
       type: 'group',
-      label: l10n.t('使用首选 Session 的 Kernel'),
+      label: l10n.t('使用运行中的 Kernel'),
       children: preferredSessionKernelList.map((item) => {
         return {
           key: item.fileName,
