@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-ai-native",
-  "version": "0.2.44",
+  "version": "0.2.45",
   "description": "",
   "keywords": [
     "libro",
@@ -45,7 +45,7 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-jupyter": "^0.2.44",
+    "@difizen/libro-jupyter": "^0.2.45",
     "@ant-design/icons": "^5.4.0",
     "@difizen/mana-app": "latest",
     "@difizen/mana-l10n": "latest",
