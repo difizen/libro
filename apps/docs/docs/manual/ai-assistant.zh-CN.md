@@ -42,7 +42,7 @@ llm:
 
 从顶部右侧工具栏唤起，你可以与 AI 进行开放式对话，询问编程相关问题，获取建议和信息，享受智能互动的乐趣。
 
-<img src="../../public/ai_chat_zh.gif" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_chat_zh.gif" alt="alt text" width="1000" >
 
 ### 代码解释
 
