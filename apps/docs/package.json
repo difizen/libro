@@ -6,6 +6,7 @@
   "description": "Document site for mana",
   "scripts": {
     "start": "UMI_DEV_SERVER_COMPRESS=none dumi dev",
+    "build:vercel": "LIBRO_DEPLOY_ENV=vercel dumi build",
     "build": "dumi build"
   },
   "type": "module",
@@ -31,6 +32,7 @@
     "@difizen/mana-react": "latest",
     "@radix-ui/react-slot": "^1.1.0",
     "antd": "^5.10.0",
+    "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "octokit": "^4.0.2",
