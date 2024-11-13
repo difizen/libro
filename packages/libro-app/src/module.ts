@@ -1,3 +1,7 @@
 import { ManaModule } from '@difizen/mana-app';
 
-export const LibroAppModule = ManaModule.create().register().dependOn();
+import { AppFileCommandContribution } from './app-file-command-contribution.js';
+
+export const LibroAppModule = ManaModule.create()
+  .register(AppFileCommandContribution)
+  .dependOn();
