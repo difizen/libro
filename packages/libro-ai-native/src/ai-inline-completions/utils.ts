@@ -1,4 +1,4 @@
-import type * as monaco from '@difizen/monaco-editor-core';
+import type { CancellationToken } from '@difizen/libro-code-editor';
 
 import { lineBasedCompletionModelConfigs } from './contant.js';
 
@@ -39,16 +39,16 @@ export function sleep(time: number) {
 
 export function raceCancellation<T>(
   promise: Promise<T>,
-  token: monaco.CancellationToken,
+  token: CancellationToken,
 ): Promise<T | undefined>;
 export function raceCancellation<T>(
   promise: Promise<T>,
-  token: monaco.CancellationToken,
+  token: CancellationToken,
   defaultValue: T,
 ): Promise<T>;
 export function raceCancellation<T>(
   promise: Promise<T>,
-  token: monaco.CancellationToken,
+  token: CancellationToken,
   defaultValue?: T,
 ): Promise<T | undefined> {
   return Promise.race([

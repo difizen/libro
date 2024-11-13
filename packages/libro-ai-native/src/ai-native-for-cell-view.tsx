@@ -1,5 +1,4 @@
 import { CloseOutlined } from '@ant-design/icons';
-import { InlineCompletionRegistry } from '@difizen/libro-code-editor';
 import type { CellView } from '@difizen/libro-jupyter';
 import type { IChatMessage } from '@difizen/magent-chat';
 import { AnswerState } from '@difizen/magent-chat';
@@ -22,7 +21,6 @@ import { EventSourceParserStream } from 'eventsource-parser/stream';
 import breaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 
-import { AICompletionProvider } from './ai-inline-completions/index.js';
 import { CodeBlockInCell } from './ai-native-code-block.js';
 import { LibroAINativeService } from './ai-native-service.js';
 import { AILoadding } from './icon.js';
@@ -93,18 +91,8 @@ export class LibroAINativeForCellView extends BaseView {
 
   @prop()
   showAI = false;
-  constructor(
-    @inject(ViewOption) options: IAINativeForCellViewOption,
-    @inject(InlineCompletionRegistry)
-    inlineCompletionRegistry: InlineCompletionRegistry,
-    @inject(AICompletionProvider)
-    completionProvider: AICompletionProvider,
-  ) {
+  constructor(@inject(ViewOption) options: IAINativeForCellViewOption) {
     super();
-
-    // 注册AI行内补全
-    inlineCompletionRegistry.registerInlineCompletionsProvider(completionProvider);
-    inlineCompletionRegistry.initialize();
 
     this.cell = options.cell;
   }

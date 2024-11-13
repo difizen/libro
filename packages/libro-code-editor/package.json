@@ -45,11 +45,10 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-common": "^0.2.44",
-    "@difizen/magent-core": "^0.1.30",
+    "@difizen/libro-common": "^0.2.45",
     "@difizen/mana-app": "latest",
     "@difizen/mana-l10n": "latest",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   },
   "peerDependencies": {
     "react": ">=16"
