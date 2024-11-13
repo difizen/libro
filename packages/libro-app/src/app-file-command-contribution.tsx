@@ -16,6 +16,7 @@ import {
   singleton,
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
+import { message } from 'antd';
 
 export const AppFileCommands = {
   OPEN_FILE_BY_LIBRO_APP: {
@@ -61,8 +62,30 @@ export class AppFileCommandContribution
   }
   registerCommands(command: CommandRegistry): void {
     command.registerCommand(AppFileCommands.OPEN_FILE_BY_LIBRO_APP, {
-      execute: () => {
-        //
+      execute: (node) => {
+        try {
+          if (node.fileStat.isFile) {
+            this.openService
+              .getOpener(node.uri, {
+                isApp: true,
+              })
+              .then((opener) => {
+                if (opener) {
+                  opener.open(node.uri, {
+                    viewOptions: {
+                      name: node.fileStat.name,
+                    },
+                  });
+                }
+                return;
+              })
+              .catch(() => {
+                throw Error();
+              });
+          }
+        } catch {
+          message.error(l10n.t('文件打开失败'));
+        }
       },
       isVisible: (node) => {
         return FileStatNode.is(node) && node.fileStat.isFile;

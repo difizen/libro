@@ -1,7 +1,9 @@
 import { ManaModule } from '@difizen/mana-app';
 
 import { AppFileCommandContribution } from './app-file-command-contribution.js';
+import { LibroAppOpenHandler } from './app-open-handler.js';
+import { LibroAppViewer } from './app-viewer.js';
 
 export const LibroAppModule = ManaModule.create()
-  .register(AppFileCommandContribution)
+  .register(AppFileCommandContribution, LibroAppOpenHandler, LibroAppViewer)
   .dependOn();
