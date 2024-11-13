@@ -24,7 +24,6 @@ export const LibroAINativeModule = ManaModule.create()
     LibroAIChatSlotContribution,
     LibroAINativeCommandContribution,
     LibroAINativeService,
-
     LibroAIChatMessageItemModel,
     LibroAINativeForCellView,
     {

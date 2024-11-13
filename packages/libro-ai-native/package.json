@@ -45,11 +45,10 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/libro-jupyter": "^0.2.44",
-    "@difizen/libro-code-editor": "^0.2.44",
+    "@difizen/libro-jupyter": "^0.2.45",
+    "@difizen/libro-code-editor": "^0.2.45",
     "@ant-design/icons": "^5.4.0",
     "@difizen/mana-app": "latest",
-    "@difizen/monaco-editor-core": "^0.39.4",
     "@difizen/mana-l10n": "latest",
     "@difizen/magent-libro": "^0.1.27",
     "@difizen/magent-chat": "^0.1.27",
@@ -67,7 +66,7 @@
     "react": ">=16"
   },
   "devDependencies": {
-    "@types/react": "^18.2.25",
+    "@types/react": "^18.3.12",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/sanitize-html": "^2.6.2",
     "@types/uuid": "^9.0.2"
