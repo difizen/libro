@@ -54,6 +54,7 @@
     "@difizen/libro-sql-cell": "^0.2.45",
     "@difizen/libro-terminal": "^0.2.45",
     "@difizen/libro-toc": "^0.2.45",
+    "@difizen/libro-app": "^0.2.45",
     "@difizen/libro-cofine-editor-core": "^0.2.45",
     "@difizen/libro-language-client": "^0.2.45",
     "@difizen/libro-widget": "^0.2.45",
