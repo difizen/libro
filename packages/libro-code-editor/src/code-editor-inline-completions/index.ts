@@ -1,2 +1,3 @@
-export * from './inline-completions-registry.js';
+export * from './inline-completions-manager.js';
 export * from './inline-completions-protocol.js';
+export * from './sequencer.js';

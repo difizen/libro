@@ -1,6 +1,10 @@
-import type { IIntelligentCompletionProvider } from '@difizen/libro-code-editor';
+import type {
+  InlineCompletionProvider,
+  CancellationToken,
+  IIntelligentCompletionsResult,
+  ICompletionContext,
+} from '@difizen/libro-code-editor';
 import { singleton } from '@difizen/mana-app';
-import type * as monaco from '@difizen/monaco-editor-core';
 
 import { CompletionRequest } from './inline-completion-request.js';
 import { raceCancellation, sleep } from './utils.js';
@@ -9,7 +13,7 @@ import { raceCancellation, sleep } from './utils.js';
 const inlineCompletionCache: {
   line: number;
   column: number;
-  last: { items: monaco.languages.InlineCompletion[] } | null;
+  last: IIntelligentCompletionsResult | null;
 } = {
   line: -1,
   column: -1,
@@ -47,7 +51,7 @@ class ReqStack {
 }
 
 @singleton()
-export class AICompletionProvider implements IIntelligentCompletionProvider {
+export class AICompletionProvider implements InlineCompletionProvider {
   reqStack: ReqStack;
   inlineComletionsDebounceTime: number;
 
@@ -57,29 +61,33 @@ export class AICompletionProvider implements IIntelligentCompletionProvider {
 
   public mount(): void {
     this.reqStack = new ReqStack();
-    this.inlineComletionsDebounceTime = 300;
+    this.inlineComletionsDebounceTime = 500;
   }
 
   async provideInlineCompletionItems(
-    model: monaco.editor.ITextModel,
-    position: monaco.Position,
-    context: monaco.languages.InlineCompletionContext,
-    token: monaco.CancellationToken,
+    context: ICompletionContext,
+    token: CancellationToken,
   ) {
     this.cancelRequest();
 
     // 放入队列
-    const requestImp = new CompletionRequest(model, position, token);
+    const requestImp = new CompletionRequest(context, token);
     this.reqStack.addReq(requestImp);
 
     await raceCancellation(sleep(this.inlineComletionsDebounceTime), token);
+
+    if (token?.isCancellationRequested) {
+      return undefined;
+    }
 
     const list = await this.reqStack.runReq();
     if (!list) {
       return undefined;
     }
-    inlineCompletionCache.column = position.column;
-    inlineCompletionCache.line = position.lineNumber;
+    if (context.position) {
+      inlineCompletionCache.column = context.position.column;
+      inlineCompletionCache.line = context.position.line;
+    }
     inlineCompletionCache.last = {
       items: list,
     };

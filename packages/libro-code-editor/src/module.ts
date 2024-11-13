@@ -1,7 +1,10 @@
 import { ManaModule } from '@difizen/mana-app';
 
 import { CodeEditorInfoManager } from './code-editor-info-manager.js';
-import { InlineCompletionRegistry } from './code-editor-inline-completions/index.js';
+import {
+  InlineCompletionContribution,
+  InlineCompletionManager,
+} from './code-editor-inline-completions/index.js';
 import { CodeEditorManager } from './code-editor-manager.js';
 import { Model } from './code-editor-model.js';
 import { CodeEditorContribution } from './code-editor-protocol.js';
@@ -19,6 +22,10 @@ export const CodeEditorModule = ManaModule.create()
     CodeEditorSettings,
     CodeEditorStateManager,
     LanguageSpecRegistry,
-    InlineCompletionRegistry,
+    InlineCompletionManager,
   )
-  .contribution(CodeEditorContribution, LanguageSpecContribution);
+  .contribution(
+    CodeEditorContribution,
+    LanguageSpecContribution,
+    InlineCompletionContribution,
+  );
