@@ -2,9 +2,9 @@ import type {
   IAICompletionOption,
   ICompletionContext,
   IIntelligentCompletionsResult,
+  CancellationToken,
 } from '@difizen/libro-code-editor';
 import { transient } from '@difizen/mana-app';
-import * as monaco from '@difizen/monaco-editor-core';
 import { v4 } from 'uuid';
 
 import { generateInstructionsPrompt } from './Prompt/instruction.js';
@@ -15,9 +15,8 @@ export class CompletionRequest {
   id: string;
 
   constructor(
-    public model: monaco.editor.ITextModel,
-    public position: monaco.Position,
-    public token: monaco.CancellationToken,
+    public context: ICompletionContext,
+    public token: CancellationToken,
   ) {
     this.isCancelFlag = false;
     this.id = v4();
@@ -26,7 +25,7 @@ export class CompletionRequest {
   // 拼接上下文信息
   protected constructRequestContext(
     context: ICompletionContext,
-    token: monaco.CancellationToken,
+    token: CancellationToken,
   ): IAICompletionOption {
     // const prompt = lineBasedPromptProcessor.processPrefix(context.prefix);
     // const suffix = lineBasedPromptProcessor.processSuffix(context.suffix);
@@ -49,33 +48,11 @@ export class CompletionRequest {
 
   // 向大模型发送请求
   async run() {
-    const { model, position, token } = this;
-    if (!this.model || this.isCancelFlag || token.isCancellationRequested) {
+    const { context, token } = this;
+
+    if (this.isCancelFlag || token.isCancellationRequested) {
       return [];
     }
-
-    const startRange = new monaco.Range(0, 0, position.lineNumber, position.column);
-    let prefix = model.getValueInRange(startRange);
-    if (prefix === '') {
-      prefix += '\n';
-    }
-    const endRange = new monaco.Range(
-      position.lineNumber,
-      position.column,
-      model.getLineCount(),
-      Number.MAX_SAFE_INTEGER,
-    );
-
-    const suffix = model.getValueInRange(endRange);
-
-    const languageId = model.getLanguageId();
-    const context: ICompletionContext = {
-      fileUrl: model.uri.fsPath,
-      filename: model.uri.toString().split('/').pop() || '',
-      language: languageId,
-      prefix,
-      suffix,
-    };
 
     let completeResult: IIntelligentCompletionsResult | undefined;
     const requestBean = await this.constructRequestContext(context, token);
@@ -85,7 +62,7 @@ export class CompletionRequest {
       console.error('Inline Completion Request Error:', e);
       return [];
     }
-    // 结果format 及其推送，先直接返回
+    // 结果format 及推送，先直接返回
 
     return [...(completeResult?.items || [])];
   }
@@ -99,7 +76,7 @@ export class CompletionRequest {
     const instruction = generateInstructionsPrompt(
       data.language,
       data.prompt,
-      data.suffix,
+      data.suffix || '',
     );
 
     const res = await fetch(url, {

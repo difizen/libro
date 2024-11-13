@@ -9,6 +9,7 @@ import {
   LibroE2EditorOptions,
   LibroE2EditorState,
 } from './libro-e2-editor.js';
+import { LibroE2InlineCompletionRegister } from './libro-e2-inline-completion-register.js';
 import { loadE2 } from './libro-e2-preload.js';
 import { LibroSQLRequestAPI } from './libro-sql-api.js';
 
@@ -18,6 +19,8 @@ export const LibroE2EditorModule = ManaModule.create()
     LibroE2Editor,
 
     LibroSQLRequestAPI,
+
+    LibroE2InlineCompletionRegister,
     {
       token: LibroE2EditorFactory,
       useFactory: (ctx) => {
