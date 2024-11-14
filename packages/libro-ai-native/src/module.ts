@@ -17,6 +17,10 @@ import { LibroAINativeChatService } from './libro-ai-native-chat-service.js';
 import { LibroAiNativeChatView } from './libro-ai-native-chat-view.js';
 import { LibroAINativeColorRegistry } from './libro-ai-native-color-registry.js';
 
+export const LibroAINativeModuleSetting = {
+  loadable: true,
+};
+
 export const LibroAINativeModule = ManaModule.create()
   .register(
     LibroAINativeColorRegistry,
@@ -43,4 +47,5 @@ export const LibroAINativeModule = ManaModule.create()
       useValue: LibroAINativeCellTopBlank,
     },
   )
+  .canload(() => Promise.resolve(LibroAINativeModuleSetting.loadable))
   .dependOn(LibroChatModule, CodeEditorModule, LibroAICompletionModule);
