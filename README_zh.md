@@ -1,6 +1,6 @@
 语言: 中文 | [English](./README.md)
 
-<p align="center"><img src="./apps/docs/public/libro-text.svg" width="120" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro-text.svg" width="120" /></p>
 <p align="center"><strong>libro：灵活定制、轻松集成的 Notebook 产品方案</strong></p>
 
 <p align="center">
@@ -23,7 +23,7 @@
 </p>
 <p>　</p>
 
-![image](./apps/docs/public/libro.png)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro.png)
 
 ---
 
@@ -66,24 +66,24 @@ pip install libro
 
 - 错误修复
 
-![image](./apps/docs/public/error_debug_zh.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug_zh.gif)
 
 - AI 对话
   - 基于 Cell 上下文对话
   
-![image](./apps/docs/public/cell_chat_zh.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat_zh.gif)
 
   - 通用对话
 
-![image](./apps/docs/public/ai_chat_zh.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_chat_zh.gif)
 
 - 代码解释
 
-![image](./apps/docs/public/cell_explain_zh.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain_zh.gif)
 
 - 代码优化
 
-![image](./apps/docs/public/cell_opitimization_zh.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization_zh.gif)
 
 ### Prompt Cell
 
@@ -97,7 +97,7 @@ pip install libro
 
 详情请阅读[prompt cell 指南](./apps/docs/docs/manual/prompt-cell.md)。
 
-![image](./apps/docs/public/prompt_cell_zh.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell_zh.gif)
 
 ### Sql Cell
 
@@ -106,11 +106,11 @@ pip install libro
 
 详情请阅读[sql cell 指南](./apps/docs/docs/manual/sql-cell.md)。
 
-![image](./apps/docs/public/sql_cell_zh.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_cell_zh.gif)
 
 ## 架构
 
-![image](./apps/docs/public/technical%20_architecture_zh.png)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical%20_architecture_zh.png)
 
 ## 后续计划
 
@@ -142,4 +142,4 @@ pip install libro
 
 🤗 [加入钉钉答疑群](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
 
-<img src="./apps/docs/public/dingding.jpg" width="30%">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/dingding.jpg" width="30%">

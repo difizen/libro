@@ -37,36 +37,36 @@ jpserver_extensions:
 
 1. 定义时间范围以及数据集地址变量的 Python 变量，注意这些变量必须是字符串类型：
 
-<img src="../../public/prompt_va.png" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_va.png" alt="alt text" width="1000" >
 2. 在 Prompt Cell 中通过自然语言输入连接模型进行加载数据集，可视化排放趋势的代码生成操作
 ① 增加新的聊天标识，使得后续选择该聊天标识的 Prompt Cell 都在一个聊天上下文中.
 ② 整个 Prompt Cell 消息保存为一个变量，该变量即为 langchain 的 AIMessage.
 
-<img src="../../public/co2_trand.png" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_trand.png" alt="alt text" width="1000" >
 
-<img src="../../public/co2_trend_va.png" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_trend_va.png" alt="alt text" width="1000" >
 3. 点击 “插入并运行选项” 会自动新增一个内容对应为模型生成代码的 Python Cell，并且运行。
 
-<img src="../../public/co2_trend_code.png" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_trend_code.png" alt="alt text" width="1000" >
 
 ### 步骤 2: 预测未来 CO2 排放量
 
 1. 使用 Prompt Cell 生成预测未来 CO2 排放量的代码，并选择与前一个 Prompt Cell 同一个聊天标识，同时保存变量。
 
-<img src="../../public/co2_predict.png" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_predict.png" alt="alt text" width="1000" >
 
 2. 点击 “插入并运行选项” 会自动新增一个内容对应为模型生成代码的 Python Cell，并且运行。
 
-<img src="../../public/co2_predict_code.png" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_predict_code.png" alt="alt text" width="1000" >
 
 ### 步骤 3: 基于 Langchain 消息提出应对 CO2 排放的建议
 
 1. 此外，我们也可以配合着 langchain 一起使用，例如，基于前面保存的 co2_predict变量，生成应对气候变化的行动建议。
 
-<img src="../../public/co2_predict_va.png" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_predict_va.png" alt="alt text" width="1000" >
 
-<img src="../../public/co2_predict_langchain.png" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_predict_langchain.png" alt="alt text" width="1000" >
 
 2. 同时，您可以看到，此时新增一个 Prompt Cell，此时模型选项中，包含对应的 langchain 变量对象 chat_prompt、llm、summary_chain。
 
-<img src="../../public/langchain_var.png" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/langchain_var.png" alt="alt text" width="1000" >

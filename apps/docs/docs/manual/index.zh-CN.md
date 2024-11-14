@@ -18,7 +18,7 @@ Libro 编辑器增强了传统 Notebook 运行的状态监控以及各种交互�
 
 ### 上方工具栏
 
-<img src="../../public/top_toolbar_zh.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/top_toolbar_zh.png" alt="alt text" width="800">
 
 | 序号 | 名称       | 描述                                                                 |
 | ---- | ---------- | -------------------------------------------------------------------- |
@@ -32,7 +32,7 @@ Libro Notebook 采用 Python3 作为基础内核，负责运行用户输入的�
 
 - 内核编辑菜单
 
-<img src="../../public/kernel_menu_zh.png" alt="alt text" width="300">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/kernel_menu_zh.png" alt="alt text" width="300">
 
 | 菜单选项                          | 描述                                               |
 | --------------------------------- | -------------------------------------------------- |
@@ -45,48 +45,48 @@ Libro Notebook 采用 Python3 作为基础内核，负责运行用户输入的�
 - 内核状态
   Libro 的内核状态分为正在连接、未知、忙碌、空闲。
 
-<img src="../../public/connecting_zh.png" alt="alt text" width="80"> Libro Notebook 正在与内核建立连接，发生在启动内核或者内核失去响应后尝试连接的情况。
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/connecting_zh.png" alt="alt text" width="80"> Libro Notebook 正在与内核建立连接，发生在启动内核或者内核失去响应后尝试连接的情况。
 
-<img src="../../public/unknown_zh.png" alt="alt text" width="68"> 当前内核的状态不能确定，可能是由于通信问题或内部错误导致状态信息无法获取。
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/unknown_zh.png" alt="alt text" width="68"> 当前内核的状态不能确定，可能是由于通信问题或内部错误导致状态信息无法获取。
 
-<img src="../../public/busy_zh.png" alt="alt text" width="50"> 当前内核正在执行代码处理任务，您提交的新代码或指令将等待当前任务完成后才会被执行。
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/busy_zh.png" alt="alt text" width="50"> 当前内核正在执行代码处理任务，您提交的新代码或指令将等待当前任务完成后才会被执行。
 
-<img src="../../public/idle_zh.png" alt="alt text" width="50"> 表示内核当前没有执行任何任务，已经准备好接受新的命令和代码执行。
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/idle_zh.png" alt="alt text" width="50"> 表示内核当前没有执行任何任务，已经准备好接受新的命令和代码执行。
 
 #### 操作控制区
 
-| 图标                                                                 | 描述                                                                     |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| <img src="../../public/save.png" alt="alt text" width="30">          | 保存当前 Notebook 中 Cell 内容的改动。                                   |
-| <img src="../../public/run.png" alt="alt text" width="36">           | 按照子菜单选项，执行选中范围的 Cell，如执行全部 Cell、执行当前 Cell 等。 |
-| <img src="../../public/loc.png" alt="alt text" width="36">           | 定位正在执行的 Cell。                                                    |
-| <img src="../../public/interrupt.png" alt="alt text" width="36">     | 中断正在执行的 Cell 代码。                                               |
-| <img src="../../public/restart.png" alt="alt text" width="36">       | 重启并清空所有 Cell 的输出。                                             |
-| <img src="../../public/undo.png" alt="alt text" width="36">          | 撤销上一步操作。                                                         |
-| <img src="../../public/redo.png" alt="alt text" width="36">          | 重做上一步被撤销的操作。                                                 |
-| <img src="../../public/output_scroll.png" alt="alt text" width="36"> | 固定 Output 展示高度。                                                   |
-| <img src="../../public/hide.png" alt="alt text" width="36">          | 根据子菜单选项，隐藏或显示代码和 Output。                                |
-| <img src="../../public/clear.png" alt="alt text" width="36">         | 清空选中 Cell 的输出。                                                   |
-| <img src="../../public/change_cell.png" alt="alt text" width="120">  | 更改 Cell 类型，如 Python、Markdown 等                                   |
+| 图标                                                                                                                | 描述                                                                     |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/save.png" alt="alt text" width="30">          | 保存当前 Notebook 中 Cell 内容的改动。                                   |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/run.png" alt="alt text" width="36">           | 按照子菜单选项，执行选中范围的 Cell，如执行全部 Cell、执行当前 Cell 等。 |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/loc.png" alt="alt text" width="36">           | 定位正在执行的 Cell。                                                    |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/interrupt.png" alt="alt text" width="36">     | 中断正在执行的 Cell 代码。                                               |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/restart.png" alt="alt text" width="36">       | 重启并清空所有 Cell 的输出。                                             |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/undo.png" alt="alt text" width="36">          | 撤销上一步操作。                                                         |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/redo.png" alt="alt text" width="36">          | 重做上一步被撤销的操作。                                                 |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/output_scroll.png" alt="alt text" width="36"> | 固定 Output 展示高度。                                                   |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/hide.png" alt="alt text" width="36">          | 根据子菜单选项，隐藏或显示代码和 Output。                                |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/clear.png" alt="alt text" width="36">         | 清空选中 Cell 的输出。                                                   |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/change_cell.png" alt="alt text" width="120">  | 更改 Cell 类型，如 Python、Markdown 等                                   |
 
 #### 分享和快捷键
 
-| 图标                                                              | 区域图                                                                   | 说明                                                   |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------ |
-| <img src="../../public/keybind_zh.png" alt="alt text" width="36"> | <img src="../../public/keybind_panel_zh.png" alt="alt text" width="300"> | 展示命令态和编辑态 Libro 的快捷键操作，提供 Magic 命令 |
+| 图标                                                                                                             | 区域图                                                                                                                  | 说明                                                   |
+| ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/keybind_zh.png" alt="alt text" width="36"> | <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/keybind_panel_zh.png" alt="alt text" width="300"> | 展示命令态和编辑态 Libro 的快捷键操作，提供 Magic 命令 |
 
 ### Cell 操作栏
 
 Notebook 支持针对单元格便捷执行 Cell 操作。在 Cell 右侧的操作栏中，从上至下分别是运行、上移、下移、增加、删除、更多菜单。
 
-| 图标/按钮                                                     | 描述                                         |
-| ------------------------------------------------------------- | -------------------------------------------- |
-| <img src="../../public/run.png" alt="alt text" width="36">    | 运行当前选中的代码单元或重新运行代码单元。   |
-| <img src="../../public/up.png" alt="alt text" width="36">     | 将当前选中的代码单元上移一个位置。           |
-| <img src="../../public/down.png" alt="alt text" width="36">   | 将当前选中的代码单元下移一个位置。           |
-| <img src="../../public/add.png" alt="alt text" width="36">    | 在下方增加选中类型的单元格。                 |
-| <img src="../../public/delete.png" alt="alt text" width="36"> | 删除当前选中的代码单元。                     |
-| <img src="../../public/more.png" alt="alt text" width="36">   | 提供隐藏代码和输出、复制、剪切、粘贴的功能。 |
+| 图标/按钮                                                                                                    | 描述                                         |
+| ------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/run.png" alt="alt text" width="36">    | 运行当前选中的代码单元或重新运行代码单元。   |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/up.png" alt="alt text" width="36">     | 将当前选中的代码单元上移一个位置。           |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/down.png" alt="alt text" width="36">   | 将当前选中的代码单元下移一个位置。           |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/add.png" alt="alt text" width="36">    | 在下方增加选中类型的单元格。                 |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/delete.png" alt="alt text" width="36"> | 删除当前选中的代码单元。                     |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/more.png" alt="alt text" width="36">   | 提供隐藏代码和输出、复制、剪切、粘贴的功能。 |
 
 ### Cell 编辑区
 
@@ -96,7 +96,7 @@ Notebook 支持针对单元格便捷执行 Cell 操作。在 Cell 右侧的操�
 
 您可以在该区域自由添加指定类型的单元格。
 
-![](../../public/cell_between_zh.gif)
+![](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_between_zh.gif)
 
 说明：如果您选中的 Cell 后无其他单元格，可以直接在底部通过指定按钮添加对应类型的单元格。详情请参见底部 Cell。
 
@@ -104,7 +104,7 @@ Notebook 支持针对单元格便捷执行 Cell 操作。在 Cell 右侧的操�
 
 支持在单元格下方查看执行此 Cell 后的运行时间和运行结果。
 
-<img src="../../public/cell_output.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_output.png" alt="alt text" width="800">
 
 注意：目前仅支持执行 Python Cell 和 Prompt Cell 并产生输出内容，其余均为说明性、展示性 Cell。
 
@@ -112,13 +112,13 @@ Notebook 支持针对单元格便捷执行 Cell 操作。在 Cell 右侧的操�
 
 如果输出内容较长，您可以选择固定或取消输出窗口的高度，以获取最佳视图体验。
 
-<img src="../../public/cell_output_scroll_zh.gif" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_output_scroll_zh.gif" alt="alt text" width="800">
 
 #### 底部 Cell
 
 实验文件中最后一个 Cell 的底部提供显式添加指定类型单元格的按钮。
 
-<img src="../../public/cell_bottom_zh.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_bottom_zh.png" alt="alt text" width="800">
 
 说明：同时，支持在 Cell 衔接区或 Cell 操作栏添加单元格，通过 Cell 控制区的类型转换来切换单元格类型。
 
@@ -126,10 +126,10 @@ Notebook 支持针对单元格便捷执行 Cell 操作。在 Cell 右侧的操�
 
 支持在上方工具栏右侧，通过查看快捷键，查看或搜索产品内所有快捷键功能和 Notebook Magic 命令，以下为您介绍几种常用的操作：
 
-<img src="../../public/keybind_zh.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/keybind_zh.png" alt="alt text" width="800">
 <br/>
 
-<img src="../../public/keybind_panel_o_zh.png" alt="alt text" width="300">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/keybind_panel_o_zh.png" alt="alt text" width="300">
 
 ### 命令态 | 编辑态
 
@@ -137,11 +137,11 @@ Notebook 将针对操作功能分为命令态和编辑态。
 
 ● 在编辑态下单击代码编辑页面空白处或快捷键 Esc 进入命令态，当前选中的 Cell 边框为蓝色。
 
-<img src="../../public/command_mode.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/command_mode.png" alt="alt text" width="800">
 
 ● 在命令态时通过快捷键 Enter 进入编辑态或直接单击 Cell 编辑框。当前选中的 Cell 边框为蓝色高亮显示。
 
-<img src="../../public/edit_mode.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/edit_mode.png" alt="alt text" width="800">
 
 注意：Markdown 类型的 Cell 由命令态进入编辑态需要双击鼠标左键。
 
@@ -149,7 +149,7 @@ Notebook 将针对操作功能分为命令态和编辑态。
 
 在命令态下，支持以下常见功能。
 
-<img src="../../public/command_operation_zh.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/command_operation_zh.png" alt="alt text" width="800">
 
 #### 多选 Cell
 
@@ -195,16 +195,16 @@ Notebook 将针对操作功能分为命令态和编辑态。
 
 <div style="display: flex; align-items: end">
   <span>当您将鼠标移至 Cell 框左侧，出现样式</span>
-  <img src="../../public/drag.webp"  style="width: 30px; height: 30px; margin-right: 10px; margin-left: 10px;">
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/drag.webp"  style="width: 30px; height: 30px; margin-right: 10px; margin-left: 10px;">
     <span>时，可以对当前 Cell 进行拖拽。</span>
 </div>
 
 - 拖拽单个 Cell（不区分命令态和编辑态）
   当您将鼠标移至目标 Cell 框左侧，出现样式时，即可进行拖拽。
 
-<img src="../../public/drag_area.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/drag_area.png" alt="alt text" width="800">
 <br/>
-<img src="../../public/drag_zh.gif" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/drag_zh.gif" alt="alt text" width="800">
 
 说明：拖拽时，蓝色横条作为定位标记，表示拖拽至蓝色横条下方。
 
@@ -216,7 +216,7 @@ Notebook 将针对操作功能分为命令态和编辑态。
 
 在编辑态下，支持以下常见功能。
 
-<img src="../../public/edit_operation_zh.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/edit_operation_zh.png" alt="alt text" width="800">
 
 #### 切分 Cell
 
@@ -258,11 +258,11 @@ Notebook 将针对操作功能分为命令态和编辑态。
 
 #### 隐藏与显示 Cell 输入部分
 
-<img src="../../public/hide_input.gif" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/hide_input.gif" alt="alt text" width="800">
 
 #### 隐藏与显示 Cell 输出部分
 
-<img src="../../public/hide_output.gif" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/hide_output.gif" alt="alt text" width="800">
 
 ## Cell 介绍
 
@@ -270,7 +270,7 @@ Notebook 将针对操作功能分为命令态和编辑态。
 
 Python Cell 是 Notebook 中编辑和调试 Python 代码的最小单元，主要包含以下使用功能：
 
-<img src="../../public/python_cell_zh.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/python_cell_zh.png" alt="alt text" width="800">
 
 | 功能         | 说明                                                             |
 | ------------ | ---------------------------------------------------------------- |
@@ -282,7 +282,7 @@ Python Cell 是 Notebook 中编辑和调试 Python 代码的最小单元，主�
 
 ### Markdown Cell
 
-<img src="../../public/markdown_cell_zh.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/markdown_cell_zh.png" alt="alt text" width="800">
 
 | 功能       | 说明                                                       |
 | ---------- | ---------------------------------------------------------- |
@@ -294,4 +294,4 @@ Python Cell 是 Notebook 中编辑和调试 Python 代码的最小单元，主�
 
 说明：此外，支持基于标题的 Markdown Cell 进行隐藏与现实，帮助您更好的组织与查看 Notebook
 
-<img src="../../public/markdown_hide.gif" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/markdown_hide.gif" alt="alt text" width="800">

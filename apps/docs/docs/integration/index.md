@@ -54,7 +54,7 @@ In the `tsconfig.json` file at the project root, add the following configuration
 
 ### Integrate Lab Development Environment
 
-<img src="../../public/libro_en.png" width="1200" />
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_en.png" width="1200" />
 
 1. Connect to the Notebook Service: You can do this by installing `libro-server` or by using Jupyter’s functionality, such as Jupyter server or Jupyter lab. Start the service, obtain the corresponding service link, and update the link on the frontend as follows:
 
@@ -114,7 +114,7 @@ export default App;
 
 ### Integrate Notebook Editor
 
-<img src="../../public/libro_editor.png" width="1000" />
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_editor.png" width="1000" />
 
 1. Create a React component for the Libro editor, using `LibroService` to create a `LibroView` instance and render it through `ViewRender`.
 

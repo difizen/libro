@@ -65,36 +65,36 @@ jpserver_extensions:
 1. 查询不同产品的销量
    我们首先通过 SQL 查询来统计每个产品的销量和总收入。这个查询将返回每个产品的销售数量以及它所产生的总收入，同时把查询结果保存到 Pandas DataFrame 中。
 
-<img src="../../public/df_sales.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/df_sales.png" alt="alt text" width="600" >
 
 2. 可视化产品销售表现
    我们可以使用 Python 的可视化工具（如 Matplotlib 或 Seaborn）对产品销量进行直观展示，通过这个直方图，我们可以快速了解哪些产品是平台上最畅销的。
 
-<img src="../../public/vis_sales.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/vis_sales.png" alt="alt text" width="600" >
 
 ### 案例 2：分析客户的购买行为
 
 1. 统计每个客户的订单数量、总消费金额和平均订单金额
    我们首先通过 SQL 查询来统计他们的总购买金额和平均订单金额。这个查询将返回每个客户的订单数量、总消费金额和平均订单金额。通过这些数据，我们可以了解哪些客户是平台的忠实用户，以及他们的消费习惯。
 
-<img src="../../public/df_customers.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/df_customers.png" alt="alt text" width="600" >
 
 2. 数据分析
    通过 Python，可以进一步处理这些数据，找出不同客户的消费模式，例如哪些客户属于高价值客户。
 
-<img src="../../public/high_value_customers.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/high_value_customers.png" alt="alt text" width="600" >
 
 案例 3：找出最佳销售月份
 
 1. 查询每个月的总销售额
    我们通过时间维度分析平台的最佳销售月份，这个查询会返回每个月的总销售额，并按降序排列，以便你了解哪几个月份的销售额最高。
 
-<img src="../../public/df_monthly_sales.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/df_monthly_sales.png" alt="alt text" width="600" >
 
 2. 可视化每月销售额趋势
    我们可以将每个月的销售数据可视化为折线图，通过这个折线图，可以轻松地看到不同月份的销售趋势，帮助调整库存和营销策略。
 
-<img src="../../public/df_monthly_sales_revnue.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/df_monthly_sales_revnue.png" alt="alt text" width="600" >
 
 # 最后
 

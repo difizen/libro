@@ -36,38 +36,38 @@ jpserver_extensions:
 
 1. Define Python variables for the time range and dataset URL, ensuring these variables are of string type:
 
-<img src="../../public/prompt_va.png" alt="Variable Definition" width="1000">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_va.png" alt="Variable Definition" width="1000">
 
 2. Use natural language in the Prompt Cell to load the dataset and generate code for visualizing emission trends:
    ① Add a new chat identifier, so that subsequent Prompt Cells with the same identifier are in one chat context.
    ② Save the entire Prompt Cell message as a variable, which represents LangChain's `AIMessage`.
 
-<img src="../../public/co2_trand.png" alt="CO2 Trend Analysis" width="1000">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_trand.png" alt="CO2 Trend Analysis" width="1000">
 
-<img src="../../public/co2_trend_va.png" alt="CO2 Trend Variable" width="1000">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_trend_va.png" alt="CO2 Trend Variable" width="1000">
 
 3. Clicking “Insert and Run” will automatically add a Python Cell with model-generated code, and execute it.
 
-<img src="../../public/co2_trend_code.png" alt="CO2 Trend Code" width="1000">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_trend_code.png" alt="CO2 Trend Code" width="1000">
 
 ### Step 2: Predict Future CO2 Emissions
 
 1. Use the Prompt Cell to generate code predicting future CO2 emissions. Select the same chat identifier as the previous Prompt Cell and save the variable.
 
-<img src="../../public/co2_predict.png" alt="CO2 Prediction" width="1000">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_predict.png" alt="CO2 Prediction" width="1000">
 
 2. Clicking “Insert and Run” will automatically add a Python Cell with model-generated code, and execute it.
 
-<img src="../../public/co2_predict_code.png" alt="CO2 Prediction Code" width="1000">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_predict_code.png" alt="CO2 Prediction Code" width="1000">
 
 ### Step 3: Suggest Actions Based on LangChain Messages to Address CO2 Emissions
 
 1. Additionally, you can use LangChain, such as generating actionable recommendations for climate change based on the previously saved `co2_predict` variable.
 
-<img src="../../public/co2_predict_va.png" alt="CO2 Prediction Variable" width="1000">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_predict_va.png" alt="CO2 Prediction Variable" width="1000">
 
-<img src="../../public/co2_predict_langchain.png" alt="CO2 Prediction with LangChain" width="1000">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/co2_predict_langchain.png" alt="CO2 Prediction with LangChain" width="1000">
 
 2. You’ll also see a new Prompt Cell with model options, including LangChain variable objects like `chat_prompt`, `llm`, and `summary_chain`.
 
-<img src="../../public/langchain_var.png" alt="LangChain Variables" width="1000">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/langchain_var.png" alt="LangChain Variables" width="1000">

@@ -1,6 +1,6 @@
 Language: English | [简体中文](./README_zh.md)
 
-<p align="center"><img src="./apps/docs/public/libro-text.svg" width="120" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro-text.svg" width="120" /></p>
 <p align="center"><strong>A Notebook Product Solution with Flexible Customization and Easy Integration</strong></p>
 
 <p align="center">
@@ -24,7 +24,7 @@ Language: English | [简体中文](./README_zh.md)
 <p>　</p>
 
 
-![image](./apps/docs/public/libro_en.png)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_en.png)
 
 ---
 
@@ -65,24 +65,24 @@ For more details, please refer to [quick start](./apps/docs/docs/quickstart/inde
 
 - Error Fixing
 
-![image](./apps/docs/public/error_debug.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug.gif)
 
 - Chat
   - Contextual Chat in Cells  
   
-![image](./apps/docs/public/cell_chat.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat.gif)
 
   - General AI Chat
 
-![image](./apps/docs/public/ai_chat.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_chat.gif)
 
 - Code Explanation
 
-![image](./apps/docs/public/cell_explain.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain.gif)
 
 - Code Optimization
 
-![image](./apps/docs/public/cell_opitimization.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization.gif)
 
 ### Prompt Cell
 
@@ -94,7 +94,7 @@ For more details, please refer to [quick start](./apps/docs/docs/quickstart/inde
 
 For more details, please refer to [prompt cell manual](./apps/docs/docs/manual/prompt-cell.md)。
 
-![image](./apps/docs/public/prompt_cell.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell.gif)
 
 
 ### Sql Cell
@@ -104,11 +104,11 @@ For more details, please refer to [prompt cell manual](./apps/docs/docs/manual/p
 
 For more details, please refer to [sql cell manual](./apps/docs/docs/manual/sql-cell.md)。
 
-![image](./apps/docs/public/sql_cell.gif)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_cell.gif)
 
 ## Technical Architecture
 
-![image](./apps/docs/public/technical%20_architecture.png)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical%20_architecture.png)
 
 ## Future Plans
 
