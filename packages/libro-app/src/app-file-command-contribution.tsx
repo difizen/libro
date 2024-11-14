@@ -16,7 +16,7 @@ import { message } from 'antd';
 export const AppFileCommands = {
   OPEN_FILE_BY_LIBRO_APP: {
     id: 'fileTree.command.openfilebyapp',
-    label: '以 App 的形式打开',
+    label: '以报告的形式打开',
   },
 };
 
