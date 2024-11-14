@@ -11,6 +11,10 @@ import { PromptScript } from './prompt-cell-script.js';
 import { LibroPromptCellView } from './prompt-cell-view.js';
 import { LibroPromptOutputMimeTypeContribution } from './prompt-output-rendermime-contribution.js';
 
+export const LibroPromptCellModuleSetting = {
+  loadable: true,
+};
+
 export const LibroPromptCellModule = ManaModule.create()
   .register(
     PromptCellContribution,
@@ -35,4 +39,5 @@ export const LibroPromptCellModule = ManaModule.create()
       },
     },
   )
+  .canload(() => Promise.resolve(LibroPromptCellModuleSetting.loadable))
   .dependOn(LibroModule, OutputModule, LibroRenderMimeModule);
