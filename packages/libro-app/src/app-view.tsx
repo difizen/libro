@@ -131,6 +131,11 @@ export class LibroAppView extends BaseView {
     if (!libroView) {
       return;
     }
+    libroView.model.cellsEditable = false;
+    libroView.model.runnable = false;
+    libroView.model.inputEditable = false;
+    libroView.model.outputEditable = false;
+    libroView.model.savable = false;
     this.libroView = libroView;
     await this.libroView.initialized;
   }
