@@ -1,11 +1,6 @@
+import { FileTreeContextMenuGroups, JupyterFileService } from '@difizen/libro-jupyter';
+import type { CommandRegistry, MenuRegistry, ViewManager } from '@difizen/mana-app';
 import {
-  FileTreeContextMenuGroups,
-  FileView,
-  JupyterFileService,
-} from '@difizen/libro-jupyter';
-import type { CommandRegistry, MenuRegistry } from '@difizen/mana-app';
-import {
-  ViewManager,
   ConfigurationService,
   CommandContribution,
   FileStatNode,
@@ -36,21 +31,6 @@ export class AppFileCommandContribution
   @inject(ModalService) modalService: ModalService;
   @inject(OpenerService) protected openService: OpenerService;
   @inject(ConfigurationService) configurationService: ConfigurationService;
-
-  fileView: FileView;
-
-  constructor(@inject(ViewManager) viewManager: ViewManager) {
-    this.viewManager = viewManager;
-    this.viewManager
-      .getOrCreateView(FileView)
-      .then((view) => {
-        this.fileView = view;
-        return;
-      })
-      .catch(() => {
-        //
-      });
-  }
 
   registerMenus(menu: MenuRegistry) {
     menu.registerMenuAction(FileTreeContextMenuGroups['new'], {
