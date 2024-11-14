@@ -7,7 +7,7 @@ order: 2
 
 The toolbar in Libro is an important part of the entire Libro UI interface, containing a series of buttons that help users quickly access commonly used features. By default, it is displayed at the top of the editor and to the right of the selected cell.
 
-<img src="../../public/toolbar.png" width="800" />
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/toolbar.png" width="800" />
 
 ### How to Register Custom Toolbar Buttons?
 

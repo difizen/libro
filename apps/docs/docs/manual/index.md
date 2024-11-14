@@ -18,7 +18,7 @@ The Libro Editor enhances the state monitoring of traditional Notebook operation
 
 ### Top Toolbar
 
-<img src="../../public/top_toolbar.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/top_toolbar.png" alt="alt text" width="800">
 
 | No. | Name                   | Description                                                                                                |
 | --- | ---------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -32,7 +32,7 @@ The Libro Notebook uses Python 3 as the base kernel, responsible for executing t
 
 - Kernel Edit Menu
 
-<img src="../../public/kernel_menu.png" alt="alt text" width="300">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/kernel_menu.png" alt="alt text" width="300">
 
 | Menu Option                       | Description                                                                                             |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -45,48 +45,48 @@ Note: The kernel is an engine that executes computations, capable of running pro
 - Kernel Status  
   The kernel status in Libro can be connecting, unknown, busy, or idle.
 
-<img src="../../public/connecting.png" alt="alt text" width="80"> The Libro Notebook is connecting to the kernel, which occurs when starting the kernel or attempting to connect after the kernel becomes unresponsive.
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/connecting.png" alt="alt text" width="80"> The Libro Notebook is connecting to the kernel, which occurs when starting the kernel or attempting to connect after the kernel becomes unresponsive.
 
-<img src="../../public/unknown.png" alt="alt text" width="75"> The current status of the kernel is uncertain, possibly due to communication issues or internal errors preventing status information retrieval.
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/unknown.png" alt="alt text" width="75"> The current status of the kernel is uncertain, possibly due to communication issues or internal errors preventing status information retrieval.
 
-<img src="../../public/busy.png" alt="alt text" width="50"> The current kernel is processing code execution tasks, and your newly submitted code or commands will wait until the current task is complete before execution.
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/busy.png" alt="alt text" width="50"> The current kernel is processing code execution tasks, and your newly submitted code or commands will wait until the current task is complete before execution.
 
-<img src="../../public/idle.png" alt="alt text" width="50"> Indicates that the kernel is currently not executing any tasks and is ready to accept new commands and code execution.
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/idle.png" alt="alt text" width="50"> Indicates that the kernel is currently not executing any tasks and is ready to accept new commands and code execution.
 
 #### Operation Control Area
 
-| Icon                                                                 | Description                                                                                                                     |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| <img src="../../public/save.png" alt="alt text" width="30">          | Save changes made to the Cell contents in the current Notebook.                                                                 |
-| <img src="../../public/run.png" alt="alt text" width="36">           | Execute the selected range of Cells according to submenu options, such as executing all Cells, executing the current Cell, etc. |
-| <img src="../../public/loc.png" alt="alt text" width="36">           | Locate the currently executing Cell.                                                                                            |
-| <img src="../../public/interrupt.png" alt="alt text" width="36">     | Interrupt the code of the currently executing Cell.                                                                             |
-| <img src="../../public/restart.png" alt="alt text" width="36">       | Restart and clear all Cell outputs.                                                                                             |
-| <img src="../../public/undo.png" alt="alt text" width="36">          | Undo the last action.                                                                                                           |
-| <img src="../../public/redo.png" alt="alt text" width="36">          | Redo the last undone action.                                                                                                    |
-| <img src="../../public/output_scroll.png" alt="alt text" width="36"> | Fix the height of the Output display.                                                                                           |
-| <img src="../../public/hide.png" alt="alt text" width="36">          | Hide or show code and Output based on submenu options.                                                                          |
-| <img src="../../public/clear.png" alt="alt text" width="36">         | Clear the output of the selected Cell.                                                                                          |
-| <img src="../../public/change_cell.png" alt="alt text" width="120">  | Change Cell types, such as Python, Markdown, etc.                                                                               |
+| Icon                                                                                                                | Description                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/save.png" alt="alt text" width="30">          | Save changes made to the Cell contents in the current Notebook.                                                                 |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/run.png" alt="alt text" width="36">           | Execute the selected range of Cells according to submenu options, such as executing all Cells, executing the current Cell, etc. |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/loc.png" alt="alt text" width="36">           | Locate the currently executing Cell.                                                                                            |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/interrupt.png" alt="alt text" width="36">     | Interrupt the code of the currently executing Cell.                                                                             |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/restart.png" alt="alt text" width="36">       | Restart and clear all Cell outputs.                                                                                             |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/undo.png" alt="alt text" width="36">          | Undo the last action.                                                                                                           |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/redo.png" alt="alt text" width="36">          | Redo the last undone action.                                                                                                    |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/output_scroll.png" alt="alt text" width="36"> | Fix the height of the Output display.                                                                                           |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/hide.png" alt="alt text" width="36">          | Hide or show code and Output based on submenu options.                                                                          |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/clear.png" alt="alt text" width="36">         | Clear the output of the selected Cell.                                                                                          |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/change_cell.png" alt="alt text" width="120">  | Change Cell types, such as Python, Markdown, etc.                                                                               |
 
 #### Sharing and Keybind
 
-| Icon                                                           | Area Diagram                                                          | Description                                                                                   |
-| -------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| <img src="../../public/keybind.png" alt="alt text" width="36"> | <img src="../../public/keybind_panel.png" alt="alt text" width="300"> | Display keybind operations for command mode and edit mode in Libro, providing Magic commands. |
+| Icon                                                                                                          | Area Diagram                                                                                                         | Description                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/keybind.png" alt="alt text" width="36"> | <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/keybind_panel.png" alt="alt text" width="300"> | Display keybind operations for command mode and edit mode in Libro, providing Magic commands. |
 
 ### Cell Operation Bar
 
 The Notebook supports convenient execution of Cell operations. In the operation bar to the right of each Cell, from top to bottom, there are options to run, move up, move down, add, delete, and access more menus.
 
-| Icon/Button                                                   | Description                                                      |
-| ------------------------------------------------------------- | ---------------------------------------------------------------- |
-| <img src="../../public/run.png" alt="alt text" width="36">    | Run the currently selected code Cell or re-run the code Cell.    |
-| <img src="../../public/up.png" alt="alt text" width="36">     | Move the currently selected code Cell up one position.           |
-| <img src="../../public/down.png" alt="alt text" width="36">   | Move the currently selected code Cell down one position.         |
-| <img src="../../public/add.png" alt="alt text" width="36">    | Add a Cell of the selected type below.                           |
-| <img src="../../public/delete.png" alt="alt text" width="36"> | Delete the currently selected code Cell.                         |
-| <img src="../../public/more.png" alt="alt text" width="36">   | Provide functions to hide code and output, copy, cut, and paste. |
+| Icon/Button                                                                                                  | Description                                                      |
+| ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/run.png" alt="alt text" width="36">    | Run the currently selected code Cell or re-run the code Cell.    |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/up.png" alt="alt text" width="36">     | Move the currently selected code Cell up one position.           |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/down.png" alt="alt text" width="36">   | Move the currently selected code Cell down one position.         |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/add.png" alt="alt text" width="36">    | Add a Cell of the selected type below.                           |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/delete.png" alt="alt text" width="36"> | Delete the currently selected code Cell.                         |
+| <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/more.png" alt="alt text" width="36">   | Provide functions to hide code and output, copy, cut, and paste. |
 
 ### Cell Editing Area
 
@@ -96,7 +96,7 @@ In the Notebook's code editing window, you can add multiple Cells to organize yo
 
 You can freely add specified types of Cells in this area.
 
-![](../../public/cell_between.gif)
+![](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_between.gif)
 
 Note: If you select a Cell without other Cells below it, you can directly add the corresponding type of Cell through the specified button at the bottom. For more details, refer to the bottom Cell section.
 
@@ -104,7 +104,7 @@ Note: If you select a Cell without other Cells below it, you can directly add th
 
 You can view the execution time and results after executing this Cell below it.
 
-<img src="../../public/cell_output.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_output.png" alt="alt text" width="800">
 
 Note: Currently, only Python Cells and Prompt Cells support output content, while others are for illustrative and display purposes.
 
@@ -112,13 +112,13 @@ Note: Currently, only Python Cells and Prompt Cells support output content, whil
 
 If the output content is lengthy, you can choose to fix or unfix the height of the output window for an optimal viewing experience.
 
-<img src="../../public/cell_output_scroll.gif" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_output_scroll.gif" alt="alt text" width="800">
 
 #### Bottom Cell
 
 The bottom of the last Cell in the experiment file provides an explicit button to add a Cell of the specified type.
 
-<img src="../../public/cell_bottom.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_bottom.png" alt="alt text" width="800">
 
 Note: Additionally, you can add Cells in the Cell linking area or the Cell operation bar, and switch Cell types through the Cell control area.
 
@@ -126,10 +126,10 @@ Note: Additionally, you can add Cells in the Cell linking area or the Cell opera
 
 On the right side of the top toolbar, you can view keybinds to see or search for all keybind functions and Notebook Magic commands within the product. Here are a few common operations:
 
-<img src="../../public/keybind.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/keybind.png" alt="alt text" width="800">
 <br/>
 
-<img src="../../public/keybind_panel_o.png" alt="alt text" width="300">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/keybind_panel_o.png" alt="alt text" width="300">
 
 ### Command Mode | Edit Mode
 
@@ -137,11 +137,11 @@ The Notebook distinguishes between command mode and edit mode based on operation
 
 - In edit mode, clicking in a blank area of the code editing page or using the Esc key enters command mode, where the border of the currently selected Cell is blue.
 
-<img src="../../public/command_mode.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/command_mode.png" alt="alt text" width="800">
 
 - In command mode, you can enter edit mode by using the Enter key or directly clicking the Cell editing box. The border of the currently selected Cell is highlighted in blue.
 
-<img src="../../public/edit_mode.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/edit_mode.png" alt="alt text" width="800">
 
 Note: For Markdown type Cells, double-clicking with the left mouse button is required to enter edit mode from command mode.
 
@@ -149,7 +149,7 @@ Note: For Markdown type Cells, double-clicking with the left mouse button is req
 
 In command mode, the following common functionalities are supported.
 
-<img src="../../public/command_operation.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/command_operation.png" alt="alt text" width="800">
 
 #### Multi-select Cells
 
@@ -195,16 +195,16 @@ In command mode, you can execute cells using the following keybinds:
 
 <div style="display: flex; align-items: end">
   <span>When you move your mouse to the left side of the cell box, the following style appears:</span>
-  <img src="../../public/drag.webp" style="width: 30px; height: 30px; margin-right: 10px; margin-left: 10px;">
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/drag.webp" style="width: 30px; height: 30px; margin-right: 10px; margin-left: 10px;">
   <span>You can then drag the current cell.</span>
 </div>
 
 - **Dragging a Single Cell** (regardless of command or edit mode)  
   When you move your mouse to the left side of the target cell and the style appears, you can drag it.
 
-<img src="../../public/drag_area.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/drag_area.png" alt="alt text" width="800">
 <br/>
-<img src="../../public/drag.gif" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/drag.gif" alt="alt text" width="800">
 
 Note: During dragging, the blue horizontal bar serves as a positioning marker, indicating where you are dragging to, below the blue bar.
 
@@ -215,7 +215,7 @@ Note: During dragging, the blue horizontal bar serves as a positioning marker, i
 
 In edit mode, the following common functionalities are supported.
 
-<img src="../../public/edit_operation.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/edit_operation.png" alt="alt text" width="800">
 
 #### Splitting Cells
 
@@ -257,11 +257,11 @@ Clicking on the long bar to the left of the cell allows you to hide or show the 
 
 #### Hiding and Showing Cell Input Sections
 
-<img src="../../public/hide_input.gif" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/hide_input.gif" alt="alt text" width="800">
 
 #### Hiding and Showing Cell Output Sections
 
-<img src="../../public/hide_output.gif" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/hide_output.gif" alt="alt text" width="800">
 
 ## Introduction to Cells
 
@@ -269,7 +269,7 @@ Clicking on the long bar to the left of the cell allows you to hide or show the 
 
 A Python cell is the smallest unit for editing and debugging Python code in the notebook, primarily featuring the following functionalities:
 
-<img src="../../public/python_cell.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/python_cell.png" alt="alt text" width="800">
 
 | Function                       | Description                                                                                                                  |
 | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -281,7 +281,7 @@ A Python cell is the smallest unit for editing and debugging Python code in the 
 
 ### Markdown Cell
 
-<img src="../../public/markdown_cell.png" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/markdown_cell.png" alt="alt text" width="800">
 
 | Function             | Description                                                                                         |
 | -------------------- | --------------------------------------------------------------------------------------------------- |
@@ -293,4 +293,4 @@ A Python cell is the smallest unit for editing and debugging Python code in the 
 
 Note: Additionally, support for hiding and revealing Markdown cells based on headings helps you better organize and view the notebook.
 
-<img src="../../public/markdown_hide.gif" alt="alt text" width="800">
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/markdown_hide.gif" alt="alt text" width="800">
