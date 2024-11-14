@@ -34,7 +34,7 @@ https://libro.difizen.net/
 # libro 有哪些特性？
 
 libro 是一个开箱即用的产品解决方案，用户可以根据需求自由组合 libro 原生模块。它提供灵活的场景定制能力，并且内置了丰富的周边功能。
-<img src="../../public/libro_feature_zh.png" width="1000px"/>
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_feature_zh.png" width="1000px"/>
 
 ## 方便定制
 
@@ -43,15 +43,15 @@ libro 构建了一套开放的自定义 UI 和执行内核能力，所有层次�
 它支持定制多种表现形态，支持 SQL 、Prompt 等不同形态的 cell，支持仅作为文档编辑器使用，也可作为报告形态，方便随时做演示 Demo。
 
 强大的内核定制能力使得 libro 支持原生 jupyter 执行能力的同时，也可方便的定制面向 SQL 执行的 ODPS 环境、面向隐私计算场景的多节点调试执行环境等。
-<img src="../../public/sql_prompt.png" width="1000px"/>
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_prompt.png" width="1000px"/>
 
 ## 功能丰富
 
 libro 提供完整 notebook 能力，并且内置了许多丰富的功能特性，例如支持智能助手 AI 对话功能；面向 Python 提供更优异的代码提示、补全、格式化、定义跳转等功能；支持 cell 级别的代码版本 Diff 能力；支持轻应用形态，结合交互控件动态生成报告等。
 
-<img src="../../public/copilot_tip.png" width="1000px"/>
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/copilot_tip.png" width="1000px"/>
 
-<img src="../../public/diff_app.png" width="1000px"/>
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/diff_app.png" width="1000px"/>
 
 # libro 的架构设计
 
@@ -62,7 +62,7 @@ libro 采用分层建设：
 - 执行层：由于不同的场景、jupyter 服务的不同版本、甚至非 jupyter 的自定义执行方式等均需要兼容，所以执行层更多的是定义行为规范，而非给出具体实现。
 - 视图层：视图层是灵活度最高、抽象最多的层次，其中提供了可扩展的 cell、可扩展的输出类型；内置了 jupyter 原生 cell、原生 output。
 - 外延层：基于 libro 的核心模块提供的高质量的周边功能。
-  <img src="../../public/technical _architecture_zh.png" width="1000px"/>
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical _architecture_zh.png" width="1000px"/>
 
 # 面向未来
 
