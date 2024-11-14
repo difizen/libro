@@ -44,6 +44,9 @@ export const AppViewComponent = forwardRef(function LibroAppComponent() {
     children = (
       <div className="libro-app-cell-list">
         {instance.libroView?.model.cells.map((cell) => {
+          if (cell.collapsedHidden) {
+            return null;
+          }
           if (ExecutableCellView.is(cell)) {
             return <ViewRender view={cell.outputArea} key={cell.id}></ViewRender>;
           } else {
