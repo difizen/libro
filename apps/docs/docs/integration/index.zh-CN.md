@@ -55,7 +55,7 @@ export default defineConfig({
 ### 集成 Lab 研发环境
 
 <img
-    src="../../public/libro.png"
+    src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro.png"
     width="1200"
 />
 
@@ -120,7 +120,7 @@ export default App;
 ### 集成 Notebook 编辑器
 
 <img
-    src="../../public/libro_editor_zh.png"
+    src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_editor_zh.png"
     width="1000"
 />
 
