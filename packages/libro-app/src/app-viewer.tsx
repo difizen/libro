@@ -2,7 +2,6 @@ import type { LibroView } from '@difizen/libro-jupyter';
 import { PlusOutlined } from '@difizen/libro-jupyter';
 import { ArrowDown, ArrowRight, CellCollapsible } from '@difizen/libro-jupyter';
 import { ExecutableCellView } from '@difizen/libro-jupyter';
-import { LibroJupyterView } from '@difizen/libro-jupyter';
 import { LibroService } from '@difizen/libro-jupyter';
 import type { NavigatableView } from '@difizen/mana-app';
 import { ViewRender } from '@difizen/mana-app';
@@ -24,7 +23,6 @@ import {
 } from '@difizen/mana-app';
 import type { RadioChangeEvent } from 'antd';
 import { Button } from 'antd';
-import { Spin } from 'antd';
 import { Radio } from 'antd';
 import type { ReactElement } from 'react';
 import { forwardRef } from 'react';
@@ -48,65 +46,50 @@ export const AppViewerComponent = forwardRef(function LibroEditorComponent() {
       <ViewRender view={instance.libroView}></ViewRender>
     ) : null;
   } else {
-    if (instance.executing) {
-      children = (
-        <Spin spinning={instance.executing} tip={`${instance.executeMessage}`}>
-          <div style={{ height: 200, width: '100%' }}></div>
-        </Spin>
-      );
-    } else {
-      if (instance.succeed) {
-        children = (
-          <div className="libro-app-cell-list">
-            {instance.libroView?.model.cells.map((cell) => {
-              if (ExecutableCellView.is(cell)) {
-                return <ViewRender view={cell.outputArea} key={cell.id}></ViewRender>;
-              } else {
-                const isCollapsible = CellCollapsible.is(cell);
-                return (
-                  <>
-                    {instance.libroView?.collapserVisible && isCollapsible && (
-                      <div className="libro-app-cell-container">
-                        <div
-                          className="libro-markdown-collapser"
-                          onClick={() => {
-                            instance.libroView?.collapseCell(
-                              cell,
-                              !cell.headingCollapsed,
-                            );
-                          }}
-                        >
-                          {cell.headingCollapsed ? <ArrowRight /> : <ArrowDown />}
+    children = (
+      <div className="libro-app-cell-list">
+        {instance.libroView?.model.cells.map((cell) => {
+          if (ExecutableCellView.is(cell)) {
+            return <ViewRender view={cell.outputArea} key={cell.id}></ViewRender>;
+          } else {
+            const isCollapsible = CellCollapsible.is(cell);
+            return (
+              <>
+                {instance.libroView?.collapserVisible && isCollapsible && (
+                  <div className="libro-app-cell-container">
+                    <div
+                      className="libro-markdown-collapser"
+                      onClick={() => {
+                        instance.libroView?.collapseCell(cell, !cell.headingCollapsed);
+                      }}
+                    >
+                      {cell.headingCollapsed ? <ArrowRight /> : <ArrowDown />}
+                    </div>
+                    <ViewRender view={cell}></ViewRender>
+                    {isCollapsible &&
+                      cell.headingCollapsed &&
+                      cell.collapsibleChildNumber > 0 && (
+                        <div className="libro-cell-collapsed-expander">
+                          <Button
+                            className="libro-cell-expand-button"
+                            onClick={() =>
+                              instance.libroView?.collapseCell(cell, false)
+                            }
+                            icon={<PlusOutlined className="" />}
+                            type="default"
+                          >
+                            {cell.collapsibleChildNumber} cell hidden
+                          </Button>
                         </div>
-                        <ViewRender view={cell}></ViewRender>
-                        {isCollapsible &&
-                          cell.headingCollapsed &&
-                          cell.collapsibleChildNumber > 0 && (
-                            <div className="libro-cell-collapsed-expander">
-                              <Button
-                                className="libro-cell-expand-button"
-                                onClick={() =>
-                                  instance.libroView?.collapseCell(cell, false)
-                                }
-                                icon={<PlusOutlined className="" />}
-                                type="default"
-                              >
-                                {cell.collapsibleChildNumber} cell hidden
-                              </Button>
-                            </div>
-                          )}
-                      </div>
-                    )}
-                  </>
-                );
-              }
-            })}
-          </div>
-        );
-      } else {
-        children = <span>{instance.executeMessage}</span>;
-      }
-    }
+                      )}
+                  </div>
+                )}
+              </>
+            );
+          }
+        })}
+      </div>
+    );
   }
   return (
     <div className="libro-app-container">
@@ -134,14 +117,6 @@ export class LibroAppViewer extends BaseView implements NavigatableView {
 
   @prop()
   libroView?: LibroView;
-
-  @prop() executeMessage?: string;
-
-  @prop() executing = false;
-
-  @prop() executed: number;
-
-  @prop() succeed?: boolean = undefined;
 
   @prop()
   mode = 'app';
@@ -180,7 +155,6 @@ export class LibroAppViewer extends BaseView implements NavigatableView {
     }
     this.libroView = libroView;
     await this.libroView.initialized;
-    this.execute();
     this.defer.resolve();
   }
 
@@ -192,25 +166,5 @@ export class LibroAppViewer extends BaseView implements NavigatableView {
     this.filePath = resourceUri.path.toString();
     this.getOrCreateLibroView();
     return resourceUri;
-  }
-
-  async execute() {
-    if (!(this.libroView instanceof LibroJupyterView)) {
-      this.executeMessage = '无法执行';
-      this.succeed = false;
-      return;
-    }
-    try {
-      this.executing = true;
-      this.executeMessage = '准备 kernel...';
-      await this.libroView.model.kcReady;
-      this.executeMessage = '正在执行...';
-      // TODO: use runCells result
-      await this.libroView.runCells(this.libroView.model.cells);
-      this.succeed = true;
-      this.executing = false;
-    } catch (e) {
-      console.error(e);
-    }
   }
 }
