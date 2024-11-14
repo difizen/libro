@@ -4,10 +4,10 @@ import { ArrowDown, ArrowRight, CellCollapsible } from '@difizen/libro-jupyter';
 import { ExecutableCellView } from '@difizen/libro-jupyter';
 import { LibroService } from '@difizen/libro-jupyter';
 import type { NavigatableView } from '@difizen/mana-app';
-import { ViewRender } from '@difizen/mana-app';
 import {
   BaseView,
   inject,
+  ViewRender,
   LabelProvider,
   prop,
   transient,
@@ -21,9 +21,9 @@ import {
   URI,
   CommandRegistry,
 } from '@difizen/mana-app';
+import { l10n } from '@difizen/mana-l10n';
 import type { RadioChangeEvent } from 'antd';
-import { Button } from 'antd';
-import { Radio } from 'antd';
+import { Radio, Button } from 'antd';
 import type { ReactElement } from 'react';
 import { forwardRef } from 'react';
 import './index.less';
@@ -95,7 +95,7 @@ export const AppViewerComponent = forwardRef(function LibroEditorComponent() {
     <div className="libro-app-container">
       <div className="libro-app-container-header">
         <Radio.Group value={instance.mode} onChange={handleSizeChange}>
-          <Radio.Button value="app">应用预览</Radio.Button>
+          <Radio.Button value="app">{l10n.t('报告预览')}</Radio.Button>
           <Radio.Button value="notebook">notebook</Radio.Button>
         </Radio.Group>
       </div>
