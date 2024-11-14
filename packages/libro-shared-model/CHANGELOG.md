@@ -1,5 +1,16 @@
 # @difizen/libro-shared-model
 
+## 0.3.0
+
+### Minor Changes
+
+- [#304](https://github.com/difizen/libro/pull/304) [`19f0028`](https://github.com/difizen/libro/commit/19f00281da4998fdf555318a0d7840a80cc066cf) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - feat: ai inline completion and report format
+
+### Patch Changes
+
+- Updated dependencies [[`19f0028`](https://github.com/difizen/libro/commit/19f00281da4998fdf555318a0d7840a80cc066cf)]:
+  - @difizen/libro-common@0.3.0
+
 ## 0.2.45
 
 ### Patch Changes
