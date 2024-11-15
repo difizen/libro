@@ -1,3 +1,4 @@
+import type { ThemeChangeEvent, Event } from '@difizen/mana-app';
 import { ColorRegistry, ThemeService } from '@difizen/mana-app';
 import { inject, singleton } from '@difizen/mana-app';
 import type { ITheme } from 'xterm';
@@ -146,7 +147,8 @@ export class TerminalThemeService {
   @inject(ColorRegistry)
   protected readonly colorRegistry: ColorRegistry;
 
-  readonly onDidChange = ThemeService.get().onDidColorThemeChange;
+  readonly onDidChange: Event<ThemeChangeEvent> =
+    ThemeService.get().onDidColorThemeChange;
 
   get theme(): ITheme {
     const foregroundColor = this.colorRegistry.getCurrentColor('terminal.foreground');
