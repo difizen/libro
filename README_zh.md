@@ -70,7 +70,7 @@ pip install libro
 
 - AI 对话
   - 基于 Cell 上下文对话
-  
+
 ![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat_zh.gif)
 
   - 通用对话
@@ -110,7 +110,7 @@ pip install libro
 
 ## 架构
 
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical%20_architecture_zh.png)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical_architecture_zh.png)
 
 ## 后续计划
 
