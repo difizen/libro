@@ -115,13 +115,13 @@ const downloadPublicAssets = async () => {
 
 const LIBRO_DEPLOY_ENV = process.env.LIBRO_DEPLOY_ENV;
 const isVercelEnv = LIBRO_DEPLOY_ENV === 'vercel';
+
 export default (api: IApi) => {
   if (isVercelEnv) {
     console.info('[deploy]: vercel environment');
     const exampleDir = path.resolve(__dirname, 'docs/examples');
-    const targetDir = path.resolve(__dirname, 'docs/_examples');
     if (fs.existsSync(exampleDir)) {
-      fs.renameSync(exampleDir, targetDir);
+      fs.rmdirSync(exampleDir, { recursive: true });
     }
     return downloadPublicAssets();
   }
