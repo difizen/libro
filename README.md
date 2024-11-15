@@ -68,8 +68,8 @@ For more details, please refer to [quick start](./apps/docs/docs/quickstart/inde
 ![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug.gif)
 
 - Chat
-  - Contextual Chat in Cells  
-  
+  - Contextual Chat in Cells
+
 ![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat.gif)
 
   - General AI Chat
@@ -108,7 +108,7 @@ For more details, please refer to [sql cell manual](./apps/docs/docs/manual/sql-
 
 ## Technical Architecture
 
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical%20_architecture.png)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical_architecture.png)
 
 ## Future Plans
 
