@@ -1,7 +1,9 @@
 import { l10n } from '@difizen/mana-l10n';
 import { useSiteData, Link } from 'dumi';
 import React from 'react';
+
 import './index.less';
+import { IS_MOBILE } from '../../layouts/DocLayout.js';
 
 type DatumType = {
   title: string;
@@ -12,7 +14,26 @@ type DatumType = {
 };
 
 const Footer: React.FC = () => {
+  const isMobile = localStorage.getItem(IS_MOBILE) === 'true';
   const { themeConfig } = useSiteData();
+  const mobileLinks = [
+    {
+      name:  l10n.t('official website'),
+      link: 'https://libro.difizen.net/',
+    },
+    {
+      name: l10n.t('Github address'),
+      link: 'https://github.com/difizen/libro',
+    },
+  ]
+
+  const mobileQrcodes = [
+    {
+      name: l10n.t('DingTalk'),
+      qrcode: '/ding-qrcode.png',
+    },
+  ];
+
   const links = [
     {
       title: l10n.t('Related'),
@@ -57,7 +78,28 @@ const Footer: React.FC = () => {
     },
   ];
 
-  return (
+  return isMobile ? (
+    <div className="difizen-dumi-footer">
+      <div className="difizen-dumi-footer-content">
+        <div className="difizen-dumi-footer-text-group px-8">
+          <h3 className="mb-4 text-3xl font-bold tracking-tight text-primary sm:text-4xl">{l10n.t('Contact Us：')}</h3>
+          {mobileLinks.map((link, i) => (
+            <p className="text-muted-foreground difizen-dumi-footer-item" key={i}>
+              <a href={link.link} target="_blank" rel="noreferrer" key={i}>
+                {link.name}：{link.link}
+              </a>
+            </p>
+          ))}
+          {mobileQrcodes.map((item: { name: string; qrcode: string }) => (
+            <div key={item.name}>
+              <img className="difizen-dumi-footer-img" src={item.qrcode} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="difizen-dumi-footer-extra">{themeConfig.footer}</div>
+    </div>
+  ) : (
     <div className="difizen-dumi-footer">
       <div className="difizen-dumi-footer-content">
             <div className="difizen-dumi-footer-logo">

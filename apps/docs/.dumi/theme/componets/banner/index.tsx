@@ -1,6 +1,7 @@
 import { l10n } from '@difizen/mana-l10n';
 import React from 'react';
 
+import { IS_MOBILE } from '../../layouts/DocLayout.js';
 import type { FeatureProps} from './constants';
 import { FeatureSection } from './feature-section';
 import { HeroSection } from './hero-section';
@@ -8,7 +9,7 @@ import './index.less';
 import { IntergractionSection } from './intergration';
 
 const Banner: React.FC = () => {
-
+  const isMobile = localStorage.getItem(IS_MOBILE) === 'true';
 
   const firstfeatures: FeatureProps[] = [
     {
@@ -35,6 +36,26 @@ const Banner: React.FC = () => {
     },
   ];
 
+  const mobileSecondfeatures: FeatureProps[] = [
+    {
+      title: 'AI Copilot',
+      description: l10n.t('AI programming assistant to help your notebook experience~'),
+      url: '/libroai',
+      isImageLeft: true,
+    },
+    {
+      title: l10n.t('Notebook as an App'),
+      description: l10n.t('Generate data reports based on notebooks～'),
+      url: '/datareport',
+      isImageLeft: false,
+    },
+    {
+      title: l10n.t('QuantExpert'),
+      description: l10n.t('Intelligent code generation for quantified scenarios~'),
+      url: '/quantexport',
+      isImageLeft: true,
+    }
+  ];
 
   const secondfeatures: FeatureProps[] = [
     {
@@ -67,7 +88,15 @@ const Banner: React.FC = () => {
       isImageLeft: false,
     },
   ];
-  return (
+  return isMobile ? (
+    <div className="difizen-dumi-mobile-banner">
+      <HeroSection></HeroSection>
+      <FeatureSection
+        features={mobileSecondfeatures}
+        title={l10n.t('Exciting features and capabilities')}
+      ></FeatureSection>
+    </div>
+  ) : (
     <div className="difizen-dumi-banner">
       <HeroSection></HeroSection>
       <FeatureSection
