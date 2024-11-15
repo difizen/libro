@@ -1,6 +1,6 @@
 {
   "name": "@difizen/libro-code-editor",
-  "version": "0.2.44",
+  "version": "0.3.0",
   "description": "",
   "keywords": [
     "libro",
@@ -45,16 +45,16 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
+    "@difizen/libro-common": "^0.3.0",
     "@difizen/mana-app": "latest",
     "@difizen/mana-l10n": "latest",
-    "@difizen/libro-common": "^0.2.44",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   },
   "peerDependencies": {
     "react": ">=16"
   },
   "devDependencies": {
-    "@types/react": "^18.2.25",
-    "@types/uuid": "^9.0.2"
+    "@types/react": "^18.3.12",
+    "@types/uuid": "^9.0.8"
   }
 }

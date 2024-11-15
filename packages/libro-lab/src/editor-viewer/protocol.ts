@@ -22,6 +22,8 @@ export const textFileTypes: string[] = [
   '.json',
   '.jsonl',
   '.md',
+  '.r',
+  '.jl',
   '',
 ];
 

@@ -28,7 +28,7 @@ llm:
 
 当 Cell 执行出现报错时，点击 “Fix with AI” 按钮，助手会自动分析错误并给出修复建议，点击“取消”按钮退出报错修复模式。
 
-<img src="../../public/error_debug_zh.gif" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug_zh.gif" alt="alt text" width="1000" >
 
 ## AI 对话
 
@@ -36,20 +36,20 @@ llm:
 
 从 Cell 右侧工具栏对话按钮唤起，你可以直接与 AI 进行互动，获得与当前代码相关的深入解答和优化建议，提升编程效率。
 
-<img src="../../public/cell_chat_zh.gif" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat_zh.gif" alt="alt text" width="1000" >
 
 ### 通用对话
 
 从顶部右侧工具栏唤起，你可以与 AI 进行开放式对话，询问编程相关问题，获取建议和信息，享受智能互动的乐趣。
 
-<img src="../../public/ai_chat_zh.gif" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_chat_zh.gif" alt="alt text" width="1000" >
 
 ### 代码解释
 
 从 Cell 右侧工具栏的魔法符号唤起，帮助理解 Cell 中代码的功能和逻辑。
-<img src="../../public/ai_chat_zh.gif" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_chat_zh.gif" alt="alt text" width="1000" >
 
 ### 代码优化
 
 从 Cell 右侧工具栏的魔法符号唤起，分析单元格（cell）中的代码，并提供优化建议。
-<img src="../../public/cell_opitimization_zh.gif" alt="alt text" width="1000" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization_zh.gif" alt="alt text" width="1000" >

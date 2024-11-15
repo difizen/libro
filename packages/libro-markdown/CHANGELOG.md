@@ -1,5 +1,17 @@
 # @difizen/libro-markdown
 
+## 0.3.0
+
+### Minor Changes
+
+- [#304](https://github.com/difizen/libro/pull/304) [`19f0028`](https://github.com/difizen/libro/commit/19f00281da4998fdf555318a0d7840a80cc066cf) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - feat: ai inline completion and report format
+
+## 0.2.45
+
+### Patch Changes
+
+- [#297](https://github.com/difizen/libro/pull/297) [`caa80ee`](https://github.com/difizen/libro/commit/caa80eeefa907d15344e69a33c81c46af063b365) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - 1. support r and julia editor 2. configurable left-side panel supported 3. disable confine editor contextmenu
+
 ## 0.2.44
 
 ### Patch Changes

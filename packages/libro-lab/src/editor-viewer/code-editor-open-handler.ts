@@ -13,8 +13,9 @@ export class CodeEditorViewerOpenHandler extends NavigatableViewOpenHandler<Code
 
   id = CodeEditorViewerFactory;
 
+  // TODO: 支持打开的文件扩展
   canHandle(uri: URI, options?: ViewOpenHandlerOptions) {
-    if (uri.scheme === 'file' && textFileTypes.includes(uri.path.ext)) {
+    if (uri.scheme === 'file' && textFileTypes.includes(uri.path.ext.toLowerCase())) {
       return 100;
     }
     return Priority.IDLE;

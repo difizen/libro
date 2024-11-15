@@ -63,36 +63,36 @@ jpserver_extensions:
 1. Query product sales  
    We start by using SQL to calculate the sales quantity and total revenue for each product. This query returns the sales quantity and total revenue for each product, with the results saved in a Pandas DataFrame.
 
-<img src="../../public/df_sales.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/df_sales.png" alt="alt text" width="600" >
 
 2. Visualize product sales performance  
    We can visualize product sales using Python visualization tools such as Matplotlib or Seaborn. This histogram provides a quick overview of the platform’s best-selling products.
 
-<img src="../../public/vis_sales.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/vis_sales.png" alt="alt text" width="600" >
 
 ### Example 2: Analyzing Customer Purchasing Behavior
 
 1. Calculate the number of orders, total spend, and average order value for each customer  
    Using SQL, we calculate each customer’s total spending and average order value. This query returns the number of orders, total spend, and average order value for each customer, allowing us to identify loyal customers and understand their purchasing habits.
 
-<img src="../../public/df_customers.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/df_customers.png" alt="alt text" width="600" >
 
 2. Data Analysis  
    We can further analyze this data in Python to identify customer spending patterns, such as identifying high-value customers.
 
-<img src="../../public/high_value_customers.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/high_value_customers.png" alt="alt text" width="600" >
 
 ### Example 3: Identifying the Best Sales Month
 
 1. Query total sales by month  
    We analyze the platform’s best sales month over time. This query returns the total monthly sales, sorted in descending order, allowing you to see which months had the highest sales.
 
-<img src="../../public/df_monthly_sales.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/df_monthly_sales.png" alt="alt text" width="600" >
 
 2. Visualize monthly sales trends  
    We can visualize the monthly sales data as a line chart. This line chart helps you easily see the monthly sales trend, providing insights to adjust inventory and marketing strategies.
 
-<img src="../../public/df_monthly_sales_revnue.png" alt="alt text" width="600" >
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/df_monthly_sales_revnue.png" alt="alt text" width="600" >
 
 # Conclusion
 

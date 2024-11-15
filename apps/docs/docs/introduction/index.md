@@ -34,7 +34,7 @@ We are launching libro as open source, hoping to receive feedback from different
 # What features does libro have?
 
 libro is a turnkey product solution, allowing users to freely combine libro native modules based on their needs. It offers flexible scenario customization capabilities and is built-in with rich peripheral functions.
-<img src="../../public/libro_feature.png" width="1000px"/>
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_feature.png" width="1000px"/>
 
 ## Easy Customization
 
@@ -43,15 +43,15 @@ libro has developed an open set of UI and execution kernel customizations, allow
 It supports customization of various forms, supports cells in different forms such as SQL and Prompt, can be used solely as a document editor, or in report form, making it convenient for demo presentations anytime.
 
 Powerful kernel customization capabilities enable libro to support native Jupyter execution capabilities while also facilitating customization for SQL execution environments like ODPS, multi-node debugging execution environments for privacy computing scenarios, etc.
-<img src="../../public/sql_prompt.png" width="1000px"/>
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_prompt.png" width="1000px"/>
 
 ## Rich Features
 
 libro provides complete notebook capabilities and is equipped with many rich feature sets, such as supporting intelligent assistant AI dialogue functions; offering better Python code suggestions, completion, formatting, and definition jump functions; supporting cell-level code version Diff capabilities; supporting lightweight application forms, combining interactive controls to dynamically generate reports, etc.
 
-<img src="../../public/copilot_tip.png" width="1000px"/>
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/copilot_tip.png" width="1000px"/>
 
-<img src="../../public/diff_app.png" width="1000px"/>
+<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/diff_app.png" width="1000px"/>
 
 # The architecture design of libro
 
@@ -62,7 +62,7 @@ libro adopts layered construction:
 - Execution Layer: Since different scenarios, different versions of Jupyter services, and even non-Jupyter custom execution methods need to be compatible, the execution layer is more about defining behavior specifications rather than providing specific implementations.
 - View Layer: The view layer is the most flexible and abstract layer, offering extensible cells and output types; it is built-in with native Jupyter cells and native outputs.
 - Extension Layer: Provides high-quality peripheral functions based on the core modules of libro.
-  <img src="../../public/technical _architecture.png" width="1000px"/>
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical _architecture.png" width="1000px"/>
 
 # Facing the Future
 

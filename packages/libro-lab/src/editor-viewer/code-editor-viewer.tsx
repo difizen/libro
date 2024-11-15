@@ -88,7 +88,7 @@ export class CodeEditorViewer extends BaseView implements NavigatableView, Savea
     this.title.label = uri.path.base;
     this.languageSpecRegistry = languageSpecRegistry;
     this.languageSpec = this.languageSpecRegistry.languageSpecs.find((item) =>
-      item.ext.includes(uri.path.ext),
+      item.ext.includes(uri.path.ext.toLowerCase()),
     );
     configurationService
       .get(LibroConfigAutoSave)

@@ -35,6 +35,7 @@ export function LibroAINativeForCellRender() {
   const libroAINativeService = useInject<LibroAINativeService>(LibroAINativeService);
 
   const msgItem = useObserve(instance.libroAIChatMessageItemModel);
+
   if (!instance.showAI) {
     return null;
   }
@@ -92,6 +93,7 @@ export class LibroAINativeForCellView extends BaseView {
   showAI = false;
   constructor(@inject(ViewOption) options: IAINativeForCellViewOption) {
     super();
+
     this.cell = options.cell;
   }
 
