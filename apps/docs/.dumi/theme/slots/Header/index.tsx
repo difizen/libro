@@ -6,17 +6,19 @@ import { Button } from 'antd';
 import { useRouteMeta, Link, usePrefersColor, useSiteData, history} from 'dumi';
 import type { SocialTypes } from 'dumi/dist/client/theme-api/types.js';
 import HeaderExtra from 'dumi/theme/slots/HeaderExtra';
-import Navbar from 'dumi/theme/slots/Navbar';
 import SearchBar from 'dumi/theme/slots/SearchBar';
 import SocialIcon from 'dumi/theme/slots/SocialIcon';
 import React, { useEffect, useMemo, useState } from 'react';
 
+import { IS_MOBILE } from '../../layouts/DocLayout.js';
 import { Github } from '../../modules/github.js';
 
+import Navigation from './Navigation';
 import './default.less';
 import './index.less';
 
 const Header: React.FC = () => {
+  const isMobile = localStorage.getItem(IS_MOBILE) === 'true';
   const { frontmatter } = useRouteMeta();
   const [showMenu, setShowMenu] = useState(false);
   const { themeConfig } = useSiteData();
@@ -67,18 +69,38 @@ const Header: React.FC = () => {
     () =>
       themeConfig.socialLinks
         ? Object.keys(themeConfig.socialLinks)
-            .slice(0, 5)
-            .map((key) => ({
-              icon: key as SocialTypes,
-              link: themeConfig.socialLinks[key as SocialTypes],
-            }))
+          .slice(0, 5)
+          .map((key) => ({
+            icon: key as SocialTypes,
+            link: themeConfig.socialLinks[key as SocialTypes],
+          }))
         : [],
     [themeConfig.socialLinks],
   );
 
+  const onLangChange = () => {
+    const urlPath = window.location.pathname;
+    const currentLang = l10n.getLang();
+    let baseUrlPath = urlPath.startsWith(`/${currentLang}`)
+      ? urlPath.replace(`/${currentLang}`, '')
+      : urlPath;
+    baseUrlPath = baseUrlPath ? baseUrlPath : '/';
+    const targetLang =
+      currentLang === L10nLang.zhCN ? L10nLang.enUS : L10nLang.zhCN;
+
+    l10n.changeLang(targetLang);
+
+    history.push({
+      pathname:
+        targetLang === L10nLang.enUS
+          ? baseUrlPath
+          : `/${targetLang}${baseUrlPath}`,
+    });
+  };
+
   return (
     <div
-      className="dumi-default-header difizen-dumi-header"
+      className={`dumi-default-header ${isMobile ? 'difizen-dumi-mobile-header' : 'difizen-dumi-header'}`}
       data-static={Boolean(frontmatter.hero) || undefined}
       data-mobile-active={showMenu || undefined}
       onClick={() => setShowMenu(false)}
@@ -93,45 +115,27 @@ const Header: React.FC = () => {
             )}
           </div>
         </section>
+        {isMobile && (
+          <Button
+            type="text"
+            className="language"
+            onClick={onLangChange}
+          >
+            {l10n.getLang() === L10nLang.zhCN ? 'EN' : '中文'}
+          </Button>
+        )}
         <section className="dumi-default-header-right difizen-dumi-header-right">
-          <Navbar />
+          {/*<Navbar />*/}
+          <Navigation key="nav" onLangChange={onLangChange} />
           <div className="dumi-default-header-right-aside">
             <SearchBar />
             <Button
               type="text"
-              onClick={() => {
-                const urlPath = window.location.pathname;
-                const currentLang = l10n.getLang();
-                let baseUrlPath = urlPath.startsWith(`/${currentLang}`)
-                  ? urlPath.replace(`/${currentLang}`, '')
-                  : urlPath;
-                baseUrlPath = baseUrlPath ? baseUrlPath : '/';
-                const targetLang =
-                  currentLang === L10nLang.zhCN ? L10nLang.enUS : L10nLang.zhCN;
-
-                l10n.changeLang(targetLang);
-
-                history.push({
-                  pathname:
-                    targetLang === L10nLang.enUS
-                      ? baseUrlPath
-                      : `/${targetLang}${baseUrlPath}`,
-                });
-              }}
+              onClick={onLangChange}
             >
               {l10n.getLang() === L10nLang.zhCN ? 'EN' : '中文'}
             </Button>
 
-            {/* {themeConfig.prefersColor.switch && (
-              <Button
-                type="text"
-                onClick={() => {
-                  const target = prefersColor === 'light' ? 'dark' : 'light';
-                  theme.setCurrentTheme(target);
-                }}
-                icon={prefersColor === 'light' ? <SunOutlined /> : <MoonOutlined />}
-              ></Button>
-            )} */}
             {socialIcons.map((item) => (
               <SocialIcon icon={item.icon} link={item.link} key={item.link} />
             ))}
