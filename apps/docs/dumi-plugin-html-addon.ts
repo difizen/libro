@@ -2,7 +2,7 @@ import type { IApi } from 'umi';
 
 export default (api: IApi) => {
   if (process.env.GOOGLE_ANALYTICS_KEY) {
-    api.addHTMLScripts(
+    api.addHTMLHeadScripts(
       () => `
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_KEY}"></script>
