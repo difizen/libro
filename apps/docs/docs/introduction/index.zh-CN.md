@@ -62,7 +62,7 @@ libro 采用分层建设：
 - 执行层：由于不同的场景、jupyter 服务的不同版本、甚至非 jupyter 的自定义执行方式等均需要兼容，所以执行层更多的是定义行为规范，而非给出具体实现。
 - 视图层：视图层是灵活度最高、抽象最多的层次，其中提供了可扩展的 cell、可扩展的输出类型；内置了 jupyter 原生 cell、原生 output。
 - 外延层：基于 libro 的核心模块提供的高质量的周边功能。
-  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical _architecture_zh.png" width="1000px"/>
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical_architecture_zh.png" width="1000px"/>
 
 # 面向未来
 

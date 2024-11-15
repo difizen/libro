@@ -62,7 +62,7 @@ libro adopts layered construction:
 - Execution Layer: Since different scenarios, different versions of Jupyter services, and even non-Jupyter custom execution methods need to be compatible, the execution layer is more about defining behavior specifications rather than providing specific implementations.
 - View Layer: The view layer is the most flexible and abstract layer, offering extensible cells and output types; it is built-in with native Jupyter cells and native outputs.
 - Extension Layer: Provides high-quality peripheral functions based on the core modules of libro.
-  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical _architecture.png" width="1000px"/>
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical_architecture.png" width="1000px"/>
 
 # Facing the Future
 
