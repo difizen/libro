@@ -63,7 +63,12 @@ export default defineConfig({
     { id: 'en-US', name: 'EN' },
     { id: 'zh-CN', name: '中文' },
   ],
-  plugins: ['@difizen/umi-plugin-mana', './dumi-plugin-alias', './dumi-plugin-deploy'],
+  plugins: [
+    '@difizen/umi-plugin-mana',
+    './dumi-plugin-alias',
+    './dumi-plugin-deploy',
+    './dumi-plugin-html-addon',
+  ],
   mana: {
     decorator: true,
     nodenext: true,
