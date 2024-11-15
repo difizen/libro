@@ -75,9 +75,12 @@ async function downloadResource(url, destination) {
       // httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false })
     });
 
-    if (response.headers['content-type'] !== 'image/gif') {
+    const contentType = response.headers['content-type'];
+    const allowedContentTypes = ['image/gif', 'image/png', 'image/jpeg'];
+
+    if (!allowedContentTypes.includes(contentType)) {
       throw new Error(
-        `Expected image/gif but received ${response.headers['content-type']}`,
+        `Unsupported content type: ${contentType}. Expected one of ${allowedContentTypes.join(', ')}.`,
       );
     }
 
