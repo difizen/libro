@@ -33,6 +33,8 @@ Language: English | [简体中文](./README_zh.md)
 ## Table of Contents
 
 - [Quick Start](#quick-start)
+  - [Install](#install)
+  - [Run](#run)
 - [New Features](#new-features)
   - [AI Capability](#ai-capability)
   - [Prompt Cell](#prompt-cell)
