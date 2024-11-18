@@ -51,11 +51,20 @@ Language: English | [简体中文](./README_zh.md)
 
 ## Quick Start
 
+### Install
 ```bash
 pip install libro
 ```
 > [!NOTE]
 > The Python version used is 3.10-3.12. Higher versions of Python may encounter issues with unsupported dependencies.
+
+### Run
+Enter command `libro` in the terminal to start the web server, then the browser will automatically launch Libro.
+```bash
+libro
+```
+TODO: **add scrren capture with the launched APP**
+
 
 For more details, please refer to [quick start](./apps/docs/docs/quickstart/index.md)。
 
