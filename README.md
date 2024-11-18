@@ -9,6 +9,7 @@ Language: English | [简体中文](./README_zh.md)
 <a href="https://www.npmjs.com/package/@difizen/libro-core"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@difizen/libro-core?logo=npm&style=for-the-badge"></a>
 <a href="https://github.com/difizen/libro/pulls"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=for-the-badge"></a>
 <a href="https://libro.difizen.net"><img alt="website" src="https://img.shields.io/static/v1?label=&labelColor=505050&message=Homepage&color=0076D6&style=for-the-badge&logo=google-chrome&logoColor=f5f5f5"></a>
+<a href="https://discord.gg/GEx6pa3GaG"><img alt="discord" src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"></a>
 </p>
 
 ## Features
@@ -146,6 +147,6 @@ For more details, please refer to [sql cell manual](./apps/docs/docs/manual/sql-
 
 ### Contact Us
 
-💬 [Chat with us on Discord](https://discord.com/invite/B4V7AWy4)
+💬 [Chat with us on Discord](https://discord.gg/GEx6pa3GaG)
 
 🤗 [Join our DingTalk Q&A group](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
