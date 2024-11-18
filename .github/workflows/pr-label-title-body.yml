@@ -13,12 +13,12 @@ jobs:
     steps:
       - uses: bubkoo/use-app-token@v1
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.PRIVATE_KEY }}
-          variable_name: bot_token
+          app_id: ${{ secrets.BOT_APP_ID }}
+          private_key: ${{ secrets.BOT_PRIVATE_KEY }}
+          variable_name: BOT_TOKEN
       - uses: Naturalclar/issue-action@v2.0.1
         with:
-          github-token: ${{ env.bot_token }}
+          github-token: ${{ env.BOT_TOKEN }}
           title-or-body: title
           parameters: >
             [
