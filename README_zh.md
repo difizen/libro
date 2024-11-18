@@ -50,6 +50,7 @@
 
 ## 快速开始
 
+### 安装
 ```bash
 pip install libro
 ```
@@ -59,6 +60,13 @@ pip install libro
 
 详情请阅读[快速开始](./apps/docs/docs/quickstart/index.md)。
 
+### 启动
+在终端中输入命令 `libro` 启动 Web 服务器，随后浏览器会自动打开 Libro。
+
+```bash
+libro
+```
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_launch.png)
 
 ## 新特性
 
