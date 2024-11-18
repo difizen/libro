@@ -126,7 +126,7 @@ pip install libro
 
 ### 贡献代码
 
-🤝 请查阅 [CONTRIBUTING.md](./CONTRIBUTING.md)
+🤝 请查阅 [CONTRIBUTING.md](./CONTRIBUTING_zh.md)
 
 ### 贡献者
 
