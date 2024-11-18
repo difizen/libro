@@ -63,8 +63,7 @@ Enter command `libro` in the terminal to start the web server, then the browser 
 ```bash
 libro
 ```
-TODO: **add scrren capture with the launched APP**
-
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_launch.png)
 
 For more details, please refer to [quick start](./apps/docs/docs/quickstart/index.md)。
 
