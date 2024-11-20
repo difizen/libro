@@ -35,7 +35,9 @@ export const PromptOutputRender: React.FC<{
     return null;
   }
 
-  const data = model.data['application/vnd.libro.prompt+json'] as IMimeBundle;
+  const data = model.data['application/vnd.libro.prompt+json'] as
+    | PartialJSONObject
+    | MultilineString;
 
   if (!data) {
     return null;

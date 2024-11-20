@@ -15,8 +15,11 @@ import { ViewManager } from '@difizen/mana-app';
 import { inject } from '@difizen/mana-app';
 import type { Event as ManaEvent } from '@difizen/mana-app';
 
+import type { InterpreterMeta } from './prompt-cell-protocol.js';
+
 export interface PromptCellMetadata extends ICodeCellMetadata {
   execution: ExecutionMeta;
+  interpreter: InterpreterMeta;
 }
 
 @transient()
