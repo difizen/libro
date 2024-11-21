@@ -1,6 +1,6 @@
 语言: 中文 | [English](./README.md)
 
-<p align="center"><img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro-text.svg" width="120" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro-text.svg" width="160" /></p>
 <p align="center"><strong>libro：灵活定制、轻松集成的 Notebook 产品方案</strong></p>
 
 <p align="center">
@@ -9,24 +9,16 @@
 <a href="https://www.npmjs.com/package/@difizen/libro-core"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@difizen/libro-core?logo=npm&style=for-the-badge"></a>
 <a href="https://github.com/difizen/libro/pulls"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=for-the-badge"></a>
 <a href="https://libro.difizen.net"><img alt="website" src="https://img.shields.io/static/v1?label=&labelColor=505050&message=Homepage&color=0076D6&style=for-the-badge&logo=google-chrome&logoColor=f5f5f5"></a>
-
 <a href="https://discord.gg/GEx6pa3GaG"><img alt="discord" src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"></a>
-
 </p>
 
 ## 特性
 
-- 提供完整的 Notebook 能力和丰富的周边功能，基于现有组合快速上手。
-- 提供内核级别的扩展能力，所有层次的内容均允许二次开发定制。
-- 定义大模型工作流，内置大模型交互和辅助开发能力。
+- 🚀 提供完整的 Notebook 能力和丰富的周边功能，基于现有组合快速上手。
+- 🌱 提供内核级别的扩展能力，所有层次的内容均允许二次开发定制。
+- 🔮 定义大模型工作流，内置大模型交互和辅助开发能力。
 
-<p>　</p>
-<p align="center">
-🌟🌟🌟 如果您也喜欢这个项目，欢迎为我们点亮 🌟🌟🌟
-</p>
-<p>　</p>
-
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro.png)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_homepage_zh.png)
 
 ---
 
@@ -77,26 +69,41 @@ libro
 
 ### AI 能力
 
-- 错误修复
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_completion_zh.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_completion_zh.gif" alt="AI 代码补全" width="150" height="100">
+      </a>
+      <p>AI 代码补全</p>
+    </td>
+    <td align="center">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug_zh.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug_zh.gif" alt="错误修复" width="150" height="100">
+      </a>
+      <p>错误修复</p>
+    </td>
+    <td align="center">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat_zh.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat_zh.gif" alt="AI 对话" width="150" height="100">
+      </a>
+      <p>AI 对话</p>
+    </td>
+    <td align="center">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain_zh.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain_zh.gif" alt="代码解释" width="150" height="100">
+      </a>
+      <p>代码解释</p>
+    </td>
+    <td align="center">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization_zh.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization_zh.gif" alt="代码优化" width="150" height="100">
+      </a>
+      <p>代码优化</p>
+    </td>
+  </tr>
+</table>
 
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug_zh.gif)
-
-- AI 对话
-  - 基于 Cell 上下文对话
-
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat_zh.gif)
-
-  - 通用对话
-
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_chat_zh.gif)
-
-- 代码解释
-
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain_zh.gif)
-
-- 代码优化
-
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization_zh.gif)
 
 ### Prompt Cell
 
@@ -108,18 +115,22 @@ libro
 - 支持选择聊天标识，使得选择该聊天标识的 Prompt Cell 都在一个聊天上下文中。
 - 支持 Prompt Cell 保存为一个变量，该变量即为 langchain 的 AIMessage。
 
-详情请阅读[prompt cell 指南](./apps/docs/docs/manual/prompt-cell.md)。
+详情请阅读 [prompt cell 指南](./apps/docs/docs/manual/prompt-cell.md)。
 
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell_zh.gif)
+<a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell_zh.gif" target="_blank">
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell_zh.gif" alt="prompt cell" width="150" height="100">
+</a>
 
 ### Sql Cell
 
 - 支持与 sql 的执行交互能力。
 - 连接 sql 数据库即可在 notebook 中写 sql 代码。
 
-详情请阅读[sql cell 指南](./apps/docs/docs/manual/sql-cell.md)。
+详情请阅读 [sql cell 指南](./apps/docs/docs/manual/sql-cell.md)。
 
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_cell_zh.gif)
+<a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_cell.gif" target="_blank">
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_cell_zh.gif" alt="sql cell" width="150" height="100">
+</a>
 
 ## 架构
 
