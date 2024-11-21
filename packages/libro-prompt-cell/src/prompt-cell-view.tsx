@@ -2,14 +2,20 @@ import type { IRange } from '@difizen/libro-code-editor';
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
 import { isOutput } from '@difizen/libro-common';
 import type {
+  ExecutionMeta,
+  KernelMessage,
   IOutputAreaOption,
   LibroCell,
   CellViewOptions,
-} from '@difizen/libro-core';
-import { LibroOutputArea } from '@difizen/libro-core';
-import { CellService, LibroEditableExecutableCellView } from '@difizen/libro-core';
-import type { ExecutionMeta, KernelMessage } from '@difizen/libro-jupyter';
-import { KernelError, LibroJupyterModel } from '@difizen/libro-jupyter';
+} from '@difizen/libro-jupyter';
+import {
+  KernelError,
+  LibroJupyterModel,
+  CellService,
+  LibroEditableExecutableCellView,
+  LibroOutputArea,
+} from '@difizen/libro-jupyter';
+import { ChatComponents } from '@difizen/magent-chat';
 import {
   getOrigin,
   inject,
@@ -22,13 +28,15 @@ import {
   ViewOption,
   ViewRender,
   watch,
+  Deferred,
 } from '@difizen/mana-app';
-import { Deferred } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 import { Switch } from 'antd';
 import { Select, Tag } from 'antd';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
+import breaks from 'remark-breaks';
+import remarkGfm from 'remark-gfm';
 
 import { ChatRecordInput, VariableNameInput } from './input-handler/index.js';
 import { LibroPromptCellModel } from './prompt-cell-model.js';
@@ -127,8 +135,9 @@ const CellEditorRaw: React.FC = () => {
 export const CellEditor = React.memo(CellEditorRaw);
 
 const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
-  function MaxPropmtEditorViewComponent(props, ref) {
+  function PropmtEditorViewComponent(props, ref) {
     const instance = useInject<LibroPromptCellView>(ViewInstance);
+    const LLMRender = ChatComponents.Markdown;
     const [selectedModel, setSelectedModel] = useState<string>(l10n.t('暂无内置模型'));
     useEffect(() => {
       // TODO: Data initialization should not depend on view initialization, which causes limitations in usage scenarios and multiple renderings.
@@ -226,6 +235,13 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
             />
           </div>
         </div>
+        {instance.model.interpreterEditMode && (
+          <div className="libro-prompt-cell-model-tip">
+            <LLMRender type="message" remarkPlugins={[remarkGfm, breaks]}>
+              {instance.model.promptOutput}
+            </LLMRender>
+          </div>
+        )}
         <CellEditor />
       </div>
     );
@@ -506,6 +522,7 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
         }),
     );
   };
+
   updateChatRecords = async () => {
     return this.fetch(
       {
