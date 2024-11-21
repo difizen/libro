@@ -1,5 +1,11 @@
 # @difizen/libro-l10n
 
+## 0.3.1
+
+### Patch Changes
+
+- [#327](https://github.com/difizen/libro/pull/327) [`3d15889`](https://github.com/difizen/libro/commit/3d1588923ffb042a5ca11453859f358383a0b331) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - improve markdown style
+
 ## 0.3.0
 
 ### Minor Changes
