@@ -1,9 +1,9 @@
+import { MIME } from '@difizen/libro-common';
 import type {
-  ICellMetadata,
+  ICodeCell,
   ExecutionCount,
   ICodeCellMetadata,
 } from '@difizen/libro-common';
-import type { ICodeCell } from '@difizen/libro-common';
 import type { ExecutableCellModel } from '@difizen/libro-core';
 import { LibroCellModel } from '@difizen/libro-core';
 import { CellOptions } from '@difizen/libro-core';
@@ -35,7 +35,7 @@ export class LibroPromptCellModel
   @prop()
   hasExecutedError = false;
   @prop()
-  override metadata: Partial<PromptCellMetadata | ICellMetadata>;
+  override metadata: Partial<PromptCellMetadata>;
   @prop()
   kernelExecuting = false;
 
@@ -46,7 +46,17 @@ export class LibroPromptCellModel
   modelType?: string;
 
   @prop()
+  prompt = '';
+
+  promptOutput?: string;
+
+  @prop()
   chatKey?: string;
+
+  @prop()
+  interpreterCode?: string;
+
+  _interpreterEditMode = false;
 
   @prop()
   variableName: string;
@@ -71,16 +81,36 @@ export class LibroPromptCellModel
       variableName: this.variableName,
       chatKey: this.chatKey,
       record: this.record,
-      value: this.value,
+      value: this.interpreterEditMode ? this.prompt : this.value,
       cellId: this.id,
     };
   }
 
-  override set decodeObject(value) {
-    super.decodeObject = value;
-    this.variableName = value.variableName;
-    this.chatKey = value.chatKey;
-    this.record = value.record;
+  override set decodeObject(data) {
+    this.value = data.value;
+    this.prompt = data.value;
+    this.variableName = data.variableName;
+    this.chatKey = data.chatKey;
+    this.record = data.record;
+  }
+
+  get interpreterEditMode() {
+    return this._interpreterEditMode;
+  }
+
+  set interpreterEditMode(data) {
+    this._interpreterEditMode = data;
+    if (data) {
+      this.prompt = this.value;
+      this.mimeType = MIME.python;
+    } else {
+      this.interpreterCode = this.value;
+      this.metadata.interpreter = {
+        ...this.metadata.interpreter,
+        interpreter_code: this.interpreterCode,
+      };
+      this.mimeType = 'application/vnd.libro.prompt+json';
+    }
   }
 
   viewManager: ViewManager;
@@ -99,6 +129,7 @@ export class LibroPromptCellModel
     this.libroFormatType = 'formatter-prompt-magic';
     this.mimeType = 'application/vnd.libro.prompt+json';
     this.metadata = {
+      interpreter: {},
       ...options?.cell?.metadata,
       libroFormatter: this.libroFormatType,
     };
