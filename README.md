@@ -14,18 +14,12 @@ Language: English | [简体中文](./README_zh.md)
 
 ## Features
 
-- Provides comprehensive Notebook functionality with a rich set of auxiliary tools, allowing for quick adoption based on existing setups.
-- Supports kernel-level extensibility, enabling customization and further development at all layers.
-- Defines workflows for large models, with built-in capabilities for model interaction and AI-powered assistance.
-
-<p>　</p>
-<p align="center">
-🌟🌟🌟 If you like this project, feel free to give us a star! 🌟🌟🌟
-</p>
-<p>　</p>
+- 🚀 Provides comprehensive Notebook functionality with a rich set of auxiliary tools, allowing for quick adoption based on existing setups.
+- 🌱 Supports kernel-level extensibility, enabling customization and further development at all layers.
+- 🔮 Defines workflows for large models, with built-in capabilities for model interaction and AI-powered assistance.
 
 
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_en.png)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_homepage.png)
 
 ---
 
@@ -74,26 +68,43 @@ For more details, please refer to [quick start](./apps/docs/docs/quickstart/inde
 
 ### AI Capability
 
-- Error Fixing
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_completion.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_completion.gif" alt="Image 1" width="150" height="100">
+      </a>
+      <p>AI Comletion</p>
+    </td>
+    <td align="center">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug.gif" alt="Image 2" width="150" height="100">
+      </a>
+      <p>Error Fixing</p>
+    </td>
+    <td align="center">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat.gif" alt="Image 3" width="150" height="100">
+      </a>
+      <p>AI Chat</p>
+    </td>
+    <td align="center">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain.gif" alt="Image 4" width="150" height="100">
+      </a>
+      <p>Code Explanation</p>
+    </td>
+    <td align="center">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization.gif" alt="Image 5" width="150" height="100">
+      </a>
+      <p>Code Optimization</p>
+    </td>
+  </tr>
+</table>
 
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug.gif)
+Click to enlarge
 
-- Chat
-  - Contextual Chat in Cells
-
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat.gif)
-
-  - General AI Chat
-
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_chat.gif)
-
-- Code Explanation
-
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain.gif)
-
-- Code Optimization
-
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization.gif)
 
 ### Prompt Cell
 
@@ -105,8 +116,11 @@ For more details, please refer to [quick start](./apps/docs/docs/quickstart/inde
 
 For more details, please refer to [prompt cell manual](./apps/docs/docs/manual/prompt-cell.md)。
 
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell.gif)
+<a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell.gif" target="_blank">
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell.gif" alt="prompt cell" width="150" height="100">
+</a>
 
+Click to enlarge
 
 ### Sql Cell
 
@@ -115,7 +129,11 @@ For more details, please refer to [prompt cell manual](./apps/docs/docs/manual/p
 
 For more details, please refer to [sql cell manual](./apps/docs/docs/manual/sql-cell.md)。
 
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_cell.gif)
+<a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_cell.gif" target="_blank">
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_cell.gif" alt="sql cell" width="150" height="100">
+</a>
+
+Click to enlarge
 
 ## Technical Architecture
 
