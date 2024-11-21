@@ -24,26 +24,32 @@ jobs:
             [
               {
                 "keywords": ["bug","fix"],
-                "labels": ["PR: fix"]
+                "labels": ["PR: fix"],
+                "assignees": ["username"]
               },
               {
                 "keywords": ["chore"],
-                "labels": ["PR: chore"]
+                "labels": ["PR: chore"],
+                "assignees": ["username"]
               },
               {
                 "keywords": ["feat","feature","enhancement","enhance"],
-                "labels": ["PR: feature"]
+                "labels": ["PR: feature"],
+                "assignees": ["username"]
               },
               {
                 "keywords": ["docs","documentation","document"],
-                "labels": ["PR: documentation"]
+                "labels": ["PR: documentation"],
+                "assignees": ["username"]
               },
               {
                 "keywords": ["refactor"],
-                "labels": ["PR: refactor"]
+                "labels": ["PR: refactor"],
+                "assignees": ["username"]
               },
               {
                 "keywords": ["dependency","dep","deps"],
-                "labels": ["PR: dependency"]
+                "labels": ["PR: dependency"],
+                "assignees": ["username"]
               }
             ]
