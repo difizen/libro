@@ -14,6 +14,7 @@ import { v4 } from 'uuid';
 
 import { LibroLLMRenderMemo } from './libro-llm-render.js';
 import { getPythonCode } from './prompt-cell-utils.js';
+import { LibroPromptCellView } from './prompt-cell-view.js';
 
 const getModelOutput = (data: PartialJSONObject | MultilineString) => {
   if (typeof data === 'string' || Array.isArray(data)) {
@@ -35,6 +36,9 @@ export const PromptOutputRender: React.FC<{
     return null;
   }
 
+  if (!(model.cell instanceof LibroPromptCellView)) {
+    return null;
+  }
   const data = model.data['application/vnd.libro.prompt+json'] as
     | PartialJSONObject
     | MultilineString;
@@ -42,7 +46,9 @@ export const PromptOutputRender: React.FC<{
   if (!data) {
     return null;
   }
+
   const modelData = getModelOutput(data);
+  model.cell.model.promptOutput = modelData;
   const sourceArr = getPythonCode(modelData ?? '');
   const insertAndRun = async () => {
     const libro = model.cell.parent;

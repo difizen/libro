@@ -25,6 +25,7 @@ import {
 } from '@difizen/mana-app';
 import { Deferred } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
+import { Switch } from 'antd';
 import { Select, Tag } from 'antd';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
@@ -159,6 +160,20 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
       setSelectedModel(value);
     };
 
+    const replace = (data: string) => {
+      if (instance instanceof LibroPromptCellView && instance.editor) {
+        const length = instance.editor.model.value.length;
+        const start = instance.editor.getPositionAt(0);
+        const end = instance.editor.getPositionAt(length);
+        if (start && end) {
+          instance.editor.replaceSelection(data, {
+            start,
+            end,
+          });
+        }
+      }
+    };
+
     return (
       <div
         className={instance.className}
@@ -187,6 +202,22 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
             />
           </div>
           <div>
+            <Switch
+              checkedChildren="Interpreter 编辑态"
+              unCheckedChildren="退出 Interpreter 编辑态"
+              onChange={(checked) => {
+                instance.model.interpreterEditMode = checked;
+                if (!instance.editorView) {
+                  return;
+                }
+                if (checked && instance.model.interpreterCode) {
+                  replace(instance.model.interpreterCode);
+                }
+                if (!checked && instance.model.prompt) {
+                  replace(instance.model.prompt);
+                }
+              }}
+            />
             <ChatRecordInput
               value={instance.model.record}
               handleChange={instance.handleRecordChange}
