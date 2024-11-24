@@ -62,6 +62,10 @@ jobs:
       contents: write
 
     steps:
+      - uses: wow-actions/use-app-token@v2
+        with:
+          app_id: ${{ secrets.BOT_APP_ID }}
+          private_key: ${{ secrets.BOT_PRIVATE_KEY }}
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -100,42 +104,25 @@ jobs:
             echo "::set-output name=tag_exists::true"
           fi
 
-      - name: Install dependencies
+      # 自动生成 Release Notes
+      - name: Generate Release Notes
         if: steps.check_tag.outputs.tag_exists == 'false'
-        run: npm install
+        id: draft_release
+        uses: release-drafter/release-drafter@v5
+        with:
+          version: v${{ steps.get_tag.outputs.latest_version }}
+        env:
+          GITHUB_TOKEN: ${{ env.BOT_TOKEN }}
 
-      - name: Extract Changeset Content
-        if: steps.check_tag.outputs.tag_exists == 'false'
-        id: extract_changesets
-        run: |
-          COMMIT_CONTENT="" 
-          for file in .changeset/*.md; do
-            echo "Processing $file"
-            CONTENT=$(awk '/^---$/{p++} p==2' "$file")
-            COMMIT_CONTENT+="$CONTENT"$'\n'
-          done
-          echo "::set-output name=release_notes::$COMMIT_CONTENT"
-
-      - name: Generate Snapshot
-        if: steps.check_tag.outputs.tag_exists == 'false'
-        id: generate_snapshot
-        run: |
-          # 获取 changeset 的快照
-          SNAPSHOT=$(npx changeset status --snapshot)
-          echo "::set-output name=snapshot::$SNAPSHOT"
-
-      - name: Generate GitHub Release
+      # 发布 Release
+      - name: Publish Release
         if: steps.check_tag.outputs.tag_exists == 'false'
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.BOT_TOKEN }}
         with:
-          tag_name: ${{ steps.get_tag.outputs.latest_version }} # 使用最近的 tag 作为 tag 名
-          release_name: Release ${{ steps.get_tag.outputs.latest_version }} # 使用最近的 tag 作为 release 名
-          body: |
-            ## Changes:
-            ${{ steps.extract_changesets.outputs.release_notes }}
-
-            ## Packages affected:
-            ${{ steps.generate_snapshot.outputs.snapshot }}
-          draft: false # 直接发布而非草稿
+          tag_name: v${{ steps.get_tag.outputs.latest_version }} # 使用触发的标签名
+          release_name: Release v${{ steps.get_tag.outputs.latest_version }} # 使用最近的 tag 作为 release 名
+          body: ${{ steps.draft_release.outputs.body }} # 使用生成的 Release Notes 内容
+          draft: false
+          prerelease: false
