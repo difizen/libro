@@ -1,0 +1,23 @@
+name-template: 'v${{version}}'
+tag-template: 'v${{version}}'
+categories:
+  - title: 🚀 Features
+    labels:
+      - 'PR: feature'
+      - 'PR: enhancement'
+  - title: 🐞 Bug Fixes
+    labels:
+      - 'PR: fix'
+  - title: 🛠 Maintenance
+    labels:
+      - 'PR: chore'
+      - 'PR: refactor'
+      - 'PR: dependency'
+      - 'PR: documentation'
+change-template: '- ${{change.title}} (#${{change.number}} by @${{change.author}})'
+template: |
+  ## What's Changed?
+  $CHANGES
+
+  Thank you to all our contributors for making this release possible!
+  $CONTRIBUTORS
