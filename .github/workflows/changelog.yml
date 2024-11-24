@@ -1,0 +1,63 @@
+name: Update Changelog After Release
+
+# 触发条件：每次创建 Release 后触发
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  update-changelog:
+    name: Update Changelog
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. 获取 Release Notes
+      - name: Fetch Release Notes
+        id: get_release_notes
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const release = context.payload.release;
+            const tagName = release.tag_name;
+            const releaseNotes = release.body || "No release notes provided.";
+            return {
+              tagName,
+              releaseNotes,
+            };
+        # 输出 Release Notes 和 Tag 名
+        outputs:
+          tag: ${{ steps.get_release_notes.outputs.tagName }}
+          notes: ${{ steps.get_release_notes.outputs.releaseNotes }}
+
+      # 3. 更新 CHANGELOG.md 文件
+      - name: Update CHANGELOG.md
+        run: |
+          # 如果 CHANGELOG.md 文件不存在，创建一个新的
+          if [ ! -f CHANGELOG.md ]; then
+            echo "# Changelog" > CHANGELOG.md
+          fi
+
+          # 创建临时文件，将新内容写到最前面
+          {
+            echo "## Release ${{ steps.get_release_notes.outputs.tag }} - $(date +"%Y-%m-%d")"
+            echo ""
+            echo "${{ steps.get_release_notes.outputs.notes }}"
+            echo ""
+            cat CHANGELOG.md
+          } > TEMP_CHANGELOG.md
+
+          # 覆盖原文件
+          mv TEMP_CHANGELOG.md CHANGELOG.md
+
+      # 4. 提交变更到仓库
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "docs: update CHANGELOG.md for release ${{ steps.get_release_notes.outputs.tag }}"
+          git push
