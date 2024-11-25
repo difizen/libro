@@ -1,6 +1,6 @@
 Language: English | [简体中文](./README_zh.md)
 
-<p align="center"><img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro-text.svg" width="120" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro-text.svg" width="160" /></p>
 <p align="center"><strong>A Notebook Product Solution with Flexible Customization and Easy Integration</strong></p>
 
 <p align="center">
@@ -168,3 +168,9 @@ Click to enlarge
 💬 [Chat with us on Discord](https://discord.gg/GEx6pa3GaG)
 
 🤗 [Join our DingTalk Q&A group](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
+
+✏️ [Start a GitHub Discussion](https://github.com/difizen/libro/discussions)
+
+🐦 [Follow us on Twitter](https://x.com/libro_project)
+
+📧 [Subscribe to our Medium](https://medium.com/@libro.development)
