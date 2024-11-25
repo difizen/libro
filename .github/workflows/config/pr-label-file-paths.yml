@@ -1,0 +1,62 @@
+pkg:libro-ai-native:
+  - packages/libro-ai-native/**/*
+pkg:libro-app:
+  - packages/libro-app/**/*
+pkg:libro-code-cell:
+  - packages/libro-code-cell/**/*
+pkg:libro-code-editor:
+  - packages/libro-code-editor/**/*
+pkg:libro-codemirror:
+  - packages/libro-codemirror/**/*
+pkg:libro-cofine-editor:
+  - packages/libro-cofine-editor/**/*
+pkg:libro-cofine-editor-contribution:
+  - packages/libro-cofine-editor-contribution/**/*
+pkg:libro-cofine-editor-core:
+  - packages/libro-cofine-editor-core/**/*
+pkg:libro-cofine-textmate:
+  - packages/libro-cofine-textmate/**/*
+pkg:libro-common:
+  - packages/libro-common/**/*
+pkg:libro-core:
+  - packages/libro-core/**/*
+pkg:libro-jupyter:
+  - packages/libro-jupyter/**/*
+pkg:libro-kernel:
+  - packages/libro-kernel/**/*
+pkg:libro-l10n:
+  - packages/libro-l10n/**/*
+pkg:libro-lab:
+  - packages/libro-lab/**/*
+pkg:libro-language-client:
+  - packages/libro-language-client/**/*
+pkg:libro-lsp:
+  - packages/libro-lsp/**/*
+pkg:libro-markdown:
+  - packages/libro-markdown/**/*
+pkg:libro-markdown-cell:
+  - packages/libro-markdown-cell/**/*
+pkg:libro-output:
+  - packages/libro-output/**/*
+pkg:libro-prompt-cell:
+  - packages/libro-prompt-cell/**/*
+pkg:libro-raw-cell:
+  - packages/libro-raw-cell/**/*
+pkg:libro-rendermime:
+  - packages/libro-rendermime/**/*
+pkg:libro-search:
+  - packages/libro-search/**/*
+pkg:libro-search-code-cell:
+  - packages/libro-search-code-cell/**/*
+pkg:libro-shared-model:
+  - packages/libro-shared-model/**/*
+pkg:libro-sql-cell:
+  - packages/libro-sql-cell/**/*
+pkg:libro-terminal:
+  - packages/libro-terminal/**/*
+pkg:libro-toc:
+  - packages/libro-toc/**/*
+pkg:libro-virtualized:
+  - packages/libro-virtualized/**/*
+pkg:libro-widget:
+  - packages/libro-widget/**/*
