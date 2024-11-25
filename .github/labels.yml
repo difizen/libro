@@ -1,0 +1,148 @@
+# issue type
+- name: 'type: bug'
+  color: B60205
+  description: Something isn't working.
+- name: 'type: discussion'
+  color: d4c5f9
+  description: For conversations and exchanging ideas.
+- name: 'type: documentation'
+  color: 006B75
+  description: Improvements or additions to documentation.
+- name: 'type: question'
+  color: F9D0C4
+  description: Issues that are just questions.
+- name: 'type: feature request'
+  color: fbca04
+  description: New feature or request.
+- name: 'type: epic'
+  color: 3E4B9E
+  description: A theme of work that contain sub-tasks.
+- name: 'type: enhancement'
+  color: 1D76DB
+  description: Something enhancement.
+
+# priority
+- name: 'priority: critical'
+  color: b60205
+  description: Critical priority.
+- name: 'priority: high'
+  color: d93f0b
+  description: High priority.
+- name: 'priority: low'
+  color: 0e8a16
+  description: Low priority.
+- name: 'priority: medium'
+  color: fbca04
+  description: Medium priority.
+
+# issue status
+- name: 'issue: duplicate'
+  color: A9A9A9
+  description: This issue or pull request already exists.
+- name: good first issue
+  color: 7057ff
+  description: Good for newcomers.
+- name: help wanted
+  color: FBCA04
+  description: An issue that could be handled by anyone, even new members of the community.
+- name: 'issue: invalid'
+  color: D3D3D3
+  description: This doesn't seem right.
+- name: 'issue: need reproduce'
+  color: F4A460
+  description: Issue need reproduce infomations.
+- name: 'issue: needs information'
+  color: FF7F50
+  description: Awaiting additional details.
+- name: 'issue: wont do/fix'
+  color: eeeeee
+  description: The issue will not be fixed or otherwise handled. When applied, the issue should be closed.
+- name: 'issue: cant reproduce'
+  color: BC8F8F
+  description: Unable to reproduce the reported issue.
+
+# PR types
+- name: 'PR: fix'
+  color: D93F0B
+  description: ':bug: Bug Fix'
+- name: 'PR: feature'
+  color: FBCA04
+  description: ':tada: New feature'
+- name: 'PR: enhancement'
+  color: 5ebeff
+  description: ':rocket: New feature or request'
+- name: 'PR: chore'
+  color: 1D76DB
+  description: ':turtle: Chore'
+- name: 'PR: dependency'
+  color: b4a8d1
+  description: ':shamrock: Updates about dependencies'
+- name: 'PR: documentation'
+  color: 006B75
+  description: ':book: Improvements or additions to documentation'
+- name: 'PR: refactor'
+  color: 1D76DB
+  description: ':100: A code change that neither fixes a bug nor adds a feature'
+- name: 'PR: test'
+  color: e9f4dc
+  description: ':white_check_mark: Adding missing tests'
+- name: 'PR: internal'
+  color: 2739db
+  description: ':house: Internal'
+- name: 'PR: breaking'
+  color: B60205
+  description: ':boom: Breaking Change'
+
+# PR status
+- name: 'PR: draft'
+  color: eeeeee
+  description: PR is draft.
+- name: 'PR: unreviewed'
+  color: fbca04
+  description: PR does not have any reviews.
+- name: 'PR: reviewed-changes-requested'
+  color: fbca04
+  description: PR has reviewed and got Change request event.
+- name: 'PR: partially-approved'
+  color: c2e2a2
+  description: PR has reviewd and got Approve from one of the reviewers.
+- name: 'PR: reviewed-approved'
+  color: 0e8a16
+  description: PR has reviewed and got Approve from everyone.
+- name: 'PR: merged'
+  color: 662daf
+  description: PR has merged.
+- name: 'PR: wip'
+  color: eeeeee
+  description: The PR is a WIP.
+
+# PR size
+- name: size/XS
+  color: 91ca55
+  description: Denotes a PR that changes 0-9 lines, ignoring generated files.
+- name: size/S
+  color: c2e2a2
+  description: Denotes a PR that changes 10-29 lines, ignoring generated files.
+- name: size/M
+  color: e9f4dc
+  description: Denotes a PR that changes 30-99 lines, ignoring generated files.
+- name: size/L
+  color: fef6d7
+  description: Denotes a PR that changes 100-499 lines, ignoring generated files.
+- name: size/XL
+  color: fef2c0
+  description: Denotes a PR that changes 500-999 lines, ignoring generated files.
+- name: size/XXL
+  color: fbca04
+  description: Denotes a PR that changes 1000+ lines, ignoring generated files.
+
+# Release note
+- name: 'release-note-none'
+  color: C2E0C6
+  description: Denotes a PR that doesn't merit a release note.
+- name: 'release-note-action-required'
+  color: C2E0C6
+  description: Denotes a PR that introduces potentially breaking changes that require user action.
+- name: 'release-note'
+  color: C2E0C6
+  description: Denotes a PR that will be considered when it comes time to generate release notes.

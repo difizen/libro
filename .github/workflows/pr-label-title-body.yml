@@ -51,5 +51,10 @@ jobs:
                 "keywords": ["dependency","dep","deps"],
                 "labels": ["PR: dependency"],
                 "assignees": ["username"]
-              }
+              },
+              {
+                "keywords": ["wip","WIP"],
+                "labels": ["PR: wip"],
+                "assignees": ["username"]
+              },
             ]
