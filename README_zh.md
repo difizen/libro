@@ -166,4 +166,8 @@ libro
 
 🤗 [加入钉钉答疑群](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
 
-<img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/dingding.jpg" width="30%">
+✏️ [开始一个 Github 讨论话题](https://github.com/difizen/libro/discussions)
+
+🐦 [关注我们的 Twitter](https://x.com/libro_project)
+
+📧 [订阅 Medium 动态](https://medium.com/@libro.development)
