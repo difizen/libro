@@ -56,5 +56,5 @@ jobs:
                 "keywords": ["wip","WIP"],
                 "labels": ["PR: wip"],
                 "assignees": ["username"]
-              },
+              }
             ]
