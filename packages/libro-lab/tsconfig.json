@@ -3,7 +3,8 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "es",
-    "declarationDir": "es"
+    "declarationDir": "es",
+    "resolveJsonModule": true
   },
   "types": ["jest"],
   "exclude": ["node_modules"],
