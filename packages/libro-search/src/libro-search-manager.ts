@@ -38,10 +38,7 @@ export const LibroSearchToggleCommand = {
   ],
 })
 export class LibroSearchManager
-  implements
-    CommandContribution,
-    KeybindingContribution,
-    LibroExtensionSlotContribution
+  implements CommandContribution, KeybindingContribution, LibroExtensionSlotContribution
 {
   @inject(ViewManager) viewManager: ViewManager;
   @inject(LibroCommandRegister) libroCommandRegister: LibroCommandRegister;
