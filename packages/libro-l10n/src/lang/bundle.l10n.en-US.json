@@ -219,6 +219,7 @@
   "运行选中 Cell": "Execute selected cells",
   "运行选中并向下插入一个 Cell": "Execute select and insert one cell down",
   "运行并选中下一个 Cell": "Execute and select the next cell",
+  "使用指南": "Guide book",
   "切换底部面板": "Toggle bottom panel",
   "文件": "File",
   "编辑": "Edit",
