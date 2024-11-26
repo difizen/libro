@@ -1,0 +1,301 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "id": "d13d3515-05d9-4fb0-a9c4-e62445c9c8af",
+      "metadata": {
+        "libroCellType": "markdown",
+        "libroFormatter": "formatter-string"
+      },
+      "source": [
+        "# <center> ✨A Quick Guide to libro✨\n",
+        "## <center> 🎉🧙🔮 欢迎使用 libro\n",
+        "**<center> libro，不只是 notebook，更是一个灵感加速器！**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "92d339b1-45f9-42f0-ac2f-e95388d6c6b3",
+      "metadata": {
+        "libroFormatter": "formatter-string"
+      },
+      "source": [
+        "**libro 是支持生成式 AI 能力的可定制 notebook 产品方案。提供商业级 notebook 产品的体验，深度集成 AI 能力，可以轻松集成到您的研发环境中，为您构建一流的 AI、数据科学研发方案。让我们用一种有趣的方式带您快速上手，解锁基于 libro 的全新工作体验！**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "e3bc282a-b4c0-4554-8657-54078632b7fa",
+      "metadata": {
+        "libroFormatter": "formatter-string"
+      },
+      "source": ["### Step 1：开启 Notebook 之门 🔑"]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "2675de53-c92c-4c76-a11b-e01f29d6e249",
+      "metadata": {
+        "libroFormatter": "formatter-string"
+      },
+      "source": [
+        "在终端中运行 `libro generate config ` 生成 ` ~/.libro/libro_config.yaml` 文件，按照如下内容，对 libro 中大模型和数据库相关的配置，并且启用 libro_sql、libro_ai 扩展。赶快试试吧～\n",
+        "\n",
+        "```yaml\n",
+        "llm:\n",
+        "  DASHSCOPE_API_KEY: xxxxxxx\n",
+        "  OPENAI_API_KEY: xxxxxxxx\n",
+        "  default_model: chatgpt\n",
+        "\n",
+        "db:\n",
+        "  - db_type: mysql\n",
+        "    username: \"root\"\n",
+        "    password: \"12345678\"\n",
+        "    host: \"127.0.0.1\"\n",
+        "    port: 3306\n",
+        "    database: sql_demo\n",
+        "\n",
+        "ipython_extensions:\n",
+        "  libro_ai: True\n",
+        "  libro_sql: True\n",
+        "```"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "43fd242d-69c1-45b8-b606-c07ce5923fbb",
+      "metadata": {
+        "libroFormatter": "formatter-string"
+      },
+      "source": [
+        "### Step 2：SQL Cell，数据界的魔法棒 🪄\n",
+        "\n",
+        "libro 支持使用 SQL Cell 来简化数据库交互，它就像一个对话框，直接对接您的数据库，不需要任何额外工具，数据分析轻松搞定！\n",
+        "\n",
+        "通过在 libro 中结合 SQL 和 Python，您可以：\n",
+        "\n",
+        "- 直接查询数据库，快速获取数据，支持把结果保存为 dataframe。\n",
+        "- 使用 Python 对查询结果进行进一步的处理和可视化。\n",
+        "- 将 SQL 的强大查询能力与 Notebook 的动态性结合，提升开发效率。\n",
+        "\n",
+        "赶快试试吧～"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "id": "12b0e2fa-a4a4-4e17-affb-2dd10ad3cabe",
+      "metadata": {
+        "execution": {},
+        "libroCellType": "sql",
+        "libroFormatter": "formatter-sql-magic"
+      },
+      "outputs": [],
+      "source": [
+        "%%sql \n",
+        "{\"result_variable\":\"df_1\",\"db_id\":\"sqlite: sql_demo\",\"sql_script\":\"select * from products\"}"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "id": "83edeb90-a116-4ed2-b80e-c0a534e365c0",
+      "metadata": {
+        "execution": {},
+        "libroFormatter": "formatter-string"
+      },
+      "outputs": [],
+      "source": ["df_1"]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "2d09d97f-8c87-4f80-b865-62239ef4d846",
+      "metadata": {
+        "libroFormatter": "formatter-string"
+      },
+      "source": ["### Step 3：AI 助手，开发者的好搭档 🤖"]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "cce8d104-8099-4d16-9dc7-96f6df99259b",
+      "metadata": {
+        "libroFormatter": "formatter-string"
+      },
+      "source": [
+        "#### 错误修复\n",
+        "\n",
+        "当 Cell 执行出现报错时，只需一键点击 “Fix with AI” 按钮，助手会自动分析错误并给出修复建议，帮助您快速解决问题，恢复顺利的编程体验。赶快试试修复下面的执行报错吧～\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "id": "549fbd17-9e22-4844-8cb5-dcf006e88338",
+      "metadata": {
+        "execution": {
+          "shell.execute_reply.end": "2024-11-26T06:08:28.406750Z",
+          "shell.execute_reply.started": "2024-11-26T06:08:28.186003Z",
+          "to_execute": "2024-11-26T06:08:28.209Z"
+        },
+        "libroFormatter": "formatter-string"
+      },
+      "outputs": [
+        {
+          "ename": "NameError",
+          "evalue": "name 'a' is not defined",
+          "output_type": "error",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "Cell \u001b[0;32mIn[2], line 1\u001b[0m\n\u001b[0;32m----> 1\u001b[0m \u001b[43ma\u001b[49m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'a' is not defined"
+          ]
+        }
+      ],
+      "source": ["a"]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "bd071522-2e45-4d3c-b5fc-beb14147271c",
+      "metadata": {
+        "libroFormatter": "formatter-string"
+      },
+      "source": [
+        "#### AI 对话\n",
+        "\n",
+        "您可以点击会话按钮 [ 顶部右侧工具栏 / Cell 右侧工具栏 ] 直接与 AI 进行互动，获得与当前代码相关的深入解答和优化建议，提升编程效率。赶快试试与 libro 的 AI 对话吧～"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "d248e413-1411-43cc-b23b-2a1b5626948a",
+      "metadata": {
+        "libroFormatter": "formatter-string"
+      },
+      "source": [
+        "#### 代码解释\n",
+        "您可以点击魔法按钮 [ Cell 右侧工具栏 ] ，libro 帮您理解 Cell 中代码的功能和逻辑，让编程学习变得更加轻松。赶快试试解释下面这段代码吧～"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "id": "300242af-2d63-4ea4-bb0c-e785d489fc6b",
+      "metadata": {
+        "execution": {},
+        "libroFormatter": "formatter-string"
+      },
+      "outputs": [],
+      "source": [
+        "def quick_sort(arr):\n",
+        "    if len(arr) <= 1:  \n",
+        "        return arr\n",
+        "    \n",
+        "    pivot = arr[len(arr) // 2]  \n",
+        "    left = [x for x in arr if x < pivot]  \n",
+        "    middle = [x for x in arr if x == pivot]  \n",
+        "    right = [x for x in arr if x > pivot]  \n",
+        "    return quick_sort(left) + middle + quick_sort(right)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "3d120c83-8655-4251-b97a-7177dba537f5",
+      "metadata": {
+        "libroFormatter": "formatter-string"
+      },
+      "source": [
+        "#### 代码优化\n",
+        "您可以点击魔法按钮 [ Cell 右侧工具栏 ] ，libro 能够分析 Cell 中的代码，并提供优化建议，让您的代码更加高效、可读，提升整体编程体验。赶快试着优化下面的这一段代码吧～"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "id": "1413a361-a51b-4ece-b673-a8a12e75dfce",
+      "metadata": {
+        "execution": {},
+        "libroFormatter": "formatter-string"
+      },
+      "outputs": [],
+      "source": [
+        "def calculate_sum(numbers):\n",
+        "    total = 0\n",
+        "    for i in range(len(numbers)):\n",
+        "        total += numbers[i]\n",
+        "    return total"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "ed705e80-6970-4bc7-8617-a82c70840b9c",
+      "metadata": {
+        "libroFormatter": "formatter-string"
+      },
+      "source": [
+        "### Step 4：AI 工作流开发利器💡\n",
+        "\n",
+        "Prompt Cell 是一种特殊的 notebook cell，通过这个 cell，用户只需要输入自然语言指令，就可以调用大模型进行推理，得到所需的输出结果。它的出现减少了编写复杂代码的需求，并且可以灵活地融入现有的工作流中。赶快试试下面的例子吧～"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "id": "758e3891-bec1-4017-9af6-247634d8ba1c",
+      "metadata": {
+        "execution": {},
+        "libroFormatter": "formatter-string"
+      },
+      "outputs": [],
+      "source": ["output_language = \"English\""]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "id": "310bf74e-295d-4a31-8a36-7109cac02982",
+      "metadata": {
+        "libroCellType": "prompt"
+      },
+      "outputs": [],
+      "source": [
+        "%%prompt \n",
+        "{\"model_name\":\"LLM:gpt4\",\"chat_key\":\"LLM:gpt4\",\"prompt\":\"You are a helpful assistant that translates Chinese to {output_language}.\",\"cell_id\":\"310bf74e-295d-4a31-8a36-7109cac02982\",\"record\":\"chat1\"}"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "id": "3281ba0d-ae5d-4510-b7a5-4968b2300e6f",
+      "metadata": {
+        "libroCellType": "prompt"
+      },
+      "outputs": [],
+      "source": [
+        "%%prompt \n",
+        "{\"model_name\":\"LLM:gpt4\",\"chat_key\":\"LLM:gpt4\",\"prompt\":\"今天天气真好\",\"cell_id\":\"3281ba0d-ae5d-4510-b7a5-4968b2300e6f\",\"record\":\"chat1\"}"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "840bbfa2-e89b-4b42-b73a-34ca90ef1736",
+      "metadata": {
+        "libroFormatter": "formatter-string"
+      },
+      "source": [
+        "### 最后 🎢\n",
+        "\n",
+        "面向未来，libro 将继续发挥自身灵活定制、轻松集成的特点，为 notebook 类产品探索更多的使用场景，让 libro 成为体验最好的 notebook 产品。\n",
+        "\n",
+        "同时，libro 将不断探索与大模型结合的应用场景，通过大模型让用户拥有更加智能的编程体验，让 libro 编程像写文档一样容易。\n",
+        "\n",
+        "我们欢迎不同场景的开发者，跟我们一起建设 libro 项目，再次附上 libro 开源项目链接，如果你也喜欢这个项目，欢迎在 GitHub 上为我们点亮 🌟🌟🌟\n",
+        "\n",
+        "https://github.com/difizen/libro\n",
+        "\n",
+        "**libro，不只是笔记本，更是一个灵感加速器！**"
+      ]
+    }
+  ],
+  "metadata": {},
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

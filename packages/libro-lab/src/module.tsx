@@ -19,6 +19,8 @@ import { LibroLabHeaderMenuModule } from './command/module.js';
 import { LabConfigAppContribution } from './config/config-contribution.js';
 import { CodeEditorViewerModule } from './editor-viewer/index.js';
 import { GithubLinkView } from './github-link/index.js';
+import { LibroGuidebookContentContribution } from './guide/content-contribution.js';
+import { GuideView } from './guide/guide-view.js';
 import { ImageViewerModule } from './image-viewer/index.js';
 // import { KernelManagerView } from './kernel-manager/index.js';
 import { LibroKernelAndTerminalPanelModule } from './kernel-and-terminal-panel/module.js';
@@ -115,6 +117,17 @@ export const LibroLabModule = ManaModule.create()
       openOptions: {
         reveal: true,
         order: 'welcome',
+      },
+    }),
+    LibroGuidebookContentContribution,
+    GuideView,
+    createViewPreference({
+      view: GuideView,
+      slot: LibroLabLayoutSlots.content,
+      autoCreate: true,
+      openOptions: {
+        reveal: true,
+        order: 'guide',
       },
     }),
     EntryPointView,
