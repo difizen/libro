@@ -56,8 +56,6 @@ export class LibroPromptCellModel
   @prop()
   interpreterCode?: string;
 
-  _interpreterEditMode = false;
-
   @prop()
   variableName: string;
 
@@ -67,6 +65,8 @@ export class LibroPromptCellModel
   hasOutputHidden: boolean;
   @prop()
   hasOutputsScrolled: boolean;
+
+  _interpreterEditMode = false;
 
   // Emitter Msg
   msgChangeEmitter: Emitter<any>;
@@ -81,7 +81,7 @@ export class LibroPromptCellModel
       variableName: this.variableName,
       chatKey: this.chatKey,
       record: this.record,
-      value: this.interpreterEditMode ? this.prompt : this.value,
+      value: this._interpreterEditMode ? this.prompt : this.value,
       cellId: this.id,
     };
   }
@@ -92,25 +92,6 @@ export class LibroPromptCellModel
     this.variableName = data.variableName;
     this.chatKey = data.chatKey;
     this.record = data.record;
-  }
-
-  get interpreterEditMode() {
-    return this._interpreterEditMode;
-  }
-
-  set interpreterEditMode(data) {
-    this._interpreterEditMode = data;
-    if (data) {
-      this.prompt = this.value;
-      this.mimeType = MIME.python;
-    } else {
-      this.interpreterCode = this.value;
-      this.metadata.interpreter = {
-        ...this.metadata.interpreter,
-        interpreter_code: this.interpreterCode,
-      };
-      this.mimeType = 'application/vnd.libro.prompt+json';
-    }
   }
 
   viewManager: ViewManager;
