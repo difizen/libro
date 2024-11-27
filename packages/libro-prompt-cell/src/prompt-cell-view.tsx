@@ -1,5 +1,6 @@
 import type { IRange } from '@difizen/libro-code-editor';
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
+import { MIME } from '@difizen/libro-common';
 import { isOutput } from '@difizen/libro-common';
 import type {
   ExecutionMeta,
@@ -215,7 +216,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
               checkedChildren="Interpreter 编辑态"
               unCheckedChildren="退出 Interpreter 编辑态"
               onChange={(checked) => {
-                instance.model.interpreterEditMode = checked;
+                instance.interpreterEditMode = checked;
                 if (!instance.editorView) {
                   return;
                 }
@@ -235,7 +236,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
             />
           </div>
         </div>
-        {instance.model.interpreterEditMode && (
+        {instance.interpreterEditMode && (
           <div className="libro-prompt-cell-model-tip">
             <LLMRender type="message" remarkPlugins={[remarkGfm, breaks]}>
               {instance.model.promptOutput}
@@ -261,6 +262,49 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
 
   @prop()
   contextChatRecords: string[] = [];
+
+  get interpreterEditMode() {
+    return this.model._interpreterEditMode;
+  }
+
+  set interpreterEditMode(data) {
+    this.model._interpreterEditMode = data;
+    if (data) {
+      this.model.prompt = this.model.value;
+      this.model.mimeType = MIME.python;
+      this.outputArea.clear();
+    } else {
+      this.model.interpreterCode = this.model.value;
+      this.model.metadata.interpreter = {
+        ...this.model.metadata.interpreter,
+        interpreter_code: this.model.interpreterCode,
+      };
+      this.model.mimeType = 'application/vnd.libro.prompt+json';
+      this.handleInterpreterOutput();
+    }
+  }
+
+  handleInterpreterOutput = async () => {
+    if (this.model.promptOutput) {
+      await this.outputArea.add({
+        data: {
+          'application/vnd.libro.prompt+json': this.model.promptOutput,
+        },
+        metadata: {},
+        output_type: 'display_data',
+      });
+    }
+    if (this.model.interpreterCode) {
+      await this.outputArea.add({
+        data: {
+          'application/vnd.libro.interpreter.code+text': this.model.interpreterCode,
+        },
+        metadata: {},
+        output_type: 'display_data',
+      });
+      this.runInterpreterCode();
+    }
+  };
 
   get sortedChatObjects(): ChatObject[] {
     const map = new Map<string, ChatObject>();
@@ -475,6 +519,81 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
       if (!msgPromise) {
         return true;
       }
+      if (msgPromise.content.status === 'ok') {
+        return true;
+      } else {
+        throw new KernelError(msgPromise.content);
+      }
+    } catch (reason: any) {
+      if (reason.message.startsWith('Canceled')) {
+        return false;
+      }
+      throw reason;
+    }
+  }
+
+  async runInterpreterCode() {
+    const libroModel = this.parent.model;
+
+    if (
+      !libroModel ||
+      !(libroModel instanceof LibroJupyterModel) ||
+      !libroModel.kernelConnection ||
+      libroModel.kernelConnection.isDisposed
+    ) {
+      return false;
+    }
+
+    const kernelConnection = getOrigin(libroModel.kernelConnection);
+    const cellModel = this.model;
+
+    if (!cellModel.interpreterCode) {
+      return false;
+    }
+
+    try {
+      cellModel.executing = true;
+      const future = kernelConnection.requestExecute({
+        code: cellModel.interpreterCode,
+      });
+
+      let startTimeStr = '';
+      future.onIOPub = (msg: any) => {
+        if (msg.header.msg_type === 'execute_input') {
+          cellModel.metadata.execution = {
+            'shell.execute_reply.started': '',
+            'shell.execute_reply.end': '',
+            to_execute: new Date().toISOString(),
+          } as ExecutionMeta;
+          cellModel.kernelExecuting = true;
+          startTimeStr = msg.header.date as string;
+          const meta = cellModel.metadata.execution as ExecutionMeta;
+          if (meta) {
+            meta['shell.execute_reply.started'] = startTimeStr;
+          }
+        }
+        cellModel.msgChangeEmitter.fire(msg);
+      };
+      future.onReply = (msg: any) => {
+        cellModel.msgChangeEmitter.fire(msg);
+      };
+
+      const msgPromise = await future.done;
+      cellModel.executing = false;
+      cellModel.kernelExecuting = false;
+
+      startTimeStr = msgPromise.metadata['started'] as string;
+      const endTimeStr = msgPromise.header.date;
+
+      (cellModel.metadata.execution as ExecutionMeta)['shell.execute_reply.started'] =
+        startTimeStr;
+      (cellModel.metadata.execution as ExecutionMeta)['shell.execute_reply.end'] =
+        endTimeStr;
+
+      if (!msgPromise) {
+        return true;
+      }
+
       if (msgPromise.content.status === 'ok') {
         return true;
       } else {
