@@ -21,7 +21,7 @@ export const InterpreterCodeOutputRender: React.FC<{
   return (
     <div className="libro-interpreter-code-output-render-container">
       <div className="libro-interpreter-code-output-render">
-        <CodeBlock className="language-python" value={data} />
+        <CodeBlock className="language-python">{data}</CodeBlock>
       </div>
     </div>
   );
