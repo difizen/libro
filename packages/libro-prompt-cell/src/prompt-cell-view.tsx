@@ -237,11 +237,16 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
           </div>
         </div>
         {instance.interpreterEditMode && (
-          <div className="libro-prompt-cell-model-tip">
-            <LLMRender type="message" remarkPlugins={[remarkGfm, breaks]}>
-              {instance.model.promptOutput}
-            </LLMRender>
-          </div>
+          <>
+            <div className="libro-prompt-cell-model-prompt">
+              {instance.model.prompt}
+            </div>
+            <div className="libro-prompt-cell-model-tip">
+              <LLMRender type="message" remarkPlugins={[remarkGfm, breaks]}>
+                {instance.model.promptOutput}
+              </LLMRender>
+            </div>
+          </>
         )}
         <CellEditor />
       </div>
