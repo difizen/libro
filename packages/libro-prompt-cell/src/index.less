@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid var(--mana-libro-code-border-color);
 }
 
 .libro-interpreter-code-output-render {
@@ -80,6 +81,25 @@
   padding: 10px 24px;
 }
 
+.libro-prompt-cell-model-prompt {
+  border-bottom: 1px solid var(--mana-color-border);
+}
+
 .libro-prompt-cell-model-tip {
   color: var(--mana-libro-llm-response-output-text-color);
+}
+
+.libro-interpreter-edit-tip {
+  margin-right: 4px;
+}
+
+.libro-interpreter-edit-container {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border-right: 1px solid var(--mana-color-border);
+}
+
+.libro-prompt-cell-right-header {
+  display: flex;
 }
