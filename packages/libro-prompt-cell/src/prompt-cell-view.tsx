@@ -32,8 +32,7 @@ import {
   Deferred,
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import { Switch } from 'antd';
-import { Select, Tag } from 'antd';
+import { Select, Switch, Tag } from 'antd';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import breaks from 'remark-breaks';
@@ -211,23 +210,28 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
               handleVariableNameChange={instance.handleVariableNameChange}
             />
           </div>
-          <div>
-            <Switch
-              checkedChildren="Interpreter 编辑态"
-              unCheckedChildren="退出 Interpreter 编辑态"
-              onChange={(checked) => {
-                instance.interpreterEditMode = checked;
-                if (!instance.editorView) {
-                  return;
-                }
-                if (checked && instance.model.interpreterCode) {
-                  replace(instance.model.interpreterCode);
-                }
-                if (!checked && instance.model.prompt) {
-                  replace(instance.model.prompt);
-                }
-              }}
-            />
+          <div className="libro-prompt-cell-right-header">
+            <div className="libro-interpreter-edit-container">
+              <Tag bordered={false} color="geekblue">
+                interpreter
+              </Tag>
+              <div className="libro-interpreter-edit-tip">代码编辑</div>
+              <Switch
+                size="small"
+                onChange={(checked) => {
+                  instance.interpreterEditMode = checked;
+                  if (!instance.editorView) {
+                    return;
+                  }
+                  if (checked && instance.model.interpreterCode) {
+                    replace(instance.model.interpreterCode);
+                  }
+                  if (!checked && instance.model.prompt) {
+                    replace(instance.model.prompt);
+                  }
+                }}
+              />
+            </div>
             <ChatRecordInput
               value={instance.model.record}
               handleChange={instance.handleRecordChange}
@@ -278,6 +282,7 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
       this.model.prompt = this.model.value;
       this.model.mimeType = MIME.python;
       this.outputArea.clear();
+      this.parent.enterEditMode();
     } else {
       this.model.interpreterCode = this.model.value;
       this.model.metadata.interpreter = {

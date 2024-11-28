@@ -1,4 +1,3 @@
-import { MIME } from '@difizen/libro-common';
 import type {
   ICodeCell,
   ExecutionCount,
@@ -65,7 +64,6 @@ export class LibroPromptCellModel
   hasOutputHidden: boolean;
   @prop()
   hasOutputsScrolled: boolean;
-
   _interpreterEditMode = false;
 
   // Emitter Msg
