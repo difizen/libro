@@ -33,6 +33,7 @@ import {
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 import { Select, Switch, Tag } from 'antd';
+import type { DefaultOptionType } from 'antd/es/select/index.js';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import breaks from 'remark-breaks';
@@ -49,6 +50,7 @@ export interface ChatObject {
   order: number;
   key: string;
   disabled?: boolean;
+  interpreterEnabled?: boolean;
 }
 
 function ChatObjectFromKey(key: string): ChatObject {
@@ -164,8 +166,8 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleChange = (value: string) => {
-      instance.handleModelNameChange(value);
+    const handleChange = (value: string, options: DefaultOptionType) => {
+      instance.handleModelNameChange(value, options);
       setSelectedModel(value);
     };
 
@@ -211,27 +213,30 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
             />
           </div>
           <div className="libro-prompt-cell-right-header">
-            <div className="libro-interpreter-edit-container">
-              <Tag bordered={false} color="geekblue">
-                interpreter
-              </Tag>
-              <div className="libro-interpreter-edit-tip">代码编辑</div>
-              <Switch
-                size="small"
-                onChange={(checked) => {
-                  instance.interpreterEditMode = checked;
-                  if (!instance.editorView) {
-                    return;
-                  }
-                  if (checked && instance.model.interpreterCode) {
-                    replace(instance.model.interpreterCode);
-                  }
-                  if (!checked && instance.model.prompt) {
-                    replace(instance.model.prompt);
-                  }
-                }}
-              />
-            </div>
+            {instance.model.interpreterEnabled && (
+              <div className="libro-interpreter-edit-container">
+                <Tag bordered={false} color="geekblue">
+                  interpreter
+                </Tag>
+                <div className="libro-interpreter-edit-tip">代码编辑</div>
+                <Switch
+                  size="small"
+                  disabled={!instance.model.interpreterCode}
+                  onChange={(checked) => {
+                    instance.interpreterEditMode = checked;
+                    if (!instance.editorView) {
+                      return;
+                    }
+                    if (checked && instance.model.interpreterCode) {
+                      replace(instance.model.interpreterCode);
+                    }
+                    if (!checked && instance.model.prompt) {
+                      replace(instance.model.prompt);
+                    }
+                  }}
+                />
+              </div>
+            )}
             <ChatRecordInput
               value={instance.model.record}
               handleChange={instance.handleRecordChange}
@@ -283,13 +288,16 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
       this.model.mimeType = MIME.python;
       this.outputArea.clear();
       this.parent.enterEditMode();
+      this.parent.model.runnable = false;
     } else {
       this.model.interpreterCode = this.model.value;
       this.model.metadata.interpreter = {
         ...this.model.metadata.interpreter,
         interpreter_code: this.model.interpreterCode,
+        interpreter_enabled: this.model.interpreterEnabled,
       };
       this.model.mimeType = 'application/vnd.libro.prompt+json';
+      this.parent.model.runnable = true;
       this.handleInterpreterOutput();
     }
   }
@@ -674,6 +682,7 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
       value: item.key,
       label: <SelectionItemLabel item={item} />,
       disabled: !!item.disabled,
+      interpreterEnabled: item.interpreterEnabled,
     };
   };
 
@@ -710,7 +719,7 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
     }
   };
 
-  checkVariableNameAvailable = (variableName: string) => {
+  checkVariableNameAvailable = (variableName?: string) => {
     return (
       this.parent.model.cells.findIndex(
         (cell) =>
@@ -719,10 +728,11 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
       ) > -1
     );
   };
-  handleModelNameChange = (value: string) => {
+  handleModelNameChange = (value: string, option: DefaultOptionType) => {
     this.model.chatKey = value;
+    this.model.interpreterEnabled = option['interpreterEnabled'];
   };
-  handleVariableNameChange = (value: string) => {
+  handleVariableNameChange = (value?: string) => {
     this.model.variableName = value;
   };
   handleRecordChange = (value: string | undefined) => {

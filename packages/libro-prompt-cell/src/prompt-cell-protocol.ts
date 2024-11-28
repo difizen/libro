@@ -9,6 +9,7 @@ export type LibroPromptCellModelFactory = (
 export const LibroPromptCellModelFactory = Symbol('LibroPromptCellModelFactory');
 
 export interface InterpreterMeta extends PartialJSONObject {
+  interpreter_enabled?: boolean;
   interpreter_code?: string;
   interpreter_text?: string;
 }
