@@ -1,3 +1,4 @@
+import { EditOutlined } from '@ant-design/icons';
 import type { IRange } from '@difizen/libro-code-editor';
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
 import { MIME } from '@difizen/libro-common';
@@ -32,7 +33,7 @@ import {
   Deferred,
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import { Select, Switch, Tag } from 'antd';
+import { Select, Tag } from 'antd';
 import type { DefaultOptionType } from 'antd/es/select/index.js';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
@@ -213,30 +214,6 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
             />
           </div>
           <div className="libro-prompt-cell-right-header">
-            {instance.model.interpreterEnabled && (
-              <div className="libro-interpreter-edit-container">
-                <Tag bordered={false} color="geekblue">
-                  interpreter
-                </Tag>
-                <div className="libro-interpreter-edit-tip">代码编辑</div>
-                <Switch
-                  size="small"
-                  disabled={!instance.model.interpreterCode}
-                  onChange={(checked) => {
-                    instance.interpreterEditMode = checked;
-                    if (!instance.editorView) {
-                      return;
-                    }
-                    if (checked && instance.model.interpreterCode) {
-                      replace(instance.model.interpreterCode);
-                    }
-                    if (!checked && instance.model.prompt) {
-                      replace(instance.model.prompt);
-                    }
-                  }}
-                />
-              </div>
-            )}
             <ChatRecordInput
               value={instance.model.record}
               handleChange={instance.handleRecordChange}
@@ -257,7 +234,23 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
             </div>
           </>
         )}
-        <CellEditor />
+        <div className="libro-edit-container">
+          {instance.model.interpreterEnabled && instance.interpreterEditMode && (
+            <div
+              className="libro-interpreter-edit-container"
+              onClick={() => {
+                instance.interpreterEditMode = false;
+                if (instance.model.prompt) {
+                  replace(instance.model.prompt);
+                }
+              }}
+            >
+              <div className="libro-interpreter-edit-tip">退出编辑</div>
+              <EditOutlined className="libro-interpreter-edit-icon" />
+            </div>
+          )}
+          <CellEditor />
+        </div>
       </div>
     );
   },
@@ -291,11 +284,6 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
       this.parent.model.runnable = false;
     } else {
       this.model.interpreterCode = this.model.value;
-      this.model.metadata.interpreter = {
-        ...this.model.metadata.interpreter,
-        interpreter_code: this.model.interpreterCode,
-        interpreter_enabled: this.model.interpreterEnabled,
-      };
       this.model.mimeType = 'application/vnd.libro.prompt+json';
       this.parent.model.runnable = true;
       this.handleInterpreterOutput();
