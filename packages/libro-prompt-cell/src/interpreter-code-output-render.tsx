@@ -1,7 +1,7 @@
 import type { BaseOutputView } from '@difizen/libro-jupyter';
 import React from 'react';
 
-import { CodeBlock } from './code-block.js';
+import { InterpreterCodeBlock } from './code-block.js';
 import { LibroPromptCellView } from './prompt-cell-view.js';
 
 export const InterpreterCodeOutputRender: React.FC<{
@@ -21,7 +21,7 @@ export const InterpreterCodeOutputRender: React.FC<{
   return (
     <div className="libro-interpreter-code-output-render-container">
       <div className="libro-interpreter-code-output-render">
-        <CodeBlock className="language-python">{data}</CodeBlock>
+        <InterpreterCodeBlock className="language-python">{data}</InterpreterCodeBlock>
       </div>
     </div>
   );
