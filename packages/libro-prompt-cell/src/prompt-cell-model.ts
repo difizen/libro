@@ -123,6 +123,11 @@ export class LibroPromptCellModel
   }
 
   override toJSON(): Omit<ICodeCell, 'outputs'> {
+    this.metadata.interpreter = {
+      ...this.metadata.interpreter,
+      interpreter_code: this.interpreterCode,
+      interpreter_enabled: this.interpreterEnabled,
+    };
     return {
       id: this.id,
       cell_type: this.type,
