@@ -91,9 +91,18 @@
 
 .libro-interpreter-edit-container {
   display: flex;
+  position: absolute;
+  margin-top: 4px;
+  z-index: 100;
+  right: 0;
   align-items: center;
   padding: 0 8px;
-  border-right: 1px solid var(--mana-color-border);
+  color: #bdc0c4;
+  cursor: pointer;
+
+  &:hover {
+    color: #1590ff;
+  }
 }
 
 .libro-prompt-cell-right-header {
