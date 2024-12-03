@@ -54,6 +54,9 @@ export class LibroPromptCellModel
   chatKey?: string;
 
   @prop()
+  supportInterpreter?: 'dynamic' | 'immutable' | 'disable';
+
+  @prop()
   interpreterEnabled?: boolean;
 
   @prop()
@@ -86,6 +89,7 @@ export class LibroPromptCellModel
       value: this._interpreterEditMode ? this.prompt : this.value,
       cellId: this.id,
       interpreterCode: this.interpreterCode,
+      supportInterpreter: this.supportInterpreter,
       interpreterEnabled: this.interpreterEnabled,
     };
   }
@@ -97,6 +101,7 @@ export class LibroPromptCellModel
     this.chatKey = data.chatKey;
     this.record = data.record;
     this.interpreterCode = data.interpreterCode;
+    this.supportInterpreter = data.supportInterpreter;
     this.interpreterEnabled = data.interpreterEnabled;
   }
 
@@ -126,6 +131,7 @@ export class LibroPromptCellModel
     this.metadata.interpreter = {
       ...this.metadata.interpreter,
       interpreter_code: this.interpreterCode,
+      support_interpreter: this.supportInterpreter,
       interpreter_enabled: this.interpreterEnabled,
     };
     return {

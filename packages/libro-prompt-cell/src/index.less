@@ -1,3 +1,5 @@
+@ant-prefix: ant;
+
 .libro-prompt-cell-header {
   display: flex;
   align-items: center;
@@ -7,6 +9,21 @@
 
 .libro-interpreter-code-output-render {
   padding: 10px 24px;
+
+  .@{ant-prefix}-collapse-content > .@{ant-prefix}-collapse-content-box {
+    padding: unset;
+  }
+  .@{ant-prefix}-collapse-ghost
+    > .@{ant-prefix}-collapse-item
+    > .@{ant-prefix}-collapse-content
+    > .@{ant-prefix}-collapse-content-box {
+    padding: unset;
+  }
+  .@{ant-prefix}-collapse
+    > .@{ant-prefix}-collapse-item
+    > .@{ant-prefix}-collapse-header {
+    padding: unset;
+  }
 }
 
 .libro-llm-hljs {
@@ -107,4 +124,12 @@
 
 .libro-prompt-cell-right-header {
   display: flex;
+}
+
+.libro-prompt-cell-interpreter-switch {
+  margin: 0 6px;
+}
+
+.libro-prompt-cell-interpreter-header-container {
+  display: inline-block;
 }
