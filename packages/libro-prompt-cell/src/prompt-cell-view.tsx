@@ -33,13 +33,14 @@ import {
   Deferred,
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import { Select, Tag } from 'antd';
+import { Select, Switch, Tag } from 'antd';
 import type { DefaultOptionType } from 'antd/es/select/index.js';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import breaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 
+import { CodeBlock } from './code-block.js';
 import { ChatRecordInput, VariableNameInput } from './input-handler/index.js';
 import { LibroPromptCellModel } from './prompt-cell-model.js';
 import { PromptScript } from './prompt-cell-script.js';
@@ -51,7 +52,9 @@ export interface ChatObject {
   order: number;
   key: string;
   disabled?: boolean;
-  interpreterEnabled?: boolean;
+  support_interpreter?: 'dynamic' | 'immutable' | 'disable';
+  interpreter_enabled?: boolean;
+  [key: string]: any;
 }
 
 function ChatObjectFromKey(key: string): ChatObject {
@@ -102,6 +105,42 @@ const ChatObjectOptions = (type: string): ChatObjectOptions => {
         color: undefined,
       };
   }
+};
+
+const InterpreterMode = () => {
+  const instance = useInject<LibroPromptCellView>(ViewInstance);
+  const handleInterpreterSwitch = (checked: boolean) => {
+    instance.model.interpreterEnabled = checked;
+    if (instance.model.chatKey) {
+      instance.switchInterpreterMode(instance.model.chatKey, checked);
+      instance.model.promptOutput = undefined;
+      instance.model.interpreterCode = undefined;
+    }
+  };
+
+  if (instance.model.supportInterpreter === 'immutable') {
+    return (
+      <Tag bordered={false} color="geekblue">
+        Interpreter
+      </Tag>
+    );
+  }
+
+  if (instance.model.supportInterpreter === 'dynamic') {
+    return (
+      <div>
+        <span className="libro-prompt-cell-interpreter-switch-tip">
+          {instance.model.interpreterEnabled ? '关闭 Interpreter' : '开启 Interpreter'}
+        </span>
+        <Switch
+          size="small"
+          className="libro-prompt-cell-interpreter-switch"
+          onChange={handleInterpreterSwitch}
+        />
+      </div>
+    );
+  }
+  return null;
 };
 
 const SelectionItemLabel: React.FC<{ item: ChatObject }> = (props: {
@@ -207,6 +246,9 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
                 }}
               />
             </span>
+            <div className="libro-prompt-cell-interpreter-header-container">
+              <InterpreterMode />
+            </div>
             <VariableNameInput
               value={instance.model.variableName}
               checkVariableNameAvailable={instance.checkVariableNameAvailable}
@@ -228,14 +270,18 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
               {instance.model.prompt}
             </div>
             <div className="libro-prompt-cell-model-tip">
-              <LLMRender type="message" remarkPlugins={[remarkGfm, breaks]}>
+              <LLMRender
+                type="message"
+                remarkPlugins={[remarkGfm, breaks]}
+                components={{ code: CodeBlock }}
+              >
                 {instance.model.promptOutput}
               </LLMRender>
             </div>
           </>
         )}
         <div className="libro-edit-container">
-          {instance.model.interpreterEnabled && instance.interpreterEditMode && (
+          {instance.interpreterEditMode && (
             <div
               className="libro-interpreter-edit-container"
               onClick={() => {
@@ -648,6 +694,18 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
     );
   };
 
+  switchInterpreterMode = async (chatKey: string, mode: boolean) => {
+    return this.fetch(
+      {
+        code: this.promptScript.switchInterpreterMode(chatKey, mode),
+        store_history: false,
+      },
+      (msg) => {
+        //
+      },
+    );
+  };
+
   updateChatRecords = async () => {
     return this.fetch(
       {
@@ -670,7 +728,7 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
       value: item.key,
       label: <SelectionItemLabel item={item} />,
       disabled: !!item.disabled,
-      interpreterEnabled: item.interpreterEnabled,
+      support_interpreter: item.support_interpreter,
     };
   };
 
@@ -718,7 +776,7 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
   };
   handleModelNameChange = (value: string, option: DefaultOptionType) => {
     this.model.chatKey = value;
-    this.model.interpreterEnabled = option['interpreterEnabled'];
+    this.model.supportInterpreter = option['support_interpreter'];
   };
   handleVariableNameChange = (value?: string) => {
     this.model.variableName = value;
