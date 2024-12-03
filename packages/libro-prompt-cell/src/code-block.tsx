@@ -2,6 +2,7 @@ import { CopyOutlined, EditOutlined } from '@ant-design/icons';
 import type { DisplayDataOutputModel } from '@difizen/libro-jupyter';
 import { copy2clipboard } from '@difizen/libro-jupyter';
 import { useInject, ViewInstance } from '@difizen/mana-app';
+import { Collapse } from 'antd';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 import { LibroPromptCellView } from './prompt-cell-view.js';
@@ -61,29 +62,44 @@ export const InterpreterCodeBlock = (props: any) => {
     const [, lang] = /language-(\w+)/.exec(className || '') || [];
 
     return (
-      <pre className={`chat-msg-md-code-wrap`}>
-        {cell.model.interpreterEnabled && (
-          <div
-            className="libro-interpreter-edit-container"
-            onClick={() => {
-              cell.interpreterEditMode = true;
-              if (cell.model.interpreterCode) {
-                replace(cell.model.interpreterCode);
-              }
-            }}
-          >
-            <div className="libro-interpreter-edit-tip">代码编辑</div>
-            <EditOutlined className="libro-interpreter-edit-icon" />
-          </div>
-        )}
-        <SyntaxHighlighter
-          className={`libro-llm-syntax-highlighter`}
-          language={lang}
-          style={{}}
-        >
-          {typeof children === 'string' ? children.trim() : children}
-        </SyntaxHighlighter>
-      </pre>
+      <Collapse
+        ghost
+        items={[
+          {
+            key: '1',
+            label: 'Code',
+            children: (
+              <p>
+                <div className="libro-code-interpreter-code">
+                  <pre className={`chat-msg-md-code-wrap`}>
+                    {
+                      <div
+                        className="libro-interpreter-edit-container"
+                        onClick={() => {
+                          cell.interpreterEditMode = true;
+                          if (cell.model.interpreterCode) {
+                            replace(cell.model.interpreterCode);
+                          }
+                        }}
+                      >
+                        <div className="libro-interpreter-edit-tip">代码编辑</div>
+                        <EditOutlined className="libro-interpreter-edit-icon" />
+                      </div>
+                    }
+                    <SyntaxHighlighter
+                      className={`libro-llm-syntax-highlighter`}
+                      language={lang}
+                      style={{}}
+                    >
+                      {typeof children === 'string' ? children.trim() : children}
+                    </SyntaxHighlighter>
+                  </pre>
+                </div>
+              </p>
+            ),
+          },
+        ]}
+      ></Collapse>
     );
   }
 
