@@ -702,12 +702,12 @@ export class LibroE2Editor implements IEditor {
    * 切换语言
    * cell 切换没走这里
    */
-  protected onMimeTypeChanged(): void {
+  protected onMimeTypeChanged = () => {
     const model = this.monacoEditor?.getModel();
     if (this.languageSpec && model) {
       editor.setModelLanguage(model, this.languageSpec.language);
     }
-  }
+  };
 
   /**
    * Handles a cursor activity event.

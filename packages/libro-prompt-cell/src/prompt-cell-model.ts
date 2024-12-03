@@ -1,9 +1,8 @@
 import type {
-  ICellMetadata,
+  ICodeCell,
   ExecutionCount,
   ICodeCellMetadata,
 } from '@difizen/libro-common';
-import type { ICodeCell } from '@difizen/libro-common';
 import type { ExecutableCellModel } from '@difizen/libro-core';
 import { LibroCellModel } from '@difizen/libro-core';
 import { CellOptions } from '@difizen/libro-core';
@@ -15,8 +14,12 @@ import { ViewManager } from '@difizen/mana-app';
 import { inject } from '@difizen/mana-app';
 import type { Event as ManaEvent } from '@difizen/mana-app';
 
+import type { PromptDecodedFormatter } from './libro-formatter-prompt-magic-contribution.js';
+import type { InterpreterMeta } from './prompt-cell-protocol.js';
+
 export interface PromptCellMetadata extends ICodeCellMetadata {
   execution: ExecutionMeta;
+  interpreter: InterpreterMeta;
 }
 
 @transient()
@@ -32,7 +35,7 @@ export class LibroPromptCellModel
   @prop()
   hasExecutedError = false;
   @prop()
-  override metadata: Partial<PromptCellMetadata | ICellMetadata>;
+  override metadata: Partial<PromptCellMetadata>;
   @prop()
   kernelExecuting = false;
 
@@ -43,10 +46,24 @@ export class LibroPromptCellModel
   modelType?: string;
 
   @prop()
+  prompt = '';
+
+  promptOutput?: string;
+
+  @prop()
   chatKey?: string;
 
   @prop()
-  variableName: string;
+  supportInterpreter?: 'dynamic' | 'immutable' | 'disable';
+
+  @prop()
+  interpreterEnabled?: boolean;
+
+  @prop()
+  interpreterCode?: string;
+
+  @prop()
+  variableName?: string;
 
   @prop()
   executing: boolean;
@@ -54,6 +71,7 @@ export class LibroPromptCellModel
   hasOutputHidden: boolean;
   @prop()
   hasOutputsScrolled: boolean;
+  _interpreterEditMode = false;
 
   // Emitter Msg
   msgChangeEmitter: Emitter<any>;
@@ -68,16 +86,23 @@ export class LibroPromptCellModel
       variableName: this.variableName,
       chatKey: this.chatKey,
       record: this.record,
-      value: this.value,
+      value: this._interpreterEditMode ? this.prompt : this.value,
       cellId: this.id,
+      interpreterCode: this.interpreterCode,
+      supportInterpreter: this.supportInterpreter,
+      interpreterEnabled: this.interpreterEnabled,
     };
   }
 
-  override set decodeObject(value) {
-    super.decodeObject = value;
-    this.variableName = value.variableName;
-    this.chatKey = value.chatKey;
-    this.record = value.record;
+  override set decodeObject(data: PromptDecodedFormatter) {
+    this.value = data.value;
+    this.prompt = data.value;
+    this.variableName = data.variableName;
+    this.chatKey = data.chatKey;
+    this.record = data.record;
+    this.interpreterCode = data.interpreterCode;
+    this.supportInterpreter = data.supportInterpreter;
+    this.interpreterEnabled = data.interpreterEnabled;
   }
 
   viewManager: ViewManager;
@@ -96,19 +121,25 @@ export class LibroPromptCellModel
     this.libroFormatType = 'formatter-prompt-magic';
     this.mimeType = 'application/vnd.libro.prompt+json';
     this.metadata = {
+      interpreter: {},
       ...options?.cell?.metadata,
       libroFormatter: this.libroFormatType,
     };
   }
 
   override toJSON(): Omit<ICodeCell, 'outputs'> {
+    this.metadata.interpreter = {
+      ...this.metadata.interpreter,
+      interpreter_code: this.interpreterCode,
+      support_interpreter: this.supportInterpreter,
+      interpreter_enabled: this.interpreterEnabled,
+    };
     return {
       id: this.id,
       cell_type: this.type,
       source: this.source,
       metadata: this.metadata,
       execution_count: this.executeCount,
-      // outputs: this.outputs,
     };
   }
 

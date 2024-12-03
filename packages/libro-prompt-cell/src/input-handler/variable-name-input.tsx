@@ -11,9 +11,9 @@ import { useCallback, useState } from 'react';
 import './index.less';
 
 interface VariableNameInputPopoverContentProps {
-  value: string;
-  handleVariableNameChange: (variableName: string) => void;
-  checkVariableNameAvailable: (variableName: string) => boolean;
+  value?: string;
+  handleVariableNameChange: (variableName?: string) => void;
+  checkVariableNameAvailable: (variableName?: string) => boolean;
   cancel: () => void;
 }
 
@@ -69,9 +69,9 @@ export const VariableNameInputPopoverContent: FC<
 };
 
 interface VariableNameInputProps {
-  value: string;
-  handleVariableNameChange: (variableName: string) => void;
-  checkVariableNameAvailable: (variableName: string) => boolean;
+  value?: string;
+  handleVariableNameChange: (variableName?: string) => void;
+  checkVariableNameAvailable: (variableName?: string) => boolean;
   classname?: string;
 }
 const variableNameInputCls = 'libro-variable-name-input';

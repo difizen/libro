@@ -14,6 +14,9 @@ export interface PromptDecodedFormatter extends DefaultDecodedFormatter {
   variableName?: string;
   cellId?: string;
   record?: string;
+  interpreterCode?: string;
+  supportInterpreter?: 'dynamic' | 'immutable' | 'disable';
+  interpreterEnabled?: boolean;
 }
 
 @singleton({ contrib: FormatterContribution })
@@ -44,6 +47,11 @@ export class FormatterPromptMagicContribution
       source: encodeValue,
       metadata: {
         libroFormatter: this.formatter,
+        interpreter: {
+          interpreter_code: source.interpreterCode,
+          support_interpreter: source.supportInterpreter,
+          interpreter_enabled: source.interpreterEnabled,
+        },
       },
     };
   };
@@ -54,6 +62,16 @@ export class FormatterPromptMagicContribution
       const run = value.split('%%prompt \n')[1];
       const runValue = JSON.parse(run);
       const codeValue = runValue.prompt;
+      let interpreterCode;
+      let supportInterpreter;
+      let interpreterEnabled;
+      if (formatterValue.metadata['interpreter']) {
+        interpreterCode = formatterValue.metadata['interpreter']['interpreter_code'];
+        supportInterpreter =
+          formatterValue.metadata['interpreter']['support_interpreter'];
+        interpreterEnabled =
+          formatterValue.metadata['interpreter']['interpreter_enabled'];
+      }
       const chatKey = runValue.chat_key || runValue.model_name;
       const variableName = runValue.variable_name;
       const cellId = runValue.cell_id;
@@ -64,6 +82,9 @@ export class FormatterPromptMagicContribution
         chatKey,
         cellId,
         record,
+        interpreterCode,
+        supportInterpreter,
+        interpreterEnabled,
       };
     }
     return {

@@ -2,6 +2,7 @@ import { CellOptions, LibroModule, OutputModule } from '@difizen/libro-core';
 import { LibroRenderMimeModule } from '@difizen/libro-rendermime';
 import { ManaModule } from '@difizen/mana-app';
 
+import { LibroInterpreterCodeOutputMimeTypeContribution } from './interpreter-code-output-rendermime-contribution.js';
 import { FormatterPromptMagicContribution } from './libro-formatter-prompt-magic-contribution.js';
 import { LibroPromptCellCommandContribution } from './prompt-cell-command-contribution.js';
 import { PromptCellContribution } from './prompt-cell-contribution.js';
@@ -22,6 +23,7 @@ export const LibroPromptCellModule = ManaModule.create()
     LibroPromptCellView,
     LibroPromptCellModel,
     LibroPromptOutputMimeTypeContribution,
+    LibroInterpreterCodeOutputMimeTypeContribution,
     LibroPromptCellCommandContribution,
     FormatterPromptMagicContribution,
     {

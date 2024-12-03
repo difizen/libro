@@ -1,15 +1,23 @@
+import { EditOutlined } from '@ant-design/icons';
 import type { IRange } from '@difizen/libro-code-editor';
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
+import { MIME } from '@difizen/libro-common';
 import { isOutput } from '@difizen/libro-common';
 import type {
+  ExecutionMeta,
+  KernelMessage,
   IOutputAreaOption,
   LibroCell,
   CellViewOptions,
-} from '@difizen/libro-core';
-import { LibroOutputArea } from '@difizen/libro-core';
-import { CellService, LibroEditableExecutableCellView } from '@difizen/libro-core';
-import type { ExecutionMeta, KernelMessage } from '@difizen/libro-jupyter';
-import { KernelError, LibroJupyterModel } from '@difizen/libro-jupyter';
+} from '@difizen/libro-jupyter';
+import {
+  KernelError,
+  LibroJupyterModel,
+  CellService,
+  LibroEditableExecutableCellView,
+  LibroOutputArea,
+} from '@difizen/libro-jupyter';
+import { ChatComponents } from '@difizen/magent-chat';
 import {
   getOrigin,
   inject,
@@ -22,13 +30,17 @@ import {
   ViewOption,
   ViewRender,
   watch,
+  Deferred,
 } from '@difizen/mana-app';
-import { Deferred } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import { Select, Tag } from 'antd';
+import { Select, Switch, Tag } from 'antd';
+import type { DefaultOptionType } from 'antd/es/select/index.js';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
+import breaks from 'remark-breaks';
+import remarkGfm from 'remark-gfm';
 
+import { CodeBlock } from './code-block.js';
 import { ChatRecordInput, VariableNameInput } from './input-handler/index.js';
 import { LibroPromptCellModel } from './prompt-cell-model.js';
 import { PromptScript } from './prompt-cell-script.js';
@@ -40,6 +52,9 @@ export interface ChatObject {
   order: number;
   key: string;
   disabled?: boolean;
+  support_interpreter?: 'dynamic' | 'immutable' | 'disable';
+  interpreter_enabled?: boolean;
+  [key: string]: any;
 }
 
 function ChatObjectFromKey(key: string): ChatObject {
@@ -92,6 +107,40 @@ const ChatObjectOptions = (type: string): ChatObjectOptions => {
   }
 };
 
+const InterpreterMode = () => {
+  const instance = useInject<LibroPromptCellView>(ViewInstance);
+  const handleInterpreterSwitch = (checked: boolean) => {
+    instance.model.interpreterEnabled = checked;
+    if (instance.model.chatKey) {
+      instance.switchInterpreterMode(instance.model.chatKey, checked);
+    }
+  };
+
+  if (instance.model.supportInterpreter === 'immutable') {
+    return (
+      <Tag bordered={false} color="geekblue">
+        Interpreter
+      </Tag>
+    );
+  }
+
+  if (instance.model.supportInterpreter === 'dynamic') {
+    return (
+      <div>
+        <span className="libro-prompt-cell-interpreter-switch-tip">
+          {instance.model.interpreterEnabled ? '关闭 Interpreter' : '开启 Interpreter'}
+        </span>
+        <Switch
+          size="small"
+          className="libro-prompt-cell-interpreter-switch"
+          onChange={handleInterpreterSwitch}
+        />
+      </div>
+    );
+  }
+  return null;
+};
+
 const SelectionItemLabel: React.FC<{ item: ChatObject }> = (props: {
   item: ChatObject;
 }) => {
@@ -126,8 +175,9 @@ const CellEditorRaw: React.FC = () => {
 export const CellEditor = React.memo(CellEditorRaw);
 
 const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
-  function MaxPropmtEditorViewComponent(props, ref) {
+  function PropmtEditorViewComponent(props, ref) {
     const instance = useInject<LibroPromptCellView>(ViewInstance);
+    const LLMRender = ChatComponents.Markdown;
     const [selectedModel, setSelectedModel] = useState<string>(l10n.t('暂无内置模型'));
     useEffect(() => {
       // TODO: Data initialization should not depend on view initialization, which causes limitations in usage scenarios and multiple renderings.
@@ -154,9 +204,23 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleChange = (value: string) => {
-      instance.handleModelNameChange(value);
+    const handleChange = (value: string, options: DefaultOptionType) => {
+      instance.handleModelNameChange(value, options);
       setSelectedModel(value);
+    };
+
+    const replace = (data: string) => {
+      if (instance instanceof LibroPromptCellView && instance.editor) {
+        const length = instance.editor.model.value.length;
+        const start = instance.editor.getPositionAt(0);
+        const end = instance.editor.getPositionAt(length);
+        if (start && end) {
+          instance.editor.replaceSelection(data, {
+            start,
+            end,
+          });
+        }
+      }
     };
 
     return (
@@ -180,13 +244,16 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
                 }}
               />
             </span>
+            <div className="libro-prompt-cell-interpreter-header-container">
+              <InterpreterMode />
+            </div>
             <VariableNameInput
               value={instance.model.variableName}
               checkVariableNameAvailable={instance.checkVariableNameAvailable}
               handleVariableNameChange={instance.handleVariableNameChange}
             />
           </div>
-          <div>
+          <div className="libro-prompt-cell-right-header">
             <ChatRecordInput
               value={instance.model.record}
               handleChange={instance.handleRecordChange}
@@ -195,7 +262,39 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
             />
           </div>
         </div>
-        <CellEditor />
+        {instance.interpreterEditMode && (
+          <>
+            <div className="libro-prompt-cell-model-prompt">
+              {instance.model.prompt}
+            </div>
+            <div className="libro-prompt-cell-model-tip">
+              <LLMRender
+                type="message"
+                remarkPlugins={[remarkGfm, breaks]}
+                components={{ code: CodeBlock }}
+              >
+                {instance.model.promptOutput}
+              </LLMRender>
+            </div>
+          </>
+        )}
+        <div className="libro-edit-container">
+          {instance.interpreterEditMode && (
+            <div
+              className="libro-interpreter-edit-container"
+              onClick={() => {
+                instance.interpreterEditMode = false;
+                if (instance.model.prompt) {
+                  replace(instance.model.prompt);
+                }
+              }}
+            >
+              <div className="libro-interpreter-edit-tip">退出编辑</div>
+              <EditOutlined className="libro-interpreter-edit-icon" />
+            </div>
+          )}
+          <CellEditor />
+        </div>
       </div>
     );
   },
@@ -214,6 +313,48 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
 
   @prop()
   contextChatRecords: string[] = [];
+
+  get interpreterEditMode() {
+    return this.model._interpreterEditMode;
+  }
+
+  set interpreterEditMode(data) {
+    this.model._interpreterEditMode = data;
+    if (data) {
+      this.model.prompt = this.model.value;
+      this.model.mimeType = MIME.python;
+      this.outputArea.clear();
+      this.parent.enterEditMode();
+      this.parent.model.runnable = false;
+    } else {
+      this.model.interpreterCode = this.model.value;
+      this.model.mimeType = 'application/vnd.libro.prompt+json';
+      this.parent.model.runnable = true;
+      this.handleInterpreterOutput();
+    }
+  }
+
+  handleInterpreterOutput = async () => {
+    if (this.model.promptOutput) {
+      await this.outputArea.add({
+        data: {
+          'application/vnd.libro.prompt+json': this.model.promptOutput,
+        },
+        metadata: {},
+        output_type: 'display_data',
+      });
+    }
+    if (this.model.interpreterCode) {
+      await this.outputArea.add({
+        data: {
+          'application/vnd.libro.interpreter.code+text': this.model.interpreterCode,
+        },
+        metadata: {},
+        output_type: 'display_data',
+      });
+      this.runInterpreterCode();
+    }
+  };
 
   get sortedChatObjects(): ChatObject[] {
     const map = new Map<string, ChatObject>();
@@ -441,6 +582,81 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
     }
   }
 
+  async runInterpreterCode() {
+    const libroModel = this.parent.model;
+
+    if (
+      !libroModel ||
+      !(libroModel instanceof LibroJupyterModel) ||
+      !libroModel.kernelConnection ||
+      libroModel.kernelConnection.isDisposed
+    ) {
+      return false;
+    }
+
+    const kernelConnection = getOrigin(libroModel.kernelConnection);
+    const cellModel = this.model;
+
+    if (!cellModel.interpreterCode) {
+      return false;
+    }
+
+    try {
+      cellModel.executing = true;
+      const future = kernelConnection.requestExecute({
+        code: cellModel.interpreterCode,
+      });
+
+      let startTimeStr = '';
+      future.onIOPub = (msg: any) => {
+        if (msg.header.msg_type === 'execute_input') {
+          cellModel.metadata.execution = {
+            'shell.execute_reply.started': '',
+            'shell.execute_reply.end': '',
+            to_execute: new Date().toISOString(),
+          } as ExecutionMeta;
+          cellModel.kernelExecuting = true;
+          startTimeStr = msg.header.date as string;
+          const meta = cellModel.metadata.execution as ExecutionMeta;
+          if (meta) {
+            meta['shell.execute_reply.started'] = startTimeStr;
+          }
+        }
+        cellModel.msgChangeEmitter.fire(msg);
+      };
+      future.onReply = (msg: any) => {
+        cellModel.msgChangeEmitter.fire(msg);
+      };
+
+      const msgPromise = await future.done;
+      cellModel.executing = false;
+      cellModel.kernelExecuting = false;
+
+      startTimeStr = msgPromise.metadata['started'] as string;
+      const endTimeStr = msgPromise.header.date;
+
+      (cellModel.metadata.execution as ExecutionMeta)['shell.execute_reply.started'] =
+        startTimeStr;
+      (cellModel.metadata.execution as ExecutionMeta)['shell.execute_reply.end'] =
+        endTimeStr;
+
+      if (!msgPromise) {
+        return true;
+      }
+
+      if (msgPromise.content.status === 'ok') {
+        return true;
+      } else {
+        throw new KernelError(msgPromise.content);
+      }
+    } catch (reason: any) {
+      if (reason.message.startsWith('Canceled')) {
+        return false;
+      }
+      throw reason;
+    }
+  }
+
   fetch = async (
     content: KernelMessage.IExecuteRequestMsg['content'],
     ioCallback: (msg: KernelMessage.IIOPubMessage) => any,
@@ -475,6 +691,19 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
         }),
     );
   };
+
+  switchInterpreterMode = async (chatKey: string, mode: boolean) => {
+    return this.fetch(
+      {
+        code: this.promptScript.switchInterpreterMode(chatKey, mode),
+        store_history: false,
+      },
+      (msg) => {
+        //
+      },
+    );
+  };
+
   updateChatRecords = async () => {
     return this.fetch(
       {
@@ -497,6 +726,7 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
       value: item.key,
       label: <SelectionItemLabel item={item} />,
       disabled: !!item.disabled,
+      support_interpreter: item.support_interpreter,
     };
   };
 
@@ -533,7 +763,7 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
     }
   };
 
-  checkVariableNameAvailable = (variableName: string) => {
+  checkVariableNameAvailable = (variableName?: string) => {
     return (
       this.parent.model.cells.findIndex(
         (cell) =>
@@ -542,10 +772,11 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
       ) > -1
     );
   };
-  handleModelNameChange = (value: string) => {
+  handleModelNameChange = (value: string, option: DefaultOptionType) => {
     this.model.chatKey = value;
+    this.model.supportInterpreter = option['support_interpreter'];
   };
-  handleVariableNameChange = (value: string) => {
+  handleVariableNameChange = (value?: string) => {
     this.model.variableName = value;
   };
   handleRecordChange = (value: string | undefined) => {

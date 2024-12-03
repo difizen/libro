@@ -49,15 +49,21 @@ export const DefaultDecodedFormatter = {
 };
 
 export const DefaultEncodedFormatter = {
-  is: (arg: Record<any, any> | undefined): arg is DefaultEncodedFormatter => {
+  is: (
+    arg: Record<string, any> | undefined,
+  ): arg is {
+    source: unknown;
+    metadata: { libroFormatter: string } & { [key: string]: unknown };
+  } => {
     return (
       !!arg &&
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      typeof arg === 'object' &&
       'source' in arg &&
       'metadata' in arg &&
+      typeof arg['metadata'] === 'object' &&
+      arg['metadata'] !== null &&
       'libroFormatter' in arg['metadata'] &&
-      typeof (arg as any).metadata.libroFormatter === 'string' &&
-      typeof (arg as any).metadata === 'object'
+      typeof arg['metadata'].libroFormatter === 'string'
     );
   },
 };

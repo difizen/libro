@@ -1,19 +1,19 @@
-import type {
-  IMimeBundle,
-  MultilineString,
-  PartialJSONObject,
-} from '@difizen/libro-common';
+import type { MultilineString, PartialJSONObject } from '@difizen/libro-common';
 import { copy2clipboard } from '@difizen/libro-common';
 import { concatMultilineString } from '@difizen/libro-common';
 import type { BaseOutputView } from '@difizen/libro-jupyter';
 import { NotebookCommands } from '@difizen/libro-jupyter';
+import { ChatComponents } from '@difizen/magent-chat';
 import { CommandRegistry, useInject } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 import React, { useState } from 'react';
+import breaks from 'remark-breaks';
+import remarkGfm from 'remark-gfm';
 import { v4 } from 'uuid';
 
-import { LibroLLMRenderMemo } from './libro-llm-render.js';
+import { CodeBlock } from './code-block.js';
 import { getPythonCode } from './prompt-cell-utils.js';
+import { LibroPromptCellView } from './prompt-cell-view.js';
 
 const getModelOutput = (data: PartialJSONObject | MultilineString) => {
   if (typeof data === 'string' || Array.isArray(data)) {
@@ -29,18 +29,26 @@ export const PromptOutputRender: React.FC<{
   const { model } = props;
   const renderHTMLRef = React.createRef<HTMLDivElement>();
   const commandRegistry = useInject(CommandRegistry);
+  const LLMRender = ChatComponents.Markdown;
   const [selection, setSelection] = useState('');
 
   if (!model.data['application/vnd.libro.prompt+json']) {
     return null;
   }
 
-  const data = model.data['application/vnd.libro.prompt+json'] as IMimeBundle;
+  if (!(model.cell instanceof LibroPromptCellView)) {
+    return null;
+  }
+  const data = model.data['application/vnd.libro.prompt+json'] as
+    | PartialJSONObject
+    | MultilineString;
 
   if (!data) {
     return null;
   }
+
   const modelData = getModelOutput(data);
+  model.cell.model.promptOutput = modelData;
   const sourceArr = getPythonCode(modelData ?? '');
   const insertAndRun = async () => {
     const libro = model.cell.parent;
@@ -98,7 +106,13 @@ export const PromptOutputRender: React.FC<{
     <div className="libro-prompt-output-render-container" onMouseUp={updateSelection}>
       <div className="prompt-output-render" ref={renderHTMLRef}>
         <div className="libro-prompt-output-llm-render">
-          <LibroLLMRenderMemo data={modelData} />
+          <LLMRender
+            type="message"
+            components={{ code: CodeBlock }}
+            remarkPlugins={[remarkGfm, breaks]}
+          >
+            {modelData}
+          </LLMRender>
         </div>
       </div>
       {sourceArr.length > 0 && (
