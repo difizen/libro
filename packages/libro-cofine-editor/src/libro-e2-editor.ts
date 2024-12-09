@@ -3,6 +3,7 @@ import type {
   CompletionProvider,
   EditorState,
   EditorStateFactory,
+  EditorWidgetContribution,
   ICoordinate,
   IEditor,
   IEditorConfig,
@@ -14,7 +15,11 @@ import type {
   SearchMatch,
   TooltipProvider,
 } from '@difizen/libro-code-editor';
-import { defaultConfig, LanguageSpecRegistry } from '@difizen/libro-code-editor';
+import {
+  defaultConfig,
+  LanguageSpecRegistry,
+  EditorWidgetManager,
+} from '@difizen/libro-code-editor';
 import type { E2Editor } from '@difizen/libro-cofine-editor-core';
 import { EditorProvider, MonacoEnvironment } from '@difizen/libro-cofine-editor-core';
 import { MIME } from '@difizen/libro-common';
@@ -39,6 +44,7 @@ import { PlaceholderContentWidget } from './placeholder.js';
 import type { MonacoEditorOptions, MonacoEditorType, MonacoMatch } from './types.js';
 import { MonacoRange, MonacoUri } from './types.js';
 import './index.less';
+import { InlineContentWidget } from './widget/ai-widget.js';
 
 export interface LibroE2EditorConfig extends IEditorConfig {
   /**
@@ -314,6 +320,8 @@ export class LibroE2Editor implements IEditor {
   protected readonly languageSpecRegistry: LanguageSpecRegistry;
   @inject(CommandRegistry) protected readonly commandRegistry: CommandRegistry;
 
+  protected react: InlineContentWidget;
+
   protected defaultLineHeight = 20;
 
   protected toDispose = new DisposableCollection();
@@ -384,13 +392,17 @@ export class LibroE2Editor implements IEditor {
 
   protected hasHorizontalScrollbar = false;
 
+  protected editorWidgetManager: EditorWidgetManager;
+
   constructor(
     @inject(LibroE2EditorOptions) options: LibroE2EditorOptions,
     @inject(LibroE2EditorState) state: LibroE2EditorState,
     @inject(ThemeService) themeService: ThemeService,
+    @inject(EditorWidgetManager) editorWidgetManager: EditorWidgetManager,
     @inject(LanguageSpecRegistry)
     languageSpecRegistry: LanguageSpecRegistry,
   ) {
+    this.editorWidgetManager = editorWidgetManager;
     this.themeService = themeService;
     this.languageSpecRegistry = languageSpecRegistry;
     this.host = options.host;
@@ -527,6 +539,12 @@ export class LibroE2Editor implements IEditor {
     };
 
     this._editor = editorPorvider.create(host, options);
+
+    const widgetProvider: EditorWidgetContribution =
+      this.editorWidgetManager.findWidgetProvider();
+
+    this.react = new InlineContentWidget(this.monacoEditor!, widgetProvider);
+
     this.toDispose.push(
       this.monacoEditor?.onDidChangeModelContent((e) => {
         const value = this.monacoEditor?.getValue();

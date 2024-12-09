@@ -9,6 +9,7 @@ import { LibroAINativeCommandContribution } from './ai-native-command-contributi
 import { LibroAINativeForCellView } from './ai-native-for-cell-view.js';
 import { LibroAINativeCellTopBlank } from './ai-native-output-top.js';
 import { LibroAINativeService } from './ai-native-service.js';
+import { LibroAIWidgetModule } from './ai-widget/module.js';
 import { LibroAIChatSlotContribution } from './chat-slot-contribution.js';
 import { LibroChatView } from './chat-view.js';
 import { AIErrorOutputModel } from './error-output-model.js';
@@ -48,4 +49,9 @@ export const LibroAINativeModule = ManaModule.create()
     },
   )
   .canload(() => Promise.resolve(LibroAINativeModuleSetting.loadable))
-  .dependOn(LibroChatModule, CodeEditorModule, LibroAICompletionModule);
+  .dependOn(
+    LibroAIWidgetModule,
+    LibroChatModule,
+    CodeEditorModule,
+    LibroAICompletionModule,
+  );

@@ -11,6 +11,10 @@ import { CodeEditorContribution } from './code-editor-protocol.js';
 import { CodeEditorSettings } from './code-editor-settings.js';
 import { CodeEditorStateManager } from './code-editor-state-manager.js';
 import { CodeEditorView } from './code-editor-view.js';
+import {
+  EditorWidgetContribution,
+  EditorWidgetManager,
+} from './code-editor-widget/index.js';
 import { LanguageSpecContribution, LanguageSpecRegistry } from './language-specs.js';
 
 export const CodeEditorModule = ManaModule.create()
@@ -23,9 +27,11 @@ export const CodeEditorModule = ManaModule.create()
     CodeEditorStateManager,
     LanguageSpecRegistry,
     InlineCompletionManager,
+    EditorWidgetManager,
   )
   .contribution(
     CodeEditorContribution,
     LanguageSpecContribution,
     InlineCompletionContribution,
+    EditorWidgetContribution,
   );

@@ -1,0 +1,70 @@
+.imageWrapper {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding-right: 6px;
+  padding-left: 6px;
+  border: solid 1px #e2e2e2;
+  box-shadow: #e2e2e2;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.imageDisplay {
+  flex-shrink: 0;
+  align-self: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+}
+
+.captionWrapper {
+  width: 1px;
+  min-width: 2px;
+  min-height: 15px;
+  margin-bottom: 4px;
+  margin-left: 6px;
+  background-color: #d3d3d3;
+}
+
+.textDescription {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 4px;
+  cursor: pointer;
+  margin: 0 4px;
+  color: #676a6e;
+  font-size: 12px;
+}
+
+.textDescription:hover {
+  background-color: #efefef;
+}
+
+.ellipsisButton {
+  align-self: center;
+  width: 10px;
+  height: 10px;
+  margin-left: 10px;
+  color: #676a6e;
+  font-size: 10px;
+}
+
+.actionWrapper {
+  width: 1px;
+  min-width: 2px;
+  min-height: 15px;
+  margin-bottom: 4px;
+  margin-left: 16px;
+  background-color: #d3d3d3;
+}
+
+.closeButton {
+  align-self: center;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  color: #676a6e;
+  font-size: 10px;
+}
