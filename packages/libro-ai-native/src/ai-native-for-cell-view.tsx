@@ -59,6 +59,7 @@ export function LibroAINativeForCellRender() {
         className={`libro-ai-native-for-cell-cancel-btn ${msgItem?.state === AnswerState.FAIL ? 'error' : ''}`}
         onClick={() => {
           instance.showAI = false;
+          instance.cancelRequest();
           if (!libroAINativeService.cellAIChatMap.get(instance.cell.id)) {
             cancelCellAIClassname(instance.cell);
           }
@@ -89,6 +90,7 @@ export class LibroAINativeForCellView extends BaseView {
   @prop()
   libroAIChatMessageItemModel?: LibroAIChatMessageItemModel;
 
+  private requestAbortController: AbortController;
   @prop()
   showAI = false;
   constructor(@inject(ViewOption) options: IAINativeForCellViewOption) {
@@ -97,9 +99,23 @@ export class LibroAINativeForCellView extends BaseView {
     this.cell = options.cell;
   }
 
+  private initAbortController() {
+    const abortController = new AbortController();
+    this.requestAbortController = abortController;
+  }
+
+  cancelRequest = () => {
+    if (this.requestAbortController) {
+      this.requestAbortController.abort();
+    }
+  };
+
   chatStream = async (option: IChatMessage) => {
     const { chat_key, content, language } = option;
 
+    this.initAbortController();
+
+    const signal = this.requestAbortController.signal;
     const url = `/libro/api/chatstream`;
     const msg = {
       chat_key: chat_key,
@@ -112,6 +128,7 @@ export class LibroAINativeForCellView extends BaseView {
       },
       responseType: 'stream',
       adapter: 'fetch',
+      signal: signal,
     });
     if (res.status === 200) {
       let reader;
