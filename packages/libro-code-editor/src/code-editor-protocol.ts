@@ -45,6 +45,26 @@ export interface IRange {
   readonly end: IPosition;
 }
 
+export declare class ISelection implements IRange {
+  /**
+   * The position of the first character in the current range.
+   *
+   * #### Notes
+   * If this position is greater than [end] then the range is considered
+   * to be backward.
+   */
+  readonly start: IPosition;
+
+  /**
+   * The position of the last character in the current range.
+   *
+   * #### Notes
+   * If this position is less than [start] then the range is considered
+   * to be backward.
+   */
+  readonly end: IPosition;
+}
+
 /**
  * A selection style.
  */
@@ -659,6 +679,17 @@ export interface CodeEditorContribution<T = any> {
    */
   stateFactory?: EditorStateFactory<T>;
   defaultConfig: IEditorConfig;
+}
+
+export interface DiffInfo {
+  // showDiff: (modified: string) => void;
+  handleApply: () => void;
+  handleReject: () => void;
+}
+
+export interface IDiffEditor extends IEditor {
+  originalEditor: IEditor;
+  modifiedEditor: IEditor;
 }
 
 export interface IModelContentChange {
