@@ -17,7 +17,8 @@ import {
   singleton,
 } from '@difizen/mana-app';
 
-import { LibroLabConfiguration } from './config/index.js';
+import { LibroLabConfiguration, LibroLabGuideViewEnabled } from './config/index.js';
+import { GuideView } from './guide/index.js';
 import { KernelAndTerminalPanelView } from './kernel-and-terminal-panel/index.js';
 import { LibroLabLayoutSlots } from './layout/index.js';
 import { LayoutService } from './layout/layout-service.js';
@@ -67,11 +68,18 @@ export class LibroLabApp implements ApplicationContribution {
       }
     }
     this.serverManager.ready
-      .then(() => {
+      .then(async () => {
         this.layoutService.setAreaVisible(LibroLabLayoutSlots.navigator, true);
         this.layoutService.setAreaVisible(LibroLabLayoutSlots.alert, false);
         this.layoutService.serverSatus = 'success';
         this.initialWorkspace();
+        const isGuideEnabled = await this.configurationService.get(
+          LibroLabGuideViewEnabled,
+        );
+        if (isGuideEnabled) {
+          const view = await this.viewManager.getOrCreateView(GuideView);
+          this.slotViewManager.addView(view, LibroLabLayoutSlots.content);
+        }
         return;
       })
       .catch(console.error);

@@ -5,8 +5,8 @@ import {
   NotebookCommands,
 } from '@difizen/libro-jupyter';
 import { TerminalCommands, TerminalManager } from '@difizen/libro-terminal';
-import type { MenuRegistry } from '@difizen/mana-app';
-import type { KeybindingRegistry } from '@difizen/mana-app';
+import type { KeybindingRegistry, MenuRegistry } from '@difizen/mana-app';
+import { SlotViewManager } from '@difizen/mana-app';
 import { KeybindingContribution } from '@difizen/mana-app';
 import { Saveable } from '@difizen/mana-app';
 import {
@@ -20,6 +20,7 @@ import {
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 
+import { GuideView } from '../guide/index.js';
 import { LibroLabLayoutSlots } from '../layout/index.js';
 import { LayoutService } from '../layout/layout-service.js';
 
@@ -43,6 +44,7 @@ export class LabMenu
   @inject(LayoutService) protected layoutService: LayoutService;
   @inject(TerminalManager) terminalManager: TerminalManager;
   @inject(ViewManager) viewManager: ViewManager;
+  @inject(SlotViewManager) slotManager: SlotViewManager;
 
   registerKeybindings(keybindings: KeybindingRegistry) {
     keybindings.registerKeybinding({
@@ -74,6 +76,11 @@ export class LabMenu
       id: LabCommands.About.id,
       command: LabCommands.About.id,
       label: () => <div>{l10n.t(LabCommands.About.label)}</div>,
+    });
+    menu.registerMenuAction(LabMenus.HELP, {
+      id: LabCommands.Guide.id,
+      command: LabCommands.Guide.id,
+      label: () => <div>{l10n.t(LabCommands.Guide.label)}</div>,
     });
     menu.registerMenuAction(LabMenus.FILE, {
       id: LabCommands.Save.id,
@@ -259,6 +266,12 @@ export class LabMenu
     commands.registerCommand(LabCommands.About, {
       execute: async () => {
         //TODO: 关于
+      },
+    });
+    commands.registerCommand(LabCommands.Guide, {
+      execute: async () => {
+        const view = await this.viewManager.getOrCreateView(GuideView);
+        this.slotManager.addView(view, LibroLabLayoutSlots.content);
       },
     });
     commands.registerCommand(LabCommands.Save);
