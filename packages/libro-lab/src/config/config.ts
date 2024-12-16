@@ -23,7 +23,19 @@ export const LibroLabTocPanelEnabled: ConfigurationNode<boolean> = {
   },
 };
 
+export const LibroLabGuideViewEnabled: ConfigurationNode<boolean> = {
+  id: 'libro.lab.guide.view.enabled',
+  description: 'whether enable guide view ',
+  title: l10n.t('是否激活使用指南'),
+  type: 'checkbox',
+  defaultValue: false,
+  schema: {
+    type: 'boolean',
+  },
+};
+
 export const LibroLabConfiguration = {
   LibroLabKernelAndTerminalPanelEnabled: LibroLabKernelAndTerminalPanelEnabled,
   LibroLabTocPanelEnabled: LibroLabTocPanelEnabled,
+  LibroLabGuideViewEnabled: LibroLabGuideViewEnabled,
 };
