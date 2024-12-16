@@ -3,6 +3,10 @@ export const LabCommands = {
     id: 'libro-lab-header-menu-help-about',
     label: '关于',
   },
+  Guide: {
+    id: 'libro-lab-header-menu-help-guide',
+    label: '使用指南',
+  },
   Save: {
     id: 'libro-lab-save',
     label: '保存',
