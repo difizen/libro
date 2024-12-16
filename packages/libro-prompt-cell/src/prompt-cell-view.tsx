@@ -33,7 +33,7 @@ import {
   Deferred,
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import { Select, Switch, Tag } from 'antd';
+import { Select, Tag } from 'antd';
 import type { DefaultOptionType } from 'antd/es/select/index.js';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
@@ -109,14 +109,14 @@ const ChatObjectOptions = (type: string): ChatObjectOptions => {
 
 const InterpreterMode = () => {
   const instance = useInject<LibroPromptCellView>(ViewInstance);
-  const handleInterpreterSwitch = (checked: boolean) => {
-    instance.model.interpreterEnabled = checked;
-    if (instance.model.chatKey) {
-      instance.switchInterpreterMode(instance.model.chatKey, checked);
-      instance.model.promptOutput = undefined;
-      instance.model.interpreterCode = undefined;
-    }
-  };
+  // const handleInterpreterSwitch = (checked: boolean) => {
+  //   instance.model.interpreterEnabled = checked;
+  //   if (instance.model.chatKey) {
+  //     instance.switchInterpreterMode(instance.model.chatKey, checked);
+  //     instance.model.promptOutput = undefined;
+  //     instance.model.interpreterCode = undefined;
+  //   }
+  // };
 
   if (instance.model.supportInterpreter === 'immutable') {
     return (
@@ -126,20 +126,20 @@ const InterpreterMode = () => {
     );
   }
 
-  if (instance.model.supportInterpreter === 'dynamic') {
-    return (
-      <div>
-        <span className="libro-prompt-cell-interpreter-switch-tip">
-          {instance.model.interpreterEnabled ? '关闭 Interpreter' : '开启 Interpreter'}
-        </span>
-        <Switch
-          size="small"
-          className="libro-prompt-cell-interpreter-switch"
-          onChange={handleInterpreterSwitch}
-        />
-      </div>
-    );
-  }
+  // if (instance.model.supportInterpreter === 'dynamic') {
+  //   return (
+  //     <div>
+  //       <span className="libro-prompt-cell-interpreter-switch-tip">
+  //         {instance.model.interpreterEnabled ? '关闭 Interpreter' : '开启 Interpreter'}
+  //       </span>
+  //       <Switch
+  //         size="small"
+  //         className="libro-prompt-cell-interpreter-switch"
+  //         onChange={handleInterpreterSwitch}
+  //       />
+  //     </div>
+  //   );
+  // }
   return null;
 };
 
@@ -206,7 +206,7 @@ const PropmtEditorViewComponent = React.forwardRef<HTMLDivElement>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleChange = (value: string, options: DefaultOptionType) => {
+    const handleChange = (value: string, options?: DefaultOptionType) => {
       instance.handleModelNameChange(value, options);
       setSelectedModel(value);
     };
@@ -327,8 +327,10 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
       this.model.mimeType = MIME.python;
       this.outputArea.clear();
       this.parent.enterEditMode();
+      this.parent.model.savable = false;
       this.parent.model.runnable = false;
     } else {
+      this.parent.model.savable = true;
       this.model.interpreterCode = this.model.value;
       this.model.mimeType = 'application/vnd.libro.prompt+json';
       this.parent.model.runnable = true;
@@ -774,9 +776,11 @@ export class LibroPromptCellView extends LibroEditableExecutableCellView {
       ) > -1
     );
   };
-  handleModelNameChange = (value: string, option: DefaultOptionType) => {
+  handleModelNameChange = (value: string, option?: DefaultOptionType) => {
     this.model.chatKey = value;
-    this.model.supportInterpreter = option['support_interpreter'];
+    if (option) {
+      this.model.supportInterpreter = option['support_interpreter'];
+    }
   };
   handleVariableNameChange = (value?: string) => {
     this.model.variableName = value;
