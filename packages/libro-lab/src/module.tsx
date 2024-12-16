@@ -121,15 +121,6 @@ export const LibroLabModule = ManaModule.create()
     }),
     LibroGuidebookContentContribution,
     GuideView,
-    createViewPreference({
-      view: GuideView,
-      slot: LibroLabLayoutSlots.content,
-      autoCreate: true,
-      openOptions: {
-        reveal: true,
-        order: 'guide',
-      },
-    }),
     EntryPointView,
   )
   .dependOn(
