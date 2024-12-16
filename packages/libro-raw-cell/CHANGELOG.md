@@ -1,5 +1,16 @@
 # @difizen/libro-codemirror-raw-cell
 
+## 0.3.2
+
+### Patch Changes
+
+- [#344](https://github.com/difizen/libro/pull/344) [`2324807`](https://github.com/difizen/libro/commit/232480779ceab4f13bfdee8eef75f668cf0c0e5c) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - feat: add interpreter for prompt cell
+
+- Updated dependencies [[`2324807`](https://github.com/difizen/libro/commit/232480779ceab4f13bfdee8eef75f668cf0c0e5c)]:
+  - @difizen/libro-core@0.3.2
+  - @difizen/libro-code-editor@0.3.2
+  - @difizen/libro-common@0.3.2
+
 ## 0.3.1
 
 ### Patch Changes
