@@ -742,13 +742,15 @@ export class LibroView extends BaseView implements NotebookView {
       this.collapseCell(previousCell, false);
     }
     if (this.model.selections.length !== 0 && this.isSelected(cell)) {
-      for (const selectedCell of this.model.selections) {
-        const selectIndex = this.findCellIndex(selectedCell);
-        if (selectIndex === 0) {
-          return;
-        }
-        this.model.exchangeCells(this.model.selections, selectIndex - 1);
+      const startIndex = this.findCellIndex(this.model.selections[0]);
+      const endIndex = this.findCellIndex(
+        this.model.selections[this.model.selections.length - 1],
+      );
+      const index = Math.min(startIndex, endIndex);
+      if (startIndex === 0) {
+        return;
       }
+      this.model.exchangeCells(this.model.selections, index - 1);
     } else {
       const sourceIndex = this.findCellIndex(cell);
       if (sourceIndex > -1) {
@@ -764,13 +766,14 @@ export class LibroView extends BaseView implements NotebookView {
       this.collapseCell(nextCell, false);
     }
     if (this.model.selections.length !== 0 && this.isSelected(cell)) {
-      for (let i = this.model.selections.length - 1; i > -1; i--) {
-        const selectIndex = this.findCellIndex(this.model.selections[i]);
-        if (selectIndex === this.model.cells.length - 1) {
-          return;
-        }
-        this.model.exchangeCells(this.model.selections, selectIndex + 1);
+      const startIndex = this.findCellIndex(this.model.selections[0]) + 1;
+      const endIndex =
+        this.findCellIndex(this.model.selections[this.model.selections.length - 1]) + 1;
+      const index = Math.max(startIndex, endIndex);
+      if (index === this.model.cells.length) {
+        return;
       }
+      this.model.exchangeCells(this.model.selections, index + 1);
     } else {
       const sourceIndex = this.findCellIndex(cell);
       if (sourceIndex > -1) {

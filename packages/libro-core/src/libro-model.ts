@@ -640,7 +640,7 @@ export class LibroModel implements NotebookModel, DndListModel {
         //往上交换cell
         if (startIndex === this.activeIndex) {
           //active在头
-          this.activeIndex = targetIndex - source.length;
+          this.activeIndex = targetIndex;
         } else {
           //active在尾
           this.activeIndex = targetIndex + 1;
