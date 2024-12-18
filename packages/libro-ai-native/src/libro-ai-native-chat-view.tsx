@@ -1,6 +1,8 @@
 import type { CellView, LibroView } from '@difizen/libro-jupyter';
 import { ChatView, ChatComponents } from '@difizen/magent-chat';
 import { inject, prop, transient, view, ViewOption } from '@difizen/mana-app';
+import rehypeKatex from 'rehype-katex';
+import rehypeRaw from 'rehype-raw';
 import breaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 
@@ -32,6 +34,7 @@ export class LibroAiNativeChatView extends ChatView {
     return {
       components: { code: CodeBlockInChat, img: ImageModal },
       remarkPlugins: [remarkGfm, breaks],
+      rehypePlugins: [rehypeRaw, rehypeKatex] as any[],
     };
   }
 

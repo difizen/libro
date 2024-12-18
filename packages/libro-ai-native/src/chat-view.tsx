@@ -18,6 +18,7 @@ import {
   ViewRender,
 } from '@difizen/mana-app';
 import { useRef } from 'react';
+import 'katex/dist/katex.min.css'; // 引入 KaTeX 样式
 
 import { LibroAINativeService } from './ai-native-service.js';
 import { LibroAiNativeChatView } from './libro-ai-native-chat-view.js';
