@@ -18,8 +18,11 @@ import { l10n } from '@difizen/mana-l10n';
 import { Button } from 'antd';
 import type { ParsedEvent } from 'eventsource-parser/stream';
 import { EventSourceParserStream } from 'eventsource-parser/stream';
+import rehypeKatex from 'rehype-katex';
+import rehypeRaw from 'rehype-raw';
 import breaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
+import 'katex/dist/katex.min.css'; // 引入 KaTeX 样式
 
 import { CodeBlockInCell } from './ai-native-code-block.js';
 import { LibroAINativeService } from './ai-native-service.js';
@@ -49,6 +52,7 @@ export function LibroAINativeForCellRender() {
           type="message"
           components={{ code: CodeBlockInCell }}
           remarkPlugins={[remarkGfm, breaks]}
+          rehypePlugins={[rehypeKatex, rehypeRaw]}
         >
           {msgItem?.content || ''}
         </LLMRender>
