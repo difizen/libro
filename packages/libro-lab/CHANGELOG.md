@@ -1,5 +1,26 @@
 # @difizen/libro-lab
 
+## 0.3.3
+
+### Patch Changes
+
+- [#352](https://github.com/difizen/libro/pull/352) [`636d59c`](https://github.com/difizen/libro/commit/636d59c03a87fd8f8355dc3f57558340a6545d31) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix selecting multiple cells to move & add katex plugin for md render
+
+- Updated dependencies [[`636d59c`](https://github.com/difizen/libro/commit/636d59c03a87fd8f8355dc3f57558340a6545d31)]:
+  - @difizen/libro-ai-native@0.3.3
+  - @difizen/libro-core@0.3.3
+  - @difizen/libro-app@0.3.3
+  - @difizen/libro-cofine-editor-core@0.3.3
+  - @difizen/libro-jupyter@0.3.3
+  - @difizen/libro-kernel@0.3.3
+  - @difizen/libro-l10n@0.3.3
+  - @difizen/libro-language-client@0.3.3
+  - @difizen/libro-prompt-cell@0.3.3
+  - @difizen/libro-sql-cell@0.3.3
+  - @difizen/libro-terminal@0.3.3
+  - @difizen/libro-toc@0.3.3
+  - @difizen/libro-widget@0.3.3
+
 ## 0.3.2
 
 ### Patch Changes
