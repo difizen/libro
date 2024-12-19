@@ -1,5 +1,11 @@
 # @difizen/libro-code-editor
 
+## 0.3.3
+
+### Patch Changes
+
+- [#352](https://github.com/difizen/libro/pull/352) [`636d59c`](https://github.com/difizen/libro/commit/636d59c03a87fd8f8355dc3f57558340a6545d31) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix selecting multiple cells to move & add katex plugin for md render
+
 ## 0.3.2
 
 ### Patch Changes

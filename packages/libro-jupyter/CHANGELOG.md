@@ -1,5 +1,29 @@
 # @difizen/libro-jupyter
 
+## 0.3.3
+
+### Patch Changes
+
+- [#352](https://github.com/difizen/libro/pull/352) [`636d59c`](https://github.com/difizen/libro/commit/636d59c03a87fd8f8355dc3f57558340a6545d31) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - fix selecting multiple cells to move & add katex plugin for md render
+
+- Updated dependencies [[`636d59c`](https://github.com/difizen/libro/commit/636d59c03a87fd8f8355dc3f57558340a6545d31)]:
+  - @difizen/libro-core@0.3.3
+  - @difizen/libro-code-cell@0.3.3
+  - @difizen/libro-code-editor@0.3.3
+  - @difizen/libro-codemirror@0.3.3
+  - @difizen/libro-cofine-editor@0.3.3
+  - @difizen/libro-common@0.3.3
+  - @difizen/libro-kernel@0.3.3
+  - @difizen/libro-l10n@0.3.3
+  - @difizen/libro-language-client@0.3.3
+  - @difizen/libro-lsp@0.3.3
+  - @difizen/libro-markdown-cell@0.3.3
+  - @difizen/libro-output@0.3.3
+  - @difizen/libro-raw-cell@0.3.3
+  - @difizen/libro-rendermime@0.3.3
+  - @difizen/libro-search@0.3.3
+  - @difizen/libro-search-code-cell@0.3.3
+
 ## 0.3.2
 
 ### Patch Changes
