@@ -2,29 +2,25 @@
 import { getOrigin, useInject, ViewInstance } from '@difizen/mana-app';
 import { useConfigurationValue } from '@difizen/mana-app';
 import { Button } from 'antd';
-import type { Identifier } from 'dnd-core';
 import React, {
   useCallback,
-  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
   useState,
   forwardRef,
+  useContext,
 } from 'react';
-import { useDrag, useDragDropManager, useDrop } from 'react-dnd';
-import { getEmptyImage } from 'react-dnd-html5-backend';
 import 'resize-observer-polyfill';
 
-import type { CellService } from '../../cell/index.js';
-import { LibroCellService } from '../../cell/index.js';
 import { CellCollapsible } from '../../collapse-service.js';
-import { DragAreaKey, isCellView } from '../../libro-protocol.js';
 import type { CellView, DndContentProps } from '../../libro-protocol.js';
 import { MultiSelectionWhenShiftClick } from '../../libro-setting.js';
 import type { LibroView } from '../../libro-view.js';
 import { HolderOutlined, PlusOutlined } from '../../material-from-designer.js';
 import { BetweenCellProvider } from '../cell-protocol.js';
+
+import { DragContext } from './dnd-list.js';
 
 export interface Dragparams {
   cell: CellView;
@@ -42,10 +38,20 @@ export const DndCellContainer: React.FC<DndContentProps> = ({
     MultiSelectionWhenShiftClick,
   );
   const BetweenCellContent = useInject<BetweenCellProvider>(BetweenCellProvider);
-  const cellService = useInject<CellService>(LibroCellService);
-  const dragDropManager = useDragDropManager();
-  const dragDropMonitor = dragDropManager.getMonitor();
+  const [isMouseOverDragArea, setIsMouseOverDragArea] = useState(false);
+  const [isDragDown, setIsDragDown] = useState(false);
   const ItemRender = getOrigin(instance.dndItemRender);
+
+  const {
+    dragOverIndex,
+    isDraging,
+    sourceIndex,
+    onDragStart,
+    onDragOver,
+    onDrop,
+    onDragEnd,
+    fragFromRef,
+  } = useContext(DragContext);
 
   useLayoutEffect(() => {
     if (typeof ref !== 'object') {
@@ -119,174 +125,102 @@ export const DndCellContainer: React.FC<DndContentProps> = ({
       return;
     }
     instance.model.selectCell(cell);
-    instance.model.selections = [];
-  }, [instance, cell]);
-
-  const scrollTimer = useRef<null | NodeJS.Timeout>(null);
-  const unsubscribe = useRef<null | any>(null);
-
-  const [{ isDrag }, drag, preview] = useDrag(
-    {
-      type: DragAreaKey,
-      item: { cell, index },
-      collect: (monitor) => ({
-        isDrag: monitor.isDragging(),
-      }),
-      end() {
-        instance.isDragging = false;
-        if (scrollTimer.current) {
-          clearInterval(scrollTimer.current);
-        }
-      },
-    },
-    [cell, index],
-  );
-
-  const libroViewContent = instance.container?.current?.getElementsByClassName(
-    'libro-view-content',
-  )[0] as HTMLElement;
-
-  useEffect(() => {
-    unsubscribe.current = dragDropMonitor.subscribeToStateChange(() => {
-      instance.isDragging = dragDropMonitor.isDragging();
-      scrollTimer.current = setInterval(() => {
-        const currentOffset = dragDropMonitor.getClientOffset();
-        if (libroViewContent && instance.isDragging && currentOffset) {
-          const libroViewClientRect = libroViewContent.getBoundingClientRect();
-          const { top, bottom } = libroViewClientRect;
-          const { y } = currentOffset;
-          const topLimit = top + 30;
-          const bottomLimit = bottom - 50;
-          if (y < topLimit) {
-            libroViewContent.scrollTop -= 0.5;
-          } else if (y > bottomLimit) {
-            libroViewContent.scrollTop += 0.5;
-          }
-        }
-      }, 10);
-      return () => {
-        if (scrollTimer.current) {
-          clearInterval(scrollTimer.current);
-        }
-        if (unsubscribe.current) {
-          unsubscribe.current();
-        }
-      };
-    });
-  }, [dragDropMonitor]);
-
-  useEffect(() => {
-    // This gets called after every render, by default
-    // (the first one, and every one after that)
-
-    // Use empty image as a drag preview so browsers don't draw it
-    // and we can draw whatever we want on the custom drag layer instead.
-    preview(getEmptyImage(), {
-      // IE fallback: specify that we'd rather screenshot the node
-      // when it already knows it's being dragged so we can hide it with CSS.
-      captureDraggingState: true,
-    });
-  }, [preview]);
-
-  const [{ handlerId, isDragOver }, drop] = useDrop<
-    Dragparams,
-    void,
-    {
-      handlerId: Identifier | null;
-      isDragOver: boolean;
+    if (instance.model.selections.length !== 0) {
+      instance.model.selections = [];
     }
-  >({
-    accept: DragAreaKey,
-    drop(item, monitor) {
-      cellService
-        .getOrCreateView(
-          {
-            ...item.cell.model.options,
-            modelId: item.cell.model.id,
-            singleSelectionDragPreview: true,
-          },
-          item.cell.parent.id,
-        )
-        .then((view) => {
-          view.dispose();
-          return;
-        })
-        .catch((e) => {
-          //
-        });
-      if (isCellView(item.cell)) {
-        const didDrop = monitor.didDrop();
-        if (didDrop) {
-          return;
-        }
-        const dragIndex = instance.findCellIndex(item.cell);
-        const dropIndex = instance.findCellIndex(cell);
-        if (instance.model.selections.length > 0) {
-          const isDragInSelections =
-            instance.model.selections.findIndex(
-              (selection) => selection.id === item.cell.id,
-            ) > -1
-              ? true
-              : false;
-          const isDropInSelections =
-            instance.model.selections.findIndex(
-              (selection) => selection.id === cell.id,
-            ) > -1
-              ? true
-              : false;
-          if (isDragInSelections && isDropInSelections) {
-            return;
-          }
-          if (isDragInSelections) {
-            instance.model.exchangeCells(instance.model.selections, dropIndex);
-            instance.model.scrollToView(cell);
-
-            return;
-          }
-        }
-        if (dragIndex < dropIndex) {
-          instance.model.exchangeCell(dragIndex, dropIndex - 1);
-          instance.model.scrollToView(cell);
-        }
-        if (dragIndex > dropIndex) {
-          instance.model.exchangeCell(dragIndex, dropIndex);
-          instance.model.scrollToView(cell);
-        }
-      }
-      return;
-    },
-    collect(monitor) {
-      return {
-        isDragOver: monitor.isOver(),
-        canDrop: monitor.canDrop(),
-        handlerId: monitor.getHandlerId(),
-      };
-    },
-  });
-  const opacity = isDrag ? 0.4 : 1;
-  if (instance.model.cellsEditable) {
-    drop(ref);
-  }
-  if (isDrag) {
-    instance.model.mouseMode = 'drag';
-  }
+  }, [instance, cell]);
 
   const isMultiSelected =
     instance.model.selections.length !== 0 && instance.isSelected(cell);
+
+  const isDragOver = useMemo(() => {
+    return index === dragOverIndex;
+  }, [index, dragOverIndex]);
+
+  const handleDragStart = useCallback(
+    (e: React.DragEvent) => {
+      if (!instance.model.cellsEditable) {
+        e.preventDefault();
+        return;
+      }
+      onDragStart?.(e, index);
+    },
+    [index, instance.model.cellsEditable, onDragStart],
+  );
+
+  const handleDragOver = useCallback(
+    (e: React.DragEvent) => {
+      //判断拖拽来源是否cell
+      if (fragFromRef.current !== 'cell') {
+        return;
+      }
+      e.preventDefault();
+      instance.model.mouseMode = 'drag';
+      //判断是向下拖拽还是向上拖拽
+      if (sourceIndex! < index) {
+        setIsDragDown(true);
+      } else {
+        setIsDragDown(false);
+      }
+      onDragOver(e, index);
+    },
+    [fragFromRef, index, instance.model, onDragOver, sourceIndex],
+  );
+
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      if (fragFromRef.current !== 'cell') {
+        return;
+      }
+      onDrop(e, index);
+    },
+    [fragFromRef, index, onDrop],
+  );
+
+  const handleDragEnd = useCallback(
+    (e: React.DragEvent) => {
+      if (fragFromRef.current !== 'cell') {
+        return;
+      }
+      onDragEnd(e, index);
+    },
+    [fragFromRef, index, onDragEnd],
+  );
+
+  const opacity = useMemo(() => {
+    return {
+      opacity: isDraging && sourceIndex === index ? 0.4 : 1,
+    };
+  }, [index, isDraging, sourceIndex]);
+
+  const onMouseOver = useCallback(() => {
+    setIsMouseOverDragArea(true);
+  }, []);
+
+  const onMouseLeave = useCallback(() => {
+    setIsMouseOverDragArea(false);
+  }, []);
+
   // let isMouseOver = false;
-  const [isMouseOverDragArea, setIsMouseOverDragArea] = useState(false);
   const hasCellHidden = useMemo(() => {
     return cell.hasCellHidden();
   }, [cell]);
   const isCollapsible = CellCollapsible.is(cell);
 
+  const wrapperclassName = useMemo(() => {
+    return `libro-dnd-cell-container ${isMultiSelected ? 'multi-selected' : ''} ${
+      hasCellHidden ? 'hidden' : ''
+    }`;
+  }, [isMultiSelected]);
+
   return (
     <div
-      className={`libro-dnd-cell-container ${isMultiSelected ? 'multi-selected' : ''} ${
-        hasCellHidden ? 'hidden' : ''
-      }`}
-      data-handler-id={handlerId}
-      style={{ opacity }}
+      className={wrapperclassName}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+      onDragEnd={handleDragEnd}
+      style={opacity}
       ref={ref}
       id={cell.id}
     >
@@ -294,15 +228,16 @@ export const DndCellContainer: React.FC<DndContentProps> = ({
         index={position || index}
         addCell={cell.parent.addCellAbove}
       />
-      {isDragOver && <div className="libro-drag-hoverline" />}
+      {!isDragDown && isDragOver && <div className="libro-drag-hoverline" />}
       {isMouseOverDragArea && <HolderOutlined className="libro-handle-style" />}
       <div
         className="libro-drag-area"
-        ref={drag}
+        onDragStart={handleDragStart}
+        draggable={instance.model.cellsEditable}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
-        onMouseOver={() => setIsMouseOverDragArea(true)}
-        onMouseLeave={() => setIsMouseOverDragArea(false)}
+        onMouseOver={onMouseOver}
+        onMouseLeave={onMouseLeave}
       />
       <div
         tabIndex={-1}
@@ -312,7 +247,7 @@ export const DndCellContainer: React.FC<DndContentProps> = ({
       >
         <ItemRender
           isDragOver={!!isDragOver}
-          isDrag={!!isDrag}
+          isDrag={!!isDraging}
           cell={cell}
           isMouseOverDragArea={isMouseOverDragArea}
         />
@@ -329,6 +264,7 @@ export const DndCellContainer: React.FC<DndContentProps> = ({
           </Button>
         </div>
       )}
+      {isDragDown && isDragOver && <div className="libro-drag-hoverline-last-one" />}
     </div>
   );
 };
