@@ -41,13 +41,7 @@ import type { LibroCell } from './cell/index.js';
 import type { LibroCellModel } from './cell/libro-cell-model.js';
 import { CollapseServiceFactory } from './collapse-service.js';
 import type { CollapseService } from './collapse-service.js';
-import {
-  CustomDragLayer,
-  DndCellContainer,
-  DndCellItemRender,
-  DndContext,
-  DndList,
-} from './components/index.js';
+import { DndCellContainer, DndCellItemRender, DndList } from './components/index.js';
 import { LibroViewHeader } from './components/libro-view-header.js';
 import { LibroContextKey } from './libro-context-key.js';
 import { LibroModel } from './libro-model.js';
@@ -173,15 +167,12 @@ export const LibroContentComponent = memo(function LibroContentComponent() {
           style={leftContentStyles}
           ref={libroViewLeftContentRef}
         >
-          <DndContext>
-            <CustomDragLayer />
-            <DndList libroView={instance} ref={ref}>
-              <Slot
-                name={libroSlotManager.getSlotName(instance, 'list')}
-                slotView={LibroSlotView}
-              />
-            </DndList>
-          </DndContext>
+          <DndList libroView={instance}>
+            <Slot
+              name={libroSlotManager.getSlotName(instance, 'list')}
+              slotView={LibroSlotView}
+            />
+          </DndList>
         </div>
         <div
           className="libro-view-content-right"
