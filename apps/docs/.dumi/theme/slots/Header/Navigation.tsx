@@ -16,7 +16,7 @@ const locales = {
     updates: '更新',
     libroai: 'Libro AI',
     datareport: '数据报告',
-    quantexpert: 'quant expert'
+    quantexpert: 'quant expert',
   },
   en: {
     manual: 'manual',
@@ -27,7 +27,7 @@ const locales = {
     updates: 'updates',
     libroai: 'Libro AI',
     datareport: 'data report',
-    quantexpert: 'quant expert'
+    quantexpert: 'quant expert',
   },
 };
 
@@ -40,9 +40,7 @@ const HeaderNavigation: React.FC<NavigationProps> = () => {
   const { pathname } = useLocation();
   const currentLang = l10n.getLang();
   const urlPath = window.location.pathname;
-  const titleLang = urlPath.startsWith(`/${L10nLang.zhCN}`)
-    ? locales.cn
-    : locales.en;
+  const titleLang = urlPath.startsWith(`/${L10nLang.zhCN}`) ? locales.cn : locales.en;
   const urlLang = urlPath.startsWith(`/${L10nLang.zhCN}`)
     ? L10nLang.zhCN
     : L10nLang.enUS;
@@ -60,51 +58,27 @@ const HeaderNavigation: React.FC<NavigationProps> = () => {
 
   const items: MenuProps['items'] = [
     {
-      label: (
-        <Link to={`${newUrl}/manual`}>
-          {titleLang.manual}
-        </Link>
-      ),
+      label: <Link to={`${newUrl}/manual`}>{titleLang.manual}</Link>,
       key: 'docs/manual',
     },
     {
-      label: (
-        <Link to={`${newUrl}/introduction`}>
-          {titleLang.introduction}
-        </Link>
-      ),
+      label: <Link to={`${newUrl}/introduction`}>{titleLang.introduction}</Link>,
       key: 'docs/introduction',
     },
     {
-      label: (
-        <Link to={`${newUrl}/integration`}>
-          {titleLang.integration}
-        </Link>
-      ),
+      label: <Link to={`${newUrl}/integration`}>{titleLang.integration}</Link>,
       key: 'docs/integration',
     },
     {
-      label: (
-        <Link to={`${newUrl}/quickstart`}>
-          {titleLang.quickstart}
-        </Link>
-      ),
+      label: <Link to={`${newUrl}/quickstart`}>{titleLang.quickstart}</Link>,
       key: 'docs/quickstart',
     },
     {
-      label: (
-        <Link to={`${newUrl}/examples`}>
-          {titleLang.examples}
-        </Link>
-      ),
+      label: <Link to={`${newUrl}/examples`}>{titleLang.examples}</Link>,
       key: 'docs/examples',
     },
     {
-      label: (
-        <Link to={`${newUrl}/updates`}>
-          {titleLang.updates}
-        </Link>
-      ),
+      label: <Link to={`${newUrl}/updates`}>{titleLang.updates}</Link>,
       key: 'docs/updates',
     },
   ].filter(Boolean);

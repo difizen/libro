@@ -28,6 +28,7 @@
     "@difizen/libro-lab": "^0.3.2",
     "@difizen/libro-terminal": "^0.3.2",
     "@difizen/mana-app": "latest",
+    "@difizen/mana-configuration-panel": "^0.1.31",
     "@difizen/mana-l10n": "latest",
     "@difizen/mana-react": "latest",
     "@radix-ui/react-slot": "^1.1.0",

@@ -5,52 +5,66 @@ import type { FC } from 'react';
 import { IS_MOBILE } from '../../layouts/DocLayout.js';
 import type { FeatureProps } from './constants';
 
-const Feature: FC<FeatureProps> = ({ title, description, imageUrl, url, isImageLeft }) => {
+const Feature: FC<FeatureProps> = ({
+  title,
+  description,
+  imageUrl,
+  url,
+  isImageLeft,
+}) => {
   const isMobile = localStorage.getItem(IS_MOBILE) === 'true';
 
   return isMobile ? (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center">
-    <div className={`order-2 ${isImageLeft ? 'md:order-2' : 'md:order-1'}`}
-         style={{ textAlign: `${isImageLeft ? 'left' : 'right'}` }}>
-      <h3 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
-        {title}
-      </h3>
-      <p className="mt-4 text-base leading-8 text-muted-foreground">{description}</p>
-      <div className="mt-4">
-        <Button type="primary" size="large" className="start-btn" onClick={() => history.push({ pathname: url}) }>
-          {l10n.t('Click to jump')}
-        </Button>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center">
+      <div
+        className={`order-2 ${isImageLeft ? 'md:order-2' : 'md:order-1'}`}
+        style={{ textAlign: `${isImageLeft ? 'left' : 'right'}` }}
+      >
+        <h3 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+          {title}
+        </h3>
+        <p className="mt-4 text-base leading-8 text-muted-foreground">{description}</p>
+        <div className="mt-4">
+          <Button
+            type="primary"
+            size="large"
+            className="start-btn"
+            onClick={() => history.push({ pathname: url })}
+          >
+            {l10n.t('Click to jump')}
+          </Button>
+        </div>
       </div>
     </div>
-  </div>
-) : (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center">
-    {isImageLeft && (
-      <div className="order-1 md:order-1">
-        <img
-          className="w-full max-w-2xl rounded-xl shadow-xl ring-1 ring-gray-400/10"
-          src={imageUrl}
-          alt={title}
-        />
+  ) : (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center">
+      {isImageLeft && (
+        <div className="order-1 md:order-1">
+          <img
+            className="w-full max-w-2xl rounded-xl shadow-xl ring-1 ring-gray-400/10"
+            src={imageUrl}
+            alt={title}
+          />
+        </div>
+      )}
+      <div className={`order-2 ${isImageLeft ? 'md:order-2' : 'md:order-1'}`}>
+        <h3 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+          {title}
+        </h3>
+        <p className="mt-6 text-lg leading-8 text-muted-foreground">{description}</p>
       </div>
-    )}
-    <div className={`order-2 ${isImageLeft ? 'md:order-2' : 'md:order-1'}`}>
-      <h3 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
-        {title}
-      </h3>
-      <p className="mt-6 text-lg leading-8 text-muted-foreground">{description}</p>
+      {!isImageLeft && (
+        <div className="order-1 md:order-2">
+          <img
+            className="w-full max-w-2xl rounded-xl shadow-xl ring-1 ring-gray-400/10"
+            src={imageUrl}
+            alt={title}
+          />
+        </div>
+      )}
     </div>
-    {!isImageLeft && (
-      <div className="order-1 md:order-2">
-        <img
-          className="w-full max-w-2xl rounded-xl shadow-xl ring-1 ring-gray-400/10"
-          src={imageUrl}
-          alt={title}
-        />
-      </div>
-    )}
-  </div>
-)};
+  );
+};
 
 export const FeatureSection: FC<{
   features: FeatureProps[];

@@ -1,4 +1,3 @@
-
 export interface FeatureProps {
   title: string;
   description: string;
@@ -6,6 +5,3 @@ export interface FeatureProps {
   url?: string;
   isImageLeft?: boolean;
 }
-
-
-
