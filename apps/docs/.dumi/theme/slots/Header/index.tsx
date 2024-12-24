@@ -3,7 +3,7 @@ import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import { ThemeService, useInject } from '@difizen/mana-app';
 import { l10n, L10nLang } from '@difizen/mana-l10n';
 import { Button } from 'antd';
-import { useRouteMeta, Link, usePrefersColor, useSiteData, history} from 'dumi';
+import { useRouteMeta, Link, usePrefersColor, useSiteData, history } from 'dumi';
 import type { SocialTypes } from 'dumi/dist/client/theme-api/types.js';
 import HeaderExtra from 'dumi/theme/slots/HeaderExtra';
 import SearchBar from 'dumi/theme/slots/SearchBar';
@@ -69,11 +69,11 @@ const Header: React.FC = () => {
     () =>
       themeConfig.socialLinks
         ? Object.keys(themeConfig.socialLinks)
-          .slice(0, 5)
-          .map((key) => ({
-            icon: key as SocialTypes,
-            link: themeConfig.socialLinks[key as SocialTypes],
-          }))
+            .slice(0, 5)
+            .map((key) => ({
+              icon: key as SocialTypes,
+              link: themeConfig.socialLinks[key as SocialTypes],
+            }))
         : [],
     [themeConfig.socialLinks],
   );
@@ -85,16 +85,13 @@ const Header: React.FC = () => {
       ? urlPath.replace(`/${currentLang}`, '')
       : urlPath;
     baseUrlPath = baseUrlPath ? baseUrlPath : '/';
-    const targetLang =
-      currentLang === L10nLang.zhCN ? L10nLang.enUS : L10nLang.zhCN;
+    const targetLang = currentLang === L10nLang.zhCN ? L10nLang.enUS : L10nLang.zhCN;
 
     l10n.changeLang(targetLang);
 
     history.push({
       pathname:
-        targetLang === L10nLang.enUS
-          ? baseUrlPath
-          : `/${targetLang}${baseUrlPath}`,
+        targetLang === L10nLang.enUS ? baseUrlPath : `/${targetLang}${baseUrlPath}`,
     });
   };
 
@@ -116,11 +113,7 @@ const Header: React.FC = () => {
           </div>
         </section>
         {isMobile && (
-          <Button
-            type="text"
-            className="language"
-            onClick={onLangChange}
-          >
+          <Button type="text" className="language" onClick={onLangChange}>
             {l10n.getLang() === L10nLang.zhCN ? 'EN' : '中文'}
           </Button>
         )}
@@ -129,10 +122,7 @@ const Header: React.FC = () => {
           <Navigation key="nav" onLangChange={onLangChange} />
           <div className="dumi-default-header-right-aside">
             <SearchBar />
-            <Button
-              type="text"
-              onClick={onLangChange}
-            >
+            <Button type="text" onClick={onLangChange}>
               {l10n.getLang() === L10nLang.zhCN ? 'EN' : '中文'}
             </Button>
 

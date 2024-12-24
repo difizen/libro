@@ -29,7 +29,7 @@ export const copy2clipboard = (string: string) => {
           window.navigator.clipboard
             .writeText(string)
             .then(() => {
-              message.success('复制成功')
+              message.success('复制成功');
               return;
             })
             .catch((err) => {
