@@ -96,7 +96,7 @@ Notebook 支持针对单元格便捷执行 Cell 操作。在 Cell 右侧的操�
 
 您可以在该区域自由添加指定类型的单元格。
 
-![](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_between_zh.gif)
+<!-- ![](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_between_zh.gif) -->
 
 说明：如果您选中的 Cell 后无其他单元格，可以直接在底部通过指定按钮添加对应类型的单元格。详情请参见底部 Cell。
 

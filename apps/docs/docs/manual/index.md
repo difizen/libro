@@ -96,7 +96,7 @@ In the Notebook's code editing window, you can add multiple Cells to organize yo
 
 You can freely add specified types of Cells in this area.
 
-![](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_between.gif)
+<!-- ![](https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_between.gif) -->
 
 Note: If you select a Cell without other Cells below it, you can directly add the corresponding type of Cell through the specified button at the bottom. For more details, refer to the bottom Cell section.
 
