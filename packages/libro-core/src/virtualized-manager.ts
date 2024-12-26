@@ -34,14 +34,16 @@ export class VirtualizedManager implements IVirtualizedManager {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   openVirtualized = async (length: number, size?: number, path?: string) => {
+    this.isVirtualized = false;
+    return false;
     // this.isVirtualized = true;
     // return true;
-    if (length > 100 || (size && size > 4)) {
-      this.isVirtualized = true;
-      return true;
-    } else {
-      this.isVirtualized = false;
-      return false;
-    }
+    // if (length > 100 || (size && size > 4)) {
+    //   this.isVirtualized = true;
+    //   return true;
+    // } else {
+    //   this.isVirtualized = false;
+    //   return false;
+    // }
   };
 }
