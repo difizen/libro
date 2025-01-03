@@ -446,7 +446,46 @@ export const DndList = forwardRef<
   ]);
 
   return (
-    <div className="libro-dnd-list-container">
+    <div
+      className="libro-dnd-list-container"
+      onDragOver={(e) => {
+        e.preventDefault();
+      }}
+      onDrop={(e) => {
+        if (fragFromRef.current !== 'cell') {
+          return;
+        }
+        const sourceCellIndex = e.dataTransfer.getData('libro_notebook_drag_text');
+        const _sourceIndex = Number(sourceCellIndex || 0);
+
+        const lastCell =
+          libroView.model.getCells()[libroView.model.getCells().length - 1];
+        const lastCellOffsetY = lastCell.container?.current?.getBoundingClientRect().y;
+        if (lastCellOffsetY && e.clientY >= lastCellOffsetY) {
+          e.preventDefault();
+          if (_sourceIndex === undefined) {
+            return;
+          }
+          if (libroView.model.selections.length > 0) {
+            const isDragInSelections =
+              libroView.model.selections.findIndex(
+                (selection) =>
+                  selection.id === libroView.model.getCells()[_sourceIndex].id,
+              ) > -1
+                ? true
+                : false;
+            if (isDragInSelections) {
+              libroView.model.exchangeCells(
+                libroView.model.selections,
+                libroView.model.cells.length,
+              );
+              return;
+            }
+          }
+          exchangeCellIndex(_sourceIndex, libroView.model.cells.length - 1);
+        }
+      }}
+    >
       <DragContext.Provider value={dragContextValue}>
         <DndCellsRender libroView={libroView} addCellButtons={children} />
       </DragContext.Provider>
