@@ -49,8 +49,8 @@ export class LibroSearchManager
     this.libroCommandRegister.registerKeybinds(
       keybindings,
       LibroSearchToggleCommand,
-      false,
-      false,
+      true,
+      true,
     );
   }
   registerCommands(commands: CommandRegistry) {

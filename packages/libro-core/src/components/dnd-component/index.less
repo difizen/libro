@@ -10,3 +10,87 @@
 .libro-dnd-cells-container {
   padding-top: 8px;
 }
+
+#libro-multiple-drag-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  height: 0;
+}
+
+#libro-single-drag-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+.libro-drag-image-container,
+.libro-single-drag-image-container {
+  margin: 8px;
+
+  .libro-cell-drag-image-input-container {
+    position: relative;
+    display: flex;
+    padding: 12px;
+    background-color: var(--mana-libro-background);
+  }
+
+  .cell-drag-image-input {
+    z-index: 100;
+    max-height: 68px;
+    max-width: 300px;
+    min-height: 40px;
+    min-width: 100px;
+    overflow: hidden;
+    padding: 8px;
+    border: 1px solid var(--mana-libro-cell-border-color);
+    border-radius: 4px;
+    background: var(--mana-libro-input-background);
+  }
+
+  .libro-execute-state-tip {
+    padding-right: 8px;
+    color: var(--mana-libro-execution-count-color);
+    font-size: 11px;
+    vertical-align: top;
+    user-select: none;
+  }
+}
+
+.libro-dnd-cascading-multiple-selection {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: calc(100% - 60px);
+  height: calc(100% - 30px);
+  border: 1px solid var(--mana-libro-cell-border-color);
+  border-radius: 4px;
+  box-shadow:
+    0 6px 16px 0 rgba(0, 0, 0, 8%),
+    0 3px 6px -4px rgba(0, 0, 0, 12%),
+    0 9px 28px 8px rgba(0, 0, 0, 5%);
+}
+
+.libro-drag-hoverline {
+  position: absolute;
+  top: -2px;
+  left: 56px;
+  z-index: 100;
+  width: calc(100% - 70px);
+  height: 4px;
+  background-color: var(--mana-libro-drag-hover-line-color);
+  border-radius: 2px;
+}
+
+.libro-drag-hoverline-last-one {
+  position: absolute;
+  left: 56px;
+  bottom: -2px;
+  z-index: 100;
+  width: calc(100% - 70px);
+  height: 4px;
+  background-color: var(--mana-libro-drag-hover-line-color);
+  border-radius: 2px;
+}

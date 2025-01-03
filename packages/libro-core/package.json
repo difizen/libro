@@ -57,14 +57,18 @@
     "classnames": "^2.3.2",
     "dayjs": "^1.11.10",
     "dnd-core": "^16.0.1",
+    "lodash": "^4.17.21",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^18.2.0",
     "resize-observer-polyfill": "^1.5.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.25",
-    "@types/uuid": "^9.0.2"
+    "@types/react-dom": "^18.2.4",
+    "@types/uuid": "^9.0.2",
+    "@types/lodash": "^4.17.13"
   },
   "peerDependencies": {
     "antd": "^5.8.6",
