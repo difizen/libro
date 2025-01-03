@@ -75,7 +75,6 @@ export interface ClipboardType {
 
 export const LibroContentComponent = memo(function LibroContentComponent() {
   const libroSlotManager = useInject(LibroSlotManager);
-  const ref = useRef<HTMLDivElement | null>(null);
   const libroViewTopRef = useRef<HTMLDivElement>(null);
   const libroViewRightContentRef = useRef<HTMLDivElement>(null);
   const libroViewLeftContentRef = useRef<HTMLDivElement>(null);
