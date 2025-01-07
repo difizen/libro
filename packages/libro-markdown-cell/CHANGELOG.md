@@ -1,5 +1,17 @@
 # @difizen/libro-markdown
 
+## 0.3.4
+
+### Patch Changes
+
+- [#362](https://github.com/difizen/libro/pull/362) [`5d5e46e`](https://github.com/difizen/libro/commit/5d5e46eed5a449d053cbf146d365f6916e28fb72) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - 1. refactor dnd list 2. serach keybind will only work when focus on libro
+
+- Updated dependencies [[`5d5e46e`](https://github.com/difizen/libro/commit/5d5e46eed5a449d053cbf146d365f6916e28fb72)]:
+  - @difizen/libro-code-editor@0.3.4
+  - @difizen/libro-common@0.3.4
+  - @difizen/libro-core@0.3.4
+  - @difizen/libro-markdown@0.3.4
+
 ## 0.3.3
 
 ### Patch Changes

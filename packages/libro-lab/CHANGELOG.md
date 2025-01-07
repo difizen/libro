@@ -1,5 +1,26 @@
 # @difizen/libro-lab
 
+## 0.3.4
+
+### Patch Changes
+
+- [#362](https://github.com/difizen/libro/pull/362) [`5d5e46e`](https://github.com/difizen/libro/commit/5d5e46eed5a449d053cbf146d365f6916e28fb72) Thanks [@sunshinesmilelk](https://github.com/sunshinesmilelk)! - 1. refactor dnd list 2. serach keybind will only work when focus on libro
+
+- Updated dependencies [[`5d5e46e`](https://github.com/difizen/libro/commit/5d5e46eed5a449d053cbf146d365f6916e28fb72)]:
+  - @difizen/libro-ai-native@0.3.4
+  - @difizen/libro-app@0.3.4
+  - @difizen/libro-cofine-editor-core@0.3.4
+  - @difizen/libro-core@0.3.4
+  - @difizen/libro-jupyter@0.3.4
+  - @difizen/libro-kernel@0.3.4
+  - @difizen/libro-l10n@0.3.4
+  - @difizen/libro-language-client@0.3.4
+  - @difizen/libro-prompt-cell@0.3.4
+  - @difizen/libro-sql-cell@0.3.4
+  - @difizen/libro-terminal@0.3.4
+  - @difizen/libro-toc@0.3.4
+  - @difizen/libro-widget@0.3.4
+
 ## 0.3.3
 
 ### Patch Changes
