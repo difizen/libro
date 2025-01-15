@@ -1,0 +1,7 @@
+!.dumi
+.dumi/tmp
+.dumi/tmp-production
+
+**/dist/**/*.js
+**/dist/**/*.cjs
+**/dist/**/*.mjs

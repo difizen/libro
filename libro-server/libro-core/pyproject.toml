@@ -1,0 +1,27 @@
+[project]
+name = "libro-core"
+version = "0.1.6"
+description = "libro core"
+authors = [
+    { name = "sunshinesmilelk", email = "ximo.lk66@gmail.com" },
+    { name = "brokun", email = "brokun0128@gmail.com" },
+]
+dependencies = [
+    "pyyaml>=6.0.2",
+]
+dev-dependencies = []
+readme = "README.md"
+requires-python = ">=3.8.1"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/libro_core"]

@@ -1,0 +1,61 @@
+.libro-execution {
+  .mana-header {
+    background: var(--mana-color-bg-container);
+  }
+
+  .libro-execution-container {
+    height: 100%;
+    overflow-y:  none;
+
+    .libro-execution-container-header {
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--mana-color-border);
+    }
+
+    .libro-execution-container-content {
+      height: calc(100% - 65px);
+      overflow-y:  none;
+    }
+
+    .libro-execution-container-left {
+      overflow-y: auto;
+      width: 75%;
+    }
+    
+    .libro-execution-container-right {
+      overflow-y: auto;
+      width: 25%;
+    }
+
+    .rjsf {
+      fieldset {
+        border: none;
+      }
+
+      padding: 24px;
+    }
+
+    .libro-view-content {
+      .libro-dnd-cell {
+        border: none;
+      }
+
+      .libro-output-area {
+        border: none;
+      }
+    }
+
+  }
+}
+
+.libro-execution-layout {
+  height: 100vh;
+}
+
+.libro-execution-file {
+  text-transform: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

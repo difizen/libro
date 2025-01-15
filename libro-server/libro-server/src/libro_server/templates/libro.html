@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="default">
+  <head>
+    <meta charset="utf-8" />
+    <base href="{{static_url('')}}" />
+    <link
+      id="favicon"
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://mdn.alipayobjects.com/huamei_hdnzbp/afts/img/A*Jl1DTrw2uxkAAAAAAAAAAAAADjOxAQ/original"
+    />
+    {# Copy so we do not modify the page_config with updates. #} {% set
+    page_config_full = page_config.copy() %} {# Set a dummy variable - we just
+    want the side effect of the update. #} {% set _ =
+    page_config_full.update(baseUrl=base_url, wsUrl=ws_url) %}
+
+    <script id="jupyter-config-data" type="application/json">
+      {{ page_config_full | tojson }}
+    </script>
+    <script type="text/javascript">
+      /* Remove token from URL. */
+      (function () {
+        var parsedUrl = new URL(window.location.href);
+        if (parsedUrl.searchParams.get('token')) {
+          parsedUrl.searchParams.delete('token');
+          window.history.replaceState({}, '', parsedUrl.href);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <h1>Libro</h1>
+    </div>
+
+    <script
+      src="{{page_config.static_js_entry}}"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+  </body>
+</html>

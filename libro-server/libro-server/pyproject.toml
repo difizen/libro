@@ -1,0 +1,48 @@
+[project]
+name = "libro-server"
+version = "0.1.11"
+description = "libro server"
+authors = [
+    { name = "zhanba", email = "c5e1856@gmail.com" },
+    { name = "brokun", email = "brokun0128@gmail.com" },
+    { name = "sunshinesmilelk", email = "ximo.lk66@gmail.com" },
+]
+dependencies = [
+    "jupyter-server>=2.13.0",
+    "jupyterlab-server>=2.25.4",
+    "ipykernel>=6.29.4",
+    "ipython>=7.34.0",
+    "jupyter-lsp>=2.2.4",
+    "ruff-lsp>=0.0.53",
+    "libro-core>=0.1.6",
+    "packaging>=24.2",
+]
+readme = "README.md"
+requires-python = ">=3.8.1"
+
+[project.scripts]
+libro = 'libro_server.entrypoint:main'
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.rye.scripts]
+dev = "libro --config=./src/dev-config/jupyter_server_config.py --debug"
+lab = "jupyter lab --config=./dev-config/jupyter_server_config.py --debug"
+gateway = 'jupyter lab --config=./dev-config/jupyter_server_config.py --debug --gateway-url=http://127.0.0.1:8888'
+version = 'libro --version'
+help = 'libro --help'
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.version]
+path = "src/libro_server/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/libro_server"]

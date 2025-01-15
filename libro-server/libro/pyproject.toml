@@ -1,0 +1,32 @@
+[project]
+name = "libro"
+version = "0.1.27"
+description = "libro"
+authors = [
+    { name = "brokun", email = "brokun0128@gmail.com" },
+    { name = "sunshinesmilelk", email = "ximo.lk66@gmail.com" },
+    { name = "zhanba", email = "c5e1856@gmail.com" },
+]
+dependencies = ["libro-server>=0.1.11", "libro-sql>=0.1.11", "libro-ai>=0.1.14"]
+dev-dependencies = []
+readme = "README.md"
+requires-python = ">= 3.9"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye.scripts]
+dev = "libro --config=../libro-server/src/dev-config/jupyter_server_config.py --debug"
+
+[tool.rye]
+managed = true
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.version]
+path = "src/libro/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/libro"]
