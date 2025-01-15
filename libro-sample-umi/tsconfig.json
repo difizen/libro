@@ -1,0 +1,10 @@
+{
+  "extends": "./src/.umi/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react",
+    "noUnusedLocals": true,
+    "strictPropertyInitialization": false,
+    "experimentalDecorators": true
+  }
+}
