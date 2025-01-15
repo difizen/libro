@@ -1,0 +1,22 @@
+pnpm-lock.yaml
+**/node_modules
+**/.venv
+
+# build artifacts
+**/build
+**/_build
+**/dist
+**/coverage
+
+# generated code
+**/.dumi/tmp
+**/.dumi/tmp-production
+**/.docusaurus
+
+# protobuf
+**/*_pb.ts
+**/*_connect.ts
+
+**/*/keyboard/layouts/**
+tinyColor.less
+

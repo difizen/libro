@@ -1,0 +1,32 @@
+[project]
+name = "libro-sql"
+version = "0.1.11"
+description = "libro sql"
+authors = [
+    { name = "brokun", email = "brokun0128@gmail.com" },
+    { name = "sunshinesmilelk", email = "1176136681@qq.com" },
+]
+dependencies = [
+    "ipython>=7.34.0",
+    "sqlalchemy>=2.0.25",
+    "pandas>=2.0.3",
+    "pydantic>=2.6.4",
+    "psycopg2-binary>=2.9.9",
+    "pymysql>=1.1.1",
+    "libro-core>=0.1.6",
+]
+readme = "README.md"
+requires-python = ">= 3.9"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/libro_sql"]

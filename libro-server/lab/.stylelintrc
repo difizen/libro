@@ -1,0 +1,9 @@
+{
+  "extends": "@umijs/lint/dist/config/stylelint",
+  "rules": {
+    "function-no-unknown": null,
+    "selector-class-pattern": "^([_a-zA-Z][A-Za-z0-9]*)(-[A-Za-z0-9]+)*",
+    "custom-property-pattern": "^([_a-zA-Z][A-Za-z0-9]*)(-[A-Za-z0-9]+)*",
+    "color-function-notation": "legacy"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "libro-server",
+  "version": "1.0.0",
+  "description": "## env setup",
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@difizen/libro-analyzer": "^0.1.0"
+  },
+  "repository": "git@github.com:difizen/libro-server.git"
+}

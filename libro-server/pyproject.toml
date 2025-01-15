@@ -1,0 +1,10 @@
+[project]
+name = "libro"
+version = "0.1.2"
+dependencies = ["matplotlib>=3.8.4"]
+
+[tool.rye]
+virtual = true
+
+[tool.rye.workspace]
+members = ["libro*"]

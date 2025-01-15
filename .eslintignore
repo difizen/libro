@@ -5,3 +5,5 @@
 **/dist/**/*.js
 **/dist/**/*.cjs
 **/dist/**/*.mjs
+**/libro-server
+

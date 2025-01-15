@@ -1,0 +1,13 @@
+[tool.pyright]
+exclude = ["**/node_modules",
+    "**/__pycache__",
+]
+ignore = ["src/oldstuff"]
+# verboseOutput = true
+# executionEnvironments = [
+#   { root = "../" }
+# ]
+typeshedPath = "../node_modules/@difizen/libro-analyzer/dist/typeshed-fallback"
+
+reportMissingImports = true
+reportMissingTypeStubs = false
