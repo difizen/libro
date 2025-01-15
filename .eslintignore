@@ -5,6 +5,6 @@
 **/dist/**/*.js
 **/dist/**/*.cjs
 **/dist/**/*.mjs
-**/libro-server
+/libro-server/**
 /mana/**
 

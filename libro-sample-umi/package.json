@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "author": "sunshinesmilelk <ximo.lk66@gmail.com>",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.4.0",
+    "@difizen/libro-jupyter": "^0.2.35-next.0",
+    "@difizen/libro-lab": "^0.2.35-next.0",
+    "@difizen/mana-app": "^0.1.25",
+    "antd": "^5.20.5",
+    "umi": "^4.3.14"
+  },
+  "devDependencies": {
+    "@difizen/umi-plugin-mana": "^0.1.25",
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "tslib": "^2.7.0",
+    "typescript": "^5.0.3"
+  }
+}
