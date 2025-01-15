@@ -1,0 +1,7 @@
+{
+  "dbName": "fakeDB",
+  "userName": "adminFake1",
+  "userToken": "absolutelyFake",
+  "defaultTable": "fakeTable",
+  "comment": "This is a fake db config file"
+}
