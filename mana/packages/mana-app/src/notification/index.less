@@ -1,0 +1,20 @@
+.mana-notification-content {
+  display: flex;
+  flex-direction: column;
+
+  &-actions {
+    align-self: flex-end;
+
+    &-item {
+      border: var(--mana-border-width) solid var(--mana-color-border);
+      padding: 4px 12px;
+      border-radius: var(--mana-border-radius);
+      background-color: inherit;
+
+      &:hover {
+        cursor: pointer;
+        background-color: var(--mana-color-border);
+      }
+    }
+  }
+}

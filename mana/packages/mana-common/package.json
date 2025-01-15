@@ -1,0 +1,56 @@
+{
+  "name": "@difizen/mana-common",
+  "version": "0.1.32",
+  "sideEffects": false,
+  "description": "",
+  "keywords": [
+    "mana",
+    "difizen",
+    "utils"
+  ],
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": {
+        "typings": "./es/index.d.ts",
+        "default": "./es/index.js"
+      },
+      "require": {
+        "typings": "./lib/index.d.ts",
+        "default": "./lib/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "es",
+    "src"
+  ],
+  "scripts": {
+    "setup": "father build",
+    "build": "father build",
+    "test": ": Note: lint task is delegated to test:* scripts",
+    "test:vitest": "vitest run",
+    "test:jest": "jest",
+    "coverage": ": Note: lint task is delegated to coverage:* scripts",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:jest": "jest --coverage",
+    "lint": ": Note: lint task is delegated to lint:* scripts",
+    "lint:eslint": "eslint src",
+    "lint:tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "path-browserify": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/path-browserify": "^1.0.0",
+    "rimraf": "latest"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

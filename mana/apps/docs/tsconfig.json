@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDirs": ["./src", ".dumi"],
+    "outDir": "es",
+    "declarationDir": "es"
+  },
+  "types": ["jest"],
+  "exclude": ["node_modules"],
+  "include": ["src", ".dumi"]
+}

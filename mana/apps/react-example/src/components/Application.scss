@@ -1,0 +1,245 @@
+/**
+ * Licensed under the MIT License. See LICENSE file in the project root for license information.
+ * Copyright (c) 2022 Codesbiome, guasam
+ *
+ * @author  : guasam
+ * @project : ERWT Boilerplate
+ * @package : Application Sass Stylesheet
+*/
+
+@import './Theme.scss';
+
+/**
+ *==========================================================================
+ * Application Specific Stylesheet
+ *==========================================================================
+ *
+ * Here we use the codes to apply application specific style
+ */
+
+::selection {
+  background: var(--selection-bgcolor);
+  color: var(--selection-color);
+}
+
+::-webkit-scrollbar {
+  width: var(--scroll-width);
+
+  &-track {
+    background: var(--scroll-track-bgcolor);
+  }
+
+  &-thumb {
+    background: var(--scroll-thumb-bgcolor);
+  }
+
+  &-thumb:hover {
+    background: var(--scroll-thumb-hover-bgcolor);
+  }
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-size: var(--app-font-size);
+  font-family: var(--app-font-family);
+  color: var(--app-color);
+  background: var(--app-bgcolor);
+  line-height: 1.5;
+}
+
+h1 {
+  margin: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  user-select: none;
+  align-items: center;
+  justify-content: center;
+
+  &.has-border {
+    border: var(--app-border-color);
+  }
+}
+
+button {
+  background: var(--button-bgcolor);
+  color: var(--button-color);
+  font-weight: normal;
+  text-shadow: 0px 1px var(--button-shadow-color);
+  font-family: var(--app-font-family);
+  border: var(--button-border);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
+  outline: none;
+  min-width: 140px;
+
+  &:hover {
+    background: var(--button-hover-bgcolor);
+  }
+  &:active {
+    background: var(--button-active-bgcolor);
+  }
+  & > span {
+    color: var(--button-badge-color);
+    background-color: var(--button-badge-bgcolor);
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+  }
+
+  img {
+    width: 22px;
+    opacity: 0.8;
+  }
+}
+
+.rotate {
+  animation: rotate 4.5s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.main-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+
+  img {
+    margin-right: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--erwt-heading-color);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.center {
+  text-align: center;
+}
+
+.main-teaser {
+  position: relative;
+  display: flex;
+  line-height: 25px;
+  font-size: 15px;
+  color: gray;
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+  text-align: center;
+  padding-left: 1rem;
+  background: #191919;
+  padding-top: 1rem;
+  padding-bottom: 10px;
+  padding-right: 1rem;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 8px 10px 0px rgba(0, 0, 0, 0.0117647059);
+}
+
+.main-teaser:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: calc(100% + 40px);
+  height: 2px;
+  background: var(--app-accent-color);
+  left: -20px;
+  box-shadow: 0 10px 20px #000000e3;
+  border-radius: 8px;
+}
+
+.versions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  box-shadow: 0 0 20px inset rgb(0 0 0 / 3%);
+  width: 70%;
+  margin: 0 auto;
+}
+
+.versions .item {
+  background: #1c1c1c;
+  color: #d1d1d1;
+  width: calc(33.33% - 1rem);
+  padding: 4px 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  & > * {
+    display: flex;
+    align-items: center;
+  }
+
+  &-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    opacity: 0.8;
+  }
+
+  & > span {
+    color: gray;
+    text-align: right;
+  }
+}
+
+#erwt {
+  // user-select: none;
+  display: flex;
+  flex-direction: column;
+  max-height: 800px;
+  justify-content: space-between;
+  background: var(--erwt-bgcolor);
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 4px #00000000;
+
+  .header {
+    padding: 3rem 2rem 0rem 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .footer {
+    margin-top: 1rem;
+    padding: 2rem;
+    background: var(--app-footer-bgColor);
+  }
+}

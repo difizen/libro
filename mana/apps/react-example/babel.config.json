@@ -1,0 +1,3 @@
+{
+  "presets": ["@difizen/babel-preset-mana"]
+}

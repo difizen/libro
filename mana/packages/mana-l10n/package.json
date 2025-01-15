@@ -1,0 +1,58 @@
+{
+  "name": "@difizen/mana-l10n",
+  "version": "0.1.32",
+  "keywords": [],
+  "exports": {
+    ".": {
+      "import": {
+        "typings": "./es/index.d.ts",
+        "default": "./es/index.js"
+      },
+      "require": {
+        "typings": "./lib/index.d.ts",
+        "default": "./lib/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "dist",
+    "lib",
+    "umd",
+    "es",
+    "src"
+  ],
+  "scripts": {
+    "setup": "father build",
+    "build": "father build",
+    "test": ": Note: lint task is delegated to test:* scripts",
+    "test:vitest": "vitest run",
+    "coverage": ": Note: lint task is delegated to coverage:* scripts",
+    "coverage:vitest": "vitest run --coverage",
+    "lint": ": Note: lint task is delegated to lint:* scripts",
+    "lint:eslint": "eslint src",
+    "lint:tsc": "tsc --noEmit"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.7",
+    "@types/jsdom": "^11.0.4",
+    "@types/safer-buffer": "^2.1.0",
+    "@types/sinon": "^2.3.5",
+    "chai": "^4.2.0",
+    "jsdom": "^11.5.1",
+    "rimraf": "latest",
+    "sinon": "^3.3.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

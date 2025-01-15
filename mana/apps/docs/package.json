@@ -1,0 +1,37 @@
+{
+  "name": "@difizen/mana-docs",
+  "version": "0.1.32",
+  "private": true,
+  "license": "MIT",
+  "description": "Document site for mana",
+  "type": "module",
+  "scripts": {
+    "start": "dumi dev",
+    "analyze": "ANALYZE=1 dumi build",
+    "build": "dumi build"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "dumi": "^2.2.13",
+    "execa": "^5.1.1"
+  },
+  "engines": {
+    "node": ">=16.20.0"
+  },
+  "packageManager": "pnpm@9.7.1",
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.1.0",
+    "@difizen/mana-app": "^0.1.32",
+    "@difizen/mana-configuration-panel": "0.1.32",
+    "@difizen/mana-l10n": "^0.1.32",
+    "@difizen/mana-react": "^0.1.32",
+    "@difizen/umi-plugin-mana": "^0.1.32",
+    "antd": "^5.8.6",
+    "moment": "^2.30.1",
+    "octokit": "^3",
+    "react-copy-to-clipboard": "^5.1.0"
+  }
+}
