@@ -1,0 +1,43 @@
+.mana-header {
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid var(--mana-menubar-border);
+  background: var(--mana-menubar-background);
+
+  .mana-flex {
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .mana-header-left {
+    .mana-flex {
+      .mana-flex-item {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .mana-header-middle {
+    .mana-flex {
+      justify-content: center;
+
+      .mana-flex-item {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .mana-header-right {
+    padding: 0 12px;
+
+    .mana-flex {
+      justify-content: flex-start;
+      flex-direction: row-reverse;
+
+      .mana-flex-item {
+        margin-left: 8px;
+      }
+    }
+  }
+}

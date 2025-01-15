@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "es",
+    "declarationDir": "es",
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*", "src/**/*.json"]
+}

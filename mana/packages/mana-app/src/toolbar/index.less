@@ -1,0 +1,40 @@
+.mana-toolbar {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 4px;
+
+  &-item {
+    margin: 0 4px;
+    cursor: pointer;
+  }
+
+  &-item-disabled {
+    cursor: default;
+    opacity: var(--mana-mod-disabled-opacity);
+  }
+
+  &-item-active {
+    background-color: var(--mana-selection-background);
+  }
+
+  &-more {
+    & :hover {
+      background-color: var(--mana-menubar-background);
+    }
+  }
+
+  &-inline-divider {
+    display: block;
+    width: 1px;
+    margin: 2px 4px;
+    background: rgba(150, 150, 150, 20%);
+    pointer-events: none;
+  }
+
+  &-item-label {
+    display: inline-block;
+    margin: 0 4px;
+  }
+}

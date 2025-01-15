@@ -15,7 +15,8 @@ pnpm-lock.yaml
 **/.dumi/theme
 **/.docusaurus
 
-**/libro-server
+/libro-server/**
+/mana/**
 
 # protobuf
 **/*_pb.ts

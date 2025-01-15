@@ -1,0 +1,1 @@
+# mana-configuration-panel

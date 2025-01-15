@@ -1,0 +1,70 @@
+.mana-tab-view-container {
+  height: 100%;
+
+  .mana-tabs {
+    height: 100%;
+  }
+}
+
+.mana-tabs-tab-active {
+  .mana-tab-title {
+    .mana-tab-close {
+      opacity: 1;
+      color: var(--mana-ant-color-icon-hover);
+    }
+  }
+}
+
+.mana-tab-side-title {
+  display: flex;
+  align-items: center;
+
+  .mana-tab-icon {
+    display: flex;
+    color: var(--mana-ant-color-icon);
+    align-items: center;
+  }
+}
+
+.mana-tab-side-pane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .mana-tab-side-pane-header {
+    display: flex;
+    flex: none;
+    align-items: center;
+    height: 32px;
+    margin-left: 12px;
+  }
+
+  .mana-tab-side-pane-content {
+    flex: auto;
+  }
+}
+
+.mana-tab-title {
+  display: flex;
+  align-items: center;
+
+  .mana-tab-icon {
+    color: var(--mana-ant-color-icon);
+    display: flex;
+    align-items: center;
+    margin-right: 6px;
+  }
+
+  .mana-tab-close {
+    padding: 2px;
+    font-size: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    opacity: 0;
+
+    &:hover {
+      background: var(--mana-tab-inactiveBackground);
+      opacity: 1;
+    }
+  }
+}

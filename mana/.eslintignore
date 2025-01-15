@@ -1,0 +1,11 @@
+!.dumi
+.dumi/tmp
+.dumi/tmp-production
+.umi
+.umi-production
+
+**/dist/**/*.js
+**/dist/**/*.cjs
+**/dist/**/*.mjs
+
+tailwind.out.css

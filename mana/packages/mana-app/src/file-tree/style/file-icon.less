@@ -1,0 +1,51 @@
+.mana-file-icons-js {
+  /*
+    Here, the `line-height` ensures that FontAwesome and `file-icons-js` container has the same height.
+    Ideally, it would be 1 em, but since we set the max height above (and other places too) with 0.8
+    multiplier, we use 0.8 em here too.
+     */
+  line-height: 0.8em;
+}
+
+.mana-file-icons-js::before {
+  font-size: calc(var(--mana-content-font-size) * 0.8);
+}
+
+.p-TabBar-tabIcon.mana-file-icons-js.file-icon {
+  padding-right: 3px !important;
+  padding-left: 1px !important;
+}
+
+.mana-file-icons-js.file-icon {
+  display: flex;
+  align-items: center;
+  width: 16px;
+  min-width: var(--mana-icon-size);
+  height: 16px;
+  line-height: 16px;
+}
+
+.default-folder-icon,
+.default-file-icon {
+  width: 20px;
+  height: 16px;
+  line-height: 16px;
+  padding-right: 4px;
+}
+
+.fa-file::before,
+.fa-folder::before,
+.mana-file-icons-js::before {
+  margin-right: 4px;
+  text-align: center;
+}
+
+.mana-app-sides .mana-file-icons-js {
+  max-height: none;
+  line-height: inherit;
+}
+
+.mana-app-sides .mana-file-icons-js::before {
+  margin-right: 0;
+  font-size: var(--mana-sidebar-icon-size);
+}

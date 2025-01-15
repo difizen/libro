@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "version": "0.1.32",
+  "name": "@difizen/mana-umi-example",
+  "author": "brokun <brokun0128@gmail.com>",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "setup": "umi setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@difizen/umi-plugin-mana": "^0.1.32",
+    "@difizen/mana-app": "^0.1.32",
+    "umi": "^4.3.20"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^5.0.3"
+  }
+}

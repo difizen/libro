@@ -6,4 +6,5 @@
 **/dist/**/*.cjs
 **/dist/**/*.mjs
 **/libro-server
+/mana/**
 
