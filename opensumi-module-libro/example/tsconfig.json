@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "@@/*": [".dumi/tmp/*"],
+      "@difizen/opensumi-module-libro": ["../src"],
+      "@difizen/opensumi-module-libro/*": ["../src/*", "*"],
+      "modules/*": ["../modules/*", "*"]
+    },
+    "module": "commonjs",
+    "target": "es2017",
+    "outDir": "lib",
+    "moduleResolution": "node",
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "downlevelIteration": true,
+    "noEmitOnError": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "strictFunctionTypes": false,
+    "jsx": "react-jsx",
+    "lib": ["dom", "esnext", "webworker"]
+  },
+  "include": ["src/**/*", "./typings/**/*", "../modules/**/*", "../src"]
+}
