@@ -3,7 +3,7 @@ import type { ToolbarRegistry } from '@difizen/mana-app';
 import { singleton, inject, ToolbarContribution } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
 
-import { Location } from '../components/icons.js';
+import { LocationIcon } from '../components/icons.js';
 import { KernelStatusAndSelectorProvider } from '../libro-jupyter-protocol.js';
 
 import { RunSelector } from './run-selector.js';
@@ -48,7 +48,7 @@ export class LibroJupyterToolbarContribution implements ToolbarContribution {
 
     registry.registerItem({
       id: NotebookCommands['SelectLastRunCell'].id,
-      icon: Location,
+      icon: LocationIcon,
       command: NotebookCommands['SelectLastRunCell'].id,
       group: ['group2'],
       order: 'b',

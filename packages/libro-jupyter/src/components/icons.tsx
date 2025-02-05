@@ -87,7 +87,7 @@ export const WarningIcon: React.FC = () => (
   </svg>
 );
 
-export const Location: React.FC = () => (
+export const LocationIcon: React.FC = () => (
   <svg
     width="17px"
     height="20px"

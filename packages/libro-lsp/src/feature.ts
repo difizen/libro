@@ -6,7 +6,7 @@ import { Emitter } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
 import mergeWith from 'lodash.mergewith';
 
-import type { ClientCapabilities } from './lsp.js';
+import type { LspClientCapabilities } from './lsp.js';
 import type { IFeature } from './tokens.js';
 import { ILSPFeatureManager } from './tokens.js';
 
@@ -45,8 +45,8 @@ export class FeatureManager implements ILSPFeatureManager {
   /**
    * Get the capabilities of all clients.
    */
-  clientCapabilities(): ClientCapabilities {
-    let capabilities: ClientCapabilities = {};
+  clientCapabilities(): LspClientCapabilities {
+    let capabilities: LspClientCapabilities = {};
     for (const feature of this.features) {
       if (!feature.capabilities) {
         continue;

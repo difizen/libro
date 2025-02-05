@@ -1,4 +1,3 @@
-export * from '@difizen/libro-jupyter';
 export * from './module.js';
 export * from './lab-app.js';
 export * from './github-link/index.js';

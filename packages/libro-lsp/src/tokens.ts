@@ -16,7 +16,7 @@ import type { IForeignCodeExtractor } from './extractors/types.js';
 import type {
   AnyCompletion,
   AnyLocation,
-  ClientCapabilities,
+  LspClientCapabilities,
   LanguageIdentifier,
 } from './lsp.js';
 import type { LanguageServer1 as LSPLanguageServerSettings } from './plugin.js';
@@ -328,7 +328,7 @@ export interface ISocketConnectionOptions {
   /**
    * LSP capabilities describing currently supported features
    */
-  capabilities: ClientCapabilities;
+  capabilities: LspClientCapabilities;
 
   /**
    * Is the file format is supported by LSP?
@@ -489,7 +489,7 @@ export interface IFeature {
   /**
    * LSP capabilities implemented by the feature.
    */
-  capabilities?: ClientCapabilities;
+  capabilities?: LspClientCapabilities;
 }
 
 export const ILSPFeatureManager = Symbol('ILSPFeatureManager');
@@ -519,7 +519,7 @@ export interface ILSPFeatureManager {
   /**
    * Get capabilities of all registered features
    */
-  clientCapabilities(): ClientCapabilities;
+  clientCapabilities(): LspClientCapabilities;
 }
 
 export const ILSPCodeExtractorsManager = Symbol('ILSPCodeExtractorsManager');
@@ -552,7 +552,7 @@ export interface ILSPOptions extends ILspOptions {
   /**
    * Client capabilities implemented by the client.
    */
-  capabilities: ClientCapabilities;
+  capabilities: LspClientCapabilities;
 
   /**
    * Language server id.

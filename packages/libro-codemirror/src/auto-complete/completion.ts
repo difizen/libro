@@ -49,7 +49,7 @@ export interface Completion {
 }
 
 /// An instance of this is passed to completion source functions.
-export class CompletionContext {
+export class CodemirrorCompletionContext {
   /// @internal
   abortListeners: (() => void)[] | null = [];
 
@@ -105,7 +105,7 @@ export class CompletionContext {
 
   /// Allows you to register abort handlers, which will be called when
   /// the query is
-  /// [aborted](#autocomplete.CompletionContext.aborted).
+  /// [aborted](#autocomplete.CodemirrorCompletionContext.aborted).
   addEventListener(type: 'abort', listener: () => void) {
     if (type === 'abort' && this.abortListeners) {
       this.abortListeners.push(listener);
@@ -144,7 +144,7 @@ export function completeFromList(
   const [validFor, match] = options.every((o) => /^\w+$/.test(o.label))
     ? [/\w*$/, /\w+$/]
     : prefixMatch(options);
-  return (context: CompletionContext) => {
+  return (context: CodemirrorCompletionContext) => {
     const token = context.matchBefore(match);
     return token || context.explicit
       ? { from: token ? token.from : context.pos, options, validFor }
@@ -158,7 +158,7 @@ export function ifIn(
   nodes: readonly string[],
   source: CompletionSource,
 ): CompletionSource {
-  return (context: CompletionContext) => {
+  return (context: CodemirrorCompletionContext) => {
     for (
       let pos: SyntaxNode | null = syntaxTree(context.state).resolveInner(
         context.pos,
@@ -181,7 +181,7 @@ export function ifNotIn(
   nodes: readonly string[],
   source: CompletionSource,
 ): CompletionSource {
-  return (context: CompletionContext) => {
+  return (context: CodemirrorCompletionContext) => {
     for (
       let pos: SyntaxNode | null = syntaxTree(context.state).resolveInner(
         context.pos,
@@ -203,7 +203,7 @@ export function ifNotIn(
 /// synchronously or as a promise. Returning null indicates no
 /// completions are available.
 export type CompletionSource = (
-  context: CompletionContext,
+  context: CodemirrorCompletionContext,
 ) => CompletionResult | null | Promise<CompletionResult | null>;
 
 /// Interface for objects returned by completion sources.
@@ -250,7 +250,7 @@ export interface CompletionResult {
     current: CompletionResult,
     from: number,
     to: number,
-    context: CompletionContext,
+    context: CodemirrorCompletionContext,
   ) => CompletionResult | null;
 }
 

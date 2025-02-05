@@ -47,7 +47,7 @@ import { v4 } from 'uuid';
 import type { CodeMirrorConfig } from './config.js';
 import { EditorConfiguration } from './config.js';
 import { stateFactory } from './factory.js';
-import { ensure } from './mode.js';
+import { codemirrorEnsure } from './mode.js';
 import { monitorPlugin } from './monitor.js';
 
 /**
@@ -922,7 +922,7 @@ export class CodeMirrorEditor implements IEditor {
   protected _onMimeTypeChanged(): void {
     const mime = this._model.mimeType;
     // TODO: should we provide a hook for when the mode is done being set?
-    void ensure(mime).then((spec) => {
+    void codemirrorEnsure(mime).then((spec) => {
       if (spec) {
         this._editorConfig.reconfigureExtension(
           this._editor,

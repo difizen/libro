@@ -17,7 +17,7 @@ import type {
   IRootPosition,
   ISourcePosition,
   IVirtualPosition,
-  Position,
+  LspPosition,
 } from '../positioning.js';
 import type { Document, ILSPCodeExtractorsManager } from '../tokens.js';
 import { ILSPDocumentConnectionManager } from '../tokens.js';
@@ -268,7 +268,7 @@ export class VirtualDocument implements Disposable {
   /**
    * Convert from code editor position into code mirror position.
    */
-  static ceToCm(position: CodeEditorPosition): Position {
+  static ceToCm(position: CodeEditorPosition): LspPosition {
     return { line: position.line, ch: position.column };
   }
 
@@ -556,7 +556,7 @@ export class VirtualDocument implements Disposable {
     }
     const shift = this._editorToSourceLine.get(editor)!;
     return {
-      ...(position as Position),
+      ...(position as LspPosition),
       line: position.line + shift,
     } as IRootPosition;
   }

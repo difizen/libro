@@ -2,7 +2,7 @@ import type {
   IAICompletionOption,
   ICompletionContext,
   IIntelligentCompletionsResult,
-  CancellationToken,
+  EditorCancellationToken,
 } from '@difizen/libro-code-editor';
 import { transient } from '@difizen/mana-app';
 import { v4 } from 'uuid';
@@ -10,13 +10,13 @@ import { v4 } from 'uuid';
 import { generateInstructionsPrompt } from './Prompt/instruction.js';
 
 @transient()
-export class CompletionRequest {
+export class AiCompletionRequest {
   isCancelFlag: boolean;
   id: string;
 
   constructor(
     public context: ICompletionContext,
-    public token: CancellationToken,
+    public token: EditorCancellationToken,
   ) {
     this.isCancelFlag = false;
     this.id = v4();
@@ -25,7 +25,7 @@ export class CompletionRequest {
   // 拼接上下文信息
   protected constructRequestContext(
     context: ICompletionContext,
-    token: CancellationToken,
+    token: EditorCancellationToken,
   ): IAICompletionOption {
     // const prompt = lineBasedPromptProcessor.processPrefix(context.prefix);
     // const suffix = lineBasedPromptProcessor.processSuffix(context.suffix);

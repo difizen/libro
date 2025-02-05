@@ -44,7 +44,7 @@ import { FoldIcon, UnFoldIcon } from './libro-icon.js';
 import { lspPythonCompletion } from './lsp/completion.js';
 import { formatKeymap } from './lsp/format.js';
 import { lspLint, lspTooltip } from './lsp/index.js';
-import { ensure } from './mode.js';
+import { codemirrorEnsure } from './mode.js';
 import { getTheme, defaultTheme } from './theme.js';
 import { tabTooltip, tooltipKeymap } from './tooltip.js';
 
@@ -632,7 +632,7 @@ export class EditorConfiguration {
     const themeOverload = this.updateThemeOverload(config);
     extensions.push(this._themeOverloader.of(themeOverload), insertExt, keymapExt);
 
-    ensure(config?.mimetype ?? 'text/x-python')
+    codemirrorEnsure(config?.mimetype ?? 'text/x-python')
       .then((spec) => {
         if (spec) {
           extensions.push(this.get('language')?.of(spec.support!));

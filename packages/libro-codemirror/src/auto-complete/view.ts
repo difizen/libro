@@ -9,7 +9,7 @@ import type {
 import { ViewPlugin, logException, getTooltip } from '@codemirror/view';
 
 import type { CompletionResult } from './completion.js';
-import { cur, CompletionContext, applyCompletion } from './completion.js';
+import { cur, CodemirrorCompletionContext, applyCompletion } from './completion.js';
 import { completionConfig } from './config.js';
 import {
   completionState,
@@ -113,7 +113,7 @@ class RunningQuery {
 
   constructor(
     readonly active: ActiveSource,
-    readonly context: CompletionContext,
+    readonly context: CodemirrorCompletionContext,
   ) {}
 }
 
@@ -216,7 +216,11 @@ export const completionPlugin = ViewPlugin.fromClass(
     startQuery(active: ActiveSource) {
       const { state } = this.view,
         pos = cur(state);
-      const context = new CompletionContext(state, pos, active.explicitPos === pos);
+      const context = new CodemirrorCompletionContext(
+        state,
+        pos,
+        active.explicitPos === pos,
+      );
       const pending = new RunningQuery(active, context);
       this.running.push(pending);
       Promise.resolve(active.source(context))

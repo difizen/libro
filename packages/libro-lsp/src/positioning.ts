@@ -11,7 +11,7 @@ import type * as lsp from 'vscode-languageserver-protocol';
  * TODO: Migrate to offset-only mode once `CodeEditor.IPosition`
  * is migrated.
  */
-export interface Position {
+export interface LspPosition {
   /**
    * Line number
    */
@@ -26,15 +26,15 @@ export interface Position {
 /**
  * is_* attributes are there only to enforce strict interface type checking
  */
-export interface ISourcePosition extends Position {
+export interface ISourcePosition extends LspPosition {
   isSource: true;
 }
 
-export interface IEditorPosition extends Position {
+export interface IEditorPosition extends LspPosition {
   isEditor: true;
 }
 
-export interface IVirtualPosition extends Position {
+export interface IVirtualPosition extends LspPosition {
   isVirtual: true;
 }
 
@@ -43,10 +43,10 @@ export interface IRootPosition extends ISourcePosition {
 }
 
 /**
- * Compare two `Position` variable.
+ * Compare two `LspPosition` variable.
  *
  */
-export function isEqual(self: Position, other: Position): boolean {
+export function isEqual(self: LspPosition, other: LspPosition): boolean {
   return other && self.line === other.line && self.ch === other.ch;
 }
 

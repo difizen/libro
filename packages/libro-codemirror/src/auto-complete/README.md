@@ -16,7 +16,7 @@
 
 ### Sources
 
-@CompletionContext
+@CodemirrorCompletionContext
 
 @CompletionResult
 

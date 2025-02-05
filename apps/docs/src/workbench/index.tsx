@@ -1,4 +1,4 @@
-import { LibroJupyterModule } from '@difizen/libro-jupyter';
+import { LibroJupyterModule } from '@difizen/libro';
 import {
   ManaAppPreset,
   ManaComponents,
@@ -7,7 +7,6 @@ import {
   RootSlotId,
   CardTabView,
   FileTreeView,
-  createViewPreference,
 } from '@difizen/mana-app';
 
 import { LibroApp } from './app.js';

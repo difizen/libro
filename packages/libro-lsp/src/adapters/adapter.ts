@@ -7,7 +7,7 @@ import type { Disposable, Event, View } from '@difizen/mana-app';
 import type {} from '@difizen/mana-app';
 import mergeWith from 'lodash.mergewith';
 
-import type { ClientCapabilities, LanguageIdentifier } from '../lsp.js';
+import type { LspClientCapabilities, LanguageIdentifier } from '../lsp.js';
 import type { IVirtualPosition } from '../positioning.js';
 import type {
   Document,
@@ -544,7 +544,7 @@ export abstract class WidgetLSPAdapter<T extends NotebookView> implements Dispos
   protected async _connect(virtualDocument: VirtualDocument) {
     const language = virtualDocument.language;
 
-    let capabilities: ClientCapabilities = {
+    let capabilities: LspClientCapabilities = {
       textDocument: {
         synchronization: {
           dynamicRegistration: true,

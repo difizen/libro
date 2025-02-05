@@ -200,12 +200,12 @@ export function findBest(mode: string | ISpec, fallback = true): ISpec | null {
 /**
  * Ensure a codemirror mode is available by name or Codemirror spec.
  *
- * @param mode - The mode to ensure.  If it is a string, uses [findBest]
+ * @param mode - The mode to codemirrorEnsure.  If it is a string, uses [findBest]
  *   to get the appropriate spec.
  *
  * @returns A promise that resolves when the mode is available.
  */
-export async function ensure(mode: string | ISpec): Promise<ISpec | null> {
+export async function codemirrorEnsure(mode: string | ISpec): Promise<ISpec | null> {
   const spec = findBest(mode);
   if (spec) {
     spec.support = await spec.load!();
