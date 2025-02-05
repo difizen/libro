@@ -2,7 +2,7 @@ import type { Diagnostic } from '@codemirror/lint';
 import { setDiagnostics } from '@codemirror/lint';
 import type { PluginValue, EditorView } from '@codemirror/view';
 import { ViewPlugin } from '@codemirror/view';
-import { DiagnosticSeverity } from '@difizen/libro-lsp';
+import { LspDiagnosticSeverity } from '@difizen/libro-lsp';
 
 import type { CMLSPExtension, LSPExtensionOptions } from './protocol.js';
 import { posToOffset } from './util.js';
@@ -28,59 +28,61 @@ class LintPlugin implements PluginValue {
         lspConnection.serverNotifications['textDocument/publishDiagnostics'].event(
           (e) => {
             const diagnostics = e.diagnostics
-              .map(({ range, message, severity = DiagnosticSeverity.Information }) => {
-                const currentEditor = virtualDocument.getEditorAtVirtualLine({
-                  line: range.start.line,
-                  ch: range.start.character,
-                  isVirtual: true,
-                });
-
-                // the diagnostic range must be in current editor
-                if (editor !== currentEditor) {
-                  return;
-                }
-
-                const editorStart = virtualDocument.transformVirtualToEditor({
-                  line: range.start.line,
-                  ch: range.start.character,
-                  isVirtual: true,
-                });
-
-                let offset: number | undefined;
-                if (editorStart) {
-                  offset = posToOffset(this.view.state.doc, {
-                    line: editorStart.line,
-                    character: editorStart.ch,
-                  })!;
-                }
-
-                const editorEnd = virtualDocument.transformVirtualToEditor({
-                  line: range.end.line,
-                  ch: range.end.character,
-                  isVirtual: true,
-                });
-
-                let end: number | undefined;
-                if (editorEnd) {
-                  end = posToOffset(this.view.state.doc, {
-                    line: editorEnd.line,
-                    character: editorEnd.ch,
+              .map(
+                ({ range, message, severity = LspDiagnosticSeverity.Information }) => {
+                  const currentEditor = virtualDocument.getEditorAtVirtualLine({
+                    line: range.start.line,
+                    ch: range.start.character,
+                    isVirtual: true,
                   });
-                }
-                return {
-                  from: offset,
-                  to: end,
-                  severity: (
-                    {
-                      [DiagnosticSeverity.Error]: 'error',
-                      [DiagnosticSeverity.Warning]: 'warning',
-                      [DiagnosticSeverity.Information]: 'info',
-                      [DiagnosticSeverity.Hint]: 'info',
-                    } as const
-                  )[severity],
-                  message,
-                } as Diagnostic;
-              })
+
+                  // the diagnostic range must be in current editor
+                  if (editor !== currentEditor) {
+                    return;
+                  }
+
+                  const editorStart = virtualDocument.transformVirtualToEditor({
+                    line: range.start.line,
+                    ch: range.start.character,
+                    isVirtual: true,
+                  });
+
+                  let offset: number | undefined;
+                  if (editorStart) {
+                    offset = posToOffset(this.view.state.doc, {
+                      line: editorStart.line,
+                      character: editorStart.ch,
+                    })!;
+                  }
+
+                  const editorEnd = virtualDocument.transformVirtualToEditor({
+                    line: range.end.line,
+                    ch: range.end.character,
+                    isVirtual: true,
+                  });
+
+                  let end: number | undefined;
+                  if (editorEnd) {
+                    end = posToOffset(this.view.state.doc, {
+                      line: editorEnd.line,
+                      character: editorEnd.ch,
+                    });
+                  }
+                  return {
+                    from: offset,
+                    to: end,
+                    severity: (
+                      {
+                        [LspDiagnosticSeverity.Error]: 'error',
+                        [LspDiagnosticSeverity.Warning]: 'warning',
+                        [LspDiagnosticSeverity.Information]: 'info',
+                        [LspDiagnosticSeverity.Hint]: 'info',
+                      } as const
+                    )[severity],
+                    message,
+                  } as Diagnostic;
+                },
+              )
               .filter<Diagnostic>(isDiagnostic)
               .sort((a, b) => {
                 switch (true) {

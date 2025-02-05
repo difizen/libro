@@ -1,4 +1,4 @@
-import { ServerConnection, ServerManager } from '@difizen/libro-jupyter';
+import { ServerConnection, ServerManager } from '@difizen/libro';
 import { ConfigurationService } from '@difizen/mana-app';
 import { SlotViewManager } from '@difizen/mana-app';
 import { ApplicationContribution, ViewManager } from '@difizen/mana-app';

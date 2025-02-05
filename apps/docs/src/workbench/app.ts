@@ -2,7 +2,7 @@ import {
   ServerConnection,
   LibroJupyterConfiguration,
   ServerManager,
-} from '@difizen/libro-jupyter';
+} from '@difizen/libro';
 import type { FileTreeView } from '@difizen/mana-app';
 import { ConfigurationService } from '@difizen/mana-app';
 import { FileTreeViewFactory, SlotViewManager } from '@difizen/mana-app';

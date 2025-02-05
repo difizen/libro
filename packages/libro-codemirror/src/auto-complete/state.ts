@@ -10,7 +10,7 @@ import {
   cur,
   asSource,
   ensureAnchor,
-  CompletionContext,
+  CodemirrorCompletionContext,
 } from './completion.js';
 import type { CompletionConfig } from './config.js';
 import { completionConfig } from './config.js';
@@ -389,7 +389,7 @@ export class ActiveResult extends ActiveSource {
         this.result,
         from,
         to,
-        new CompletionContext(tr.state, pos, explicitPos >= 0),
+        new CodemirrorCompletionContext(tr.state, pos, explicitPos >= 0),
       ))
     ) {
       return new ActiveResult(

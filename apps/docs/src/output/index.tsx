@@ -1,4 +1,4 @@
-import { LibroJupyterModule } from '@difizen/libro-jupyter';
+import { LibroJupyterModule } from '@difizen/libro';
 import { ManaAppPreset, ManaComponents, ManaModule } from '@difizen/mana-app';
 
 import { LibroApp } from './app.js';

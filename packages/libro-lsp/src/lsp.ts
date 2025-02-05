@@ -3,25 +3,25 @@
 
 import type * as lsp from 'vscode-languageserver-protocol';
 
-export type ClientCapabilities = lsp.ClientCapabilities;
+export type LspClientCapabilities = lsp.ClientCapabilities;
 
-export enum DiagnosticSeverity {
+export enum LspDiagnosticSeverity {
   Error = 1,
   Warning = 2,
   Information = 3,
   Hint = 4,
 }
 
-export enum DiagnosticTag {
+export enum LspDiagnosticTag {
   Unnecessary = 1,
   Deprecated = 2,
 }
 
-export enum CompletionItemTag {
+export enum LspCompletionItemTag {
   Deprecated = 1,
 }
 
-export enum CompletionItemKind {
+export enum LspCompletionItemKind {
   Text = 1,
   Method = 2,
   Function = 3,
@@ -49,13 +49,13 @@ export enum CompletionItemKind {
   TypeParameter = 25,
 }
 
-export enum DocumentHighlightKind {
+export enum LspDocumentHighlightKind {
   Text = 1,
   Read = 2,
   Write = 3,
 }
 
-export enum CompletionTriggerKind {
+export enum LspCompletionTriggerKind {
   Invoked = 1,
   TriggerCharacter = 2,
   TriggerForIncompleteCompletions = 3,
@@ -66,10 +66,10 @@ export enum AdditionalCompletionTriggerKinds {
 }
 
 export type ExtendedCompletionTriggerKind =
-  | CompletionTriggerKind
+  | LspCompletionTriggerKind
   | AdditionalCompletionTriggerKinds;
 
-export type CompletionItemKindStrings = keyof typeof CompletionItemKind;
+export type CompletionItemKindStrings = keyof typeof LspCompletionItemKind;
 
 export type RecommendedLanguageIdentifier = keyof typeof Languages;
 

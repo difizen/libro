@@ -39,7 +39,7 @@ export interface TOCOptions {
 /**
  * Default table of content configuration
  */
-export const defaultConfig: TOCOptions = {
+export const defaultTocConfig: TOCOptions = {
   baseNumbering: 1,
   maximalDepth: 4,
   numberingH1: true,

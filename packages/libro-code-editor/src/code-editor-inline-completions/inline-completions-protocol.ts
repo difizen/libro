@@ -137,7 +137,7 @@ export interface InlineCompletionProvider {
   provideInlineCompletionItems: ProvideInlineCompletionsFunction;
 }
 
-export interface CancellationToken {
+export interface EditorCancellationToken {
   /**
    * A flag signalling is cancellation has been requested.
    */
@@ -169,5 +169,5 @@ export interface InlineCompletionImplement {
 
 export type ProvideInlineCompletionsFunction = (
   context: ICompletionContext,
-  token: CancellationToken,
+  token: EditorCancellationToken,
 ) => Promise<IIntelligentCompletionsResult | undefined>;

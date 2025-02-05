@@ -1,4 +1,4 @@
-import { ServerConnection, ServerManager } from '@difizen/libro-lab';
+import { ServerConnection, ServerManager } from '@difizen/libro';
 import { ApplicationContribution, inject, singleton } from '@difizen/mana-app';
 
 @singleton({ contrib: ApplicationContribution })

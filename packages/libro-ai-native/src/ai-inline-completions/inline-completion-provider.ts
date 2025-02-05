@@ -1,12 +1,12 @@
 import type {
   InlineCompletionProvider,
-  CancellationToken,
+  EditorCancellationToken,
   IIntelligentCompletionsResult,
   ICompletionContext,
 } from '@difizen/libro-code-editor';
 import { singleton } from '@difizen/mana-app';
 
-import { CompletionRequest } from './inline-completion-request.js';
+import { AiCompletionRequest } from './inline-completion-request.js';
 import { raceCancellation, sleep } from './utils.js';
 
 // 缓存最近一次的补全结果
@@ -21,11 +21,11 @@ const inlineCompletionCache: {
 };
 
 class ReqStack {
-  queue: CompletionRequest[];
+  queue: AiCompletionRequest[];
   constructor() {
     this.queue = [];
   }
-  addReq(reqRequest: CompletionRequest) {
+  addReq(reqRequest: AiCompletionRequest) {
     this.queue.push(reqRequest);
   }
   runReq() {
@@ -66,12 +66,12 @@ export class AICompletionProvider implements InlineCompletionProvider {
 
   async provideInlineCompletionItems(
     context: ICompletionContext,
-    token: CancellationToken,
+    token: EditorCancellationToken,
   ) {
     this.cancelRequest();
 
     // 放入队列
-    const requestImp = new CompletionRequest(context, token);
+    const requestImp = new AiCompletionRequest(context, token);
     this.reqStack.addReq(requestImp);
 
     await raceCancellation(sleep(this.inlineComletionsDebounceTime), token);

@@ -17,7 +17,7 @@ import type * as protocol from 'vscode-languageserver-protocol';
 import type { WidgetLSPAdapter } from './adapters/adapter.js';
 import type { LSPConnection } from './connection.js';
 import { LSPConnectionFactory } from './connection.js';
-import type { ClientCapabilities } from './lsp.js';
+import type { LspClientCapabilities } from './lsp.js';
 import type { AskServersToSendTraceNotifications } from './plugin.js';
 import type {
   Document,
@@ -84,7 +84,7 @@ export class DocumentConnectionManager implements ILSPDocumentConnectionManager 
     languageServerId: TLanguageServerId,
     uris: IURIs,
     onCreate: (connection: LSPConnection) => void,
-    capabilities: ClientCapabilities,
+    capabilities: LspClientCapabilities,
   ): Promise<LSPConnection> {
     let connection = this._connections.get(languageServerId);
     if (!connection) {

@@ -1,5 +1,6 @@
 import { pythonLanguage } from '@codemirror/lang-python';
-import { CompletionItemKind, CompletionTriggerKind } from '@difizen/libro-lsp';
+import { LspCompletionTriggerKind } from '@difizen/libro-lsp';
+import { LspCompletionItemKind } from '@difizen/libro-lsp';
 
 import type { Completion, CompletionSource } from '../auto-complete/index.js';
 
@@ -11,8 +12,8 @@ export type CompletionItemDetailReolve = (
 ) => Node | null | Promise<Node | null>;
 
 const CompletionItemKindMap = Object.fromEntries(
-  Object.entries(CompletionItemKind).map(([key, value]) => [value, key]),
-) as Record<CompletionItemKind, string>;
+  Object.entries(LspCompletionItemKind).map(([key, value]) => [value, key]),
+) as Record<LspCompletionTriggerKind, string>;
 
 function toSet(chars: Set<string>) {
   let preamble = '';
@@ -86,7 +87,7 @@ export const lspPythonCompletion: CMLSPExtension = ({ lspProvider }) => {
         uri: doc.documentInfo.uri,
       },
       context: {
-        triggerKind: CompletionTriggerKind.Invoked,
+        triggerKind: LspCompletionTriggerKind.Invoked,
       },
     });
 

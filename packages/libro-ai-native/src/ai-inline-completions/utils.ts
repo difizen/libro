@@ -1,4 +1,4 @@
-import type { CancellationToken } from '@difizen/libro-code-editor';
+import type { EditorCancellationToken } from '@difizen/libro-code-editor';
 
 import { lineBasedCompletionModelConfigs } from './contant.js';
 
@@ -39,16 +39,16 @@ export function sleep(time: number) {
 
 export function raceCancellation<T>(
   promise: Promise<T>,
-  token: CancellationToken,
+  token: EditorCancellationToken,
 ): Promise<T | undefined>;
 export function raceCancellation<T>(
   promise: Promise<T>,
-  token: CancellationToken,
+  token: EditorCancellationToken,
   defaultValue: T,
 ): Promise<T>;
 export function raceCancellation<T>(
   promise: Promise<T>,
-  token: CancellationToken,
+  token: EditorCancellationToken,
   defaultValue?: T,
 ): Promise<T | undefined> {
   return Promise.race([
