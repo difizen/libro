@@ -14,13 +14,9 @@
       "typings": "./es/index.d.ts",
       "default": "./es/index.js"
     },
-    "./mock": {
-      "typings": "./es/mock/index.d.ts",
-      "default": "./es/mock/index.js"
-    },
-    "./es/mock": {
-      "typings": "./es/mock/index.d.ts",
-      "default": "./es/mock/index.js"
+    "./mana-common": {
+      "typings": "./es/mana-common/index.js",
+      "default": "./es/mana-common/index.js"
     },
     "./package.json": "./package.json"
   },

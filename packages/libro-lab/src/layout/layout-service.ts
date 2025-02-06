@@ -1,3 +1,4 @@
+import type { Disposable } from '@difizen/libro-common/mana-common';
 import { LibroNavigatableView, LibroService } from '@difizen/libro-jupyter';
 import type { View, ViewOpenHandlerOptions, ViewOpenOption } from '@difizen/mana-app';
 import { SideTabView } from '@difizen/mana-app';
@@ -9,7 +10,6 @@ import {
   singleton,
   SlotViewManager,
 } from '@difizen/mana-app';
-import type { Disposable } from '@difizen/mana-common';
 
 import type { LibroLabLayoutSlotsType, StatusType } from './protocol.js';
 import { LibroLabLayoutSlots } from './protocol.js';
