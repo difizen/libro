@@ -1,7 +1,7 @@
 import assert from 'assert';
 
-import { Deferred, Disposable, noop } from './';
-import { DisposableCollection } from './';
+import { Deferred, Disposable, noop } from '.';
+import { DisposableCollection } from '.';
 
 describe('disposable', () => {
   it('#Disposable is', () => {

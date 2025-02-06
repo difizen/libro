@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 'use strict';
 
-import { CharCode } from './char-code';
-import { isWindows } from './platform';
+import { CharCode } from './char-code.js';
+import { isWindows } from './platform.js';
 
 const _schemePattern = /^\w[\w\d+.-]*$/;
 const _singleSlashStart = /^\//;

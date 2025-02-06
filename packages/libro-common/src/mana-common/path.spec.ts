@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import { Path } from './';
+import { Path } from '.';
 
 describe('Path util', () => {
   it('#normalizeDrive', async () => {

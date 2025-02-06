@@ -1,8 +1,8 @@
 import assert from 'assert';
 
-import { WaitUntilEvent } from './';
-import { Emitter } from './';
-import { Deferred } from './';
+import { WaitUntilEvent } from '.';
+import { Emitter } from '.';
+import { Deferred } from '.';
 
 describe('wait until event', () => {
   it('#wait until', async () => {
