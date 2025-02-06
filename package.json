@@ -28,6 +28,9 @@
     "clean": "git clean -fX .",
     "tsc": "nx run-many  -t typecheck:tsc"
   },
+  "resolutions": {
+    "@octokit/webhooks": "13.4.2"
+  },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.24.7",
     "@babel/plugin-transform-class-properties": "^7.24.7",
