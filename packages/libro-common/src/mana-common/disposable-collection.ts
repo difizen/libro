@@ -1,6 +1,6 @@
 import { Disposable } from './disposable';
-import type { Event } from './src/event.js';
-import { Emitter } from './src/event.js';
+import type { Event } from './event.js';
+import { Emitter } from './event.js';
 
 export class DisposableCollection implements Disposable {
   protected readonly disposables: Disposable[];

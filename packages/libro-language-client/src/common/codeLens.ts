@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
 
-import { Emitter as EventEmitter } from '@difizen/mana-common';
+import { Emitter as EventEmitter } from '@difizen/libro-common/mana-common';
 import type {
   ClientCapabilities,
   CancellationToken,
