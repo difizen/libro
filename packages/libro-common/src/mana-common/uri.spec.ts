@@ -2,7 +2,7 @@ import assert from 'assert';
 
 import { VscodeURI } from './vscode-uri';
 
-import { URI } from './';
+import { URI } from '.';
 
 describe('URI', () => {
   it('#toSting', async () => {

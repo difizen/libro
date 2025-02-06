@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See https://github.com/Microsoft/vscode/blob/master/LICENSE.txt for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Event, Emitter } from './event';
+import { Event, Emitter } from './src/event.js';
 
 export type CancellationToken = {
   readonly isCancellationRequested: boolean;

@@ -1,8 +1,8 @@
 import assert from 'assert';
 
-import { timeout, retry } from './';
-import { CancellationTokenSource } from './';
-import { Deferred } from './';
+import { timeout, retry } from '.';
+import { CancellationTokenSource } from '.';
+import { Deferred } from '.';
 
 describe('promise util', () => {
   it('#timeout', async () => {

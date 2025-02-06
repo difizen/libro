@@ -5,8 +5,8 @@
 
 import { posix } from 'path-browserify';
 
-import { CharCode } from './char-code';
-import type { URI } from './uri';
+import { CharCode } from './char-code.js';
+import type { URI } from './uri.js';
 
 const posixPath = posix;
 const slash = '/';

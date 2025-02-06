@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import { isPlainObject, getPropertyDescriptor } from './';
+import { isPlainObject, getPropertyDescriptor } from '.';
 
 describe('Utils', () => {
   it('#plainObject', async () => {

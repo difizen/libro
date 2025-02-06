@@ -3,7 +3,7 @@ import assert from 'assert';
 import type { Disposable } from '.';
 import { noop } from '.';
 import { Deferred } from '.';
-import { Emitter, Event } from './';
+import { Emitter, Event } from '.';
 
 describe('event', () => {
   describe('Event', () => {
