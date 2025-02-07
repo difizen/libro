@@ -1,7 +1,7 @@
 import type { Command } from '@difizen/mana-core';
 import { CommandContribution, CommandRegistry } from '@difizen/mana-core';
 import { l10n } from '@difizen/mana-l10n'; /* eslint-disable max-len, @typescript-eslint/indent */
-import { inject, singleton } from '../../mana-syringe/index.js';
+import { inject, singleton } from '../../../mana-syringe/index.js';
 
 export const CLOSE_TAB: Command = {
   id: 'tab.close',

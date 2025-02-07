@@ -16,8 +16,8 @@ import { v1 } from 'uuid';
 
 import { isOSX, notEmpty } from '../../../mana-common/index.js';
 import { Disposable, DisposableCollection } from '../../../mana-common/index.js';
+import { inject, postConstruct, singleton } from '../../../mana-syringe/index.js';
 import { LabelProvider } from '../../label';
-import { inject, postConstruct, singleton } from '../../mana-syringe/index.js';
 import { MenuRender } from '../../menu';
 import {
   DEFAULT_SCROLL_OPTIONS,
