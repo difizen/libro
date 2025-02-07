@@ -1,4 +1,3 @@
-import type { CellView } from '@difizen/libro-jupyter';
 import {
   getOrigin,
   inject,
@@ -6,6 +5,7 @@ import {
   singleton,
   ViewManager,
 } from '@difizen/libro-common/app';
+import type { CellView } from '@difizen/libro-jupyter';
 
 import { LibroAINativeForCellView } from './ai-native-for-cell-view.js';
 import type { LibroChatView } from './chat-view.js';
@@ -16,18 +16,18 @@ export class LibroAINativeService {
   @prop()
   showSideToolbar = false;
 
-  chatViewMap: Map<string, LibroChatView> = new Map();
+  // chatViewMap: Map<string, LibroChatView> = new Map();
 
-  //用于控制是否显示当前 libro 层级的 chat 面板
-  showChatMap: Map<string, boolean> = new Map();
+  // //用于控制是否显示当前 libro 层级的 chat 面板
+  // showChatMap: Map<string, boolean> = new Map();
 
-  cellAIChatMap: Map<string, boolean> = new Map();
+  // cellAIChatMap: Map<string, boolean> = new Map();
   @inject(ViewManager)
   viewManager: ViewManager;
 
   libroAINativeForCellViewMap: Map<string, LibroAINativeForCellView> = new Map();
 
-  libroAINativeChatViewMap: Map<string, LibroAiNativeChatView> = new Map();
+  // libroAINativeChatViewMap: Map<string, LibroAiNativeChatView> = new Map();
 
   async getOrCreateLibroAINativeForCellView(id: string, cell: CellView) {
     let libroAINativeForCellView = this.libroAINativeForCellViewMap.get(id);
@@ -38,7 +38,7 @@ export class LibroAINativeService {
         LibroAINativeForCellView,
         { id: id, cell: getOrigin(cell) },
       );
-      this.libroAINativeForCellViewMap.set(cell.id, libroAINativeForCellView);
+      // this.libroAINativeForCellViewMap.set(cell.id, libroAINativeForCellView);
     }
     return libroAINativeForCellView;
   }
