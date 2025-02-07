@@ -46,8 +46,8 @@
   },
   "dependencies": {
     "@difizen/libro-jupyter": "^0.3.4",
-    "@ant-design/icons": "^5.4.0",
-    "@difizen/mana-app": "latest"
+    "@difizen/libro-common": "^0.3.4",
+    "@ant-design/icons": "^5.4.0"
   },
   "peerDependencies": {
     "antd": "^5.8.6",

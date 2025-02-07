@@ -46,7 +46,6 @@
   },
   "dependencies": {
     "@difizen/libro-common": "^0.3.4",
-    "@difizen/mana-app": "latest",
     "uuid": "^9.0.1"
   },
   "peerDependencies": {

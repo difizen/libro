@@ -66,7 +66,6 @@
     "@difizen/libro-rendermime": "^0.3.4",
     "@difizen/libro-search": "^0.3.4",
     "@difizen/libro-search-code-cell": "^0.3.4",
-    "@difizen/mana-app": "latest",
     "classnames": "^2.3.2",
     "moment": "^2.29.4",
     "plotly.js": "^2.35.0"

@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@difizen/libro-cofine-editor-core": "^0.3.4",
-    "@difizen/mana-app": "latest",
+    "@difizen/libro-common": "^0.3.4",
     "fast-plist": "^0.1.2",
     "vscode-oniguruma": "^1.5.1",
     "vscode-textmate": "^9.0.0"

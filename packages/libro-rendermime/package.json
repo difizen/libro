@@ -48,7 +48,6 @@
     "@difizen/libro-common": "^0.3.4",
     "@difizen/libro-core": "^0.3.4",
     "@difizen/libro-markdown": "^0.3.4",
-    "@difizen/mana-app": "latest",
     "lodash.escape": "^4.0.1"
   },
   "peerDependencies": {

@@ -48,7 +48,6 @@
     "@difizen/libro-common": "^0.3.4",
     "@difizen/libro-core": "^0.3.4",
     "@difizen/libro-rendermime": "^0.3.4",
-    "@difizen/mana-app": "latest",
     "markdown-it": "^13.0.1"
   },
   "peerDependencies": {

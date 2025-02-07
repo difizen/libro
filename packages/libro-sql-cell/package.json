@@ -49,8 +49,7 @@
     "@difizen/libro-jupyter": "^0.3.4",
     "@difizen/libro-rendermime": "^0.3.4",
     "@difizen/libro-common": "^0.3.4",
-    "@ant-design/icons": "^5.1.0",
-    "@difizen/mana-app": "latest"
+    "@ant-design/icons": "^5.1.0"
   },
   "peerDependencies": {
     "react": ">=16",
