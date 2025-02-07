@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Event } from '../../mana-common/index.js';
-import { isFalsyOrWhitespace } from '../../mana-common/index.js';
+import type { Event } from '../../../mana-common/index.js';
+import { isFalsyOrWhitespace } from '../../../mana-common/index.js';
 // import { createDecorator } from 'vs/platform/instantiation/common/instantiation';
 import {
   userAgent,
@@ -12,8 +12,8 @@ import {
   isLinux,
   isWindows,
   isWeb,
-} from '../../mana-common/index.js';
-import { Syringe } from '../../mana-syringe/index.js';
+} from '../../../mana-common/index.js';
+import { Syringe } from '../../../mana-syringe/index.js';
 
 const _userAgent = userAgent || '';
 const STATIC_VALUES = new Map<string, boolean>();

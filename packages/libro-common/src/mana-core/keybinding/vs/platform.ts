@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { types, ok } from '../../mana-common/index.js';
+import { types, ok } from '../../../mana-common/index.js';
 
 export interface IRegistry {
   /**
