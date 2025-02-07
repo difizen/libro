@@ -9,8 +9,8 @@ import {
   CommandRegistry,
   ViewInstance,
   ConfigurationService,
-} from '@difizen/libro-common/mana-app';
-import type { Toolbar } from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
+import type { Toolbar } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import { Menu, Dropdown, Tooltip } from 'antd';
 import type { MenuProps } from 'antd';

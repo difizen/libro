@@ -1,4 +1,4 @@
-import { inject, singleton, ViewManager } from '@difizen/libro-common/mana-app';
+import { inject, singleton, ViewManager } from '@difizen/libro-common/app';
 
 import { LibroOutputView } from './output-model.js';
 import type { IOutputOptions } from './output-protocol.js';

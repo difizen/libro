@@ -3,7 +3,7 @@ import {
   inject,
   postConstruct,
   singleton,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import latexPlugin from '@traptitech/markdown-it-katex';
 import MarkdownIt from 'markdown-it';
 

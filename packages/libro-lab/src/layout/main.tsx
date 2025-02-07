@@ -1,6 +1,6 @@
 import { SplitPanel } from '@difizen/libro-common/react';
-import { singleton, Slot, useInject, view } from '@difizen/libro-common/mana-app';
-import { BaseView } from '@difizen/libro-common/mana-app';
+import { singleton, Slot, useInject, view } from '@difizen/libro-common/app';
+import { BaseView } from '@difizen/libro-common/app';
 import { forwardRef } from 'react';
 
 import './index.less';

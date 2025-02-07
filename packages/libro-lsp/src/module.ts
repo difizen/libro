@@ -1,5 +1,5 @@
 import { LibroServerModule } from '@difizen/libro-kernel';
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import {
   NotebookAdapter,

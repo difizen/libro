@@ -1,5 +1,5 @@
-import { singleton, Slot, view } from '@difizen/libro-common/mana-app';
-import { BaseView } from '@difizen/libro-common/mana-app';
+import { singleton, Slot, view } from '@difizen/libro-common/app';
+import { BaseView } from '@difizen/libro-common/app';
 import { BoxPanel } from '@difizen/libro-common/react';
 import { forwardRef } from 'react';
 

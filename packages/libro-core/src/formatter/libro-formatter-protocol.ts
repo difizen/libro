@@ -1,5 +1,5 @@
 import type { MultilineString } from '@difizen/libro-common';
-import { Syringe } from '@difizen/libro-common/mana-app';
+import { Syringe } from '@difizen/libro-common/app';
 
 export const FormatterContribution = Syringe.defineToken('FormatterContribution');
 

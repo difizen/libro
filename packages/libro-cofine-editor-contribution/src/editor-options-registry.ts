@@ -1,4 +1,4 @@
-import { singleton } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/app';
 import type monaco from '@difizen/monaco-editor-core';
 
 @singleton()

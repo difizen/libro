@@ -4,16 +4,16 @@ import type {
   View,
   ViewOpenHandlerOptions,
   ViewOpenOption,
-} from '@difizen/libro-common/mana-app';
-import { SideTabView } from '@difizen/libro-common/mana-app';
-import { observable } from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
+import { SideTabView } from '@difizen/libro-common/app';
+import { observable } from '@difizen/libro-common/app';
 import {
   DefaultSlotView,
   inject,
   prop,
   singleton,
   SlotViewManager,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 
 import type { LibroLabLayoutSlotsType, StatusType } from './protocol.js';
 import { LibroLabLayoutSlots } from './protocol.js';

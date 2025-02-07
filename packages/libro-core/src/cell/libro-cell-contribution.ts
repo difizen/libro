@@ -1,4 +1,4 @@
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import type { CellModel, CellOptions } from '../libro-protocol.js';
 

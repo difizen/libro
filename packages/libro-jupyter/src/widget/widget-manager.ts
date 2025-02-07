@@ -6,7 +6,7 @@ import {
   prop,
   singleton,
   ApplicationContribution,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 
 import type { LibroWidgets } from './libro-widgets.js';
 import { LibroWidgetsFactory } from './protocol.js';

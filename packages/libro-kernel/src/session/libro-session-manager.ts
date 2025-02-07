@@ -1,9 +1,9 @@
 import { Poll } from '@difizen/libro-common';
-import type { Event } from '@difizen/libro-common/mana-app';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
-import { prop, getOrigin } from '@difizen/libro-common/mana-app';
-import { Emitter } from '@difizen/libro-common/mana-app';
-import { StorageService } from '@difizen/libro-common/mana-app';
+import type { Event } from '@difizen/libro-common/app';
+import { inject, singleton } from '@difizen/libro-common/app';
+import { prop, getOrigin } from '@difizen/libro-common/app';
+import { Emitter } from '@difizen/libro-common/app';
+import { StorageService } from '@difizen/libro-common/app';
 
 import type { IContentsModel } from '../contents/index.js';
 import { LibroKernelManager } from '../kernel/libro-kernel-manager.js';

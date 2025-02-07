@@ -1,5 +1,5 @@
 import { SaveOutlined, SettingOutlined } from '@ant-design/icons';
-import type { Command } from '@difizen/libro-common/mana-app';
+import type { Command } from '@difizen/libro-common/app';
 
 import { FormatCellIcon } from '../material-from-designer.js';
 

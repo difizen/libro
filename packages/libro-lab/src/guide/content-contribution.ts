@@ -5,8 +5,8 @@ import type {
   INotebookContent,
   LibroJupyterModel,
 } from '@difizen/libro-jupyter';
-import { URI } from '@difizen/libro-common/mana-app';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { URI } from '@difizen/libro-common/app';
+import { singleton } from '@difizen/libro-common/app';
 import { l10n, L10nLang } from '@difizen/libro-common/l10n';
 
 import contentJson from './libro_guide_book.json';

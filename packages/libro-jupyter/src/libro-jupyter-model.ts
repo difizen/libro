@@ -10,9 +10,9 @@ import {
 } from '@difizen/libro-kernel';
 import type { IKernelConnection, ExecutableNotebookModel } from '@difizen/libro-kernel';
 import type { IContentsCheckpointModel, IContentsModel } from '@difizen/libro-kernel';
-import { getOrigin, ModalService, prop } from '@difizen/libro-common/mana-app';
-import { Deferred } from '@difizen/libro-common/mana-app';
-import { inject, transient } from '@difizen/libro-common/mana-app';
+import { getOrigin, ModalService, prop } from '@difizen/libro-common/app';
+import { Deferred } from '@difizen/libro-common/app';
+import { inject, transient } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 
 import {

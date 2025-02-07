@@ -1,7 +1,7 @@
 import { LibroMarkdownCellModel } from '@difizen/libro-core';
 import type { CellView } from '@difizen/libro-core';
 import { MarkdownParser } from '@difizen/libro-markdown';
-import { inject, singleton, watch } from '@difizen/libro-common/mana-app';
+import { inject, singleton, watch } from '@difizen/libro-common/app';
 
 import type { CellTOCProvider } from '../toc-protocol.js';
 import { HeadingType, CellTOCProviderContribution } from '../toc-protocol.js';

@@ -9,8 +9,8 @@
 // but without language deemed unnecessary following the Berne Convention." (Wikipedia).
 // Introduced modifications are BSD licenced, copyright JupyterLab development team.
 
-import type { Disposable, Event } from '@difizen/libro-common/mana-app';
-import { Emitter, transient } from '@difizen/libro-common/mana-app';
+import type { Disposable, Event } from '@difizen/libro-common/app';
+import { Emitter, transient } from '@difizen/libro-common/app';
 import type * as protocol from 'vscode-languageserver-protocol';
 //TODO: vscode-ws-jsonrpc has new version
 import type { MessageConnection } from 'vscode-ws-jsonrpc';

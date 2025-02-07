@@ -3,7 +3,7 @@ import {
   ManaModule,
   RootSlotId,
   createSlotPreference,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import { AppView } from './app.js';
 
 // 用于文档测试页面

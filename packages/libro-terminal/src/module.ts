@@ -3,7 +3,7 @@ import {
   ServerConnection,
   ServerManager,
 } from '@difizen/libro-kernel';
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { TerminalCommandContribution } from './command.js';
 import { TerminalConfiguration } from './configuration.js';

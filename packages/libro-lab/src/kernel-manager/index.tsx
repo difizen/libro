@@ -1,6 +1,6 @@
 import { CodeFilled } from '@ant-design/icons';
-import { singleton, view } from '@difizen/libro-common/mana-app';
-import { BaseView } from '@difizen/libro-common/mana-app';
+import { singleton, view } from '@difizen/libro-common/app';
+import { BaseView } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import { forwardRef } from 'react';
 

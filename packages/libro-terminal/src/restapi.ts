@@ -2,7 +2,7 @@ import { URL } from '@difizen/libro-common';
 import type { ISettings } from '@difizen/libro-kernel';
 import { createResponseError } from '@difizen/libro-kernel';
 import { ServerConnection } from '@difizen/libro-kernel';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import type { TerminalModel, TerminalOption } from './protocol.js';
 

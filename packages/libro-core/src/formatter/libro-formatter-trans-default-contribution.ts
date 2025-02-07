@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { singleton } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/app';
 
 import type { DefaultDecodedFormatter } from './libro-formatter-protocol.js';
 import { FormatterTransContribution } from './libro-formatter-protocol.js';

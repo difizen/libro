@@ -1,6 +1,6 @@
 import type { BaseOutputView } from '@difizen/libro-jupyter';
 import { RenderMimeContribution } from '@difizen/libro-jupyter';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/app';
 
 import { InterpreterCodeOutputRender } from './interpreter-code-output-render.js';
 

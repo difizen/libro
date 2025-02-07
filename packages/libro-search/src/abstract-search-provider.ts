@@ -1,8 +1,8 @@
 import type { SearchMatch } from '@difizen/libro-code-editor';
-import type { Event } from '@difizen/libro-common/mana-app';
-import type { View } from '@difizen/libro-common/mana-app';
-import { Emitter } from '@difizen/libro-common/mana-app';
-import { transient } from '@difizen/libro-common/mana-app';
+import type { Event } from '@difizen/libro-common/app';
+import type { View } from '@difizen/libro-common/app';
+import { Emitter } from '@difizen/libro-common/app';
+import { transient } from '@difizen/libro-common/app';
 
 import type {
   SearchFilter,

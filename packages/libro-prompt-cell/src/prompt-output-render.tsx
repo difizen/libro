@@ -4,7 +4,7 @@ import { concatMultilineString } from '@difizen/libro-common';
 import type { BaseOutputView } from '@difizen/libro-jupyter';
 import { NotebookCommands } from '@difizen/libro-jupyter';
 import { ChatComponents } from '@difizen/magent-chat';
-import { CommandRegistry, useInject } from '@difizen/libro-common/mana-app';
+import { CommandRegistry, useInject } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import React, { useState } from 'react';
 import breaks from 'remark-breaks';

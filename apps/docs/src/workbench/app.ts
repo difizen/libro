@@ -3,12 +3,12 @@ import {
   LibroJupyterConfiguration,
   ServerManager,
 } from '@difizen/libro';
-import type { FileTreeView } from '@difizen/libro-common/mana-app';
-import { ConfigurationService } from '@difizen/libro-common/mana-app';
-import { FileTreeViewFactory, SlotViewManager } from '@difizen/libro-common/mana-app';
-import { URI } from '@difizen/libro-common/mana-app';
-import { ApplicationContribution, ViewManager } from '@difizen/libro-common/mana-app';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import type { FileTreeView } from '@difizen/libro-common/app';
+import { ConfigurationService } from '@difizen/libro-common/app';
+import { FileTreeViewFactory, SlotViewManager } from '@difizen/libro-common/app';
+import { URI } from '@difizen/libro-common/app';
+import { ApplicationContribution, ViewManager } from '@difizen/libro-common/app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import { LibroWorkbenchSlots } from './layout/workbench-layout.view.js';
 

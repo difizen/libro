@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { concatMultilineString } from '@difizen/libro-common';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/app';
 
 import type { DefaultEncodedFormatter } from './libro-formatter-protocol.js';
 import {

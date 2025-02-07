@@ -1,4 +1,4 @@
-import { ManaModule, ConfigurationModule } from '@difizen/libro-common/mana-app';
+import { ManaModule, ConfigurationModule } from '@difizen/libro-common/app';
 
 import { ConfigurationPanelView } from './configuration-panel-view.js';
 import { DefaultConfigurationRenderContribution } from './configuration-render-contribution.js';

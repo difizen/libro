@@ -1,6 +1,6 @@
 import type { BaseOutputView } from '@difizen/libro-core';
 import { RenderMimeContribution } from '@difizen/libro-rendermime';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import { LibroJupyterModel } from '../libro-jupyter-model.js';
 

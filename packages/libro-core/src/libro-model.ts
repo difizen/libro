@@ -10,10 +10,10 @@ import type {
   NotebookChange,
 } from '@difizen/libro-shared-model';
 import { createMutex, YNotebook } from '@difizen/libro-shared-model';
-import { getOrigin, ConfigurationService } from '@difizen/libro-common/mana-app';
-import { Emitter } from '@difizen/libro-common/mana-app';
-import { prop } from '@difizen/libro-common/mana-app';
-import { inject, transient } from '@difizen/libro-common/mana-app';
+import { getOrigin, ConfigurationService } from '@difizen/libro-common/app';
+import { Emitter } from '@difizen/libro-common/app';
+import { prop } from '@difizen/libro-common/app';
+import { inject, transient } from '@difizen/libro-common/app';
 import { v4 } from 'uuid';
 
 import { LibroContentService } from './content/index.js';

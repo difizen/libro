@@ -1,6 +1,6 @@
 import type { LanguageWorkerRegistry } from '@difizen/libro-cofine-editor-contribution';
 import { LanguageWorkerContribution } from '@difizen/libro-cofine-editor-contribution';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import pkg from '../package.json';
 

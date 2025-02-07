@@ -13,8 +13,8 @@ import {
   TreeViewComponent,
   TreeViewDecorator,
   view,
-} from '@difizen/libro-common/mana-app';
-import type { TreeNode } from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
+import type { TreeNode } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import React, { forwardRef } from 'react';
 import './index.less';

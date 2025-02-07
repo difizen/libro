@@ -6,12 +6,12 @@ import {
   Emitter,
   ConfigurationContribution,
   ConfigurationService,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import type {
   Disposable,
   ConfigurationNode,
   ConfigurationStorage,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 
 import type { IEditorConfig } from './code-editor-protocol.js';

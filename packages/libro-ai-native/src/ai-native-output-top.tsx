@@ -1,5 +1,5 @@
 import type { CellView } from '@difizen/libro-jupyter';
-import { useInject, ViewManager, ViewRender } from '@difizen/libro-common/mana-app';
+import { useInject, ViewManager, ViewRender } from '@difizen/libro-common/app';
 import { useEffect, useState } from 'react';
 import './index.less';
 

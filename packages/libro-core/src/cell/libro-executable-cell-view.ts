@@ -1,7 +1,7 @@
 import type { ICodeCell } from '@difizen/libro-common';
-import { watch } from '@difizen/libro-common/mana-app';
-import { ViewOption } from '@difizen/libro-common/mana-app';
-import { inject } from '@difizen/libro-common/mana-app';
+import { watch } from '@difizen/libro-common/app';
+import { ViewOption } from '@difizen/libro-common/app';
+import { inject } from '@difizen/libro-common/app';
 
 import type { CellModel } from '../libro-protocol.js';
 import type { CellViewOptions } from '../libro-protocol.js';

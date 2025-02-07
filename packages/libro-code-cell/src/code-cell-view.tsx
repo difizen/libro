@@ -6,7 +6,7 @@ import type { ICodeCell, IOutput } from '@difizen/libro-common';
 import { CellUri } from '@difizen/libro-common';
 import { isOutput } from '@difizen/libro-common';
 import { l10n } from '@difizen/libro-common/l10n'; /* eslint-disable react-hooks/exhaustive-deps */
-import type { ViewSize } from '@difizen/libro-common/mana-app';
+import type { ViewSize } from '@difizen/libro-common/app';
 import {
   getOrigin,
   inject,
@@ -20,7 +20,7 @@ import {
   ViewRender,
   watch,
   Deferred,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import type {
   IOutputAreaOption,
   LibroCell,

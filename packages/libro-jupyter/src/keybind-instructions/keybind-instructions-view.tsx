@@ -1,8 +1,8 @@
 import { LibroContextKey } from '@difizen/libro-core';
-import { inject, singleton, ThemeService } from '@difizen/libro-common/mana-app';
-import { getOrigin, prop, useInject } from '@difizen/libro-common/mana-app';
-import type { ModalItem, ModalItemProps } from '@difizen/libro-common/mana-app';
-import type { Disposable } from '@difizen/libro-common/mana-app';
+import { inject, singleton, ThemeService } from '@difizen/libro-common/app';
+import { getOrigin, prop, useInject } from '@difizen/libro-common/app';
+import type { ModalItem, ModalItemProps } from '@difizen/libro-common/app';
+import type { Disposable } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import { Input, Drawer, Table, Segmented, ConfigProvider, theme } from 'antd';
 import { forwardRef, useCallback, useState } from 'react';

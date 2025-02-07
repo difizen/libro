@@ -1,7 +1,7 @@
 import type { NotebookModel, NotebookOption } from '@difizen/libro-core';
 import { ContentContribution } from '@difizen/libro-core';
-import { URI } from '@difizen/libro-common/mana-app';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { URI } from '@difizen/libro-common/app';
+import { singleton } from '@difizen/libro-common/app';
 
 import type { LibroJupyterModel } from '../libro-jupyter-model.js';
 

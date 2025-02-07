@@ -1,5 +1,5 @@
 import { LibroLSPModule } from '@difizen/libro-lsp';
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { LibroWindow } from './common/vscodeAdaptor/libroWindow.js';
 import { LibroWorkspace } from './common/vscodeAdaptor/libroWorkspace.js';

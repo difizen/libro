@@ -1,8 +1,8 @@
 import { Model } from '@difizen/libro-code-editor';
 import type { ICell } from '@difizen/libro-common';
 import { concatMultilineString } from '@difizen/libro-common';
-import { DisposableCollection, watch } from '@difizen/libro-common/mana-app';
-import { prop, inject, postConstruct, transient } from '@difizen/libro-common/mana-app';
+import { DisposableCollection, watch } from '@difizen/libro-common/app';
+import { prop, inject, postConstruct, transient } from '@difizen/libro-common/app';
 
 import type { DefaultDecodedFormatter } from '../formatter/index.js';
 import { DefaultEncodedFormatter, LibroFormatterManager } from '../formatter/index.js';

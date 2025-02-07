@@ -1,6 +1,6 @@
 import type { JSONObject, JSONValue } from '@difizen/libro-common';
-import type { Disposable, Event, ThemeType } from '@difizen/libro-common/mana-app';
-import { Syringe } from '@difizen/libro-common/mana-app';
+import type { Disposable, Event, ThemeType } from '@difizen/libro-common/app';
+import { Syringe } from '@difizen/libro-common/app';
 
 import type { IModel } from './code-editor-model.js';
 

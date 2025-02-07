@@ -1,8 +1,8 @@
 import type { IOutput } from '@difizen/libro-common';
 import type { IOutputOptions } from '@difizen/libro-core';
 import { OutputContribution } from '@difizen/libro-core';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
-import { ViewManager } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
+import { ViewManager } from '@difizen/libro-common/app';
 
 import { ErrorOutputModel } from './error-output-model.js';
 

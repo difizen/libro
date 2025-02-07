@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { LibroOutputArea } from './output-area.js';
 import { DefaultOutputContribution } from './output-contribution.js';

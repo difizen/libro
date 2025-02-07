@@ -1,6 +1,6 @@
 import { GithubFilled } from '@ant-design/icons';
-import { singleton, view } from '@difizen/libro-common/mana-app';
-import { BaseView } from '@difizen/libro-common/mana-app';
+import { singleton, view } from '@difizen/libro-common/app';
+import { BaseView } from '@difizen/libro-common/app';
 import { forwardRef } from 'react';
 
 export const GithubLinkComponent = forwardRef(function GithubLinkComponent() {

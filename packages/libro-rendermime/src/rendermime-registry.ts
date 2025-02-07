@@ -1,9 +1,9 @@
 import { defaultSanitizer } from '@difizen/libro-common';
 import type { BaseOutputView } from '@difizen/libro-core';
 import { MarkdownParser } from '@difizen/libro-markdown';
-import type { Contribution } from '@difizen/libro-common/mana-app';
-import { contrib, inject, singleton, Priority } from '@difizen/libro-common/mana-app';
-import { Emitter } from '@difizen/libro-common/mana-app';
+import type { Contribution } from '@difizen/libro-common/app';
+import { contrib, inject, singleton, Priority } from '@difizen/libro-common/app';
+import { Emitter } from '@difizen/libro-common/app';
 
 import {
   RenderMimeContribution,

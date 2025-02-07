@@ -1,11 +1,11 @@
 import type { JSONPrimitive } from '@difizen/libro-common';
 import { URL } from '@difizen/libro-common';
 import { ServerConnection } from '@difizen/libro-kernel';
-import type { Disposable, Disposed, Event } from '@difizen/libro-common/mana-app';
-import { transient } from '@difizen/libro-common/mana-app';
-import { Deferred } from '@difizen/libro-common/mana-app';
-import { Emitter } from '@difizen/libro-common/mana-app';
-import { inject } from '@difizen/libro-common/mana-app';
+import type { Disposable, Disposed, Event } from '@difizen/libro-common/app';
+import { transient } from '@difizen/libro-common/app';
+import { Deferred } from '@difizen/libro-common/app';
+import { Emitter } from '@difizen/libro-common/app';
+import { inject } from '@difizen/libro-common/app';
 
 import { TerminalOption } from './protocol.js';
 import type {

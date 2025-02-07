@@ -1,9 +1,5 @@
 import { LibroLabModule } from '@difizen/libro';
-import {
-  ManaAppPreset,
-  ManaComponents,
-  ManaModule,
-} from '@difizen/libro-common/mana-app';
+import { ManaAppPreset, ManaComponents, ManaModule } from '@difizen/libro-common/app';
 
 import { LibroApp } from './app.js';
 import './index.less';

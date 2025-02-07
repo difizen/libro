@@ -1,10 +1,10 @@
-import type { Contribution } from '@difizen/libro-common/mana-app';
+import type { Contribution } from '@difizen/libro-common/app';
 import {
   contrib,
   DefaultContributionProvider,
   singleton,
   Syringe,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import type monaco from '@difizen/monaco-editor-core';
 
 export const InitializeContribution = Syringe.defineToken('InitializeContribution');

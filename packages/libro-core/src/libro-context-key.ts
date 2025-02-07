@@ -1,7 +1,7 @@
-import type { Disposable } from '@difizen/libro-common/mana-app';
-import type { IContextKey } from '@difizen/libro-common/mana-app';
-import { ContextKeyService } from '@difizen/libro-common/mana-app';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import type { Disposable } from '@difizen/libro-common/app';
+import type { IContextKey } from '@difizen/libro-common/app';
+import { ContextKeyService } from '@difizen/libro-common/app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import { LibroContextKeys } from './libro-protocol.js';
 import { LibroService } from './libro-service.js';

@@ -1,15 +1,10 @@
-import type { ViewComponent } from '@difizen/libro-common/mana-app';
-import { Deferred } from '@difizen/libro-common/mana-app';
-import { useInject, watch } from '@difizen/libro-common/mana-app';
-import {
-  BaseView,
-  view,
-  ViewInstance,
-  ViewOption,
-} from '@difizen/libro-common/mana-app';
-import { inject } from '@difizen/libro-common/mana-app';
-import { DisposableCollection } from '@difizen/libro-common/mana-app';
-import { prop } from '@difizen/libro-common/mana-app';
+import type { ViewComponent } from '@difizen/libro-common/app';
+import { Deferred } from '@difizen/libro-common/app';
+import { useInject, watch } from '@difizen/libro-common/app';
+import { BaseView, view, ViewInstance, ViewOption } from '@difizen/libro-common/app';
+import { inject } from '@difizen/libro-common/app';
+import { DisposableCollection } from '@difizen/libro-common/app';
+import { prop } from '@difizen/libro-common/app';
 import React from 'react';
 
 import type { CellViewOptions, CellModel } from '../libro-protocol.js';

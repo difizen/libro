@@ -3,7 +3,7 @@
 import type { SearchMatch } from '@difizen/libro-code-editor';
 import type { GenericSearchProvider, SearchFilters } from '@difizen/libro-search';
 import { GenericSearchProviderFactory } from '@difizen/libro-search';
-import { inject, prop, transient, watch } from '@difizen/libro-common/mana-app';
+import { inject, prop, transient, watch } from '@difizen/libro-common/app';
 
 import {
   CodeCellSearchOption,

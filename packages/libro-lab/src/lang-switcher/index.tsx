@@ -1,5 +1,5 @@
-import { singleton, useInject, view } from '@difizen/libro-common/mana-app';
-import { BaseView } from '@difizen/libro-common/mana-app';
+import { singleton, useInject, view } from '@difizen/libro-common/app';
+import { BaseView } from '@difizen/libro-common/app';
 import { l10n, L10nLang } from '@difizen/libro-common/l10n';
 import { Select } from 'antd';
 import { forwardRef } from 'react';

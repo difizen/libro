@@ -1,6 +1,6 @@
 import type { IEditor } from '@difizen/libro-code-editor';
 import { LibroSearchModule } from '@difizen/libro-search';
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import {
   CodeCellSearchOption,

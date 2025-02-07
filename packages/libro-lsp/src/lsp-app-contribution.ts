@@ -1,8 +1,8 @@
 import type { LibroView } from '@difizen/libro-core';
 import { LibroService } from '@difizen/libro-core';
 import { ServerManager } from '@difizen/libro-kernel';
-import { ApplicationContribution } from '@difizen/libro-common/mana-app';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { ApplicationContribution } from '@difizen/libro-common/app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import { NotebookAdapterFactory } from './adapters/notebook-adapter.js';
 import {

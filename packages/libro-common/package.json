@@ -37,9 +37,9 @@
       "typings": "./es/core/index.js",
       "default": "./es/core/index.js"
     },
-    "./mana-app": {
-      "typings": "./es/mana-app/index.js",
-      "default": "./es/mana-app/index.js"
+    "./app": {
+      "typings": "./es/app/index.js",
+      "default": "./es/app/index.js"
     },
     "./package.json": "./package.json"
   },

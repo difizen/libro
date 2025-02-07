@@ -3,7 +3,7 @@ import {
   CaretRightOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
-import { OpenerService, URI, useInject } from '@difizen/libro-common/mana-app';
+import { OpenerService, URI, useInject } from '@difizen/libro-common/app';
 import React, { useState } from 'react';
 
 import { fileUnderKernel, runningKernel } from '../../common/icon.js';

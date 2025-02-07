@@ -2,8 +2,8 @@ import {
   ModalContribution,
   singleton,
   ToolbarContribution,
-} from '@difizen/libro-common/mana-app';
-import type { ToolbarRegistry } from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
+import type { ToolbarRegistry } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 
 import { DocumentCommands } from '../command/document-commands.js';

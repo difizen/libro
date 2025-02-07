@@ -1,6 +1,6 @@
 // import { URL } from '@difizen/libro-common';
 import type { PartialJSONObject } from '@difizen/libro-common';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import { createResponseError } from '../server/connection-error.js';
 import type { ISettings } from '../server/server-connection-protocol.js';

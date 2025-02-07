@@ -22,7 +22,7 @@ import {
 import { RawCellModule } from '@difizen/libro-raw-cell';
 import { LibroSearchModule } from '@difizen/libro-search';
 import { SearchCodeCellModule } from '@difizen/libro-search-code-cell';
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { LibroBetweenCellModule } from './add-between-cell/index.js';
 import { JupyterCodeCellModel, JupyterCodeCellView } from './cell/index.js';

@@ -1,7 +1,7 @@
 import type { CellView } from '@difizen/libro-core';
-import type { Contribution } from '@difizen/libro-common/mana-app';
-import { Priority } from '@difizen/libro-common/mana-app';
-import { contrib, singleton } from '@difizen/libro-common/mana-app';
+import type { Contribution } from '@difizen/libro-common/app';
+import { Priority } from '@difizen/libro-common/app';
+import { contrib, singleton } from '@difizen/libro-common/app';
 
 import { CellTOCProviderContribution } from './toc-protocol.js';
 

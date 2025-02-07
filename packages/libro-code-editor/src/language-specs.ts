@@ -1,6 +1,6 @@
-import type { Contribution } from '@difizen/libro-common/mana-app';
-import { ApplicationContribution } from '@difizen/libro-common/mana-app';
-import { contrib, singleton, Syringe } from '@difizen/libro-common/mana-app';
+import type { Contribution } from '@difizen/libro-common/app';
+import { ApplicationContribution } from '@difizen/libro-common/app';
+import { contrib, singleton, Syringe } from '@difizen/libro-common/app';
 
 export const LanguageSpecContribution = Syringe.defineToken('LanguageSpecContribution');
 export interface LanguageSpecContribution {

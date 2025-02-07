@@ -1,5 +1,5 @@
-import type { View } from '@difizen/libro-common/mana-app';
-import { transient, view, CardTabView, inject } from '@difizen/libro-common/mana-app';
+import type { View } from '@difizen/libro-common/app';
+import { transient, view, CardTabView, inject } from '@difizen/libro-common/app';
 
 import { LayoutService } from './layout-service.js';
 import { LibroLabLayoutSlots } from './protocol.js';

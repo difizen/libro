@@ -1,7 +1,7 @@
 import type { InlineCompletionRegistry } from '@difizen/libro-code-editor';
 import { InlineCompletionContribution } from '@difizen/libro-code-editor';
 import { Sequencer } from '@difizen/libro-code-editor';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import { AICompletionProvider } from './inline-completion-provider.js';
 

@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { ServerConnection } from './server-connection.js';
 import { ServerManager } from './server-manager.js';

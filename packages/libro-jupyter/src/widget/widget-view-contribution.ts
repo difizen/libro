@@ -1,4 +1,4 @@
-import { ViewManager, inject, singleton } from '@difizen/libro-common/mana-app';
+import { ViewManager, inject, singleton } from '@difizen/libro-common/app';
 
 import type { IWidgetViewProps } from './protocol.js';
 import { WidgetViewContribution } from './protocol.js';

@@ -1,6 +1,6 @@
 import type { CellOptions } from '@difizen/libro-core';
-import type { CommandRegistry } from '@difizen/libro-common/mana-app';
-import { CommandContribution, singleton } from '@difizen/libro-common/mana-app';
+import type { CommandRegistry } from '@difizen/libro-common/app';
+import { CommandContribution, singleton } from '@difizen/libro-common/app';
 
 export const LibroAddBetweenCellCommand = {
   AddBetweenCell: {

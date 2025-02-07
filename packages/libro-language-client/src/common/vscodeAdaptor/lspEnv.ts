@@ -1,5 +1,5 @@
-import { ApplicationContribution, singleton } from '@difizen/libro-common/mana-app';
-import { Deferred } from '@difizen/libro-common/mana-app';
+import { ApplicationContribution, singleton } from '@difizen/libro-common/app';
+import { Deferred } from '@difizen/libro-common/app';
 
 import { initLspEnv } from './vscodeAdaptor.js';
 

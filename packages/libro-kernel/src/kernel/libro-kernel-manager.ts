@@ -1,8 +1,8 @@
 import { Poll } from '@difizen/libro-common';
-import type { Event as ManaEvent } from '@difizen/libro-common/mana-app';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
-import { prop, getOrigin } from '@difizen/libro-common/mana-app';
-import { Emitter } from '@difizen/libro-common/mana-app';
+import type { Event as ManaEvent } from '@difizen/libro-common/app';
+import { inject, singleton } from '@difizen/libro-common/app';
+import { prop, getOrigin } from '@difizen/libro-common/app';
+import { Emitter } from '@difizen/libro-common/app';
 
 import { NetworkError, ServerManager } from '../server/index.js';
 

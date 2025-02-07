@@ -1,7 +1,7 @@
-import type { Contribution } from '@difizen/libro-common/mana-app';
-import { Priority, prop } from '@difizen/libro-common/mana-app';
-import { ApplicationContribution, ViewManager } from '@difizen/libro-common/mana-app';
-import { contrib, inject, singleton } from '@difizen/libro-common/mana-app';
+import type { Contribution } from '@difizen/libro-common/app';
+import { Priority, prop } from '@difizen/libro-common/app';
+import { ApplicationContribution, ViewManager } from '@difizen/libro-common/app';
+import { contrib, inject, singleton } from '@difizen/libro-common/app';
 
 import type { CellView, CellModel, CellOptions } from '../libro-protocol.js';
 import { LibroService } from '../libro-service.js';

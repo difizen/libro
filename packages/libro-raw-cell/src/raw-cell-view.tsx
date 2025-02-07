@@ -4,15 +4,15 @@ import type { CodeEditorViewOptions } from '@difizen/libro-code-editor';
 import { CellUri } from '@difizen/libro-common';
 import type { CellViewOptions } from '@difizen/libro-core';
 import { CellService, LibroEditorCellView } from '@difizen/libro-core';
-import { getOrigin, useInject } from '@difizen/libro-common/mana-app';
+import { getOrigin, useInject } from '@difizen/libro-common/app';
 import {
   view,
   ViewInstance,
   ViewManager,
   ViewOption,
   ViewRender,
-} from '@difizen/libro-common/mana-app';
-import { inject, transient } from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
+import { inject, transient } from '@difizen/libro-common/app';
 import React, { useEffect } from 'react';
 
 import type { LibroRawCellModel } from './raw-cell-model.js';

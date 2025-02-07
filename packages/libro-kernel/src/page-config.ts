@@ -1,5 +1,5 @@
 import { isObject, URL } from '@difizen/libro-common';
-import { isWeb } from '@difizen/libro-common/mana-app';
+import { isWeb } from '@difizen/libro-common/app';
 
 /**
  * page config data for the Jupyter application.

@@ -1,5 +1,5 @@
-import { Disposable } from '@difizen/libro-common/mana-app';
-import { Deferred } from '@difizen/libro-common/mana-app';
+import { Disposable } from '@difizen/libro-common/app';
+import { Deferred } from '@difizen/libro-common/app';
 
 import type {
   IKernelConnection,

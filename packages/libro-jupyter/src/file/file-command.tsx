@@ -7,8 +7,8 @@ import type {
   MenuPath,
   MenuRegistry,
   ToolbarRegistry,
-} from '@difizen/libro-common/mana-app';
-import { ViewManager, ConfigurationService } from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
+import { ViewManager, ConfigurationService } from '@difizen/libro-common/app';
 import {
   CommandContribution,
   FileStatNode,
@@ -19,7 +19,7 @@ import {
   singleton,
   ToolbarContribution,
   URI,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import { message, Modal } from 'antd';
 

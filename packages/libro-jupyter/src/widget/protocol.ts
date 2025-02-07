@@ -1,6 +1,6 @@
 import type { JSONObject, JSONValue } from '@difizen/libro-common';
 import type { IComm, IKernelConnection, KernelMessage } from '@difizen/libro-kernel';
-import { Syringe } from '@difizen/libro-common/mana-app';
+import { Syringe } from '@difizen/libro-common/app';
 
 import type { WidgetView } from './widget-view.js';
 

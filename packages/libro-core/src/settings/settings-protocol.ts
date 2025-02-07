@@ -1,4 +1,4 @@
-import type { ConfigurationStorage } from '@difizen/libro-common/mana-app';
+import type { ConfigurationStorage } from '@difizen/libro-common/app';
 
 export const LibroUserSettingsNamespace = 'libro.user';
 export const LibroUserSettingStorage: ConfigurationStorage = {

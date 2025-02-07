@@ -1,8 +1,8 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { Emitter } from '@difizen/libro-common/mana-app';
-import type { Disposable } from '@difizen/libro-common/mana-app';
+import { Emitter } from '@difizen/libro-common/app';
+import type { Disposable } from '@difizen/libro-common/app';
 
 export class StatusMessage implements Disposable {
   /**

@@ -129,9 +129,9 @@ export default defineConfig({
       getPackagesDir(),
       'libro-common/es/l10n/index.js',
     ),
-    '@difizen/libro-common/mana-app': path.resolve(
+    '@difizen/libro-common/app': path.resolve(
       getPackagesDir(),
-      'libro-common/es/mana-app/index.js',
+      'libro-common/es/app/index.js',
     ),
   },
   analytics: {

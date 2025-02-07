@@ -6,7 +6,7 @@ import type {
   DefaultEncodedFormatter,
   DefaultDecodedFormatter,
 } from '@difizen/libro-jupyter';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/app';
 
 export interface SqlDecodedFormatter extends DefaultDecodedFormatter {
   result_variable?: string;

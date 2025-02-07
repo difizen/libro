@@ -1,5 +1,5 @@
-import type { NavigatableView } from '@difizen/libro-common/mana-app';
-import { ViewRender, ViewManager } from '@difizen/libro-common/mana-app';
+import type { NavigatableView } from '../../libro-common/es/app/index.js';
+import { ViewRender, ViewManager } from '../../libro-common/es/app/index.js';
 import {
   BaseView,
   inject,
@@ -15,7 +15,7 @@ import {
   Deferred,
   URI,
   CommandRegistry,
-} from '@difizen/libro-common/mana-app';
+} from '../../libro-common/es/app/index.js';
 import { forwardRef } from 'react';
 
 import './index.less';

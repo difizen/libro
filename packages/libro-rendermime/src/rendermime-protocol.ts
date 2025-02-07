@@ -1,7 +1,7 @@
 import type { ISanitizer } from '@difizen/libro-common';
 import type { BaseOutputView } from '@difizen/libro-core';
 import type { MarkdownParser } from '@difizen/libro-markdown';
-import { Syringe } from '@difizen/libro-common/mana-app';
+import { Syringe } from '@difizen/libro-common/app';
 
 export const DefaultRenderMimeRegistry = Symbol('RenderMimeRegistry');
 export const IRenderMimeRegistryOptions = Symbol('IRenderMimeRegistryOptions');

@@ -2,7 +2,7 @@ import type { LanguageSpecRegistry } from '@difizen/libro-code-editor';
 import { LanguageSpecContribution } from '@difizen/libro-code-editor';
 import type { CellMeta, CellModel, CellOptions } from '@difizen/libro-core';
 import { CellModelContribution, CellViewContribution } from '@difizen/libro-core';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import { RawCellModelFactory } from './raw-cell-protocol.js';
 import { LibroRawCellView } from './raw-cell-view.js';

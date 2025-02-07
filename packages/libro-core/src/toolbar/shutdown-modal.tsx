@@ -1,4 +1,4 @@
-import type { ModalItemProps, ModalItem } from '@difizen/libro-common/mana-app';
+import type { ModalItemProps, ModalItem } from '@difizen/libro-common/app';
 import { Modal } from 'antd';
 import { useCallback } from 'react';
 

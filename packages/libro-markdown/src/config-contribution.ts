@@ -1,5 +1,5 @@
-import { ConfigurationContribution } from '@difizen/libro-common/mana-app';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { ConfigurationContribution } from '@difizen/libro-common/app';
+import { singleton } from '@difizen/libro-common/app';
 
 import { LibroMarkdownConfiguration } from './config.js';
 

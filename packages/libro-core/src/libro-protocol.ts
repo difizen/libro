@@ -8,8 +8,8 @@ import type {
   INotebookMetadata,
 } from '@difizen/libro-common';
 import type { ISharedNotebook } from '@difizen/libro-shared-model';
-import type { Disposable, Event } from '@difizen/libro-common/mana-app';
-import type { View } from '@difizen/libro-common/mana-app';
+import type { Disposable, Event } from '@difizen/libro-common/app';
+import type { View } from '@difizen/libro-common/app';
 
 import type { LibroCell } from './cell/index.js';
 import type { LibroView } from './libro-view.js';

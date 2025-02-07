@@ -1,5 +1,5 @@
-import type { Contribution } from '@difizen/libro-common/mana-app';
-import { contrib, Priority, singleton } from '@difizen/libro-common/mana-app';
+import type { Contribution } from '@difizen/libro-common/app';
+import { contrib, Priority, singleton } from '@difizen/libro-common/app';
 
 import { CellModelContribution } from '../cell/index.js';
 

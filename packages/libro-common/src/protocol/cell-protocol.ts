@@ -1,4 +1,4 @@
-import { URI } from '@difizen/libro-common/mana-app';
+import { URI } from '../app/index.js';
 
 import type { PartialJSONObject } from '../json.js';
 

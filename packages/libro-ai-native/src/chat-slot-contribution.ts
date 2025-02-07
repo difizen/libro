@@ -4,8 +4,8 @@ import type {
   LibroSlot,
 } from '@difizen/libro-jupyter';
 import { LibroExtensionSlotContribution } from '@difizen/libro-jupyter';
-import { ViewManager } from '@difizen/libro-common/mana-app';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { ViewManager } from '@difizen/libro-common/app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import { LibroAINativeService } from './ai-native-service.js';
 import { LibroChatView } from './chat-view.js';

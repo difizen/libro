@@ -1,11 +1,11 @@
 import { Menu, MenuContext } from '@difizen/libro-common/react';
-import type { Toolbar } from '@difizen/libro-common/mana-app';
+import type { Toolbar } from '@difizen/libro-common/app';
 import {
   CommandRegistry,
   getOrigin,
   ToolbarInstance,
   useInject,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import type { ReactNode } from 'react';
 
 import type { LibroToolbarArags } from '../toolbar/index.js';

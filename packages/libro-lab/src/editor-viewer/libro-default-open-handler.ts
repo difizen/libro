@@ -1,11 +1,11 @@
 import { LibroJupyterConfiguration } from '@difizen/libro-jupyter';
-import type { URI, ViewOpenHandlerOptions } from '@difizen/libro-common/mana-app';
-import { ConfigurationService, inject } from '@difizen/libro-common/mana-app';
+import type { URI, ViewOpenHandlerOptions } from '@difizen/libro-common/app';
+import { ConfigurationService, inject } from '@difizen/libro-common/app';
 import {
   NavigatableViewOpenHandler,
   OpenHandler,
   singleton,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 
 import type { LibroDefaultViewer } from './libro-default-viewer.js';
 import { LibroDefaultViewerFactory } from './protocol.js';

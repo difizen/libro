@@ -1,5 +1,5 @@
 import { CellOptions } from '@difizen/libro-core';
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { RawCellContribution } from './raw-cell-contribution.js';
 import { LibroRawCellModel } from './raw-cell-model.js';
