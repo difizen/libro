@@ -10,7 +10,7 @@ import {
   compareIgnoreCase,
   compareSubstring,
   compareSubstringIgnoreCase,
-} from '@difizen/mana-common';
+} from '../../mana-common/index.js';
 import { URI } from 'vscode-uri';
 
 export function getOrSet<K, V>(map: Map<K, V>, key: K, value: V): V {

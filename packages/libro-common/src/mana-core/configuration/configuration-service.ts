@@ -1,4 +1,4 @@
-import { Emitter } from '@difizen/mana-common';
+import { Emitter } from '../../mana-common/index.js';
 import { getOrigin } from '@difizen/mana-observable';
 import type { Contribution } from '@difizen/mana-syringe';
 import { contrib, inject, singleton } from '@difizen/mana-syringe';

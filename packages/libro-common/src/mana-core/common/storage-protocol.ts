@@ -1,4 +1,4 @@
-import type { MaybePromise } from '@difizen/mana-common';
+import type { MaybePromise } from '../../mana-common/index.js';
 
 export const StorageService = Symbol('StorageService');
 

@@ -1,7 +1,7 @@
-import type { Newable } from '@difizen/mana-common';
-import { Emitter } from '@difizen/mana-common';
-import { Deferred } from '@difizen/mana-common';
-import { Disposable, Priority } from '@difizen/mana-common';
+import type { Newable } from '../../mana-common/index.js';
+import { Emitter } from '../../mana-common/index.js';
+import { Deferred } from '../../mana-common/index.js';
+import { Disposable, Priority } from '../../mana-common/index.js';
 import { prop } from '@difizen/mana-observable';
 import { contrib, inject, singleton } from '@difizen/mana-syringe';
 import type { Contribution } from '@difizen/mana-syringe';

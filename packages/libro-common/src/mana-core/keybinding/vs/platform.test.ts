@@ -6,7 +6,7 @@
 import 'regenerator-runtime/runtime';
 import * as assert from 'assert';
 
-import { types } from '@difizen/mana-common';
+import { types } from '../../mana-common/index.js';
 
 import { Registry } from './platform';
 

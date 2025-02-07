@@ -1,4 +1,4 @@
-import type { MaybePromise } from '@difizen/mana-common';
+import type { MaybePromise } from '../../mana-common/index.js';
 import type { Syringe, SyringeModuleLoader } from '@difizen/mana-syringe';
 
 import type { ManaModule } from './mana-module';

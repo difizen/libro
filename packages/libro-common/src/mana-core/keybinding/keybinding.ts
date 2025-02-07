@@ -1,6 +1,6 @@
-import type { Event } from '@difizen/mana-common';
-import { isOSX } from '@difizen/mana-common';
-import { Emitter, Disposable, DisposableCollection } from '@difizen/mana-common';
+import type { Event } from '../../mana-common/index.js';
+import { isOSX } from '../../mana-common/index.js';
+import { Emitter, Disposable, DisposableCollection } from '../../mana-common/index.js';
 import { contrib, inject, singleton, Syringe } from '@difizen/mana-syringe';
 import type { Contribution } from '@difizen/mana-syringe';
 

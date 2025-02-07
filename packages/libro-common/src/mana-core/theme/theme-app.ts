@@ -1,4 +1,4 @@
-import { Disposable, DisposableCollection } from '@difizen/mana-common';
+import { Disposable, DisposableCollection } from '../../mana-common/index.js';
 import type { Contribution } from '@difizen/mana-syringe';
 import { contrib, inject, singleton } from '@difizen/mana-syringe';
 

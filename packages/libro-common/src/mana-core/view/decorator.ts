@@ -1,4 +1,4 @@
-import type { Newable } from '@difizen/mana-common';
+import type { Newable } from '../../mana-common/index.js';
 import type { Syringe } from '@difizen/mana-syringe';
 import { registerSideOption } from '@difizen/mana-syringe';
 

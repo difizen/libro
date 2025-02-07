@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { Disposable, Event } from '@difizen/mana-common';
-import { Emitter } from '@difizen/mana-common';
+import type { Disposable, Event } from '../../mana-common/index.js';
+import { Emitter } from '../../mana-common/index.js';
 import { getOrigin, prop } from '@difizen/mana-observable';
 import { inject, transient } from '@difizen/mana-syringe';
 

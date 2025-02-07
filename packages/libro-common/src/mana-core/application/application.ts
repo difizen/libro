@@ -1,6 +1,6 @@
-import type { MaybePromise } from '@difizen/mana-common';
-import { Disposable } from '@difizen/mana-common';
-import { Emitter, DisposableCollection } from '@difizen/mana-common';
+import type { MaybePromise } from '../../mana-common/index.js';
+import { Disposable } from '../../mana-common/index.js';
+import { Emitter, DisposableCollection } from '../../mana-common/index.js';
 import { inject, singleton, Syringe, contrib, Utils } from '@difizen/mana-syringe';
 import type { Decorator, Contribution } from '@difizen/mana-syringe';
 
