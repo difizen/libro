@@ -25,6 +25,10 @@
       "typings": "./es/mana-l10n/index.js",
       "default": "./es/mana-l10n/index.js"
     },
+    "./mana-syringe": {
+      "typings": "./es/mana-syringe/index.js",
+      "default": "./es/mana-syringe/index.js"
+    },
     "./package.json": "./package.json"
   },
   "main": "es/index.js",
@@ -58,7 +62,9 @@
     "rc-motion": "^2.9.2",
     "rc-notification": "^5.6.0",
     "rc-tabs": "^11.10.1",
-    "rc-util": "^4.21.1"
+    "rc-util": "^4.21.1",
+    "inversify": "^5.1.1",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@types/react": "^18.2.25",

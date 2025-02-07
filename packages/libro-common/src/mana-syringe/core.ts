@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 
 import 'reflect-metadata';
-import type { Event, Newable, Abstract } from '@difizen/mana-common';
+import type { Event, Newable, Abstract } from '../mana-common/index.js';
 
 export type TokenOption = {
   multiple?: boolean;

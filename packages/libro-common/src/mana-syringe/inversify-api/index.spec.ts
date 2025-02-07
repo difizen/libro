@@ -3,11 +3,11 @@
 import 'reflect-metadata';
 import assert from 'assert';
 
-import { Event } from '@difizen/mana-common';
 import { injectable } from 'inversify';
 
 import { GlobalContainer } from '../container';
 import { Syringe } from '../core';
+import { Event } from '../../mana-common/index.js';
 import { Register } from '../register';
 
 import { bindSingleton, bindTransient, bindLifecycle, isInversifyContext } from '.';
