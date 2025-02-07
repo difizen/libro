@@ -2,11 +2,12 @@
 
 import assert from 'assert';
 
-import { GlobalContainer, inject } from '@difizen/mana-syringe';
-import { singleton } from '@difizen/mana-syringe';
 import type { ErrorInfo, ReactNode } from 'react';
 import React from 'react';
 import renderer, { act } from 'react-test-renderer';
+
+import { singleton } from '../mana-syringe/index.js';
+import { GlobalContainer, inject } from '../mana-syringe/index.js';
 
 import {
   defaultObservableContext,
