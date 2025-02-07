@@ -1,8 +1,8 @@
-import { notEmpty } from '@difizen/mana-common';
 import { ViewInstance } from '@difizen/mana-core';
 import { useInject } from '@difizen/mana-observable';
 import * as React from 'react';
 
+import { notEmpty } from '../../../mana-common/index.js';
 import type { TreeNodeIconDecoratorProps } from '../tree';
 import type { TreeViewDecoration } from '../tree-view-decoration';
 import { IconOverlayPosition, TreeViewDecorationStyles } from '../tree-view-decoration';

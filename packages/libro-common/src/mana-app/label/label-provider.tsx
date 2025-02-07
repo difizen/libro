@@ -1,6 +1,6 @@
-import type { Event } from '@difizen/mana-common';
-import { URI, Priority } from '@difizen/mana-common';
-import { Emitter, Disposable } from '@difizen/mana-common';
+import type { Event } from '../../mana-common/index.js';
+import { URI, Priority } from '../../mana-common/index.js';
+import { Emitter, Disposable } from '../../mana-common/index.js';
 import { ApplicationContribution } from '@difizen/mana-core';
 import type { Contribution } from '../../mana-syringe/index.js';
 import {

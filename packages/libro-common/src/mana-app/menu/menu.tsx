@@ -1,10 +1,11 @@
-import type { Event, Disposable } from '@difizen/mana-common';
-import { DisposableCollection, Emitter } from '@difizen/mana-common';
 import type { GeneralMenuItem, ActionMenuItem, MenuPath } from '@difizen/mana-core';
 import { MenuItem } from '@difizen/mana-core';
 import { CommandRegistry, MenuRegistry } from '@difizen/mana-core';
 import { prop } from '@difizen/mana-observable';
 import { Menu as MenuComponent } from '@difizen/mana-react';
+
+import { DisposableCollection, Emitter } from '../../mana-common/index.js';
+import type { Event, Disposable } from '../../mana-common/index.js';
 import { inject, transient } from '../../mana-syringe/index.js';
 
 import { MenuItemRender } from './menu-item-render';

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import type { URI } from '@difizen/mana-common';
+import type { URI } from '../../mana-common/index.js';
 import { getOrigin } from '@difizen/mana-observable';
 import { inject, singleton } from '../../mana-syringe/index.js';
 

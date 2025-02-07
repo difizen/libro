@@ -1,8 +1,8 @@
-import { notEmpty } from '@difizen/mana-common';
 import { ViewInstance } from '@difizen/mana-core';
 import { useInject } from '@difizen/mana-observable';
 import * as React from 'react';
 
+import { notEmpty } from '../../../mana-common/index.js';
 import type { TreeNodeProps } from '../tree';
 import { TREE_NODE_SEGMENT_CLASS, TREE_NODE_TAIL_CLASS } from '../tree-protocol';
 import type { TreeViewDecoration } from '../tree-view-decoration';

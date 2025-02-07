@@ -1,4 +1,4 @@
-import type { Disposable } from '@difizen/mana-common';
+import type { Disposable } from '../../mana-common/index.js';
 import { prop } from '@difizen/mana-observable';
 import type { Contribution } from '../../mana-syringe/index.js';
 import { contrib, singleton } from '../../mana-syringe/index.js';

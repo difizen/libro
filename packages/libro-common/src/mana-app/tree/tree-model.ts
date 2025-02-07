@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { Event, WaitUntilEvent, CancellationToken } from '@difizen/mana-common';
-import { Emitter, DisposableCollection } from '@difizen/mana-common';
+import type {
+  Event,
+  WaitUntilEvent,
+  CancellationToken,
+} from '../../mana-common/index.js';
+import { Emitter, DisposableCollection } from '../../mana-common/index.js';
 import type { SelectionProvider } from '@difizen/mana-core';
 import { inject, singleton, postConstruct } from '../../mana-syringe/index.js';
 

@@ -1,6 +1,4 @@
 import { MoreOutlined } from '@ant-design/icons';
-import type { Disposable } from '@difizen/mana-common';
-import { DisposableCollection } from '@difizen/mana-common';
 import {
   CommandRegistry,
   MenuRegistry,
@@ -10,9 +8,12 @@ import {
 } from '@difizen/mana-core';
 import { l10n } from '@difizen/mana-l10n';
 import { getOrigin, prop } from '@difizen/mana-observable';
-import { inject, transient } from '../../mana-syringe/index.js';
 import classnames from 'classnames';
 import Tooltip from 'rc-tooltip';
+
+import { DisposableCollection } from '../../mana-common/index.js';
+import type { Disposable } from '../../mana-common/index.js';
+import { inject, transient } from '../../mana-syringe/index.js';
 
 import { ToolbarItemRender } from './toolbar-item-render';
 import type { ToolbarItemState } from './toolbar-protocol';
