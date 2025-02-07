@@ -1,5 +1,5 @@
 import type { Disposable } from '../../common/index.js';
-import { prop } from '../../mana-observable/index.js';
+import { prop } from '../../observable/index.js';
 import type { Contribution } from '../../ioc/index.js';
 import { contrib, singleton } from '../../ioc/index.js';
 

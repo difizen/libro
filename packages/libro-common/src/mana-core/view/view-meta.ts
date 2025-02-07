@@ -1,4 +1,4 @@
-import { getOrigin } from '../../mana-observable/index.js';
+import { getOrigin } from '../../observable/index.js';
 
 import type { ManaContext } from '../module';
 

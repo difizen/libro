@@ -1,7 +1,7 @@
 import type { ToolbarItem } from '../../mana-core/index.js';
 import { CommandRegistry } from '../../mana-core/index.js';
-import { observable, useObserve } from '../../mana-observable/index.js';
-import { useInject } from '../../mana-observable/index.js';
+import { observable, useObserve } from '../../observable/index.js';
+import { useInject } from '../../observable/index.js';
 import { memo } from 'react';
 import type { Toolbar } from './toolbar';
 import type { ToolbarItemData, ToolbarItemState } from './toolbar-protocol';

@@ -1,4 +1,4 @@
-import { ObservableContext } from '../../mana-observable/index.js';
+import { ObservableContext } from '../../observable/index.js';
 import type { Syringe } from '../../ioc/index.js';
 import { GlobalContainer } from '../../ioc/index.js';
 import * as React from 'react';

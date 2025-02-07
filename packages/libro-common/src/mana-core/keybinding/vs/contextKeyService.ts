@@ -7,7 +7,7 @@ import type { Emitter, Event } from '../../../common/index.js';
 import { Iterable } from '../../../common/index.js';
 import { PauseableEmitter } from '../../../common/index.js';
 import { objects } from '../../../common/index.js';
-import { prop } from '../../../mana-observable/index.js';
+import { prop } from '../../../observable/index.js';
 import { inject, injectable, singleton } from '../../../ioc/index.js';
 import type { CommandRegistry } from '../../command/index';
 import type { CommandContribution } from '../../command/index';

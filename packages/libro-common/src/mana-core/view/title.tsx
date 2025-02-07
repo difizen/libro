@@ -1,4 +1,4 @@
-import { prop } from '../../mana-observable/index.js';
+import { prop } from '../../observable/index.js';
 import { transient } from '../../ioc/index.js';
 import type * as React from 'react';
 

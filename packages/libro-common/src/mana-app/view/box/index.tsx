@@ -7,7 +7,7 @@ import {
 } from '../../../mana-core/index.js';
 import { ViewInstance } from '../../../mana-core/index.js';
 import type { SlotViewOption } from '../../../mana-core/index.js';
-import { prop, useInject } from '../../../mana-observable/index.js';
+import { prop, useInject } from '../../../observable/index.js';
 import { BoxPanel } from '../../../react/index.js';
 import { inject, transient } from '../../../ioc/index.js';
 import React from 'react';

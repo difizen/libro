@@ -1,4 +1,4 @@
-import { ObservableContext, useInject } from '../../mana-observable/index.js';
+import { ObservableContext, useInject } from '../../observable/index.js';
 import type { Syringe } from '../../ioc/index.js';
 import * as React from 'react';
 

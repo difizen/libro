@@ -1,5 +1,5 @@
 import type { Newable } from '../../common/index.js';
-import { useInject, getOrigin } from '../../mana-observable/index.js';
+import { useInject, getOrigin } from '../../observable/index.js';
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 import { memo } from 'react';

@@ -9,8 +9,8 @@ import {
   ViewRender,
 } from '../../../mana-core/index.js';
 import type { View, SlotViewOption } from '../../../mana-core/index.js';
-import { useInject } from '../../../mana-observable/index.js';
-import { prop } from '../../../mana-observable/index.js';
+import { useInject } from '../../../observable/index.js';
+import { prop } from '../../../observable/index.js';
 import { Tabs, Dropdown } from '../../../react/index.js';
 import type { TabPaneProps, TabsProps } from '../../../react/index.js';
 import { inject, transient } from '../../../ioc/index.js';

@@ -6,7 +6,7 @@ import {
   Notifier,
   prop,
   useInject,
-} from '../../mana-observable/index.js';
+} from '../../observable/index.js';
 import { inject, transient } from '../../ioc/index.js';
 import * as React from 'react';
 

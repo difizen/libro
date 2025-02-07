@@ -1,6 +1,6 @@
 import type { Event } from '../../common/index.js';
 import { Emitter } from '../../common/index.js';
-import { prop } from '../../mana-observable/index.js';
+import { prop } from '../../observable/index.js';
 import { inject } from '../../ioc/index.js';
 import { transient } from '../../ioc/index.js';
 

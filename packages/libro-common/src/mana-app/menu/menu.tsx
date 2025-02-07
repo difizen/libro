@@ -7,7 +7,7 @@ import type {
 } from '../../mana-core/index.js';
 import { MenuItem } from '../../mana-core/index.js';
 import { CommandRegistry, MenuRegistry } from '../../mana-core/index.js';
-import { prop } from '../../mana-observable/index.js';
+import { prop } from '../../observable/index.js';
 import { Menu as MenuComponent } from '../../react/index.js';
 import { inject, transient } from '../../ioc/index.js';
 

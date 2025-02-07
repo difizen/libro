@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Disposable, Event } from '../../common/index.js';
 import { Emitter } from '../../common/index.js';
-import { getOrigin, prop } from '../../mana-observable/index.js';
+import { getOrigin, prop } from '../../observable/index.js';
 import { inject, transient } from '../../ioc/index.js';
 
 import { CommandRegistry } from '../command/command-registry';

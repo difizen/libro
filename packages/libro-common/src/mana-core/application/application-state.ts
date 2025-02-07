@@ -1,6 +1,6 @@
 import type { Event } from '../../common/index.js';
 import { Emitter, Deferred } from '../../common/index.js';
-import { prop } from '../../mana-observable/index.js';
+import { prop } from '../../observable/index.js';
 import { inject, singleton } from '../../ioc/index.js';
 import { DebugService } from '../common/debug';
 

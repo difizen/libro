@@ -1,5 +1,5 @@
 import { Emitter } from '../../common/index.js';
-import { getOrigin } from '../../mana-observable/index.js';
+import { getOrigin } from '../../observable/index.js';
 import type { Contribution } from '../../ioc/index.js';
 import { contrib, inject, singleton } from '../../ioc/index.js';
 

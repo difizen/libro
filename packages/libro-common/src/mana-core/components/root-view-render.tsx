@@ -1,4 +1,4 @@
-import { useInject } from '../../mana-observable/index.js';
+import { useInject } from '../../observable/index.js';
 
 import { ViewManager, ViewRender } from '../view';
 

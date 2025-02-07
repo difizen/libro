@@ -1,4 +1,4 @@
-import { getOrigin, equals } from '../../mana-observable/index.js';
+import { getOrigin, equals } from '../../observable/index.js';
 
 import type { Mutable, Event, CancellationToken } from '../../common/index.js';
 import { timeout } from '../../common/index.js';

@@ -1,4 +1,4 @@
-import { getOrigin } from '../../mana-observable/index.js';
+import { getOrigin } from '../../observable/index.js';
 import { singleton } from '../../ioc/index.js';
 import Ajv from 'ajv';
 

@@ -2,7 +2,7 @@
 import type { MaybePromise, Event, Newable, Disposable } from '../../common/index.js';
 import { DisposableCollection } from '../../common/index.js';
 import { Priority, Emitter } from '../../common/index.js';
-import { prop } from '../../mana-observable/index.js';
+import { prop } from '../../observable/index.js';
 import type { Contribution } from '../../ioc/index.js';
 import { contrib, inject, singleton } from '../../ioc/index.js';
 

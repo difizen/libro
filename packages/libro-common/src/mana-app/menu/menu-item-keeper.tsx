@@ -1,6 +1,6 @@
 import { CommandRegistry, MenuItem } from '../../mana-core/index.js';
-import { observable, useObserve } from '../../mana-observable/index.js';
-import { useInject } from '../../mana-observable/index.js';
+import { observable, useObserve } from '../../observable/index.js';
+import { useInject } from '../../observable/index.js';
 import { memo } from 'react';
 
 import type { Menu } from './menu';

@@ -1,5 +1,5 @@
 import { timeout } from '../../common/index.js';
-import { prop, useInject } from '../../mana-observable/index.js';
+import { prop, useInject } from '../../observable/index.js';
 import { inject, singleton } from '../../ioc/index.js';
 import * as React from 'react';
 
