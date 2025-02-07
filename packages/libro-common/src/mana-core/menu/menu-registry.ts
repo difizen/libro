@@ -1,7 +1,7 @@
 import type { MaybePromise } from '../../mana-common/index.js';
 import { Disposable } from '../../mana-common/index.js';
-import type { Contribution } from '@difizen/mana-syringe';
-import { contrib, inject, singleton, Syringe } from '@difizen/mana-syringe';
+import type { Contribution } from '../../mana-syringe/index.js';
+import { contrib, inject, singleton, Syringe } from '../../mana-syringe/index.js';
 
 import { ApplicationContribution } from '../application/application';
 import { CommandRegistry } from '../command/command-registry';

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/unified-signatures */
 import { Disposable, DisposableCollection } from '../../mana-common/index.js';
 import { equals, getOrigin, prop, useInject } from '@difizen/mana-observable';
-import { inject, transient } from '@difizen/mana-syringe';
+import { inject, transient } from '../../mana-syringe/index.js';
 import * as React from 'react';
 
 import { view } from './decorator';

@@ -1,5 +1,5 @@
 import { prop } from '@difizen/mana-observable';
-import { transient } from '@difizen/mana-syringe';
+import { transient } from '../../mana-syringe/index.js';
 import type * as React from 'react';
 
 import type { View } from './view-protocol';

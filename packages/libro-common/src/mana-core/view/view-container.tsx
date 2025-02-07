@@ -1,5 +1,5 @@
 import { ObservableContext, useInject } from '@difizen/mana-observable';
-import type { Syringe } from '@difizen/mana-syringe';
+import type { Syringe } from '../../mana-syringe/index.js';
 import * as React from 'react';
 
 import { useMount, useUnmount } from '../utils/hooks';

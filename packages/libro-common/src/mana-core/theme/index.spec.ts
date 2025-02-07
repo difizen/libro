@@ -1,7 +1,7 @@
 import 'react';
 import assert from 'assert';
 
-import { Container } from '@difizen/mana-syringe';
+import { Container } from '../../mana-syringe/index.js';
 
 import { ApplicationModule } from '../index';
 

@@ -1,6 +1,6 @@
 import type { MaybePromise } from '../../mana-common/index.js';
 import { Deferred } from '../../mana-common/index.js';
-import { SyringeModule } from '@difizen/mana-syringe';
+import { SyringeModule } from '../../mana-syringe/index.js';
 
 import type { CanloadModule, ModuleLoader, ModulePreload } from './module-protocol';
 

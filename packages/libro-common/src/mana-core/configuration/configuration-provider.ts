@@ -1,6 +1,6 @@
 import type { MaybePromise } from '../../mana-common/index.js';
 import { prop } from '@difizen/mana-observable';
-import { singleton, Syringe } from '@difizen/mana-syringe';
+import { singleton, Syringe } from '../../mana-syringe/index.js';
 
 import type { ConfigurationNode } from './configuration-protocol';
 import type { ConfigurationStorage } from './configuration-storage';

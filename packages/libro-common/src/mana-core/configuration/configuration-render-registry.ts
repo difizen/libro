@@ -1,5 +1,5 @@
-import type { Contribution } from '@difizen/mana-syringe';
-import { contrib, singleton, Syringe } from '@difizen/mana-syringe';
+import type { Contribution } from '../../mana-syringe/index.js';
+import { contrib, singleton, Syringe } from '../../mana-syringe/index.js';
 import type { JSONSchemaType } from 'ajv';
 import type React from 'react';
 

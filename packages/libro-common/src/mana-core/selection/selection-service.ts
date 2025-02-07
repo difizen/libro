@@ -1,6 +1,6 @@
 import type { Event } from '../../mana-common/index.js';
 import { Emitter } from '../../mana-common/index.js';
-import { singleton } from '@difizen/mana-syringe';
+import { singleton } from '../../mana-syringe/index.js';
 
 export type SelectionProvider<T> = {
   onSelectionChanged: Event<T | undefined>;

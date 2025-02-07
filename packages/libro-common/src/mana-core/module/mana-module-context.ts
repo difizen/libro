@@ -1,4 +1,4 @@
-import type { Syringe } from '@difizen/mana-syringe';
+import type { Syringe } from '../../mana-syringe/index.js';
 
 import { ManaModule } from './mana-module';
 

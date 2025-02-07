@@ -1,6 +1,6 @@
 import { Disposable, DisposableCollection } from '../../mana-common/index.js';
-import type { Contribution } from '@difizen/mana-syringe';
-import { contrib, inject, singleton } from '@difizen/mana-syringe';
+import type { Contribution } from '../../mana-syringe/index.js';
+import { contrib, inject, singleton } from '../../mana-syringe/index.js';
 
 import type { Application } from '../application/index';
 import { ApplicationContribution } from '../application/index';

@@ -5,7 +5,7 @@ import type {
   Disposable,
   Newable,
 } from '../../mana-common/index.js';
-import { Syringe } from '@difizen/mana-syringe';
+import { Syringe } from '../../mana-syringe/index.js';
 import type React from 'react';
 
 import type { ManaModule } from '../module';

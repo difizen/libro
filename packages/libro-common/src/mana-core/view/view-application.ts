@@ -1,4 +1,4 @@
-import { inject, singleton } from '@difizen/mana-syringe';
+import { inject, singleton } from '../../mana-syringe/index.js';
 
 import { ApplicationContribution } from '../application';
 

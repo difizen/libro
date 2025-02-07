@@ -1,7 +1,7 @@
 import type { Event } from '../../mana-common/index.js';
 import { DisposableCollection, Emitter } from '../../mana-common/index.js';
 import { prop } from '@difizen/mana-observable';
-import { transient } from '@difizen/mana-syringe';
+import { transient } from '../../mana-syringe/index.js';
 import * as React from 'react';
 
 import { ViewTitle } from './title';

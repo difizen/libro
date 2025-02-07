@@ -1,6 +1,6 @@
 import { ObservableContext } from '@difizen/mana-observable';
-import type { Syringe } from '@difizen/mana-syringe';
-import { GlobalContainer } from '@difizen/mana-syringe';
+import type { Syringe } from '../../mana-syringe/index.js';
+import { GlobalContainer } from '../../mana-syringe/index.js';
 import * as React from 'react';
 
 import { ManaContext } from '../module/mana-module-context';

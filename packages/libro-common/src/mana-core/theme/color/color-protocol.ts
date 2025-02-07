@@ -1,4 +1,4 @@
-import { Syringe } from '@difizen/mana-syringe';
+import { Syringe } from '../../mana-syringe/index.js';
 
 import type { VariableDefinition } from '../protocol';
 

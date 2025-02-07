@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Syringe } from '@difizen/mana-syringe';
+import { Syringe } from '../../mana-syringe/index.js';
 
 import type { ManaModule } from '../module';
 
