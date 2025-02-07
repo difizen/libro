@@ -17,6 +17,14 @@
       "typings": "./es/mana-common/index.js",
       "default": "./es/mana-common/index.js"
     },
+    "./mana-react": {
+      "typings": "./es/mana-react/index.js",
+      "default": "./es/mana-react/index.js"
+    },
+    "./mana-l10n": {
+      "typings": "./es/mana-l10n/index.js",
+      "default": "./es/mana-l10n/index.js"
+    },
     "./package.json": "./package.json"
   },
   "main": "es/index.js",
