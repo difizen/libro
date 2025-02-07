@@ -1,8 +1,8 @@
 import { ServerConnection, ServerManager } from '@difizen/libro';
-import { ConfigurationService } from '@difizen/mana-app';
-import { SlotViewManager } from '@difizen/mana-app';
-import { ApplicationContribution, ViewManager } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
+import { ConfigurationService } from '@difizen/libro-common/mana-app';
+import { SlotViewManager } from '@difizen/libro-common/mana-app';
+import { ApplicationContribution, ViewManager } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 
 @singleton({ contrib: ApplicationContribution })
 export class LibroApp implements ApplicationContribution {

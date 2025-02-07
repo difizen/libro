@@ -1,5 +1,9 @@
 import { ServerConnection, ServerManager } from '@difizen/libro';
-import { ApplicationContribution, inject, singleton } from '@difizen/mana-app';
+import {
+  ApplicationContribution,
+  inject,
+  singleton,
+} from '@difizen/libro-common/mana-app';
 
 @singleton({ contrib: ApplicationContribution })
 export class LibroApp implements ApplicationContribution {

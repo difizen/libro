@@ -1,4 +1,4 @@
-import { ManaComponents } from '@difizen/mana-app';
+import { ManaComponents } from '@difizen/libro-common/mana-app';
 import { Helmet, useLocation, useSiteData } from 'dumi';
 import DefaultLayout from 'dumi/theme-default/layouts/DocLayout';
 import React, { useEffect } from 'react';

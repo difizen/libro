@@ -1,6 +1,6 @@
 import { GithubOutlined } from '@ant-design/icons';
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
-import { ThemeService, useInject } from '@difizen/mana-app';
+import { ThemeService, useInject } from '@difizen/libro-common/mana-app';
 import { l10n, L10nLang } from '@difizen/libro-common/mana-l10n';
 import { Button } from 'antd';
 import { useRouteMeta, Link, usePrefersColor, useSiteData, history} from 'dumi';
