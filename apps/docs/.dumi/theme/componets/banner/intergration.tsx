@@ -1,4 +1,4 @@
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Row, Col } from 'antd';
 import React from 'react';
 import type { FC } from 'react';

@@ -51,7 +51,6 @@
     "@difizen/libro-common": "^0.3.4",
     "@difizen/libro-core": "^0.3.4",
     "@ant-design/icons": "^5.1.0",
-    "@difizen/mana-l10n": "latest",
     "@difizen/mana-app": "latest",
     "@difizen/magent-chat": "^0.1.27",
     "react-syntax-highlighter": "^15.5.0",

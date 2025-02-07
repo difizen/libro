@@ -18,7 +18,7 @@ import {
   singleton,
   ViewManager,
 } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 
 import { GuideView } from '../guide/index.js';
 import { LibroLabLayoutSlots } from '../layout/index.js';

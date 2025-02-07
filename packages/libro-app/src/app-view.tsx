@@ -18,7 +18,7 @@ import {
   ViewOption,
   ViewRender,
 } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import type { RadioChangeEvent } from 'antd';
 import { Radio, Button } from 'antd';
 import type { ReactElement } from 'react';

@@ -3,7 +3,7 @@ import type { CommandRegistry, ToolbarRegistry } from '@difizen/mana-app';
 import { ModalContribution } from '@difizen/mana-app';
 import { ToolbarContribution, CommandContribution } from '@difizen/mana-app';
 import { inject, singleton } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 
 import { KeybindInstructionsIcon } from './keybind-instructions-icon.js';
 import { KeybindInstrutionModal } from './keybind-instructions-view.js';

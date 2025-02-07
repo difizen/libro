@@ -6,7 +6,7 @@ import {
   ExecutableCellModel,
 } from '@difizen/libro-core';
 import { useObserve } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import classnames from 'classnames';
 import moment from 'moment';
 import { useState } from 'react';

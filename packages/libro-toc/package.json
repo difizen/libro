@@ -50,8 +50,7 @@
     "@difizen/libro-core": "^0.3.4",
     "@difizen/libro-markdown": "^0.3.4",
     "@difizen/libro-rendermime": "^0.3.4",
-    "@difizen/mana-app": "latest",
-    "@difizen/mana-l10n": "latest"
+    "@difizen/mana-app": "latest"
   },
   "peerDependencies": {
     "react": ">=16"

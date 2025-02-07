@@ -1,7 +1,8 @@
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import React from 'react';
 
 import { IS_MOBILE } from '../../layouts/DocLayout.js';
+
 import type { FeatureProps} from './constants';
 import { FeatureSection } from './feature-section';
 import { HeroSection } from './hero-section';

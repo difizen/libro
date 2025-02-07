@@ -6,7 +6,7 @@ import {
   CommandRegistry,
 } from '@difizen/mana-app';
 import type { Toolbar } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Menu, Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
 import { memo } from 'react';

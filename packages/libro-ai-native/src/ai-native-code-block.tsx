@@ -1,7 +1,7 @@
 import { CopyOutlined } from '@ant-design/icons';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { LibroCodeCellView } from '@difizen/libro-jupyter';
 import { useInject, ViewInstance } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
 import { Button, message } from 'antd';
 import copy from 'copy-to-clipboard';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';

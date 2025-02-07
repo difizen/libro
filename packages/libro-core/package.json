@@ -52,7 +52,6 @@
     "@difizen/libro-shared-model": "^0.3.4",
     "@difizen/libro-virtualized": "^0.3.4",
     "@difizen/mana-app": "latest",
-    "@difizen/mana-l10n": "latest",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.10",
     "dnd-core": "^16.0.1",

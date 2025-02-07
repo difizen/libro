@@ -11,7 +11,7 @@ import { KernelError } from '@difizen/libro-kernel';
 import { transient } from '@difizen/mana-app';
 import { view, ViewInstance } from '@difizen/mana-app';
 import { getOrigin, useInject } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { forwardRef } from 'react';
 
 import { LibroJupyterModel } from '../libro-jupyter-model.js';

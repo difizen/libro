@@ -48,8 +48,7 @@
     "@difizen/libro-code-editor": "^0.3.4",
     "@difizen/libro-common": "^0.3.4",
     "@difizen/libro-core": "^0.3.4",
-    "@difizen/mana-app": "latest",
-    "@difizen/mana-l10n": "latest"
+    "@difizen/mana-app": "latest"
   },
   "peerDependencies": {
     "react": ">=16"

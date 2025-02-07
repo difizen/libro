@@ -1,5 +1,5 @@
 import type { ModalItemProps, ModalItem } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Modal } from 'antd';
 import { useCallback } from 'react';
 

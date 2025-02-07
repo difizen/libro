@@ -1,7 +1,7 @@
 import type { ModalItem, ModalItemProps } from '@difizen/mana-app';
 import { ConfigurationRegistry } from '@difizen/mana-app';
 import { useInject, ViewManager, ViewRender } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Modal } from 'antd';
 import { useEffect, useState } from 'react';
 

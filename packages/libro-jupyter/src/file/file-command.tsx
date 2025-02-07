@@ -20,7 +20,7 @@ import {
   ToolbarContribution,
   URI,
 } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { message, Modal } from 'antd';
 
 import { FileCreateModal } from './file-create-modal.js';

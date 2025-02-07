@@ -62,7 +62,6 @@
     "@difizen/libro-ai-native": "^0.3.4",
     "@difizen/libro-common": "^0.3.4",
     "@difizen/mana-app": "latest",
-    "@difizen/mana-l10n": "latest",
     "classnames": "^2.3.2",
     "uuid": "^9.0.0",
     "viewerjs": "^1.11.6"

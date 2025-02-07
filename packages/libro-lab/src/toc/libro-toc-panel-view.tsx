@@ -12,7 +12,7 @@ import {
   ViewManager,
   ViewRender,
 } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { ConfigProvider, Empty, theme } from 'antd';
 
 import { TocIcon } from '../common/index.js';

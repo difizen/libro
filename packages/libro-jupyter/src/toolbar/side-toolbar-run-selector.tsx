@@ -3,7 +3,7 @@ import type { LibroSideToolbarMenuItemType, LibroView } from '@difizen/libro-cor
 import { NotebookCommands, LibroSideToolbarMenu } from '@difizen/libro-core';
 import { ServerManager } from '@difizen/libro-kernel';
 import { ConfigurationService, useInject, ViewInstance } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Popover, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 

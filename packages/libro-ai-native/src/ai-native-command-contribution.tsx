@@ -1,4 +1,5 @@
 import { CommentOutlined } from '@ant-design/icons';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import {
   LibroCommandRegister,
   LibroSlotManager,
@@ -11,7 +12,6 @@ import type { CommandRegistry, ToolbarRegistry } from '@difizen/mana-app';
 import { inject } from '@difizen/mana-app';
 import { CommandContribution } from '@difizen/mana-app';
 import { singleton, ToolbarContribution, ViewManager } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
 
 import { AINativeCommands } from './ai-native-command.js';
 import { LibroAINativeService } from './ai-native-service.js';

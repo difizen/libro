@@ -46,7 +46,6 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/mana-l10n": "latest",
     "@difizen/mana-app": "latest"
   }
 }
