@@ -49,7 +49,6 @@
     "@difizen/libro-code-editor": "^0.3.4",
     "@difizen/libro-code-cell": "^0.3.4",
     "@difizen/libro-search": "^0.3.4",
-    "@difizen/libro-core": "^0.3.4",
-    "@difizen/mana-app": "latest"
+    "@difizen/libro-core": "^0.3.4"
   }
 }

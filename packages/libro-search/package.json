@@ -46,9 +46,8 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@difizen/mana-app": "latest",
-    "@ant-design/icons": "^5.1.0",
     "@difizen/libro-common": "^0.3.4",
+    "@ant-design/icons": "^5.1.0",
     "@difizen/libro-core": "^0.3.4",
     "@difizen/libro-code-editor": "^0.3.4",
     "@types/lodash.debounce": "^4.0.7",

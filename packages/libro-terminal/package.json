@@ -48,7 +48,6 @@
     "@difizen/libro-common": "^0.3.4",
     "@difizen/libro-kernel": "^0.3.4",
     "@ant-design/icons": "^5.1.0",
-    "@difizen/mana-app": "latest",
     "uuid": "^9.0.0",
     "xterm-addon-search": "^0.13.0",
     "xterm": "~5.1.0",
