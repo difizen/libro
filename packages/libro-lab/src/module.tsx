@@ -1,11 +1,5 @@
-import { LibroAINativeModule } from '@difizen/libro-ai-native';
+// import { LibroAINativeModule } from '@difizen/libro-ai-native';
 import { LibroAppModule } from '@difizen/libro-app';
-import { FileView, LibroJupyterModule } from '@difizen/libro-jupyter';
-import { langBundles } from '@difizen/libro-l10n';
-import { LibroPromptCellModule } from '@difizen/libro-prompt-cell';
-import { LibroSqlCellModule } from '@difizen/libro-sql-cell';
-import { TerminalModule } from '@difizen/libro-terminal';
-import { CommonWidgetsModule } from '@difizen/libro-widget';
 import {
   ManaModule,
   createSlotPreference,
@@ -14,6 +8,12 @@ import {
   HeaderArea,
 } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
+import { FileView, LibroJupyterModule } from '@difizen/libro-jupyter';
+import { langBundles } from '@difizen/libro-l10n';
+import { LibroPromptCellModule } from '@difizen/libro-prompt-cell';
+import { LibroSqlCellModule } from '@difizen/libro-sql-cell';
+import { TerminalModule } from '@difizen/libro-terminal';
+import { CommonWidgetsModule } from '@difizen/libro-widget';
 
 import { LibroLabHeaderMenuModule } from './command/module.js';
 import { LabConfigAppContribution } from './config/config-contribution.js';
@@ -135,6 +135,6 @@ export const LibroLabModule = ManaModule.create()
     TerminalModule,
     ImageViewerModule,
     CodeEditorViewerModule,
-    LibroAINativeModule,
+    // LibroAINativeModule,
     LibroAppModule,
   );
