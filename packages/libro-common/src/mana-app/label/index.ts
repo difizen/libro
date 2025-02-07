@@ -1,4 +1,4 @@
-import { ManaModule } from '../../mana-core/index.js';
+import { ManaModule } from '../../core/index.js';
 
 import {
   DefaultUriLabelProviderContribution,

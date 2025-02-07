@@ -11,14 +11,9 @@ import { v1 } from 'uuid';
 
 import { isOSX, notEmpty } from '../../../common/index.js';
 import { Disposable, DisposableCollection } from '../../../common/index.js';
-import type { MenuPath } from '../../../mana-core/index.js';
-import type { StatefulView, ViewSize } from '../../../mana-core/index.js';
-import {
-  BaseView,
-  SelectionService,
-  view,
-  ViewInstance,
-} from '../../../mana-core/index.js';
+import type { MenuPath } from '../../../core/index.js';
+import type { StatefulView, ViewSize } from '../../../core/index.js';
+import { BaseView, SelectionService, view, ViewInstance } from '../../../core/index.js';
 import { getOrigin, prop, useInject } from '../../../observable/index.js';
 import { Dropdown } from '../../../react/index.js';
 import { inject, postConstruct, singleton } from '../../../ioc/index.js';

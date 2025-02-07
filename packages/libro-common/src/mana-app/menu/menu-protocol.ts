@@ -1,4 +1,4 @@
-import type { MenuPath, MenuItem } from '../../mana-core/index.js';
+import type { MenuPath, MenuItem } from '../../core/index.js';
 
 export const MAIN_MENU_BAR: MenuPath = ['menubar'];
 

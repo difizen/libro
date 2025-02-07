@@ -1,5 +1,5 @@
 import { notEmpty } from '../../../common/index.js';
-import { ViewInstance } from '../../../mana-core/index.js';
+import { ViewInstance } from '../../../core/index.js';
 import { useInject } from '../../../observable/index.js';
 import * as React from 'react';
 

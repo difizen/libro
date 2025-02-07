@@ -1,4 +1,4 @@
-import type { MenuPath } from '../../mana-core/index.js';
+import type { MenuPath } from '../../core/index.js';
 import { useInject, ObservableContext } from '../../observable/index.js';
 import type { Syringe } from '../../ioc/index.js';
 import type { FC } from 'react';

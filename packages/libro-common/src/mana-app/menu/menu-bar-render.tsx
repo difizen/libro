@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
 
-import { MenuItem } from '../../mana-core/index.js';
+import { MenuItem } from '../../core/index.js';
 import { useInject } from '../../observable/index.js';
 import { Menubar } from '../../react/index.js';
 

@@ -1,4 +1,4 @@
-import { view, ViewManager, ViewOption } from '../../../mana-core/index.js';
+import { view, ViewManager, ViewOption } from '../../../core/index.js';
 import type { TabsProps } from '../../../react/index.js';
 import { inject, transient } from '../../../ioc/index.js';
 import cls from 'classnames';

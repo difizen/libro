@@ -1,5 +1,5 @@
-import type { ToolbarItem } from '../../mana-core/index.js';
-import { CommandRegistry } from '../../mana-core/index.js';
+import type { ToolbarItem } from '../../core/index.js';
+import { CommandRegistry } from '../../core/index.js';
 import { observable, useObserve } from '../../observable/index.js';
 import { useInject } from '../../observable/index.js';
 import { memo } from 'react';

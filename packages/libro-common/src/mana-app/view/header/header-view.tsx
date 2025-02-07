@@ -1,4 +1,4 @@
-import { DefaultSlotView, view, Slot } from '../../../mana-core/index.js';
+import { DefaultSlotView, view, Slot } from '../../../core/index.js';
 import { BoxPanel } from '../../../react/index.js';
 import { singleton } from '../../../ioc/index.js';
 import * as React from 'react';

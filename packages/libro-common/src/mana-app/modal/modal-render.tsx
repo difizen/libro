@@ -1,4 +1,4 @@
-import { BaseView, view } from '../../mana-core/index.js';
+import { BaseView, view } from '../../core/index.js';
 import { useInject } from '../../observable/index.js';
 import { singleton } from '../../ioc/index.js';
 import React from 'react';

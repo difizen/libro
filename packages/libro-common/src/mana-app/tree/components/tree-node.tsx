@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewInstance } from '../../../mana-core/index.js';
+import { ViewInstance } from '../../../core/index.js';
 import { useInject } from '../../../observable/index.js';
 import type { TreeNodeProps } from '../tree';
 import { TreeNode, TreeNodeComponents } from '../tree';

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Event, WaitUntilEvent, CancellationToken } from '../../common/index.js';
 import { Emitter, DisposableCollection } from '../../common/index.js';
-import type { SelectionProvider } from '../../mana-core/index.js';
+import type { SelectionProvider } from '../../core/index.js';
 import { inject, singleton, postConstruct } from '../../ioc/index.js';
 
 import type { TreeNode } from './tree';
