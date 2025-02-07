@@ -1,4 +1,4 @@
-import { Disposable, Event } from '@difizen/mana-common';
+import { Disposable, Event } from '../mana-common/index.js';
 
 import type { Notify } from './core';
 import { Notifier } from './notifier';

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Disposable } from '@difizen/mana-common';
-import { Event } from '@difizen/mana-common';
+import type { Disposable } from '../mana-common/index.js';
+import { Event } from '../mana-common/index.js';
 
 import { AsyncEmitter } from './async-event';
 import { ObservableConfig } from './config';

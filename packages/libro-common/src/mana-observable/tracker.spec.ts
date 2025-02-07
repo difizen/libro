@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import assert from 'assert';
 
-import { noop } from '@difizen/mana-common';
+import { noop } from '../mana-common/index.js';
 
 import {
   prop,

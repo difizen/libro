@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import { Disposable } from '@difizen/mana-common';
+import { Disposable } from '../mana-common/index.js';
 
 import { watch, prop } from './index';
 
