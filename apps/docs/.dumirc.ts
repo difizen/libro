@@ -1,4 +1,6 @@
+import path from 'path';
 import { defineConfig } from 'dumi';
+
 const LIBRO_DEPLOY_ENV = process.env.LIBRO_DEPLOY_ENV;
 const nav = [
   { title: '介绍', link: '/introduction' },
@@ -10,7 +12,11 @@ const nav = [
 if (LIBRO_DEPLOY_ENV !== 'vercel') {
   nav.push({ title: '示例', link: '/examples' });
 }
-console.log(process.cwd());
+
+function getPackagesDir() {
+  return path.resolve(__dirname, '..', '..', 'packages');
+}
+
 export default defineConfig({
   themeConfig: {
     hd: { rules: [] },
@@ -111,7 +117,10 @@ export default defineConfig({
     },
   },
   alias: {
-    '@difizen/libro-common/mana-common': `/Users/ximo.lk/Public/code/opensource/_libro/packages/libro-common/es/mana-common/index.js`,
+    '@difizen/libro-common/mana-common': path.resolve(
+      getPackagesDir(),
+      'libro-common/es/mana-common/index.js',
+    ),
   },
   analytics: {
     baidu: process.env.BAIDU_ANALYTICS,

@@ -1,8 +1,10 @@
 ---
-title: Output Example
-order: 0
+title: Lab
+order: 1
 ---
 
-# libro Output Example
+# libro Lab
 
-<!-- <code src="../../src/output" compact="true"></code> -->
+Start a `jupyterlab` service locally in a specific directory that contains files with the `.ipynb` extension.
+
+<code src="../../src/lab" compact="true"></code>
