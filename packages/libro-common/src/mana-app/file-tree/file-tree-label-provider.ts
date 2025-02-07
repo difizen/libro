@@ -1,5 +1,5 @@
 import type { URI } from '@difizen/mana-common';
-import { singleton, inject } from '@difizen/mana-syringe';
+import { singleton, inject } from '../../mana-syringe/index.js';
 
 import type { DidChangeLabelEvent } from '../label';
 import { LabelProvider, LabelProviderContribution, URIIconReference } from '../label';

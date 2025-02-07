@@ -3,7 +3,7 @@ import { DisposableCollection } from '@difizen/mana-common';
 import { notEmpty } from '@difizen/mana-common';
 import { ViewOption } from '@difizen/mana-core';
 import { prop } from '@difizen/mana-observable';
-import { inject, postConstruct, singleton } from '@difizen/mana-syringe';
+import { inject, postConstruct, singleton } from '../../mana-syringe/index.js';
 import debounce from 'lodash.debounce';
 
 import type { TreeNode } from '../tree';

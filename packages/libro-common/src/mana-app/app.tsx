@@ -1,5 +1,6 @@
 import { ApplicationContribution, localStorageService } from '@difizen/mana-core';
-import { inject, singleton } from '@difizen/mana-syringe';
+
+import { inject, singleton } from '../mana-syringe/index.js';
 
 import { NotificationService } from './notification/service';
 

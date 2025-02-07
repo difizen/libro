@@ -1,6 +1,6 @@
 import { Disposable } from '@difizen/mana-common';
 import { notification } from '@difizen/mana-react';
-import { singleton } from '@difizen/mana-syringe';
+import { singleton } from '../../mana-syringe/index.js';
 import { v1 } from 'uuid';
 
 import type { NotificationConfig, NotificationAction } from './protocol';

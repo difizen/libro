@@ -5,7 +5,7 @@ import { MenuItem } from '@difizen/mana-core';
 import { CommandRegistry, MenuRegistry } from '@difizen/mana-core';
 import { prop } from '@difizen/mana-observable';
 import { Menu as MenuComponent } from '@difizen/mana-react';
-import { inject, transient } from '@difizen/mana-syringe';
+import { inject, transient } from '../../mana-syringe/index.js';
 
 import { MenuItemRender } from './menu-item-render';
 import type { MenuData, MenuItemState } from './menu-protocol';

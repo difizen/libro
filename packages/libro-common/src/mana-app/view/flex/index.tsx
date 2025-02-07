@@ -8,7 +8,7 @@ import {
 import { ViewInstance } from '@difizen/mana-core';
 import type { SlotViewOption } from '@difizen/mana-core';
 import { prop, useInject } from '@difizen/mana-observable';
-import { inject, transient } from '@difizen/mana-syringe';
+import { inject, transient } from '../../mana-syringe/index.js';
 import cls from 'classnames';
 import React from 'react';
 import './index.less';

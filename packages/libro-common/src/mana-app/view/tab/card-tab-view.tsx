@@ -1,6 +1,6 @@
 import { view, ViewManager, ViewOption } from '@difizen/mana-core';
 import type { TabsProps } from '@difizen/mana-react';
-import { inject, transient } from '@difizen/mana-syringe';
+import { inject, transient } from '../../mana-syringe/index.js';
 import cls from 'classnames';
 
 import type { TabOption } from './tab-view';

@@ -1,6 +1,6 @@
 import { BaseView, view } from '@difizen/mana-core';
 import { useInject } from '@difizen/mana-observable';
-import { singleton } from '@difizen/mana-syringe';
+import { singleton } from '../../mana-syringe/index.js';
 import React from 'react';
 
 import { ModalService } from './modal-service';

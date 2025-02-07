@@ -6,7 +6,7 @@ import { ViewInstance } from '@difizen/mana-core';
 import { ManaModule, SelectionService, view } from '@difizen/mana-core';
 import { l10n } from '@difizen/mana-l10n'; /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useInject } from '@difizen/mana-observable';
-import { singleton, inject } from '@difizen/mana-syringe';
+import { singleton, inject } from '../../mana-syringe/index.js';
 import type { LegacyRef } from 'react';
 import * as React from 'react';
 import { forwardRef, lazy, Suspense } from 'react';

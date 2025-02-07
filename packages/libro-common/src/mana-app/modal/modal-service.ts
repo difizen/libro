@@ -1,7 +1,7 @@
 import type { Disposable } from '@difizen/mana-common';
 import { prop } from '@difizen/mana-observable';
-import type { Contribution } from '@difizen/mana-syringe';
-import { contrib, singleton } from '@difizen/mana-syringe';
+import type { Contribution } from '../../mana-syringe/index.js';
+import { contrib, singleton } from '../../mana-syringe/index.js';
 
 import type { ModalItem, ModalItemProps } from './modal-protocol';
 import { renderModal, ModalContribution } from './modal-protocol';

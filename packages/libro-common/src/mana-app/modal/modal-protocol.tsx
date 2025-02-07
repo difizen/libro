@@ -1,4 +1,4 @@
-import { Syringe } from '@difizen/mana-syringe';
+import { Syringe } from '../../mana-syringe/index.js';
 
 export interface ModalItemProps<T> {
   modalItem: ModalItem<T>;

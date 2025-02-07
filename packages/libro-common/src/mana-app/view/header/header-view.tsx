@@ -1,6 +1,6 @@
 import { DefaultSlotView, view, Slot } from '@difizen/mana-core';
 import { BoxPanel } from '@difizen/mana-react';
-import { singleton } from '@difizen/mana-syringe';
+import { singleton } from '../../mana-syringe/index.js';
 import * as React from 'react';
 import './index.less';
 

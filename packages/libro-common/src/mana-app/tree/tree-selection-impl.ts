@@ -1,6 +1,6 @@
 import type { Event } from '@difizen/mana-common';
 import { Emitter } from '@difizen/mana-common';
-import { singleton, inject, postConstruct } from '@difizen/mana-syringe';
+import { singleton, inject, postConstruct } from '../../mana-syringe/index.js';
 
 import type { TreeNode } from './tree';
 import { Tree } from './tree';

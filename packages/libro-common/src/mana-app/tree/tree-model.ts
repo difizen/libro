@@ -2,7 +2,7 @@
 import type { Event, WaitUntilEvent, CancellationToken } from '@difizen/mana-common';
 import { Emitter, DisposableCollection } from '@difizen/mana-common';
 import type { SelectionProvider } from '@difizen/mana-core';
-import { inject, singleton, postConstruct } from '@difizen/mana-syringe';
+import { inject, singleton, postConstruct } from '../../mana-syringe/index.js';
 
 import type { TreeNode } from './tree';
 import { Tree, CompositeTreeNode } from './tree';
