@@ -1,5 +1,0 @@
----
-hero:
-  title: mana
-  description:
----
