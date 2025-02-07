@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Dropdown } from '@difizen/mana-react';
 import debounce from 'lodash.debounce';
 import type PerfectScrollbar from 'perfect-scrollbar';
 import { forwardRef } from 'react';
@@ -21,6 +20,7 @@ import {
   ViewInstance,
 } from '../../../mana-core/index.js';
 import { getOrigin, prop, useInject } from '../../../mana-observable/index.js';
+import { Dropdown } from '../../../mana-react/index.js';
 import { inject, postConstruct, singleton } from '../../../mana-syringe/index.js';
 import { LabelProvider } from '../../label';
 import { MenuRender } from '../../menu';

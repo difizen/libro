@@ -1,4 +1,4 @@
-import { notification } from '@difizen/mana-react';
+import { notification } from '../../mana-react/index.js';
 import { v1 } from 'uuid';
 
 import { Disposable } from '../../mana-common/index.js';
