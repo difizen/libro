@@ -1,4 +1,12 @@
 import { CommentOutlined } from '@ant-design/icons';
+import type { CommandRegistry, ToolbarRegistry } from '@difizen/libro-common/mana-app';
+import { inject } from '@difizen/libro-common/mana-app';
+import { CommandContribution } from '@difizen/libro-common/mana-app';
+import {
+  singleton,
+  ToolbarContribution,
+  ViewManager,
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import {
   LibroCommandRegister,
@@ -8,10 +16,6 @@ import {
   LibroCellView,
   LibroView,
 } from '@difizen/libro-jupyter';
-import type { CommandRegistry, ToolbarRegistry } from '@difizen/mana-app';
-import { inject } from '@difizen/mana-app';
-import { CommandContribution } from '@difizen/mana-app';
-import { singleton, ToolbarContribution, ViewManager } from '@difizen/mana-app';
 
 import { AINativeCommands } from './ai-native-command.js';
 import { LibroAINativeService } from './ai-native-service.js';

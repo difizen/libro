@@ -1,6 +1,6 @@
-import { prop } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
-import { timeout, Deferred } from '@difizen/mana-app';
+import { prop } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { timeout, Deferred } from '@difizen/libro-common/mana-app';
 
 import type { ISpecModels } from '../kernelspec/restapi.js';
 import { KernelSpecRestAPI } from '../kernelspec/restapi.js';

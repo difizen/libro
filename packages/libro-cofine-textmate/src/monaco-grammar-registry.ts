@@ -1,4 +1,4 @@
-import { inject, singleton } from '@difizen/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate';
 import { Registry, parseRawGrammar } from 'vscode-textmate';
 

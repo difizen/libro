@@ -1,10 +1,10 @@
-import type { Contribution } from '@difizen/mana-app';
+import type { Contribution } from '@difizen/libro-common/mana-app';
 import {
   contrib,
   Priority,
   singleton,
   ApplicationContribution,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 
 import type {
   InlineCompletionImplement,

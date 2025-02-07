@@ -1,5 +1,5 @@
-import type { StatefulView } from '@difizen/mana-app';
-import { BaseView } from '@difizen/mana-app';
+import type { StatefulView } from '@difizen/libro-common/mana-app';
+import { BaseView } from '@difizen/libro-common/mana-app';
 
 export abstract class BaseStatefulView extends BaseView implements StatefulView {
   constructor() {

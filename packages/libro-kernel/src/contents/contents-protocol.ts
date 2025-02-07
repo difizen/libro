@@ -1,4 +1,4 @@
-import type { Disposable, Event as ManaEvent } from '@difizen/mana-app';
+import type { Disposable, Event as ManaEvent } from '@difizen/libro-common/mana-app';
 
 import type { ISettings } from '../server/index.js';
 

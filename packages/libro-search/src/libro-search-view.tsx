@@ -8,9 +8,15 @@ import {
 } from '@ant-design/icons';
 import type { LibroView } from '@difizen/libro-core';
 import { LibroContextKey } from '@difizen/libro-core';
-import { prop, ThemeService, useInject, useObserve, watch } from '@difizen/mana-app';
-import { BaseView, view, ViewInstance } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+import {
+  prop,
+  ThemeService,
+  useInject,
+  useObserve,
+  watch,
+} from '@difizen/libro-common/mana-app';
+import { BaseView, view, ViewInstance } from '@difizen/libro-common/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Button, Checkbox, ConfigProvider, Input, Tag, theme } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';

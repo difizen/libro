@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { KernelAndTerminalPanelView } from './kernel-and-terminal-panel-view.js';
 import { KernelPanelColorContribution } from './kernel-color-registry.js';

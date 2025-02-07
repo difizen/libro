@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { LibroToolbarContribution } from './libro-toolbar.js';
 import { RestartClearOutputsContribution } from './restart-clear-outputs-contribution.js';

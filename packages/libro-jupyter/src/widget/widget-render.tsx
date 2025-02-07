@@ -7,7 +7,7 @@ import {
   useObserve,
   ViewInstance,
   ViewRender,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import React from 'react';
 
 import './index.less';

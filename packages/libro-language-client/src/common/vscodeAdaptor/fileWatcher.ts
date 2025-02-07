@@ -1,5 +1,5 @@
 import { LibroService } from '@difizen/libro-core';
-import { inject, singleton } from '@difizen/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 import type { Event, FileSystemWatcher, GlobPattern, Uri } from 'vscode';
 
 import { EventEmitter } from './vscodeAdaptor.js';

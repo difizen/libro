@@ -1,7 +1,7 @@
 import type { CodeEditorFactory } from '@difizen/libro-code-editor';
 import { CodeEditorContribution } from '@difizen/libro-code-editor';
 import { MIME } from '@difizen/libro-common';
-import { singleton } from '@difizen/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 import { codeMirrorDefaultConfig } from './editor.js';
 import { codeMirrorEditorFactory, stateFactory } from './factory.js';

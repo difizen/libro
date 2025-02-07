@@ -1,6 +1,6 @@
-import type { ThemeChangeEvent, Event } from '@difizen/mana-app';
-import { ColorRegistry, ThemeService } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
+import type { ThemeChangeEvent, Event } from '@difizen/libro-common/mana-app';
+import { ColorRegistry, ThemeService } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 import type { ITheme } from 'xterm';
 
 /**

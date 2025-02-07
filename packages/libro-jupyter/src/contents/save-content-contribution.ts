@@ -1,7 +1,7 @@
 import type { NotebookOption } from '@difizen/libro-core';
 import { ContentSaveContribution } from '@difizen/libro-core';
 import type { IContentsModel } from '@difizen/libro-kernel';
-import { ModalService, inject, singleton } from '@difizen/mana-app';
+import { ModalService, inject, singleton } from '@difizen/libro-common/mana-app';
 
 import type { LibroJupyterModel } from '../libro-jupyter-model.js';
 import { SaveFileErrorModal } from '../toolbar/save-file-error.js';

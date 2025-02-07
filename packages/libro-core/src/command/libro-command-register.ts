@@ -4,8 +4,8 @@ import type {
   CommandHandlerWithContext,
   CommandRegistry,
   KeybindingRegistry,
-} from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 
 import type { CellView, NotebookView } from '../libro-protocol.js';
 import { LibroContextKeys } from '../libro-protocol.js';

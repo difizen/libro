@@ -1,6 +1,6 @@
 import type { LibroSideToolbarMenuItemType } from '@difizen/libro-jupyter';
 import { LibroSideToolbarMenu } from '@difizen/libro-jupyter';
-import { useInject } from '@difizen/mana-app';
+import { useInject } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Popover } from 'antd';
 

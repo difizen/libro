@@ -1,5 +1,11 @@
-import type { Contribution } from '@difizen/mana-app';
-import { Priority, ViewManager, contrib, inject, singleton } from '@difizen/mana-app';
+import type { Contribution } from '@difizen/libro-common/mana-app';
+import {
+  Priority,
+  ViewManager,
+  contrib,
+  inject,
+  singleton,
+} from '@difizen/libro-common/mana-app';
 
 import { CodeEditorInfoManager } from './code-editor-info-manager.js';
 import type { IModel } from './code-editor-model.js';

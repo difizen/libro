@@ -1,5 +1,5 @@
-import { prop } from '@difizen/mana-app';
-import { transient, inject } from '@difizen/mana-app';
+import { prop } from '@difizen/libro-common/mana-app';
+import { transient, inject } from '@difizen/libro-common/mana-app';
 
 import type { KernelConnection } from '../kernel/kernel-connection.js';
 import type { SessionId } from '../session/libro-session-protocol.js';

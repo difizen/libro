@@ -6,8 +6,8 @@ import {
   MixedThemeRegistry,
   InitializeContribution,
 } from '@difizen/libro-cofine-editor-core';
-import type { Color } from '@difizen/mana-app';
-import { Emitter, inject, singleton } from '@difizen/mana-app';
+import type { Color } from '@difizen/libro-common/mana-app';
+import { Emitter, inject, singleton } from '@difizen/libro-common/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 import { StandaloneServices } from '@difizen/monaco-editor-core/esm/vs/editor/standalone/browser/standaloneServices.js';
 import { IStandaloneThemeService } from '@difizen/monaco-editor-core/esm/vs/editor/standalone/common/standaloneTheme.js';

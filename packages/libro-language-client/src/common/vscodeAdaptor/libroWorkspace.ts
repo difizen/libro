@@ -1,7 +1,7 @@
 import type { LibroView } from '@difizen/libro-core';
 import { LibroService, ILibroWorkspaceService } from '@difizen/libro-core';
 import { ExecutableNotebookModel } from '@difizen/libro-kernel';
-import { inject, noop, singleton } from '@difizen/mana-app';
+import { inject, noop, singleton } from '@difizen/libro-common/mana-app';
 import type {
   Uri,
   NotebookDocument,

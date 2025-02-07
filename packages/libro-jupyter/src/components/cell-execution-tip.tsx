@@ -5,7 +5,7 @@ import {
   CheckCircleOutlined,
   ExecutableCellModel,
 } from '@difizen/libro-core';
-import { useObserve } from '@difizen/mana-app';
+import { useObserve } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import classnames from 'classnames';
 import moment from 'moment';

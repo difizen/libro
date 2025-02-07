@@ -1,8 +1,8 @@
 import type { LibroView } from '@difizen/libro-core';
 import { LibroService, DocumentCommands } from '@difizen/libro-core';
-import type { NavigatableView, Saveable } from '@difizen/mana-app';
-import { ConfigurationService } from '@difizen/mana-app';
-import { Disposable, DisposableCollection } from '@difizen/mana-app';
+import type { NavigatableView, Saveable } from '@difizen/libro-common/mana-app';
+import { ConfigurationService } from '@difizen/libro-common/mana-app';
+import { Disposable, DisposableCollection } from '@difizen/libro-common/mana-app';
 import {
   BaseView,
   inject,
@@ -20,7 +20,7 @@ import {
   URI,
   CommandRegistry,
   Emitter,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { createRef, forwardRef } from 'react';
 
 import { LibroConfigAutoSave } from '../config/config.js';

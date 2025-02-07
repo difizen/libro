@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 /* eslint-disable global-require */
 
-import { Module } from '@difizen/mana-app';
+import { Module } from '@difizen/libro-common/mana-app';
 import * as oniguruma from 'vscode-oniguruma';
 import * as onig from 'vscode-oniguruma/release/onig.wasm';
 

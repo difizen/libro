@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import type { JSONObject } from '@difizen/libro-common';
-import type { Event, Disposable } from '@difizen/mana-app';
+import type { Event, Disposable } from '@difizen/libro-common/mana-app';
 
 import type { ISpecModel } from '../kernelspec/index.js';
 import type { ISettings } from '../server/index.js';

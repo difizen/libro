@@ -1,4 +1,4 @@
-import { ModalContribution, singleton } from '@difizen/mana-app';
+import { ModalContribution, singleton } from '@difizen/libro-common/mana-app';
 
 import { SaveFileErrorModal } from './save-file-error.js';
 

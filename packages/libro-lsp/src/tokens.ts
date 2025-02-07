@@ -6,7 +6,7 @@
 
 import type { IEditor as ICodeEditor } from '@difizen/libro-code-editor';
 import type { NotebookView } from '@difizen/libro-core';
-import type { Disposable, Emitter, Event } from '@difizen/mana-app';
+import type { Disposable, Emitter, Event } from '@difizen/libro-common/mana-app';
 import type * as rpc from 'vscode-jsonrpc';
 import type * as lsp from 'vscode-languageserver-protocol';
 

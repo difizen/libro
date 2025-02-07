@@ -4,7 +4,7 @@ import type {
   IIntelligentCompletionsResult,
   EditorCancellationToken,
 } from '@difizen/libro-code-editor';
-import { transient } from '@difizen/mana-app';
+import { transient } from '@difizen/libro-common/mana-app';
 import { v4 } from 'uuid';
 
 import { generateInstructionsPrompt } from './Prompt/instruction.js';

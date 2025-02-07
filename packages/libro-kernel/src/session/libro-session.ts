@@ -1,4 +1,4 @@
-import { transient, inject } from '@difizen/mana-app';
+import { transient, inject } from '@difizen/libro-common/mana-app';
 
 import type { LibroKernel } from '../kernel/libro-kernel.js';
 

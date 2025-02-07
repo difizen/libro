@@ -1,4 +1,4 @@
-import { inject, prop, transient } from '@difizen/mana-app';
+import { inject, prop, transient } from '@difizen/libro-common/mana-app';
 
 import type { CellView } from './libro-protocol.js';
 import type { LibroView } from './libro-view.js';

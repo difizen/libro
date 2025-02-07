@@ -1,5 +1,5 @@
 import { MarkdownModule } from '@difizen/libro-markdown';
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { standardRendererFactories as initialFactories } from './rendermime-factory.js';
 import {

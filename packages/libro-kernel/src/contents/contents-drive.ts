@@ -1,8 +1,8 @@
 import type { PartialJSONObject } from '@difizen/libro-common';
 import { URL as URLUtil } from '@difizen/libro-common';
-import type { Event as ManaEvent } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
-import { Emitter } from '@difizen/mana-app';
+import type { Event as ManaEvent } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { Emitter } from '@difizen/libro-common/mana-app';
 import qs from 'query-string';
 
 import type { ISettings } from '../server/index.js';

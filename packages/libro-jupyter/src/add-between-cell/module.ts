@@ -1,5 +1,5 @@
 import { BetweenCellProvider } from '@difizen/libro-core';
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { LibroAddBetweenCellCommandContribution } from './add-between-cell-command-contribution.js';
 import { LibroWrappedBetweenCellContent } from './add-between-cell.js';

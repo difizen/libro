@@ -20,7 +20,7 @@ import {
   LibroJupyterModel,
   LibroOutputArea,
 } from '@difizen/libro-jupyter';
-import type { ViewSize } from '@difizen/mana-app';
+import type { ViewSize } from '@difizen/libro-common/mana-app';
 import {
   Deferred,
   getOrigin,
@@ -33,7 +33,7 @@ import {
   ViewManager,
   ViewOption,
   ViewRender,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import type { InputRef } from 'antd';
 import { Select } from 'antd';

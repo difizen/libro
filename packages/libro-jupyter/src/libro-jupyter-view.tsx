@@ -2,8 +2,8 @@ import type { NotebookOption } from '@difizen/libro-core';
 import { VirtualizedManagerHelper } from '@difizen/libro-core';
 import { CollapseServiceFactory, NotebookService } from '@difizen/libro-core';
 import { LibroView, notebookViewFactoryId } from '@difizen/libro-core';
-import { URI, view, ViewOption } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+import { URI, view, ViewOption } from '@difizen/libro-common/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 
 import type { LibroJupyterModel } from './libro-jupyter-model.js';
 

@@ -1,6 +1,6 @@
-import type { ConfigurationNode } from '@difizen/mana-app';
-import { ConfigurationContribution } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
+import type { ConfigurationNode } from '@difizen/libro-common/mana-app';
+import { ConfigurationContribution } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 
 export const TOCVisible: ConfigurationNode<boolean> = {

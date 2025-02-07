@@ -2,7 +2,12 @@ import { URL } from '@difizen/libro-common';
 import { PageConfig } from '@difizen/libro-kernel';
 import type { ILanguageServerManager, TSessionMap } from '@difizen/libro-lsp';
 import { ILanguageServerManagerFactory } from '@difizen/libro-lsp';
-import { singleton, inject, postConstruct, getOrigin } from '@difizen/mana-app';
+import {
+  singleton,
+  inject,
+  postConstruct,
+  getOrigin,
+} from '@difizen/libro-common/mana-app';
 
 import type { LibroLanguageClientOptions } from './libro-language-client.js';
 import { LibroLanguageClient } from './libro-language-client.js';

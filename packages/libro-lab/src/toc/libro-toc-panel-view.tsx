@@ -11,7 +11,7 @@ import {
   ViewInstance,
   ViewManager,
   ViewRender,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { ConfigProvider, Empty, theme } from 'antd';
 

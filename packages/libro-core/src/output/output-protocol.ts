@@ -3,9 +3,9 @@ import type {
   ReadonlyPartialJSONObject,
   JSONObject,
 } from '@difizen/libro-common';
-import type { Event } from '@difizen/mana-app';
-import type { View } from '@difizen/mana-app';
-import { Syringe } from '@difizen/mana-app';
+import type { Event } from '@difizen/libro-common/mana-app';
+import type { View } from '@difizen/libro-common/mana-app';
+import { Syringe } from '@difizen/libro-common/mana-app';
 
 import type { CellView } from '../libro-protocol.js';
 

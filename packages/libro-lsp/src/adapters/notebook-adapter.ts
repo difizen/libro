@@ -14,8 +14,8 @@ import type {
 } from '@difizen/libro-core';
 import { EditorCellView } from '@difizen/libro-core';
 import type { ExecutableNotebookModel } from '@difizen/libro-kernel';
-import {} from '@difizen/mana-app';
-import { inject, transient, watch, Deferred } from '@difizen/mana-app';
+import {} from '@difizen/libro-common/mana-app';
+import { inject, transient, watch, Deferred } from '@difizen/libro-common/mana-app';
 
 import type { IVirtualPosition } from '../positioning.js';
 import type { Document } from '../tokens.js';

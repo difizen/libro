@@ -1,5 +1,5 @@
 import { URL } from '@difizen/libro-common';
-import { isNative, isWeb, prop, singleton } from '@difizen/mana-app';
+import { isNative, isWeb, prop, singleton } from '@difizen/libro-common/mana-app';
 
 import { PageConfig } from '../page-config.js';
 

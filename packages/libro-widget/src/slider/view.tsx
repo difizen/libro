@@ -12,7 +12,7 @@ import {
   prop,
   inject,
   ViewOption,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { Slider } from 'antd';
 import { forwardRef } from 'react';
 

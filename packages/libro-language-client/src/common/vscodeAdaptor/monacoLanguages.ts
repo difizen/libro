@@ -1,4 +1,4 @@
-import { singleton } from '@difizen/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 // import { score } from '@difizen/monaco-editor-core/esm/vs/editor/common/languageSelector.js';
 import type {

@@ -1,6 +1,6 @@
 import type { JSONObject } from '@difizen/libro-common';
 import type { IComm, IKernelConnection, IShellFuture } from '@difizen/libro-kernel';
-import { inject, transient } from '@difizen/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 
 import type { ICallbacks, IClassicComm } from './protocol.js';
 import { WidgetCommOption } from './protocol.js';

@@ -1,5 +1,5 @@
-import { ViewManager } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
+import { ViewManager } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 
 import type { LibroView } from '../libro-view.js';
 import { LibroExtensionSlotContribution } from '../slot/index.js';

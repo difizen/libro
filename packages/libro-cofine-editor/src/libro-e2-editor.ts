@@ -28,8 +28,12 @@ import {
   ThemeService,
   transient,
   watch,
-} from '@difizen/mana-app';
-import { Disposable, DisposableCollection, Emitter } from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
+import {
+  Disposable,
+  DisposableCollection,
+  Emitter,
+} from '@difizen/libro-common/mana-app';
 import { editor, KeyCode, Selection } from '@difizen/monaco-editor-core';
 import 'resize-observer-polyfill';
 import * as monaco from '@difizen/monaco-editor-core';

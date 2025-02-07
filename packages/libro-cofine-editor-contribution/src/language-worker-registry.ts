@@ -1,5 +1,5 @@
-import type { Contribution } from '@difizen/mana-app';
-import { contrib, singleton, Syringe } from '@difizen/mana-app';
+import type { Contribution } from '@difizen/libro-common/mana-app';
+import { contrib, singleton, Syringe } from '@difizen/libro-common/mana-app';
 
 export const LanguageWorkerContribution = Syringe.defineToken(
   'LanguageWorkerContribution',

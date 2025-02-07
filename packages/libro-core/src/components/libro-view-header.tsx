@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ToolbarRender, useInject, ViewInstance } from '@difizen/mana-app';
+import { ToolbarRender, useInject, ViewInstance } from '@difizen/libro-common/mana-app';
 import type { FC } from 'react';
 import { useMemo } from 'react';
 

@@ -1,6 +1,6 @@
 import { EditorHandlerContribution } from '@difizen/libro-cofine-editor-contribution';
-import type { Contribution } from '@difizen/mana-app';
-import { contrib, singleton } from '@difizen/mana-app';
+import type { Contribution } from '@difizen/libro-common/mana-app';
+import { contrib, singleton } from '@difizen/libro-common/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 
 @singleton()

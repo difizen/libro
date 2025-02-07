@@ -1,6 +1,6 @@
-import type { ColorRegistry } from '@difizen/mana-app';
-import { ColorContribution } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
+import type { ColorRegistry } from '@difizen/libro-common/mana-app';
+import { ColorContribution } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 @singleton({ contrib: ColorContribution })
 export class LibroColorRegistry implements ColorContribution {

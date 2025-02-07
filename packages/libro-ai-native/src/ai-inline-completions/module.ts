@@ -1,5 +1,5 @@
 import { CodeEditorModule } from '@difizen/libro-code-editor';
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { AICompletionContribution } from './inline-completion-contribution.js';
 import { AICompletionProvider } from './inline-completion-provider.js';

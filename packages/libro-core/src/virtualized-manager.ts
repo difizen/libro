@@ -1,4 +1,4 @@
-import { transient, prop, inject } from '@difizen/mana-app';
+import { transient, prop, inject } from '@difizen/libro-common/mana-app';
 
 import type { NotebookModel } from './libro-protocol.js';
 import { VirtualizedManagerOption } from './libro-protocol.js';

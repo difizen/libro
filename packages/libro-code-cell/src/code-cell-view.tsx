@@ -17,7 +17,7 @@ import {
   LibroOutputArea,
   VirtualizedManagerHelper,
 } from '@difizen/libro-core';
-import type { ViewSize } from '@difizen/mana-app';
+import type { ViewSize } from '@difizen/libro-common/mana-app';
 import {
   getOrigin,
   inject,
@@ -31,7 +31,7 @@ import {
   ViewRender,
   watch,
   Deferred,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n'; /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, memo, forwardRef } from 'react';
 

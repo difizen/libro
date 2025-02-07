@@ -1,7 +1,7 @@
 import { LoadingOutlined, StopOutlined } from '@ant-design/icons';
 import type { LibroView } from '@difizen/libro-core';
 import { ServerManager } from '@difizen/libro-kernel';
-import { useInject, ViewInstance } from '@difizen/mana-app';
+import { useInject, ViewInstance } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Badge } from 'antd';
 

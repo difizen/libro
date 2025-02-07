@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import type { ThemeRegistry } from '@difizen/libro-cofine-editor-core';
 import { ThemeContribution } from '@difizen/libro-cofine-editor-core';
-import { singleton } from '@difizen/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 import darkDefaults from './data/monaco-themes/vscode/dark_defaults.json';
 import darkEditor from './data/monaco-themes/vscode/dark_editor.json';

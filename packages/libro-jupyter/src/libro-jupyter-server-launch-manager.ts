@@ -1,5 +1,5 @@
 import { ServerManager, ServerConnection } from '@difizen/libro-kernel';
-import { inject, singleton } from '@difizen/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 
 import { ServerLaunchManager } from './libro-jupyter-protocol.js';
 

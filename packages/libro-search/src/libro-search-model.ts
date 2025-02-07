@@ -2,9 +2,9 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import type { Disposable } from '@difizen/mana-app';
-import { DisposableCollection, Emitter } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
+import type { Disposable } from '@difizen/libro-common/mana-app';
+import { DisposableCollection, Emitter } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 import debounce from 'lodash.debounce';
 
 import type { SearchProvider } from './libro-search-protocol.js';

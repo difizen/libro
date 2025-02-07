@@ -1,10 +1,10 @@
 import type { JSONObject } from '@difizen/libro-common';
 import { deepCopy, URL } from '@difizen/libro-common';
-import type { Event as ManaEvent } from '@difizen/mana-app';
-import { Disposable } from '@difizen/mana-app';
-import { prop } from '@difizen/mana-app';
-import { Deferred, Emitter } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+import type { Event as ManaEvent } from '@difizen/libro-common/mana-app';
+import { Disposable } from '@difizen/libro-common/mana-app';
+import { prop } from '@difizen/libro-common/mana-app';
+import { Deferred, Emitter } from '@difizen/libro-common/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 import { v4 } from 'uuid';
 
 import type { ISpecModel } from '../kernelspec/index.js';

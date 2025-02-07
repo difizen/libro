@@ -4,7 +4,7 @@ import { LibroOutputView } from '@difizen/libro-core';
 import type { BaseOutputView, IOutputOptions } from '@difizen/libro-core';
 import { RenderMimeRegistry, renderText } from '@difizen/libro-rendermime';
 import type { IRenderMimeRegistry } from '@difizen/libro-rendermime';
-import { inject, transient } from '@difizen/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 import {
   getOrigin,
   prop,
@@ -12,7 +12,7 @@ import {
   view,
   ViewInstance,
   ViewOption,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { Button } from 'antd';
 import { forwardRef, createRef, useEffect } from 'react';
 import '../index.less';

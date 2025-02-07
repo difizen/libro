@@ -1,5 +1,5 @@
 import { CodeOutlined } from '@ant-design/icons';
-import { ConfigurationService } from '@difizen/mana-app';
+import { ConfigurationService } from '@difizen/libro-common/mana-app';
 import {
   Disposable,
   DisposableCollection,
@@ -13,7 +13,7 @@ import {
   transient,
   useInject,
   view,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { forwardRef } from 'react';
 import type { FontWeight, ITerminalOptions } from 'xterm';

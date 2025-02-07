@@ -1,4 +1,4 @@
-import type { NavigatableView } from '@difizen/mana-app';
+import type { NavigatableView } from '@difizen/libro-common/mana-app';
 import {
   inject,
   LabelProvider,
@@ -6,8 +6,8 @@ import {
   URI,
   URIIconReference,
   ViewOption,
-} from '@difizen/mana-app';
-import { BaseView, transient, view } from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
+import { BaseView, transient, view } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import React from 'react';
 

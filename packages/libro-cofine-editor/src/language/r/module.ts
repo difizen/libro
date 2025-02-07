@@ -1,4 +1,4 @@
-import { Module } from '@difizen/mana-app';
+import { Module } from '@difizen/libro-common/mana-app';
 
 import { RContribution } from './r-contribution.js';
 

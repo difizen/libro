@@ -2,8 +2,8 @@ import type { LanguageSpecRegistry } from '@difizen/libro-code-editor';
 import { LanguageSpecContribution } from '@difizen/libro-code-editor';
 import type { CellMeta, CellModel, CellOptions } from '@difizen/libro-jupyter';
 import { CellModelContribution, CellViewContribution } from '@difizen/libro-jupyter';
-import { inject } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
+import { inject } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 import { LibroSqlCellModelFactory } from './libro-sql-cell-protocol.js';
 import { LibroSqlCellView } from './libro-sql-cell-view.js';

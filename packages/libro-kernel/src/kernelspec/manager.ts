@@ -1,9 +1,9 @@
 import { deepEqual, Poll } from '@difizen/libro-common';
-import type { Event as ManaEvent } from '@difizen/mana-app';
-import { getOrigin } from '@difizen/mana-app';
-import { Emitter, Deferred } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
-import { prop } from '@difizen/mana-app';
+import type { Event as ManaEvent } from '@difizen/libro-common/mana-app';
+import { getOrigin } from '@difizen/libro-common/mana-app';
+import { Emitter, Deferred } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { prop } from '@difizen/libro-common/mana-app';
 
 import { BaseManager } from '../basemanager.js';
 import { ServerManager } from '../server/server-manager.js';

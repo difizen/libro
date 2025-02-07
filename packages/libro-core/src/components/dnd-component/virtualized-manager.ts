@@ -1,4 +1,4 @@
-import { prop, singleton } from '@difizen/mana-app';
+import { prop, singleton } from '@difizen/libro-common/mana-app';
 
 export interface IVirtualizedManager {
   openVirtualized: (length: number, size?: number) => Promise<boolean>;

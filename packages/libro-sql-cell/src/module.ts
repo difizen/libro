@@ -1,6 +1,6 @@
 import { CellOptions, LibroModule } from '@difizen/libro-jupyter';
 import { LibroRenderMimeModule } from '@difizen/libro-rendermime';
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { FormatterSqlMagicContribution } from './libro-formatter-sql-magic-contribution.js';
 import { FormatterStringTransSqlContribution } from './libro-formatter-sql-trans-contribution.js';

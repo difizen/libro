@@ -9,7 +9,7 @@ import type {
   IChatMessageItem,
 } from '@difizen/magent-chat';
 import { autoFactory, AutoFactoryOption } from '@difizen/magent-core';
-import { inject, prop } from '@difizen/mana-app';
+import { inject, prop } from '@difizen/libro-common/mana-app';
 
 @autoFactory()
 export class LibroAIChatMessageItemModel {

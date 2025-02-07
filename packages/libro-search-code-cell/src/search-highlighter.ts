@@ -2,8 +2,8 @@
 import type { IEditor, SearchMatch } from '@difizen/libro-code-editor';
 import { deepEqual } from '@difizen/libro-common';
 import { LibroSearchUtils } from '@difizen/libro-search';
-import { prop } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+import { prop } from '@difizen/libro-common/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 
 import type { CodeEditorSearchHighlighter } from './code-cell-search-protocol.js';
 

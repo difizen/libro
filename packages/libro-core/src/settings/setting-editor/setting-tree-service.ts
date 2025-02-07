@@ -1,6 +1,6 @@
-import { inject, ConfigurationRegistry, URI } from '@difizen/mana-app';
-import { FileService, singleton } from '@difizen/mana-app';
-import type { FileStatWithMetadata } from '@difizen/mana-app';
+import { inject, ConfigurationRegistry, URI } from '@difizen/libro-common/mana-app';
+import { FileService, singleton } from '@difizen/libro-common/mana-app';
+import type { FileStatWithMetadata } from '@difizen/libro-common/mana-app';
 
 const defaultFileMeta = {
   mtime: 0,

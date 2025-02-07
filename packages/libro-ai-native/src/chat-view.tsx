@@ -5,7 +5,7 @@ import {
   LibroSlotView,
 } from '@difizen/libro-jupyter';
 import type { DisplayView, LibroView } from '@difizen/libro-jupyter';
-import type { ConfigurationService } from '@difizen/mana-app';
+import type { ConfigurationService } from '@difizen/libro-common/mana-app';
 import {
   BaseView,
   prop,
@@ -16,7 +16,7 @@ import {
   useInject,
   ViewInstance,
   ViewRender,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { useRef } from 'react';
 import 'katex/dist/katex.min.css'; // 引入 KaTeX 样式
 

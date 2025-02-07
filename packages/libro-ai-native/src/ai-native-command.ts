@@ -1,4 +1,4 @@
-import type { Command } from '@difizen/mana-app';
+import type { Command } from '@difizen/libro-common/mana-app';
 
 export const AINativeCommands: Record<string, Command & { keybind?: string }> = {
   Explain: {

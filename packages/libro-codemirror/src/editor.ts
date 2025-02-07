@@ -39,8 +39,8 @@ import {
   removeAllWhereFromArray,
 } from '@difizen/libro-common';
 import type { LSPProvider } from '@difizen/libro-lsp';
-import { Deferred, Disposable, Emitter } from '@difizen/mana-app';
-import { getOrigin, watch } from '@difizen/mana-app';
+import { Deferred, Disposable, Emitter } from '@difizen/libro-common/mana-app';
+import { getOrigin, watch } from '@difizen/libro-common/mana-app';
 import type { SyntaxNodeRef } from '@lezer/common';
 import { v4 } from 'uuid';
 

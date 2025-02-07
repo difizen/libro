@@ -6,8 +6,8 @@ import {
   VirtualizedManagerHelper,
   LibroContextKey,
 } from '@difizen/libro-core';
-import { inject, prop, transient, equals } from '@difizen/mana-app';
-import { Deferred, DisposableCollection } from '@difizen/mana-app';
+import { inject, prop, transient, equals } from '@difizen/libro-common/mana-app';
+import { Deferred, DisposableCollection } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 
 import { AbstractSearchProvider } from './abstract-search-provider.js';

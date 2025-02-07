@@ -1,5 +1,10 @@
 import { CloseOutlined } from '@ant-design/icons';
-import { renderNode, useInject, ViewContext, ViewInstance } from '@difizen/mana-app';
+import {
+  renderNode,
+  useInject,
+  ViewContext,
+  ViewInstance,
+} from '@difizen/libro-common/mana-app';
 
 import type { SaveableTabView } from '../../index.js';
 

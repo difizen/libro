@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { getOrigin, useInject, ViewInstance } from '@difizen/mana-app';
-import { useConfigurationValue } from '@difizen/mana-app';
+import { getOrigin, useInject, ViewInstance } from '@difizen/libro-common/mana-app';
+import { useConfigurationValue } from '@difizen/libro-common/mana-app';
 import { Button } from 'antd';
 import React, {
   useCallback,

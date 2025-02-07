@@ -10,8 +10,8 @@
 import { URL } from '@difizen/libro-common';
 import type { NotebookView } from '@difizen/libro-core';
 import { PageConfig } from '@difizen/libro-kernel';
-import type { Event } from '@difizen/mana-app';
-import { Emitter, inject, singleton } from '@difizen/mana-app';
+import type { Event } from '@difizen/libro-common/mana-app';
+import { Emitter, inject, singleton } from '@difizen/libro-common/mana-app';
 import type * as protocol from 'vscode-languageserver-protocol';
 
 import type { WidgetLSPAdapter } from './adapters/adapter.js';

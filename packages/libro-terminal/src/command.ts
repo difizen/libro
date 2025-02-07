@@ -1,9 +1,16 @@
-import type { Command, CommandRegistry, KeybindingRegistry } from '@difizen/mana-app';
-import { ConfigurationService, KeybindingContribution } from '@difizen/mana-app';
-import { SlotViewManager } from '@difizen/mana-app';
-import { inject, ViewManager } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
-import { CommandContribution } from '@difizen/mana-app';
+import type {
+  Command,
+  CommandRegistry,
+  KeybindingRegistry,
+} from '@difizen/libro-common/mana-app';
+import {
+  ConfigurationService,
+  KeybindingContribution,
+} from '@difizen/libro-common/mana-app';
+import { SlotViewManager } from '@difizen/libro-common/mana-app';
+import { inject, ViewManager } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
+import { CommandContribution } from '@difizen/libro-common/mana-app';
 
 import { terminalDefaultSlot } from './configuration.js';
 import { TerminalManager } from './manager.js';

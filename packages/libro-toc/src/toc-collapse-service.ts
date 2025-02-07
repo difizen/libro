@@ -4,8 +4,8 @@ import {
   DefaultCollapseService,
   CollapseService,
 } from '@difizen/libro-core';
-import { prop } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+import { prop } from '@difizen/libro-common/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 
 import { LibroTOCManager } from './toc-manager.js';
 import { HeadingType } from './toc-protocol.js';

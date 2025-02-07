@@ -3,8 +3,8 @@ import { LanguageSpecContribution } from '@difizen/libro-code-editor';
 import type { CellModel } from '@difizen/libro-core';
 import type { CellMeta, CellOptions } from '@difizen/libro-core';
 import { CellViewContribution, CellModelContribution } from '@difizen/libro-core';
-import { inject } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
+import { inject } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 import { LibroPromptCellModelFactory } from './prompt-cell-protocol.js';
 import { LibroPromptCellView } from './prompt-cell-view.js';

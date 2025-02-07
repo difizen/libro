@@ -1,13 +1,13 @@
 import { Menu, MenuContext } from '@difizen/libro-common/mana-react';
-import type { Toolbar } from '@difizen/mana-app';
-import { isMacintosh } from '@difizen/mana-app';
+import type { Toolbar } from '@difizen/libro-common/mana-app';
+import { isMacintosh } from '@difizen/libro-common/mana-app';
 import {
   CommandRegistry,
   getOrigin,
   ToolbarInstance,
   useInject,
   useObserve,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Popover } from 'antd';
 

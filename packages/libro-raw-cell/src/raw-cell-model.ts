@@ -1,6 +1,6 @@
 import type { IRawCell } from '@difizen/libro-common';
 import { CellOptions, LibroCellModel } from '@difizen/libro-core';
-import { inject, transient } from '@difizen/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 
 @transient()
 export class LibroRawCellModel extends LibroCellModel {

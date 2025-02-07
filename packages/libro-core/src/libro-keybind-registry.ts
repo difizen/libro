@@ -1,5 +1,5 @@
-import { KeybindingRegistry, KeyCode } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
+import { KeybindingRegistry, KeyCode } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 @singleton({ token: KeybindingRegistry })
 export class LibroKeybindRegistry extends KeybindingRegistry {

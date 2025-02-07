@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { FormatterJsonContribution } from './libro-formatter-json-contribution.js';
 import { LibroFormatterManager } from './libro-formatter-manager.js';

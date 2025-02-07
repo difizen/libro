@@ -9,8 +9,8 @@ import {
   view,
   ViewInstance,
   ViewOption,
-} from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 import { forwardRef } from 'react';
 
 import { getBundleOptions } from '../output-utils.js';

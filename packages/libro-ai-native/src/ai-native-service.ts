@@ -1,5 +1,11 @@
 import type { CellView } from '@difizen/libro-jupyter';
-import { getOrigin, inject, prop, singleton, ViewManager } from '@difizen/mana-app';
+import {
+  getOrigin,
+  inject,
+  prop,
+  singleton,
+  ViewManager,
+} from '@difizen/libro-common/mana-app';
 
 import { LibroAINativeForCellView } from './ai-native-for-cell-view.js';
 import type { LibroChatView } from './chat-view.js';

@@ -1,7 +1,11 @@
 import { CaretDownOutlined } from '@ant-design/icons';
 import type { LibroView } from '@difizen/libro-core';
 import { LibroKernelConnectionManager, KernelSpecManager } from '@difizen/libro-kernel';
-import { ConfigurationService, useInject, ViewInstance } from '@difizen/mana-app';
+import {
+  ConfigurationService,
+  useInject,
+  ViewInstance,
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Dropdown, Space } from 'antd';
 import type { MenuProps } from 'antd';

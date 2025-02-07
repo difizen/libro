@@ -9,7 +9,7 @@ import {
   // ReloadOutlined,
   PoweroffOutlined,
 } from '@ant-design/icons';
-import type { Command } from '@difizen/mana-app';
+import type { Command } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 
 import {

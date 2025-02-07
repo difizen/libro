@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { ImageViewerOpenHandler } from './open-handler.js';
 import { NavigatableImageViewerView } from './viewer.js';

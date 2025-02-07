@@ -1,6 +1,6 @@
 import type { EditorState, IEditorOptions } from '@difizen/libro-code-editor';
 import { CodeEditorModule } from '@difizen/libro-code-editor';
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { LibroE2EditorContribution } from './editor-contribution.js';
 import {
