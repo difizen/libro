@@ -1,4 +1,4 @@
-import { ApplicationContribution } from '../../mana-core/index.js';
+import { ApplicationContribution } from '../../core/index.js';
 import { inject } from '../../ioc/index.js';
 import { singleton } from '../../ioc/index.js';
 

@@ -1,4 +1,4 @@
-import type { SelectionService } from '../../mana-core/index.js';
+import type { SelectionService } from '../../core/index.js';
 
 import { FileStat } from './files';
 import { SelectionCommandHandler } from './selection-command-handler';

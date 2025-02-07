@@ -1,4 +1,4 @@
-import { CommandRegistry, MenuItem } from '../../mana-core/index.js';
+import { CommandRegistry, MenuItem } from '../../core/index.js';
 import { observable, useObserve } from '../../observable/index.js';
 import { useInject } from '../../observable/index.js';
 import { memo } from 'react';

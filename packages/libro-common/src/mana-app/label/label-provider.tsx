@@ -1,7 +1,7 @@
 import type { Event } from '../../common/index.js';
 import { URI, Priority } from '../../common/index.js';
 import { Emitter, Disposable } from '../../common/index.js';
-import { ApplicationContribution } from '../../mana-core/index.js';
+import { ApplicationContribution } from '../../core/index.js';
 import type { Contribution } from '../../ioc/index.js';
 import { contrib, postConstruct, singleton, Syringe } from '../../ioc/index.js';
 import fileIcons from 'file-icons-js';

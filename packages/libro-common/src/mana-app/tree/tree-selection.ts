@@ -1,4 +1,4 @@
-import type { SelectionProvider } from '../../mana-core/index.js';
+import type { SelectionProvider } from '../../core/index.js';
 
 import type { Event, Disposable } from '../../common/index.js';
 

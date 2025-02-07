@@ -1,4 +1,8 @@
 import { CloseOutlined } from '@ant-design/icons';
+import classnames from 'classnames';
+import type { ReactNode } from 'react';
+import { forwardRef } from 'react';
+
 import {
   DefaultSlotView,
   view,
@@ -7,16 +11,13 @@ import {
   ViewContext,
   ViewManager,
   ViewRender,
-} from '../../../mana-core/index.js';
-import type { View, SlotViewOption } from '../../../mana-core/index.js';
+} from '../../../core/index.js';
+import type { View, SlotViewOption } from '../../../core/index.js';
+import { inject, transient } from '../../../ioc/index.js';
 import { useInject } from '../../../observable/index.js';
 import { prop } from '../../../observable/index.js';
 import { Tabs, Dropdown } from '../../../react/index.js';
 import type { TabPaneProps, TabsProps } from '../../../react/index.js';
-import { inject, transient } from '../../../ioc/index.js';
-import classnames from 'classnames';
-import type { ReactNode } from 'react';
-import { forwardRef } from 'react';
 import './index.less';
 
 import { MenuRender } from '../../menu/menu-render';

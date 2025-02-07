@@ -1,4 +1,4 @@
-import { ManaModule, ManaPreset } from '../mana-core/index.js';
+import { ManaModule, ManaPreset } from '../core/index.js';
 
 import { ManaApplication } from './app';
 import { FileTreeModule } from './file-tree';
@@ -34,4 +34,4 @@ export const ManaAppPreset = ManaModule.create()
 export * from '../ioc/index.js';
 export * from '../observable/index.js';
 export * from '../common/index.js';
-export * from '../mana-core/index.js';
+export * from '../core/index.js';

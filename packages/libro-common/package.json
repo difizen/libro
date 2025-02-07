@@ -33,9 +33,9 @@
       "typings": "./es/observable/index.js",
       "default": "./es/observable/index.js"
     },
-    "./mana-core": {
-      "typings": "./es/mana-core/index.js",
-      "default": "./es/mana-core/index.js"
+    "./core": {
+      "typings": "./es/core/index.js",
+      "default": "./es/core/index.js"
     },
     "./mana-app": {
       "typings": "./es/mana-app/index.js",

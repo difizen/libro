@@ -1,4 +1,4 @@
-import type { ToolbarItem } from '../../mana-core/index.js';
+import type { ToolbarItem } from '../../core/index.js';
 import { useObserve } from '../../observable/index.js';
 import { memo } from 'react';
 

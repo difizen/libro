@@ -1,5 +1,5 @@
-import type { MenuPath } from '../../mana-core/index.js';
-import { ManaModule } from '../../mana-core/index.js';
+import type { MenuPath } from '../../core/index.js';
+import { ManaModule } from '../../core/index.js';
 
 import { Menu, MenuFactory, MenuPathSymbol } from './menu';
 import 'rc-tooltip/assets/bootstrap.css';

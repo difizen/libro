@@ -1,6 +1,6 @@
-import type { ColorRegistry } from '../../mana-core/index.js';
-import { Color } from '../../mana-core/index.js';
-import { ColorContribution } from '../../mana-core/index.js';
+import type { ColorRegistry } from '../../core/index.js';
+import { Color } from '../../core/index.js';
+import { ColorContribution } from '../../core/index.js';
 import { singleton } from '../../ioc/index.js';
 
 @singleton({ contrib: ColorContribution })

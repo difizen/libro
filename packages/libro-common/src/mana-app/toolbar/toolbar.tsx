@@ -10,7 +10,7 @@ import {
   ToolbarItem,
   ToolbarRegistry,
   renderNode,
-} from '../../mana-core/index.js';
+} from '../../core/index.js';
 import { l10n } from '../../l10n/index.js';
 import { getOrigin, prop } from '../../observable/index.js';
 import { inject, transient } from '../../ioc/index.js';

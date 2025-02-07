@@ -1,4 +1,4 @@
-import { ManaModule, createSlotPreference } from '../../../mana-core/index.js';
+import { ManaModule, createSlotPreference } from '../../../core/index.js';
 import { HeaderView, HeaderArea } from './header-view';
 import { FlexSlotView } from '../flex';
 
