@@ -1,4 +1,4 @@
-import type { NotificationArgsProps } from '@difizen/mana-react';
+import type { NotificationArgsProps } from '../../mana-react/index.js';
 import type { ReactNode } from 'react';
 
 export interface NotificationAction {
