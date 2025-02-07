@@ -1,4 +1,4 @@
-import type { MaybePromise } from '@difizen/mana-common';
+import type { MaybePromise } from '../../mana-common/index.js';
 import { prop } from '@difizen/mana-observable';
 import { singleton, Syringe } from '@difizen/mana-syringe';
 

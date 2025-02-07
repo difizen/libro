@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { MaybePromise, Event, Disposable, Newable } from '@difizen/mana-common';
+import type {
+  MaybePromise,
+  Event,
+  Disposable,
+  Newable,
+} from '../../mana-common/index.js';
 import { Syringe } from '@difizen/mana-syringe';
 import type React from 'react';
 

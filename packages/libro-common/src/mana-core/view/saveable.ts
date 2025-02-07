@@ -1,4 +1,4 @@
-import type { Event, MaybePromise } from '@difizen/mana-common';
+import type { Event, MaybePromise } from '../../mana-common/index.js';
 
 import type { View } from '..';
 

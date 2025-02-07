@@ -1,4 +1,4 @@
-import type { Disposable } from '@difizen/mana-common';
+import type { Disposable } from '../../mana-common/index.js';
 import { singleton } from '@difizen/mana-syringe';
 
 import { BaseVariableRegistry } from '../base-variable-registry';

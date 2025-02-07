@@ -1,14 +1,14 @@
-import {
-  Emitter,
-  WaitUntilEvent,
-  Disposable,
-  DisposableCollection,
-} from '@difizen/mana-common';
 import { prop } from '@difizen/mana-observable';
 import type { Contribution } from '@difizen/mana-syringe';
 import { Syringe } from '@difizen/mana-syringe';
 import { contrib, singleton } from '@difizen/mana-syringe';
 
+import {
+  Emitter,
+  WaitUntilEvent,
+  Disposable,
+  DisposableCollection,
+} from '../../mana-common/index.js';
 import { ApplicationContribution } from '../application/application';
 
 import type {

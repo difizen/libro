@@ -1,4 +1,4 @@
-import type { Newable } from '@difizen/mana-common';
+import type { Newable } from '../../mana-common/index.js';
 import { useInject, getOrigin } from '@difizen/mana-observable';
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';

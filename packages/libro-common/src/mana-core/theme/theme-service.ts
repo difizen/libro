@@ -1,6 +1,6 @@
-import type { Event } from '@difizen/mana-common';
-import { isPromiseLike } from '@difizen/mana-common';
-import { Emitter, Disposable, objects } from '@difizen/mana-common';
+import type { Event } from '../../mana-common/index.js';
+import { isPromiseLike } from '../../mana-common/index.js';
+import { Emitter, Disposable, objects } from '../../mana-common/index.js';
 import { prop } from '@difizen/mana-observable';
 import { singleton } from '@difizen/mana-syringe';
 

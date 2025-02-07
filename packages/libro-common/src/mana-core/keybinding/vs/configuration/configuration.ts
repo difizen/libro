@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Event, IStringDictionary } from '@difizen/mana-common';
-import { objects, types, URI } from '@difizen/mana-common';
+import type { Event, IStringDictionary } from '../../mana-common/index.js';
+import { objects, types, URI } from '../../mana-common/index.js';
 import { Syringe } from '@difizen/mana-syringe';
 
 import { Registry } from '../platform';

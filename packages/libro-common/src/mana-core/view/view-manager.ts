@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-invalid-this */
-import type { MaybePromise, Event, Newable, Disposable } from '@difizen/mana-common';
-import { DisposableCollection } from '@difizen/mana-common';
-import { Priority, Emitter } from '@difizen/mana-common';
+import type {
+  MaybePromise,
+  Event,
+  Newable,
+  Disposable,
+} from '../../mana-common/index.js';
+import { DisposableCollection } from '../../mana-common/index.js';
+import { Priority, Emitter } from '../../mana-common/index.js';
 import { prop } from '@difizen/mana-observable';
 import type { Contribution } from '@difizen/mana-syringe';
 import { contrib, inject, singleton } from '@difizen/mana-syringe';

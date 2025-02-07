@@ -1,5 +1,5 @@
-import type { Event } from '@difizen/mana-common';
-import { Emitter } from '@difizen/mana-common';
+import type { Event } from '../../mana-common/index.js';
+import { Emitter } from '../../mana-common/index.js';
 import { singleton } from '@difizen/mana-syringe';
 
 import { ApplicationContribution } from './application';

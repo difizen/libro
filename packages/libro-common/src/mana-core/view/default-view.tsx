@@ -1,5 +1,5 @@
-import type { Event } from '@difizen/mana-common';
-import { DisposableCollection, Emitter } from '@difizen/mana-common';
+import type { Event } from '../../mana-common/index.js';
+import { DisposableCollection, Emitter } from '../../mana-common/index.js';
 import { prop } from '@difizen/mana-observable';
 import { transient } from '@difizen/mana-syringe';
 import * as React from 'react';

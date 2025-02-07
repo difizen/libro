@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Emitter, Event } from '@difizen/mana-common';
-import { Iterable } from '@difizen/mana-common';
-import { PauseableEmitter } from '@difizen/mana-common';
-import { objects } from '@difizen/mana-common';
+import type { Emitter, Event } from '../../mana-common/index.js';
+import { Iterable } from '../../mana-common/index.js';
+import { PauseableEmitter } from '../../mana-common/index.js';
+import { objects } from '../../mana-common/index.js';
 import { prop } from '@difizen/mana-observable';
 import { inject, injectable, singleton } from '@difizen/mana-syringe';
 

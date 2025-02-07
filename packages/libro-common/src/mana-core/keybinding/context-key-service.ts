@@ -1,4 +1,4 @@
-import { Emitter } from '@difizen/mana-common';
+import { Emitter } from '../../mana-common/index.js';
 import { inject, postConstruct, singleton } from '@difizen/mana-syringe';
 
 import type { ContextKeyExpression, IContextKey } from './vs/contextkey';

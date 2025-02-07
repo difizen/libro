@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Emitter } from '@difizen/mana-common';
-import type { Event } from '@difizen/mana-common';
+import { Emitter } from '../../mana-common/index.js';
+import type { Event } from '../../mana-common/index.js';
 import { singleton } from '@difizen/mana-syringe';
 
 import type { IDisposable } from '../../../utils/lifecycle';

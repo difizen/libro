@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { isMacintosh, isLinux, isWindows, isWeb } from '@difizen/mana-common';
+import { isMacintosh, isLinux, isWindows, isWeb } from '../../mana-common/index.js';
 
 import { localize } from '../../nls';
 

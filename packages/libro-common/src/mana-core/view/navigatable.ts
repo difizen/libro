@@ -1,4 +1,4 @@
-import { URI } from '@difizen/mana-common';
+import { URI } from '../../mana-common/index.js';
 
 import type { NavigatableView, NavigatableViewOptions } from './navigatable-types';
 import type { ViewOpenHandlerOptions } from './view-open-handler';
