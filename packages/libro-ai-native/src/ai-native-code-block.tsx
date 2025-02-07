@@ -62,77 +62,77 @@ export const CodeBlockInCell = (props: any) => {
   return <code className={`chat-msg-md-code-code`}>{children}</code>;
 };
 
-// export const CodeBlockInChat = (props: any) => {
-//   const { className, children } = props;
-//   const instance = useInject<LibroAiNativeChatView>(ViewInstance);
-//   const cell = instance.libro?.activeCell;
+export const CodeBlockInChat = (props: any) => {
+  const { className, children } = props;
+  const instance = useInject<LibroAiNativeChatView>(ViewInstance);
+  const cell = instance.libro?.activeCell;
 
-//   const insertCell = async (data: any) => {
-//     const libro = instance.libro;
-//     if (!libro) {
-//       return;
-//     }
-//     const insertIndex = libro.model.cells.findIndex(
-//       (c) => c.id === libro.activeCell?.id,
-//     );
-//     await libro.addCell(
-//       {
-//         id: v4(),
-//         cell: { cell_type: 'code', source: data, metadata: {} },
-//       },
-//       insertIndex + 1,
-//     );
-//   };
+  const insertCell = async (data: any) => {
+    const libro = instance.libro;
+    if (!libro) {
+      return;
+    }
+    const insertIndex = libro.model.cells.findIndex(
+      (c) => c.id === libro.activeCell?.id,
+    );
+    await libro.addCell(
+      {
+        id: v4(),
+        cell: { cell_type: 'code', source: data, metadata: {} },
+      },
+      insertIndex + 1,
+    );
+  };
 
-//   const replace = (data: any) => {
-//     if (cell instanceof LibroCodeCellView && cell.editor) {
-//       const length = cell.editor.model.value.length;
-//       const start = cell.editor.getPositionAt(0);
-//       const end = cell.editor.getPositionAt(length);
-//       if (start && end) {
-//         cell.editor.replaceSelection(data, {
-//           start,
-//           end,
-//         });
-//       }
-//     }
-//   };
+  const replace = (data: any) => {
+    if (cell instanceof LibroCodeCellView && cell.editor) {
+      const length = cell.editor.model.value.length;
+      const start = cell.editor.getPositionAt(0);
+      const end = cell.editor.getPositionAt(length);
+      if (start && end) {
+        cell.editor.replaceSelection(data, {
+          start,
+          end,
+        });
+      }
+    }
+  };
 
-//   if (!props.inline && className) {
-//     const [, lang] = /language-(\w+)/.exec(className || '') || [];
+  if (!props.inline && className) {
+    const [, lang] = /language-(\w+)/.exec(className || '') || [];
 
-//     return (
-//       <pre className={`chat-msg-md-code-wrap`}>
-//         {lang && <div className={`chat-msg-md-code-lang`}>{lang}</div>}
-//         <CopyOutlined
-//           onClick={() => {
-//             copy(children);
-//             message.success(l10n.t('代码已复制'));
-//           }}
-//           className={`chat-msg-md-code-copy`}
-//         />
-//         <SyntaxHighlighter
-//           className={`libro-llm-syntax-highlighter`}
-//           language={lang}
-//           style={{}}
-//         >
-//           {typeof children === 'string' ? children.trim() : children}
-//         </SyntaxHighlighter>
-//         <div className="libro-ai-native-debug-code-btn-container">
-//           <Button
-//             color="primary"
-//             variant="outlined"
-//             onClick={() => insertCell(children)}
-//           >
-//             {l10n.t('插入 Cell')}
-//           </Button>
-//           <Button color="primary" variant="outlined" onClick={() => replace(children)}>
-//             {l10n.t('替换 Cell')}
-//           </Button>
-//         </div>
-//       </pre>
-//     );
-//   }
+    return (
+      <pre className={`chat-msg-md-code-wrap`}>
+        {lang && <div className={`chat-msg-md-code-lang`}>{lang}</div>}
+        <CopyOutlined
+          onClick={() => {
+            copy(children);
+            message.success(l10n.t('代码已复制'));
+          }}
+          className={`chat-msg-md-code-copy`}
+        />
+        <SyntaxHighlighter
+          className={`libro-llm-syntax-highlighter`}
+          language={lang}
+          style={{}}
+        >
+          {typeof children === 'string' ? children.trim() : children}
+        </SyntaxHighlighter>
+        <div className="libro-ai-native-debug-code-btn-container">
+          <Button
+            color="primary"
+            variant="outlined"
+            onClick={() => insertCell(children)}
+          >
+            {l10n.t('插入 Cell')}
+          </Button>
+          <Button color="primary" variant="outlined" onClick={() => replace(children)}>
+            {l10n.t('替换 Cell')}
+          </Button>
+        </div>
+      </pre>
+    );
+  }
 
-//   return <code className={`chat-msg-md-code-code`}>{children}</code>;
-// };
+  return <code className={`chat-msg-md-code-code`}>{children}</code>;
+};
