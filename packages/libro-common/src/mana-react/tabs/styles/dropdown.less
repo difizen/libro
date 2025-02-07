@@ -1,0 +1,70 @@
+@import '../../styles/variables.less';
+
+@tab-prefix-cls: ~'@{mana-prefix}-tabs';
+
+.@{tab-prefix-cls}-dropdown {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--mana-text-color);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  z-index: 1050;
+  display: block;
+
+  &-hidden {
+    display: none;
+  }
+
+  &-menu {
+    max-height: 200px;
+    margin: 0;
+    padding: 4px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: left;
+    list-style-type: none;
+    background-color: var(--mana-color-bg-container);
+    background-clip: padding-box;
+    border-radius: 2px;
+    outline: none;
+    box-shadow:
+      0 3px 6px -4px rgba(0, 0, 0, 12%),
+      0 6px 16px 0 rgba(0, 0, 0, 8%),
+      0 9px 28px 8px rgba(0, 0, 0, 5%);
+
+    &-item {
+      min-width: 120px;
+      margin: 0;
+      padding: 5px 12px;
+      overflow: hidden;
+      color: var(--mana-text-color);
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 22px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background: #f5f5f5;
+      }
+
+      &-disabled {
+        &,
+        &:hover {
+          color: var(--mana-text-quaternary);
+          background: transparent;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

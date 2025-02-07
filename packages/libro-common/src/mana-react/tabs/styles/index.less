@@ -1,0 +1,231 @@
+@import './position';
+@import './dropdown';
+@import './card';
+@import '../../styles/variables.less';
+
+@tab-prefix-cls: ~'@{mana-prefix}-tabs';
+
+.@{tab-prefix-cls} {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--mana-text-color);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  display: flex;
+  overflow: hidden;
+
+  // ========================== Navigation ==========================
+  > .@{tab-prefix-cls}-nav,
+  > div > .@{tab-prefix-cls}-nav {
+    position: relative;
+    display: flex;
+    flex: none;
+    align-items: center;
+
+    .@{tab-prefix-cls}-nav-wrap {
+      position: relative;
+      display: inline-block;
+      display: flex;
+      flex: auto;
+      align-self: stretch;
+      overflow: hidden;
+      white-space: nowrap;
+      transform: translate(0); // Fix chrome render bug
+
+      // >>>>> Ping shadow
+      &::before,
+      &::after {
+        position: absolute;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s;
+        content: '';
+        pointer-events: none;
+      }
+    }
+
+    .@{tab-prefix-cls}-nav-list {
+      position: relative;
+      display: flex;
+      transition: transform 0.3s;
+    }
+
+    // >>>>>>>> Operations
+    .@{tab-prefix-cls}-nav-operations {
+      display: flex;
+      align-self: stretch;
+
+      &-hidden {
+        position: absolute;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    }
+
+    .@{tab-prefix-cls}-nav-more {
+      position: relative;
+      padding: 16px;
+      background: transparent;
+      border: 0;
+
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 5px;
+        transform: translateY(100%);
+        content: '';
+      }
+    }
+
+    .@{tab-prefix-cls}-nav-add {
+      min-width: 28px;
+      margin-left: 0;
+      padding: 0 8px;
+      background: hsv(0, 0, 98%);
+      border: 1px solid hsv(0, 0, 94%);
+      border-radius: 2px 2px 0 0;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+      &:hover {
+        color: var(--mana-text-color);
+      }
+
+      &:active,
+      &:focus {
+        color: var(--mana-text-color);
+      }
+    }
+  }
+
+  &-extra-content {
+    flex: none;
+  }
+
+  &-centered {
+    > .@{tab-prefix-cls}-nav,
+    > div > .@{tab-prefix-cls}-nav {
+      .@{tab-prefix-cls}-nav-wrap {
+        &:not([class*='@{tab-prefix-cls}-nav-wrap-ping']) {
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+  // ============================ InkBar ============================
+  &-ink-bar {
+    position: absolute;
+    background: var(--mana-primary-color);
+    pointer-events: none;
+  }
+
+  // ============================= Tabs =============================
+  &-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 14px;
+    background: transparent;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+
+    &-btn,
+    &-remove {
+      &:focus,
+      &:active {
+        color: var(--mana-text-color);
+      }
+    }
+
+    &-btn {
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    &-remove {
+      flex: none;
+      margin-right: -4px;
+      margin-left: 8px;
+      color: var(--mana-text-secondary);
+      font-size: 12px;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        color: var(--mana-text-color);
+      }
+    }
+
+    &:hover {
+      color: var(--mana-text-color);
+      background-color: var(--mana-sideBar-background);
+    }
+
+    &&-tab-active:hover {
+      background-color: var(--mana-sideBar-background);
+    }
+
+    &&-active &-btn {
+      color: var(--mana-activityBar-foreground);
+      // color: @tabs-highlight-color;
+      text-shadow: 0 0 0.25px currentcolor;
+    }
+
+    &&-disabled {
+      color: var(--mana-text-quaternary);
+      cursor: not-allowed;
+    }
+
+    &&-disabled &-btn,
+    &&-disabled &-remove {
+      &:focus,
+      &:active {
+        color: var(--mana-text-quaternary);
+      }
+    }
+
+    & &-remove .@{iconfont-css-prefix} {
+      margin: 0;
+    }
+  }
+
+  &-tab + &-tab {
+    margin: 0 0 0 32px;
+  }
+
+  // =========================== TabPanes ===========================
+  &-content {
+    &-holder {
+      flex: auto;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    &-animated {
+      transition: margin 0.3s;
+    }
+  }
+
+  &-tabpane {
+    flex: none;
+    width: 100%;
+    outline: none;
+  }
+}
