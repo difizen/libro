@@ -14,7 +14,7 @@ import {
   useInject,
   view,
 } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { forwardRef } from 'react';
 import type { FontWeight, ITerminalOptions } from 'xterm';
 import { Terminal } from 'xterm';

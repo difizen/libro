@@ -3,7 +3,7 @@ import { ThemeService } from '@difizen/libro-common/mana-app';
 import { URI } from '@difizen/libro-common/mana-app';
 import { ViewManager } from '@difizen/libro-common/mana-app';
 import { useInject } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Form, message, Input, Modal, ConfigProvider, theme } from 'antd';
 import type { InputRef } from 'antd';
 import { useEffect, useRef, useState } from 'react';

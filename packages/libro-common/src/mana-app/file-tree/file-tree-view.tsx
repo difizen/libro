@@ -3,6 +3,7 @@ import type { LegacyRef } from 'react';
 import * as React from 'react';
 import { forwardRef, lazy, Suspense } from 'react';
 
+import { l10n } from '../../l10n/index.js'; /* eslint-disable @typescript-eslint/no-unused-vars */
 import { URI } from '../../mana-common/index.js';
 import {
   Disposable,
@@ -12,7 +13,6 @@ import {
 import { ManaModule, SelectionService, view } from '../../mana-core/index.js';
 import { ViewInstance } from '../../mana-core/index.js';
 import type { MenuPath } from '../../mana-core/index.js';
-import { l10n } from '../../mana-l10n/index.js'; /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useInject } from '../../mana-observable/index.js';
 import { singleton, inject } from '../../mana-syringe/index.js';
 import { LabelProvider } from '../label';

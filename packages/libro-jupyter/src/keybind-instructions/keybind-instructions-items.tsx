@@ -1,5 +1,5 @@
 import { isMacintosh, singleton } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 

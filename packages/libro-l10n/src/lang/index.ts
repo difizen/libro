@@ -1,4 +1,4 @@
-import type { LanguageBundles } from '@difizen/libro-common/mana-l10n';
+import type { LanguageBundles } from '@difizen/libro-common/l10n';
 
 import langENUS from './bundle.l10n.en-US.json';
 import langZHCN from './bundle.l10n.zh-CN.json';

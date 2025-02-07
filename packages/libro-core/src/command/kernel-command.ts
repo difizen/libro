@@ -1,5 +1,5 @@
 import type { Command } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 
 export const KernelCommands: Record<string, Command & { keybind?: string }> = {
   //#region libro command

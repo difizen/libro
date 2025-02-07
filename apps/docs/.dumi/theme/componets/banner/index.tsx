@@ -1,4 +1,4 @@
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import React from 'react';
 
 import { IS_MOBILE } from '../../layouts/DocLayout.js';

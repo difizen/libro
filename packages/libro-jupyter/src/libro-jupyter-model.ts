@@ -13,7 +13,7 @@ import type { IContentsCheckpointModel, IContentsModel } from '@difizen/libro-ke
 import { getOrigin, ModalService, prop } from '@difizen/libro-common/mana-app';
 import { Deferred } from '@difizen/libro-common/mana-app';
 import { inject, transient } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 
 import {
   ExecutedWithKernelCellModel,

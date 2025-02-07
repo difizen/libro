@@ -1,4 +1,4 @@
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Button } from 'antd';
 import { history } from 'dumi';
 import type { FC } from 'react';

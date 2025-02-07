@@ -11,7 +11,7 @@ import type {
 } from '@difizen/libro-common/mana-app';
 import { Emitter } from '@difizen/libro-common/mana-app';
 import { FileService, URI, inject, singleton } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { message } from 'antd';
 
 import { FileNameAlias } from './file-name-alias.js';

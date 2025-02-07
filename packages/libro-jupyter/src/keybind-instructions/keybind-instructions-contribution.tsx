@@ -6,7 +6,7 @@ import {
   CommandContribution,
 } from '@difizen/libro-common/mana-app';
 import { inject, singleton } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 
 import { KeybindInstructionsIcon } from './keybind-instructions-icon.js';
 import { KeybindInstrutionModal } from './keybind-instructions-view.js';

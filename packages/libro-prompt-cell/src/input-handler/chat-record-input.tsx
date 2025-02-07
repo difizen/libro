@@ -1,7 +1,7 @@
 import { EditFilled } from '@ant-design/icons';
 import { LibroContextKey } from '@difizen/libro-core';
 import { useInject } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Select, Tag } from 'antd';
 import classNames from 'classnames';
 import type { BaseSelectRef } from 'rc-select';

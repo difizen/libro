@@ -2,7 +2,7 @@ import type { ModalItemProps, ModalItem } from '@difizen/libro-common/mana-app';
 import { ThemeService } from '@difizen/libro-common/mana-app';
 import { CommandRegistry } from '@difizen/libro-common/mana-app';
 import { URI, useInject, ViewManager } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Col, Form, message, Row, Input, Modal, ConfigProvider, theme } from 'antd';
 import type { InputRef } from 'antd';
 import { useEffect, useRef, useState } from 'react';

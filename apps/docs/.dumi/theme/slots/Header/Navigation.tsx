@@ -1,4 +1,4 @@
-import { l10n, L10nLang } from '@difizen/libro-common/mana-l10n';
+import { l10n, L10nLang } from '@difizen/libro-common/l10n';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { Link, useLocation } from 'dumi';

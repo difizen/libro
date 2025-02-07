@@ -21,9 +21,9 @@
       "typings": "./es/mana-react/index.js",
       "default": "./es/mana-react/index.js"
     },
-    "./mana-l10n": {
-      "typings": "./es/mana-l10n/index.js",
-      "default": "./es/mana-l10n/index.js"
+    "./l10n": {
+      "typings": "./es/l10n/index.js",
+      "default": "./es/l10n/index.js"
     },
     "./mana-syringe": {
       "typings": "./es/mana-syringe/index.js",

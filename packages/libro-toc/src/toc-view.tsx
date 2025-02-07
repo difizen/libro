@@ -5,7 +5,7 @@ import { ConfigurationService } from '@difizen/libro-common/mana-app';
 import { getOrigin, prop, useInject } from '@difizen/libro-common/mana-app';
 import { BaseView, view, ViewInstance } from '@difizen/libro-common/mana-app';
 import { inject, transient } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import React, { useRef } from 'react';
 
 import { TOCVisible } from './toc-configuration.js';

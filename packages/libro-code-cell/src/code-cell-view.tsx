@@ -5,18 +5,7 @@ import { CodeEditorManager } from '@difizen/libro-code-editor';
 import type { ICodeCell, IOutput } from '@difizen/libro-common';
 import { CellUri } from '@difizen/libro-common';
 import { isOutput } from '@difizen/libro-common';
-import type {
-  IOutputAreaOption,
-  LibroCell,
-  CellViewOptions,
-} from '@difizen/libro-core';
-import {
-  CellService,
-  EditorStatus,
-  LibroEditableExecutableCellView,
-  LibroOutputArea,
-  VirtualizedManagerHelper,
-} from '@difizen/libro-core';
+import { l10n } from '@difizen/libro-common/l10n'; /* eslint-disable react-hooks/exhaustive-deps */
 import type { ViewSize } from '@difizen/libro-common/mana-app';
 import {
   getOrigin,
@@ -32,7 +21,18 @@ import {
   watch,
   Deferred,
 } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n'; /* eslint-disable react-hooks/exhaustive-deps */
+import type {
+  IOutputAreaOption,
+  LibroCell,
+  CellViewOptions,
+} from '@difizen/libro-core';
+import {
+  CellService,
+  EditorStatus,
+  LibroEditableExecutableCellView,
+  LibroOutputArea,
+  VirtualizedManagerHelper,
+} from '@difizen/libro-core';
 import { useEffect, useRef, memo, forwardRef } from 'react';
 
 import type { LibroCodeCellModel } from './code-cell-model.js';

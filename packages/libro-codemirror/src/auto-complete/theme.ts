@@ -1,5 +1,5 @@
 import { EditorView } from '@codemirror/view';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 
 export const enum Info {
   Margin = 30,

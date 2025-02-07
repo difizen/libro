@@ -7,7 +7,7 @@ import {
   view,
 } from '@difizen/libro-common/mana-app';
 import { BaseView } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Alert } from 'antd';
 import { forwardRef } from 'react';
 
