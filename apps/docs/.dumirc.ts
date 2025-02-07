@@ -10,6 +10,7 @@ const nav = [
 if (LIBRO_DEPLOY_ENV !== 'vercel') {
   nav.push({ title: '示例', link: '/examples' });
 }
+console.log(process.cwd());
 export default defineConfig({
   themeConfig: {
     hd: { rules: [] },
@@ -108,6 +109,9 @@ export default defineConfig({
       pathRewrite: {},
       ws: true,
     },
+  },
+  alias: {
+    '@difizen/libro-common/mana-common': `/Users/ximo.lk/Public/code/opensource/_libro/packages/libro-common/es/mana-common/index.js`,
   },
   analytics: {
     baidu: process.env.BAIDU_ANALYTICS,

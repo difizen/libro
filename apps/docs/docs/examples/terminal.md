@@ -7,4 +7,4 @@ order: 2
 
 Start a `jupyterlab` service locally in a specific directory.
 
-<code src="../../src/terminal" compact="true"></code>
+<!-- <code src="../../src/terminal" compact="true"></code> -->
