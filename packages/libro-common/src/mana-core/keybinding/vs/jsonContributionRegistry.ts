@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Event } from '../../mana-common/index.js';
-import { Emitter } from '../../mana-common/index.js';
+import type { Event } from '../../../mana-common/index.js';
+import { Emitter } from '../../../mana-common/index.js';
 
 import type { IJSONSchema } from './jsonSchema';
 import * as platform from './platform';

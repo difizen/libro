@@ -1,5 +1,4 @@
-import { Syringe } from '../../mana-syringe/index.js';
-
+import { Syringe } from '../../../mana-syringe/index.js';
 import type { VariableDefinition } from '../protocol';
 
 import type { Color } from './color';

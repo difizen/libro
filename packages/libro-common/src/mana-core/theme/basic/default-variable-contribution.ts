@@ -1,4 +1,4 @@
-import { singleton } from '../../mana-syringe/index.js';
+import { singleton } from '../../../mana-syringe/index.js';
 
 import { VariableContribution } from './variable-protocol';
 import type { VariableRegistry } from './variable-registry';
