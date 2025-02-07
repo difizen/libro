@@ -1,7 +1,6 @@
-import { prop } from '@difizen/mana-observable';
-
 import type { Event } from '../../mana-common/index.js';
 import { Emitter, Deferred } from '../../mana-common/index.js';
+import { prop } from '../../mana-observable/index.js';
 import { inject, singleton } from '../../mana-syringe/index.js';
 import { DebugService } from '../common/debug';
 

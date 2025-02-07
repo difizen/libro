@@ -1,5 +1,5 @@
 import type { MaybePromise } from '../../mana-common/index.js';
-import { prop } from '@difizen/mana-observable';
+import { prop } from '../../mana-observable/index.js';
 import { singleton, Syringe } from '../../mana-syringe/index.js';
 
 import type { ConfigurationNode } from './configuration-protocol';

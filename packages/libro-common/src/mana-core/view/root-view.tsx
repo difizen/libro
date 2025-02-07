@@ -1,5 +1,5 @@
 import { timeout } from '../../mana-common/index.js';
-import { prop, useInject } from '@difizen/mana-observable';
+import { prop, useInject } from '../../mana-observable/index.js';
 import { inject, singleton } from '../../mana-syringe/index.js';
 import * as React from 'react';
 

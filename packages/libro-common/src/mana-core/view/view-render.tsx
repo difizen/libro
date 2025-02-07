@@ -1,4 +1,4 @@
-import { useInject } from '@difizen/mana-observable';
+import { useInject } from '../../mana-observable/index.js';
 import type { ReactNode } from 'react';
 import { memo } from 'react';
 

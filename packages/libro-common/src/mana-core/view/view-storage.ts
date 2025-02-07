@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { prop } from '@difizen/mana-observable';
+import { prop } from '../../mana-observable/index.js';
 import { inject, singleton } from '../../mana-syringe/index.js';
 
 import { DebugService, StorageService } from '../common';
