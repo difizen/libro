@@ -7,7 +7,7 @@ import {
   prop,
   useInject,
 } from '../../mana-observable/index.js';
-import { inject, transient } from '../../mana-syringe/index.js';
+import { inject, transient } from '../../ioc/index.js';
 import * as React from 'react';
 
 import { view } from './decorator';

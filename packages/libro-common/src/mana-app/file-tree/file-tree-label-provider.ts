@@ -1,5 +1,5 @@
 import type { URI } from '../../common/index.js';
-import { singleton, inject } from '../../mana-syringe/index.js';
+import { singleton, inject } from '../../ioc/index.js';
 
 import type { DidChangeLabelEvent } from '../label';
 import { LabelProvider, LabelProviderContribution, URIIconReference } from '../label';

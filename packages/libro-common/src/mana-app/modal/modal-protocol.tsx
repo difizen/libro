@@ -1,4 +1,4 @@
-import { Syringe } from '../../mana-syringe/index.js';
+import { Syringe } from '../../ioc/index.js';
 
 export interface ModalItemProps<T> {
   modalItem: ModalItem<T>;

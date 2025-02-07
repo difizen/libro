@@ -1,7 +1,7 @@
 // import { Modal } from 'antd';
 import { Deferred } from '../../common/index.js';
 import { URI } from '../../common/index.js';
-import { inject, postConstruct, singleton } from '../../mana-syringe/index.js';
+import { inject, postConstruct, singleton } from '../../ioc/index.js';
 
 import { LabelProvider } from '../label';
 import {

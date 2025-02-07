@@ -1,5 +1,5 @@
 import { ApplicationContribution, localStorageService } from '../mana-core/index.js';
-import { inject, singleton } from '../mana-syringe/index.js';
+import { inject, singleton } from '../ioc/index.js';
 
 import { NotificationService } from './notification/service';
 

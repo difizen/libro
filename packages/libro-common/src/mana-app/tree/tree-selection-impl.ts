@@ -1,6 +1,6 @@
 import type { Event } from '../../common/index.js';
 import { Emitter } from '../../common/index.js';
-import { singleton, inject, postConstruct } from '../../mana-syringe/index.js';
+import { singleton, inject, postConstruct } from '../../ioc/index.js';
 
 import type { TreeNode } from './tree';
 import { Tree } from './tree';

@@ -1,7 +1,7 @@
 import 'react';
 import assert from 'assert';
 
-import { Container } from '../../mana-syringe/index.js';
+import { Container } from '../../ioc/index.js';
 
 import { ThemeService } from '../theme-service';
 

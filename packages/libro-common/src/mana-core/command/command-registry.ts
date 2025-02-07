@@ -5,9 +5,9 @@ import {
   DisposableCollection,
 } from '../../common/index.js';
 import { prop } from '../../mana-observable/index.js';
-import type { Contribution } from '../../mana-syringe/index.js';
-import { Syringe } from '../../mana-syringe/index.js';
-import { contrib, singleton } from '../../mana-syringe/index.js';
+import type { Contribution } from '../../ioc/index.js';
+import { Syringe } from '../../ioc/index.js';
+import { contrib, singleton } from '../../ioc/index.js';
 import { ApplicationContribution } from '../application/application';
 
 import type {

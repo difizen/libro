@@ -1,6 +1,6 @@
 import type { Newable } from '../../common/index.js';
-import type { Syringe } from '../../mana-syringe/index.js';
-import { registerSideOption } from '../../mana-syringe/index.js';
+import type { Syringe } from '../../ioc/index.js';
+import { registerSideOption } from '../../ioc/index.js';
 
 import type { ManaModule } from '../module';
 import { ManaContext } from '../module';

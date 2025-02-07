@@ -1,7 +1,7 @@
 import type { ColorRegistry } from '../../mana-core/index.js';
 import { Color } from '../../mana-core/index.js';
 import { ColorContribution } from '../../mana-core/index.js';
-import { singleton } from '../../mana-syringe/index.js';
+import { singleton } from '../../ioc/index.js';
 
 @singleton({ contrib: ColorContribution })
 export class MenuColorRegistry implements ColorContribution {

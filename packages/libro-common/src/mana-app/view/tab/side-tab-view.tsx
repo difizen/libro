@@ -4,7 +4,7 @@ import { ViewManager } from '../../../mana-core/index.js';
 import { view, ViewOption, ViewContext } from '../../../mana-core/index.js';
 import { equals, prop } from '../../../mana-observable/index.js';
 import type { TabsProps } from '../../../react/index.js';
-import { inject, transient } from '../../../mana-syringe/index.js';
+import { inject, transient } from '../../../ioc/index.js';
 import cls from 'classnames';
 
 import { ToolbarRender } from '../../toolbar/toolbar-render';

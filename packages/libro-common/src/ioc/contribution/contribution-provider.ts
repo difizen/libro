@@ -1,13 +1,13 @@
 import type { Disposable } from '../../common/index.js';
 import { Emitter } from '../../common/index.js';
 import { DisposableCollection } from '../../common/index.js';
-import type { Syringe } from '../core';
+import type { Syringe } from '../core.js';
 
 import {
   ContributionOptionConfig,
   type Option,
   type Provider,
-} from './contribution-protocol';
+} from './contribution-protocol.js';
 
 export class DefaultContributionProvider<T extends Record<string, any>>
   implements Provider<T>, Disposable

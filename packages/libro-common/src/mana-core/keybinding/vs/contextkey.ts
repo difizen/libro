@@ -13,7 +13,7 @@ import {
   isWindows,
   isWeb,
 } from '../../../common/index.js';
-import { Syringe } from '../../../mana-syringe/index.js';
+import { Syringe } from '../../../ioc/index.js';
 
 const _userAgent = userAgent || '';
 const STATIC_VALUES = new Map<string, boolean>();

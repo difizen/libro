@@ -5,7 +5,7 @@
 
 import { Emitter } from '../../../../common/index.js';
 import type { Event } from '../../../../common/index.js';
-import { singleton } from '../../../../mana-syringe/index.js';
+import { singleton } from '../../../../ioc/index.js';
 
 import type { IDisposable } from '../../../utils/lifecycle';
 import { VSDisposable } from '../../../utils/lifecycle';

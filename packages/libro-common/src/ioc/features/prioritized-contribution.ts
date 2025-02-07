@@ -1,9 +1,9 @@
 import { Priority } from '../../common/index.js';
 import type { Newable } from '../../common/index.js';
 import type { Contribution } from '../contribution/index';
-import { Syringe } from '../core';
-import { singleton } from '../decorator';
-import { registerSideOption } from '../side-option';
+import { Syringe } from '../core.js';
+import { singleton } from '../decorator.js';
+import { registerSideOption } from '../side-option.js';
 
 export interface PrioritizedContribution<O = any, T = any> {
   canHandle: (option: O) => number;

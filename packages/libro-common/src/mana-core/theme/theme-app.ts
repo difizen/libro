@@ -1,6 +1,6 @@
 import { Disposable, DisposableCollection } from '../../common/index.js';
-import type { Contribution } from '../../mana-syringe/index.js';
-import { contrib, inject, singleton } from '../../mana-syringe/index.js';
+import type { Contribution } from '../../ioc/index.js';
+import { contrib, inject, singleton } from '../../ioc/index.js';
 
 import type { Application } from '../application/index';
 import { ApplicationContribution } from '../application/index';

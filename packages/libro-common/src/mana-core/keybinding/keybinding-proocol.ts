@@ -1,4 +1,4 @@
-import { Syringe } from '../../mana-syringe/index.js';
+import { Syringe } from '../../ioc/index.js';
 
 import type { KeybindingRegistry } from './keybinding';
 

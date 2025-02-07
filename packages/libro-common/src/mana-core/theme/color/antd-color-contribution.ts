@@ -1,4 +1,4 @@
-import { singleton } from '../../../mana-syringe/index.js';
+import { singleton } from '../../../ioc/index.js';
 
 import { ColorContribution } from './color-protocol';
 import type { ColorRegistry } from './color-registry';

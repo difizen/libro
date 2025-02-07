@@ -9,7 +9,7 @@ import { MenuItem } from '../../mana-core/index.js';
 import { CommandRegistry, MenuRegistry } from '../../mana-core/index.js';
 import { prop } from '../../mana-observable/index.js';
 import { Menu as MenuComponent } from '../../react/index.js';
-import { inject, transient } from '../../mana-syringe/index.js';
+import { inject, transient } from '../../ioc/index.js';
 
 import { MenuItemRender } from './menu-item-render';
 import type { MenuData, MenuItemState } from './menu-protocol';

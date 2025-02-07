@@ -8,7 +8,7 @@ import { Iterable } from '../../../common/index.js';
 import { PauseableEmitter } from '../../../common/index.js';
 import { objects } from '../../../common/index.js';
 import { prop } from '../../../mana-observable/index.js';
-import { inject, injectable, singleton } from '../../../mana-syringe/index.js';
+import { inject, injectable, singleton } from '../../../ioc/index.js';
 import type { CommandRegistry } from '../../command/index';
 import type { CommandContribution } from '../../command/index';
 import { DisposableStore, MutableDisposable } from '../../utils';

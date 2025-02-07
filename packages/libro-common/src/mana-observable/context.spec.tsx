@@ -6,8 +6,8 @@ import type { ErrorInfo, ReactNode } from 'react';
 import React from 'react';
 import renderer, { act } from 'react-test-renderer';
 
-import { singleton } from '../mana-syringe/index.js';
-import { GlobalContainer, inject } from '../mana-syringe/index.js';
+import { singleton } from '../ioc/index.js';
+import { GlobalContainer, inject } from '../ioc/index.js';
 
 import {
   defaultObservableContext,

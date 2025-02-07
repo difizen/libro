@@ -1,5 +1,5 @@
 import { ObservableContext } from '../../mana-observable/index.js';
-import type { Syringe } from '../../mana-syringe/index.js';
+import type { Syringe } from '../../ioc/index.js';
 import * as React from 'react';
 
 import type { ManaContext } from '../module/mana-module-context';

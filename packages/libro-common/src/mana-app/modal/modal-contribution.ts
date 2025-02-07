@@ -1,6 +1,6 @@
 import { ApplicationContribution } from '../../mana-core/index.js';
-import { inject } from '../../mana-syringe/index.js';
-import { singleton } from '../../mana-syringe/index.js';
+import { inject } from '../../ioc/index.js';
+import { singleton } from '../../ioc/index.js';
 
 import { ModalService } from './modal-service';
 

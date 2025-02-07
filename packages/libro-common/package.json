@@ -25,9 +25,9 @@
       "typings": "./es/l10n/index.js",
       "default": "./es/l10n/index.js"
     },
-    "./mana-syringe": {
-      "typings": "./es/mana-syringe/index.js",
-      "default": "./es/mana-syringe/index.js"
+    "./ioc": {
+      "typings": "./es/ioc/index.js",
+      "default": "./es/ioc/index.js"
     },
     "./mana-observable": {
       "typings": "./es/mana-observable/index.js",

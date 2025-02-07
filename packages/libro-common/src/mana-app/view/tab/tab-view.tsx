@@ -13,7 +13,7 @@ import { useInject } from '../../../mana-observable/index.js';
 import { prop } from '../../../mana-observable/index.js';
 import { Tabs, Dropdown } from '../../../react/index.js';
 import type { TabPaneProps, TabsProps } from '../../../react/index.js';
-import { inject, transient } from '../../../mana-syringe/index.js';
+import { inject, transient } from '../../../ioc/index.js';
 import classnames from 'classnames';
 import type { ReactNode } from 'react';
 import { forwardRef } from 'react';

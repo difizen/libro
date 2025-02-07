@@ -5,7 +5,7 @@
 
 import type { Event, IStringDictionary } from '../../../../common/index.js';
 import { objects, types, URI } from '../../../../common/index.js';
-import { Syringe } from '../../../../mana-syringe/index.js';
+import { Syringe } from '../../../../ioc/index.js';
 import { Registry } from '../platform';
 
 // import type { IWorkspaceFolder } from 'vs/platform/workspace/common/workspace';

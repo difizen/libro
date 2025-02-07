@@ -1,6 +1,6 @@
 import type { Event, MaybePromise, URI } from '../../common/index.js';
 import { Emitter } from '../../common/index.js';
-import { inject, postConstruct, singleton } from '../../mana-syringe/index.js';
+import { inject, postConstruct, singleton } from '../../ioc/index.js';
 
 import type { BaseView } from './default-view';
 import type { OpenHandler } from './open-handler';

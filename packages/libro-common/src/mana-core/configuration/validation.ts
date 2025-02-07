@@ -1,5 +1,5 @@
 import { getOrigin } from '../../mana-observable/index.js';
-import { singleton } from '../../mana-syringe/index.js';
+import { singleton } from '../../ioc/index.js';
 import Ajv from 'ajv';
 
 import type { ConfigurationNode } from './configuration-protocol';
