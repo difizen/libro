@@ -1,6 +1,6 @@
 import type { Command } from '../../../mana-core/index.js';
 import { CommandContribution, CommandRegistry } from '../../../mana-core/index.js';
-import { l10n } from '@difizen/mana-l10n'; /* eslint-disable max-len, @typescript-eslint/indent */
+import { l10n } from '../../../mana-l10n/index.js'; /* eslint-disable max-len, @typescript-eslint/indent */
 import { inject, singleton } from '../../../mana-syringe/index.js';
 
 export const CLOSE_TAB: Command = {
