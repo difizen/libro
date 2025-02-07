@@ -129,6 +129,10 @@ export default defineConfig({
       getPackagesDir(),
       'libro-common/es/mana-l10n/index.js',
     ),
+    '@difizen/libro-common/mana-app': path.resolve(
+      getPackagesDir(),
+      'libro-common/es/mana-app/index.js',
+    ),
   },
   analytics: {
     baidu: process.env.BAIDU_ANALYTICS,
