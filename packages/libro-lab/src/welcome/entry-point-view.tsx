@@ -16,7 +16,7 @@ import {
   ViewManager,
 } from '@difizen/libro-common/mana-app';
 import { BaseView } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Col, Row } from 'antd';
 import { forwardRef, useEffect, useState } from 'react';
 

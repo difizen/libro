@@ -8,7 +8,7 @@ import {
   useInject,
   useObserve,
 } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Popover } from 'antd';
 
 import { ExecutableCellModel, ExecutableCellView } from '../cell/index.js';

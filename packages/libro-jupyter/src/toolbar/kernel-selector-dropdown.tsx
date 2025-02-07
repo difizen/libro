@@ -6,7 +6,7 @@ import {
   useInject,
   ViewInstance,
 } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Dropdown, Space } from 'antd';
 import type { MenuProps } from 'antd';
 import { useCallback, useEffect, useState } from 'react';

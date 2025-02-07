@@ -14,7 +14,7 @@ import {
   OpenerService,
   singleton,
 } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { message } from 'antd';
 
 export const AppFileCommands = {

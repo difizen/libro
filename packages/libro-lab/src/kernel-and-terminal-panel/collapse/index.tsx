@@ -1,6 +1,6 @@
 import { CaretDownOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { ViewContext } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Empty, message, Popconfirm } from 'antd';
 import React, { useState } from 'react';
 

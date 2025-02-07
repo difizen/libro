@@ -8,7 +8,7 @@ import {
   ViewOption,
 } from '@difizen/libro-common/mana-app';
 import { BaseView, transient, view } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import React from 'react';
 
 import './index.less';

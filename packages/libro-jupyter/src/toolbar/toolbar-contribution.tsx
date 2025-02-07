@@ -1,7 +1,7 @@
 import { KernelCommands, NotebookCommands } from '@difizen/libro-core';
 import type { ToolbarRegistry } from '@difizen/libro-common/mana-app';
 import { singleton, inject, ToolbarContribution } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 
 import { LocationIcon } from '../components/icons.js';
 import { KernelStatusAndSelectorProvider } from '../libro-jupyter-protocol.js';

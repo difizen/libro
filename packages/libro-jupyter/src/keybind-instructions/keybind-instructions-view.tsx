@@ -3,7 +3,7 @@ import { inject, singleton, ThemeService } from '@difizen/libro-common/mana-app'
 import { getOrigin, prop, useInject } from '@difizen/libro-common/mana-app';
 import type { ModalItem, ModalItemProps } from '@difizen/libro-common/mana-app';
 import type { Disposable } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Input, Drawer, Table, Segmented, ConfigProvider, theme } from 'antd';
 import { forwardRef, useCallback, useState } from 'react';
 

@@ -1,5 +1,5 @@
 import type { ConfigurationNode } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 
 export const LibroConfigAutoSave: ConfigurationNode<boolean> = {
   id: 'libro.autosave',

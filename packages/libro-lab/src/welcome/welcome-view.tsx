@@ -9,7 +9,7 @@ import {
   ViewRender,
 } from '@difizen/libro-common/mana-app';
 import { BaseView } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { forwardRef } from 'react';
 
 import { LayoutService } from '../layout/layout-service.js';

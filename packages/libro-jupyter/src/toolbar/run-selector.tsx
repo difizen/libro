@@ -11,7 +11,7 @@ import {
   ConfigurationService,
 } from '@difizen/libro-common/mana-app';
 import type { Toolbar } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Menu, Dropdown, Tooltip } from 'antd';
 import type { MenuProps } from 'antd';
 import { useEffect, useState } from 'react';

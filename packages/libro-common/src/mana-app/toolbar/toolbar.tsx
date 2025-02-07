@@ -11,7 +11,7 @@ import {
   ToolbarRegistry,
   renderNode,
 } from '../../mana-core/index.js';
-import { l10n } from '../../mana-l10n/index.js';
+import { l10n } from '../../l10n/index.js';
 import { getOrigin, prop } from '../../mana-observable/index.js';
 import { inject, transient } from '../../mana-syringe/index.js';
 

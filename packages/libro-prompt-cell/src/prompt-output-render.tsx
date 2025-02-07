@@ -5,7 +5,7 @@ import type { BaseOutputView } from '@difizen/libro-jupyter';
 import { NotebookCommands } from '@difizen/libro-jupyter';
 import { ChatComponents } from '@difizen/magent-chat';
 import { CommandRegistry, useInject } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import React, { useState } from 'react';
 import breaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';

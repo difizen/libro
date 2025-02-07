@@ -1,5 +1,5 @@
 import { CopyOutlined } from '@ant-design/icons';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { LibroCodeCellView } from '@difizen/libro-jupyter';
 import { useInject, ViewInstance } from '@difizen/libro-common/mana-app';
 import { Button, message } from 'antd';

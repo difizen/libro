@@ -32,7 +32,7 @@ import {
   watch,
   Deferred,
 } from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/mana-l10n';
+import { l10n } from '@difizen/libro-common/l10n';
 import { Select, Tag } from 'antd';
 import type { DefaultOptionType } from 'antd/es/select/index.js';
 import classNames from 'classnames';
