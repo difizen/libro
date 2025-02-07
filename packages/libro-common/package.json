@@ -43,10 +43,19 @@
     "@difizen/mana-app": "latest",
     "path-browserify": "^1.0.0",
     "sanitize-html": "^2.7.2",
-    "url-parse": "^1.5.10"
+    "url-parse": "^1.5.10",
+    "@ant-design/icons": "^5.1.0",
+    "classnames": "^2.3.2",
+    "rc-dropdown": "^3.2.0",
+    "rc-motion": "^2.9.2",
+    "rc-notification": "^5.6.0",
+    "rc-tabs": "^11.10.1",
+    "rc-util": "^4.21.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.4",
+    "rimraf": "latest",
     "@types/path-browserify": "^1.0.0",
     "@types/sanitize-html": "^2.6.2",
     "@types/url-parse": "^1.4.8"
