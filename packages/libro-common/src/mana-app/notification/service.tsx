@@ -1,4 +1,4 @@
-import { notification } from '../../mana-react/index.js';
+import { notification } from '../../react/index.js';
 import { v1 } from 'uuid';
 
 import { Disposable } from '../../common/index.js';

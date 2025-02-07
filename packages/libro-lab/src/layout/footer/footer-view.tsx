@@ -1,4 +1,4 @@
-import { BoxPanel } from '@difizen/libro-common/mana-react';
+import { BoxPanel } from '@difizen/libro-common/react';
 import { DefaultSlotView, singleton, Slot, view } from '@difizen/libro-common/mana-app';
 import * as React from 'react';
 import './index.less';

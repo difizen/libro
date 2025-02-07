@@ -20,7 +20,7 @@ import {
   ViewInstance,
 } from '../../../mana-core/index.js';
 import { getOrigin, prop, useInject } from '../../../mana-observable/index.js';
-import { Dropdown } from '../../../mana-react/index.js';
+import { Dropdown } from '../../../react/index.js';
 import { inject, postConstruct, singleton } from '../../../mana-syringe/index.js';
 import { LabelProvider } from '../../label';
 import { MenuRender } from '../../menu';

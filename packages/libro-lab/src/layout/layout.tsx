@@ -1,4 +1,4 @@
-import { BoxPanel } from '@difizen/libro-common/mana-react';
+import { BoxPanel } from '@difizen/libro-common/react';
 import {
   inject,
   singleton,

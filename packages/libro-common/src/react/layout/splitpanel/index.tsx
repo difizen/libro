@@ -4,13 +4,13 @@ import clsx from 'classnames';
 import * as React from 'react';
 
 import { Emitter } from '../../../common/index.js';
-import { defaultPrefixCls } from '../../constant';
+import { defaultPrefixCls } from '../../constant.js';
 import type { IResizeHandleDelegate } from '../../resize/index';
 import { ResizeFlexMode } from '../../resize/index';
-import { Layout } from '../layout';
+import { Layout } from '../layout.js';
 
-import { SplitPanelContext } from './context';
-import { Pane } from './pane';
+import { SplitPanelContext } from './context.js';
+import { Pane } from './pane.js';
 import './styles/index.less';
 
 export interface SplitPanelProps {
