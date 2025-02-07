@@ -1,0 +1,68 @@
+.@{notification-prefix-cls} {
+  &-top,
+  &-bottom {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  &-top {
+    .@{notification-prefix-cls}-fade-enter.@{notification-prefix-cls}-fade-enter-active,
+    .@{notification-prefix-cls}-fade-appear.@{notification-prefix-cls}-fade-appear-active {
+      animation-name: notification-top-fade-in;
+    }
+  }
+
+  &-bottom {
+    .@{notification-prefix-cls}-fade-enter.@{notification-prefix-cls}-fade-enter-active,
+    .@{notification-prefix-cls}-fade-appear.@{notification-prefix-cls}-fade-appear-active {
+      animation-name: notification-bottom-fade-in;
+    }
+  }
+
+  &-topLeft,
+  &-bottomLeft {
+    margin-right: 0;
+    margin-left: 16px;
+
+    .@{notification-prefix-cls}-fade-enter.@{notification-prefix-cls}-fade-enter-active,
+    .@{notification-prefix-cls}-fade-appear.@{notification-prefix-cls}-fade-appear-active {
+      animation-name: notification-left-fade-in;
+    }
+  }
+}
+
+@keyframes notification-top-fade-in {
+  0% {
+    margin-top: -100%;
+    opacity: 0;
+  }
+
+  100% {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes notification-bottom-fade-in {
+  0% {
+    margin-bottom: -100%;
+    opacity: 0;
+  }
+
+  100% {
+    margin-bottom: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes notification-left-fade-in {
+  0% {
+    right: 384px;
+    opacity: 0;
+  }
+
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}
