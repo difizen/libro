@@ -4,17 +4,17 @@ import { Container as InversifyContainer } from 'inversify';
 import type { Disposable } from '../common/index.js';
 import { DisposableCollection, Emitter } from '../common/index.js';
 
-import { ContainerAPI } from './container-api';
-import { Syringe } from './core';
-import { Utils } from './core';
+import { ContainerAPI } from './container-api.js';
+import { Syringe } from './core.js';
+import { Utils } from './core.js';
 import {
   GlobalContainer as InversifyGlobalContainer,
   namedToIdentifier,
   tokenToIdentifier,
-} from './inversify-api';
-import type { InversifyContext } from './inversify-api/inversify-protocol';
-import { isSyringeModule } from './module';
-import { Register } from './register';
+} from './inversify-api/index.js';
+import type { InversifyContext } from './inversify-api/inversify-protocol.js';
+import { isSyringeModule } from './module/index.js';
+import { Register } from './register.js';
 
 export const ContainerMeta = Symbol('ContainerMeta');
 

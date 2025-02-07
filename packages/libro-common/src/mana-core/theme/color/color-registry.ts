@@ -1,5 +1,5 @@
 import type { Disposable } from '../../../common/index.js';
-import { singleton } from '../../../mana-syringe/index.js';
+import { singleton } from '../../../ioc/index.js';
 import { BaseVariableRegistry } from '../base-variable-registry';
 import type { VariableDefinition } from '../protocol';
 

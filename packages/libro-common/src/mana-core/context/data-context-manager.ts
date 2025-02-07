@@ -1,5 +1,5 @@
-import type { Contribution, Syringe } from '../../mana-syringe/index.js';
-import { contrib, inject, singleton } from '../../mana-syringe/index.js';
+import type { Contribution, Syringe } from '../../ioc/index.js';
+import { contrib, inject, singleton } from '../../ioc/index.js';
 
 import { ManaContext } from '../module';
 

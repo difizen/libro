@@ -1,6 +1,6 @@
 import { BaseView, view } from '../../mana-core/index.js';
 import { useInject } from '../../mana-observable/index.js';
-import { singleton } from '../../mana-syringe/index.js';
+import { singleton } from '../../ioc/index.js';
 import React from 'react';
 
 import { ModalService } from './modal-service';

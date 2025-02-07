@@ -1,4 +1,4 @@
-import type { Syringe } from '../../mana-syringe/index.js';
+import type { Syringe } from '../../ioc/index.js';
 
 import { ManaModule } from './mana-module';
 

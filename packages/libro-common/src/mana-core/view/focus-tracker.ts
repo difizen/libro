@@ -1,7 +1,7 @@
 import type { Disposable, Event as EmitterEvent } from '../../common/index.js';
 import { Iterable } from '../../common/index.js';
 import { Emitter } from '../../common/index.js';
-import { singleton } from '../../mana-syringe/index.js';
+import { singleton } from '../../ioc/index.js';
 
 import type { View } from './view-protocol';
 

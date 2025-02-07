@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { MaybePromise, Event, Disposable, Newable } from '../../common/index.js';
-import { Syringe } from '../../mana-syringe/index.js';
+import { Syringe } from '../../ioc/index.js';
 import type React from 'react';
 
 import type { ManaModule } from '../module';

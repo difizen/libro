@@ -1,5 +1,5 @@
 import type { Event } from '../../common/index.js';
-import { Syringe } from '../core';
+import { Syringe } from '../core.js';
 
 export type Option = {
   /**

@@ -1,7 +1,7 @@
 import type { Newable } from '../../common/index.js';
-import { Syringe } from '../core';
-import { transient } from '../decorator';
-import { registerSideOption } from '../side-option';
+import { Syringe } from '../core.js';
+import { transient } from '../decorator.js';
+import { registerSideOption } from '../side-option.js';
 
 export const AutoFactoryOption = Syringe.defineToken('AutoFactoryOption');
 export const AutoFactoryMeta = Syringe.defineToken('AutoFactoryMeta', {

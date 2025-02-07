@@ -1,5 +1,5 @@
 import type { Disposable } from '../../common/index.js';
-import { singleton } from '../../mana-syringe/index.js';
+import { singleton } from '../../ioc/index.js';
 
 import type { ConfigurationNode } from './configuration-protocol';
 import type { ConfigurationProvider } from './configuration-provider';

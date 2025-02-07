@@ -5,7 +5,7 @@ import { timeout } from '../../common/index.js';
 import { CancellationTokenSource } from '../../common/index.js';
 import { DisposableCollection } from '../../common/index.js';
 import { Emitter, WaitUntilEvent } from '../../common/index.js';
-import { singleton } from '../../mana-syringe/index.js';
+import { singleton } from '../../ioc/index.js';
 
 import type { TreeNode } from './tree';
 import { Tree, CompositeTreeNode } from './tree';

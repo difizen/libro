@@ -5,7 +5,7 @@ import {
   objects,
   isPromiseLike,
 } from '../../common/index.js';
-import { singleton, inject } from '../../mana-syringe/index.js';
+import { singleton, inject } from '../../ioc/index.js';
 
 import { localStorageService } from '../common';
 import type { StorageService } from '../common';

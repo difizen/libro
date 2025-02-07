@@ -1,8 +1,8 @@
 import type { Event } from '../../common/index.js';
 import { isOSX } from '../../common/index.js';
 import { Emitter, Disposable, DisposableCollection } from '../../common/index.js';
-import { contrib, inject, singleton, Syringe } from '../../mana-syringe/index.js';
-import type { Contribution } from '../../mana-syringe/index.js';
+import { contrib, inject, singleton, Syringe } from '../../ioc/index.js';
+import type { Contribution } from '../../ioc/index.js';
 
 import type { Application } from '../application';
 import { ApplicationContribution } from '../application';

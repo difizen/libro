@@ -10,7 +10,7 @@ import { ManaModule, SelectionService, view } from '../../mana-core/index.js';
 import { ViewInstance } from '../../mana-core/index.js';
 import type { MenuPath } from '../../mana-core/index.js';
 import { useInject } from '../../mana-observable/index.js';
-import { singleton, inject } from '../../mana-syringe/index.js';
+import { singleton, inject } from '../../ioc/index.js';
 import { LabelProvider } from '../label';
 import { TreeModel } from '../tree';
 import { CompositeTreeNode, TreeNode } from '../tree/tree';

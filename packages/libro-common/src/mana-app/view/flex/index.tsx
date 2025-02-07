@@ -8,7 +8,7 @@ import {
 import { ViewInstance } from '../../../mana-core/index.js';
 import type { SlotViewOption } from '../../../mana-core/index.js';
 import { prop, useInject } from '../../../mana-observable/index.js';
-import { inject, transient } from '../../../mana-syringe/index.js';
+import { inject, transient } from '../../../ioc/index.js';
 import cls from 'classnames';
 import React from 'react';
 import './index.less';

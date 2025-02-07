@@ -5,7 +5,7 @@
 /* eslint-disable no-plusplus */
 import type { Event } from '../../common/index.js';
 import { Emitter, isWindows } from '../../common/index.js';
-import { inject, optional, singleton } from '../../mana-syringe/index.js';
+import { inject, optional, singleton } from '../../ioc/index.js';
 import type { IWindowsKeyMapping } from 'native-keymap';
 
 import type { NativeKeyboardLayout } from './keyboard-protocol';

@@ -31,7 +31,7 @@ export const ManaAppPreset = ManaModule.create()
     NotificationModule,
   );
 
-export * from '../mana-syringe/index.js';
+export * from '../ioc/index.js';
 export * from '../mana-observable/index.js';
 export * from '../common/index.js';
 export * from '../mana-core/index.js';

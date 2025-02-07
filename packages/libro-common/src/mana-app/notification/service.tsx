@@ -2,7 +2,7 @@ import { notification } from '../../react/index.js';
 import { v1 } from 'uuid';
 
 import { Disposable } from '../../common/index.js';
-import { singleton } from '../../mana-syringe/index.js';
+import { singleton } from '../../ioc/index.js';
 
 import type { NotificationConfig, NotificationAction } from './protocol';
 

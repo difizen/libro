@@ -1,6 +1,6 @@
 import type { Event, Disposable, MaybePromise } from '../../common/index.js';
 import { Emitter, DisposableCollection } from '../../common/index.js';
-import { singleton } from '../../mana-syringe/index.js';
+import { singleton } from '../../ioc/index.js';
 
 import type { Tree, TreeNode } from './tree';
 import type { TreeViewDecorationData } from './tree-view-decoration';

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Syringe } from '../../mana-syringe/index.js';
+import { Syringe } from '../../ioc/index.js';
 
 import type { ManaModule } from '../module';
 

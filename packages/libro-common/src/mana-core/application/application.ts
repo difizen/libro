@@ -1,14 +1,8 @@
 import type { MaybePromise } from '../../common/index.js';
 import { Disposable } from '../../common/index.js';
 import { Emitter, DisposableCollection } from '../../common/index.js';
-import {
-  inject,
-  singleton,
-  Syringe,
-  contrib,
-  Utils,
-} from '../../mana-syringe/index.js';
-import type { Decorator, Contribution } from '../../mana-syringe/index.js';
+import { inject, singleton, Syringe, contrib, Utils } from '../../ioc/index.js';
+import type { Decorator, Contribution } from '../../ioc/index.js';
 
 import { DebugService } from '../common/debug';
 

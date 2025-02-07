@@ -5,7 +5,7 @@ import assert from 'assert';
 
 import { GlobalContainer } from '../container';
 import { register } from '../container';
-import { Contribution, contrib } from '../contribution/index';
+import { Contribution, contrib } from './index';
 import { Syringe } from '../core';
 import { inject, singleton } from '../decorator';
 import { Module } from '../module/index';

@@ -1,7 +1,7 @@
 import type { MaybePromise, Event, Disposable, URI } from '../../common/index.js';
 import { Priority } from '../../common/index.js';
-import type { Contribution } from '../../mana-syringe/index.js';
-import { singleton, contrib, Syringe } from '../../mana-syringe/index.js';
+import type { Contribution } from '../../ioc/index.js';
+import { singleton, contrib, Syringe } from '../../ioc/index.js';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface OpenerOptions {}
