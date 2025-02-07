@@ -17,9 +17,9 @@
       "typings": "./es/common/index.js",
       "default": "./es/common/index.js"
     },
-    "./mana-react": {
-      "typings": "./es/mana-react/index.js",
-      "default": "./es/mana-react/index.js"
+    "./react": {
+      "typings": "./es/react/index.js",
+      "default": "./es/react/index.js"
     },
     "./l10n": {
       "typings": "./es/l10n/index.js",

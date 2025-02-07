@@ -1,4 +1,4 @@
-import { SplitPanel } from '@difizen/libro-common/mana-react';
+import { SplitPanel } from '@difizen/libro-common/react';
 import {
   BaseView,
   view,

@@ -1,4 +1,4 @@
-import { Menu, MenuContext } from '@difizen/libro-common/mana-react';
+import { Menu, MenuContext } from '@difizen/libro-common/react';
 import type { Toolbar } from '@difizen/libro-common/mana-app';
 import { isMacintosh } from '@difizen/libro-common/mana-app';
 import {

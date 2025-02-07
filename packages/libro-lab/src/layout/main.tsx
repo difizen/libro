@@ -1,4 +1,4 @@
-import { SplitPanel } from '@difizen/libro-common/mana-react';
+import { SplitPanel } from '@difizen/libro-common/react';
 import { singleton, Slot, useInject, view } from '@difizen/libro-common/mana-app';
 import { BaseView } from '@difizen/libro-common/mana-app';
 import { forwardRef } from 'react';
