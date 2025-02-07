@@ -1,5 +1,5 @@
-import { Deferred, URI } from '@difizen/libro-common/mana-app';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { Deferred, URI } from '@difizen/libro-common/app';
+import { singleton } from '@difizen/libro-common/app';
 
 import type { NotebookView } from './libro-protocol.js';
 

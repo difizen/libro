@@ -3,14 +3,14 @@ import { LibroOutputView } from '@difizen/libro-core';
 import type { BaseOutputView, IOutputOptions } from '@difizen/libro-core';
 import { RenderMimeRegistry } from '@difizen/libro-rendermime';
 import type { IRenderMimeRegistry, IRendererFactory } from '@difizen/libro-rendermime';
-import { inject, transient } from '@difizen/libro-common/mana-app';
+import { inject, transient } from '@difizen/libro-common/app';
 import {
   getOrigin,
   useInject,
   view,
   ViewInstance,
   ViewOption,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import { forwardRef } from 'react';
 
 import '../index.less';

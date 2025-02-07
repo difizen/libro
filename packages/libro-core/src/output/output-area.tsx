@@ -1,6 +1,6 @@
 import type { IOutput } from '@difizen/libro-common';
 import { isError, isStream } from '@difizen/libro-common';
-import type { ViewComponent, Contribution } from '@difizen/libro-common/mana-app';
+import type { ViewComponent, Contribution } from '@difizen/libro-common/app';
 import {
   ViewOption,
   getOrigin,
@@ -10,14 +10,8 @@ import {
   useInject,
   view,
   ViewInstance,
-} from '@difizen/libro-common/mana-app';
-import {
-  Emitter,
-  prop,
-  contrib,
-  inject,
-  transient,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
+import { Emitter, prop, contrib, inject, transient } from '@difizen/libro-common/app';
 import { useEffect, forwardRef } from 'react';
 import { v4 } from 'uuid';
 

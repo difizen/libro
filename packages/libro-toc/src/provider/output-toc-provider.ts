@@ -3,8 +3,8 @@ import { concatMultilineString } from '@difizen/libro-common';
 import type { CellView } from '@difizen/libro-core';
 import { ExecutableCellView } from '@difizen/libro-core';
 import { RenderMimeRegistry } from '@difizen/libro-rendermime';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
-import { watch } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
+import { watch } from '@difizen/libro-common/app';
 
 import type { CellTOCProvider } from '../toc-protocol.js';
 import { CellTOCProviderContribution } from '../toc-protocol.js';

@@ -2,7 +2,7 @@ import {
   createSlotPreference,
   HeaderArea,
   ManaModule,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 
 import { LabMenu } from './lab-menu-contribution.js';
 import { MenuBarView } from './menu-bar-view.js';

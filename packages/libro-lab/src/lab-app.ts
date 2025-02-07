@@ -5,7 +5,7 @@ import {
   ServerManager,
 } from '@difizen/libro-jupyter';
 import { terminalDefaultSlot } from '@difizen/libro-terminal';
-import type { FileTreeView } from '@difizen/libro-common/mana-app';
+import type { FileTreeView } from '@difizen/libro-common/app';
 import {
   ConfigurationService,
   FileTreeViewFactory,
@@ -15,7 +15,7 @@ import {
   ViewManager,
   inject,
   singleton,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 
 import { LibroLabConfiguration, LibroLabGuideViewEnabled } from './config/index.js';
 import { GuideView } from './guide/index.js';

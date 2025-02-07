@@ -1,6 +1,6 @@
 import { EditFilled } from '@ant-design/icons';
 import { LibroContextKey } from '@difizen/libro-core';
-import { useInject } from '@difizen/libro-common/mana-app';
+import { useInject } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import { Input, Popover } from 'antd';
 import classNames from 'classnames';

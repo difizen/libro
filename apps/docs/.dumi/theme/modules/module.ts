@@ -1,4 +1,4 @@
-import { ManaAppPreset, ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaAppPreset, ManaModule } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 
 import { langBundles } from '../lang/index';

@@ -1,4 +1,4 @@
-import { Module } from '@difizen/libro-common/mana-app';
+import { Module } from '@difizen/libro-common/app';
 
 import { JuliaContribution } from './julia-contribution.js';
 

@@ -1,6 +1,6 @@
-import { SideTabView, ToolbarRender } from '@difizen/libro-common/mana-app';
-import { view } from '@difizen/libro-common/mana-app';
-import { transient } from '@difizen/libro-common/mana-app';
+import { SideTabView, ToolbarRender } from '@difizen/libro-common/app';
+import { view } from '@difizen/libro-common/app';
+import { transient } from '@difizen/libro-common/app';
 
 @transient()
 @view('libro-lab-side-tab')

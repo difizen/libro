@@ -13,8 +13,8 @@ import type {
   CellType,
 } from '@difizen/libro-common';
 import { deepCopy, deepEqual } from '@difizen/libro-common';
-import type { Event } from '@difizen/libro-common/mana-app';
-import { Emitter } from '@difizen/libro-common/mana-app';
+import type { Event } from '@difizen/libro-common/app';
+import { Emitter } from '@difizen/libro-common/app';
 import { v4 } from 'uuid';
 import { Awareness } from 'y-protocols/awareness';
 import * as Y from 'yjs';

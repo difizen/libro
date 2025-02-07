@@ -1,5 +1,5 @@
 import { RenderMimeContribution } from '@difizen/libro-rendermime';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/app';
 
 import { PlotlyRender } from './plotly-render.js';
 

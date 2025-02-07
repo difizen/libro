@@ -1,12 +1,6 @@
 import { BoxPanel } from '@difizen/libro-common/react';
-import {
-  inject,
-  singleton,
-  Slot,
-  useInject,
-  view,
-} from '@difizen/libro-common/mana-app';
-import { BaseView } from '@difizen/libro-common/mana-app';
+import { inject, singleton, Slot, useInject, view } from '@difizen/libro-common/app';
+import { BaseView } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import { Alert } from 'antd';
 import { forwardRef } from 'react';

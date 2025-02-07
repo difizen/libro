@@ -1,8 +1,5 @@
-import type { ConfigurationRender } from '@difizen/libro-common/mana-app';
-import {
-  singleton,
-  ConfigurationRenderContribution,
-} from '@difizen/libro-common/mana-app';
+import type { ConfigurationRender } from '@difizen/libro-common/app';
+import { singleton, ConfigurationRenderContribution } from '@difizen/libro-common/app';
 
 import {
   DefaultCheckbox,

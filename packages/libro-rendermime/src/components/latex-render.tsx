@@ -1,6 +1,6 @@
 import { concatMultilineString } from '@difizen/libro-common';
 import type { BaseOutputView } from '@difizen/libro-core';
-import { useInject } from '@difizen/libro-common/mana-app';
+import { useInject } from '@difizen/libro-common/app';
 import React from 'react';
 
 import type { IRenderMimeRegistry } from '../rendermime-protocol.js';

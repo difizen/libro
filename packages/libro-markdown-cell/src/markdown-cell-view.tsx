@@ -4,16 +4,16 @@ import { CellUri } from '@difizen/libro-common';
 import type { CellCollapsible, CellViewOptions } from '@difizen/libro-core';
 import { CellService, EditorStatus, LibroEditorCellView } from '@difizen/libro-core';
 import { MarkdownParser } from '@difizen/libro-markdown';
-import type { ViewSize } from '@difizen/libro-common/mana-app';
-import { getOrigin, prop, useInject, watch } from '@difizen/libro-common/mana-app';
+import type { ViewSize } from '@difizen/libro-common/app';
+import { getOrigin, prop, useInject, watch } from '@difizen/libro-common/app';
 import {
   view,
   ViewInstance,
   ViewManager,
   ViewOption,
   ViewRender,
-} from '@difizen/libro-common/mana-app';
-import { inject, transient } from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
+import { inject, transient } from '@difizen/libro-common/app';
 import { forwardRef, useEffect } from 'react';
 
 import './index.less';

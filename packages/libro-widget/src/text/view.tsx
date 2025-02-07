@@ -9,7 +9,7 @@ import {
   ViewInstance,
   inject,
   prop,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import { Input } from 'antd';
 import { forwardRef } from 'react';
 

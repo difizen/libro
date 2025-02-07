@@ -1,5 +1,5 @@
 import { LibroTOCModule } from '@difizen/libro-toc';
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { TocPanelView } from './libro-toc-panel-view.js';
 

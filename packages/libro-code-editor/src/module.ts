@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { CodeEditorInfoManager } from './code-editor-info-manager.js';
 import {

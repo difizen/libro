@@ -3,7 +3,7 @@ import {
   useInject,
   useObserve,
   ViewInstance,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import classNames from 'classnames';
 import { throttle } from 'lodash';
 import type { FC, ReactNode } from 'react';

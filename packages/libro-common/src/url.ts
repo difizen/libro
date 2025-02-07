@@ -1,4 +1,4 @@
-import { isWeb } from '@difizen/libro-common/mana-app';
+import { isWeb } from './app';
 import { posix } from 'path-browserify';
 import urlparse from 'url-parse';
 

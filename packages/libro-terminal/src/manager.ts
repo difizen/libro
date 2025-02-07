@@ -3,10 +3,10 @@
 
 import { Poll } from '@difizen/libro-common';
 import { NetworkError, ServerConnection } from '@difizen/libro-kernel';
-import type { Disposable, Disposed, Event } from '@difizen/libro-common/mana-app';
-import { prop } from '@difizen/libro-common/mana-app';
-import { singleton } from '@difizen/libro-common/mana-app';
-import { Emitter, inject } from '@difizen/libro-common/mana-app';
+import type { Disposable, Disposed, Event } from '@difizen/libro-common/app';
+import { prop } from '@difizen/libro-common/app';
+import { singleton } from '@difizen/libro-common/app';
+import { Emitter, inject } from '@difizen/libro-common/app';
 import { v4 } from 'uuid';
 
 import type { TerminalConnection } from './connection.js';

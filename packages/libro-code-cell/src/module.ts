@@ -1,6 +1,6 @@
 import { CodeEditorModule } from '@difizen/libro-code-editor';
 import { CellOptions } from '@difizen/libro-core';
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { CodeEditorCellContribution } from './code-cell-contribution.js';
 import { LibroCodeCellModel } from './code-cell-model.js';

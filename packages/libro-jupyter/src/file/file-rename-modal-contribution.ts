@@ -1,4 +1,4 @@
-import { ModalContribution, singleton } from '@difizen/libro-common/mana-app';
+import { ModalContribution, singleton } from '@difizen/libro-common/app';
 
 import { FileRenameModal } from './file-rename-modal.js';
 

@@ -1,6 +1,6 @@
 import type { CellView } from '@difizen/libro-core';
 import { LibroEditableExecutableCellView, LibroOutputArea } from '@difizen/libro-core';
-import { useObserve } from '@difizen/libro-common/mana-app';
+import { useObserve } from '@difizen/libro-common/app';
 
 import { isWaitingExecute } from '../utils/index.js';
 

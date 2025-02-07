@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { BaseManager } from './basemanager.js';
 import { LibroContentsModule } from './contents/contents-module.js';

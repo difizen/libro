@@ -1,5 +1,5 @@
 import { InitializeContribution } from '@difizen/libro-cofine-editor-core';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/app';
 import * as monaco from '@difizen/monaco-editor-core';
 
 import { id } from './config.js';

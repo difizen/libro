@@ -1,8 +1,8 @@
 import { ExclamationCircleFilled, FolderFilled } from '@ant-design/icons';
 import { ContentsManager } from '@difizen/libro-kernel';
 import type { IContentsModel } from '@difizen/libro-kernel';
-import type { TreeNode, ViewOpenHandler } from '@difizen/libro-common/mana-app';
-import { FileTreeViewFactory } from '@difizen/libro-common/mana-app';
+import type { TreeNode, ViewOpenHandler } from '@difizen/libro-common/app';
+import { FileTreeViewFactory } from '@difizen/libro-common/app';
 import {
   FileStatNode,
   FileTree,
@@ -21,7 +21,7 @@ import {
   view,
   inject,
   singleton,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import { Modal } from 'antd';
 import React from 'react';

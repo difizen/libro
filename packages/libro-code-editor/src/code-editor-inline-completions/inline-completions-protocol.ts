@@ -1,4 +1,4 @@
-import { Syringe } from '@difizen/libro-common/mana-app';
+import { Syringe } from '@difizen/libro-common/app';
 
 import type { IPosition, IRange } from '../code-editor-protocol.js';
 

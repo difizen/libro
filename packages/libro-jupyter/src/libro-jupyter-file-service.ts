@@ -1,10 +1,10 @@
 import type { INotebookContent } from '@difizen/libro-common';
 import type { IContentsModel } from '@difizen/libro-kernel';
 import { ServerManager, ContentsManager } from '@difizen/libro-kernel';
-import { Emitter } from '@difizen/libro-common/mana-app';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
-import type { URI } from '@difizen/libro-common/mana-app';
-import type { Event as ManaEvent } from '@difizen/libro-common/mana-app';
+import { Emitter } from '@difizen/libro-common/app';
+import { inject, singleton } from '@difizen/libro-common/app';
+import type { URI } from '@difizen/libro-common/app';
+import type { Event as ManaEvent } from '@difizen/libro-common/app';
 
 import { LibroFileService } from './libro-jupyter-protocol.js';
 

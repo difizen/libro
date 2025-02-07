@@ -2,9 +2,9 @@
 // Distributed under the terms of the Modified BSD License.
 
 import type { NotebookView } from '@difizen/libro-core';
-import { Emitter, injectable } from '@difizen/libro-common/mana-app';
-import type { Disposable, Event, View } from '@difizen/libro-common/mana-app';
-import type {} from '@difizen/libro-common/mana-app';
+import { Emitter, injectable } from '@difizen/libro-common/app';
+import type { Disposable, Event, View } from '@difizen/libro-common/app';
+import type {} from '@difizen/libro-common/app';
 import mergeWith from 'lodash.mergewith';
 
 import type { LspClientCapabilities, LanguageIdentifier } from '../lsp.js';

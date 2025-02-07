@@ -1,4 +1,4 @@
-import { Module } from '@difizen/libro-common/mana-app';
+import { Module } from '@difizen/libro-common/app';
 
 import { LibroPythonThemeContribution } from './libro-python-theme-contribution.js';
 

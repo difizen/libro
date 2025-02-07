@@ -1,5 +1,5 @@
-import type { Disposable } from '@difizen/libro-common/mana-app';
-import { DisposableCollection } from '@difizen/libro-common/mana-app';
+import type { Disposable } from '@difizen/libro-common/app';
+import { DisposableCollection } from '@difizen/libro-common/app';
 import { editor } from '@difizen/monaco-editor-core';
 
 import type { MonacoEditorType } from './types.js';

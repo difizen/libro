@@ -8,7 +8,7 @@ import {
   ViewInstance,
   inject,
   prop,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import { forwardRef } from 'react';
 
 import type { IWidgetViewProps, WidgetState } from '../protocol.js';

@@ -11,7 +11,7 @@ import {
   prop,
   URI,
   ConfigurationRegistry,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import { useEffect, useState } from 'react';
 
 import { ConfigurationPanelView } from './configuration-panel-view.js';

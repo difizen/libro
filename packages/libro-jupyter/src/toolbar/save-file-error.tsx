@@ -1,7 +1,7 @@
 import type { LibroView } from '@difizen/libro-core';
-import type { ModalItemProps, ModalItem } from '@difizen/libro-common/mana-app';
-import { ThemeService } from '@difizen/libro-common/mana-app';
-import { useInject, ViewInstance } from '@difizen/libro-common/mana-app';
+import type { ModalItemProps, ModalItem } from '@difizen/libro-common/app';
+import { ThemeService } from '@difizen/libro-common/app';
+import { useInject, ViewInstance } from '@difizen/libro-common/app';
 import { ConfigProvider, Modal, theme } from 'antd';
 
 import type { LibroJupyterModel } from '../libro-jupyter-model.js';

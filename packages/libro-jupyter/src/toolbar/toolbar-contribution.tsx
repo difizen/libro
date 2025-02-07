@@ -1,6 +1,6 @@
 import { KernelCommands, NotebookCommands } from '@difizen/libro-core';
-import type { ToolbarRegistry } from '@difizen/libro-common/mana-app';
-import { singleton, inject, ToolbarContribution } from '@difizen/libro-common/mana-app';
+import type { ToolbarRegistry } from '@difizen/libro-common/app';
+import { singleton, inject, ToolbarContribution } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 
 import { LocationIcon } from '../components/icons.js';

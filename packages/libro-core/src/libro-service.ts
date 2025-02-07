@@ -1,8 +1,8 @@
-import type { Disposable } from '@difizen/libro-common/mana-app';
-import { DisposableCollection, Emitter } from '@difizen/libro-common/mana-app';
-import { ThemeService, ViewManager } from '@difizen/libro-common/mana-app';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
-import { prop } from '@difizen/libro-common/mana-app';
+import type { Disposable } from '@difizen/libro-common/app';
+import { DisposableCollection, Emitter } from '@difizen/libro-common/app';
+import { ThemeService, ViewManager } from '@difizen/libro-common/app';
+import { inject, singleton } from '@difizen/libro-common/app';
+import { prop } from '@difizen/libro-common/app';
 
 import type {
   CellView,

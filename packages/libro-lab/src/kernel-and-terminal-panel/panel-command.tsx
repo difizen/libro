@@ -1,12 +1,12 @@
 import { ReloadOutlined } from '@ant-design/icons';
-import type { CommandRegistry, ToolbarRegistry } from '@difizen/libro-common/mana-app';
-import { ViewManager } from '@difizen/libro-common/mana-app';
+import type { CommandRegistry, ToolbarRegistry } from '@difizen/libro-common/app';
+import { ViewManager } from '@difizen/libro-common/app';
 import {
   CommandContribution,
   inject,
   singleton,
   ToolbarContribution,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 
 import { KernelAndTerminalPanelView } from './kernel-and-terminal-panel-view.js';

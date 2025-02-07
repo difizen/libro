@@ -1,10 +1,10 @@
 import { CloseOutlined } from '@ant-design/icons';
 import { Dropdown } from '@difizen/libro-common/react';
 import { JupyterFileService } from '@difizen/libro-jupyter';
-import type { CardTabOption, View } from '@difizen/libro-common/mana-app';
-import { ViewManager, ViewOption } from '@difizen/libro-common/mana-app';
-import { NavigatableView } from '@difizen/libro-common/mana-app';
-import { inject } from '@difizen/libro-common/mana-app';
+import type { CardTabOption, View } from '@difizen/libro-common/app';
+import { ViewManager, ViewOption } from '@difizen/libro-common/app';
+import { NavigatableView } from '@difizen/libro-common/app';
+import { inject } from '@difizen/libro-common/app';
 import {
   CardTabView,
   MenuRender,
@@ -12,7 +12,7 @@ import {
   view,
   ViewContext,
   Saveable,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import { Badge } from 'antd';
 import classnames from 'classnames';
 

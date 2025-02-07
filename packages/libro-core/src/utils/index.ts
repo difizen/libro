@@ -1,4 +1,4 @@
-import { useUnmount } from '@difizen/libro-common/mana-app';
+import { useUnmount } from '@difizen/libro-common/app';
 import type { RefObject } from 'react';
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 

@@ -1,5 +1,5 @@
 import type { LibroView } from '@difizen/libro-core';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import type { LibroTOCProvider } from './toc-provider.js';
 import { LibroTOCProviderFactory } from './toc-provider.js';

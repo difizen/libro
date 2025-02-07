@@ -8,7 +8,7 @@ import {
   KeybindingRegistry,
   singleton,
   KeybindingContribution,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 
 @singleton({ contrib: KeybindingContribution })
 export class LibroJupyterKeybindingContribution implements KeybindingContribution {

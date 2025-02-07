@@ -1,6 +1,6 @@
 import type { IOutput, JSONObject, PartialJSONObject } from '@difizen/libro-common';
-import { BaseView, prop, view, ViewOption } from '@difizen/libro-common/mana-app';
-import { inject, transient } from '@difizen/libro-common/mana-app';
+import { BaseView, prop, view, ViewOption } from '@difizen/libro-common/app';
+import { inject, transient } from '@difizen/libro-common/app';
 import type { FC } from 'react';
 import { v4 } from 'uuid';
 

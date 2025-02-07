@@ -1,4 +1,4 @@
-import type { Event as ManaEvent } from '@difizen/libro-common/mana-app';
+import type { Event as ManaEvent } from '@difizen/libro-common/app';
 
 import type { IManager as IBaseManager } from '../basemanager.js';
 

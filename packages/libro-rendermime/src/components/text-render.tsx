@@ -1,7 +1,7 @@
 import type { JSONValue } from '@difizen/libro-common';
 import { concatMultilineString } from '@difizen/libro-common';
 import type { BaseOutputView } from '@difizen/libro-core';
-import { useInject } from '@difizen/libro-common/mana-app';
+import { useInject } from '@difizen/libro-common/app';
 import React, { useEffect, useRef } from 'react';
 
 import { renderText } from '../renderers.js';

@@ -1,4 +1,4 @@
-import { Syringe } from '@difizen/libro-common/mana-app';
+import { Syringe } from '@difizen/libro-common/app';
 import * as monaco from '@difizen/monaco-editor-core';
 
 import type { TextmateRegistry } from './textmate-registry.js';

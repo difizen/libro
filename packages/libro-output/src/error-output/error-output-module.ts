@@ -1,6 +1,6 @@
 import { OutputModule } from '@difizen/libro-core';
 import { LibroRenderMimeModule } from '@difizen/libro-rendermime';
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { ErrorOutputContribution } from './error-output-contribution.js';
 import { ErrorOutputModel } from './error-output-model.js';

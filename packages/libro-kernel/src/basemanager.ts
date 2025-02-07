@@ -1,6 +1,6 @@
-import type { Disposable, Event as ManaEvent } from '@difizen/libro-common/mana-app';
-import { Emitter } from '@difizen/libro-common/mana-app';
-import { singleton } from '@difizen/libro-common/mana-app';
+import type { Disposable, Event as ManaEvent } from '@difizen/libro-common/app';
+import { Emitter } from '@difizen/libro-common/app';
+import { singleton } from '@difizen/libro-common/app';
 
 import type { ISettings, NetworkError } from './server/index.js';
 /**

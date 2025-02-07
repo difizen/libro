@@ -1,6 +1,6 @@
 import type { IBaseCell, ICell, ICellMetadata } from '@difizen/libro-common';
-import type { MaybePromise, Newable } from '@difizen/libro-common/mana-app';
-import { Syringe } from '@difizen/libro-common/mana-app';
+import type { MaybePromise, Newable } from '@difizen/libro-common/app';
+import { Syringe } from '@difizen/libro-common/app';
 
 import type { CellModel, CellOptions, CellView } from '../libro-protocol.js';
 

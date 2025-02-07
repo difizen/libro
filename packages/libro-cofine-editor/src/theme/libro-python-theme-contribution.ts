@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import type { ThemeRegistry } from '@difizen/libro-cofine-editor-core';
 import { ThemeContribution } from '@difizen/libro-cofine-editor-core';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/app';
 
 import jupyterDark from './data/jupyter_dark.json';
 import jupyterHCDark from './data/jupyter_hc_dark.json';

@@ -1,8 +1,4 @@
-import type {
-  DidChangeLabelEvent,
-  FileStat,
-  URI,
-} from '@difizen/libro-common/mana-app';
+import type { DidChangeLabelEvent, FileStat, URI } from '@difizen/libro-common/app';
 import {
   FileStatNode,
   LabelProvider,
@@ -11,7 +7,7 @@ import {
   URIIconReference,
   inject,
   singleton,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 
 @singleton({ contrib: LabelProviderContribution })
 export class FileTreeLabelProvider implements LabelProviderContribution {

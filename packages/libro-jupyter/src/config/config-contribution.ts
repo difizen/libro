@@ -2,9 +2,9 @@ import { AutoInsertWhenNoCell, EnterEditModeWhenAddCell } from '@difizen/libro-c
 import {
   ConfigurationContribution,
   ConfigurationService,
-} from '@difizen/libro-common/mana-app';
-import { ApplicationContribution } from '@difizen/libro-common/mana-app';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
+import { ApplicationContribution } from '@difizen/libro-common/app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import { LibroJupyterConfiguration } from './config.js';
 

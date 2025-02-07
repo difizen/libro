@@ -130,7 +130,7 @@ export const ApplicationComponent = (props: ApplicationProps) => {
     return loadingValue;
   };
   return (
-    <div ref={hostRef} className={`mana-app`} tabIndex={1}>
+    <div ref={hostRef} className={`app`} tabIndex={1}>
       <ContextComponent
         {...props}
         loading={loadingValue}

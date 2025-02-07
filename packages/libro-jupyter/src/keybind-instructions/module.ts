@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { KeybindInstructionsContribution } from './keybind-instructions-contribution.js';
 import { LibroKeybindItems } from './keybind-instructions-items.js';

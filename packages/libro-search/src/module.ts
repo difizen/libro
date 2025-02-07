@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import './index.less';
 import { LibroCellSearchProvider } from './libro-cell-search-provider.js';

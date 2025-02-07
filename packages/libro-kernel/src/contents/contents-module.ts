@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { Drive } from './contents-drive.js';
 import { ContentsManager } from './contents-manager.js';

@@ -1,8 +1,8 @@
 import type { SearchMatch } from '@difizen/libro-code-editor';
 import type { CellView } from '@difizen/libro-core';
-import type { Disposable, Event } from '@difizen/libro-common/mana-app';
-import type { View } from '@difizen/libro-common/mana-app';
-import { Syringe } from '@difizen/libro-common/mana-app';
+import type { Disposable, Event } from '@difizen/libro-common/app';
+import type { View } from '@difizen/libro-common/app';
+import { Syringe } from '@difizen/libro-common/app';
 /**
  * HTML search match interface
  */

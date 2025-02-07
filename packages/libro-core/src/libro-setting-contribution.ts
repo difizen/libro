@@ -1,4 +1,4 @@
-import { singleton, ConfigurationContribution } from '@difizen/libro-common/mana-app';
+import { singleton, ConfigurationContribution } from '@difizen/libro-common/app';
 
 import {
   AutoInsertWhenNoCell,

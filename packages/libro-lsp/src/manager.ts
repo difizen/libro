@@ -4,9 +4,9 @@
 import { Poll, URL } from '@difizen/libro-common';
 import type { ISettings } from '@difizen/libro-kernel';
 import { PageConfig, ServerConnection, ServerManager } from '@difizen/libro-kernel';
-import type { Event } from '@difizen/libro-common/mana-app';
-import { Deferred, Emitter } from '@difizen/libro-common/mana-app';
-import { inject, postConstruct, transient } from '@difizen/libro-common/mana-app';
+import type { Event } from '@difizen/libro-common/app';
+import { Deferred, Emitter } from '@difizen/libro-common/app';
+import { inject, postConstruct, transient } from '@difizen/libro-common/app';
 
 import type { ServerSpecProperties } from './schema.js';
 import { ILanguageServerManagerOptions, URL_NS } from './tokens.js';

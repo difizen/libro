@@ -4,8 +4,8 @@ import {
   CloseOutlined,
   LoadingOutlined,
 } from '@ant-design/icons';
-import { useInject, ViewInstance } from '@difizen/libro-common/mana-app';
-import type { Disposable } from '@difizen/libro-common/mana-app';
+import { useInject, ViewInstance } from '@difizen/libro-common/app';
+import type { Disposable } from '@difizen/libro-common/app';
 import type { FC } from 'react';
 import { useEffect, useCallback, useState } from 'react';
 

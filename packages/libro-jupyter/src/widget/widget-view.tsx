@@ -11,8 +11,8 @@ import {
   BaseView,
   prop,
   watch,
-} from '@difizen/libro-common/mana-app';
-import type { ViewComponent, Disposable } from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
+import type { ViewComponent, Disposable } from '@difizen/libro-common/app';
 import { forwardRef } from 'react';
 
 import { LibroJupyterModel } from '../libro-jupyter-model.js';

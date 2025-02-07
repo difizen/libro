@@ -1,4 +1,4 @@
-import type { ConfigurationNode } from '@difizen/libro-common/mana-app';
+import type { ConfigurationNode } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 
 export const LibroConfigLinkTargetToBlank: ConfigurationNode<boolean> = {

@@ -4,7 +4,7 @@ import {
   HeaderArea,
   HeaderView,
   ManaModule,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 
 import { BrandView } from './brand/brand.js';
 import { LibroLabLayoutContainerView } from './container.js';

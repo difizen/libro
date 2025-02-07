@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ArrowDown, ArrowRight } from '@difizen/libro-core';
 import type { DisplayView, LibroView } from '@difizen/libro-core';
-import { ConfigurationService } from '@difizen/libro-common/mana-app';
-import { getOrigin, prop, useInject } from '@difizen/libro-common/mana-app';
-import { BaseView, view, ViewInstance } from '@difizen/libro-common/mana-app';
-import { inject, transient } from '@difizen/libro-common/mana-app';
+import { ConfigurationService } from '@difizen/libro-common/app';
+import { getOrigin, prop, useInject } from '@difizen/libro-common/app';
+import { BaseView, view, ViewInstance } from '@difizen/libro-common/app';
+import { inject, transient } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import React, { useRef } from 'react';
 

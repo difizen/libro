@@ -1,6 +1,6 @@
-import type { Contribution } from '@difizen/libro-common/mana-app';
-import { SlotViewManager } from '@difizen/libro-common/mana-app';
-import { contrib, inject, singleton } from '@difizen/libro-common/mana-app';
+import type { Contribution } from '@difizen/libro-common/app';
+import { SlotViewManager } from '@difizen/libro-common/app';
+import { contrib, inject, singleton } from '@difizen/libro-common/app';
 
 import type { LibroView } from '../libro-view.js';
 

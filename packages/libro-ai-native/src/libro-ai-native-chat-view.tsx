@@ -1,12 +1,6 @@
 import type { CellView, LibroView } from '@difizen/libro-jupyter';
 import { ChatView, ChatComponents } from '@difizen/magent-chat';
-import {
-  inject,
-  prop,
-  transient,
-  view,
-  ViewOption,
-} from '@difizen/libro-common/mana-app';
+import { inject, prop, transient, view, ViewOption } from '@difizen/libro-common/app';
 import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
 import breaks from 'remark-breaks';

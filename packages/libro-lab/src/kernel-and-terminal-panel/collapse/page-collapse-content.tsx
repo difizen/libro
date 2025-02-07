@@ -4,7 +4,7 @@ import {
   useInject,
   ViewContext,
   ViewInstance,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 
 import type { SaveableTabView } from '../../index.js';
 

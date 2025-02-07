@@ -1,5 +1,5 @@
-import type { Contribution } from '@difizen/libro-common/mana-app';
-import { contrib, singleton, Syringe } from '@difizen/libro-common/mana-app';
+import type { Contribution } from '@difizen/libro-common/app';
+import { contrib, singleton, Syringe } from '@difizen/libro-common/app';
 import * as monaco from '@difizen/monaco-editor-core';
 
 import { InitializeContribution } from './initialize-provider.js';

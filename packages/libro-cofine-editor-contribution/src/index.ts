@@ -1,5 +1,5 @@
-import type { Disposable } from '@difizen/libro-common/mana-app';
-import { Syringe } from '@difizen/libro-common/mana-app';
+import type { Disposable } from '@difizen/libro-common/app';
+import { Syringe } from '@difizen/libro-common/app';
 import type monaco from '@difizen/monaco-editor-core';
 
 export const EditorHandlerContribution = Syringe.defineToken(

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FormatterTransContribution } from '@difizen/libro-jupyter';
 import type { DefaultDecodedFormatter } from '@difizen/libro-jupyter';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/app';
 
 import type { SqlDecodedFormatter } from './libro-formatter-sql-magic-contribution.js';
 

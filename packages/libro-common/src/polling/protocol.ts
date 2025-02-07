@@ -1,4 +1,4 @@
-import type { Event } from '@difizen/libro-common/mana-app';
+import type { Event } from '../app';
 
 /**
  * A readonly poll that calls an asynchronous function with each tick.

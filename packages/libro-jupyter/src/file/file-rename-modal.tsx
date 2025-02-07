@@ -1,5 +1,5 @@
-import { ThemeService, useInject, ViewManager } from '@difizen/libro-common/mana-app';
-import type { ModalItem, ModalItemProps, URI } from '@difizen/libro-common/mana-app';
+import { ThemeService, useInject, ViewManager } from '@difizen/libro-common/app';
+import type { ModalItem, ModalItemProps, URI } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import { Form, message, Input, Modal, theme, ConfigProvider } from 'antd';
 import type { InputRef } from 'antd';

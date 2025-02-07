@@ -1,4 +1,4 @@
-import type { RenderProps } from '@difizen/libro-common/mana-app';
+import type { RenderProps } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import { Checkbox, DatePicker, Input, InputNumber, Select, Switch } from 'antd';
 import dayjs from 'dayjs';

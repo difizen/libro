@@ -1,9 +1,12 @@
+import { l10n } from '@difizen/libro-common/l10n';
 import { FileTreeContextMenuGroups, JupyterFileService } from '@difizen/libro-jupyter';
+import { message } from 'antd';
+
 import type {
   CommandRegistry,
   MenuRegistry,
   ViewManager,
-} from '@difizen/libro-common/mana-app';
+} from '../../libro-common/es/app/index.js';
 import {
   ConfigurationService,
   CommandContribution,
@@ -13,9 +16,7 @@ import {
   ModalService,
   OpenerService,
   singleton,
-} from '@difizen/libro-common/mana-app';
-import { l10n } from '@difizen/libro-common/l10n';
-import { message } from 'antd';
+} from '../../libro-common/es/app/index.js';
 
 export const AppFileCommands = {
   OPEN_FILE_BY_LIBRO_APP: {

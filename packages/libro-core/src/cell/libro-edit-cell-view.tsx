@@ -14,7 +14,7 @@ import {
   ViewOption,
   ViewRender,
   watch,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import type { ReactNode } from 'react';
 
 import { LibroContextKey } from '../libro-context-key.js';

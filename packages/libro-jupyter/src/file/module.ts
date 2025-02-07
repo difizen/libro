@@ -1,4 +1,4 @@
-import { FileTreeModule, ManaModule } from '@difizen/libro-common/mana-app';
+import { FileTreeModule, ManaModule } from '@difizen/libro-common/app';
 
 import { FileColorContribution } from './file-color-registry.js';
 import { FileCommandContribution } from './file-command.js';

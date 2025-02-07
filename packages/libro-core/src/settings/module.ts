@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { SettingEditorModule } from './setting-editor/index.js';
 import { SettingsContribution } from './settings-contribution.js';

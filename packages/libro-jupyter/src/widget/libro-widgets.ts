@@ -1,14 +1,8 @@
 import type { JSONObject } from '@difizen/libro-common';
 import type { IKernelConnection, KernelMessage } from '@difizen/libro-kernel';
-import type { Contribution } from '@difizen/libro-common/mana-app';
-import {
-  contrib,
-  inject,
-  Priority,
-  prop,
-  transient,
-} from '@difizen/libro-common/mana-app';
-import { Emitter } from '@difizen/libro-common/mana-app';
+import type { Contribution } from '@difizen/libro-common/app';
+import { contrib, inject, Priority, prop, transient } from '@difizen/libro-common/app';
+import { Emitter } from '@difizen/libro-common/app';
 
 import type { Comm } from './comm.js';
 import type {

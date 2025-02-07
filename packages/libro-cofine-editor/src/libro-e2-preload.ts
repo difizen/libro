@@ -1,6 +1,6 @@
 import { MonacoEnvironment } from '@difizen/libro-cofine-editor-core';
-import type { Syringe } from '@difizen/libro-common/mana-app';
-import { Deferred } from '@difizen/libro-common/mana-app';
+import type { Syringe } from '@difizen/libro-common/app';
+import { Deferred } from '@difizen/libro-common/app';
 
 import { JSONLanguageFeature } from './language/json/module.js';
 import { JuliaLanguageFeature } from './language/julia/module.js';

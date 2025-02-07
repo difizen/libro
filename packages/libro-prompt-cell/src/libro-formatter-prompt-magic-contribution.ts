@@ -6,7 +6,7 @@ import {
   DefaultDecodedFormatter,
   FormatterContribution,
 } from '@difizen/libro-jupyter';
-import { singleton } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/app';
 
 export interface PromptDecodedFormatter extends DefaultDecodedFormatter {
   modelType?: string;

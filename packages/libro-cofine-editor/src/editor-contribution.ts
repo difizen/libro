@@ -3,7 +3,7 @@ import {
   CodeEditorContribution,
   LanguageSpecRegistry,
 } from '@difizen/libro-code-editor';
-import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
 
 import {
   e2StateFactory,

@@ -1,12 +1,12 @@
-import type { View, ViewOpenOption, Disposable } from '@difizen/libro-common/mana-app';
+import type { View, ViewOpenOption, Disposable } from '@difizen/libro-common/app';
 import {
   DefaultSlotView,
   view,
   ViewRender,
   ViewInstance,
-} from '@difizen/libro-common/mana-app';
-import { transient } from '@difizen/libro-common/mana-app';
-import { equals, prop, useInject } from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
+import { transient } from '@difizen/libro-common/app';
+import { equals, prop, useInject } from '@difizen/libro-common/app';
 import { forwardRef } from 'react';
 
 import { isDisplayView } from './libro-slot-protocol.js';

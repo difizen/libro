@@ -1,5 +1,5 @@
-import type { URI } from '@difizen/libro-common/mana-app';
-import { singleton } from '@difizen/libro-common/mana-app';
+import type { URI } from '@difizen/libro-common/app';
+import { singleton } from '@difizen/libro-common/app';
 
 @singleton()
 export class FileNameAlias {

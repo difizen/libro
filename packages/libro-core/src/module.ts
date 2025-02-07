@@ -1,6 +1,6 @@
 import { CodeEditorModule } from '@difizen/libro-code-editor';
-import { ConfigurationModule, ManaAppPreset } from '@difizen/libro-common/mana-app';
-import { ManaModule } from '@difizen/libro-common/mana-app';
+import { ConfigurationModule, ManaAppPreset } from '@difizen/libro-common/app';
+import { ManaModule } from '@difizen/libro-common/app';
 
 import { LibroCellModule } from './cell/libro-cell-module.js';
 import {

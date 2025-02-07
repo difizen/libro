@@ -1,4 +1,4 @@
-import { useInject, ViewInstance } from '@difizen/libro-common/mana-app';
+import { useInject, ViewInstance } from '@difizen/libro-common/app';
 import type { FC } from 'react';
 
 import type { LibroView } from '../libro-view.js';

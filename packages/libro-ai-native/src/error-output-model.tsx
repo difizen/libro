@@ -6,13 +6,8 @@ import {
   RenderMimeRegistry,
   renderText,
 } from '@difizen/libro-jupyter';
-import { prop, transient } from '@difizen/libro-common/mana-app';
-import {
-  getOrigin,
-  useInject,
-  view,
-  ViewInstance,
-} from '@difizen/libro-common/mana-app';
+import { prop, transient } from '@difizen/libro-common/app';
+import { getOrigin, useInject, view, ViewInstance } from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import { Button } from 'antd';
 import { forwardRef, createRef, useEffect } from 'react';

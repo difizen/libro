@@ -6,7 +6,7 @@ import {
   prop,
   singleton,
   view,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import { l10n } from '@difizen/libro-common/l10n';
 import { forwardRef } from 'react';
 

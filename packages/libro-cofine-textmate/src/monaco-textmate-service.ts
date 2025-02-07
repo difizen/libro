@@ -1,12 +1,12 @@
 import { EditorHandlerContribution } from '@difizen/libro-cofine-editor-core';
-import type { Contribution } from '@difizen/libro-common/mana-app';
+import type { Contribution } from '@difizen/libro-common/app';
 import {
   Disposable,
   DisposableCollection,
   contrib,
   inject,
   singleton,
-} from '@difizen/libro-common/mana-app';
+} from '@difizen/libro-common/app';
 import * as monaco from '@difizen/monaco-editor-core';
 import { ILanguageService } from '@difizen/monaco-editor-core/esm/vs/editor/common/languages/language.js';
 import { TokenizationRegistry } from '@difizen/monaco-editor-core/esm/vs/editor/common/languages.js';

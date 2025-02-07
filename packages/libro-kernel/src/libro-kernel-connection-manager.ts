@@ -1,5 +1,5 @@
-import { inject, singleton } from '@difizen/libro-common/mana-app';
-import { prop } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/app';
+import { prop } from '@difizen/libro-common/app';
 
 import type { IContentsModel } from './contents/index.js';
 import { LibroKernelManager } from './kernel/libro-kernel-manager.js';
