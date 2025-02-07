@@ -1,6 +1,5 @@
-import type { Newable } from '@difizen/mana-common';
-import { Priority } from '@difizen/mana-common';
-
+import { Priority } from '../../mana-common/index.js';
+import type { Newable } from '../../mana-common/index.js';
 import type { Contribution } from '../contribution/index';
 import { Syringe } from '../core';
 import { singleton } from '../decorator';

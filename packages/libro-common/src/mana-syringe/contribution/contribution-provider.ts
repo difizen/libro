@@ -1,7 +1,6 @@
-import type { Disposable } from '@difizen/mana-common';
-import { Emitter } from '@difizen/mana-common';
-import { DisposableCollection } from '@difizen/mana-common';
-
+import type { Disposable } from '../../mana-common/index.js';
+import { Emitter } from '../../mana-common/index.js';
+import { DisposableCollection } from '../../mana-common/index.js';
 import type { Syringe } from '../core';
 
 import {

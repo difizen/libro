@@ -1,7 +1,8 @@
-import type { Disposable } from '@difizen/mana-common';
-import { DisposableCollection, Emitter } from '@difizen/mana-common';
 import type { interfaces } from 'inversify';
 import { Container as InversifyContainer } from 'inversify';
+
+import type { Disposable } from '../mana-common/index.js';
+import { DisposableCollection, Emitter } from '../mana-common/index.js';
 
 import { ContainerAPI } from './container-api';
 import { Syringe } from './core';
