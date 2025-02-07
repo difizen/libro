@@ -33,6 +33,14 @@
       "typings": "./es/mana-observable/index.js",
       "default": "./es/mana-observable/index.js"
     },
+    "./mana-core": {
+      "typings": "./es/mana-core/index.js",
+      "default": "./es/mana-core/index.js"
+    },
+    "./mana-app": {
+      "typings": "./es/mana-app/index.js",
+      "default": "./es/mana-app/index.js"
+    },
     "./package.json": "./package.json"
   },
   "main": "es/index.js",
