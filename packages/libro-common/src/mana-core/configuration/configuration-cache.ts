@@ -1,4 +1,4 @@
-import type { Disposable } from '../../mana-common/index.js';
+import type { Disposable } from '../../common/index.js';
 import { singleton } from '../../mana-syringe/index.js';
 
 import type { ConfigurationNode } from './configuration-protocol';

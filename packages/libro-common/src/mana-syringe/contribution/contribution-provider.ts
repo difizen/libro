@@ -1,6 +1,6 @@
-import type { Disposable } from '../../mana-common/index.js';
-import { Emitter } from '../../mana-common/index.js';
-import { DisposableCollection } from '../../mana-common/index.js';
+import type { Disposable } from '../../common/index.js';
+import { Emitter } from '../../common/index.js';
+import { DisposableCollection } from '../../common/index.js';
 import type { Syringe } from '../core';
 
 import {

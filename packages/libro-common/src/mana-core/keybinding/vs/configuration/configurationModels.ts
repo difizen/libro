@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Emitter } from '../../../../mana-common/index.js';
-import { types } from '../../../../mana-common/index.js';
-import { objects } from '../../../../mana-common/index.js';
-import type { URI } from '../../../../mana-common/index.js';
-import type { Event } from '../../../../mana-common/index.js';
+import { Emitter } from '../../../../common/index.js';
+import { types } from '../../../../common/index.js';
+import { objects } from '../../../../common/index.js';
+import type { URI } from '../../../../common/index.js';
+import type { Event } from '../../../../common/index.js';
 
 import { getOrSet, ResourceMap, VSDisposable } from '../../../utils';
 import { Registry } from '../platform';

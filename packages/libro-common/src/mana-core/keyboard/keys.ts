@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-redeclare */
-import { isOSX } from '../../mana-common/index.js';
+import { isOSX } from '../../common/index.js';
 
 export type KeySequence = KeyCode[];
 export namespace KeySequence {

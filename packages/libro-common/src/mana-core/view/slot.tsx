@@ -1,4 +1,4 @@
-import type { Newable } from '../../mana-common/index.js';
+import type { Newable } from '../../common/index.js';
 import { useInject, getOrigin } from '../../mana-observable/index.js';
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';

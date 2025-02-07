@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
-import type { Event } from '../../mana-common/index.js';
+import type { Event } from '../../common/index.js';
 import type { IKeyboardLayoutInfo, IKeyboardMapping } from 'native-keymap';
 
 export interface NativeKeyboardLayout {

@@ -1,4 +1,4 @@
-import { Deferred } from '@difizen/libro-common/mana-common';
+import { Deferred } from '@difizen/libro-common/common';
 import {
   BrowserMessageReader,
   BrowserMessageWriter,

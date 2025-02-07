@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Emitter, Event } from '../../../mana-common/index.js';
-import { Iterable } from '../../../mana-common/index.js';
-import { PauseableEmitter } from '../../../mana-common/index.js';
-import { objects } from '../../../mana-common/index.js';
+import type { Emitter, Event } from '../../../common/index.js';
+import { Iterable } from '../../../common/index.js';
+import { PauseableEmitter } from '../../../common/index.js';
+import { objects } from '../../../common/index.js';
 import { prop } from '../../../mana-observable/index.js';
 import { inject, injectable, singleton } from '../../../mana-syringe/index.js';
 import type { CommandRegistry } from '../../command/index';

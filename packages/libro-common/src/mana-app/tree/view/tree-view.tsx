@@ -9,8 +9,8 @@ import { CellMeasurer, CellMeasurerCache, List } from 'react-virtualized';
 import type { MeasuredCellParent } from 'react-virtualized/dist/es/CellMeasurer';
 import { v1 } from 'uuid';
 
-import { isOSX, notEmpty } from '../../../mana-common/index.js';
-import { Disposable, DisposableCollection } from '../../../mana-common/index.js';
+import { isOSX, notEmpty } from '../../../common/index.js';
+import { Disposable, DisposableCollection } from '../../../common/index.js';
 import type { MenuPath } from '../../../mana-core/index.js';
 import type { StatefulView, ViewSize } from '../../../mana-core/index.js';
 import {

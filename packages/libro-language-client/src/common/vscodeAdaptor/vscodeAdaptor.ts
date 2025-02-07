@@ -1,4 +1,4 @@
-import { Emitter } from '@difizen/libro-common/mana-common';
+import { Emitter } from '@difizen/libro-common/common';
 import type { Syringe } from '@difizen/libro-common/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 import type { Disposable } from 'vscode';

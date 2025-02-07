@@ -1,4 +1,4 @@
-import { URI } from '../../mana-common/index.js';
+import { URI } from '../../common/index.js';
 import type { MenuPath } from '../../mana-core/index.js';
 
 export const FileTreeContextMenuPath: MenuPath = ['file-tree-context-menu'];

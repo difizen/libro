@@ -1,6 +1,6 @@
-import type { MaybePromise } from '../../mana-common/index.js';
-import { Disposable } from '../../mana-common/index.js';
-import { Emitter, DisposableCollection } from '../../mana-common/index.js';
+import type { MaybePromise } from '../../common/index.js';
+import { Disposable } from '../../common/index.js';
+import { Emitter, DisposableCollection } from '../../common/index.js';
 import {
   inject,
   singleton,

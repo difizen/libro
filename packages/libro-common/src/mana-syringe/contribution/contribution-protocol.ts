@@ -1,4 +1,4 @@
-import type { Event } from '../../mana-common/index.js';
+import type { Event } from '../../common/index.js';
 import { Syringe } from '../core';
 
 export type Option = {

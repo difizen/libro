@@ -1,7 +1,7 @@
 import { notification } from '../../mana-react/index.js';
 import { v1 } from 'uuid';
 
-import { Disposable } from '../../mana-common/index.js';
+import { Disposable } from '../../common/index.js';
 import { singleton } from '../../mana-syringe/index.js';
 
 import type { NotificationConfig, NotificationAction } from './protocol';

@@ -1,6 +1,6 @@
-import type { Event } from '../../mana-common/index.js';
-import { Deferred, Emitter } from '../../mana-common/index.js';
-import { isOSX } from '../../mana-common/index.js';
+import type { Event } from '../../common/index.js';
+import { Deferred, Emitter } from '../../common/index.js';
+import { isOSX } from '../../common/index.js';
 import { inject, postConstruct, singleton } from '../../mana-syringe/index.js';
 
 import { LocalStorageService } from '../common';

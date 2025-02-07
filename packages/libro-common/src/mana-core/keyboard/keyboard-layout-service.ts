@@ -3,8 +3,8 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-plusplus */
-import type { Event } from '../../mana-common/index.js';
-import { Emitter, isWindows } from '../../mana-common/index.js';
+import type { Event } from '../../common/index.js';
+import { Emitter, isWindows } from '../../common/index.js';
 import { inject, optional, singleton } from '../../mana-syringe/index.js';
 import type { IWindowsKeyMapping } from 'native-keymap';
 

@@ -1,5 +1,5 @@
-import type { Event } from '../../mana-common/index.js';
-import { Emitter, Deferred } from '../../mana-common/index.js';
+import type { Event } from '../../common/index.js';
+import { Emitter, Deferred } from '../../common/index.js';
 import { prop } from '../../mana-observable/index.js';
 import { inject, singleton } from '../../mana-syringe/index.js';
 import { DebugService } from '../common/debug';

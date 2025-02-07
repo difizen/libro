@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import type { Disposable } from '../mana-common/index.js';
-import { isPlainObject, getPropertyDescriptor } from '../mana-common/index.js';
+import type { Disposable } from '../common/index.js';
+import { isPlainObject, getPropertyDescriptor } from '../common/index.js';
 
 import { ObservableConfig } from './config';
 import type { Traceable } from './core';

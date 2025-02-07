@@ -10,4 +10,4 @@ export * from './display-wrapper.js';
 export * from './protocol/index.js';
 export * from './dom.js';
 export * from './mime.js';
-// export * from './mana-common/index.js';
+// export * from './common/index.js';

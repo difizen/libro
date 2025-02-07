@@ -1,10 +1,10 @@
 import { getOrigin, equals } from '../../mana-observable/index.js';
 
-import type { Mutable, Event, CancellationToken } from '../../mana-common/index.js';
-import { timeout } from '../../mana-common/index.js';
-import { CancellationTokenSource } from '../../mana-common/index.js';
-import { DisposableCollection } from '../../mana-common/index.js';
-import { Emitter, WaitUntilEvent } from '../../mana-common/index.js';
+import type { Mutable, Event, CancellationToken } from '../../common/index.js';
+import { timeout } from '../../common/index.js';
+import { CancellationTokenSource } from '../../common/index.js';
+import { DisposableCollection } from '../../common/index.js';
+import { Emitter, WaitUntilEvent } from '../../common/index.js';
 import { singleton } from '../../mana-syringe/index.js';
 
 import type { TreeNode } from './tree';

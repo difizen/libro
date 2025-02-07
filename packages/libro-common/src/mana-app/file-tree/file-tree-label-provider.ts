@@ -1,4 +1,4 @@
-import type { URI } from '../../mana-common/index.js';
+import type { URI } from '../../common/index.js';
 import { singleton, inject } from '../../mana-syringe/index.js';
 
 import type { DidChangeLabelEvent } from '../label';

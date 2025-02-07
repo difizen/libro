@@ -1,6 +1,6 @@
 import type { SelectionProvider } from '../../mana-core/index.js';
 
-import type { Event, Disposable } from '../../mana-common/index.js';
+import type { Event, Disposable } from '../../common/index.js';
 
 import { TreeNode } from './tree';
 

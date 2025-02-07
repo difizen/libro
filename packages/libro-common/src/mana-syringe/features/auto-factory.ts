@@ -1,4 +1,4 @@
-import type { Newable } from '../../mana-common/index.js';
+import type { Newable } from '../../common/index.js';
 import { Syringe } from '../core';
 import { transient } from '../decorator';
 import { registerSideOption } from '../side-option';

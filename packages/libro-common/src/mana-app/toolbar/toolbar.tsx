@@ -2,8 +2,8 @@ import { MoreOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 import Tooltip from 'rc-tooltip';
 
-import { DisposableCollection } from '../../mana-common/index.js';
-import type { Disposable } from '../../mana-common/index.js';
+import { DisposableCollection } from '../../common/index.js';
+import type { Disposable } from '../../common/index.js';
 import {
   CommandRegistry,
   MenuRegistry,

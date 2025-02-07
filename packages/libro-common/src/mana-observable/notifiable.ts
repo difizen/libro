@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-spread */
-import { isPlainObject } from '../mana-common/index.js';
+import { isPlainObject } from '../common/index.js';
 
 import { ObservableSymbol } from './core';
 import { Notifier } from './notifier';

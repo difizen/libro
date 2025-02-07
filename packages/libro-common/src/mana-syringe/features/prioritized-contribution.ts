@@ -1,5 +1,5 @@
-import { Priority } from '../../mana-common/index.js';
-import type { Newable } from '../../mana-common/index.js';
+import { Priority } from '../../common/index.js';
+import type { Newable } from '../../common/index.js';
 import type { Contribution } from '../contribution/index';
 import { Syringe } from '../core';
 import { singleton } from '../decorator';

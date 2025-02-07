@@ -1,4 +1,4 @@
-import type { Event } from '../../mana-common/index.js';
+import type { Event } from '../../common/index.js';
 
 /**
  * Service for opening new browser windows.

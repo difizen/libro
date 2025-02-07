@@ -1,5 +1,5 @@
-import { DisposableCollection, Emitter } from '../../mana-common/index.js';
-import type { Event, Disposable } from '../../mana-common/index.js';
+import { DisposableCollection, Emitter } from '../../common/index.js';
+import type { Event, Disposable } from '../../common/index.js';
 import type {
   GeneralMenuItem,
   ActionMenuItem,

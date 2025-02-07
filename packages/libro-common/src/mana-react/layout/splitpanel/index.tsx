@@ -3,7 +3,7 @@
 import clsx from 'classnames';
 import * as React from 'react';
 
-import { Emitter } from '../../../mana-common';
+import { Emitter } from '../../../common/index.js';
 import { defaultPrefixCls } from '../../constant';
 import type { IResizeHandleDelegate } from '../../resize/index';
 import { ResizeFlexMode } from '../../resize/index';

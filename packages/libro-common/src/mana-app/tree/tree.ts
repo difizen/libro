@@ -3,7 +3,7 @@ import type {
   Disposable,
   CancellationToken,
   WaitUntilEvent,
-} from '../../mana-common/index.js';
+} from '../../common/index.js';
 
 import type { NodeProps, TreeProps } from './tree-protocol';
 

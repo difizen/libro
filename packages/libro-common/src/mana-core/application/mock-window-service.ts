@@ -1,4 +1,4 @@
-import { Event } from '../../mana-common/index.js';
+import { Event } from '../../common/index.js';
 import { singleton } from '../../mana-syringe/index.js';
 
 import type { WindowService } from './application-protocol';

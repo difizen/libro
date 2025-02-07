@@ -1,5 +1,5 @@
-import type { MaybePromise, Event } from '../../mana-common/index.js';
-import { Emitter } from '../../mana-common/index.js';
+import type { MaybePromise, Event } from '../../common/index.js';
+import { Emitter } from '../../common/index.js';
 
 import type { DebugService } from './debug';
 import { debug } from './debug';

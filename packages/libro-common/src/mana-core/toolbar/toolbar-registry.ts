@@ -1,4 +1,4 @@
-import { Emitter } from '../../mana-common/index.js';
+import { Emitter } from '../../common/index.js';
 import { prop } from '../../mana-observable/index.js';
 import type { Contribution } from '../../mana-syringe/index.js';
 import { contrib, inject, singleton, Syringe } from '../../mana-syringe/index.js';

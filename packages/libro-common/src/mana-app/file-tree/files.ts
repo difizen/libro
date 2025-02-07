@@ -5,8 +5,8 @@
  *--------------------------------------------------------------------------------------------*/
 // based on https://github.com/microsoft/vscode/blob/04c36be045a94fee58e5f8992d3e3fd980294a84/src/vs/platform/files/common/files.ts
 
-import type { Disposable as IDisposable, Event } from '../../mana-common/index.js';
-import { URI } from '../../mana-common/index.js';
+import type { Disposable as IDisposable, Event } from '../../common/index.js';
+import { URI } from '../../common/index.js';
 
 export enum FileOperation {
   CREATE,

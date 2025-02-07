@@ -4,8 +4,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Event, IStringDictionary } from '../../../../mana-common/index.js';
-import { Emitter, types } from '../../../../mana-common/index.js';
+import type { Event, IStringDictionary } from '../../../../common/index.js';
+import { Emitter, types } from '../../../../common/index.js';
 
 import * as nls from '../../../nls';
 import type { IJSONContributionRegistry } from '../jsonContributionRegistry';
