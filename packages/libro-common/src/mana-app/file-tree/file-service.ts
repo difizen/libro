@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Emitter } from '@difizen/mana-common';
-import type { URI } from '@difizen/mana-common';
-
+import { Emitter } from '../../mana-common/index.js';
+import type { URI } from '../../mana-common/index.js';
 import { singleton } from '../../mana-syringe/index.js';
 
 import type {

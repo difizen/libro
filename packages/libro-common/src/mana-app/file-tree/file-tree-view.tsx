@@ -1,6 +1,10 @@
 import { FileOutlined } from '@ant-design/icons';
-import { Disposable, DisposableCollection, isCancelled } from '@difizen/mana-common';
-import { URI } from '@difizen/mana-common';
+import {
+  Disposable,
+  DisposableCollection,
+  isCancelled,
+} from '../../mana-common/index.js';
+import { URI } from '../../mana-common/index.js';
 import type { MenuPath } from '@difizen/mana-core';
 import { ViewInstance } from '@difizen/mana-core';
 import { ManaModule, SelectionService, view } from '@difizen/mana-core';

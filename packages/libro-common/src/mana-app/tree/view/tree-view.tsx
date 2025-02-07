@@ -1,13 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Disposable, DisposableCollection } from '@difizen/mana-common';
-import { isOSX, notEmpty } from '@difizen/mana-common';
 import { BaseView, SelectionService, view, ViewInstance } from '@difizen/mana-core';
 import type { StatefulView, ViewSize } from '@difizen/mana-core';
 import type { MenuPath } from '@difizen/mana-core';
 import { getOrigin, prop, useInject } from '@difizen/mana-observable';
 import { Dropdown } from '@difizen/mana-react';
-import { inject, postConstruct, singleton } from '../../mana-syringe/index.js';
 import debounce from 'lodash.debounce';
 import type PerfectScrollbar from 'perfect-scrollbar';
 import { forwardRef } from 'react';
@@ -17,7 +14,10 @@ import { CellMeasurer, CellMeasurerCache, List } from 'react-virtualized';
 import type { MeasuredCellParent } from 'react-virtualized/dist/es/CellMeasurer';
 import { v1 } from 'uuid';
 
+import { isOSX, notEmpty } from '../../../mana-common/index.js';
+import { Disposable, DisposableCollection } from '../../../mana-common/index.js';
 import { LabelProvider } from '../../label';
+import { inject, postConstruct, singleton } from '../../mana-syringe/index.js';
 import { MenuRender } from '../../menu';
 import {
   DEFAULT_SCROLL_OPTIONS,

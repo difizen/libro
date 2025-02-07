@@ -1,6 +1,6 @@
 // import { Modal } from 'antd';
-import { Deferred } from '@difizen/mana-common';
-import { URI } from '@difizen/mana-common';
+import { Deferred } from '../../mana-common/index.js';
+import { URI } from '../../mana-common/index.js';
 import { inject, postConstruct, singleton } from '../../mana-syringe/index.js';
 
 import { LabelProvider } from '../label';

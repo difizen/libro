@@ -1,5 +1,6 @@
-import type { Event, Disposable } from '@difizen/mana-common';
 import type { SelectionProvider } from '@difizen/mana-core';
+
+import type { Event, Disposable } from '../../mana-common/index.js';
 
 import { TreeNode } from './tree';
 
