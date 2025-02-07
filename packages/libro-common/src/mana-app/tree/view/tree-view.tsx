@@ -7,7 +7,7 @@ import type { StatefulView, ViewSize } from '@difizen/mana-core';
 import type { MenuPath } from '@difizen/mana-core';
 import { getOrigin, prop, useInject } from '@difizen/mana-observable';
 import { Dropdown } from '@difizen/mana-react';
-import { inject, postConstruct, singleton } from '@difizen/mana-syringe';
+import { inject, postConstruct, singleton } from '../../mana-syringe/index.js';
 import debounce from 'lodash.debounce';
 import type PerfectScrollbar from 'perfect-scrollbar';
 import { forwardRef } from 'react';

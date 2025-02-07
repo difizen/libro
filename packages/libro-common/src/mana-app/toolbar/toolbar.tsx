@@ -10,7 +10,7 @@ import {
 } from '@difizen/mana-core';
 import { l10n } from '@difizen/mana-l10n';
 import { getOrigin, prop } from '@difizen/mana-observable';
-import { inject, transient } from '@difizen/mana-syringe';
+import { inject, transient } from '../../mana-syringe/index.js';
 import classnames from 'classnames';
 import Tooltip from 'rc-tooltip';
 

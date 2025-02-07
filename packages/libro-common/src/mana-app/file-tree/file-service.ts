@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Emitter } from '@difizen/mana-common';
 import type { URI } from '@difizen/mana-common';
-import { singleton } from '@difizen/mana-syringe';
+
+import { singleton } from '../../mana-syringe/index.js';
 
 import type {
   CopyFileOptions,

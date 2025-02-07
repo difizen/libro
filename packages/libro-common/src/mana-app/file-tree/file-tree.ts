@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import type { URI } from '@difizen/mana-common';
 import { getOrigin } from '@difizen/mana-observable';
-import { inject, singleton } from '@difizen/mana-syringe';
+import { inject, singleton } from '../../mana-syringe/index.js';
 
 import type { TreeNode, CompositeTreeNode } from '../tree/tree';
 import { Tree } from '../tree/tree';

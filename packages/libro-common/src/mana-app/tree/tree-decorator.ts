@@ -1,6 +1,6 @@
 import type { Event, Disposable, MaybePromise } from '@difizen/mana-common';
 import { Emitter, DisposableCollection } from '@difizen/mana-common';
-import { singleton } from '@difizen/mana-syringe';
+import { singleton } from '../../mana-syringe/index.js';
 
 import type { Tree, TreeNode } from './tree';
 import type { TreeViewDecorationData } from './tree-view-decoration';

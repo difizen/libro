@@ -9,7 +9,7 @@ import { ViewInstance } from '@difizen/mana-core';
 import type { SlotViewOption } from '@difizen/mana-core';
 import { prop, useInject } from '@difizen/mana-observable';
 import { BoxPanel } from '@difizen/mana-react';
-import { inject, transient } from '@difizen/mana-syringe';
+import { inject, transient } from '../../mana-syringe/index.js';
 import React from 'react';
 
 type Direction = 'left-to-right' | 'right-to-left' | 'top-to-bottom' | 'bottom-to-top';

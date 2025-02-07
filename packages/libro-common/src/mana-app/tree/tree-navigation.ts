@@ -1,4 +1,4 @@
-import { singleton } from '@difizen/mana-syringe';
+import { singleton } from '../../mana-syringe/index.js';
 
 import type { TreeNode } from './tree';
 
