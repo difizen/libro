@@ -1,5 +1,5 @@
-import { ViewRender } from '@difizen/mana-app';
-import { useInject } from '@difizen/mana-app';
+import { ViewRender } from '@difizen/libro-common/mana-app';
+import { useInject } from '@difizen/libro-common/mana-app';
 import { useEffect, useState } from 'react';
 
 import type { NotebookOption, NotebookView } from '../libro-protocol.js';

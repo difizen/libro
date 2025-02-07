@@ -1,4 +1,4 @@
-import type { Container } from '@difizen/mana-app';
+import type { Container } from '@difizen/libro-common/mana-app';
 
 import { MonacoEnvironment } from './monaco-environment.js';
 

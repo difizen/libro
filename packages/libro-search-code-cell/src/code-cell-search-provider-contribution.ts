@@ -1,8 +1,8 @@
 import { LibroCodeCellView } from '@difizen/libro-code-cell';
 import type { CellView } from '@difizen/libro-core';
 import { CellSearchProviderContribution } from '@difizen/libro-search';
-import { ViewManager } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
+import { ViewManager } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 
 import { CodeCellSearchProviderFactory } from './code-cell-search-protocol.js';
 

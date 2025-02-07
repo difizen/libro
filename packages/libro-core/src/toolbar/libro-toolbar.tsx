@@ -1,12 +1,12 @@
-import type { ToolbarRegistry } from '@difizen/mana-app';
-import { isMacintosh } from '@difizen/mana-app';
+import type { ToolbarRegistry } from '@difizen/libro-common/mana-app';
+import { isMacintosh } from '@difizen/libro-common/mana-app';
 import {
   inject,
   ModalService,
   singleton,
   ToolbarContribution,
   useObserve,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 
 import { DocumentCommands, NotebookCommands } from '../command/index.js';

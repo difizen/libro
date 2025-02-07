@@ -1,4 +1,4 @@
-import { singleton } from '@difizen/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 import { ContentContribution } from './libro-content-protocol.js';
 

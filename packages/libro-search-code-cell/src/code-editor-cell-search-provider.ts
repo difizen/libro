@@ -2,12 +2,12 @@ import type { LibroCodeCellView } from '@difizen/libro-code-cell';
 import type { IPosition, SearchMatch } from '@difizen/libro-code-editor';
 import type { BaseSearchProvider, SearchFilters } from '@difizen/libro-search';
 import { searchText } from '@difizen/libro-search';
-import type { Event } from '@difizen/mana-app';
-import { Disposable } from '@difizen/mana-app';
-import { prop } from '@difizen/mana-app';
-import { DisposableCollection, Emitter } from '@difizen/mana-app';
-import { watch } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+import type { Event } from '@difizen/libro-common/mana-app';
+import { Disposable } from '@difizen/libro-common/mana-app';
+import { prop } from '@difizen/libro-common/mana-app';
+import { DisposableCollection, Emitter } from '@difizen/libro-common/mana-app';
+import { watch } from '@difizen/libro-common/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 
 import type { CodeEditorSearchHighlighter } from './code-cell-search-protocol.js';
 import { CodeEditorSearchHighlighterFactory } from './code-cell-search-protocol.js';

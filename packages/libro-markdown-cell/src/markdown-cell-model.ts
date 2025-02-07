@@ -2,8 +2,8 @@ import type { IMarkdownCell } from '@difizen/libro-common';
 import { concatMultilineString } from '@difizen/libro-common';
 import type { LibroMarkdownCellModel } from '@difizen/libro-core';
 import { CellOptions, LibroCellModel } from '@difizen/libro-core';
-import { prop } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+import { prop } from '@difizen/libro-common/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 
 @transient()
 export class MarkdownCellModel

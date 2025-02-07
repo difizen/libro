@@ -8,13 +8,13 @@ import {
   NotebookCommands,
   ExecutableCellView,
 } from '@difizen/libro-core';
-import type { CommandRegistry } from '@difizen/mana-app';
+import type { CommandRegistry } from '@difizen/libro-common/mana-app';
 import {
   CommandContribution,
   inject,
   ModalService,
   singleton,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 
 import { LibroJupyterModel } from '../libro-jupyter-model.js';
 import { ExecutedWithKernelCellModel } from '../libro-jupyter-protocol.js';

@@ -1,4 +1,4 @@
-import { inject, prop, singleton } from '@difizen/mana-app';
+import { inject, prop, singleton } from '@difizen/libro-common/mana-app';
 
 import type { NotebookModel } from './libro-protocol.js';
 import { VirtualizedManagerOptionFactory } from './libro-protocol.js';

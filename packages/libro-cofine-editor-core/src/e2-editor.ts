@@ -1,5 +1,5 @@
-import { DisposableCollection } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
+import { DisposableCollection } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 
 import { EditorHanlerRegistry } from './editor-handler-registry.js';

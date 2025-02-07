@@ -7,7 +7,7 @@ import {
   LazyLoaderRegistry,
   LazyLoaderRegistryContribution,
 } from '@difizen/libro-cofine-editor-contribution';
-import { Contribution, Module, Syringe } from '@difizen/mana-app';
+import { Contribution, Module, Syringe } from '@difizen/libro-common/mana-app';
 
 import 'reflect-metadata';
 import { DefaultWorkerContribution } from './default-worker-contribution.js';

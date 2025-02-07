@@ -16,7 +16,7 @@ import {
   isStream,
   URL,
 } from '@difizen/libro-common';
-import { URI } from '@difizen/mana-app';
+import { URI } from '@difizen/libro-common/mana-app';
 import escape from 'lodash.escape';
 
 import type { ILinkHandler, IResolver, RankMap } from './rendermime-protocol.js';

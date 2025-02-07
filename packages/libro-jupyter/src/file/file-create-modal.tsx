@@ -1,7 +1,7 @@
-import type { ModalItemProps, ModalItem } from '@difizen/mana-app';
-import { ThemeService } from '@difizen/mana-app';
-import { CommandRegistry } from '@difizen/mana-app';
-import { URI, useInject, ViewManager } from '@difizen/mana-app';
+import type { ModalItemProps, ModalItem } from '@difizen/libro-common/mana-app';
+import { ThemeService } from '@difizen/libro-common/mana-app';
+import { CommandRegistry } from '@difizen/libro-common/mana-app';
+import { URI, useInject, ViewManager } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Col, Form, message, Row, Input, Modal, ConfigProvider, theme } from 'antd';
 import type { InputRef } from 'antd';

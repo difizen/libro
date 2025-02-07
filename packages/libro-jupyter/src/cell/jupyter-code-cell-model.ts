@@ -1,8 +1,8 @@
 import { LibroCodeCellModel } from '@difizen/libro-code-cell';
 import type { ICellMetadata } from '@difizen/libro-common';
 import { CellOptions } from '@difizen/libro-core';
-import { inject, transient } from '@difizen/mana-app';
-import { prop, ViewManager } from '@difizen/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
+import { prop, ViewManager } from '@difizen/libro-common/mana-app';
 
 import type {
   CodeCellMetadata,

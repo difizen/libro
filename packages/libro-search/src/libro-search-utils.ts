@@ -1,5 +1,5 @@
 import type { SearchMatch } from '@difizen/libro-code-editor';
-import { singleton } from '@difizen/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 /**
  * Search Utils

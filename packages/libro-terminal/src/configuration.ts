@@ -1,10 +1,10 @@
-import type { ConfigurationNode } from '@difizen/mana-app';
+import type { ConfigurationNode } from '@difizen/libro-common/mana-app';
 import {
   isOSX,
   isWindows,
   singleton,
   ConfigurationContribution,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 
 export type TerminalRendererType = 'canvas' | 'dom';
 export const DEFAULT_TERMINAL_RENDERER_TYPE = 'canvas';

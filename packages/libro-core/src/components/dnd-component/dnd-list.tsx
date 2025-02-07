@@ -1,4 +1,9 @@
-import { getOrigin, useInject, useObserve, ViewInstance } from '@difizen/mana-app';
+import {
+  getOrigin,
+  useInject,
+  useObserve,
+  ViewInstance,
+} from '@difizen/libro-common/mana-app';
 import classNames from 'classnames';
 import { throttle } from 'lodash';
 import type { FC, ReactNode } from 'react';

@@ -4,8 +4,8 @@ import type {
   LibroSlot,
 } from '@difizen/libro-core';
 import { LibroExtensionSlotContribution } from '@difizen/libro-core';
-import { ViewManager } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
+import { ViewManager } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 
 import { TOCView } from './toc-view.js';
 

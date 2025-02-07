@@ -25,7 +25,7 @@ import {
   watch,
   ConfigurationService,
   useConfigurationValue,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { FloatButton, Button, Spin } from 'antd';
 import type { FC, ForwardRefExoticComponent, RefAttributes } from 'react';
 import { forwardRef, memo, useCallback, useEffect, useRef } from 'react';

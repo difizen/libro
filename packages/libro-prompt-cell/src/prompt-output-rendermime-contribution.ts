@@ -1,6 +1,6 @@
 import type { BaseOutputView } from '@difizen/libro-jupyter';
 import { RenderMimeContribution } from '@difizen/libro-jupyter';
-import { singleton } from '@difizen/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 import { PromptOutputRender } from './prompt-output-render.js';
 

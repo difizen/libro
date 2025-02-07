@@ -1,5 +1,5 @@
 import { Emitter } from '@difizen/libro-common/mana-common';
-import type { Syringe } from '@difizen/mana-app';
+import type { Syringe } from '@difizen/libro-common/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 import type { Disposable } from 'vscode';
 import { URI } from 'vscode-uri';

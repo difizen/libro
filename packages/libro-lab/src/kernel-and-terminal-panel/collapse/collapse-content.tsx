@@ -1,6 +1,6 @@
 import { CloseOutlined } from '@ant-design/icons';
 import { TerminalCommands } from '@difizen/libro-terminal';
-import { CommandRegistry, useInject } from '@difizen/mana-app';
+import { CommandRegistry, useInject } from '@difizen/libro-common/mana-app';
 import { message } from 'antd';
 import React from 'react';
 

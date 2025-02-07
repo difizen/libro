@@ -8,7 +8,7 @@ import {
   CommandRegistry,
   view,
   ViewInstance,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { Button } from 'antd';
 import { forwardRef } from 'react';
 

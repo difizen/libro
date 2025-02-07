@@ -1,5 +1,5 @@
 import { KeybindInstructionsOutlined } from '@difizen/libro-core';
-import { ModalService, useInject } from '@difizen/mana-app';
+import { ModalService, useInject } from '@difizen/libro-common/mana-app';
 import type { FC } from 'react';
 
 import {

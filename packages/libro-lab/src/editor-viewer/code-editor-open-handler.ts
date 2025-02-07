@@ -1,8 +1,12 @@
 import { LibroJupyterConfiguration } from '@difizen/libro-jupyter';
-import type { URI, ViewOpenHandlerOptions } from '@difizen/mana-app';
-import { ConfigurationService, inject } from '@difizen/mana-app';
-import { Priority } from '@difizen/mana-app';
-import { NavigatableViewOpenHandler, OpenHandler, singleton } from '@difizen/mana-app';
+import type { URI, ViewOpenHandlerOptions } from '@difizen/libro-common/mana-app';
+import { ConfigurationService, inject } from '@difizen/libro-common/mana-app';
+import { Priority } from '@difizen/libro-common/mana-app';
+import {
+  NavigatableViewOpenHandler,
+  OpenHandler,
+  singleton,
+} from '@difizen/libro-common/mana-app';
 
 import type { CodeEditorViewer } from './code-editor-viewer.js';
 import { CodeEditorViewerFactory, textFileTypes } from './protocol.js';

@@ -1,7 +1,12 @@
 import { LibroService } from '@difizen/libro-core';
 import type { IKernelConnection } from '@difizen/libro-kernel';
 import { KernelConnection, LibroKernelManager } from '@difizen/libro-kernel';
-import { inject, prop, singleton, ApplicationContribution } from '@difizen/mana-app';
+import {
+  inject,
+  prop,
+  singleton,
+  ApplicationContribution,
+} from '@difizen/libro-common/mana-app';
 
 import type { LibroWidgets } from './libro-widgets.js';
 import { LibroWidgetsFactory } from './protocol.js';

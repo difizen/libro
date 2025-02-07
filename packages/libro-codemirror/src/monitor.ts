@@ -1,5 +1,5 @@
 import { EditorView, hasHoverTooltips } from '@codemirror/view';
-import { Emitter } from '@difizen/mana-app';
+import { Emitter } from '@difizen/libro-common/mana-app';
 
 import {
   closeCompletionEffect,

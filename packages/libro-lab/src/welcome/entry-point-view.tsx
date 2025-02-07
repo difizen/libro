@@ -14,8 +14,8 @@ import {
   useInject,
   view,
   ViewManager,
-} from '@difizen/mana-app';
-import { BaseView } from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
+import { BaseView } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Col, Row } from 'antd';
 import { forwardRef, useEffect, useState } from 'react';

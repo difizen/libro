@@ -1,6 +1,6 @@
 import { ContentsManager } from '@difizen/libro-kernel';
-import type { NavigatableView } from '@difizen/mana-app';
-import { DisposableCollection } from '@difizen/mana-app';
+import type { NavigatableView } from '@difizen/libro-common/mana-app';
+import { DisposableCollection } from '@difizen/libro-common/mana-app';
 import {
   BaseView,
   inject,
@@ -16,7 +16,7 @@ import {
   Deferred,
   URI,
   CommandRegistry,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { Spin } from 'antd';
 import { createRef, forwardRef, useEffect, useRef } from 'react';
 import Viewer from 'viewerjs';

@@ -1,5 +1,9 @@
 import { FileTreeContextMenuGroups, JupyterFileService } from '@difizen/libro-jupyter';
-import type { CommandRegistry, MenuRegistry, ViewManager } from '@difizen/mana-app';
+import type {
+  CommandRegistry,
+  MenuRegistry,
+  ViewManager,
+} from '@difizen/libro-common/mana-app';
 import {
   ConfigurationService,
   CommandContribution,
@@ -9,7 +13,7 @@ import {
   ModalService,
   OpenerService,
   singleton,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { message } from 'antd';
 

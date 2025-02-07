@@ -1,4 +1,4 @@
-import { inject, singleton } from '@difizen/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 
 export const MonacoLoaderConfig = Symbol('MonacoLoaderConfig');

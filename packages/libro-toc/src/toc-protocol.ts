@@ -1,7 +1,7 @@
 import type { CellView } from '@difizen/libro-core';
-import type { View } from '@difizen/mana-app';
-import type { Disposable } from '@difizen/mana-app';
-import { Syringe } from '@difizen/mana-app';
+import type { View } from '@difizen/libro-common/mana-app';
+import type { Disposable } from '@difizen/libro-common/mana-app';
+import { Syringe } from '@difizen/libro-common/mana-app';
 
 /**
  * Table of Contents configuration

@@ -2,9 +2,9 @@ import {
   LanguageWorkerRegistry,
   LazyLoaderRegistry,
 } from '@difizen/libro-cofine-editor-contribution';
-import type { Syringe } from '@difizen/mana-app';
-import { Deferred } from '@difizen/mana-app';
-import { GlobalContainer } from '@difizen/mana-app';
+import type { Syringe } from '@difizen/libro-common/mana-app';
+import { Deferred } from '@difizen/libro-common/mana-app';
+import { GlobalContainer } from '@difizen/libro-common/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 
 import { InitializeProvider } from './initialize-provider.js';

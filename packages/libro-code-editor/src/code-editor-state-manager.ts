@@ -1,7 +1,7 @@
-import type { Contribution } from '@difizen/mana-app';
-import { Priority } from '@difizen/mana-app';
-import { contrib } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
+import type { Contribution } from '@difizen/libro-common/mana-app';
+import { Priority } from '@difizen/libro-common/mana-app';
+import { contrib } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 import type { IModel } from './code-editor-model.js';
 import type { EditorState, IEditorStateOptions } from './code-editor-protocol.js';

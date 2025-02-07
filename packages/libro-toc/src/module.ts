@@ -1,6 +1,6 @@
 import { MarkdownModule } from '@difizen/libro-markdown';
 import { LibroRenderMimeModule } from '@difizen/libro-rendermime';
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { LibroCellTOCProvider } from './cell-toc-provider.js';
 import { LibroTocColorRegistry } from './libro-toc-color-registry.js';

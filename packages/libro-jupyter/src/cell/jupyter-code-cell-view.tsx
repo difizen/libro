@@ -8,9 +8,9 @@ import type {
 } from '@difizen/libro-code-editor';
 import type { KernelMessage } from '@difizen/libro-kernel';
 import { KernelError } from '@difizen/libro-kernel';
-import { transient } from '@difizen/mana-app';
-import { view, ViewInstance } from '@difizen/mana-app';
-import { getOrigin, useInject } from '@difizen/mana-app';
+import { transient } from '@difizen/libro-common/mana-app';
+import { view, ViewInstance } from '@difizen/libro-common/mana-app';
+import { getOrigin, useInject } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { forwardRef } from 'react';
 

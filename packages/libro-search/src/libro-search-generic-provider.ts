@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-loop-func */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { View } from '@difizen/mana-app';
-import { prop } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+import type { View } from '@difizen/libro-common/mana-app';
+import { prop } from '@difizen/libro-common/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 
 import { AbstractSearchProvider } from './abstract-search-provider.js';
 import { searchInHTML } from './libro-search-engine-html.js';

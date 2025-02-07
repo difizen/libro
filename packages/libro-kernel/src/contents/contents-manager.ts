@@ -1,7 +1,7 @@
 import { PathExt } from '@difizen/libro-common';
-import type { Event as ManaEvent } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
-import { Emitter } from '@difizen/mana-app';
+import type { Event as ManaEvent } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
+import { Emitter } from '@difizen/libro-common/mana-app';
 
 import { Drive } from './contents-drive.js';
 import type { IContentsDrive } from './contents-protocol.js';

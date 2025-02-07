@@ -1,5 +1,5 @@
 import type { ExecutionCount } from '@difizen/libro-common';
-import type { Emitter } from '@difizen/mana-app';
+import type { Emitter } from '@difizen/libro-common/mana-app';
 
 export interface ExecutableCellModel {
   // 执行中

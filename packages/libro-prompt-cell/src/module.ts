@@ -1,6 +1,6 @@
 import { CellOptions, LibroModule, OutputModule } from '@difizen/libro-core';
 import { LibroRenderMimeModule } from '@difizen/libro-rendermime';
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { LibroInterpreterCodeOutputMimeTypeContribution } from './interpreter-code-output-rendermime-contribution.js';
 import { FormatterPromptMagicContribution } from './libro-formatter-prompt-magic-contribution.js';

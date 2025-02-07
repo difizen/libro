@@ -5,10 +5,10 @@ import {
   NotebookCommands,
 } from '@difizen/libro-jupyter';
 import { TerminalCommands, TerminalManager } from '@difizen/libro-terminal';
-import type { KeybindingRegistry, MenuRegistry } from '@difizen/mana-app';
-import { SlotViewManager } from '@difizen/mana-app';
-import { KeybindingContribution } from '@difizen/mana-app';
-import { Saveable } from '@difizen/mana-app';
+import type { KeybindingRegistry, MenuRegistry } from '@difizen/libro-common/mana-app';
+import { SlotViewManager } from '@difizen/libro-common/mana-app';
+import { KeybindingContribution } from '@difizen/libro-common/mana-app';
+import { Saveable } from '@difizen/libro-common/mana-app';
 import {
   CommandContribution,
   CommandRegistry,
@@ -17,7 +17,7 @@ import {
   MenuContribution,
   singleton,
   ViewManager,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 
 import { GuideView } from '../guide/index.js';

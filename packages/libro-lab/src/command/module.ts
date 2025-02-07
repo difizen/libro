@@ -1,4 +1,8 @@
-import { createSlotPreference, HeaderArea, ManaModule } from '@difizen/mana-app';
+import {
+  createSlotPreference,
+  HeaderArea,
+  ManaModule,
+} from '@difizen/libro-common/mana-app';
 
 import { LabMenu } from './lab-menu-contribution.js';
 import { MenuBarView } from './menu-bar-view.js';

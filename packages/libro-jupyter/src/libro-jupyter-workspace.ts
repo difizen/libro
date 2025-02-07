@@ -1,9 +1,9 @@
 import { URL } from '@difizen/libro-common';
 import { BaseWorkspaceService, ILibroWorkspaceService } from '@difizen/libro-core';
 import { ServerConnection, ServerManager } from '@difizen/libro-kernel';
-import { ApplicationContribution } from '@difizen/mana-app';
-import { URI } from '@difizen/mana-app';
-import { inject, singleton } from '@difizen/mana-app';
+import { ApplicationContribution } from '@difizen/libro-common/mana-app';
+import { URI } from '@difizen/libro-common/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 
 interface JupyterWorkspaceData {
   rootUri: string;

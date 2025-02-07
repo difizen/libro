@@ -1,6 +1,6 @@
 // import { default as axios } from 'axios';
 import { URL } from '@difizen/libro-common';
-import { inject, singleton } from '@difizen/mana-app';
+import { inject, singleton } from '@difizen/libro-common/mana-app';
 
 import type { ISettings } from '../server/index.js';
 import { createResponseError } from '../server/index.js';

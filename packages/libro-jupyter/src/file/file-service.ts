@@ -8,9 +8,9 @@ import type {
   MoveFileOptions,
   ResolveFileOptions,
   Event as ManaEvent,
-} from '@difizen/mana-app';
-import { Emitter } from '@difizen/mana-app';
-import { FileService, URI, inject, singleton } from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
+import { Emitter } from '@difizen/libro-common/mana-app';
+import { FileService, URI, inject, singleton } from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { message } from 'antd';
 

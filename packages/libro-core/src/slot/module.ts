@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { LibroSlotManager } from './libro-slot-manager.js';
 import { LibroExtensionSlotContribution } from './libro-slot-protocol.js';

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { noop, singleton } from '@difizen/mana-app';
+import { noop, singleton } from '@difizen/libro-common/mana-app';
 import type {
   TabGroups,
   TextEditor,

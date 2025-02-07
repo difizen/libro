@@ -1,5 +1,5 @@
-import type { View } from '@difizen/mana-app';
-import { Syringe } from '@difizen/mana-app';
+import type { View } from '@difizen/libro-common/mana-app';
+import { Syringe } from '@difizen/libro-common/mana-app';
 
 import type { LibroView } from '../libro-view.js';
 

@@ -1,6 +1,6 @@
 import { BoxPanel } from '@difizen/libro-common/mana-react';
-import { singleton, Slot, view } from '@difizen/mana-app';
-import { BaseView } from '@difizen/mana-app';
+import { singleton, Slot, view } from '@difizen/libro-common/mana-app';
+import { BaseView } from '@difizen/libro-common/mana-app';
 import { forwardRef } from 'react';
 
 import './index.less';

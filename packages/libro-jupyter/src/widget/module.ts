@@ -1,5 +1,5 @@
 import { LibroKernelManageModule } from '@difizen/libro-kernel';
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { VBoxWidget, VBoxWidgetContribution } from './box/index.js';
 import { Comm } from './comm.js';

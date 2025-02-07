@@ -7,12 +7,12 @@ import type { ExecutableCellModel } from '@difizen/libro-core';
 import { LibroCellModel } from '@difizen/libro-core';
 import { CellOptions } from '@difizen/libro-core';
 import type { ExecutionMeta } from '@difizen/libro-jupyter';
-import { Emitter } from '@difizen/mana-app';
-import { transient } from '@difizen/mana-app';
-import { prop } from '@difizen/mana-app';
-import { ViewManager } from '@difizen/mana-app';
-import { inject } from '@difizen/mana-app';
-import type { Event as ManaEvent } from '@difizen/mana-app';
+import { Emitter } from '@difizen/libro-common/mana-app';
+import { transient } from '@difizen/libro-common/mana-app';
+import { prop } from '@difizen/libro-common/mana-app';
+import { ViewManager } from '@difizen/libro-common/mana-app';
+import { inject } from '@difizen/libro-common/mana-app';
+import type { Event as ManaEvent } from '@difizen/libro-common/mana-app';
 
 import type { PromptDecodedFormatter } from './libro-formatter-prompt-magic-contribution.js';
 import type { InterpreterMeta } from './prompt-cell-protocol.js';

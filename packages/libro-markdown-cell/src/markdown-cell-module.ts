@@ -1,6 +1,6 @@
 import { CellOptions } from '@difizen/libro-core';
 import { MarkdownModule } from '@difizen/libro-markdown';
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { MarkdownCellContribution } from './markdown-cell-contribution.js';
 import { MarkdownCellModel } from './markdown-cell-model.js';

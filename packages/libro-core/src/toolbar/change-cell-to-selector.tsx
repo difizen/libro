@@ -4,8 +4,8 @@ import {
   getOrigin,
   CommandRegistry,
   ThemeService,
-} from '@difizen/mana-app';
-import type { Toolbar } from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
+import type { Toolbar } from '@difizen/libro-common/mana-app';
 import { ConfigProvider, Select, theme } from 'antd';
 import { memo } from 'react';
 

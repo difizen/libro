@@ -1,4 +1,4 @@
-import type { ConfigurationNode } from '@difizen/mana-app';
+import type { ConfigurationNode } from '@difizen/libro-common/mana-app';
 import {
   BaseView,
   prop,
@@ -9,7 +9,7 @@ import {
   ConfigurationRenderRegistry,
   useConfigurationValue,
   SchemaValidator,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { Form } from 'antd';
 import React from 'react';
 

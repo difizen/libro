@@ -1,9 +1,9 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import type { Event } from '@difizen/mana-app';
-import { Emitter } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
+import type { Event } from '@difizen/libro-common/mana-app';
+import { Emitter } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 import mergeWith from 'lodash.mergewith';
 
 import type { LspClientCapabilities } from './lsp.js';

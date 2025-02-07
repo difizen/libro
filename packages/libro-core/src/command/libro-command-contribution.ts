@@ -1,12 +1,12 @@
 import { MIME } from '@difizen/libro-common';
-import type { CommandRegistry } from '@difizen/mana-app';
+import type { CommandRegistry } from '@difizen/libro-common/mana-app';
 import {
   inject,
   ModalService,
   singleton,
   CommandContribution,
-} from '@difizen/mana-app';
-import { equals } from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
+import { equals } from '@difizen/libro-common/mana-app';
 import { v4 } from 'uuid';
 
 import { LibroCellView, ExecutableCellModel, EditorCellView } from '../cell/index.js';

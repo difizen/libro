@@ -11,7 +11,7 @@ import {
   view,
   ViewInstance,
   ViewManager,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect, useState } from 'react';

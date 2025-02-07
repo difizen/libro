@@ -1,6 +1,6 @@
 import type { CellType } from '@difizen/libro-common';
-import type { Disposable, Event } from '@difizen/mana-app';
-import { prop, transient, Emitter } from '@difizen/mana-app';
+import type { Disposable, Event } from '@difizen/libro-common/mana-app';
+import { prop, transient, Emitter } from '@difizen/libro-common/mana-app';
 import { v4 } from 'uuid';
 
 import type { ITextSelection } from './code-editor-protocol.js';

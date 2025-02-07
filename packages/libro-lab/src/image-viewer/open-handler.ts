@@ -1,12 +1,12 @@
 import { LibroJupyterConfiguration } from '@difizen/libro-jupyter';
-import type { URI, ViewOpenHandlerOptions } from '@difizen/mana-app';
-import { ConfigurationService, inject } from '@difizen/mana-app';
+import type { URI, ViewOpenHandlerOptions } from '@difizen/libro-common/mana-app';
+import { ConfigurationService, inject } from '@difizen/libro-common/mana-app';
 import {
   NavigatableViewOpenHandler,
   OpenHandler,
   singleton,
   Priority,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 
 import { imageExtToTypes } from './protocol.js';
 import { NavigatableImageViewerViewFactoryId } from './viewer.js';

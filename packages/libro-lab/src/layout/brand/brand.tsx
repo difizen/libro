@@ -1,4 +1,4 @@
-import { BaseView, view, singleton } from '@difizen/mana-app';
+import { BaseView, view, singleton } from '@difizen/libro-common/mana-app';
 import * as React from 'react';
 import { Logo } from '../../common/index.js';
 

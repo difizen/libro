@@ -6,7 +6,7 @@ import {
   ThemeService,
   view,
   ViewOption,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { forwardRef, memo } from 'react';
 
 import { CodeEditorInfoManager } from './code-editor-info-manager.js';

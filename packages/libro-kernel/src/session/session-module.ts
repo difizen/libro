@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { LibroSessionManager } from './libro-session-manager.js';
 import type { SessionMeta } from './libro-session-protocol.js';

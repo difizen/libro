@@ -1,7 +1,11 @@
 import { DisplayWrapComponent } from '@difizen/libro-common';
 import type { BetweenCellProvider, CellOptions, LibroView } from '@difizen/libro-core';
 import { CellService } from '@difizen/libro-core';
-import { CommandRegistry, useInject, ViewInstance } from '@difizen/mana-app';
+import {
+  CommandRegistry,
+  useInject,
+  ViewInstance,
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Tooltip, Popover, Menu } from 'antd';
 import type { MenuProps } from 'antd';

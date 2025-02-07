@@ -1,5 +1,5 @@
-import { Emitter } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
+import { Emitter } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 import type { IMessageLog, MessageKind } from './lsp-protocol.js';
 

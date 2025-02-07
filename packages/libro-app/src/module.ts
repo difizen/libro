@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { AppFileCommandContribution } from './app-file-command-contribution.js';
 import { LibroAppOpenHandler } from './app-open-handler.js';

@@ -15,7 +15,7 @@ import {
   isStreamMsg,
   isUpdateDisplayDataMsg,
 } from '@difizen/libro-kernel';
-import { inject, transient, view, ViewOption } from '@difizen/mana-app';
+import { inject, transient, view, ViewOption } from '@difizen/libro-common/mana-app';
 
 @transient()
 @view('libro-output-area')

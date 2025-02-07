@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable no-restricted-syntax */
 
-import { Disposable } from '@difizen/mana-app';
-import { singleton } from '@difizen/mana-app';
+import { Disposable } from '@difizen/libro-common/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 import type { IGrammarConfiguration } from 'vscode-textmate';
 
 import type { TokenizerOption } from './textmate-tokenizer.js';

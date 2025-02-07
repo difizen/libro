@@ -10,7 +10,7 @@ import {
   ViewOption,
   ViewRender,
   getOrigin,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { forwardRef } from 'react';
 
 import type { IWidgets, IWidgetViewProps, WidgetState } from '../protocol.js';

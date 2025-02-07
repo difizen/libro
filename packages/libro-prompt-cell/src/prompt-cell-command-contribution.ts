@@ -1,13 +1,13 @@
 import type { CellView, NotebookView } from '@difizen/libro-core';
 import { LibroCommandRegister, LibroCellView, LibroView } from '@difizen/libro-core';
-import type { CommandRegistry } from '@difizen/mana-app';
+import type { CommandRegistry } from '@difizen/libro-common/mana-app';
 import {
   CommandContribution,
   inject,
   KeybindingContribution,
   KeybindingRegistry,
   singleton,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 
 export const LibroPromptCellCommands = {
   ChangeCellToPrompt: {

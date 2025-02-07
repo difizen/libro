@@ -1,7 +1,7 @@
 import { CopyOutlined, EditOutlined } from '@ant-design/icons';
 import type { DisplayDataOutputModel } from '@difizen/libro-jupyter';
 import { copy2clipboard } from '@difizen/libro-jupyter';
-import { useInject, ViewInstance } from '@difizen/mana-app';
+import { useInject, ViewInstance } from '@difizen/libro-common/mana-app';
 import { Collapse } from 'antd';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 

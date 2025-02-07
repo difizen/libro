@@ -8,14 +8,17 @@ import type {
   LibroSlot,
   LibroView,
 } from '@difizen/libro-core';
-import type { CommandRegistry, KeybindingRegistry } from '@difizen/mana-app';
+import type {
+  CommandRegistry,
+  KeybindingRegistry,
+} from '@difizen/libro-common/mana-app';
 import {
   ViewManager,
   CommandContribution,
   KeybindingContribution,
   inject,
   singleton,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 
 import { LibroSearchView } from './libro-search-view.js';
 

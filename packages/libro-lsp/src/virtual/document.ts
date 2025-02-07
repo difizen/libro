@@ -6,9 +6,9 @@ import type {
   IPosition as CodeEditorPosition,
   IRange,
 } from '@difizen/libro-code-editor';
-import type { Disposable, Event } from '@difizen/mana-app';
-import { Emitter } from '@difizen/mana-app';
-import { inject, transient } from '@difizen/mana-app';
+import type { Disposable, Event } from '@difizen/libro-common/mana-app';
+import { Emitter } from '@difizen/libro-common/mana-app';
+import { inject, transient } from '@difizen/libro-common/mana-app';
 
 import type { IForeignCodeExtractor } from '../extractors/types.js';
 import type { LanguageIdentifier } from '../lsp.js';

@@ -6,8 +6,14 @@ import type {
 import type { ExecutionCount } from '@difizen/libro-common';
 import { CellOptions, LibroCellModel } from '@difizen/libro-jupyter';
 import type { ExecutableCellModel } from '@difizen/libro-jupyter';
-import type { Event as ManaEvent } from '@difizen/mana-app';
-import { Emitter, inject, prop, transient, ViewManager } from '@difizen/mana-app';
+import type { Event as ManaEvent } from '@difizen/libro-common/mana-app';
+import {
+  Emitter,
+  inject,
+  prop,
+  transient,
+  ViewManager,
+} from '@difizen/libro-common/mana-app';
 
 import type { SqlDecodedFormatter } from './libro-formatter-sql-magic-contribution.js';
 

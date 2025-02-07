@@ -1,7 +1,13 @@
 import type { LibroView } from '@difizen/libro-core';
-import type { Disposable, Event } from '@difizen/mana-app';
-import { inject, notEmpty, prop, transient, watch } from '@difizen/mana-app';
-import { Emitter, DisposableCollection } from '@difizen/mana-app';
+import type { Disposable, Event } from '@difizen/libro-common/mana-app';
+import {
+  inject,
+  notEmpty,
+  prop,
+  transient,
+  watch,
+} from '@difizen/libro-common/mana-app';
+import { Emitter, DisposableCollection } from '@difizen/libro-common/mana-app';
 
 import { LibroCellTOCProvider } from './cell-toc-provider.js';
 import type { CellTOCProvider, IHeading } from './toc-protocol.js';

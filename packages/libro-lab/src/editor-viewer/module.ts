@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { CodeEditorViewerOpenHandler } from './code-editor-open-handler.js';
 import { CodeEditorViewer } from './code-editor-viewer.js';

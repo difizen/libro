@@ -3,9 +3,9 @@ import type { LanguageSpec, MonacoEditorOptions } from '@difizen/libro-jupyter';
 import { LibroConfigAutoSave } from '@difizen/libro-jupyter';
 import { MonacoUri } from '@difizen/libro-jupyter';
 import { JupyterFileService, LanguageSpecRegistry } from '@difizen/libro-jupyter';
-import type { NavigatableView, Saveable } from '@difizen/mana-app';
-import { ConfigurationService } from '@difizen/mana-app';
-import { Disposable } from '@difizen/mana-app';
+import type { NavigatableView, Saveable } from '@difizen/libro-common/mana-app';
+import { ConfigurationService } from '@difizen/libro-common/mana-app';
+import { Disposable } from '@difizen/libro-common/mana-app';
 import {
   DisposableCollection,
   Emitter,
@@ -16,8 +16,14 @@ import {
   URI,
   URIIconReference,
   ViewOption,
-} from '@difizen/mana-app';
-import { BaseView, transient, useInject, view, ViewInstance } from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
+import {
+  BaseView,
+  transient,
+  useInject,
+  view,
+  ViewInstance,
+} from '@difizen/libro-common/mana-app';
 import React from 'react';
 import './index.less';
 

@@ -5,7 +5,11 @@ import {
   LibroService,
 } from '@difizen/libro-core';
 import { ExecutableNotebookModel } from '@difizen/libro-kernel';
-import { ApplicationContribution, inject, singleton } from '@difizen/mana-app';
+import {
+  ApplicationContribution,
+  inject,
+  singleton,
+} from '@difizen/libro-common/mana-app';
 import * as monaco from '@difizen/monaco-editor-core';
 import { URI } from 'vscode-uri';
 

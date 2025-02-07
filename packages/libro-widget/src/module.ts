@@ -1,5 +1,5 @@
 import { WidgetModule } from '@difizen/libro-jupyter';
-import { ManaModule } from '@difizen/mana-app';
+import { ManaModule } from '@difizen/libro-common/mana-app';
 
 import { SilderWidgetContribution, SliderWidget } from './slider/index.js';
 import { TextModelContribution, TextWidget } from './text/index.js';

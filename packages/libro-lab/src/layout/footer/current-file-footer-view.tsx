@@ -5,7 +5,7 @@ import {
   useInject,
   view,
   ViewInstance,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { l10n } from '@difizen/libro-common/mana-l10n';
 import * as React from 'react';
 
