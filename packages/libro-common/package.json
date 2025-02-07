@@ -72,7 +72,22 @@
     "ajv": "^8.12.0",
     "debug": "^4.3.1",
     "resize-observer-polyfill": "^1.5.1",
-    "vscode-uri": "^2.1.1"
+    "vscode-uri": "^2.1.1",
+    "@difizen/mana-common": "^0.1.32",
+    "@difizen/mana-core": "^0.1.32",
+    "@difizen/mana-observable": "^0.1.32",
+    "@difizen/mana-react": "^0.1.32",
+    "@difizen/mana-syringe": "^0.1.32",
+    "@difizen/mana-l10n": "^0.1.32",
+    "@types/lodash.debounce": "4.0.3",
+    "@types/react-virtualized": "^9.21.22",
+    "file-icons-js": "~1.0.3",
+    "font-awesome": "^4.7.0",
+    "lodash.debounce": "^4.0.8",
+    "perfect-scrollbar": "^1.5.5",
+    "rc-tooltip": "^5.1.1",
+    "react-virtualized": "^9.22.5",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.25",
@@ -81,7 +96,8 @@
     "@types/path-browserify": "^1.0.0",
     "@types/sanitize-html": "^2.6.2",
     "@types/url-parse": "^1.4.8",
-    "@types/debug": "^4.1.8"
+    "@types/debug": "^4.1.8",
+    "@types/uuid": "^9.0.2"
   },
   "peerDependencies": {
     "react": ">=16"
