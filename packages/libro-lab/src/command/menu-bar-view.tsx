@@ -7,7 +7,7 @@ import {
   singleton,
   view,
 } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { forwardRef } from 'react';
 
 export const ManaMenubarComponent = forwardRef(function GithubLinkComponent() {

@@ -1,7 +1,7 @@
 import { CodeFilled } from '@ant-design/icons';
 import { singleton, view } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { forwardRef } from 'react';
 
 // import './index.less';

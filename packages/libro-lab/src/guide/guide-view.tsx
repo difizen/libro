@@ -11,7 +11,7 @@ import {
   ViewRender,
 } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
-import { l10n, L10nLang } from '@difizen/mana-l10n';
+import { l10n, L10nLang } from '@difizen/libro-common/mana-l10n';
 import { forwardRef } from 'react';
 import './index.less';
 

@@ -13,7 +13,7 @@ import {
   createViewPreference,
   HeaderArea,
 } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 
 import { LibroLabHeaderMenuModule } from './command/module.js';
 import { LabConfigAppContribution } from './config/config-contribution.js';

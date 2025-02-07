@@ -1,7 +1,7 @@
 import type { ConfigurationNode } from '@difizen/mana-app';
 import { ConfigurationContribution } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 
 export const TOCVisible: ConfigurationNode<boolean> = {
   id: 'libro.toc.visible',

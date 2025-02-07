@@ -12,7 +12,7 @@ import type {
   ConfigurationNode,
   ConfigurationStorage,
 } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 
 import type { IEditorConfig } from './code-editor-protocol.js';
 import { defaultConfig } from './code-editor-protocol.js';

@@ -1,6 +1,6 @@
 import type { CellModel } from '@difizen/libro-core';
 import type { ServerManager } from '@difizen/libro-kernel';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { duration } from 'moment';
 
 import { LibroJupyterModel } from '../libro-jupyter-model.js';

@@ -1,6 +1,6 @@
 import { ModalContribution, singleton, ToolbarContribution } from '@difizen/mana-app';
 import type { ToolbarRegistry } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 
 import { DocumentCommands } from '../command/document-commands.js';
 

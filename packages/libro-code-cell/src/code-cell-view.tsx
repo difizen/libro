@@ -32,7 +32,7 @@ import {
   watch,
   Deferred,
 } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n'; /* eslint-disable react-hooks/exhaustive-deps */
+import { l10n } from '@difizen/libro-common/mana-l10n'; /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, memo, forwardRef } from 'react';
 
 import type { LibroCodeCellModel } from './code-cell-model.js';

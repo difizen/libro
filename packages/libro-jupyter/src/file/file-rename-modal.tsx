@@ -1,6 +1,6 @@
 import { ThemeService, useInject, ViewManager } from '@difizen/mana-app';
 import type { ModalItem, ModalItemProps, URI } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Form, message, Input, Modal, theme, ConfigProvider } from 'antd';
 import type { InputRef } from 'antd';
 import { useEffect, useRef, useState } from 'react';

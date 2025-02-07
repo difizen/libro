@@ -7,7 +7,7 @@ import type {
 } from '@difizen/libro-jupyter';
 import { URI } from '@difizen/mana-app';
 import { singleton } from '@difizen/mana-app';
-import { l10n, L10nLang } from '@difizen/mana-l10n';
+import { l10n, L10nLang } from '@difizen/libro-common/mana-l10n';
 
 import contentJson from './libro_guide_book.json';
 import contentZhJson from './libro_guide_book_zh.json';

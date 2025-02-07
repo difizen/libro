@@ -1,8 +1,10 @@
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Button } from 'antd';
 import { history } from 'dumi';
 import type { FC } from 'react';
+
 import { IS_MOBILE } from '../../layouts/DocLayout.js';
+
 import type { FeatureProps } from './constants';
 
 const Feature: FC<FeatureProps> = ({ title, description, imageUrl, url, isImageLeft }) => {

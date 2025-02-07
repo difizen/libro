@@ -1,5 +1,5 @@
 // import { BGShapeCircle } from "@/components/bg-shape-circle";
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Button } from 'antd';
 import React from 'react';
 

@@ -14,7 +14,7 @@ import { useObserve } from '@difizen/mana-app';
 import { useInject, ViewInstance } from '@difizen/mana-app';
 import { inject } from '@difizen/mana-app';
 import { BaseView, transient, view } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Button } from 'antd';
 import type { ParsedEvent } from 'eventsource-parser/stream';
 import { EventSourceParserStream } from 'eventsource-parser/stream';

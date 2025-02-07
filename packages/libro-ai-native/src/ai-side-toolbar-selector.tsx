@@ -1,7 +1,7 @@
 import type { LibroSideToolbarMenuItemType } from '@difizen/libro-jupyter';
 import { LibroSideToolbarMenu } from '@difizen/libro-jupyter';
 import { useInject } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import { Popover } from 'antd';
 
 import { AINativeCommands } from './ai-native-command.js';

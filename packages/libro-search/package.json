@@ -47,7 +47,6 @@
   },
   "dependencies": {
     "@difizen/mana-app": "latest",
-    "@difizen/mana-l10n": "latest",
     "@ant-design/icons": "^5.1.0",
     "@difizen/libro-common": "^0.3.4",
     "@difizen/libro-core": "^0.3.4",

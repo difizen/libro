@@ -34,7 +34,7 @@ import {
   ViewOption,
   ViewRender,
 } from '@difizen/mana-app';
-import { l10n } from '@difizen/mana-l10n';
+import { l10n } from '@difizen/libro-common/mana-l10n';
 import type { InputRef } from 'antd';
 import { Select } from 'antd';
 import { Input } from 'antd';

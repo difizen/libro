@@ -52,7 +52,6 @@
     "@difizen/magent-core": "^0.1.27",
     "@difizen/magent-libro": "^0.1.27",
     "@difizen/mana-app": "latest",
-    "@difizen/mana-l10n": "latest",
     "copy-to-clipboard": "^3.3.3",
     "eventsource-parser": "^1.1.2",
     "katex": "^0.16.10",
