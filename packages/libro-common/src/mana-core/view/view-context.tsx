@@ -1,4 +1,4 @@
-import { getOrigin, ObservableContext } from '@difizen/mana-observable';
+import { getOrigin, ObservableContext } from '../../mana-observable/index.js';
 import * as React from 'react';
 
 import type { ManaContext } from '../module';

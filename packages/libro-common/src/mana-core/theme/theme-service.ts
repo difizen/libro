@@ -1,7 +1,7 @@
 import type { Event } from '../../mana-common/index.js';
 import { isPromiseLike } from '../../mana-common/index.js';
 import { Emitter, Disposable, objects } from '../../mana-common/index.js';
-import { prop } from '@difizen/mana-observable';
+import { prop } from '../../mana-observable/index.js';
 import { singleton } from '../../mana-syringe/index.js';
 
 import { localStorageService } from '../common';

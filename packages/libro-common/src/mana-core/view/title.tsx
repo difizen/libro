@@ -1,4 +1,4 @@
-import { prop } from '@difizen/mana-observable';
+import { prop } from '../../mana-observable/index.js';
 import { transient } from '../../mana-syringe/index.js';
 import type * as React from 'react';
 
