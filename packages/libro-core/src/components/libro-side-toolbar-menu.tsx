@@ -1,3 +1,4 @@
+import { Menu, MenuContext } from '@difizen/libro-common/mana-react';
 import type { Toolbar } from '@difizen/mana-app';
 import {
   CommandRegistry,
@@ -5,7 +6,6 @@ import {
   ToolbarInstance,
   useInject,
 } from '@difizen/mana-app';
-import { Menu, MenuContext } from '@difizen/mana-react';
 import type { ReactNode } from 'react';
 
 import type { LibroToolbarArags } from '../toolbar/index.js';

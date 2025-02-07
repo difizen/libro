@@ -1,3 +1,4 @@
+import { SplitPanel } from '@difizen/libro-common/mana-react';
 import {
   BaseView,
   view,
@@ -11,7 +12,6 @@ import {
   URI,
   ConfigurationRegistry,
 } from '@difizen/mana-app';
-import { SplitPanel } from '@difizen/mana-react';
 import { useEffect, useState } from 'react';
 
 import { ConfigurationPanelView } from './configuration-panel-view.js';

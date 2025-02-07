@@ -1,3 +1,4 @@
+import { Menu, MenuContext } from '@difizen/libro-common/mana-react';
 import type { Toolbar } from '@difizen/mana-app';
 import { isMacintosh } from '@difizen/mana-app';
 import {
@@ -8,7 +9,6 @@ import {
   useObserve,
 } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import { Menu, MenuContext } from '@difizen/mana-react';
 import { Popover } from 'antd';
 
 import { ExecutableCellModel, ExecutableCellView } from '../cell/index.js';

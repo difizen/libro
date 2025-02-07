@@ -1,7 +1,7 @@
+import { BoxPanel } from '@difizen/libro-common/mana-react';
 import { inject, singleton, Slot, useInject, view } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
 import { l10n } from '@difizen/mana-l10n';
-import { BoxPanel } from '@difizen/mana-react';
 import { Alert } from 'antd';
 import { forwardRef } from 'react';
 

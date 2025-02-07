@@ -1,6 +1,6 @@
+import { SplitPanel } from '@difizen/libro-common/mana-react';
 import { singleton, Slot, useInject, view } from '@difizen/mana-app';
 import { BaseView } from '@difizen/mana-app';
-import { SplitPanel } from '@difizen/mana-react';
 import { forwardRef } from 'react';
 
 import './index.less';

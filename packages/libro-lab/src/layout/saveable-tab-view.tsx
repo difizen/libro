@@ -1,4 +1,5 @@
 import { CloseOutlined } from '@ant-design/icons';
+import { Dropdown } from '@difizen/libro-common/mana-react';
 import { JupyterFileService } from '@difizen/libro-jupyter';
 import type { CardTabOption, View } from '@difizen/mana-app';
 import { ViewManager, ViewOption } from '@difizen/mana-app';
@@ -12,7 +13,6 @@ import {
   ViewContext,
   Saveable,
 } from '@difizen/mana-app';
-import { Dropdown } from '@difizen/mana-react';
 import { Badge } from 'antd';
 import classnames from 'classnames';
 

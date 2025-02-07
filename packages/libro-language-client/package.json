@@ -51,7 +51,6 @@
     "@difizen/libro-common": "^0.3.4",
     "@difizen/libro-lsp": "^0.3.4",
     "@difizen/mana-app": "latest",
-    "@difizen/mana-common": "latest",
     "uuid": "^9.0.0",
     "@difizen/vscode-languageserver-protocol": "^3.17.6-next.2",
     "vscode-ws-jsonrpc": "^3.1.0",
