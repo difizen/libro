@@ -5,7 +5,7 @@
 
 import { Emitter } from '../../mana-common/index.js';
 import type { Event } from '../../mana-common/index.js';
-import { singleton } from '@difizen/mana-syringe';
+import { singleton } from '../../mana-syringe/index.js';
 
 import type { IDisposable } from '../../../utils/lifecycle';
 import { VSDisposable } from '../../../utils/lifecycle';

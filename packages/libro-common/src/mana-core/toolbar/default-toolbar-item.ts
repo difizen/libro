@@ -1,8 +1,8 @@
 import type { Event } from '../../mana-common/index.js';
 import { Emitter } from '../../mana-common/index.js';
 import { prop } from '@difizen/mana-observable';
-import { inject } from '@difizen/mana-syringe';
-import { transient } from '@difizen/mana-syringe';
+import { inject } from '../../mana-syringe/index.js';
+import { transient } from '../../mana-syringe/index.js';
 
 import { ToolbarNode } from './toolbar-protocol';
 import type { ToolbarItem } from './toolbar-protocol';

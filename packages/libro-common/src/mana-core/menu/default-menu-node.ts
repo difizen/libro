@@ -2,7 +2,7 @@
 import type { Disposable, Event } from '../../mana-common/index.js';
 import { Emitter } from '../../mana-common/index.js';
 import { getOrigin, prop } from '@difizen/mana-observable';
-import { inject, transient } from '@difizen/mana-syringe';
+import { inject, transient } from '../../mana-syringe/index.js';
 
 import { CommandRegistry } from '../command/command-registry';
 import { renderNode } from '../view/utils';

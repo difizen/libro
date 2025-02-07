@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Iterable } from '../../mana-common/index.js';
-import { injectable } from '@difizen/mana-syringe';
+import { injectable } from '../../mana-syringe/index.js';
 
 export function once<T extends (...args: any[]) => any>(this: unknown, fn: T): T {
   // eslint-disable-next-line @typescript-eslint/no-this-alias

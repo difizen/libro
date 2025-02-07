@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import { Container, singleton } from '@difizen/mana-syringe';
+import { Container, singleton } from '../../mana-syringe/index.js';
 
 import { ManaModule } from './mana-module';
 import { ManaContext } from './mana-module-context';

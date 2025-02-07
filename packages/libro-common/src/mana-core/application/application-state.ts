@@ -1,8 +1,8 @@
 import { prop } from '@difizen/mana-observable';
-import { inject, singleton } from '@difizen/mana-syringe';
 
 import type { Event } from '../../mana-common/index.js';
 import { Emitter, Deferred } from '../../mana-common/index.js';
+import { inject, singleton } from '../../mana-syringe/index.js';
 import { DebugService } from '../common/debug';
 
 export enum ApplicationState {

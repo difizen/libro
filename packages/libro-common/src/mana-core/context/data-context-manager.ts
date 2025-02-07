@@ -1,5 +1,5 @@
-import type { Contribution, Syringe } from '@difizen/mana-syringe';
-import { contrib, inject, singleton } from '@difizen/mana-syringe';
+import type { Contribution, Syringe } from '../../mana-syringe/index.js';
+import { contrib, inject, singleton } from '../../mana-syringe/index.js';
 
 import { ManaContext } from '../module';
 

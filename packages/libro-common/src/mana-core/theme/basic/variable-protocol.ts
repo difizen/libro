@@ -1,4 +1,4 @@
-import { Syringe } from '@difizen/mana-syringe';
+import { Syringe } from '../../mana-syringe/index.js';
 
 import type { VariableRegistry } from './variable-registry';
 
