@@ -1,5 +1,5 @@
 import { BaseView, view } from '@difizen/mana-core';
-import { useInject } from '@difizen/mana-observable';
+import { useInject } from '../../mana-observable/index.js';
 import { singleton } from '../../mana-syringe/index.js';
 import React from 'react';
 

@@ -1,5 +1,5 @@
 import { ViewInstance } from '@difizen/mana-core';
-import { useInject } from '@difizen/mana-observable';
+import { useInject } from '../../../mana-observable/index.js';
 import * as React from 'react';
 
 import type { TreeNode, TreeNodeProps } from '../tree';

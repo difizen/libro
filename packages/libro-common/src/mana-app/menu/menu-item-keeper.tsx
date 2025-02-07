@@ -1,6 +1,6 @@
 import { CommandRegistry, MenuItem } from '@difizen/mana-core';
-import { observable, useObserve } from '@difizen/mana-observable';
-import { useInject } from '@difizen/mana-observable';
+import { observable, useObserve } from '../../mana-observable/index.js';
+import { useInject } from '../../mana-observable/index.js';
 import { memo } from 'react';
 
 import type { Menu } from './menu';

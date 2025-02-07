@@ -1,4 +1,4 @@
-import { getOrigin, equals } from '@difizen/mana-observable';
+import { getOrigin, equals } from '../../mana-observable/index.js';
 
 import type { Mutable, Event, CancellationToken } from '../../mana-common/index.js';
 import { timeout } from '../../mana-common/index.js';

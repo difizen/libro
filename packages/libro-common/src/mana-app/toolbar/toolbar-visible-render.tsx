@@ -1,5 +1,5 @@
 import type { ToolbarItem } from '@difizen/mana-core';
-import { useObserve } from '@difizen/mana-observable';
+import { useObserve } from '../../mana-observable/index.js';
 import { memo } from 'react';
 
 import type { Toolbar } from './toolbar';

@@ -7,7 +7,7 @@ import {
   renderNode,
 } from '@difizen/mana-core';
 import { l10n } from '@difizen/mana-l10n';
-import { getOrigin, prop } from '@difizen/mana-observable';
+import { getOrigin, prop } from '../../mana-observable/index.js';
 import classnames from 'classnames';
 import Tooltip from 'rc-tooltip';
 

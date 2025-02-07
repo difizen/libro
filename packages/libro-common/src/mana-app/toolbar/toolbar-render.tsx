@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { ToolbarRegistry, ToolbarInstance, useUnmount } from '@difizen/mana-core';
-import { useInject, ObservableContext } from '@difizen/mana-observable';
+import { useInject, ObservableContext } from '../../mana-observable/index.js';
 import type { Syringe } from '../../mana-syringe/index.js';
 import { useEffect, memo, useState, useContext, useMemo } from 'react';
 

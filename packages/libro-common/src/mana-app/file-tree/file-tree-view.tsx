@@ -1,20 +1,20 @@
 import { FileOutlined } from '@ant-design/icons';
+import type { MenuPath } from '@difizen/mana-core';
+import { ViewInstance } from '@difizen/mana-core';
+import { ManaModule, SelectionService, view } from '@difizen/mana-core';
+import { l10n } from '@difizen/mana-l10n'; /* eslint-disable @typescript-eslint/no-unused-vars */
+import type { LegacyRef } from 'react';
+import * as React from 'react';
+import { forwardRef, lazy, Suspense } from 'react';
+
+import { URI } from '../../mana-common/index.js';
 import {
   Disposable,
   DisposableCollection,
   isCancelled,
 } from '../../mana-common/index.js';
-import { URI } from '../../mana-common/index.js';
-import type { MenuPath } from '@difizen/mana-core';
-import { ViewInstance } from '@difizen/mana-core';
-import { ManaModule, SelectionService, view } from '@difizen/mana-core';
-import { l10n } from '@difizen/mana-l10n'; /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useInject } from '@difizen/mana-observable';
+import { useInject } from '../../mana-observable/index.js';
 import { singleton, inject } from '../../mana-syringe/index.js';
-import type { LegacyRef } from 'react';
-import * as React from 'react';
-import { forwardRef, lazy, Suspense } from 'react';
-
 import { LabelProvider } from '../label';
 import { TreeModel } from '../tree';
 import { CompositeTreeNode, TreeNode } from '../tree/tree';

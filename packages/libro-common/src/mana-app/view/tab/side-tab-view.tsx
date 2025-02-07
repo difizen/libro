@@ -2,7 +2,7 @@ import type { View } from '@difizen/mana-core';
 import { ViewRender } from '@difizen/mana-core';
 import { ViewManager } from '@difizen/mana-core';
 import { view, ViewOption, ViewContext } from '@difizen/mana-core';
-import { equals, prop } from '@difizen/mana-observable';
+import { equals, prop } from '../../../mana-observable/index.js';
 import type { TabsProps } from '@difizen/mana-react';
 import { inject, transient } from '../../../mana-syringe/index.js';
 import cls from 'classnames';

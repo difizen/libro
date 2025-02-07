@@ -1,6 +1,6 @@
 import { ViewInstance } from '@difizen/mana-core';
-import { useInject } from '@difizen/mana-observable';
 
+import { useInject } from '../../mana-observable/index.js';
 import type { TreeNodeProps } from '../tree/tree';
 
 import type { FileTreeView } from './file-tree-view';

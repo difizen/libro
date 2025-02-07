@@ -7,7 +7,7 @@ import {
 } from '@difizen/mana-core';
 import { ViewInstance } from '@difizen/mana-core';
 import type { SlotViewOption } from '@difizen/mana-core';
-import { prop, useInject } from '@difizen/mana-observable';
+import { prop, useInject } from '../../../mana-observable/index.js';
 import { inject, transient } from '../../../mana-syringe/index.js';
 import cls from 'classnames';
 import React from 'react';
