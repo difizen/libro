@@ -5,4 +5,4 @@ order: 0
 
 # libro Output Example
 
-<code src="../../src/output" compact="true"></code>
+<!-- <code src="../../src/output" compact="true"></code> -->

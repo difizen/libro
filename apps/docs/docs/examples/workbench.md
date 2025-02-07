@@ -7,4 +7,4 @@ order: 1
 
 Start a `jupyterlab` service locally in a specific directory that contains files with the `.ipynb` extension.
 
-<code src="../../src/workbench" compact="true"></code>
+<!-- <code src="../../src/workbench" compact="true"></code> -->

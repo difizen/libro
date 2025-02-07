@@ -8,7 +8,6 @@
   ],
   "repository": "git@github.com:difizen/libro.git",
   "license": "MIT",
-  "type": "module",
   "exports": {
     ".": {
       "typings": "./es/index.d.ts",
