@@ -29,6 +29,10 @@
       "typings": "./es/mana-syringe/index.js",
       "default": "./es/mana-syringe/index.js"
     },
+    "./mana-observable": {
+      "typings": "./es/mana-observable/index.js",
+      "default": "./es/mana-observable/index.js"
+    },
     "./package.json": "./package.json"
   },
   "main": "es/index.js",
