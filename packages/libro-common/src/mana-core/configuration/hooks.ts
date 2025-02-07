@@ -1,4 +1,4 @@
-import { useInject } from '../../mana-observable/index.js';
+import { useInject } from '../../observable/index.js';
 import { useCallback, useEffect, useState } from 'react';
 
 import type { ConfigurationNode } from './configuration-protocol';

@@ -29,9 +29,9 @@
       "typings": "./es/ioc/index.js",
       "default": "./es/ioc/index.js"
     },
-    "./mana-observable": {
-      "typings": "./es/mana-observable/index.js",
-      "default": "./es/mana-observable/index.js"
+    "./observable": {
+      "typings": "./es/observable/index.js",
+      "default": "./es/observable/index.js"
     },
     "./mana-core": {
       "typings": "./es/mana-core/index.js",

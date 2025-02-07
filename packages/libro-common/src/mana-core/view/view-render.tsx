@@ -1,4 +1,4 @@
-import { useInject } from '../../mana-observable/index.js';
+import { useInject } from '../../observable/index.js';
 import type { ReactNode } from 'react';
 import { memo } from 'react';
 

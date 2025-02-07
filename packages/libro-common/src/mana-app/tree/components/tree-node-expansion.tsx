@@ -1,5 +1,5 @@
 import { ViewInstance } from '../../../mana-core/index.js';
-import { useInject } from '../../../mana-observable/index.js';
+import { useInject } from '../../../observable/index.js';
 
 import {
   BUSY_CLASS,

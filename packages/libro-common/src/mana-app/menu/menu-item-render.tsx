@@ -1,4 +1,4 @@
-import { useObserve, useInject } from '../../mana-observable/index.js';
+import { useObserve, useInject } from '../../observable/index.js';
 import React from 'react';
 
 import type { Menu } from './menu';

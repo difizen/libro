@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/unified-signatures */
 import { Disposable, DisposableCollection } from '../../common/index.js';
-import { equals, getOrigin, prop, useInject } from '../../mana-observable/index.js';
+import { equals, getOrigin, prop, useInject } from '../../observable/index.js';
 import { inject, transient } from '../../ioc/index.js';
 import * as React from 'react';
 

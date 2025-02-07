@@ -1,11 +1,11 @@
-import { ViewOption } from '../../../mana-core/index.js';
-import { prop } from '../../../mana-observable/index.js';
 import debounce from 'lodash.debounce';
 
 import type { Disposable } from '../../../common/index.js';
 import { DisposableCollection } from '../../../common/index.js';
 import { notEmpty } from '../../../common/index.js';
 import { inject, postConstruct, singleton } from '../../../ioc/index.js';
+import { ViewOption } from '../../../mana-core/index.js';
+import { prop } from '../../../observable/index.js';
 import type { TreeNode } from '../tree';
 import { DecoratedTreeNode, TreeDecoratorService } from '../tree-decorator';
 import { TreeModel } from '../tree-model';

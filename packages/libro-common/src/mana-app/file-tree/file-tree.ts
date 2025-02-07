@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import type { URI } from '../../common/index.js';
-import { getOrigin } from '../../mana-observable/index.js';
+import { getOrigin } from '../../observable/index.js';
 import { inject, singleton } from '../../ioc/index.js';
 
 import type { TreeNode, CompositeTreeNode } from '../tree/tree';

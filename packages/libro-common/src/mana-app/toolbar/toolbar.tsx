@@ -12,7 +12,7 @@ import {
   renderNode,
 } from '../../mana-core/index.js';
 import { l10n } from '../../l10n/index.js';
-import { getOrigin, prop } from '../../mana-observable/index.js';
+import { getOrigin, prop } from '../../observable/index.js';
 import { inject, transient } from '../../ioc/index.js';
 
 import { ToolbarItemRender } from './toolbar-item-render';

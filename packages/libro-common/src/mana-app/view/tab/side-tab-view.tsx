@@ -2,7 +2,7 @@ import type { View } from '../../../mana-core/index.js';
 import { ViewRender } from '../../../mana-core/index.js';
 import { ViewManager } from '../../../mana-core/index.js';
 import { view, ViewOption, ViewContext } from '../../../mana-core/index.js';
-import { equals, prop } from '../../../mana-observable/index.js';
+import { equals, prop } from '../../../observable/index.js';
 import type { TabsProps } from '../../../react/index.js';
 import { inject, transient } from '../../../ioc/index.js';
 import cls from 'classnames';

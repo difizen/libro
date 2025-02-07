@@ -19,7 +19,7 @@ import {
   view,
   ViewInstance,
 } from '../../../mana-core/index.js';
-import { getOrigin, prop, useInject } from '../../../mana-observable/index.js';
+import { getOrigin, prop, useInject } from '../../../observable/index.js';
 import { Dropdown } from '../../../react/index.js';
 import { inject, postConstruct, singleton } from '../../../ioc/index.js';
 import { LabelProvider } from '../../label';
