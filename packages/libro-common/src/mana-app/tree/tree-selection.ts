@@ -1,4 +1,4 @@
-import type { SelectionProvider } from '@difizen/mana-core';
+import type { SelectionProvider } from '../../mana-core/index.js';
 
 import type { Event, Disposable } from '../../mana-common/index.js';
 

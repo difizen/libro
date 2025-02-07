@@ -1,6 +1,10 @@
-import type { GeneralMenuItem, ActionMenuItem, MenuPath } from '@difizen/mana-core';
-import { MenuItem } from '@difizen/mana-core';
-import { CommandRegistry, MenuRegistry } from '@difizen/mana-core';
+import type {
+  GeneralMenuItem,
+  ActionMenuItem,
+  MenuPath,
+} from '../../mana-core/index.js';
+import { MenuItem } from '../../mana-core/index.js';
+import { CommandRegistry, MenuRegistry } from '../../mana-core/index.js';
 import { prop } from '../../mana-observable/index.js';
 import { Menu as MenuComponent } from '@difizen/mana-react';
 

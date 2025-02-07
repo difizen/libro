@@ -1,5 +1,5 @@
-import type { MenuPath } from '@difizen/mana-core';
-import { ManaModule } from '@difizen/mana-core';
+import type { MenuPath } from '../../mana-core/index.js';
+import { ManaModule } from '../../mana-core/index.js';
 
 import { Menu, MenuFactory, MenuPathSymbol } from './menu';
 import 'rc-tooltip/assets/bootstrap.css';

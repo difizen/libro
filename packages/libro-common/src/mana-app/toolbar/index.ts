@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/mana-core';
+import { ManaModule } from '../../mana-core/index.js';
 
 import { Toolbar, ToolbarFactory } from './toolbar';
 import 'rc-tooltip/assets/bootstrap.css';

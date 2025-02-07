@@ -5,7 +5,7 @@ import type {
   CancellationToken,
 } from '../../mana-common/index.js';
 import { Emitter, DisposableCollection } from '../../mana-common/index.js';
-import type { SelectionProvider } from '@difizen/mana-core';
+import type { SelectionProvider } from '../../mana-core/index.js';
 import { inject, singleton, postConstruct } from '../../mana-syringe/index.js';
 
 import type { TreeNode } from './tree';

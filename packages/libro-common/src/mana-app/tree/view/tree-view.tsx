@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BaseView, SelectionService, view, ViewInstance } from '@difizen/mana-core';
-import type { StatefulView, ViewSize } from '@difizen/mana-core';
-import type { MenuPath } from '@difizen/mana-core';
 import { Dropdown } from '@difizen/mana-react';
 import debounce from 'lodash.debounce';
 import type PerfectScrollbar from 'perfect-scrollbar';
@@ -15,6 +12,14 @@ import { v1 } from 'uuid';
 
 import { isOSX, notEmpty } from '../../../mana-common/index.js';
 import { Disposable, DisposableCollection } from '../../../mana-common/index.js';
+import type { MenuPath } from '../../../mana-core/index.js';
+import type { StatefulView, ViewSize } from '../../../mana-core/index.js';
+import {
+  BaseView,
+  SelectionService,
+  view,
+  ViewInstance,
+} from '../../../mana-core/index.js';
 import { getOrigin, prop, useInject } from '../../../mana-observable/index.js';
 import { inject, postConstruct, singleton } from '../../../mana-syringe/index.js';
 import { LabelProvider } from '../../label';

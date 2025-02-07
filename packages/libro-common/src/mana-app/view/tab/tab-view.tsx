@@ -7,8 +7,8 @@ import {
   ViewContext,
   ViewManager,
   ViewRender,
-} from '@difizen/mana-core';
-import type { View, SlotViewOption } from '@difizen/mana-core';
+} from '../../../mana-core/index.js';
+import type { View, SlotViewOption } from '../../../mana-core/index.js';
 import { useInject } from '../../../mana-observable/index.js';
 import { prop } from '../../../mana-observable/index.js';
 import { Tabs, Dropdown } from '@difizen/mana-react';

@@ -1,6 +1,6 @@
-import type { ColorRegistry } from '@difizen/mana-core';
-import { Color } from '@difizen/mana-core';
-import { ColorContribution } from '@difizen/mana-core';
+import type { ColorRegistry } from '../../mana-core/index.js';
+import { Color } from '../../mana-core/index.js';
+import { ColorContribution } from '../../mana-core/index.js';
 import { singleton } from '../../mana-syringe/index.js';
 
 @singleton({ contrib: ColorContribution })

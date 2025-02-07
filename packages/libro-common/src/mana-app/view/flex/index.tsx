@@ -4,9 +4,9 @@ import {
   ViewManager,
   ViewOption,
   ViewRender,
-} from '@difizen/mana-core';
-import { ViewInstance } from '@difizen/mana-core';
-import type { SlotViewOption } from '@difizen/mana-core';
+} from '../../../mana-core/index.js';
+import { ViewInstance } from '../../../mana-core/index.js';
+import type { SlotViewOption } from '../../../mana-core/index.js';
 import { prop, useInject } from '../../../mana-observable/index.js';
 import { inject, transient } from '../../../mana-syringe/index.js';
 import cls from 'classnames';

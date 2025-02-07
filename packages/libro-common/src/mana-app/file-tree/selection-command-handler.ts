@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/method-signature-style */
-import type { CommandHandler } from '@difizen/mana-core';
-import type { SelectionService } from '@difizen/mana-core';
+import type { CommandHandler } from '../../mana-core/index.js';
+import type { SelectionService } from '../../mana-core/index.js';
 
 export class SelectionCommandHandler<S> implements CommandHandler {
   protected readonly selectionService: SelectionService;

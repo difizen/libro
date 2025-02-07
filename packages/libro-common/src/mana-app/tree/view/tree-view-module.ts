@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/mana-core';
+import { ManaModule } from '../../../mana-core/index.js';
 import { TreeExpansionServiceImpl } from '../tree-expansion';
 import { TreeImpl } from '../tree-impl';
 import { TreeModelImpl } from '../tree-model';
