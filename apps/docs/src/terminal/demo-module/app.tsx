@@ -1,6 +1,6 @@
-import type { TerminalViewOption } from '@difizen/libro-terminal';
-import { TerminalManager, LibroTerminalView } from '@difizen/libro-terminal';
-import type { Disposable } from '@difizen/mana-app';
+import type { TerminalViewOption } from '@difizen/libro';
+import { TerminalManager, LibroTerminalView } from '@difizen/libro';
+import type { Disposable } from '@difizen/libro-common/mana-app';
 import {
   BaseView,
   ViewInstance,
@@ -10,7 +10,7 @@ import {
   singleton,
   useInject,
   view,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 import { Button, Card, Checkbox, Flex, Form, Input, Space, Tabs } from 'antd';
 import type { FC } from 'react';
 import { forwardRef, useCallback, useEffect, useState } from 'react';

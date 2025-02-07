@@ -1,4 +1,4 @@
-import { prop, singleton } from '@difizen/mana-app';
+import { prop, singleton } from '@difizen/libro-common/mana-app';
 import { Octokit } from 'octokit';
 
 @singleton()

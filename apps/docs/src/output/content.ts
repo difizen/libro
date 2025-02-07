@@ -1,6 +1,6 @@
 import type { INotebookContent } from '@difizen/libro';
 import { ContentContribution } from '@difizen/libro';
-import { singleton } from '@difizen/mana-app';
+import { singleton } from '@difizen/libro-common/mana-app';
 
 import content from './OutputExamples.ipynb.json';
 

@@ -7,7 +7,7 @@ import {
   RootSlotId,
   CardTabView,
   FileTreeView,
-} from '@difizen/mana-app';
+} from '@difizen/libro-common/mana-app';
 
 import { LibroApp } from './app.js';
 import { LibroWorkbenchLayoutView, LibroWorkbenchSlots } from './layout/index.js';
