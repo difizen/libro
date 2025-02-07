@@ -1,6 +1,6 @@
-import type { Disposable, Event } from '@difizen/mana-common';
-import { Emitter, noop } from '@difizen/mana-common';
-import { CallbackList } from '@difizen/mana-common';
+import type { Disposable, Event } from '../mana-common/index.js';
+import { Emitter, noop } from '../mana-common/index.js';
+import { CallbackList } from '../mana-common/index.js';
 
 type Callback = (...args: any[]) => any;
 

@@ -1,4 +1,4 @@
-import type { Abstract, Newable } from '@difizen/mana-common';
+import type { Abstract, Newable } from '../mana-common/index.js';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export namespace ObservableSymbol {
