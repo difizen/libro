@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import { noop } from '../mana-common/index.js';
+import { noop } from '../common/index.js';
 
 import { AsyncEmitter, AsyncCallbackList } from './async-event';
 

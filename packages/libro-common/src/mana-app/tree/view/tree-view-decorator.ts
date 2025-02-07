@@ -2,9 +2,9 @@ import { ViewOption } from '../../../mana-core/index.js';
 import { prop } from '../../../mana-observable/index.js';
 import debounce from 'lodash.debounce';
 
-import type { Disposable } from '../../../mana-common/index.js';
-import { DisposableCollection } from '../../../mana-common/index.js';
-import { notEmpty } from '../../../mana-common/index.js';
+import type { Disposable } from '../../../common/index.js';
+import { DisposableCollection } from '../../../common/index.js';
+import { notEmpty } from '../../../common/index.js';
 import { inject, postConstruct, singleton } from '../../../mana-syringe/index.js';
 import type { TreeNode } from '../tree';
 import { DecoratedTreeNode, TreeDecoratorService } from '../tree-decorator';

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Iterable } from '../../mana-common/index.js';
+import { Iterable } from '../../common/index.js';
 import { injectable } from '../../mana-syringe/index.js';
 
 export function once<T extends (...args: any[]) => any>(this: unknown, fn: T): T {

@@ -117,9 +117,9 @@ export default defineConfig({
     },
   },
   alias: {
-    '@difizen/libro-common/mana-common': path.resolve(
+    '@difizen/libro-common/common': path.resolve(
       getPackagesDir(),
-      'libro-common/es/mana-common/index.js',
+      'libro-common/es/common/index.js',
     ),
     '@difizen/libro-common/mana-react': path.resolve(
       getPackagesDir(),

@@ -4,12 +4,8 @@ import * as React from 'react';
 import { forwardRef, lazy, Suspense } from 'react';
 
 import { l10n } from '../../l10n/index.js'; /* eslint-disable @typescript-eslint/no-unused-vars */
-import { URI } from '../../mana-common/index.js';
-import {
-  Disposable,
-  DisposableCollection,
-  isCancelled,
-} from '../../mana-common/index.js';
+import { URI } from '../../common/index.js';
+import { Disposable, DisposableCollection, isCancelled } from '../../common/index.js';
 import { ManaModule, SelectionService, view } from '../../mana-core/index.js';
 import { ViewInstance } from '../../mana-core/index.js';
 import type { MenuPath } from '../../mana-core/index.js';

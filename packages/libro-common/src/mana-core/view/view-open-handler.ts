@@ -1,5 +1,5 @@
-import type { Event, MaybePromise, URI } from '../../mana-common/index.js';
-import { Emitter } from '../../mana-common/index.js';
+import type { Event, MaybePromise, URI } from '../../common/index.js';
+import { Emitter } from '../../common/index.js';
 import { inject, postConstruct, singleton } from '../../mana-syringe/index.js';
 
 import type { BaseView } from './default-view';

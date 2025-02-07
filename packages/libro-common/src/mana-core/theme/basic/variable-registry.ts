@@ -1,4 +1,4 @@
-import type { Disposable } from '../../../mana-common/index.js';
+import type { Disposable } from '../../../common/index.js';
 import { singleton } from '../../../mana-syringe/index.js';
 import { BaseVariableRegistry } from '../base-variable-registry';
 import type { VariableDefinition } from '../protocol';

@@ -1,4 +1,4 @@
-import type { Event, Disposable } from '../../mana-common/index.js';
+import type { Event, Disposable } from '../../common/index.js';
 
 import type { CommandHandler } from '../command';
 

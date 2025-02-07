@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Emitter } from '../../../../mana-common/index.js';
-import type { Event } from '../../../../mana-common/index.js';
+import { Emitter } from '../../../../common/index.js';
+import type { Event } from '../../../../common/index.js';
 import { singleton } from '../../../../mana-syringe/index.js';
 
 import type { IDisposable } from '../../../utils/lifecycle';

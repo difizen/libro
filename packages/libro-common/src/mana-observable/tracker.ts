@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getPropertyDescriptor, isPlainObject } from '../mana-common/index.js';
+import { getPropertyDescriptor, isPlainObject } from '../common/index.js';
 
 import { ObservableSymbol } from './core';
 import { Notifiable } from './notifiable';

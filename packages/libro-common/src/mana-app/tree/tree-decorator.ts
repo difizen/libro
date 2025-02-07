@@ -1,5 +1,5 @@
-import type { Event, Disposable, MaybePromise } from '../../mana-common/index.js';
-import { Emitter, DisposableCollection } from '../../mana-common/index.js';
+import type { Event, Disposable, MaybePromise } from '../../common/index.js';
+import { Emitter, DisposableCollection } from '../../common/index.js';
 import { singleton } from '../../mana-syringe/index.js';
 
 import type { Tree, TreeNode } from './tree';

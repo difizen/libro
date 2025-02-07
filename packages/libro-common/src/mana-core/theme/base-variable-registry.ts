@@ -4,7 +4,7 @@ import {
   Emitter,
   objects,
   isPromiseLike,
-} from '../../mana-common/index.js';
+} from '../../common/index.js';
 import { singleton, inject } from '../../mana-syringe/index.js';
 
 import { localStorageService } from '../common';

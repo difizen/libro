@@ -1,5 +1,5 @@
-import type { MaybePromise } from '../../mana-common/index.js';
-import { Disposable } from '../../mana-common/index.js';
+import type { MaybePromise } from '../../common/index.js';
+import { Disposable } from '../../common/index.js';
 import type { Contribution } from '../../mana-syringe/index.js';
 import { contrib, inject, singleton, Syringe } from '../../mana-syringe/index.js';
 

@@ -2,7 +2,7 @@ import { ViewInstance } from '../../../mana-core/index.js';
 import { useInject } from '../../../mana-observable/index.js';
 import * as React from 'react';
 
-import { notEmpty } from '../../../mana-common/index.js';
+import { notEmpty } from '../../../common/index.js';
 import type { TreeNodeCaptionAffixesProps } from '../tree';
 import {
   TREE_NODE_SEGMENT_CLASS,

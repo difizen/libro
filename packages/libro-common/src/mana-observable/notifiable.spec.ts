@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import assert from 'assert';
 
-import { isPlainObject } from '../mana-common/index.js';
+import { isPlainObject } from '../common/index.js';
 
 import { Notifiable, Notifier, Observability } from './index';
 

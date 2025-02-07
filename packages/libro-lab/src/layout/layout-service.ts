@@ -1,4 +1,4 @@
-import type { Disposable } from '@difizen/libro-common/mana-common';
+import type { Disposable } from '@difizen/libro-common/common';
 import { LibroNavigatableView, LibroService } from '@difizen/libro-jupyter';
 import type {
   View,

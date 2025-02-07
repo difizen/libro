@@ -1,4 +1,4 @@
-import type { URI } from '../../mana-common/index.js';
+import type { URI } from '../../common/index.js';
 
 import { BaseView } from './default-view';
 import type { View } from './view-protocol';

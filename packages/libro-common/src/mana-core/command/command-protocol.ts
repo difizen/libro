@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Event, WaitUntilEvent } from '../../mana-common/index.js';
+import type { Event, WaitUntilEvent } from '../../common/index.js';
 import type React from 'react';
 
 /**

@@ -1,5 +1,5 @@
-import type { Event } from '../../mana-common/index.js';
-import { Emitter } from '../../mana-common/index.js';
+import type { Event } from '../../common/index.js';
+import { Emitter } from '../../common/index.js';
 import { prop } from '../../mana-observable/index.js';
 import { inject } from '../../mana-syringe/index.js';
 import { transient } from '../../mana-syringe/index.js';
