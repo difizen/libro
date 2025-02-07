@@ -1,4 +1,4 @@
-import type { ToolbarItem } from '@difizen/mana-core';
+import type { ToolbarItem } from '../../mana-core/index.js';
 import { useObserve } from '../../mana-observable/index.js';
 import type { FC } from 'react';
 import { memo } from 'react';

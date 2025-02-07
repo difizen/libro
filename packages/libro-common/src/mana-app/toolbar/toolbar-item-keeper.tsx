@@ -1,5 +1,5 @@
-import type { ToolbarItem } from '@difizen/mana-core';
-import { CommandRegistry } from '@difizen/mana-core';
+import type { ToolbarItem } from '../../mana-core/index.js';
+import { CommandRegistry } from '../../mana-core/index.js';
 import { observable, useObserve } from '../../mana-observable/index.js';
 import { useInject } from '../../mana-observable/index.js';
 import { memo } from 'react';

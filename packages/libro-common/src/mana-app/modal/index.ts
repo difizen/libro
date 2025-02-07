@@ -1,4 +1,8 @@
-import { createViewPreference, ManaModule, PortalSlotId } from '@difizen/mana-core';
+import {
+  createViewPreference,
+  ManaModule,
+  PortalSlotId,
+} from '../../mana-core/index.js';
 
 import { ModalApplicationContribution } from './modal-contribution';
 import { ModalContribution } from './modal-protocol';

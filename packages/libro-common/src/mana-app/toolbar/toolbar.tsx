@@ -5,7 +5,7 @@ import {
   ToolbarItem,
   ToolbarRegistry,
   renderNode,
-} from '@difizen/mana-core';
+} from '../../mana-core/index.js';
 import { l10n } from '@difizen/mana-l10n';
 import { getOrigin, prop } from '../../mana-observable/index.js';
 import classnames from 'classnames';

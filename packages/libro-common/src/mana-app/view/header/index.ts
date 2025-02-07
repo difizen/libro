@@ -1,4 +1,4 @@
-import { ManaModule, createSlotPreference } from '@difizen/mana-core';
+import { ManaModule, createSlotPreference } from '../../../mana-core/index.js';
 import { HeaderView, HeaderArea } from './header-view';
 import { FlexSlotView } from '../flex';
 

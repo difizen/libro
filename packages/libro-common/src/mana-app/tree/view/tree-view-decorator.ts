@@ -1,4 +1,4 @@
-import { ViewOption } from '@difizen/mana-core';
+import { ViewOption } from '../../../mana-core/index.js';
 import { prop } from '../../../mana-observable/index.js';
 import debounce from 'lodash.debounce';
 

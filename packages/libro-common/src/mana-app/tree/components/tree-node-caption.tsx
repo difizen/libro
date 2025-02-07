@@ -1,5 +1,5 @@
 import { notEmpty } from '../../../mana-common/index.js';
-import { ViewInstance } from '@difizen/mana-core';
+import { ViewInstance } from '../../../mana-core/index.js';
 import { useInject } from '../../../mana-observable/index.js';
 import * as React from 'react';
 

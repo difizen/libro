@@ -1,5 +1,5 @@
-import type { Command } from '@difizen/mana-core';
-import { CommandContribution, CommandRegistry } from '@difizen/mana-core';
+import type { Command } from '../../../mana-core/index.js';
+import { CommandContribution, CommandRegistry } from '../../../mana-core/index.js';
 import { l10n } from '@difizen/mana-l10n'; /* eslint-disable max-len, @typescript-eslint/indent */
 import { inject, singleton } from '../../../mana-syringe/index.js';
 

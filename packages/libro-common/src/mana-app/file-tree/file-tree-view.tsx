@@ -1,7 +1,4 @@
 import { FileOutlined } from '@ant-design/icons';
-import type { MenuPath } from '@difizen/mana-core';
-import { ViewInstance } from '@difizen/mana-core';
-import { ManaModule, SelectionService, view } from '@difizen/mana-core';
 import { l10n } from '@difizen/mana-l10n'; /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { LegacyRef } from 'react';
 import * as React from 'react';
@@ -13,6 +10,9 @@ import {
   DisposableCollection,
   isCancelled,
 } from '../../mana-common/index.js';
+import { ManaModule, SelectionService, view } from '../../mana-core/index.js';
+import { ViewInstance } from '../../mana-core/index.js';
+import type { MenuPath } from '../../mana-core/index.js';
 import { useInject } from '../../mana-observable/index.js';
 import { singleton, inject } from '../../mana-syringe/index.js';
 import { LabelProvider } from '../label';

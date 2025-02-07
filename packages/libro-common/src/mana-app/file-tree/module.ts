@@ -1,4 +1,4 @@
-import { ManaModule } from '@difizen/mana-core';
+import { ManaModule } from '../../mana-core/index.js';
 
 import { DefaultTreeNodeComponents, TreeModule, TreeNodeComponents } from '../tree';
 

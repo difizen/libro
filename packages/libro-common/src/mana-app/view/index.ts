@@ -1,6 +1,6 @@
 import { TabSlotView, SideTabView, CardTabView } from './tab';
 import { BoxSlotView } from './box';
-import { ManaModule } from '@difizen/mana-core';
+import { ManaModule } from '../../mana-core/index.js';
 import { FlexSlotView } from './flex';
 import { HeaderModule } from './header';
 

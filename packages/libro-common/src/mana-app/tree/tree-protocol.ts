@@ -1,4 +1,4 @@
-import type { MenuPath } from '@difizen/mana-core';
+import type { MenuPath } from '../../mana-core/index.js';
 
 export const TREE_CLASS = 'mana-tree';
 export const TREE_CONTAINER_CLASS = 'mana-tree-container';

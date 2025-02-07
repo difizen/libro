@@ -1,4 +1,4 @@
-import type { MenuPath, MenuItem } from '@difizen/mana-core';
+import type { MenuPath, MenuItem } from '../../mana-core/index.js';
 
 export const MAIN_MENU_BAR: MenuPath = ['menubar'];
 

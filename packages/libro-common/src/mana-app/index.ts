@@ -1,4 +1,4 @@
-import { ManaModule, ManaPreset } from '@difizen/mana-core';
+import { ManaModule, ManaPreset } from '../mana-core/index.js';
 
 import { ManaApplication } from './app';
 import { FileTreeModule } from './file-tree';
@@ -34,4 +34,4 @@ export const ManaAppPreset = ManaModule.create()
 export * from '../mana-syringe/index.js';
 export * from '../mana-observable/index.js';
 export * from '../mana-common/index.js';
-export * from '@difizen/mana-core';
+export * from '../mana-core/index.js';
