@@ -1,5 +1,5 @@
 import { ViewOption } from '@difizen/mana-core';
-import { prop } from '@difizen/mana-observable';
+import { prop } from '../../../mana-observable/index.js';
 import debounce from 'lodash.debounce';
 
 import type { Disposable } from '../../../mana-common/index.js';

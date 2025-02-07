@@ -1,4 +1,4 @@
-import { equals } from '@difizen/mana-observable';
+import { equals } from '../../mana-observable/index.js';
 
 import type { TreeNode } from './tree';
 import { CompositeTreeNode } from './tree';

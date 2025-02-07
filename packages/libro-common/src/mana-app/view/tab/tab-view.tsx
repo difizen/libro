@@ -9,8 +9,8 @@ import {
   ViewRender,
 } from '@difizen/mana-core';
 import type { View, SlotViewOption } from '@difizen/mana-core';
-import { useInject } from '@difizen/mana-observable';
-import { prop } from '@difizen/mana-observable';
+import { useInject } from '../../../mana-observable/index.js';
+import { prop } from '../../../mana-observable/index.js';
 import { Tabs, Dropdown } from '@difizen/mana-react';
 import type { TabPaneProps, TabsProps } from '@difizen/mana-react';
 import { inject, transient } from '../../../mana-syringe/index.js';

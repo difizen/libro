@@ -32,6 +32,6 @@ export const ManaAppPreset = ManaModule.create()
   );
 
 export * from '../mana-syringe/index.js';
-export * from '@difizen/mana-observable';
-export * from '../../mana-common/index.js';
+export * from '../mana-observable/index.js';
+export * from '../mana-common/index.js';
 export * from '@difizen/mana-core';

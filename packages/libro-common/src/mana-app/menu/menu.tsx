@@ -1,7 +1,7 @@
 import type { GeneralMenuItem, ActionMenuItem, MenuPath } from '@difizen/mana-core';
 import { MenuItem } from '@difizen/mana-core';
 import { CommandRegistry, MenuRegistry } from '@difizen/mana-core';
-import { prop } from '@difizen/mana-observable';
+import { prop } from '../../mana-observable/index.js';
 import { Menu as MenuComponent } from '@difizen/mana-react';
 
 import { DisposableCollection, Emitter } from '../../mana-common/index.js';

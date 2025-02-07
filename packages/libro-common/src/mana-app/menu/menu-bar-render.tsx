@@ -1,5 +1,5 @@
 import { MenuItem } from '@difizen/mana-core';
-import { useInject } from '@difizen/mana-observable';
+import { useInject } from '../../mana-observable/index.js';
 import { Menubar } from '@difizen/mana-react';
 import type { FC } from 'react';
 import React from 'react';

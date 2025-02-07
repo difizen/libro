@@ -1,5 +1,5 @@
 import type { MenuPath } from '@difizen/mana-core';
-import { useInject, ObservableContext } from '@difizen/mana-observable';
+import { useInject, ObservableContext } from '../../mana-observable/index.js';
 import type { Syringe } from '../../mana-syringe/index.js';
 import type { FC } from 'react';
 import { memo, useEffect, useState, useContext, useMemo } from 'react';
