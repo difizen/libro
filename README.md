@@ -1,5 +1,3 @@
-语言: 中文 | [English](./README.md)
-
 <p align="center"><img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro-text.svg" width="160" /></p>
 <p align="center"><strong>libro：灵活定制、轻松集成的 Notebook 产品方案</strong></p>
 
