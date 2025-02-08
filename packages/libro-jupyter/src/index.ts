@@ -33,3 +33,13 @@ export * from './file/index.js';
 export * from './libro-jupyter-view.js';
 export * from './config/index.js';
 export * from './widget/index.js';
+
+import * as SyringeModules from '@difizen/libro-common/ioc';
+import * as ObservableModules from '@difizen/libro-common/observable';
+
+export const AppIOC = {
+  ...ObservableModules,
+  ...SyringeModules,
+};
+
+export * as AppExtention from '@difizen/libro-common/app';

@@ -59,7 +59,6 @@
     "@difizen/libro-language-client": "^0.3.4",
     "@difizen/libro-widget": "^0.3.4",
     "@difizen/libro-l10n": "^0.3.4",
-    "@difizen/libro-ai-native": "^0.3.4",
     "@difizen/libro-common": "^0.3.4",
     "classnames": "^2.3.2",
     "uuid": "^9.0.0",

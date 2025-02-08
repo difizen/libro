@@ -1,7 +1,7 @@
 class ObservableConfigImpl {
   async = false;
   paused = false;
-  protected excludeCheckers: any[] = [];
+  excludeCheckers: any[] = [];
 
   exclude(checker: (obj: Record<string | number | symbol, any>) => boolean) {
     return !!this.excludeCheckers.push(checker);

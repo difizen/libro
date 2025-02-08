@@ -1,7 +1,7 @@
+import { singleton } from '@difizen/libro-common/app';
 import type { IChatEvent, IChatMessageItem } from '@difizen/magent-chat';
 import { ChatEvent } from '@difizen/magent-chat';
 import { LibroChatService } from '@difizen/magent-libro';
-import { singleton } from '@difizen/libro-common/app';
 import type { ParsedEvent } from 'eventsource-parser/stream';
 import { EventSourceParserStream } from 'eventsource-parser/stream';
 

@@ -1,3 +1,6 @@
+export * from '@difizen/libro-shared-model';
+export * from '@difizen/libro-virtualized';
+
 export * from './libro-view.js';
 export * from './module.js';
 export * from './libro-protocol.js';
