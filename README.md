@@ -1,7 +1,7 @@
-Language: English | [简体中文](./README_zh.md)
+语言: 中文 | [English](./README.md)
 
 <p align="center"><img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro-text.svg" width="160" /></p>
-<p align="center"><strong>A Notebook Product Solution with Flexible Customization and Easy Integration</strong></p>
+<p align="center"><strong>libro：灵活定制、轻松集成的 Notebook 产品方案</strong></p>
 
 <p align="center">
 <a href="https://github.com/difizen/libro/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/difizen/libro/ci.yml?branch=main&style=for-the-badge&logo=github" alt="Code: CI" style="max-width: 100%;" height="20px"></a>
@@ -12,165 +12,140 @@ Language: English | [简体中文](./README_zh.md)
 <a href="https://discord.gg/GEx6pa3GaG"><img alt="discord" src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white" height="20px"></a>
 </p>
 
-## Features
+## 特性
 
-- 🚀 Provides comprehensive Notebook functionality with a rich set of auxiliary tools, allowing for quick adoption based on existing setups.
-- 🌱 Supports kernel-level extensibility, enabling customization and further development at all layers.
-- 🔮 Defines workflows for large models, with built-in capabilities for model interaction and AI-powered assistance.
+- 🚀 提供完整的 Notebook 能力和丰富的周边功能，基于现有组合快速上手。
+- 🌱 提供内核级别的扩展能力，所有层次的内容均允许二次开发定制。
+- 🔮 定义大模型工作流，内置大模型交互和辅助开发能力。
 
-
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_homepage.png)
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_homepage_zh.png)
 
 ---
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-## Table of Contents
+## 目录
 
-- [Quick Start](#quick-start)
-  - [Install](#install)
-  - [Run](#run)
-- [New Features](#new-features)
-  - [AI Capability](#ai-capability)
+- [快速开始](#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
+  - [安装](#%E5%AE%89%E8%A3%85)
+  - [启动](#%E5%90%AF%E5%8A%A8)
+- [新特性](#%E6%96%B0%E7%89%B9%E6%80%A7)
+  - [AI 能力](#ai-%E8%83%BD%E5%8A%9B)
   - [Prompt Cell](#prompt-cell)
   - [Sql Cell](#sql-cell)
-- [Technical Architecture](#technical-architecture)
-- [Future Plans](#future-plans)
-- [More](#more)
-  - [Reporting Issues](#reporting-issues)
-  - [Contributing](#contributing)
-  - [Contributors](#contributors)
-  - [Contact Us](#contact-us)
+- [架构](#%E6%9E%B6%E6%9E%84)
+- [后续计划](#%E5%90%8E%E7%BB%AD%E8%AE%A1%E5%88%92)
+- [更多](#%E6%9B%B4%E5%A4%9A)
+  - [提交issue](#%E6%8F%90%E4%BA%A4issue)
+  - [贡献代码](#%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ---
 
-## Quick Start
+## 快速开始
 
-### Install
+### 安装
 ```bash
 pip install libro
 ```
-> [!NOTE]
-> The Python version used is 3.10-3.12. Higher versions of Python may encounter issues with unsupported dependencies.
 
-### Run
-Enter command `libro` in the terminal to start the web server, then the browser will automatically launch Libro.
+> [!NOTE]
+> 使用的 Python 版本为 3.10-3.12，过高的 Python 版本可能存在依赖包不支持的问题。
+
+详情请阅读[快速开始](./apps/docs/docs/quickstart/index.md)。
+
+### 启动
+在终端中输入命令 `libro` 启动 Web 服务器，随后浏览器会自动打开 Libro。
+
 ```bash
 libro
 ```
 ![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_launch.png)
 
-For more details, please refer to [quick start](./apps/docs/docs/quickstart/index.md)。
+## 新特性
 
-## New Features
-
-### AI Capability
+### AI 能力
 
 <table align="center">
   <tr>
     <td align="center">
-      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_completion.gif" target="_blank">
-        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_completion.gif" alt="Image 1" width="150" height="100">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_completion_zh.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/ai_completion_zh.gif" alt="AI 代码补全" width="150" height="100">
       </a>
-      <p>AI Comletion</p>
+      <p>AI 代码补全</p>
     </td>
     <td align="center">
-      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug.gif" target="_blank">
-        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug.gif" alt="Image 2" width="150" height="100">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug_zh.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/error_debug_zh.gif" alt="错误修复" width="150" height="100">
       </a>
-      <p>Error Fixing</p>
+      <p>错误修复</p>
     </td>
     <td align="center">
-      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat.gif" target="_blank">
-        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat.gif" alt="Image 3" width="150" height="100">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat_zh.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_chat_zh.gif" alt="AI 对话" width="150" height="100">
       </a>
-      <p>AI Chat</p>
+      <p>AI 对话</p>
     </td>
     <td align="center">
-      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain.gif" target="_blank">
-        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain.gif" alt="Image 4" width="150" height="100">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain_zh.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_explain_zh.gif" alt="代码解释" width="150" height="100">
       </a>
-      <p>Code Explanation</p>
+      <p>代码解释</p>
     </td>
     <td align="center">
-      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization.gif" target="_blank">
-        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization.gif" alt="Image 5" width="150" height="100">
+      <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization_zh.gif" target="_blank">
+        <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/cell_opitimization_zh.gif" alt="代码优化" width="150" height="100">
       </a>
-      <p>Code Optimization</p>
+      <p>代码优化</p>
     </td>
   </tr>
 </table>
 
-Click to enlarge
-
 
 ### Prompt Cell
 
-- Enhances the ability to interact directly with large models, supporting text conversations, multimodal expressions, and more.
-- Improves interaction capabilities for common output types, such as providing options to copy or run code when outputting it.
-- Built-in OpenAI models are available, and you can also extend models in the following ways:
-  - Define variables for LLMs, agents, and other dialogue objects based on Langchain, which can be directly used in Prompt Cells.
-  - Extend your own models based on libro-ai.
+- 增强直接与大模型交互的能力，支持文本对话，多模态表达等。
+- 增强对于常见输出类型的交互能力，如在输出代码时给出复制、运行等操作能力。
+- 内置了 OpenAI 系列模型，您还可以通过以下方式扩展模型～
+  - 基于 langchain 定义 llm、agent 等可对话对象的变量，他们可以直接用在 Prompt cell 中。
+  - 基于 libro-ai 扩展自己的模型。
+- 支持选择聊天标识，使得选择该聊天标识的 Prompt Cell 都在一个聊天上下文中。
+- 支持 Prompt Cell 保存为一个变量，该变量即为 langchain 的 AIMessage。
 
-For more details, please refer to [prompt cell manual](./apps/docs/docs/manual/prompt-cell.md)。
+详情请阅读 [prompt cell 指南](./apps/docs/docs/manual/prompt-cell.md)。
 
-<a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell.gif" target="_blank">
-  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell.gif" alt="prompt cell" width="150" height="100">
+<a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell_zh.gif" target="_blank">
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/prompt_cell_zh.gif" alt="prompt cell" width="150" height="100">
 </a>
-
-Click to enlarge
 
 ### Sql Cell
 
-- Supports interaction capabilities for executing SQL commands.
-- Connect to SQL databases to write SQL code directly in the notebook.
+- 支持与 sql 的执行交互能力。
+- 连接 sql 数据库即可在 notebook 中写 sql 代码。
 
-For more details, please refer to [sql cell manual](./apps/docs/docs/manual/sql-cell.md)。
+详情请阅读 [sql cell 指南](./apps/docs/docs/manual/sql-cell.md)。
 
 <a href="https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_cell.gif" target="_blank">
-  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_cell.gif" alt="sql cell" width="150" height="100">
+  <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/sql_cell_zh.gif" alt="sql cell" width="150" height="100">
 </a>
 
-Click to enlarge
+## 架构
 
-## Technical Architecture
+![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical_architecture_zh.png)
 
-![image](https://raw.githubusercontent.com/wiki/difizen/libro/assets/technical_architecture.png)
+## 后续计划
 
-## Future Plans
+- AI 特性接入
+- Libro 在浏览器端执行
+- 版本 Diff 接入
 
-- AI Capability Integration
-- Support for Prompt Notebook
-- Execution of libro in the Browser
+## 更多
 
-## More
+### 提交issue
 
-### Reporting Issues
+😊 我们建议您使用[github issue](https://github.com/difizen/libro/issues) 提交您的疑问, 我们通常会在2日内回复。
 
-😊 We recommend submitting your questions through [github issue](https://github.com/difizen/libro/issues), and we typically respond within two days.
+### 贡献代码
 
-### Contributing
-
-🤝 Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md)
-
-### Contributors
-
-💪 Thanks to all contributors
-
-<a href="https://github.com/difizen/libro/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=difizen/libro" alt="List of Contributors"/>
-</a>
-
-### Contact Us
-
-💬 [Chat with us on Discord](https://discord.gg/GEx6pa3GaG)
-
-🤗 [Join our DingTalk Q&A group](https://qr.dingtalk.com/action/joingroup?code=v1,k1,52f1gKWwsZBMrWjXHcQFlOJEQIbbrMO86Iulu3T3ePY=&_dt_no_comment=1&origin=11)
-
-✏️ [Start a GitHub Discussion](https://github.com/difizen/libro/discussions)
-
-🐦 [Follow us on Twitter](https://x.com/libro_project)
-
-📧 [Subscribe to our Medium](https://medium.com/@libro.development)
+🤝 请查阅 [CONTRIBUTING.md](./CONTRIBUTING_zh.md)
