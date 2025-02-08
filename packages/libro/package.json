@@ -65,7 +65,6 @@
     "@difizen/libro-app": "^0.3.4",
     "@difizen/libro-cofine-editor-core": "^0.3.4",
     "@difizen/libro-widget": "^0.3.4",
-    "@difizen/libro-ai-native": "^0.3.4",
     "@difizen/libro-kernel": "^0.3.4",
     "@difizen/libro-l10n": "^0.3.4",
     "@difizen/libro-language-client": "^0.3.4",

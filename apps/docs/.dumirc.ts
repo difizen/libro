@@ -125,6 +125,14 @@ export default defineConfig({
       getPackagesDir(),
       'libro-common/es/react/index.js',
     ),
+    '@difizen/libro-common/ioc': path.resolve(
+      getPackagesDir(),
+      'libro-common/es/ioc/index.js',
+    ),
+    '@difizen/libro-common/observable': path.resolve(
+      getPackagesDir(),
+      'libro-common/es/observable/index.js',
+    ),
     '@difizen/libro-common/l10n': path.resolve(
       getPackagesDir(),
       'libro-common/es/l10n/index.js',
