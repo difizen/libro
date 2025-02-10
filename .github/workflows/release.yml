@@ -8,10 +8,10 @@ on:
 jobs:
   changesets:
     # prevents this action from running on forks
-    if: github.repository == 'difizen/libro'
+    if: github.repository == 'weavefox/libro'
 
     name: Changesets
-    uses: difizen/actions/.github/workflows/release-changesets.yml@main
+    uses: weavefox/actions/.github/workflows/release-changesets.yml@main
     secrets:
       BOT_APP_ID: ${{ secrets.BOT_APP_ID }}
       BOT_PRIVATE_KEY: ${{ secrets.BOT_PRIVATE_KEY }}
@@ -38,7 +38,7 @@ jobs:
       needs.ci.result == 'success'
 
     name: Publish
-    uses: difizen/actions/.github/workflows/release-publish.yml@main
+    uses: weavefox/actions/.github/workflows/release-publish.yml@main
 
     with:
       node-version: '20'

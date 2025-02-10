@@ -12,7 +12,7 @@ on:
 jobs:
   ci-javascript:
     name: 'CI: JavaScript'
-    uses: difizen/actions/.github/workflows/ci-javascript.yml@main
+    uses: weavefox/actions/.github/workflows/ci-javascript.yml@main
     with:
       node-version: ${{ matrix.node-version }}
       python-version: ${{ matrix.python-version }}

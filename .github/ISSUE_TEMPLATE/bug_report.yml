@@ -12,11 +12,11 @@ body:
     attributes:
       label: Search before asking
       description: >
-        Please make sure to search in the [issues](https://github.com/difizen/libro/issues)
+        Please make sure to search in the [issues](https://github.com/weavefox/libro/issues)
         first to see whether the same issue was reported already.
       options:
         - label: >
-            I had searched in the [issues](https://github.com/difizen/libro/issues) and found
+            I had searched in the [issues](https://github.com/weavefox/libro/issues) and found
             no similar issues.
           required: true
 
@@ -88,7 +88,7 @@ body:
       label: How to reproduce
       description: >
         What should we do to reproduce the problem? If you are not able to provide a reproducible case,
-        please open a [Discussion](https://github.com/difizen/libro/discussions) instead.
+        please open a [Discussion](https://github.com/weavefox/libro/discussions) instead.
       placeholder: >
         Steps to reproduce the behavior:
 
