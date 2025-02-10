@@ -18,9 +18,7 @@ Before starting, ensure your local environment has Node version 18 or above inst
 Install the relevant packages for libro and mana as needed.
 
 ```bash
-pnpm add @difizen/libro-lab // Install for lab development environment integration
-pnpm add @difizen/libro-jupyter // Install for libro editor integration
-pnpm add @difizen/mana-app
+pnpm add @difizen/libro // Install for lab development environment integration
 
 pnpm add @difizen/umi-plugin-mana -D
 ```
@@ -59,8 +57,15 @@ In the `tsconfig.json` file at the project root, add the following configuration
 1. Connect to the Notebook Service: You can do this by installing `libro-server` or by using Jupyter’s functionality, such as Jupyter server or Jupyter lab. Start the service, obtain the corresponding service link, and update the link on the frontend as follows:
 
 ```typescript
-import { ServerConnection, ServerManager } from '@difizen/libro-lab';
-import { ApplicationContribution, inject, singleton } from '@difizen/mana-app';
+import {
+  ServerConnection,
+  ServerManager,
+  AppExtention,
+  AppIOC,
+} from '@difizen/libro-lab';
+
+const { ApplicationContribution } = AppExtention;
+const { singleton, inject } = AppIOC; // 仅给 github 的用户
 
 @singleton({ contrib: ApplicationContribution })
 export class LibroApp implements ApplicationContribution {
@@ -80,10 +85,10 @@ export class LibroApp implements ApplicationContribution {
 2. Create and register a `ManaModule`.
 
 ```typescript
-import { ManaModule } from '@difizen/mana-app';
 import { LibroApp } from './app';
-import { LibroLabModule } from '@difizen/libro-lab';
+import { LibroLabModule, AppExtention } from '@difizen/libro-lab';
 
+const { ManaModule } = AppExtention;
 export const LabModule = ManaModule.create()
   .register(LibroApp)
   .dependOn(LibroLabModule);
@@ -93,9 +98,11 @@ export const LabModule = ManaModule.create()
 
 ```typescript
 import React from 'react';
-import { ManaAppPreset, ManaComponents } from '@difizen/mana-app';
+import { AppExtention } from '@difizen/libro-lab';
 import { LabModule } from '@/modules/libro-lab/module';
 import './index.less'
+
+const { ManaAppPreset, ManaComponents } = AppExtention;
 
 const App = (): JSX.Element => {
   return (
@@ -119,10 +126,11 @@ export default App;
 1. Create a React component for the Libro editor, using `LibroService` to create a `LibroView` instance and render it through `ViewRender`.
 
 ```typescript
-import { DocumentCommands, LibroService, LibroView } from '@difizen/libro-jupyter';
-import { CommandRegistry, ViewRender, useInject } from '@difizen/mana-app';
+import { DocumentCommands, LibroService, LibroView, AppExtention, AppIOC } from '@difizen/libro-jupyter';
 import React, { useEffect, useState } from 'react';
 
+const { CommandRegistry, ViewRender } = AppExtention;
+const { useInject } = AppIOC;
 export const LibroEditor: React.FC = () => {
   const libroService = useInject<LibroService>(LibroService);
   const [libroView, setLibroView] = useState<LibroView | undefined>();
@@ -180,8 +188,9 @@ import type {
   LibroJupyterModel,
   NotebookOption,
 } from '@difizen/libro-jupyter';
-import { ContentContribution } from '@difizen/libro-jupyter';
-import { singleton } from '@difizen/mana-app';
+import { ContentContribution, AppIOC } from '@difizen/libr-jupyter';
+
+const { singleton } = AppIOC;
 
 @singleton({ contrib: ContentContribution })
 export class LibroEditorContentContribution implements ContentContribution {
@@ -213,11 +222,11 @@ export class LibroEditorContentContribution implements ContentContribution {
 3. Create and register a `mana` module.
 
 ```typescript
-import { ManaModule } from '@difizen/mana-app';
 import { LibroApp } from './app';
-import { LibroJupyterModule } from '@difizen/libro-lab';
-import { LibroEditorContentContribution } from './libro-content-contribution';
+import { LibroJupyterModule, AppExtention } from '@difizen/libro-jupyter';
 
+import { LibroEditorContentContribution } from './libro-content-contribution';
+const { ManaModule } = AppExtention;
 export const LibroEditorModule = ManaModule.create()
   .register(LibroApp, LibroEditorContentContribution)
   .dependOn(LibroJupyterModule);
@@ -229,11 +238,13 @@ export const LibroEditorModule = ManaModule.create()
 
 ```typescript
 import React from 'react';
-import { ManaAppPreset, ManaComponents } from '@difizen/mana-app';
+import { AppExtention } from '@difizen/libro-jupyter';
+
 import './index.less';
 import { LibroEditorModule } from '@/modules/libro-editor/module';
 import { LibroEditor } from './libro-editor';
 
+const { ManaAppPreset, ManaComponents } = AppExtention;
 const App = (): JSX.Element => {
   return (
     <div className="libro-editor-demo">

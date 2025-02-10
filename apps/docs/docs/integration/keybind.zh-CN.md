@@ -82,10 +82,11 @@ export const LibroDemoKeybindCommand = {
 3. 把新增的快捷键扩展类注册进 mana module 中。
 
 ```typescript
-import { ManaModule } from '@difizen/mana-app';
+import { AppExtention } from '@difizen/libro-jupyter';
 import { LibroEditorModule } from '../libro-editor/module';
 import { LibroDemoKeybindingContribution } from './libro-demo-keybind-contribution';
 
+const { ManaModule } = AppExtention;
 export const LibroKeybindDemoModule = ManaModule.create()
   .register(LibroDemoKeybindingContribution)
   .dependOn(LibroEditorModule);
@@ -94,20 +95,20 @@ export const LibroKeybindDemoModule = ManaModule.create()
 #### 示例
 
 ```typescript
-import { LibroCommandRegister } from '@difizen/libro-jupyter';
-import {
-  inject,
+import { LibroCommandRegister, AppIOC, AppExtention } from '@difizen/libro-jupyter';
+import { LibroDemoKeybindCommand } from './libro-demo-keybind-command';
+
+const { inject, singleton } = AppIOC;
+const {
   KeybindingRegistry,
-  singleton,
   KeybindingContribution,
   CommandContribution,
   CommandRegistry,
-} from '@difizen/mana-app';
-import { LibroDemoKeybindCommand } from './libro-demo-keybind-command';
+} = AppExtention;
 
 @singleton({ contrib: [KeybindingContribution, CommandContribution] })
 export class LibroDemoKeybindingContribution
-  implements KeybindingContribution, CommandContribution
+  implements AppExtention.KeybindingContribution, AppExtention.CommandContribution
 {
   @inject(LibroCommandRegister) protected readonly libroCommand: LibroCommandRegister;
 

@@ -82,10 +82,11 @@ export const LibroDemoKeybindCommand = {
 3. Register the newly added keyboard shortcut extension class in the mana module.
 
 ```typescript
-import { ManaModule } from '@difizen/mana-app';
+import { AppExtention } from '@difizen/libro-jupyter';
 import { LibroEditorModule } from '../libro-editor/module';
 import { LibroDemoKeybindingContribution } from './libro-demo-keybind-contribution';
 
+const { ManaModule } = AppExtention;
 export const LibroKeybindDemoModule = ManaModule.create()
   .register(LibroDemoKeybindingContribution)
   .dependOn(LibroEditorModule);
@@ -94,17 +95,16 @@ export const LibroKeybindDemoModule = ManaModule.create()
 #### Example
 
 ```typescript
-import { LibroCommandRegister } from '@difizen/libro-jupyter';
-import {
-  inject,
+import { LibroCommandRegister, AppExtention, AppIOC } from '@difizen/libro-jupyter';
+import { LibroDemoKeybindCommand } from './libro-demo-keybind-command';
+
+const { inject, singleton } = AppIOC;
+const {
   KeybindingRegistry,
-  singleton,
   KeybindingContribution,
   CommandContribution,
   CommandRegistry,
-} from '@difizen/mana-app';
-import { LibroDemoKeybindCommand } from './libro-demo-keybind-command';
-
+} = AppExtention;
 @singleton({ contrib: [KeybindingContribution, CommandContribution] })
 export class LibroDemoKeybindingContribution
   implements KeybindingContribution, CommandContribution

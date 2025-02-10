@@ -40,10 +40,11 @@ The toolbar buttons are closely linked with commands. Each button is bound to a 
 3. Register the newly added command extension class in the Mana module.
 
 ```typescript
-import { ManaModule } from '@difizen/mana-app';
+import { AppExtention } from '@difizen/libro-jupyter';
 import { LibroEditorModule } from '../libro-editor/module';
 import { LibroDemoToolbarContribution } from './libro-demo-toolbar-contribution';
 
+const { ManaModule } = AppExtention;
 export const LibroToolbarDemoModule = ManaModule.create()
   .register(LibroDemoToolbarContribution)
   .dependOn(LibroEditorModule);
@@ -52,15 +53,12 @@ export const LibroToolbarDemoModule = ManaModule.create()
 ##### Example
 
 ```typescript
-import { LibroCommandRegister, LibroToolbarArea } from '@difizen/libro-jupyter';
 import {
-  CommandContribution,
-  CommandRegistry,
-  inject,
-  singleton,
-  ToolbarContribution,
-  ToolbarRegistry,
-} from '@difizen/mana-app';
+  LibroCommandRegister,
+  LibroToolbarArea,
+  AppExtention,
+  AppIOC,
+} from '@difizen/libro-jupyter';
 import {
   BellOutlined,
   BulbOutlined,
@@ -69,9 +67,13 @@ import {
 } from '@ant-design/icons';
 import { LibroDemoToolbarCommand } from './libro-demo-toolbar-commands';
 
+const { CommandContribution, CommandRegistry, ToolbarContribution, ToolbarRegistry } =
+  AppExtention;
+const { inject, singleton } = AppIOC;
+
 @singleton({ contrib: [ToolbarContribution, CommandContribution] })
 export class LibroDemoToolbarContribution
-  implements ToolbarContribution, CommandContribution
+  implements AppExtention.ToolbarContribution, AppExtention.CommandContribution
 {
   @inject(LibroCommandRegister) protected readonly libroCommand: LibroCommandRegister;
 

@@ -22,10 +22,12 @@ Tip: To use commands in a React component, ensure that the component is within t
 #### Example
 
 ```jsx
-import { DocumentCommands, LibroService, LibroView, NotebookCommands } from '@difizen/libro-jupyter';
-import { CommandRegistry, ViewRender, useInject } from '@difizen/mana-app';
+import { DocumentCommands, LibroService, LibroView, NotebookCommands, AppIOC, AppExtention } from '@difizen/libro-jupyter';
 import React,{ useEffect, useState } from 'react';
 import { Button } from 'antd';
+
+const { CommandRegistry, ViewRender } = AppExtention;
+const { useInject } = AppIOC;
 
 export const LibroEditor: React.FC = ()=>{
   const libroService = useInject<LibroService>(LibroService);
@@ -94,9 +96,16 @@ export const LibroEditor: React.FC = ()=>{
 #### Example
 
 ```typescript
-import { DocumentCommands, LibroView, NotebookCommands } from '@difizen/libro-jupyter';
-import { CommandRegistry, inject, singleton } from '@difizen/mana-app';
+import {
+  DocumentCommands,
+  LibroView,
+  NotebookCommands,
+  AppExtention,
+  AppIOC,
+} from '@difizen/libro-jupyter';
 
+const { inject, singleton } = AppIOC;
+const { CommandRegistry } = AppExtention;
 @singleton()
 export class LibroCommandDemoService {
   @inject(CommandRegistry) commandRegistry: CommandRegistry;
@@ -191,17 +200,14 @@ export const LibroCommandDemoModule = ManaModule.create()
 #### Custom Command Registration Example
 
 ```typescript
-import { LibroCommandRegister } from '@difizen/libro-jupyter';
-import {
-  CommandContribution,
-  CommandRegistry,
-  inject,
-  singleton,
-} from '@difizen/mana-app';
+import { LibroCommandRegister, AppExtention, AppIOC } from '@difizen/libro-jupyter';
 import { LibroDemoCommand } from './libro-demo-command';
 
+const { inject, singleton } = AppIOC;
+const { CommandContribution, CommandRegistry } = AppExtention;
+
 @singleton({ contrib: CommandContribution })
-export class LibroDemoCommandContribution implements CommandContribution {
+export class LibroDemoCommandContribution implements AppExtention.CommandContribution {
   @inject(LibroCommandRegister) protected readonly libroCommand: LibroCommandRegister;
 
   registerCommands(command: CommandRegistry): void {
