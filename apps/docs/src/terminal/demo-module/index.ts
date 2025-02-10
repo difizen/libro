@@ -1,9 +1,10 @@
-import { TerminalModule } from '@difizen/libro';
 import {
   ManaModule,
   RootSlotId,
   createSlotPreference,
 } from '@difizen/libro-common/app';
+import { TerminalModule } from '@difizen/libro-terminal';
+
 import { AppView } from './app.js';
 
 // 用于文档测试页面
