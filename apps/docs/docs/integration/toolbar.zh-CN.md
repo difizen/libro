@@ -42,10 +42,11 @@ libro 的工具栏（Toolbar）是整个 libro UI 界面中重要的一部分，
 3. 把新增的命令扩展类注册进 mana module 中。
 
 ```typescript
-import { ManaModule } from '@difizen/mana-app';
+import { AppExtention } from '@difizen/libro-jupyter';
 import { LibroEditorModule } from '../libro-editor/module';
 import { LibroDemoToolbarContribution } from './libro-demo-toolbar-contribution';
 
+const { ManaModule } = AppExtention;
 export const LibroToolbarDemoModule = ManaModule.create()
   .register(LibroDemoToolbarContribution)
   .dependOn(LibroEditorModule);
@@ -54,15 +55,12 @@ export const LibroToolbarDemoModule = ManaModule.create()
 ##### 示例
 
 ```typescript
-import { LibroCommandRegister, LibroToolbarArea } from '@difizen/libro-jupyter';
 import {
-  CommandContribution,
-  CommandRegistry,
-  inject,
-  singleton,
-  ToolbarContribution,
-  ToolbarRegistry,
-} from '@difizen/mana-app';
+  LibroCommandRegister,
+  LibroToolbarArea,
+  AppExtention,
+  AppIOC,
+} from '@difizen/libro-jupyter';
 import {
   BellOutlined,
   BulbOutlined,
@@ -71,9 +69,12 @@ import {
 } from '@ant-design/icons';
 import { LibroDemoToolbarCommand } from './libro-demo-toolbar-commands';
 
+const { CommandContribution, CommandRegistry, ToolbarContribution, ToolbarRegistry } =
+  AppExtention;
+const { inject, singleton } = AppIOC;
 @singleton({ contrib: [ToolbarContribution, CommandContribution] })
 export class LibroDemoToolbarContribution
-  implements ToolbarContribution, CommandContribution
+  implements AppExtention.ToolbarContribution, AppExtention.CommandContribution
 {
   @inject(LibroCommandRegister) protected readonly libroCommand: LibroCommandRegister;
 

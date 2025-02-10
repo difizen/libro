@@ -62,11 +62,18 @@ export default defineConfig({
 1. 连接 Notebook 服务：这里您可以通过安装 libro-server ，也可以使用 jupyter 的能力，例如 jupyter server 或者 jupyter lab。启动服务，获得对应的服务链接，并可以按照下述方式在前端侧更新服务链接。
 
 ```typescript
-import { ServerConnection, ServerManager } from '@difizen/libro-lab';
-import { ApplicationContribution, inject, singleton } from '@difizen/mana-app';
+import {
+  ServerConnection,
+  ServerManager,
+  AppExtention,
+  AppIOC,
+} from '@difizen/libro-lab';
+
+const { inject, singleton } = AppIOC;
+const { ApplicationContribution } = AppExtention;
 
 @singleton({ contrib: ApplicationContribution })
-export class LibroApp implements ApplicationContribution {
+export class LibroApp implements AppExtention.ApplicationContribution {
   @inject(ServerConnection) serverConnection: ServerConnection;
   @inject(ServerManager) serverManager: ServerManager;
 
@@ -83,10 +90,10 @@ export class LibroApp implements ApplicationContribution {
 2. 创建并注册 ManaModule。
 
 ```typescript
-import { ManaModule } from '@difizen/mana-app';
 import { LibroApp } from './app';
-import { LibroLabModule } from '@difizen/libro-lab';
+import { LibroLabModule, AppExtention } from '@difizen/libro-lab';
 
+const { ManaModule } = AppExtention;
 export const LabModule = ManaModule.create()
   .register(LibroApp)
   .dependOn(LibroLabModule);
@@ -96,10 +103,11 @@ export const LabModule = ManaModule.create()
 
 ```typescript
 import React from 'react';
-import { ManaAppPreset, ManaComponents } from '@difizen/mana-app';
 import { LabModule } from '@/modules/libro-lab/module';
+import { AppExtention } from '@difizen/libro-lab';
 import './index.less'
 
+const { ManaAppPreset, ManaComponents } = AppExtention;
 
 const App = (): JSX.Element => {
   return (
@@ -127,10 +135,12 @@ export default App;
 1. 编写 Libro 编辑器的 React 组件，核心是通过 LibroService 创建 LibroView 实例，并通过 ViewRender 渲染构建出的 LibroView 实例。
 
 ```jsx
-import { DocumentCommands, LibroService, LibroView } from '@difizen/libro-jupyter';
-import { CommandRegistry, ViewRender, useInject } from '@difizen/mana-app';
+import { DocumentCommands, LibroService, LibroView, AppIOC, AppExtention } from '@difizen/libro-jupyter';
 import React from 'react';
 import { useEffect, useState } from 'react';
+
+const { useInject } = AppIOC;
+const { CommandRegistry, ViewRender } = AppExtention;
 
 export const LibroEditor: React.FC = ()=>{
   const libroService = useInject<LibroService>(LibroService);
@@ -193,9 +203,9 @@ import type {
   LibroJupyterModel,
   NotebookOption,
 } from '@difizen/libro-jupyter';
-import { ContentContribution } from '@difizen/libro-jupyter';
-import { singleton } from '@difizen/mana-app';
+import { ContentContribution, AppIOC } from '@difizen/libro-jupyter';
 
+const { singleton } = AppIOC;
 @singleton({ contrib: ContentContribution })
 export class LibroEditorContentContribution implements ContentContribution {
   canHandle = () => {
@@ -228,11 +238,11 @@ export class LibroEditorContentContribution implements ContentContribution {
 3. 创建并注册 mana module。
 
 ```typescript
-import { ManaModule } from '@difizen/mana-app';
 import { LibroApp } from './app';
-import { LibroJupyterModule } from '@difizen/libro-lab';
+import { LibroJupyterModule, AppExtention } from '@difizen/libro-jupyter';
 import { LibroEditorContentContribution } from './libro-content-contribution';
 
+const { ManaModule } = AppExtention;
 export const LibroEditorModule = ManaModule.create()
   .register(LibroApp, LibroEditorContentContribution)
   .dependOn(LibroJupyterModule);
@@ -244,11 +254,12 @@ export const LibroEditorModule = ManaModule.create()
 
 ```jsx
 import React from 'react';
-import { ManaAppPreset, ManaComponents } from '@difizen/mana-app';
+import { ManaAppPreset, ManaComponents } from '@difizen/libro-jupyter';
 import './index.less'
 import { LibroEditorModule } from '@/modules/libro-editor/module';
 import { LibroEditor } from './libro-editor';
 
+const { ManaAppPreset, ManaComponents } = AppExtention;
 
 const App = (): JSX.Element => {
   return (
