@@ -1,2 +1,2 @@
-export * from '@difizen/libro-jupyter';
-export * from '@difizen/libro-lab';
+export * as LibroJupyter from '@difizen/libro-jupyter';
+export * as LibroLab from '@difizen/libro-lab';
