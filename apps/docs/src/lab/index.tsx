@@ -1,8 +1,9 @@
-import { LibroLabModule } from '@difizen/libro';
-import { ManaAppPreset, ManaComponents, ManaModule } from '@difizen/libro-common/app';
+import { LibroLabModule, AppExtention } from '@difizen/libro-lab';
 
 import { LibroApp } from './app.js';
 import './index.less';
+
+const { ManaAppPreset, ManaComponents, ManaModule } = AppExtention;
 
 const BaseModule = ManaModule.create().register(LibroApp);
 

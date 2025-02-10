@@ -24,6 +24,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
     "@difizen/libro": "latest",
+    "@difizen/libro-terminal": "latest",
     "@difizen/libro-common": "latest",
     "@radix-ui/react-slot": "^1.1.0",
     "antd": "^5.10.0",

@@ -1,16 +1,22 @@
-import { ServerConnection, ServerManager } from '@difizen/libro';
-import { ConfigurationService } from '@difizen/libro-common/app';
-import { SlotViewManager } from '@difizen/libro-common/app';
-import { ApplicationContribution, ViewManager } from '@difizen/libro-common/app';
-import { inject, singleton } from '@difizen/libro-common/app';
+import {
+  ServerConnection,
+  ServerManager,
+  AppExtention,
+  AppIOC,
+} from '@difizen/libro-lab';
+
+const { ApplicationContribution, ViewManager, SlotViewManager, ConfigurationService } =
+  AppExtention;
+const { inject, singleton } = AppIOC;
 
 @singleton({ contrib: ApplicationContribution })
-export class LibroApp implements ApplicationContribution {
+export class LibroApp implements AppExtention.ApplicationContribution {
   @inject(ServerConnection) serverConnection: ServerConnection;
   @inject(ServerManager) serverManager: ServerManager;
-  @inject(ViewManager) viewManager: ViewManager;
-  @inject(SlotViewManager) slotViewManager: SlotViewManager;
-  @inject(ConfigurationService) configurationService: ConfigurationService;
+  @inject(ViewManager) viewManager: AppExtention.ViewManager;
+  @inject(SlotViewManager) slotViewManager: AppExtention.SlotViewManager;
+  @inject(ConfigurationService)
+  configurationService: AppExtention.ConfigurationService;
 
   async onStart() {
     this.serverConnection.updateSettings({

@@ -1,5 +1,3 @@
-import type { TerminalViewOption } from '@difizen/libro';
-import { TerminalManager, LibroTerminalView } from '@difizen/libro';
 import type { Disposable } from '@difizen/libro-common/app';
 import {
   BaseView,
@@ -11,6 +9,8 @@ import {
   useInject,
   view,
 } from '@difizen/libro-common/app';
+import { TerminalManager, LibroTerminalView } from '@difizen/libro-terminal';
+import type { TerminalViewOption } from '@difizen/libro-terminal';
 import { Button, Card, Checkbox, Flex, Form, Input, Space, Tabs } from 'antd';
 import type { FC } from 'react';
 import { forwardRef, useCallback, useEffect, useState } from 'react';
