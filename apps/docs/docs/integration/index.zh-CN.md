@@ -52,7 +52,32 @@ export default defineConfig({
 },
 ```
 
-### 集成 Lab 研发环境
+### 集成引入
+
+我们提供了 Lab 研发环境、Notebook 编辑器两种形态的方式引入。
+`'@difizen/libro-lab'`，包含了两种形态的内容，Lab 研发环境,对应的包为 `'@difizen/libro-lab'`, Notebook 编辑器对应的包为 `'@difizen/libro-jupyter'`。
+
+可以通过如下两个方式导入：
+
+- 方式一
+
+从 `'@difizen/libro'` 包中引入：
+
+```typescript
+import { LibroLab } from '@difizen/libro';
+
+const { LibroLabModule } = LibroLab;
+```
+
+- 方式二
+
+从 `'@difizen/libro-lab'` 包中引入：
+
+```typescript
+import { LibroLabModule } from '@difizen/libro-lab';
+```
+
+#### 集成 Lab 研发环境
 
 <img
     src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro.png"
@@ -125,7 +150,7 @@ export default App;
 
 ```
 
-### 集成 Notebook 编辑器
+#### 集成 Notebook 编辑器
 
 <img
     src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_editor_zh.png"

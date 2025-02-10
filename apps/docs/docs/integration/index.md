@@ -50,7 +50,32 @@ In the `tsconfig.json` file at the project root, add the following configuration
 },
 ```
 
-### Integrate Lab Development Environment
+### Integrated Import
+
+We provide two ways to introduce the integration: the Lab Dev environment and the Notebook editor.  
+The package `'@difizen/libro-lab'` includes both forms—the Lab Dev environment corresponds to `'@difizen/libro-lab'`, while the Notebook editor corresponds to `'@difizen/libro-jupyter'`.
+
+You can import them in the following two ways:
+
+- **Method 1**
+
+Import from the `'@difizen/libro'` package:
+
+```typescript
+import { LibroLab } from '@difizen/libro';
+
+const { LibroLabModule } = LibroLab;
+```
+
+- **Method 2**
+
+Import from the `'@difizen/libro-lab'` package:
+
+```typescript
+import { LibroLabModule } from '@difizen/libro-lab';
+```
+
+#### Integrate Lab Development Environment
 
 <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_en.png" width="1200" />
 
@@ -119,7 +144,7 @@ const App = (): JSX.Element => {
 export default App;
 ```
 
-### Integrate Notebook Editor
+#### Integrate Notebook Editor
 
 <img src="https://raw.githubusercontent.com/wiki/difizen/libro/assets/libro_editor.png" width="1000" />
 
