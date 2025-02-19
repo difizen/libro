@@ -1,12 +1,14 @@
 import {
   LibroSearchToggleCommand,
   LibroService,
+  LibroView,
   NotebookCommands,
 } from '@difizen/libro-jupyter';
 import type { Container } from '@difizen/mana-app';
 import { CommandRegistry as LibroCommandRegistry } from '@difizen/mana-app';
 import { Autowired } from '@opensumi/di';
 import type {
+  IContextKey,
   KeybindingRegistry,
   MaybePromise,
 } from '@opensumi/ide-core-browser';
@@ -36,22 +38,33 @@ export class LibroKeybindContribution
   protected readonly commandRegistry: CommandRegistry;
   @Autowired(ManaContainer)
   private readonly manaContainer: Container;
+  notebookFocusContext: IContextKey<boolean>;
 
   initialize(): MaybePromise<void> {
     this.registerContextKey();
   }
 
+  onDidStart(): MaybePromise<void> {
+    this.libroService.onFocusChanged((e) => {
+      if (e instanceof LibroView) {
+        this.notebookFocusContext.set(true);
+      } else {
+        this.notebookFocusContext.set(false);
+      }
+    });
+  }
+
   registerContextKey() {
-    const notebookFocusContext = this.contextKeyService.createKey<boolean>(
+    this.notebookFocusContext = this.contextKeyService.createKey<boolean>(
       'libroNotebookFocused',
-      false,
+      this.hasActiveNotebook(),
     );
 
     this.workbenchEditorService.onActiveResourceChange((e) => {
       if (e?.uri?.path.ext === `.${LIBRO_COMPONENTS_SCHEME_ID}`) {
-        notebookFocusContext.set(true);
+        this.notebookFocusContext.set(true);
       } else {
-        notebookFocusContext.set(false);
+        this.notebookFocusContext.set(false);
       }
     });
   }
@@ -62,6 +75,13 @@ export class LibroKeybindContribution
 
   get libroCommandRegistry() {
     return this.manaContainer.get(LibroCommandRegistry);
+  }
+
+  hasActiveNotebook() {
+    return (
+      this.libroService.active instanceof LibroView &&
+      this.libroService.focus instanceof LibroView
+    );
   }
 
   registerCommands(commands: CommandRegistry) {
